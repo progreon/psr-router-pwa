@@ -7,9 +7,13 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    index: './src/index.js',
+    another: './src/another-module.js'
   },
   optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
