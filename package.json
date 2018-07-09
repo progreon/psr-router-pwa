@@ -4,13 +4,17 @@
   "description": "A web application for routing Pokemon SpeedRuns",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --open --config config/webpack.dev.js",
-    "start:prod": "webpack-dev-server --open --config config/webpack.prod.js",
-    "start:http-server": "http-server dist -o -p 5000",
-    "build": "webpack --config config/webpack.prod.js",
+    "serve": "npm run serve:dev",
+    "serve:dev": "webpack-dev-server --open --config config/webpack.dev.js",
+    "serve:prod": "webpack-dev-server --open --config config/webpack.prod.js",
+    "start": "npm run start:prod",
+    "start:dev": "npm run build:dev && http-server dist -o -p 5000",
+    "start:prod": "npm run build:prod && http-server dist -o -p 5000",
+    "build": "npm run build:prod",
     "build:dev": "webpack --config config/webpack.dev.js",
+    "build:prod": "webpack --config config/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch",
+    "watch": "webpack --watch --config config/webpack.dev.js",
     "server": "node server.js"
   },
   "repository": {
