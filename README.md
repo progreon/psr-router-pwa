@@ -8,17 +8,20 @@ TODO
 ### Installing
 Clone the repo and run npm install
 ```shell
-$ git clone https://github.com/progreon/psr-router-pwa.git && cd psr-router-pwa
+$ git clone https://github.com/progreon/psr-router-pwa.git psr-router-pwa && cd psr-router-pwa
 $ npm install
+```
+### Serving
+```shell
+$ npm serve
+```
+### Building
+```shell
+$ npm run build
 ```
 ### Executing
 ```shell
 $ npm start
-```
-And open the shown url in a browser
-### Building
-```shell
-$ npm run build
 ```
 ## Help
 If any issues with installing and/or running, look at the documentations of npm, webpack or polymer and/or contact me.
