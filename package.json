@@ -4,15 +4,18 @@
   "description": "A web application for routing Pokemon SpeedRuns",
   "private": true,
   "scripts": {
-    "serve": "npm run serve:dev",
+    "serve": "yarn serve:dev",
     "serve:dev": "webpack-dev-server --open --config config/webpack.dev.js",
     "serve:prod": "webpack-dev-server --open --config config/webpack.prod.js",
-    "start": "npm run start:prod",
-    "start:dev": "npm run build:dev && http-server dist -o -p 5000",
-    "start:prod": "npm run build:prod && http-server dist -o -p 5000",
-    "build": "npm run build:prod",
+    "start": "yarn start:prod",
+    "start:dev": "yarn build:dev && http-server dist -p 5000 -c-1",
+    "start:prod": "yarn build:prod && http-server dist -p 5000 -c-1",
+    "build": "yarn build:prod",
     "build:dev": "webpack --config config/webpack.dev.js",
     "build:prod": "webpack --config config/webpack.prod.js",
+    "build:profile": "yarn build:profile:prod",
+    "build:profile:dev": "webpack --config config/webpack.dev.js --profile --json > stats.json",
+    "build:profile:prod": "webpack --config config/webpack.prod.js --profile --json > stats.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch --config config/webpack.dev.js",
     "server": "node server.js"
@@ -47,16 +50,24 @@
     "http-server": "^0.11.1",
     "mini-css-extract-plugin": "^0.4.1",
     "optimize-css-assets-webpack-plugin": "^4.0.3",
+    "papaparse": "^4.5.0",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.15.1",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.0.8",
     "webpack-dev-middleware": "^3.1.3",
     "webpack-dev-server": "^3.1.4",
+    "webpack-manifest-plugin": "^2.0.3",
     "webpack-merge": "^4.1.3",
+    "workbox-webpack-plugin": "^3.4.1",
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
-    "lodash": "^4.17.10"
+    "@webcomponents/webcomponentsjs": "^2.0.2",
+    "babel-polyfill": "^6.26.0",
+    "es6-promise": "^4.2.4",
+    "lodash": "^4.17.10",
+    "whatwg-fetch": "^2.0.4"
   }
 }

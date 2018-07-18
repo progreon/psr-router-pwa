@@ -1,40 +1,75 @@
+const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: './src/index.js',
-    another: './src/another-module.js'
+    polyfills: './src/polyfills.js',
+    index: './src/main.js'
   },
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
+      // cacheGroups: {
+      //   vendor: {
+      //     test: /[\\/]node_modules[\\/]/,
+      //     name: 'vendors',
+      //     chunks: 'all'
+      //   }
+      // },
       chunks: 'all'
     },
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true // set to true if you want JS source maps
-      }),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [
+    // new BundleAnalyzerPlugin(),
+    // new webpack.HashedModuleIdsPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NamedChunksPlugin((chunk) => {
+      if (chunk.name) {
+        return chunk.name;
+      } else {
+        var a = [];
+        chunk._modules.forEach(m => a.push(path.relative(m.context, m.request)));
+        return a.join("_");
+      }
+    }),
+    { // TODO: name-all-modules-plugin?
+      apply(compiler) {
+        compiler.plugin("compilation", (compilation) => {
+          compilation.plugin("before-module-ids", (modules) => {
+            modules.forEach((module) => {
+              if (module.id !== null) {
+                return;
+              }
+              module.id = module.identifier();
+            });
+          });
+        });
+      }
+    },
     new CleanWebpackPlugin(['dist'], { root: path.resolve(__dirname, '../') }),
     new HtmlWebpackPlugin({
-      title: 'Production'
+      // title: 'CO-Pilot - PWA',
+      template: path.resolve(__dirname, '../src/index.html')
     }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+    new ManifestPlugin(),
+    new WorkboxPlugin.GenerateSW({
+      // these options encourage the ServiceWorkers to get in there fast
+      // and not allow any straggling "old" SWs to hang around
+      clientsClaim: true,
+      skipWaiting: true
     })
   ],
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[chunkhash].bundle.js',
     path: path.resolve(__dirname, '../dist')
   },
   resolve: {
@@ -44,14 +79,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'style-loader',
-          'css-loader'
-        ]
-      },
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
@@ -76,6 +103,9 @@ module.exports = {
           'xml-loader'
         ]
       }
-    ]
+    ],
+    noParse: function(content) {
+      return /webcomponents/.test(content);
+    }
   }
 };
