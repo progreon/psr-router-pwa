@@ -1,5 +1,5 @@
-# My App
-My App description
+# PSR Router
+A web application for routing Pokemon SpeedRuns
 ## Description
 My App description
 ## Getting Started
@@ -9,7 +9,7 @@ My App description
 ### Installing
 Clone the repo and run yarn
 ```shell
-$ git clone git@github.com:progreon/pwa-p3-webpack-starter-kit.git pwa-p3-webpack-starter-kit && cd pwa-p3-webpack-starter-kit
+$ git clone https://github.com/progreon/psr-router-pwa.git psr-router-pwa && cd psr-router-pwa
 $ yarn
 ```
 ## Scripts
