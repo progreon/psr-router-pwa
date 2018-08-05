@@ -1,10 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>PSR Router</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title><%= htmlWebpackPlugin.options.config.app.name %></title>
+    <meta name="description" content="<%= htmlWebpackPlugin.options.config.app.description %>">
+
+    <base href="<%= htmlWebpackPlugin.options.config.app.basePath %>">
+
+    <script>
+      window.MyAppGlobals = {
+        rootPath: '<%= htmlWebpackPlugin.options.config.app.basePath %>',
+        wideWidth: '<%= htmlWebpackPlugin.options.config.settings.wideWidth %>'
+      };
+    </script>
+
+    <!-- polyfills -->
+    <!-- load the webcomponents loader, which injects the necessary polyfill bundle -->
+    <!-- Needed for IE11, Edge, Firefox, Safari<11 -->
+    <script src="scripts/wc/webcomponents-loader.js"></script>
+    <% if (htmlWebpackPlugin.options.config.app.transpile) { %>
+    <!-- Load the elements adapter for es5 transpiled code -->
+    <script src="scripts/wc/custom-elements-es5-adapter.js"></script>
+    <% } %>
+
+    <!-- Add any global styles for body, document, etc. -->
+    <style>
+      body {
+        margin: 0;
+        font-family: "Roboto", "Noto", sans-serif;
+        line-height: 1.5;
+        min-height: 100vh;
+        background-color: #eeeeee;
+      }
+    </style>
   </head>
   <body>
-    <div>Hello World!</div>
+    <my-app appTitle="<%= htmlWebpackPlugin.options.config.app.name %>"></my-app>
+    <noscript>
+      Please enable JavaScript to view this website.
+    </noscript>
   </body>
 </html>

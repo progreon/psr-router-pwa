@@ -1,7 +1,7 @@
-# PSR Router
-A web application for routing Pokemon SpeedRuns
+# My App
+My App description
 ## Description
-TODO
+My App description
 ## Getting Started
 ### Dependencies
 * npm
@@ -9,15 +9,18 @@ TODO
 ### Installing
 Clone the repo and run yarn
 ```shell
-$ git clone https://github.com/progreon/psr-router-pwa.git psr-router-pwa && cd psr-router-pwa
+$ git clone git@github.com:progreon/pwa-p3-webpack-starter-kit.git pwa-p3-webpack-starter-kit && cd pwa-p3-webpack-starter-kit
 $ yarn
 ```
 ## Scripts
-For each of these scripts you can add `:dev` or `:prod` to run these for development or production
+For each of these scripts you can add `:dev` or `:prod` to run these for development or production:
+```shell
+$ yarn <script>[:dev|:prod] [options]
+```
 ### Serving
 *default: dev*
 ```shell
-$ yarn serve
+$ yarn serve --open
 ```
 Mainly used during development, rebuilds automatically on each save and the browser will refresh automatically.
 *NOTE: if a service worker is active, you'll have to refresh again manually for the new cached modules to be loaded*
@@ -62,3 +65,4 @@ No releases yet!
 This project is licensed under the ISC License - see the LICENSE.md file for details
 ## Acknowledgments
 * [Webpack guides](https://webpack.js.org/guides/)
+* [polymer3-webpack-starter-kit](https://github.com/Dabolus/polymer3-webpack-starter-kit)
