@@ -1,10 +1,10 @@
 import { html } from '@polymer/lit-element';
-import { PageViewElement } from 'CoreComponents/page-view-element/page-view-element';
+import { PsrRouterPage } from 'CoreComponents/psr-router-page/psr-router-page';
 
 // These are the shared styles needed by this element.
 import { AppStyles } from 'Shared/app-styles.js';
 
-class MyView404 extends PageViewElement {
+class PsrRouter404 extends PsrRouterPage {
   _render(props) {
     return html`
       ${AppStyles}
@@ -18,4 +18,4 @@ class MyView404 extends PageViewElement {
   }
 }
 
-window.customElements.define('my-view404', MyView404);
+window.customElements.define('psr-router-404', PsrRouter404);

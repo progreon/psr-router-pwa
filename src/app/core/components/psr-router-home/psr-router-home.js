@@ -1,15 +1,15 @@
 import { html } from '@polymer/lit-element';
-import { PageViewElement } from 'CoreComponents/page-view-element/page-view-element';
+import { PsrRouterPage } from 'CoreComponents/psr-router-page/psr-router-page';
 
 // These are the shared styles needed by this element.
 import { AppStyles } from 'Shared/app-styles';
 
-class MyView1 extends PageViewElement {
+class PsrRouterHome extends PsrRouterPage {
   _render(props) {
     return html`
       ${AppStyles}
       <section>
-        <h2>Static page</h2>
+        <h2>Home</h2>
         <p>This is a text-only page.</p>
         <p>It doesn't do anything other than display some static text.</p>
       </section>
@@ -24,4 +24,4 @@ class MyView1 extends PageViewElement {
   }
 }
 
-window.customElements.define('my-view1', MyView1);
+window.customElements.define('psr-router-home', PsrRouterHome);

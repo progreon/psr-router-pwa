@@ -23,7 +23,6 @@ import { barsIcon } from 'Shared/my-icons';
 
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
-import * as style from 'App/my-app.css';
 
 // This element is connected to the Redux store.
 import { store } from 'Core/store.js';
@@ -36,7 +35,7 @@ import {
   updateLayout
 } from 'CoreActions/app.js';
 
-class MyApp extends connect(store)(LitElement) {
+class PsrRouterApp extends connect(store)(LitElement) {
   _render({appTitle, _drawerOpened, _offline, _page, _pageList, _searchParams, _snackbarOpened, _wideLayout}) {
     var linkList = [];
     if (_pageList) {
@@ -254,9 +253,9 @@ class MyApp extends connect(store)(LitElement) {
 
           <!-- Main content -->
           <main role="main" class="main-content">
-            <my-view1 class="page" active?="${_page === 'view1'}" searchParams="${_searchParams}"></my-view1>
-            <my-view2 class="page" active?="${_page === 'view2'}" searchParams="${_searchParams}"></my-view2>
-            <my-view404 class="page" active?="${_page === 'view404'}" searchParams="${_searchParams}"></my-view404>
+            <psr-router-home class="page" active?="${_page === 'home'}" searchParams="${_searchParams}"></psr-router-home>
+            <psr-router-redux class="page" active?="${_page === 'redux'}" searchParams="${_searchParams}"></psr-router-redux>
+            <psr-router-404 class="page" active?="${_page === '404'}" searchParams="${_searchParams}"></psr-router-404>
 
             <snack-bar active?="${_snackbarOpened}">
                 You are now ${_offline ? 'offline' : 'online'}.</snack-bar>
@@ -291,9 +290,9 @@ class MyApp extends connect(store)(LitElement) {
     setPassiveTouchGestures(true);
     // Setting the list of pages
     this._pageList = [
-      {name: 'view1', title: "Home", element: 'my-view1'},
-      {name: 'view2', title: "Redux Example", element: 'my-view2'},
-      {name: 'view404', title: "404", element: 'my-view404', is404: true}
+      {name: 'home', title: "Home", element: 'psr-router-home'},
+      {name: 'redux', title: "Redux Example", element: 'psr-router-redux'},
+      {name: '404', title: "404", element: 'psr-router-404', is404: true}
     ];
   }
 
@@ -326,4 +325,4 @@ class MyApp extends connect(store)(LitElement) {
   }
 }
 
-window.customElements.define('my-app', MyApp);
+window.customElements.define('psr-router-app', PsrRouterApp);

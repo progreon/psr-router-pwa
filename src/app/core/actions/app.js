@@ -16,7 +16,7 @@ export const navigate = (location) => (dispatch) => {
   }
 
   // Extract the page name from path.
-  const page = path === '/' ? 'view1' : path.slice(1);
+  const page = path === '/' ? 'home' : path.slice(1);
 
   // Any other info you might want to extract from the path (like page type),
   // you can do here
@@ -28,18 +28,18 @@ export const navigate = (location) => (dispatch) => {
 
 const loadPage = (page, searchParams) => (dispatch) => {
   switch(page) {
-    case 'view1':
-      import('CoreComponents/my-view1/my-view1').then((module) => {
+    case 'home':
+      import('CoreComponents/psr-router-home/psr-router-home').then((module) => {
         // Put code in here that you want to run every time when
-        // navigating to view1 after my-view1.js is loaded.
+        // navigating to home after psr-router-home.js is loaded.
       });
       break;
-    case 'view2':
-      import('CoreComponents/my-view2/my-view2');
+    case 'redux':
+      import('CoreComponents/psr-router-redux/psr-router-redux');
       break;
     default:
-      page = 'view404';
-      import('CoreComponents/my-view404/my-view404');
+      page = '404';
+        import('CoreComponents/psr-router-404/psr-router-404');
   }
 
   dispatch(updatePage(page, searchParams));

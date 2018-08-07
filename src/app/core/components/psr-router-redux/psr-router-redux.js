@@ -1,5 +1,5 @@
 import { html } from '@polymer/lit-element';
-import { PageViewElement } from 'CoreComponents/page-view-element/page-view-element';
+import { PsrRouterPage } from 'CoreComponents/psr-router-page/psr-router-page';
 import { connect } from 'pwa-helpers/connect-mixin';
 
 // This element is connected to the Redux store.
@@ -20,7 +20,7 @@ import 'SharedComponents/counter-element/counter-element';
 // These are the shared styles needed by this element.
 import { AppStyles } from 'Shared/app-styles';
 
-class MyView2 extends connect(store)(PageViewElement) {
+class PsrRouterRedux extends connect(store)(PsrRouterPage) {
   _render(props) {
     return html`
       ${AppStyles}
@@ -61,4 +61,4 @@ class MyView2 extends connect(store)(PageViewElement) {
   }
 }
 
-window.customElements.define('my-view2', MyView2);
+window.customElements.define('psr-router-redux', PsrRouterRedux);

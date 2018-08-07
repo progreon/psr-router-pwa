@@ -1,4 +1,4 @@
-import './app/my-app.js';
+import './app/psr-router-app.js';
 
 // Load and register pre-caching Service Worker
 if ('serviceWorker' in navigator) {

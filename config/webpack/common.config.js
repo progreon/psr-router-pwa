@@ -65,7 +65,6 @@ module.exports = (config) => ({
           if (!a.includes(id))
             a.push(id)
         });
-        console.log(a.length);
         if (a.length > 10) {
           var s = a.join("_");
           a = a.slice(0, 10);
