@@ -37,7 +37,7 @@ import {
 } from 'CoreActions/app.js';
 
 class MyApp extends connect(store)(LitElement) {
-  _render({appTitle, _page, _pageList, _drawerOpened, _snackbarOpened, _wideLayout, _offline}) {
+  _render({appTitle, _drawerOpened, _offline, _page, _pageList, _searchParams, _snackbarOpened, _wideLayout}) {
     var linkList = [];
     if (_pageList) {
       _pageList.forEach(function(page) {
@@ -51,10 +51,7 @@ class MyApp extends connect(store)(LitElement) {
       ${AppStyles}
       <style>
         :host {
-          --polymer-blue: #4285f4; /* TEMP */
-
-          --app-drawer-width: 256px;
-
+          /* COLORS */
           --app-profile-color: var(--app-color-grass);
           --app-profile-color-light: var(--app-color-grass-light);
 
@@ -65,22 +62,27 @@ class MyApp extends connect(store)(LitElement) {
 
           --app-header-background-color: var(--app-color-white);
           --app-header-text-color: var(--app-dark-text-color);
-          --app-header-height: var(--app-grid-7x);
 
           --app-header-menu-background-color: var(--app-color-slate);
           --app-header-menu-text-color: var(--app-dark-text-color);
           --app-header-menu-selected-color: var(--app-dark-text-color);
 
-          --app-drawer-background-color: var(--app-color-black);
-          --app-drawer-text-color: var(--app-light-text-color);
-          --app-drawer-selected-color: var(--app-light-text-color);
+          --app-drawer-background-color: var(--app-color-white);
+          --app-drawer-text-color: var(--app-dark-text-color);
+          --app-drawer-selected-color: var(--app-dark-text-color);
 
-          --app-drawer-header-background-color: var(--app-color-granite);
+          --app-drawer-header-background-color: var(--app-color-polymer-blue);
           --app-drawer-header-text-color: var(--app-light-text-color);
 
-          --app-footer-height: var(--app-grid-7x);
+          --app-footer-text-color: var(--app-color-white);
+          --app-footer-background-color: var(--app-color-polymer-blue);
 
           color: var(--app-dark-text-color);
+
+          /* SIZES */
+          --app-header-height: var(--app-grid-7x);
+          --app-drawer-width: 256px;
+          --app-footer-height: var(--app-grid-7x);
         }
 
         .drawer {
@@ -90,6 +92,7 @@ class MyApp extends connect(store)(LitElement) {
         .drawer-top {
           color: var(--app-drawer-header-text-color);
           background-color: var(--app-drawer-header-background-color);
+          height: var(--app-header-height);
         }
 
         .drawer-list {
@@ -113,11 +116,6 @@ class MyApp extends connect(store)(LitElement) {
           color: var(--app-drawer-selected-color);
           border-bottom: 1px solid var(--app-drawer-selected-color);
         }
-
-        /* app-toolbar {
-          color: var(--app-header-text-color);
-          background-color: var(--app-primary-color);
-        } */
 
         .toolbar {
           color: var(--app-header-text-color);
@@ -202,8 +200,8 @@ class MyApp extends connect(store)(LitElement) {
           margin: 0px;
           width: 100%;
           height: var(--app-footer-height);
-          background: var(--app-drawer-background-color);
-          color: var(--app-drawer-text-color);
+          background: var(--app-footer-background-color);
+          color: var(--app-footer-text-color);
           text-align: center;
         }
 
@@ -220,6 +218,10 @@ class MyApp extends connect(store)(LitElement) {
           }
 
           .main-content {
+          }
+
+          .footer {
+            display: none;
           }
         }
       </style>
@@ -252,17 +254,17 @@ class MyApp extends connect(store)(LitElement) {
 
           <!-- Main content -->
           <main role="main" class="main-content">
-            <my-view1 class="page" active?="${_page === 'view1'}"></my-view1>
-            <my-view2 class="page" active?="${_page === 'view2'}"></my-view2>
-            <my-view404 class="page" active?="${_page === 'view404'}"></my-view404>
+            <my-view1 class="page" active?="${_page === 'view1'}" searchParams="${_searchParams}"></my-view1>
+            <my-view2 class="page" active?="${_page === 'view2'}" searchParams="${_searchParams}"></my-view2>
+            <my-view404 class="page" active?="${_page === 'view404'}" searchParams="${_searchParams}"></my-view404>
+
+            <snack-bar active?="${_snackbarOpened}">
+                You are now ${_offline ? 'offline' : 'online'}.</snack-bar>
           </main>
 
           <footer class="footer">
             <p>[TODO: shortcuts]</p>
           </footer>
-
-          <snack-bar active?="${_snackbarOpened}">
-              You are now ${_offline ? 'offline' : 'online'}.</snack-bar>
         </app-header-layout>
       </app-drawer-layout>
     `;
@@ -276,6 +278,7 @@ class MyApp extends connect(store)(LitElement) {
       _offline: Boolean,
       _page: String,
       _pageList: Object,
+      _searchParams: Object,
       _snackbarOpened: Boolean,
       _wideLayout: Boolean
     };
@@ -295,7 +298,7 @@ class MyApp extends connect(store)(LitElement) {
   }
 
   _firstRendered() {
-    installRouter((location) => {store.dispatch(navigate(window.decodeURIComponent(location.pathname)))});
+    installRouter((location) => {store.dispatch(navigate(location))});
     installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     installMediaQueryWatcher(`(min-width: ${MyAppGlobals.wideWidth})`,
         (matches) => store.dispatch(updateLayout(matches)));
@@ -316,14 +319,10 @@ class MyApp extends connect(store)(LitElement) {
   _stateChanged(state) {
     this._page = state.app.page;
     this._offline = state.app.offline;
+    this._searchParams = state.app.searchParams;
     this._snackbarOpened = state.app.snackbarOpened;
     this._wideLayout = state.app.wideLayout;
     this._drawerOpened = state.app.drawerOpened;
-    // this._page = state.app.page;
-    // this._offline = state.app.offline;
-    // this._snackbarOpened = state.app.snackbarOpened;
-    // this._wideLayout = state.app.wideLayout;
-    // this._drawerOpened = this._wideLayout || state.app.drawerOpened;
   }
 }
 

@@ -8,7 +8,8 @@ export class PageViewElement extends LitElement {
 
   static get properties() {
     return {
-      active: Boolean
+      active: Boolean,
+      searchParams: Object
     }
   }
 }

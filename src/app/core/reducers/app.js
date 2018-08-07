@@ -22,7 +22,8 @@ const app = (state = {drawerOpened: false}, action) => {
     case UPDATE_PAGE:
       return {
         ...state,
-        page: action.page
+        page: action.page,
+        searchParams: action.searchParams
       };
     case UPDATE_OFFLINE:
       return {

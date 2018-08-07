@@ -82,6 +82,7 @@
     "pwa-helpers": "^0.8.3",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
+    "url-polyfill": "^1.0.13",
     "whatwg-fetch": "^2.0.4"
   },
   "browserslist": [

@@ -60,7 +60,22 @@ module.exports = (config) => ({
         return chunk.name;
       } else {
         var a = [];
-        chunk._modules.forEach(m => a.push(m.id.replace(/.*\/(.*?)\..*?$/, '$1')));
+        chunk._modules.forEach(m => {
+          var id = m.id.replace(/.*\/(.*?)\..*?$/, '$1');
+          if (!a.includes(id))
+            a.push(id)
+        });
+        console.log(a.length);
+        if (a.length > 10) {
+          var s = a.join("_");
+          a = a.slice(0, 10);
+          // Add hash
+          var h = 0, l = s.length, i = 0;
+          if ( l > 0 )
+            while (i < l)
+              h = (h << 5) - h + s.charCodeAt(i++) | 0;
+          a.push(h);
+        }
         // chunk._modules.forEach(m => a.push(path.relative(m.context, m.request)));
         return a.join("_");
       }
@@ -109,7 +124,8 @@ module.exports = (config) => ({
       minify: {
         collapseWhitespace: true,
         preserveLineBreaks: true
-      }
+      },
+      chunksSortMode: "none"
     }),
     new ManifestPlugin(),
     // TODO: switch to InjectManifest Plugin? (for fonts and webcomponents-loader.js)

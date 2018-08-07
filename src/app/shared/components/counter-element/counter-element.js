@@ -27,12 +27,14 @@ class CounterElement extends LitElement {
     `;
   }
 
-  static get properties() { return {
-    /* The total number of clicks you've done. */
-    clicks: Number,
-    /* The current value of the counter. */
-    value: Number
-  }};
+  static get properties() {
+    return {
+      /* The total number of clicks you've done. */
+      clicks: Number,
+      /* The current value of the counter. */
+      value: Number
+    }
+  };
 
   constructor() {
     super();

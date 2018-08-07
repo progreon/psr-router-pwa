@@ -5,19 +5,28 @@ export const UPDATE_DRAWER_STATE = 'UPDATE_DRAWER_STATE';
 export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
 
-export const navigate = (path) => (dispatch) => {
+export const navigate = (location) => (dispatch) => {
+  const url = new URL(location.href);
+
+  // Extract the path and search parameters from the url.
+  const path = window.decodeURIComponent(url.pathname);
+  var searchParams = {};
+  for (var pair of url.searchParams) {
+    searchParams[pair[0]] = pair[1];
+  }
+
   // Extract the page name from path.
   const page = path === '/' ? 'view1' : path.slice(1);
 
   // Any other info you might want to extract from the path (like page type),
   // you can do here
-  dispatch(loadPage(page));
+  dispatch(loadPage(page, searchParams));
 
   // Close the drawer - in case the *path* change came from a link in the drawer.
   dispatch(updateDrawerState(false));
 };
 
-const loadPage = (page) => (dispatch) => {
+const loadPage = (page, searchParams) => (dispatch) => {
   switch(page) {
     case 'view1':
       import('CoreComponents/my-view1/my-view1').then((module) => {
@@ -33,13 +42,14 @@ const loadPage = (page) => (dispatch) => {
       import('CoreComponents/my-view404/my-view404');
   }
 
-  dispatch(updatePage(page));
+  dispatch(updatePage(page, searchParams));
 };
 
-const updatePage = (page) => {
+const updatePage = (page, searchParams) => {
   return {
     type: UPDATE_PAGE,
-    page
+    page,
+    searchParams
   };
 };
 
