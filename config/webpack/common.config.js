@@ -29,6 +29,8 @@ module.exports = (config) => ({
       CoreComponents: path.resolve(__dirname, '../../src/app/core/components/'),
       CoreReducers: path.resolve(__dirname, '../../src/app/core/reducers/'),
       SharedComponents: path.resolve(__dirname, '../../src/app/shared/components/'),
+      SharedData: path.resolve(__dirname, '../../src/app/shared/data/'),
+      SharedModules: path.resolve(__dirname, '../../src/app/shared/modules/'),
       Shared: path.resolve(__dirname, '../../src/app/shared')
     }
   },

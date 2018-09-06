@@ -1,5 +1,9 @@
 'use strict';
 
+// Imports
+import { Data, GetGame } from 'SharedModules/psr-router-data/psr-router-data';
+import { Model } from 'SharedModules/psr-router-model/psr-router-model';
+
 // Imports for polymer/pwa
 import { LitElement, html } from '@polymer/lit-element';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings';
@@ -17,6 +21,8 @@ import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import 'CoreComponents/snack-bar/snack-bar';
+
+// import { GameData } from 'Shared/js/data';
 
 // Image imports for this element
 import { barsIcon } from 'Shared/my-icons';
@@ -294,6 +300,13 @@ class PsrRouterApp extends connect(store)(LitElement) {
       {name: 'redux', title: "Redux Example", element: 'psr-router-redux'},
       {name: '404', title: "404", element: 'psr-router-404', is404: true}
     ];
+
+    var pkmnRed = GetGame("r");
+
+    console.log("Model:", Model);
+    console.log("Data:", Data);
+    console.log("Game(red):", pkmnRed);
+    console.log("Pikachu:", pkmnRed.findPokemonByName("Pikachu"));
   }
 
   _firstRendered() {

@@ -1,0 +1,27 @@
+{
+  "platforms": {
+    "gb": "Game Boy",
+    "gbc": "Game Boy Colour",
+    "gba": "Game Boy Advance",
+    "ds": "Nintendo DS",
+    "3ds": "Nintendo 3DS"
+  },
+  "r": {
+    "name": "Red",
+    "gen": 1,
+    "year": 1996,
+    "platform": "gb"
+  },
+  "b": {
+    "name": "Blue",
+    "gen": 1,
+    "year": 1996,
+    "platform": "gb"
+  },
+  "y": {
+    "name": "Yellow",
+    "gen": 1,
+    "year": 1998,
+    "platform": "gbc"
+  }
+}
