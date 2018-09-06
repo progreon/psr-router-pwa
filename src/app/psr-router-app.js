@@ -3,6 +3,7 @@
 // Imports
 import { Data, GetGame } from 'SharedModules/psr-router-data/psr-router-data';
 import { Model } from 'SharedModules/psr-router-model/psr-router-model';
+import { Util } from 'SharedModules/psr-router-util/psr-router-util';
 
 // Imports for polymer/pwa
 import { LitElement, html } from '@polymer/lit-element';
@@ -301,12 +302,12 @@ class PsrRouterApp extends connect(store)(LitElement) {
       {name: '404', title: "404", element: 'psr-router-404', is404: true}
     ];
 
-    var pkmnRed = GetGame("r");
-
-    console.log("Model:", Model);
     console.log("Data:", Data);
+    var pkmnRed = GetGame("r");
     console.log("Game(red):", pkmnRed);
     console.log("Pikachu:", pkmnRed.findPokemonByName("Pikachu"));
+    console.log("Model:", Model);
+    console.log("Util:", Util);
   }
 
   _firstRendered() {

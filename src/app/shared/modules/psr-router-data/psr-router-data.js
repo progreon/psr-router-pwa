@@ -114,6 +114,5 @@ export function GetGame(gameKey) {
   var moves = loadMoves(gameInfo.gen, types);
   var pokemon = loadPokemon(gameInfo.gen, types);
   var game = new Model.Game(gameInfo, items, types, typeChart, moves, pokemon);
-  console.log(game);
   return game;
 };
