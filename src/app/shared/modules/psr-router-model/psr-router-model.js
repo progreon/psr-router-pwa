@@ -5,6 +5,7 @@
 // - Battler
 //
 
+import Battle from './psr-router-model-battle';
 import EvolutionKey from './psr-router-model-evolution-key';
 // TODO: ExperienceGroup
 import GameInfo from './psr-router-model-game-info';
@@ -18,6 +19,7 @@ import Stone from './psr-router-model-stone';
 import Type from './psr-router-model-type';
 
 export const Model = {
+  Battle,
   EvolutionKey,
   GameInfo,
   Game,

@@ -1,6 +1,6 @@
 'use strict';
 
-// Imports
+// JS Imports
 import { Data, GetGame } from 'SharedModules/psr-router-data/psr-router-data';
 import { Model } from 'SharedModules/psr-router-model/psr-router-model';
 import { Util } from 'SharedModules/psr-router-util/psr-router-util';
@@ -23,8 +23,6 @@ import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import 'CoreComponents/snack-bar/snack-bar';
 
-// import { GameData } from 'Shared/js/data';
-
 // Image imports for this element
 import { barsIcon } from 'Shared/my-icons';
 
@@ -43,7 +41,7 @@ import {
 } from 'CoreActions/app.js';
 
 class PsrRouterApp extends connect(store)(LitElement) {
-  _render({appTitle, _drawerOpened, _offline, _page, _pageList, _searchParams, _snackbarOpened, _wideLayout}) {
+  _render({appTitle, _currentGame, _drawerOpened, _offline, _page, _pageList, _searchParams, _snackbarOpened, _wideLayout}) {
     var linkList = [];
     if (_pageList) {
       _pageList.forEach(function(page) {
@@ -261,7 +259,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
           <!-- Main content -->
           <main role="main" class="main-content">
             <psr-router-home class="page" active?="${_page === 'home'}" searchParams="${_searchParams}"></psr-router-home>
-            <psr-router-redux class="page" active?="${_page === 'redux'}" searchParams="${_searchParams}"></psr-router-redux>
+            <psr-router-items class="page" active?="${_page === 'items'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-items>
+            <psr-router-moves class="page" active?="${_page === 'moves'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-moves>
             <psr-router-404 class="page" active?="${_page === '404'}" searchParams="${_searchParams}"></psr-router-404>
 
             <snack-bar active?="${_snackbarOpened}">
@@ -280,6 +279,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
   static get properties() {
     return {
       appTitle: String,
+      _currentGame: Object,
       _drawerOpened: Boolean,
       _offline: Boolean,
       _page: String,
@@ -298,7 +298,9 @@ class PsrRouterApp extends connect(store)(LitElement) {
     // Setting the list of pages
     this._pageList = [
       {name: 'home', title: "Home", element: 'psr-router-home'},
-      {name: 'redux', title: "Redux Example", element: 'psr-router-redux'},
+      // {name: 'redux', title: "Redux Example", element: 'psr-router-redux'},
+      {name: 'items', title: "Item List", element: 'psr-router-items'},
+      {name: 'moves', title: "Move List", element: 'psr-router-moves'},
       {name: '404', title: "404", element: 'psr-router-404', is404: true}
     ];
 
@@ -308,6 +310,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
     console.log("Pikachu:", pkmnRed.findPokemonByName("Pikachu"));
     console.log("Model:", Model);
     console.log("Util:", Util);
+    this._currentGame = pkmnRed;
   }
 
   _firstRendered() {

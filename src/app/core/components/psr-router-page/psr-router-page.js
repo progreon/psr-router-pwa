@@ -9,7 +9,8 @@ export class PsrRouterPage extends LitElement {
   static get properties() {
     return {
       active: Boolean,
-      searchParams: Object
+      searchParams: Object,
+      game: Object
     }
   }
 }

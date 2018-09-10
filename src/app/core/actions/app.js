@@ -34,8 +34,14 @@ const loadPage = (page, searchParams) => (dispatch) => {
         // navigating to home after psr-router-home.js is loaded.
       });
       break;
-    case 'redux':
-      import('CoreComponents/psr-router-redux/psr-router-redux');
+    // case 'redux':
+    //   import('CoreComponents/psr-router-redux/psr-router-redux');
+    //   break;
+    case 'items':
+      import('CoreComponents/psr-router-items/psr-router-items');
+      break;
+    case 'moves':
+      import('CoreComponents/psr-router-moves/psr-router-moves');
       break;
     default:
       page = '404';
