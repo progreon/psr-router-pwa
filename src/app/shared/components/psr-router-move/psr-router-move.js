@@ -1,6 +1,10 @@
 // Imports for this element
 import { LitElement, html } from '@polymer/lit-element';
 
+// These are the elements needed by this element.
+// import '@vaadin/vaadin-item/vaadin-item';
+import '@vaadin/vaadin-item/theme/material/vaadin-item';
+
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
 
@@ -11,15 +15,15 @@ class PsrRouterMove extends LitElement {
   _render(props) {
     return html`
       ${AppStyles}
-      <style></style>
       <vaadin-item hidden?="${!props.detailed}">
-        <div><strong>${props.move.name} (${props.move.type}, ${props.move.category})</strong></div>
-        <div>${props.move.power} / ${props.move.accuracy}% / ${props.move.pp}pp / ${props.move.effect}</div>
-        <div>${props.move.description}</div>
+        <div><strong>${props.move.name} (${props.move.type.name}, ${props.move.category})</strong></div>
+        <div>power: ${props.move.power}, accuracy: ${props.move.accuracy}%, ${props.move.pp}pp</div>
+        <div>effect: ${props.move.effect}</div>
+        <div><i>${props.move.description}</i></div>
       </vaadin-item>
       <vaadin-item hidden?="${props.detailed}">
         <div><strong>${props.move.name} (${props.move.type})</strong></div>
-        <div>${props.move.description}</div>
+        <div><i>${props.move.description}</i></div>
       </vaadin-item>
     `;
   }

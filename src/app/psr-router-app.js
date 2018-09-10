@@ -24,7 +24,7 @@ import '@polymer/app-layout/app-toolbar/app-toolbar';
 import 'CoreComponents/snack-bar/snack-bar';
 
 // Image imports for this element
-import { barsIcon } from 'Shared/my-icons';
+import { barsIcon, angleLeftIcon } from 'Shared/my-icons';
 
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
@@ -43,14 +43,17 @@ import {
 class PsrRouterApp extends connect(store)(LitElement) {
   _render({appTitle, _currentGame, _drawerOpened, _offline, _page, _pageList, _searchParams, _snackbarOpened, _wideLayout}) {
     var linkList = [];
-    if (_pageList) {
-      _pageList.forEach(function(page) {
-        if (!page.is404) {
-          const a = html`<a selected?="${_page === page.name}" href="/${page.name}">${page.title}</a>`;
-          linkList.push(a);
-        }
-      });
-    }
+    var menuIcon = angleLeftIcon; // Default to back-arrow
+    // Creating the menu links
+    this._pageList.forEach(function(page) {
+      if (_page === page.name) {
+        menuIcon = barsIcon; // Normal menu icon if current page is a level 1 page
+      }
+      if (!page.is404) {
+        const a = html`<a selected?="${_page === page.name}" href="/${page.name}">${page.title}</a>`;
+        linkList.push(a);
+      }
+    });
     const template = html`
       ${AppStyles}
       <style>
@@ -245,7 +248,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
           <app-header slot="header" class="toolbar" fixed effects="waterfall">
             <app-toolbar class="toolbar-top" sticky>
               <div class="toolbar-top-content">
-                <button class="menu-btn" title="Menu" on-click="${_ => store.dispatch(updateDrawerState(true))}">${barsIcon}</button>
+                <button class="menu-btn" title="Menu" onclick="${_ => this._onMenuButtonClicked(menuIcon === angleLeftIcon)}">${menuIcon}</button>
                 <div class="title">${appTitle}</div>
               </div>
             </app-toolbar>
@@ -261,6 +264,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
             <psr-router-home class="page" active?="${_page === 'home'}" searchParams="${_searchParams}"></psr-router-home>
             <psr-router-items class="page" active?="${_page === 'items'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-items>
             <psr-router-moves class="page" active?="${_page === 'moves'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-moves>
+            <psr-router-pokemon-info class="page" active?="${_page === 'pokemon-info'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-pokemon-info>
+            <psr-router-pokemon-list class="page" active?="${_page === 'pokemon-list'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-pokemon-list>
             <psr-router-404 class="page" active?="${_page === '404'}" searchParams="${_searchParams}"></psr-router-404>
 
             <snack-bar active?="${_snackbarOpened}">
@@ -301,8 +306,18 @@ class PsrRouterApp extends connect(store)(LitElement) {
       // {name: 'redux', title: "Redux Example", element: 'psr-router-redux'},
       {name: 'items', title: "Item List", element: 'psr-router-items'},
       {name: 'moves', title: "Move List", element: 'psr-router-moves'},
+      {name: 'pokemon-list', title: "Pokemon List", element: 'psr-router-pokemon-list'},
       {name: '404', title: "404", element: 'psr-router-404', is404: true}
     ];
+    // Handle the navigation caused by js code here.
+    document.body.addEventListener('navigate', (e) => {
+      if (e.detail.external) {
+        window.location.href = e.detail.href;
+      } else {
+        window.history.pushState({}, '', e.detail.href);
+        store.dispatch(navigate(window.location));
+      }
+    });
 
     console.log("Data:", Data);
     var pkmnRed = GetGame("r");
@@ -318,6 +333,13 @@ class PsrRouterApp extends connect(store)(LitElement) {
     installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     installMediaQueryWatcher(`(min-width: ${MyAppGlobals.wideWidth})`,
         (matches) => store.dispatch(updateLayout(matches)));
+  }
+
+  _onMenuButtonClicked(isBackButton) {
+    if (!isBackButton)
+      store.dispatch(updateDrawerState(true));
+    else
+      window.history.back();
   }
 
   _didRender(properties, changeList) {

@@ -1,6 +1,10 @@
 // Imports for this element
 import { LitElement, html } from '@polymer/lit-element';
 
+// These are the elements needed by this element.
+// import '@vaadin/vaadin-item/vaadin-item';
+import '@vaadin/vaadin-item/theme/material/vaadin-item';
+
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
 
@@ -11,10 +15,10 @@ class PsrRouterItem extends LitElement {
   _render(props) {
     return html`
       ${AppStyles}
-      <style></style>
       <vaadin-item hidden?="${!props.detailed}">
         <div><strong>${props.item.name} (₽${props.item.price})</strong></div>
         <div>${props.item.type} (${props.item.value})</div>
+        <div><i>${props.item.description}</i></div>
       </vaadin-item>
       <vaadin-item hidden?="${props.detailed}">
         <div><strong>${props.item.name}</strong></div>

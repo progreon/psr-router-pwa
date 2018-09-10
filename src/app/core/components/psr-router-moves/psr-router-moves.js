@@ -11,8 +11,8 @@ class PsrRouterMoves extends PsrRouterPage {
   _render(props) {
     var moves = props.game ? props.game.moves : {};
     var moveElements = [];
-    for (var i in moves) {
-      moveElements.push(html`<psr-router-move id="${i}" move=${moves[i]} detailed></psr-router-move>`);
+    for (var m in moves) {
+      moveElements.push(html`<psr-router-move id="${m}" move=${moves[m]} detailed></psr-router-move>`);
     }
     return html`
       ${AppStyles}

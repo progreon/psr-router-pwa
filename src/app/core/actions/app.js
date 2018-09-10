@@ -43,9 +43,15 @@ const loadPage = (page, searchParams) => (dispatch) => {
     case 'moves':
       import('CoreComponents/psr-router-moves/psr-router-moves');
       break;
+    case 'pokemon-info':
+      import('CoreComponents/psr-router-pokemon/psr-router-pokemon-info');
+      break;
+    case 'pokemon-list':
+      import('CoreComponents/psr-router-pokemon/psr-router-pokemon-list');
+      break;
     default:
       page = '404';
-        import('CoreComponents/psr-router-404/psr-router-404');
+      import('CoreComponents/psr-router-404/psr-router-404');
   }
 
   dispatch(updatePage(page, searchParams));
