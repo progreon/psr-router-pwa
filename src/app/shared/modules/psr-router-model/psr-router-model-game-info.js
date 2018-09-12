@@ -24,4 +24,4 @@ class GameInfo {
   }
 }
 
-export default GameInfo;
+export { GameInfo };

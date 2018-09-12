@@ -20,7 +20,7 @@ class Type {
   /** @returns {string} */
   toString() {
     return this.name;
-  };
+  }
 }
 
-export default Type;
+export { Type };

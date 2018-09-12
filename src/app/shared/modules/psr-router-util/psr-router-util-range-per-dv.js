@@ -1,4 +1,4 @@
-import Range from './psr-router-util-range';
+import { Range } from './';
 
 const DVS = 16;
 
@@ -229,4 +229,4 @@ class RangePerDV {
   }
 }
 
-export default RangePerDV;
+export { RangePerDV };

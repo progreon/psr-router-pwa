@@ -30,4 +30,4 @@ class IntPair {
   }
 }
 
-export default IntPair;
+export { IntPair };

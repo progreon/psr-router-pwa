@@ -2,8 +2,8 @@
 
 // JS Imports
 import { Data, GetGame } from 'SharedModules/psr-router-data/psr-router-data';
-import { Model } from 'SharedModules/psr-router-model/psr-router-model';
-import { Util } from 'SharedModules/psr-router-util/psr-router-util';
+import * as Model from 'SharedModules/psr-router-model';
+import * as Util from 'SharedModules/psr-router-util';
 
 // Imports for polymer/pwa
 import { LitElement, html } from '@polymer/lit-element';

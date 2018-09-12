@@ -76,4 +76,4 @@ class DVRange {
   }
 }
 
-export default DVRange;
+export { DVRange };

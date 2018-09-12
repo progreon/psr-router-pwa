@@ -30,4 +30,4 @@ class EvolutionKey {
   }
 }
 
-export default EvolutionKey;
+export { EvolutionKey };

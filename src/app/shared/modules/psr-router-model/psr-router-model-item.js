@@ -46,4 +46,4 @@ class Item {
   }
 }
 
-export default Item;
+export { Item };

@@ -59,4 +59,4 @@ class PokemonCountPair {
   }
 }
 
-export default PokemonCountPair;
+export { PokemonCountPair };

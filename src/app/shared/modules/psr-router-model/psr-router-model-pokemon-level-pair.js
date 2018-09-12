@@ -43,4 +43,4 @@ class PokemonLevelPair {
   }
 }
 
-export default PokemonLevelPair;
+export { PokemonLevelPair };

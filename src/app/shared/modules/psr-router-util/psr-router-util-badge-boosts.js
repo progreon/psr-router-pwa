@@ -111,4 +111,4 @@ class BadgeBoosts {
   }
 }
 
-export default BadgeBoosts;
+export { BadgeBoosts };

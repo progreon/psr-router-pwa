@@ -23,4 +23,4 @@ class Battle {
   }
 }
 
-export default Battle;
+export { Battle };

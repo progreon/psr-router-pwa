@@ -181,4 +181,4 @@ const ExperienceGroup = {
   "Fast": new FastExperienceGroup()
 };
 
-export default ExperienceGroup;
+export { ExperienceGroup };

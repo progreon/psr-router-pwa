@@ -112,4 +112,4 @@ class Stages {
   }
 }
 
-export default Stages;
+export { Stages };

@@ -21,4 +21,4 @@ class Stone {
   }
 }
 
-export default Stone;
+export { Stone };

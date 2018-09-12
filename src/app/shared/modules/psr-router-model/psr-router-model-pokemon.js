@@ -112,4 +112,4 @@ class Pokemon {
 //     }
 // }
 
-export default Pokemon;
+export { Pokemon };

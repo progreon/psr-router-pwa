@@ -1,5 +1,5 @@
-import ABattler from './abattler';
-import Range from 'SharedModules/psr-router-util/psr-router-util-range';
+import { ABattler } from './abattler';
+import { Range } from 'SharedModules/psr-router-util';
 
 /**
  * Class representing a battler from generation 1.
@@ -557,4 +557,4 @@ class Battler1 extends ABattler {
 //
 // }
 
-export default Battler1;
+export { Battler1 };

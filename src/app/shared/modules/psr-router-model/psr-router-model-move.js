@@ -40,4 +40,4 @@ class Move {
   }
 }
 
-export default Move;
+export { Move };

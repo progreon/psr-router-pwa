@@ -375,4 +375,4 @@ class ABattler {
   }
 }
 
-export default ABattler;
+export { ABattler };
