@@ -374,3 +374,5 @@ class ABattler {
     // clone._levelExp = this._levelExp;
   }
 }
+
+export default ABattler;
