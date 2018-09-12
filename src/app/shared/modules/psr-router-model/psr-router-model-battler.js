@@ -16,18 +16,45 @@ class ABattler {
     if (new.target === ABattler) {
       throw new TypeError("Cannot construct ABattler instances directly");
     }
-    this.game = game;
-    this.pokemon = pokemon;
-    this.catchLocation = catchLocation;
-    this.isTrainerMon = isTrainerMon;
-    this.level = level;
-    this.moveset = []; // TODO: hold Move's or strings of keys for Move?
-    this.levelExp = 0;
+    /**
+     * @type {Game}
+     * @protected
+     */
+    this._game = game;
+    /**
+     * @type {Pokemon}
+     * @protected
+     */
+    this._pokemon = pokemon;
+    /**
+     * @type {EncounterArea}
+     * @protected
+     */
+    this._catchLocation = catchLocation;
+    /**
+     * @type {number}
+     * @protected
+     */
+    this._isTrainerMon = isTrainerMon;
+    /**
+     * @type {number}
+     * @protected
+     */
+    this._level = level;
+    /**
+     * @type {move[]}
+     * @protected
+     */
+    this._moveset = []; // TODO: hold Move's or strings of keys for Move?
+    /**
+     * @type {number}
+     * @protected
+     */
+    this._levelExp = 0;
   }
 
   /**
    * Defeat given battler, this battler is modified but not evolved.
-   *
    * @param {ABattler}  battler       The battler to defeat
    * @param {number}    participants  The number of participants in the battle (defaults to 1)
    * @returns {ABattler} Returns the modified/evolved battler (not a deep copy)
@@ -39,7 +66,6 @@ class ABattler {
 
   /**
    * Tries to evolve the battler with the specified item.
-   *
    * @param {Item}  item  The item which triggers the evolution
    * @returns {ABattler}   Returns the evolved battler or null if it couldn't evolve
    * @abstract
@@ -50,7 +76,6 @@ class ABattler {
 
   /**
    * Add experience, this battler is modified but not evolved.
-   *
    * @param {number}    exp
    * @returns {ABattler} Returns the modified/evolved ABattler (not a deep copy)
    * @abstract
@@ -63,19 +88,18 @@ class ABattler {
    * Try to learn a TM or HM move.
    * TODO: Move or string?
    * TODO: (get via game): var canLearn = pokemon.getTMMoves().contains(newMove)
-   *
    * @param {Move}  newMove   The TM or HM move
    * @param {Move}  [oldMove]
-   * @returns {boolean} True if success
+   * @returns {boolean} Returns true if success.
    */
   learnTmMove(newMove, oldMove) {
     var success = false;
-    var moves = this.moveset;
+    var moves = this._moveset;
     var canLearn = false; // TODO
     if (canLearn && !moves.includes(newMove)) {
       if (!oldMove || moves.includes(oldMove)) {
         var i = 0;
-        while ( i < 4 && oldMove != this.moveset[i] && this.moveset[i] != null)
+        while ( i < 4 && oldMove != this._moveset[i] && this._moveset[i] != null)
           i++;
         // only remove the move if no more room!
         if (i < 4) {
@@ -88,10 +112,9 @@ class ABattler {
   }
 
   /**
-   * Use some Rare Candies
-   *
+   * Use some Rare Candies.
    * @param {number}    [count=1]
-   * @returns {ABattler} Returns the modified/evolved ABattler (not a deep copy)
+   * @returns {ABattler} Returns the modified/evolved ABattler (not a deep copy).
    */
   useCandy(count = 1) {
     if (!count)
@@ -100,16 +123,15 @@ class ABattler {
     var newBattler = this;
     for (var i = 0; i < count; i++)
       if (level < 100)
-        newBattler = newBattler.addXP(game.experienceGroup[pokemon.expGroup].getDeltaExp(level, level + 1, levelExp));
+        newBattler = newBattler.addXP(this._game.experienceGroup[this._pokemon.expGroup].getDeltaExp(level, level + 1, levelExp));
 
     return newBattler;
   }
 
   /**
-   * Use HP Up
-   *
+   * Use some HP Up.
    * @param {number}    [count=1]
-   * @returns {boolean} Returns true if successful
+   * @returns {boolean} Returns true if successful.
    * @abstract
    */
   useHPUp(count = 1) {
@@ -117,10 +139,9 @@ class ABattler {
   }
 
   /**
-   * Use Protein
-   *
+   * Use some Protein.
    * @param {number}    [count=1]
-   * @returns {boolean} Returns true if successful
+   * @returns {boolean} Returns true if successful.
    * @abstract
    */
   useProtein(count = 1) {
@@ -128,10 +149,9 @@ class ABattler {
   }
 
   /**
-   * Use Iron
-   *
+   * Use some Iron.
    * @param {number}    [count=1]
-   * @returns {boolean} Returns true if successful
+   * @returns {boolean} Returns true if successful.
    * @abstract
    */
   useIron(count = 1) {
@@ -139,10 +159,9 @@ class ABattler {
   }
 
   /**
-   * Use Carbos
-   *
+   * Use some Carbos.
    * @param {number}    [count=1]
-   * @returns {boolean} Returns true if successful
+   * @returns {boolean} Returns true if successful.
    * @abstract
    */
   useCarbos(count = 1) {
@@ -150,10 +169,9 @@ class ABattler {
   }
 
   /**
-   * Use Calcium
-   *
+   * Use some Calcium.
    * @param {number}    [count=1]
-   * @returns {boolean} Returns true if successful
+   * @returns {boolean} Returns true if successful.
    * @abstract
    */
   useCalcium(count = 1) {
@@ -161,10 +179,9 @@ class ABattler {
   }
 
   /**
-   * Get the DV range for a stat
-   *
+   * Get the DV range for a stat.
    * @param {number}    stat    The stat index
-   * @returns {DVRange} Returns the current possible DVs for the stat
+   * @returns {DVRange} The current possible DVs for the stat.
    * @abstract
    */
   getDVRange(stat) {
@@ -172,155 +189,188 @@ class ABattler {
   }
 
   /**
-   * Get the DV range for a stat
-   *
-   * @returns {DVRange[]} Returns the current possible DVs for the stat
+   * Get the DV range for a stat.
+   * @returns {DVRange[]} The current possible DVs for the stat.
    * @abstract
    */
   getDVRanges() {
     throw new TypeError("getDVRanges not callable from super class");
   }
 
-  // TODO
-//     public abstract DVRange[] getDVRanges();
-//
-//     public List<Move> getMoveset() {
-//         List<Move> moves = new ArrayList<>();
-//         for (Move m : moveset) {
-//             if (m != null) {
-//                 moves.add(m);
-//             }
-//         }
-//         return moves;
-//     }
-//
-//     public int getLevel() {
-//         return this.level;
-//     }
-//
-//     /**
-//      * Gets the current HP stat value
-//      *
-//      * @return
-//      */
-//     public abstract Range getHP();
-//
-//     /**
-//      * Gets the current Attack stat value
-//      *
-//      * @return
-//      */
-//     public abstract Range getAtk();
-//
-//     /**
-//      * Gets the current Defense stat value
-//      *
-//      * @return
-//      */
-//     public abstract Range getDef();
-//
-//     /**
-//      * Gets the current Speed stat value
-//      *
-//      * @return
-//      */
-//     public abstract Range getSpd();
-//
-//     /**
-//      * Gets the current Special stat value
-//      *
-//      * @return
-//      */
-//     public abstract Range getSpc();
-//
-//     /**
-//      * Gets the current Attack stat value with boosts
-//      *
-//      * @param badgeBoosts
-//      * @param stage
-//      * @return
-//      */
-//     public Range getAtk(int badgeBoosts, int stage) {
-//         return getBoostedStat(getAtk(), badgeBoosts, stage);
-//     }
-//
-//     /**
-//      * Gets the current Defense stat value with boosts
-//      *
-//      * @param badgeBoosts
-//      * @param stage
-//      * @return
-//      */
-//     public Range getDef(int badgeBoosts, int stage) {
-//         return getBoostedStat(getDef(), badgeBoosts, stage);
-//     }
-//
-//     /**
-//      * Gets the current Speed stat value with boosts
-//      *
-//      * @param badgeBoosts
-//      * @param stage
-//      * @return
-//      */
-//     public Range getSpd(int badgeBoosts, int stage) {
-//         return getBoostedStat(getSpd(), badgeBoosts, stage);
-//     }
-//
-//     /**
-//      * Gets the current Special stat value with boosts
-//      *
-//      * @param badgeBoosts
-//      * @param stage
-//      * @return
-//      */
-//     public Range getSpc(int badgeBoosts, int stage) {
-//         return getBoostedStat(getSpc(), badgeBoosts, stage);
-//     }
-//
-//     protected abstract Range getBoostedStat(Range statRange, int badgeBoostCount, int xItemCount);
-//
-// //    public Pokemon getPokemon() {
-// //        return this.pokemon;
-// //    }
-//
-//     public boolean isType(Types.Type type) {
-//         return type == pokemon.type1 || (pokemon.type2 != null && type == pokemon.type2);
-//     }
-//
-//     public int getExp(int participants) {
-//         return pokemon.getExp(level, participants, false, isTrainerMon);
-//     }
-//
-//     public int getLevelExp() {
-//         return levelExp;
-//     }
-//
-//     @Override
-//     // TODO: NOT with hash codes!!
-//     public abstract boolean equals(Object obj);
-//
-//     @Override
-//     public int hashCode() {
-//         int hash = 7;
-//         hash = 97 * hash + Objects.hashCode(this.pokemon);
-//         hash = 97 * hash + Objects.hashCode(this.catchLocation);
-//         return hash;
-//     }
-//
-//     @Override
-//     public String toString() {
-//         String battler = pokemon.name + " Lv." + getLevel();
-//
-//         return battler;
-//     }
-
-  clone() {
-    var clone = new ABattler(this.game, this.pokemon, this.catchLocation, this.isTrainerMon, this.level);
-    // TODO: clone.moveset = ...;
-    clone.levelExp = this.levelExp;
+  /**
+   * Get the current moveset.
+   * @returns {Move[]} The current moveset.
+   */
+  getMoveset() {
+    return this._moveset;
   }
 
+  /**
+   * Get the current level.
+   * @returns {number} The current level.
+   */
+  getLevel() {
+    return this._level;
+  }
+
+  /**
+   * Get the current HP stat value.
+   * @returns {Range} The current HP stat value.
+   * @abstract
+   */
+  getHP() {
+    throw new TypeError("getHP not callable from super class");
+  }
+
+  /**
+   * Get the current attack stat value.
+   * @returns {Range} The current attack stat value.
+   * @abstract
+   */
+  getAtk() {
+    throw new TypeError("getAtk not callable from super class");
+  }
+
+  /**
+   * Get the current defense stat value.
+   * @returns {Range} The current defense stat value.
+   * @abstract
+   */
+  getDef() {
+    throw new TypeError("getDef not callable from super class");
+  }
+
+  /**
+   * Get the current speed stat value.
+   * @returns {Range} The current speed stat value.
+   * @abstract
+   */
+  getSpd() {
+    throw new TypeError("getSpd not callable from super class");
+  }
+
+  /**
+   * Get the current special stat value.
+   * @returns {Range} The current special stat value.
+   * @abstract
+   */
+  getSpc() {
+    throw new TypeError("getSpc not callable from super class");
+  }
+
+  /**
+   * Get the current special stat value.
+   * @returns {Range} The current special stat value.
+   * @abstract
+   */
+  getSpc() {
+    throw new TypeError("getSpc not callable from super class");
+  }
+
+  /**
+   * Get the current attack stat value with boosts.
+   * @param {number}  badgeBoosts
+   * @param {number}  stage
+   * @return {Range}  The boosted attack stat value.
+   */
+  getBoostedAtk(badgeBoosts, stage) {
+    return getBoostedStat(getAtk(), badgeBoosts, stage);
+  }
+
+  /**
+   * Get the current defense stat value with boosts.
+   * @param {number}  badgeBoosts
+   * @param {number}  stage
+   * @return {Range}  The boosted defense stat value.
+   */
+  getBoostedDef(badgeBoosts, stage) {
+    return getBoostedStat(getDef(), badgeBoosts, stage);
+  }
+
+  /**
+   * Get the current speed stat value with boosts.
+   * @param {number}  badgeBoosts
+   * @param {number}  stage
+   * @return {Range}  The boosted speed stat value.
+   */
+  getBoostedSpd(badgeBoosts, stage) {
+    return getBoostedStat(getSpd(), badgeBoosts, stage);
+  }
+
+  /**
+   * Get the current special stat value with boosts.
+   * @param {number}  badgeBoosts
+   * @param {number}  stage
+   * @return {Range}  The boosted special stat value.
+   */
+  getBoostedSpc(badgeBoosts, stage) {
+    return getBoostedStat(getSpc(), badgeBoosts, stage);
+  }
+
+  /**
+   * Get the current stat value with boosts.
+   * @param {Range}   statRange
+   * @param {number}  badgeBoostCount
+   * @param {number}  xItemCount
+   * @returns {Range} The current stat value with boosts.
+   * @abstract
+   */
+  getBoostedStat(statRange, badgeBoostCount, xItemCount) {
+    throw new TypeError("getSpc not callable from super class");
+  }
+
+  /**
+   * Get the pokemon object.
+   * @returns {Pokemon} The pokemon object.
+   */
+  getPokemon() {
+    return this._pokemon;
+  }
+
+  /**
+   * Check if the battler has the given type.
+   * @param {Type}  type
+   * @return {boolean}  Returns true if the battler has the given type.
+   */
+  isType(type) {
+    return type == this._pokemon.type1 || (this._pokemon.type2 != null && type == this._pokemon.type2);
+  }
+
+  /**
+   * Get the experience a battler gets for battling this pokemon.
+   * @param {number}  participants  The number of participants in the battle.
+   * @returns {number}  The experience.
+   */
+  getExp(participants) {
+    return this._pokemon.getExp(this._level, participants, false, this._isTrainerMon);
+  }
+
+  /**
+   * Get the current experience within the current level.
+   * @returns {number}  The current experience within the current level.
+   */
+  getLevelExp() {
+    return this._levelExp;
+  }
+
+  /** @returns {ABattler} */
+  equals(battler) {
+    // TODO
+  }
+
+  /** @returns {string} */
   toString() {
-    return "ABattler";
+    return this._pokemon.name + " Lv." + this.getLevel();
+  }
+
+  /**
+   * @returns {ABattler} The clone.
+   * @abstract
+   */
+  clone() {
+    throw new TypeError("clone not callable from super class");
+    // var clone = new ABattler(this._game, this._pokemon, this._catchLocation, this._isTrainerMon, this._level);
+    // // TODO: clone._moveset = ...;
+    // clone._levelExp = this._levelExp;
   }
 }
