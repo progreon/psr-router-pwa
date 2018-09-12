@@ -4,18 +4,21 @@
  *
  * @class
  */
-export default class Battler {
+class ABattler {
   /**
    *
-   * @param {RouterData}    routerData    The router data
+   * @param {Game}          game          The game
    * @param {Pokemon}       pokemon       The pokemon
    * @param {EncounterArea} catchLocation The catch location of this battler (used for calculating possible DVs)
    * @param {boolean}       isTrainerMon  If it's a trainer's pokemon (TODO: do this more properly?)
    * @param {number}        level         The current level
-   * @returns {Battler}
+   * @returns {ABattler}
    */
-  constructor(routerData, pokemon, catchLocation, isTrainerMon, level) {
-    this.object = routerData;
+  constructor(game, pokemon, catchLocation, isTrainerMon, level) {
+    if (new.target === ABattler) {
+      throw new TypeError("Cannot construct ABattler instances directly");
+    }
+    this.game = game;
     this.pokemon = pokemon;
     this.catchLocation = catchLocation;
     this.isTrainerMon = isTrainerMon;
@@ -27,51 +30,47 @@ export default class Battler {
   /**
    * Defeat given battler, this battler is modified but not evolved.
    *
-   * @param {Battler} battler      The battler to defeat
-   * @param {number}  participants The number of participants in the battle (defaults to 1)
-   * @returns {Battler} Returns the modified/evolved battler (not a deep copy)
+   * @param {ABattler}  battler       The battler to defeat
+   * @param {number}    participants  The number of participants in the battle (defaults to 1)
+   * @returns {ABattler} Returns the modified/evolved battler (not a deep copy)
    */
-  defeatBattler(battler, participants) {
-    if (!participants)
-      participants = 1;
-
-    // TODO
+  defeatBattler(battler, participants = 1) {
+    throw new TypeError("defeatBattler not callable from super class");
   }
 
   /**
    * Tries to evolve the battler with the specified item.
    *
    * @param {Item}  item  The item which triggers the evolution
-   * @returns {Battler}   Returns the evolved battler or null if it couldn't evolve
+   * @returns {ABattler}   Returns the evolved battler or null if it couldn't evolve
    */
   evolve(item) {
-    // TODO
+    throw new TypeError("evolve not callable from super class");
   }
 
   /**
    * Add experience, this battler is modified but not evolved.
    *
    * @param {number}    exp
-   * @returns {Battler} Returns the modified/evolved Battler (not a deep copy)
+   * @returns {ABattler} Returns the modified/evolved ABattler (not a deep copy)
    */
   addXP(exp) {
-    // TODO
+    throw new TypeError("addXP not callable from super class");
   }
 
   /**
    * Try to learn a TM or HM move.
    * TODO: Move or string?
+   * TODO: (get via game): var canLearn = pokemon.getTMMoves().contains(newMove)
    *
-   * @param {Move}  newMove The TM or HM move
-   * @param {Move}  oldMove Optional
+   * @param {Move}  newMove   The TM or HM move
+   * @param {Move}  [oldMove]
    * @returns {boolean} True if success
    */
   learnTmMove(newMove, oldMove) {
-    // TODO
     var success = false;
     var moves = this.moveset;
-    var canLearn = false;
-    // TODO (get via routerData): var canLearn = pokemon.getTMMoves().contains(newMove)
+    var canLearn = false; // TODO
     if (canLearn && !moves.includes(newMove)) {
       if (!oldMove || moves.includes(oldMove)) {
         var i = 0;
@@ -90,34 +89,91 @@ export default class Battler {
   /**
    * Use some Rare Candies
    *
-   * @param {number}    count
-   * @returns {Battler} Returns the modified/evolved Battler (not a deep copy)
+   * @param {number}    [count=1]
+   * @returns {ABattler} Returns the modified/evolved ABattler (not a deep copy)
    */
-  addXP(count) {
+  useCandy(count = 1) {
     if (!count)
       count = 1;
 
     var newBattler = this;
     for (var i = 0; i < count; i++)
       if (level < 100)
-      // TODO: newBattler = newBattler.addXP(...);
+        newBattler = newBattler.addXP(game.experienceGroup[pokemon.expGroup].getDeltaExp(level, level + 1, levelExp));
 
     return newBattler;
   }
 
+  /**
+   * Use HP Up
+   *
+   * @param {number}    [count=1]
+   * @returns {boolean} Returns true if successful
+   */
+  useHPUp(count = 1) {
+    throw new TypeError("useHPUp not callable from super class");
+  }
+
+  /**
+   * Use Protein
+   *
+   * @param {number}    [count=1]
+   * @returns {boolean} Returns true if successful
+   */
+  useProtein(count = 1) {
+    throw new TypeError("useProtein not callable from super class");
+  }
+
+  /**
+   * Use Iron
+   *
+   * @param {number}    [count=1]
+   * @returns {boolean} Returns true if successful
+   */
+  useIron(count = 1) {
+    throw new TypeError("useIron not callable from super class");
+  }
+
+  /**
+   * Use Carbos
+   *
+   * @param {number}    [count=1]
+   * @returns {boolean} Returns true if successful
+   */
+  useCarbos(count = 1) {
+    throw new TypeError("useCarbos not callable from super class");
+  }
+
+  /**
+   * Use Calcium
+   *
+   * @param {number}    [count=1]
+   * @returns {boolean} Returns true if successful
+   */
+  useCalcium(count = 1) {
+    throw new TypeError("useCalcium not callable from super class");
+  }
+
+  /**
+   * Get the DV range for a stat
+   *
+   * @param {number}    stat    The stat index
+   * @returns {DVRange} Returns the current possible DVs for the stat
+   */
+  getDVRange(stat) {
+    throw new TypeError("getDVRange not callable from super class");
+  }
+
+  /**
+   * Get the DV range for a stat
+   *
+   * @returns {DVRange[]} Returns the current possible DVs for the stat
+   */
+  getDVRanges() {
+    throw new TypeError("getDVRanges not callable from super class");
+  }
+
   // TODO
-//     public abstract boolean useHPUp(int count);
-//
-//     public abstract boolean useProtein(int count);
-//
-//     public abstract boolean useIron(int count);
-//
-//     public abstract boolean useCarbos(int count);
-//
-//     public abstract boolean useCalcium(int count);
-//
-//     public abstract DVRange getDVRange(int stat);
-//
 //     public abstract DVRange[] getDVRanges();
 //
 //     public List<Move> getMoveset() {
@@ -251,12 +307,12 @@ export default class Battler {
 //     }
 
   clone() {
-    var clone = new Battler(this.routerData, this.pokemon, this.catchLocation, this.isTrainerMon, this.level);
+    var clone = new ABattler(this.game, this.pokemon, this.catchLocation, this.isTrainerMon, this.level);
     // TODO: clone.moveset = ...;
     clone.levelExp = this.levelExp;
   }
 
   toString() {
-    return "Battler";
-  };
+    return "ABattler";
+  }
 }

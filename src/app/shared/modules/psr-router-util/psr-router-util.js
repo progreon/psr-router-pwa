@@ -12,6 +12,10 @@ import Range from './psr-router-util-range';
 import RangePerDV from './psr-router-util-range-per-dv';
 import Stages from './psr-router-util-stages';
 
+/**
+ * {BadgeBoosts, DVRange, IntPair, Range, RangePerDV, Stages}
+ * @type {{BadgeBoosts, DVRange, IntPair, Range, RangePerDV, Stages}}
+ */
 export const Util = {
   BadgeBoosts,
   DVRange,

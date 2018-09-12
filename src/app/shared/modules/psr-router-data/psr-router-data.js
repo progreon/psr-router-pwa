@@ -95,7 +95,6 @@ function loadPokemon(gen, types) {
   return PokemonMap
 }
 
-
 // TEMP (?), just for reference
 export const Data = {
   games: _games,
@@ -105,6 +104,11 @@ export const Data = {
   types: _types
 };
 
+/**
+ * Get a game instance.
+ * @param {string}  gameKey   The key string of a game.
+ * @returns {Game}  The game instance.
+ */
 export function GetGame(gameKey) {
   var info = _games[gameKey];
   var gameInfo = new Model.GameInfo(gameKey, info.name, info.gen, info.year, _games.platforms[info.platform]);
@@ -113,6 +117,7 @@ export function GetGame(gameKey) {
   var typeChart = loadTypeChart(gameInfo.gen);
   var moves = loadMoves(gameInfo.gen, types);
   var pokemon = loadPokemon(gameInfo.gen, types);
-  var game = new Model.Game(gameInfo, items, types, typeChart, moves, pokemon);
+  var experienceGroup = ExperienceGroup; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
+  var game = new Model.Game(experienceGroup, gameInfo, items, types, typeChart, moves, pokemon);
   return game;
 };

@@ -1,23 +1,23 @@
 /**
- * Class representing a Pokemon
- * TODO: Pokemon (TODO: cross-gen!)
- *
- * @class
+ * Class representing a Pokemon.
+ * TODO
+ * TODO: jsdoc
+ * TODO: cross-gen!
  */
-export default class Pokemon {
+class Pokemon {
   /**
    *
-   * @param {string}          name
-   * @param {number}          id
-   * @param {Type}            type1
-   * @param {Type}            type2
-   * @param {number}          expGiven
-   * @param {number}          hp
-   * @param {number}          atk
-   * @param {number}          def
-   * @param {number}          spd
-   * @param {number}          spc
-   * @param {ExperienceGroup} expGroup
+   * @param {string}    name
+   * @param {number}    id
+   * @param {Type}      type1
+   * @param {Type}      type2
+   * @param {number}    expGiven
+   * @param {string}    expGroup
+   * @param {number}    hp
+   * @param {number}    atk
+   * @param {number}    def
+   * @param {number}    spd
+   * @param {number}    spc
    * @returns {Pokemon}
    */
   constructor(name, id, type1, type2, expGiven, expGroup, hp, atk, def, spcAtk, spcDef, spd) {
@@ -50,47 +50,47 @@ export default class Pokemon {
    */
   addEvolution(evolutionKey, pokemon) {
     this.evolutions[evolutionKey.toString()] = pokemon;
-  };
+  }
 
   getDefaultMoveset(level) {
     // TODO
-  };
+  }
 
   addLearnedMove(level, move) {
     // TODO
-  };
+  }
 
   getLearnedMoves(level) {
     // TODO
-  };
+  }
 
   addTmMove(move) {
     // TODO
-  };
+  }
 
   getAllMoves() {
     // TODO
-  };
+  }
 
   getExp(level, participants, isTraded, isTrainer) {
     // TODO
-  };
+  }
 
   getCritRatio() {
     // TODO
-  };
+  }
 
   getHighCritRatio() {
     // TODO
-  };
+  }
 
   toString() {
     return this.name;
-  };
+  }
 
   compare(pokemon) {
     return this.name.localeCompare(pokemon.name);
-  };
+  }
 }
 
 // TODO: do it like this?
@@ -111,3 +111,5 @@ export default class Pokemon {
 //             break;
 //     }
 // }
+
+export default Pokemon;

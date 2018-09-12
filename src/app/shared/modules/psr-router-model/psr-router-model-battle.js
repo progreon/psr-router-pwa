@@ -4,7 +4,7 @@
  *
  * @class
  */
-export default class Battle {
+class Battle {
   /**
    *
    * @param {Player}   player   The player that's playing the game
@@ -14,9 +14,13 @@ export default class Battle {
   constructor(player, opponent) {
     this.player = player;
     this.opponent = opponent;
+    // this.usedMoves = [];
+    // this.usedItems = [];
   }
 
   toString() {
     return "Battle";
-  };
+  }
 }
+
+export default Battle;

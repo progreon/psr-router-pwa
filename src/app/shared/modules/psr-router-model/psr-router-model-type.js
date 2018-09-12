@@ -1,23 +1,26 @@
 /**
- * Class representing a Pokemon type
- *
- * @class
+ * Class representing a Pokemon type.
  */
-export default class Type {
+class Type {
   /**
    *
    * @param {string}   key         The key to use in maps
    * @param {string}   name        A more user friendly name
    * @param {boolean}  isPhysical  If moves of this type are physical in gen 1-3
-   * @returns {Type}
    */
   constructor(key, name, isPhysical) {
+    /** @type {string} */
     this.key = key;
+    /** @type {string} */
     this.name = name;
+    /** @type {boolean} */
     this.isPhysical = isPhysical;
   }
 
+  /** @returns {string} */
   toString() {
-    return name;
+    return this.name;
   };
 }
+
+export default Type;

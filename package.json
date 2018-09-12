@@ -16,6 +16,7 @@
     "build:profile": "yarn build:profile:prod",
     "build:profile:dev": "webpack --config config/webpack/dev.config.js --profile --json > stats.json",
     "build:profile:prod": "webpack --config config/webpack/prod.config.js --profile --json > stats.json",
+    "genjsdoc": "jsdoc -r -d jsdoc ./src",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch --config config/webpack/dev.config.js",
     "server": "node server.js"
@@ -81,6 +82,7 @@
     "@vaadin/vaadin-list-box": "^1.1.0",
     "@webcomponents/webcomponentsjs": "^2.0.2",
     "es6-promise": "^4.2.4",
+    "jsdoc": "^3.5.5",
     "lodash": "^4.17.10",
     "pwa-helpers": "^0.8.3",
     "redux": "^4.0.0",

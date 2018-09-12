@@ -1,9 +1,7 @@
 /**
- * Class representing a Pokemon move
- *
- * @class
+ * Class representing a Pokemon move.
  */
-export default class Move {
+class Move {
   /**
    *
    * @param {string}  key      The key to use in maps
@@ -14,21 +12,32 @@ export default class Move {
    * @param {number}  accuracy The accuracy of this move
    * @param {number}  pp       The initial PP of this move
    * @param {string}  category The move category in gen 4+
-   * @returns {Move}
    */
   constructor(key, name, effect, power, type, accuracy, pp, category, description) {
+    /** @type {string} */
     this.key = key;
+    /** @type {string} */
     this.name = name;
+    /** @type {string} */
     this.effect = effect;
+    /** @type {string} */
     this.power = power;
+    /** @type {string} */
     this.type = type;
+    /** @type {string} */
     this.accuracy = accuracy;
+    /** @type {string} */
     this.pp = pp;
+    /** @type {string} */
     this.category = (category ? category : "other");
+    /** @type {string} */
     this.description = description;
   }
 
+  /** @returns {string} */
   toString() {
-    return name;
-  };
+    return this.name;
+  }
 }
+
+export default Move;

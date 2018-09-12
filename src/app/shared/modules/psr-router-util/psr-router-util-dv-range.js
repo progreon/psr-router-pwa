@@ -1,24 +1,22 @@
 /**
- * Class representing a DV-range
- *
- * @class
+ * Class representing a DV-range.
  */
-export default class DVRange {
+class DVRange {
   /**
    *
-   * @returns {DVRange}
    */
   constructor() {
     /**
-     * The DVs array, not necessarily in order
+     * The DVs array, not necessarily in order.
+     * @type {number[]}
+     * @private
      */
     this._dvs = [];
   }
 
   /**
-   *
-   * @param {Number} dv [0, 15]
-   * @returns {undefined}
+   * Add a DV to the range.
+   * @param {number}  dv  The added dv between [0, 15]
    */
   addDV(dv) {
     dv = parseInt(dv);
@@ -27,8 +25,8 @@ export default class DVRange {
   }
 
   /**
-   * Returns the minimum value of this range
-   * @returns {number}
+   * Get the minimum value of this range.
+   * @returns {number}  The minimum value of this range.
    */
   getMin() {
     var min = 15;
@@ -40,8 +38,8 @@ export default class DVRange {
   }
 
   /**
-   * Returns the maximum value of this range
-   * @returns {number}
+   * Get the maximum value of this range.
+   * @returns {number}  The maximum value of this range.
    */
   getMax() {
     var max = 0;
@@ -53,9 +51,8 @@ export default class DVRange {
   }
 
   /**
-   * Combine another range into this one
-   * @param {DVRange} dvRange
-   * @returns {undefined}
+   * Combine another range into this one.
+   * @param {DVRange}   dvRange   The DVRange to combine this with.
    */
   combine(dvRange) {
     var dvrThis = this;
@@ -64,10 +61,7 @@ export default class DVRange {
     });
   }
 
-  /**
-   *
-   * @returns {String}
-   */
+  /** @returns {string} */
   toString() {
     switch (this._dvs.length) {
       case 0:
@@ -81,3 +75,5 @@ export default class DVRange {
     }
   }
 }
+
+export default DVRange;

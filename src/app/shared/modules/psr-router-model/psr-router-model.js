@@ -7,7 +7,7 @@
 
 import Battle from './psr-router-model-battle';
 import EvolutionKey from './psr-router-model-evolution-key';
-// TODO: ExperienceGroup
+import ExperienceGroup from './psr-router-model-experience-group';
 import GameInfo from './psr-router-model-game-info';
 import Game from './psr-router-model-game';
 import Item from './psr-router-model-item';
@@ -18,9 +18,11 @@ import PokemonCountPair from './psr-router-model-pokemon-count-pair';
 import Stone from './psr-router-model-stone';
 import Type from './psr-router-model-type';
 
+/** TODO: Model object */
 export const Model = {
   Battle,
   EvolutionKey,
+  ExperienceGroup,
   GameInfo,
   Game,
   Item,

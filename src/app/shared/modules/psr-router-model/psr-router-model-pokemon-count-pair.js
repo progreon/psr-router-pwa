@@ -1,18 +1,17 @@
 /**
- * Class representing pokemon-count pair
- *
- * @class
+ * Class representing pokemon-count pair.
  */
-export default class PokemonCountPair {
+class PokemonCountPair {
   /**
    *
    * @param {Pokemon} pokemon
    * @param {number} level
    * @param {number} count
-   * @returns {PokemonCountPair}
    */
   constructor(pokemon, level, count) {
+    /** @type {PokemonLevelPair} */
     this.plp = new PokemonLevelPair(pokemon, level);
+    /** @type {number} */
     this.count = parseInt(count);
     if (this.count < 0)
       this.count = 0;
@@ -20,42 +19,20 @@ export default class PokemonCountPair {
 
   /**
    * Incremets the count.
-   *
-   * @returns {undefined}
    */
   inc() {
     this.count++;
-  };
+  }
 
   /**
    * Decrements the count.
-   *
-   * @returns {undefined}
    */
   dec() {
     if (this.count > 0)
       this.count--;
-  };
+  }
 
   /**
-   *
-   * @returns {String}
-   */
-  toString() {
-    return this.plp.toString() + ': x' + this.count;
-  };
-
-  /**
-   *
-   * @param {PokemonCountPair} pokemonCountPair
-   * @returns {Boolean}
-   */
-  equals(pokemonCountPair) {
-    return this.plp.equals(pokemonCountPair.plp) && this.count === pokemonCountPair.count;
-  };
-
-  /**
-   *
    * @param {PokemonCountPair} pokemonCountPair
    * @returns {number}
    */
@@ -66,5 +43,20 @@ export default class PokemonCountPair {
       result = this.count - pokemonCountPair.count;
 
     return result;
-  };
+  }
+
+  /**
+   * @param {PokemonCountPair} pokemonCountPair
+   * @returns {boolean}
+   */
+  equals(pokemonCountPair) {
+    return this.plp.equals(pokemonCountPair.plp) && this.count === pokemonCountPair.count;
+  }
+
+  /** @returns {string} */
+  toString() {
+    return this.plp.toString() + ': x' + this.count;
+  }
 }
+
+export default PokemonCountPair;

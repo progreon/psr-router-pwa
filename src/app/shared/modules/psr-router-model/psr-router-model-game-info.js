@@ -1,9 +1,7 @@
 /**
- * Class representing game information
- *
- * @class
+ * Class representing game information.
  */
-export default class GameInfo {
+class GameInfo {
   /**
    *
    * @param {string}   key      The key to use in maps
@@ -11,13 +9,19 @@ export default class GameInfo {
    * @param {number}   gen      The generation this game is made for
    * @param {number}   year     The year this game was released in
    * @param {string}   platform The platform for which this game is made
-   * @returns {GameInfo}
    */
   constructor(key, name, gen, year, platform) {
+    /** @type {string} */
     this.key = key;
+    /** @type {string} */
     this.name = name;
+    /** @type {number} */
     this.gen = gen;
+    /** @type {number} */
     this.year = year;
+    /** @type {string} */
     this.platform = platform;
   }
 }
+
+export default GameInfo;

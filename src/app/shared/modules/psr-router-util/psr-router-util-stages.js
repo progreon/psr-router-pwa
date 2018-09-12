@@ -2,19 +2,32 @@ const MIN_STAGE = -6;
 const MAX_STAGE = 6;
 
 /**
- * Class holding stages
- *
- * @class
+ * Class holding stages.
  */
-export default class Stages {
+class Stages {
+  /**
+   *
+   */
   constructor() {
-    this.values = [0, 0, 0, 0];
+    /**
+     * @type {number[]}
+     * @private
+     */
+    this._values = [0, 0, 0, 0];
   }
 
+  /**
+   * Get the minimum badge stage.
+   * @returns {number}  The minimum badge stage.
+   */
   static MIN() {
     return MIN_STAGE;
   }
 
+  /**
+   * Get the minimum badge stage.
+   * @returns {number}  The minimum badge stage.
+   */
   static MAX() {
     return MAX_STAGE;
   }
@@ -22,7 +35,6 @@ export default class Stages {
   /**
    * Set the stages and returns this object.
    * (for example, you can run: var stages = new Stages().set(atk, def, spd, spc);)
-   *
    * @param {number} atk
    * @param {number} def
    * @param {number} spd
@@ -39,49 +51,45 @@ export default class Stages {
         || atk > Stages.MAX() || def > Stages.MAX() || spd > Stages.MAX() || spc > Stages.MAX())
       throw new RangeError("stages must be in range [" + Stages.MIN() + "," + Stages.MAX() + "]!");
 
-    this.values = [atk, def, spd, spc];
+    this._values = [atk, def, spd, spc];
     return this;
   }
 
   /**
-   * Returns the attack stage.
-   *
+   * Get the attack stage.
    * @returns {number}
    */
   atk() {
-    return this.values[0];
+    return this._values[0];
   }
 
   /**
-   * Returns the defense stage.
-   *
+   * Get the defense stage.
    * @returns {number}
    */
   def() {
-    return this.values[1];
+    return this._values[1];
   }
 
   /**
-   * Returns the speed stage.
-   *
+   * Get the speed stage.
    * @returns {number}
    */
   spd() {
-    return this.values[2];
+    return this._values[2];
   }
 
   /**
-   * Returns the special stage.
-   *
+   * Get the special stage.
    * @returns {number}
    */
   spc() {
-    return this.values[3];
+    return this._values[3];
   }
 
   /**
-   *
-   * @param {number} index 0:atk, 1:def, 2:spd, 3:spc
+   * Get a value.
+   * @param {number}  index   0:atk, 1:def, 2:spd, 3:spc
    * @returns {number}
    */
   getValue(index) {
@@ -90,14 +98,18 @@ export default class Stages {
     if (index < 0 || index >= 4)
       throw new RangeError("index must be in range [0,3]!");
 
-    return this.values[index];
+    return this._values[index];
   }
 
+  /** @returns {string} */
   toString() {
     return "{atk:" + this.atk() + ", def:" + this.def() + ", spd:" + this.spd() + ", spc:" + this.spc() + "}";
   }
 
+  /** @returns {Stages} */
   clone() {
     return new Stages().setStages(this.atk(), this.def(), this.spd(), this.spc());
   }
 }
+
+export default Stages;
