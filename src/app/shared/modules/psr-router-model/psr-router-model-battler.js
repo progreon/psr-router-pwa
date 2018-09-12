@@ -1,8 +1,7 @@
 /**
  * Class representing a battler
  * TODO: Change useCandy, useHPUP, ... to useItem?
- *
- * @class
+ * @abstract
  */
 class ABattler {
   /**
@@ -12,7 +11,6 @@ class ABattler {
    * @param {EncounterArea} catchLocation The catch location of this battler (used for calculating possible DVs)
    * @param {boolean}       isTrainerMon  If it's a trainer's pokemon (TODO: do this more properly?)
    * @param {number}        level         The current level
-   * @returns {ABattler}
    */
   constructor(game, pokemon, catchLocation, isTrainerMon, level) {
     if (new.target === ABattler) {
@@ -33,6 +31,7 @@ class ABattler {
    * @param {ABattler}  battler       The battler to defeat
    * @param {number}    participants  The number of participants in the battle (defaults to 1)
    * @returns {ABattler} Returns the modified/evolved battler (not a deep copy)
+   * @abstract
    */
   defeatBattler(battler, participants = 1) {
     throw new TypeError("defeatBattler not callable from super class");
@@ -43,6 +42,7 @@ class ABattler {
    *
    * @param {Item}  item  The item which triggers the evolution
    * @returns {ABattler}   Returns the evolved battler or null if it couldn't evolve
+   * @abstract
    */
   evolve(item) {
     throw new TypeError("evolve not callable from super class");
@@ -53,6 +53,7 @@ class ABattler {
    *
    * @param {number}    exp
    * @returns {ABattler} Returns the modified/evolved ABattler (not a deep copy)
+   * @abstract
    */
   addXP(exp) {
     throw new TypeError("addXP not callable from super class");
@@ -109,6 +110,7 @@ class ABattler {
    *
    * @param {number}    [count=1]
    * @returns {boolean} Returns true if successful
+   * @abstract
    */
   useHPUp(count = 1) {
     throw new TypeError("useHPUp not callable from super class");
@@ -119,6 +121,7 @@ class ABattler {
    *
    * @param {number}    [count=1]
    * @returns {boolean} Returns true if successful
+   * @abstract
    */
   useProtein(count = 1) {
     throw new TypeError("useProtein not callable from super class");
@@ -129,6 +132,7 @@ class ABattler {
    *
    * @param {number}    [count=1]
    * @returns {boolean} Returns true if successful
+   * @abstract
    */
   useIron(count = 1) {
     throw new TypeError("useIron not callable from super class");
@@ -139,6 +143,7 @@ class ABattler {
    *
    * @param {number}    [count=1]
    * @returns {boolean} Returns true if successful
+   * @abstract
    */
   useCarbos(count = 1) {
     throw new TypeError("useCarbos not callable from super class");
@@ -149,6 +154,7 @@ class ABattler {
    *
    * @param {number}    [count=1]
    * @returns {boolean} Returns true if successful
+   * @abstract
    */
   useCalcium(count = 1) {
     throw new TypeError("useCalcium not callable from super class");
@@ -159,6 +165,7 @@ class ABattler {
    *
    * @param {number}    stat    The stat index
    * @returns {DVRange} Returns the current possible DVs for the stat
+   * @abstract
    */
   getDVRange(stat) {
     throw new TypeError("getDVRange not callable from super class");
@@ -168,6 +175,7 @@ class ABattler {
    * Get the DV range for a stat
    *
    * @returns {DVRange[]} Returns the current possible DVs for the stat
+   * @abstract
    */
   getDVRanges() {
     throw new TypeError("getDVRanges not callable from super class");

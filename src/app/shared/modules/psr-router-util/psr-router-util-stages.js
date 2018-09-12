@@ -17,16 +17,16 @@ class Stages {
   }
 
   /**
-   * Get the minimum badge stage.
-   * @returns {number}  The minimum badge stage.
+   * Get the minimum stat stage.
+   * @returns {number}  The minimum stat stage.
    */
   static MIN() {
     return MIN_STAGE;
   }
 
   /**
-   * Get the minimum badge stage.
-   * @returns {number}  The minimum badge stage.
+   * Get the minimum stat stage.
+   * @returns {number}  The minimum stat stage.
    */
   static MAX() {
     return MAX_STAGE;

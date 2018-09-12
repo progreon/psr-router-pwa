@@ -1,4 +1,4 @@
-import { Range } from './psr-router-range';
+import Range from './psr-router-util-range';
 
 const DVS = 16;
 

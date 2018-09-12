@@ -7,7 +7,6 @@ class AExperienceGroup {
   /**
    *
    * @param {string}  name
-   * @abstract
    */
   constructor(name) {
     if (new.target === AExperienceGroup) {
@@ -113,12 +112,14 @@ class AExperienceGroup {
 
 /**
  * Class representing the SLOW experience group
+ * @augments AExperienceGroup
  */
 class SlowExperienceGroup extends AExperienceGroup {
   constructor() {
     super("Slow");
   }
 
+  /** @inheritdoc */
   _getExpForLevel(l) {
     return 5 * l * l * l / 4;
   }
@@ -126,12 +127,14 @@ class SlowExperienceGroup extends AExperienceGroup {
 
 /**
  * Class representing the MEDIUM_SLOW experience group
+ * @augments AExperienceGroup
  */
 class MediumSlowExperienceGroup extends AExperienceGroup {
   constructor() {
     super("Medium Slow");
   }
 
+  /** @inheritdoc */
   _getExpForLevel(l) {
     return 6 * l * l * l / 5 - 15 * l * l + 100 * l - 140;
   }
@@ -139,12 +142,14 @@ class MediumSlowExperienceGroup extends AExperienceGroup {
 
 /**
  * Class representing the MEDIUM_FAST experience group
+ * @augments AExperienceGroup
  */
 class MediumFastExperienceGroup extends AExperienceGroup {
   constructor() {
     super("Medium Fast");
   }
 
+  /** @inheritdoc */
   _getExpForLevel(l) {
     return l * l * l;
   }
@@ -152,12 +157,14 @@ class MediumFastExperienceGroup extends AExperienceGroup {
 
 /**
  * Class representing the FAST experience group
+ * @augments AExperienceGroup
  */
 class FastExperienceGroup extends AExperienceGroup {
   constructor() {
     super("Fast");
   }
 
+  /** @inheritdoc */
   _getExpForLevel(l) {
     return 4 * l * l * l / 5;
   }
@@ -167,9 +174,11 @@ class FastExperienceGroup extends AExperienceGroup {
  * {SlowExperienceGroup, MediumSlowExperienceGroup, MediumFastExperienceGroup, FastExperienceGroup}
  * @type {{SlowExperienceGroup, MediumSlowExperienceGroup, MediumFastExperienceGroup, FastExperienceGroup}}
  */
-export const ExperienceGroup = {
+const ExperienceGroup = {
   "Slow": new SlowExperienceGroup(),
   "Medium Slow": new MediumSlowExperienceGroup(),
   "Medium Fast": new MediumFastExperienceGroup(),
   "Fast": new FastExperienceGroup()
 };
+
+export default ExperienceGroup;

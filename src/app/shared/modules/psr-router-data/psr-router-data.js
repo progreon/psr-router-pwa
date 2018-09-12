@@ -117,7 +117,7 @@ export function GetGame(gameKey) {
   var typeChart = loadTypeChart(gameInfo.gen);
   var moves = loadMoves(gameInfo.gen, types);
   var pokemon = loadPokemon(gameInfo.gen, types);
-  var experienceGroup = ExperienceGroup; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
+  var experienceGroup = Model.ExperienceGroup; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
   var game = new Model.Game(experienceGroup, gameInfo, items, types, typeChart, moves, pokemon);
   return game;
 };
