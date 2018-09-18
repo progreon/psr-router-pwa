@@ -114,11 +114,25 @@ class RouteEntry {
    * Add a child entry.
    * @param {RouteEntry} entry
    * @returns {RouteEntry} The added entry.
+   * @protected
    */
-  addEntry(entry) {
+  _addEntry(entry) {
     this._children.push(entry);
     // this._notifyListeners();
     return entry;
+  }
+
+    /**
+     * Add a new child entry.
+     * @param {string}        [title=""]        A title for this entry.
+     * @param {string}        [description=""]  A description for this entry.
+     * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
+     * @param {Location}      [location]        The location in the game where this entry occurs.
+     * @param {string}        [type="ENTRY"]    The type of route entry.
+     * @returns {RouteEntry} The added entry.
+     */
+  addNewEntry(title="", description="", children=[], location=undefined, type="ENTRY") {
+    return this._addEntry(new RouteEntry(this.game, title, description, children, location, type));
   }
 
   /** @returns {Location} */

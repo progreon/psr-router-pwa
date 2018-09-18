@@ -26,8 +26,21 @@ class PsrRouterRouteEntry extends LitElement {
   _render(props) {
     var children = props.routeEntry ? props.routeEntry.getChildren() : [];
     var childElements = [];
-    for (var i = 0; i < children.length; i++)
-      childElements.push(html`<hr hidden?="${i === 0}"/><psr-router-route-entry id="${'child-' + i}" routeEntry=${children[i]}></psr-router-route-entry>`);
+    for (var i = 0; i < children.length; i++) {
+      if (i !== 0)
+        childElements.push(html`<hr />`);
+
+      switch (children[i].getEntryType()) {
+        // case "ENTRY":
+        //   blabla;
+        //   break;
+        case "ROUTE":
+        case "SECTION":
+        case "ENTRY":
+        default:
+          childElements.push(html`<psr-router-route-entry id="${'child-' + i}" routeEntry=${children[i]}></psr-router-route-entry>`);
+      }
+    }
 
     var icon;
     if (children.length > 0) {
