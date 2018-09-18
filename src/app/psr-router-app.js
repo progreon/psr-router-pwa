@@ -4,6 +4,7 @@
 import { Data, GetGame } from 'SharedModules/psr-router-data/psr-router-data';
 import * as Model from 'SharedModules/psr-router-model';
 import * as Util from 'SharedModules/psr-router-util';
+import * as Route from 'SharedModules/psr-router-route';
 
 // Imports for polymer/pwa
 import { LitElement, html } from '@polymer/lit-element';
@@ -262,6 +263,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
           <!-- Main content -->
           <main role="main" class="main-content">
             <psr-router-home class="page" active?="${_page === 'home'}" searchParams="${_searchParams}"></psr-router-home>
+            <psr-router-example class="page" active?="${_page === 'example'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-example>
             <psr-router-items class="page" active?="${_page === 'items'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-items>
             <psr-router-moves class="page" active?="${_page === 'moves'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-moves>
             <psr-router-pokemon-info class="page" active?="${_page === 'pokemon-info'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-pokemon-info>
@@ -304,6 +306,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
     this._pageList = [
       {name: 'home', title: "Home", element: 'psr-router-home'},
       // {name: 'redux', title: "Redux Example", element: 'psr-router-redux'},
+      {name: 'example', title: "Example Route", element: 'psr-router-example'},
       {name: 'items', title: "Item List", element: 'psr-router-items'},
       {name: 'moves', title: "Move List", element: 'psr-router-moves'},
       {name: 'pokemon-list', title: "Pokemon List", element: 'psr-router-pokemon-list'},
@@ -324,6 +327,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
     console.log("Game(red):", pkmnRed);
     console.log("Pikachu:", pkmnRed.findPokemonByName("Pikachu"));
     console.log("Model:", Model);
+    console.log("Route:", Route);
     console.log("Util:", Util);
     this._currentGame = pkmnRed;
   }

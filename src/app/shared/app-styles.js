@@ -52,12 +52,11 @@ ${AppColors}
     /* GLOBALS */
     display: block;
     font-family: Arial, Helvetica, sans-serif;
-    /* line-height: 1.5; */
+    line-height: 1.5;
     font-size: 14px;
   }
 
   h1 {
-    font-family: VolvoBroadProDigital, Arial, Helvetica, sans-serif;
     font-size: 36px;
     font-weight: 400;
   }

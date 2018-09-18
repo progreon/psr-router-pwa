@@ -40,6 +40,14 @@ class Item {
     return (this.tossableOutsideBattle ? "T" : "") + (this.usableOutsideBattle ? "O" : "") + (this.usableInsideBattle ? "I" : "");
   }
 
+  /**
+   * @param {Item}
+   * @returns {boolean}
+   */
+  equals(item) {
+    return item && this.key === item.key;
+  }
+
   /** @returns {string} */
   toString() {
     return this.name;

@@ -3,6 +3,7 @@ import _items1 from 'SharedData/items-1.json';
 import _moves1 from 'SharedData/moves-1.json';
 import _pokemon1 from 'SharedData/pokemon-1.json';
 import _types from 'SharedData/types.json';
+// TODO: badges!
 
 // import { Model } from 'SharedModules/psr-router-model/psr-router-model';
 import { Item, Type, Move, Pokemon, Game, GameInfo, ExperienceGroup } from 'SharedModules/psr-router-model';

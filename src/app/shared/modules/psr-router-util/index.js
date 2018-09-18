@@ -10,6 +10,8 @@ import { DVRange } from './psr-router-util-dv-range';
 import { IntPair } from './psr-router-util-int-pair';
 import { Range } from './psr-router-util-range';
 import { RangePerDV } from './psr-router-util-range-per-dv';
+import { RouterError } from './psr-router-util-router-error';
+import { RouterMessage, RouterMessageType } from './psr-router-util-router-message';
 import { Stages } from './psr-router-util-stages';
 
-export { BadgeBoosts, DVRange, IntPair, Range, RangePerDV, Stages };
+export { BadgeBoosts, DVRange, IntPair, Range, RangePerDV, RouterError, RouterMessage, RouterMessageType, Stages };
