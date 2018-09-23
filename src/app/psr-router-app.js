@@ -5,6 +5,7 @@ import { Data, GetGame } from 'SharedModules/psr-router-data/psr-router-data';
 import * as Model from 'SharedModules/psr-router-model';
 import * as Util from 'SharedModules/psr-router-util';
 import * as Route from 'SharedModules/psr-router-route';
+import { GetDummyRoute } from 'SharedModules/psr-router-route-factory';
 
 // Imports for polymer/pwa
 import { LitElement, html } from '@polymer/lit-element';
@@ -42,7 +43,7 @@ import {
 } from 'CoreActions/app.js';
 
 class PsrRouterApp extends connect(store)(LitElement) {
-  _render({appTitle, _currentGame, _drawerOpened, _offline, _page, _pageList, _searchParams, _snackbarOpened, _wideLayout}) {
+  _render({appTitle, _currentGame, _drawerOpened, _exampleRoute, _offline, _page, _pageList, _searchParams, _snackbarOpened, _wideLayout}) {
     var linkList = [];
     var menuIcon = angleLeftIcon; // Default to back-arrow
     // Creating the menu links
@@ -263,7 +264,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
           <!-- Main content -->
           <main role="main" class="main-content">
             <psr-router-home class="page" active?="${_page === 'home'}" searchParams="${_searchParams}"></psr-router-home>
-            <psr-router-example class="page" active?="${_page === 'example'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-example>
+            <psr-router-example class="page" active?="${_page === 'example'}" searchParams="${_searchParams}" game="${_currentGame}" route="${_exampleRoute}"></psr-router-example>
             <psr-router-items class="page" active?="${_page === 'items'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-items>
             <psr-router-moves class="page" active?="${_page === 'moves'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-moves>
             <psr-router-pokemon-info class="page" active?="${_page === 'pokemon-info'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-pokemon-info>
@@ -288,6 +289,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
       appTitle: String,
       _currentGame: Object,
       _drawerOpened: Boolean,
+      _exampleRoute: Object,
       _offline: Boolean,
       _page: String,
       _pageList: Object,
@@ -324,12 +326,15 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
     console.log("Data:", Data);
     var pkmnRed = GetGame("r");
+    var exampleRoute = GetDummyRoute(pkmnRed);
     console.log("Game(red):", pkmnRed);
     console.log("Pikachu:", pkmnRed.findPokemonByName("Pikachu"));
     console.log("Model:", Model);
     console.log("Route:", Route);
     console.log("Util:", Util);
+    console.log("Example route:", exampleRoute);
     this._currentGame = pkmnRed;
+    this._exampleRoute = exampleRoute;
   }
 
   _firstRendered() {

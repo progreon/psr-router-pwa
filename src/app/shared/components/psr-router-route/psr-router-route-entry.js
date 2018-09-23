@@ -11,9 +11,7 @@ import '@vaadin/vaadin-item/theme/material/vaadin-item';
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
 
-// This is a reusable element. It is not connected to the store. You can
-// imagine that it could just as well be a third-party element that you
-// got from someone else.
+// TODO: show messages.
 class PsrRouterRouteEntry extends LitElement {
   _renderRouteEntryContent(props) {
     return undefined;
@@ -36,6 +34,7 @@ class PsrRouterRouteEntry extends LitElement {
         //   break;
         case "ROUTE":
         case "SECTION":
+        case "DESCRIPTION":
         case "ENTRY":
         default:
           childElements.push(html`<psr-router-route-entry id="${'child-' + i}" routeEntry=${children[i]}></psr-router-route-entry>`);

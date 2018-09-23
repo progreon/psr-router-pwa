@@ -1,4 +1,4 @@
-// imports?
+// imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 
 /**
@@ -13,11 +13,11 @@ class RouteEntry {
    * @param {Game}          game              The Game object this route entry uses.
    * @param {string}        [title=""]        A title for this entry.
    * @param {string}        [description=""]  A description for this entry.
-   * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
+   * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
    * @param {string}        [type="ENTRY"]    The type of route entry.
    */
-  constructor(game, title="", description="", children=[], location=undefined, type="ENTRY") {
+  constructor(game, title="", description="", location=undefined, children=[], type="ENTRY") {
     //// INPUT VARIABLES ////
     /** @type {Game} */
     this.game = game;
@@ -29,15 +29,15 @@ class RouteEntry {
      * @type {RouteEntry[]}
      * @protected
      */
-    this._children = children;
-    /**
-     * @type {Location}
-     * @protected
-     */
     this._location = location;
     /**
      * @type {string}
      * @private
+     */
+    this._children = children;
+    /**
+     * @type {Location}
+     * @protected
      */
     this._type = type;
     //// OTHERS ////
@@ -71,15 +71,17 @@ class RouteEntry {
 
   /**
    * Apply this entry to the player (which holds the state of the game).
-   * @param {Player} player The player before this entry.
-   * @returns {Player} Returns the player after this entry.
+   * @param {Player} [player] The player before this entry. If undefined, just recalculate.
+   * @returns {Player} Returns the player after this entry (if you edit this instance, getPlayerAfter() will be edited too).
    */
   apply(player) {
-    var newPlayer = undefined;
+    var newPlayer;
     this.messages = [];
-    this._playerBefore = player;
-    if (player) {
-      newPlayer = player.clone();
+    if (player)
+      this._playerBefore = player;
+
+    if (this._playerBefore) {
+      newPlayer = this._playerBefore.clone();
       // TODO: this.wildEncounters.apply(newPlayer); // Defeat wild encounters
     } else {
       this.messages.push(new RouterMessage("There is no player set!", RouterMessageType.ERROR));
@@ -120,19 +122,6 @@ class RouteEntry {
     this._children.push(entry);
     // this._notifyListeners();
     return entry;
-  }
-
-    /**
-     * Add a new child entry.
-     * @param {string}        [title=""]        A title for this entry.
-     * @param {string}        [description=""]  A description for this entry.
-     * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
-     * @param {Location}      [location]        The location in the game where this entry occurs.
-     * @param {string}        [type="ENTRY"]    The type of route entry.
-     * @returns {RouteEntry} The added entry.
-     */
-  addNewEntry(title="", description="", children=[], location=undefined, type="ENTRY") {
-    return this._addEntry(new RouteEntry(this.game, title, description, children, location, type));
   }
 
   /** @returns {Location} */
@@ -178,8 +167,46 @@ class RouteEntry {
   /** @returns {string} */
   toString() {
     var str = this.title;
-    if (this.title === "" || this.description === "") str += " : ";
+    if (this.title !== "" && this.description !== "")
+      str += ": ";
     return str + this.description;
+  }
+
+  /**
+   * Get the string to print to a route file. To edit the output, inherit _getRouteFileLines in subclasses.
+   * @param {number}  [depth=0]   The depth in the route tree.
+   * @param {PrinterSettings} [printerSettings] TODO
+   * @returns {string}
+   * @todo PrinterSettings
+   */
+  toRouteString(depth=0, printerSettings) {
+    var strings = this._getRouteFileLines(printerSettings);
+    var tabs = "";
+    for (var t = 0; t < depth; t++) {
+      tabs += "\t";
+    }
+    var str = "";
+    for (var s = 0; s < strings.length; s++) {
+      str += tabs + strings[s] + "\r\n";
+    }
+    for (var c = 0; c < this._children.length; c++) {
+      str += this._children[c].toRouteString(depth + 1, printerSettings);
+    }
+    return str;
+  }
+
+  /**
+   * Get the lines array to export to a route file. Inherit this method in subclasses.
+   * @param {PrinterSettings} [printerSettings] TODO
+   * @returns {string[]}
+   * @todo PrinterSettings
+   */
+  _getRouteFileLines(printerSettings) {
+    var str = this.title;
+    if (this.title !== "" && this.description !== "")
+      str += " :: ";
+    str += this.description;
+    return [str];
   }
 }
 
