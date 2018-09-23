@@ -1,5 +1,8 @@
+'use strict';
+
 // Imports for this element
 import { LitElement, html } from '@polymer/lit-element';
+import * as Route from 'SharedModules/psr-router-route';
 
 // Image imports for this element
 import { angleDownIcon, angleUpIcon, circleIcon } from 'Shared/my-icons';
@@ -28,14 +31,14 @@ class PsrRouterRouteEntry extends LitElement {
       if (i !== 0)
         childElements.push(html`<hr />`);
 
-      switch (children[i].getEntryType()) {
+      switch (children[i].constructor.getEntryType()) {
         // case "ENTRY":
         //   blabla;
         //   break;
-        case "ROUTE":
-        case "SECTION":
-        case "DESCRIPTION":
-        case "ENTRY":
+        case Route.Route.getEntryType():
+        case Route.RouteSection.getEntryType():
+        case Route.RouteDirections.getEntryType():
+        case Route.RouteEntry.getEntryType():
         default:
           childElements.push(html`<psr-router-route-entry id="${'child-' + i}" routeEntry=${children[i]}></psr-router-route-entry>`);
       }

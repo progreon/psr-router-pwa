@@ -1,3 +1,5 @@
+'use strict';
+
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 
@@ -15,9 +17,8 @@ class RouteEntry {
    * @param {string}        [description=""]  A description for this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
-   * @param {string}        [type="ENTRY"]    The type of route entry.
    */
-  constructor(game, title="", description="", location=undefined, children=[], type="ENTRY") {
+  constructor(game, title="", description="", location=undefined, children=[]) {
     //// INPUT VARIABLES ////
     /** @type {Game} */
     this.game = game;
@@ -35,11 +36,6 @@ class RouteEntry {
      * @private
      */
     this._children = children;
-    /**
-     * @type {Location}
-     * @protected
-     */
-    this._type = type;
     //// OTHERS ////
     /**
      * @type {Player}
@@ -56,8 +52,8 @@ class RouteEntry {
   }
 
   /** @returns {string} */
-  getEntryType() {
-    return this._type;
+  static getEntryType() {
+    return "ENTRY";
   }
 
   /**
@@ -178,9 +174,13 @@ class RouteEntry {
    * @param {PrinterSettings} [printerSettings] TODO
    * @returns {string}
    * @todo PrinterSettings
+   * @todo Error/warning/info messages as comments.
    */
   toRouteString(depth=0, printerSettings) {
     var strings = this._getRouteFileLines(printerSettings);
+    if (this.constructor.getEntryType() !== "")
+      strings[0] = this.constructor.getEntryType() + ": " + strings[0];
+
     var tabs = "";
     for (var t = 0; t < depth; t++) {
       tabs += "\t";
@@ -199,6 +199,7 @@ class RouteEntry {
    * Get the lines array to export to a route file. Inherit this method in subclasses.
    * @param {PrinterSettings} [printerSettings] TODO
    * @returns {string[]}
+   * @protected
    * @todo PrinterSettings
    */
   _getRouteFileLines(printerSettings) {

@@ -1,6 +1,8 @@
+'use strict';
+
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
-import { RouteEntry, RouteDescription } from 'SharedModules/psr-router-route';
+import { RouteEntry, RouteDirections } from 'SharedModules/psr-router-route';
 
 /**
  * A class representing a route-setions that holds multiple child entries.
@@ -17,10 +19,13 @@ class RouteSection extends RouteEntry {
    * @param {string}        [description=""]  A description for this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
-   * @param {string}        [type="SECTION"]    The type of route entry.
    */
-  constructor(game, title="", description="", location=undefined, children=[], type="SECTION") {
-    super(game, title, description, location, children, type);
+  constructor(game, title="", description="", location=undefined, children=[]) {
+    super(game, title, description, location, children);
+  }
+
+  static getEntryType() {
+    return "S";
   }
 
   apply(player) {
@@ -58,8 +63,8 @@ class RouteSection extends RouteEntry {
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @returns {RouteSection} The added entry.
    */
-  addNewDescription(description, location=undefined) {
-    return super._addEntry(new RouteDescription(this.game, description, location ? location : this._location));
+  addNewDirections(description, location=undefined) {
+    return super._addEntry(new RouteDirections(this.game, description, location ? location : this._location));
   }
 }
 

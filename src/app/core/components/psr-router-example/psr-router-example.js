@@ -38,8 +38,6 @@ class PsrRouterExample extends PsrRouterPage {
   doImport(e) {
     var fileInput = this.shadowRoot.getElementById("selFile");
     fileInput.oninput = function(e) {
-      // console.log("oninput", e.target.files);
-      // console.log(ParseRouteFile(fileInput.files[0]));
       var fileReader = new FileReader();
       fileReader.onload = function(e) {
         console.log(ParseRouteText(e.target.result));
@@ -47,8 +45,6 @@ class PsrRouterExample extends PsrRouterPage {
       fileReader.readAsText(e.target.files[0]);
     }
     fileInput.click();
-    // console.log(fileInput);
-    // var parsedRoute = ParseRouteFile(fileInput.files[0]);
   }
 }
 

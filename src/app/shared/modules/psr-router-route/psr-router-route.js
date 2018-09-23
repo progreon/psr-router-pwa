@@ -1,3 +1,5 @@
+'use strict';
+
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 import { RouteSection } from 'SharedModules/psr-router-route';
@@ -20,7 +22,11 @@ class Route extends RouteSection {
    * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
    */
   constructor(game, title, description="", location=undefined, children=[]) {
-    super(game, title, description, location, children, "ROUTE");
+    super(game, title, description, location, children);
+  }
+
+  static getEntryType() {
+    return "ROUTE";
   }
 
   exportToFile(filename) {

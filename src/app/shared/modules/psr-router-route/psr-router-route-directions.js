@@ -1,3 +1,5 @@
+'use strict';
+
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 import { RouteEntry } from 'SharedModules/psr-router-route';
@@ -9,7 +11,7 @@ import { RouteEntry } from 'SharedModules/psr-router-route';
  * @todo writeToString
  * @augments RouteEntry
  */
-class RouteDescription extends RouteEntry {
+class RouteDirections extends RouteEntry {
   /**
    *
    * @param {Game}          game              The Game object this route entry uses.
@@ -17,8 +19,12 @@ class RouteDescription extends RouteEntry {
    * @param {Location}      [location]        The location in the game where this entry occurs.
    */
   constructor(game, description, location=undefined) {
-    super(game, "", description, [], location, "DESCRIPTION");
+    super(game, "", description, [], location);
+  }
+
+  static getEntryType() {
+    return "";
   }
 }
 
-export { RouteDescription };
+export { RouteDirections };

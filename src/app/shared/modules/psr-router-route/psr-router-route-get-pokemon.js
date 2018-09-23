@@ -1,3 +1,5 @@
+'use strict';
+
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 import { RouteEntry } from 'SharedModules/psr-router-route';
@@ -20,7 +22,11 @@ class RouteGetPokemon extends RouteEntry {
    * @param {Location}    [location]        The location in the game where this entry occurs.
    */
   constructor(game, title="", description="", choices=[], preference=0, location=undefined) {
-    super(game, title, description, location, children, "GETP");
+    super(game, title, description, location, children);
+  }
+
+  static getEntryType() {
+    return "GET_P";
   }
 }
 
