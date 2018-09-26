@@ -4,7 +4,7 @@
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 import { RouteSection } from 'SharedModules/psr-router-route';
 import { saveAs } from 'file-saver/FileSaver';
-import { GetEntryListFromLines } from '../psr-router-route-parser';
+import { GetEntryListFromLines } from './psr-router-route-parser';
 
 /**
  * A class representing the root route-entry.

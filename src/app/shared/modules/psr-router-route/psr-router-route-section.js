@@ -3,7 +3,7 @@
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 import { RouteEntry, RouteDirections } from 'SharedModules/psr-router-route';
-import { GetEntryListFromLines } from '../psr-router-route-parser';
+import { GetEntryListFromLines } from './psr-router-route-parser';
 
 /**
  * A class representing a route-setions that holds multiple child entries.
@@ -39,11 +39,10 @@ class RouteSection extends RouteEntry {
    * @param {string}        [description=""]  A description for this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
-   * @param {string}        [type="ENTRY"]    The type of route entry.
    * @returns {RouteEntry} The added entry.
    */
-  addNewEntry(title="", description="", location=undefined, children=[], type="ENTRY") {
-    return super._addEntry(new RouteEntry(this.game, title, description, location ? location : this._location, children, type));
+  addNewEntry(title="", description="", location=undefined, children=[]) {
+    return super._addEntry(new RouteEntry(this.game, title, description, location ? location : this._location, children));
   }
 
   /**

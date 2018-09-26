@@ -6,4 +6,7 @@ import { RouteGetPokemon } from './psr-router-route-get-pokemon';
 import { RouteSection } from './psr-router-route-section';
 import { Route } from './psr-router-route';
 
-export { RouteEntry, RouteDirections, RouteGetPokemon, RouteSection, Route };
+import * as RouteFactory from './psr-router-route-factory';
+import * as RouteParser from './psr-router-route-parser';
+
+export { RouteEntry, RouteDirections, RouteGetPokemon, RouteSection, Route, RouteFactory, RouteParser };

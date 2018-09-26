@@ -32,30 +32,29 @@ function getEntryLines(lines, startLine=0) {
 }
 
 export function GetEntryListFromLines(parent, lines, startLine=0) {
-  var sublines = getEntryLines(lines, startLine);
-  startLine += sublines.length;
   var entries = [];
   while (startLine < lines.length) {
-    // TODO: get the route entry type with switch case
-    // TODO: in each case, add a route entry to the list to return
+    var sublines = getEntryLines(lines, startLine);
     var i = sublines[0].line.indexOf(": ");
-    var type = sublines[0].line.substring(0, i);
-    if (i >= 0) {
-      sublines[0].line = sublines[0].line.substring(i + 2);
-    }
+    var type = sublines[0].line.substring(0, i).toUpperCase();
     switch (type) {
-      case Route.RouteSection.getEntryType():
+      case Route.RouteSection.getEntryType().toUpperCase():
+        if (Route.RouteSection.getEntryType() !== "")
+          sublines[0].line = sublines[0].line.substring(i + 2);
         entries.push(Route.RouteSection.newFromRouteFileLines(parent, sublines));
         break;
-      case Route.RouteDirections.getEntryType():
-        entries.push(Route.RouteDirections.newFromRouteFileLines(parent, sublines));
-        break;
-      case Route.RouteEntry.getEntryType():
-      default:
+      case Route.RouteEntry.getEntryType().toUpperCase():
+        if (Route.RouteEntry.getEntryType() !== "")
+          sublines[0].line = sublines[0].line.substring(i + 2);
         entries.push(Route.RouteEntry.newFromRouteFileLines(parent, sublines));
+        break;
+      case Route.RouteDirections.getEntryType().toUpperCase():
+        if (Route.RouteDirections.getEntryType() !== "")
+          sublines[0].line = sublines[0].line.substring(i + 2);
+      default:
+        entries.push(Route.RouteDirections.newFromRouteFileLines(parent, sublines));
     }
 
-    sublines = getEntryLines(lines, startLine);
     startLine += sublines.length;
   }
   return entries;
@@ -84,8 +83,7 @@ export function ParseRouteText(routeText) {
     }
     l++;
   }
-  console.log(linesToParse);
-  // TODO: parse these lines!!
+  console.log("TODO: parse these lines!", linesToParse);
 
   // TODO: for the next line, get the "key" for lines that match "^(.*?): (.*)$", else the key is an empty string (will result to RouteDirections).
   // TODO: get its 'node' lines (= line + child lines).
@@ -96,18 +94,19 @@ export function ParseRouteText(routeText) {
   var currLine = 0;
   while (currLine < linesToParse.length) {
     var i = linesToParse[currLine].line.indexOf(": ");
-    var prefix = linesToParse[currLine].line.substring(0, i);
-    if (i >= 0) {
-      linesToParse[0].line = linesToParse[0].line.substring(i + 2);
-    }
+    var prefix = linesToParse[currLine].line.substring(0, i).toUpperCase();
     switch (prefix) {
-      case "Game":
-        game = GetGame(linesToParse[0].line);
+      // TODO: other settings?
+      case "Game".toUpperCase():
+        game = GetGame(linesToParse[currLine].line.substring(i + 2));
+        currLine++;
         break;
-      case Route.Route.getEntryType():
+      case Route.Route.getEntryType().toUpperCase():
         if (!game) {
           // TODO: throw exception!
+          throw new Util.RouterError("A game must be defined before the route definition!", "Parser Error");
         }
+        linesToParse[currLine].line = linesToParse[currLine].line.substring(i + 2);
         var lines = getEntryLines(linesToParse, currLine);
         route = Route.Route.newFromRouteFileLines(game, lines);
         currLine += lines.length;
