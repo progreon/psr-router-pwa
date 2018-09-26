@@ -196,18 +196,42 @@ class RouteEntry {
   }
 
   /**
-   * Get the lines array to export to a route file. Inherit this method in subclasses.
+   * Get the lines array to export to a route file. Inherit this method in subclasses. This should match with newFromRouteFileLines()!
    * @param {PrinterSettings} [printerSettings] TODO
    * @returns {string[]}
    * @protected
    * @todo PrinterSettings
+   * @todo Location
    */
   _getRouteFileLines(printerSettings) {
     var str = this.title;
-    if (this.title !== "" && this.description !== "")
-      str += " :: ";
-    str += this.description;
+    if (this.description !== "")
+      str += " :: " + this.description;
     return [str];
+  }
+
+  /**
+   * Create a new RouteEntry from lines in a route file.
+   * @param {RouteEntry}  parent  The parent route entry.
+   * @param {string[]}    lines   The lines you would get with _getRouteFileLines
+   * @returns {RouteEntry}
+   * @todo Location: from parent
+   * @todo Throw exception
+   */
+  static newFromRouteFileLines(parent, lines) {
+    if (lines && lines.length > 0 && lines[0].line) {
+      var line = lines[0].line;
+      var title = line;
+      var description = "";
+      var i = line.indexOf(" :: ");
+      if (i >= 0) {
+        title = line.substring(0, i);
+        description = line.substring(i + 4);
+      }
+      return new RouteEntry(parent.game, title, description, parent.getLocation());
+    } else {
+      // TODO: throw exception
+    }
   }
 }
 

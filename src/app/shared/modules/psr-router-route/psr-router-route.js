@@ -4,6 +4,7 @@
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 import { RouteSection } from 'SharedModules/psr-router-route';
 import { saveAs } from 'file-saver/FileSaver';
+import { GetEntryListFromLines } from '../psr-router-route-parser';
 
 /**
  * A class representing the root route-entry.
@@ -38,14 +39,42 @@ class Route extends RouteSection {
     try {
       var isFileSaverSupported = !!new Blob;
       if (isFileSaverSupported) {
-        console.log(this.game.info.name);
-        var blob = new Blob(["Game: " + this.game.info.name, "\r\n\r\n", text], {type: "text/plain;charset=utf-8"});
+        var blob = new Blob(["Game: " + this.game.info.key, "\r\n\r\n", text], {type: "text/plain;charset=utf-8"});
         saveAs(blob, filename);
       } else {
         window.alert("Exporting to a file is not supported for this browser...");
       }
     } catch (e) {
       window.alert("Exporting to a file is not supported for this browser...");
+    }
+  }
+
+  /**
+   * Create a new Route from lines in a route file.
+   * @param {Game}        game    The parent route entry.
+   * @param {string[]}    lines   The lines you would get with _getRouteFileLines
+   * @returns {Route}
+   * @todo Location
+   * @todo Throw exception
+   */
+  static newFromRouteFileLines(game, lines) {
+    if (lines && lines.length > 0 && lines[0].line) {
+      var line = lines[0].line;
+      var title = line;
+      var description = "";
+      var i = line.indexOf(" :: ");
+      if (i >= 0) {
+        title = line.substring(0, i);
+        description = line.substring(i + 4);
+      }
+      var route = new Route(game, title, description);
+      var childEntries = GetEntryListFromLines(route, lines, 1);
+      for (var ic = 0; ic < childEntries.length; ic++) {
+        route._addEntry(childEntries[ic]);
+      }
+      return route;
+    } else {
+      // TODO: throw exception
     }
   }
 }

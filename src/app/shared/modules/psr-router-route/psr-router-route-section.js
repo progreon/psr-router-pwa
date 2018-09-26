@@ -3,6 +3,7 @@
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 import { RouteEntry, RouteDirections } from 'SharedModules/psr-router-route';
+import { GetEntryListFromLines } from '../psr-router-route-parser';
 
 /**
  * A class representing a route-setions that holds multiple child entries.
@@ -65,6 +66,27 @@ class RouteSection extends RouteEntry {
    */
   addNewDirections(description, location=undefined) {
     return super._addEntry(new RouteDirections(this.game, description, location ? location : this._location));
+  }
+
+  static newFromRouteFileLines(parent, lines) {
+    if (lines && lines.length > 0 && lines[0].line) {
+      var line = lines[0].line;
+      var title = line;
+      var description = "";
+      var i = line.indexOf(" :: ");
+      if (i >= 0) {
+        title = line.substring(0, i);
+        description = line.substring(i + 4);
+      }
+      var routeSection = new RouteSection(parent.game, title, description, parent.getLocation());
+      var childEntries = GetEntryListFromLines(parent, lines, 1);
+      for (var ic = 0; ic < childEntries.length; ic++) {
+        routeSection._addEntry(childEntries[ic]);
+      }
+      return routeSection;
+    } else {
+      // TODO: throw exception
+    }
   }
 }
 
