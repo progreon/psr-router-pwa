@@ -2,7 +2,7 @@ import { html } from '@polymer/lit-element';
 import { PsrRouterPage } from 'CoreComponents/psr-router-page/psr-router-page';
 
 // JS imports
-import { ParseRouteText } from 'SharedModules/psr-router-route-parser';
+import { RouteParser } from 'SharedModules/psr-router-route';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
@@ -37,10 +37,14 @@ class PsrRouterExample extends PsrRouterPage {
 
   doImport(e) {
     var fileInput = this.shadowRoot.getElementById("selFile");
+    var _this = this;
     fileInput.oninput = function(e) {
       var fileReader = new FileReader();
       fileReader.onload = function(e) {
-        console.log(ParseRouteText(e.target.result));
+        var route = RouteParser.ParseRouteText(e.target.result);
+        console.log(route);
+        // console.log(route.toRouteString());
+        _this.route = route;
       }
       fileReader.readAsText(e.target.files[0]);
     }

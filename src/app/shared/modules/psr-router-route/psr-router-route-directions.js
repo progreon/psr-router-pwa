@@ -25,6 +25,18 @@ class RouteDirections extends RouteEntry {
   static getEntryType() {
     return "";
   }
+
+  _getRouteFileLines(printerSettings) {
+    return [this.description];
+  }
+
+  static newFromRouteFileLines(parent, lines) {
+    if (lines && lines.length > 0 && lines[0].line) {
+      return new RouteDirections(parent.game, lines[0].line, parent.getLocation());
+    } else {
+      // TODO: throw exception
+    }
+  }
 }
 
 export { RouteDirections };

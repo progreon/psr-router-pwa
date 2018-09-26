@@ -3,6 +3,7 @@
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 import { RouteEntry, RouteDirections } from 'SharedModules/psr-router-route';
+import { GetEntryListFromLines } from './psr-router-route-parser';
 
 /**
  * A class representing a route-setions that holds multiple child entries.
@@ -38,11 +39,10 @@ class RouteSection extends RouteEntry {
    * @param {string}        [description=""]  A description for this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
-   * @param {string}        [type="ENTRY"]    The type of route entry.
    * @returns {RouteEntry} The added entry.
    */
-  addNewEntry(title="", description="", location=undefined, children=[], type="ENTRY") {
-    return super._addEntry(new RouteEntry(this.game, title, description, location ? location : this._location, children, type));
+  addNewEntry(title="", description="", location=undefined, children=[]) {
+    return super._addEntry(new RouteEntry(this.game, title, description, location ? location : this._location, children));
   }
 
   /**
@@ -65,6 +65,27 @@ class RouteSection extends RouteEntry {
    */
   addNewDirections(description, location=undefined) {
     return super._addEntry(new RouteDirections(this.game, description, location ? location : this._location));
+  }
+
+  static newFromRouteFileLines(parent, lines) {
+    if (lines && lines.length > 0 && lines[0].line) {
+      var line = lines[0].line;
+      var title = line;
+      var description = "";
+      var i = line.indexOf(" :: ");
+      if (i >= 0) {
+        title = line.substring(0, i);
+        description = line.substring(i + 4);
+      }
+      var routeSection = new RouteSection(parent.game, title, description, parent.getLocation());
+      var childEntries = GetEntryListFromLines(parent, lines, 1);
+      for (var ic = 0; ic < childEntries.length; ic++) {
+        routeSection._addEntry(childEntries[ic]);
+      }
+      return routeSection;
+    } else {
+      // TODO: throw exception
+    }
   }
 }
 
