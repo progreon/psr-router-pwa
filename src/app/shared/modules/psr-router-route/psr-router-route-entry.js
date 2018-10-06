@@ -212,8 +212,8 @@ class RouteEntry {
 
   /**
    * Create a new RouteEntry from lines in a route file.
-   * @param {RouteEntry}  parent  The parent route entry.
-   * @param {string[]}    lines   The lines you would get with _getRouteFileLines
+   * @param {RouteEntry}          parent  The parent route entry.
+   * @param {{number, string}[]}  lines   The lines you would get with _getRouteFileLines
    * @returns {RouteEntry}
    * @todo Location: from parent
    * @todo Throw exception

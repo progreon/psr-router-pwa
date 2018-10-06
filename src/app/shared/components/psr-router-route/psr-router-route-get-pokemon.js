@@ -14,7 +14,7 @@ import '@vaadin/vaadin-item/theme/material/vaadin-item';
 import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
-class PsrRouterRouteBattle extends PsrRouterRouteEntry {
+class PsrRouterRouteGetPokemon extends PsrRouterRouteEntry {
   _renderRouteEntryContent(props) {
     // TODO
     return html`
@@ -39,4 +39,4 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   }
 }
 
-window.customElements.define('psr-router-route-battle', PsrRouterRouteBattle);
+window.customElements.define('psr-router-route-get-pokemon', PsrRouterRouteGetPokemon);

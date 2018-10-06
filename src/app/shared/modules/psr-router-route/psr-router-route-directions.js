@@ -16,10 +16,12 @@ class RouteDirections extends RouteEntry {
    *
    * @param {Game}          game              The Game object this route entry uses.
    * @param {string}        description       A description for this entry.
+   * @param {string}        [imageUrl]        A link to an image (e.g. imgur).
    * @param {Location}      [location]        The location in the game where this entry occurs.
    */
-  constructor(game, description, location=undefined) {
+  constructor(game, description, imageUrl="", location=undefined) {
     super(game, "", description, [], location);
+    this.imageUrl = imageUrl;
   }
 
   static getEntryType() {

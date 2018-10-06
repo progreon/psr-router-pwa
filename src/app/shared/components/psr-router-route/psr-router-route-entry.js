@@ -15,7 +15,11 @@ import '@vaadin/vaadin-item/theme/material/vaadin-item';
 import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
-class PsrRouterRouteEntry extends LitElement {
+export class PsrRouterRouteEntry extends LitElement {
+  _renderRouteEntryChildren(props) {
+    return undefined;
+  }
+
   _renderRouteEntryContent(props) {
     return undefined;
   }
@@ -25,27 +29,8 @@ class PsrRouterRouteEntry extends LitElement {
   }
 
   _render(props) {
-    var children = props.routeEntry ? props.routeEntry.getChildren() : [];
-    var childElements = [];
-    for (var i = 0; i < children.length; i++) {
-      if (i !== 0)
-        childElements.push(html`<hr />`);
-
-      switch (children[i].constructor.getEntryType()) {
-        // case "ENTRY":
-        //   blabla;
-        //   break;
-        case Route.Route.getEntryType():
-        case Route.RouteSection.getEntryType():
-        case Route.RouteDirections.getEntryType():
-        case Route.RouteEntry.getEntryType():
-        default:
-          childElements.push(html`<psr-router-route-entry id="${'child-' + i}" routeEntry=${children[i]}></psr-router-route-entry>`);
-      }
-    }
-
     var icon;
-    if (children.length > 0) {
+    if (props.routeEntry && props.routeEntry._children.length > 0) {
       icon = props.hideChildren ? angleDownIcon : angleUpIcon;
     }
 
@@ -66,6 +51,9 @@ class PsrRouterRouteEntry extends LitElement {
         }
         .entry {
           align-self: center;
+        }
+        .content {
+          padding-left: 20px;
         }
         #children {
           padding-left: 20px;
@@ -89,7 +77,7 @@ class PsrRouterRouteEntry extends LitElement {
         ${this._renderRouteEntryContent(props)}
       </div>
       <div id="children">
-        ${childElements}
+        ${this._renderRouteEntryChildren(props)}
       </div>
     `;
   }

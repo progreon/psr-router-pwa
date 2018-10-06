@@ -6,7 +6,7 @@ import { RouteParser } from 'SharedModules/psr-router-route';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
-import 'SharedComponents/psr-router-route/psr-router-route-entry';
+import 'SharedComponents/psr-router-route/psr-router-route';
 
 // These are the shared styles needed by this element.
 import { AppStyles } from 'Shared/app-styles';
@@ -20,7 +20,7 @@ class PsrRouterExample extends PsrRouterPage {
         <vaadin-button id="export" on-click="${e => this.doExport(e)}">Export to file</vaadin-button>
         <vaadin-button id="import" on-click="${e => this.doImport(e)}">Import file</vaadin-button>
       </div>
-      <psr-router-route-entry id="the-route" routeEntry=${props.route}></psr-router-route-entry>
+      <psr-router-route id="the-route" routeEntry=${props.route}></psr-router-route>
     `;
   }
 
@@ -43,7 +43,6 @@ class PsrRouterExample extends PsrRouterPage {
       fileReader.onload = function(e) {
         var route = RouteParser.ParseRouteText(e.target.result);
         console.log(route);
-        // console.log(route.toRouteString());
         _this.route = route;
       }
       fileReader.readAsText(e.target.files[0]);
