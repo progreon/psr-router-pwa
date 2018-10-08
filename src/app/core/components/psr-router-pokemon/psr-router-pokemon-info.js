@@ -8,8 +8,8 @@ import 'SharedComponents/psr-router-pokemon/psr-router-pokemon';
 import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterPokemonInfo extends PsrRouterPage {
-  _render(props) {
-    var pokemon = props.game.findPokemonByName(props.searchParams.p);
+  _render() {
+    var pokemon = this.game.findPokemonByName(this.searchParams.p);
     return html`
       ${AppStyles}
       <style>
@@ -76,7 +76,7 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
         <h1>#${this._parseIdString(pokemon.id)} ${pokemon.name}</h1>
         <div class="type">
           <div>${pokemon.type1}</div>
-          <div hidden="${!pokemon.type2}">, ${pokemon.type2}</div>
+          <div ?hidden="${!pokemon.type2}">, ${pokemon.type2}</div>
         </div>
         <div class="section">
           <h2>Base Stats</h2>
@@ -106,7 +106,7 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
         <div class="section">
           <h2>Evolutions</h2>
         </div>
-        <div class="section" hidden?="${this._isGen(props.game, 1)}">
+        <div class="section" ?hidden="${this._isGen(this.game, 1)}">
           <h2>Breeding</h2>
         </div>
         <div class="section">

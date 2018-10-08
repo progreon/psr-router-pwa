@@ -8,11 +8,11 @@ import 'SharedComponents/psr-router-move/psr-router-move';
 import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterMoves extends PsrRouterPage {
-  _render(props) {
-    var moves = props.game ? props.game.moves : {};
+  _render() {
+    var moves = this.game ? this.game.moves : {};
     var moveElements = [];
     for (var m in moves) {
-      moveElements.push(html`<psr-router-move id="${m}" move=${moves[m]} detailed></psr-router-move>`);
+      moveElements.push(html`<psr-router-move id="${m}" .move=${moves[m]} detailed></psr-router-move>`);
     }
     return html`
       ${AppStyles}

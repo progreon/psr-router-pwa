@@ -74,8 +74,8 @@
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
-    "@polymer/app-layout": "^3.0.0-pre.21",
-    "@polymer/lit-element": "^0.5.2",
+    "@polymer/app-layout": "^3.0.1",
+    "@polymer/lit-element": "^0.6.2",
     "@polymer/polymer": "^3.0.2",
     "@vaadin/vaadin-button": "^2.1.0",
     "@vaadin/vaadin-item": "^2.1.0",

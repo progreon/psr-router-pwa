@@ -4,7 +4,7 @@ import { LitElement, html } from '@polymer/lit-element';
 import { AppStyles } from 'Shared/app-styles';
 
 class SnackBar extends LitElement {
-  _render({active, offline}) {
+  render() {
     return html`
       ${AppStyles}
       <style>
@@ -24,7 +24,7 @@ class SnackBar extends LitElement {
           transition-duration: 0.2s;
           visibility: hidden;
           /* TODO: FIX THIS */
-          background-color: ${offline?'var(--app-color-error-red)':'var(--app-color-success-green)'};
+          background-color: ${this.offline?'var(--app-color-error-red)':'var(--app-color-success-green)'};
         }
         :host([active]) {
           visibility: visible;
@@ -43,8 +43,8 @@ class SnackBar extends LitElement {
 
   static get properties() {
     return {
-      active: Boolean,
-      offline: Boolean,
+      active: {type: Boolean, reflect: true},
+      offline: {type: Boolean, reflect: true}
     };
   }
 }

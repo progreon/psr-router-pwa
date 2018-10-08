@@ -28,10 +28,10 @@ export class PsrRouterRouteEntry extends LitElement {
     return undefined;
   }
 
-  _render(props) {
+  render() {
     var icon;
-    if (props.routeEntry && props.routeEntry._children.length > 0) {
-      icon = props.hideChildren ? angleDownIcon : angleUpIcon;
+    if (this.routeEntry && this.routeEntry._children.length > 0) {
+      icon = this.hideChildren ? angleDownIcon : angleUpIcon;
     }
 
     return html`
@@ -65,19 +65,19 @@ export class PsrRouterRouteEntry extends LitElement {
           transition: height 0.3s ease-out;
         }
       </style>
-      ${this._renderRouteEntryStyle(props)}
-      <div class="header" on-click=${e => this._onClick(e)}>
+      ${this._renderRouteEntryStyle()}
+      <div class="header" @click=${this._onClick}>
         <vaadin-item class="entry">
-          <div><strong>${props.routeEntry?props.routeEntry.title:""}</strong></div>
-          <div>${props.routeEntry?props.routeEntry.description:""}</div>
+          <div><strong>${this.routeEntry?this.routeEntry.title:""}</strong></div>
+          <div>${this.routeEntry?this.routeEntry.description:""}</div>
         </vaadin-item>
-        <div class="icon" hidden?="${icon == undefined}">${icon}</div>
+        <div class="icon" ?hidden="${icon == undefined}">${icon}</div>
       </div>
       <div class="content">
-        ${this._renderRouteEntryContent(props)}
+        ${this._renderRouteEntryContent()}
       </div>
       <div id="children">
-        ${this._renderRouteEntryChildren(props)}
+        ${this._renderRouteEntryChildren()}
       </div>
     `;
   }

@@ -3,9 +3,17 @@ import { LitElement } from '@polymer/lit-element';
 export class PsrRouterPage extends LitElement {
   static get properties() {
     return {
-      active: Boolean,
+      active: {type: Boolean, reflect: true},
       game: Object,
       searchParams: Object
+    }
+  }
+
+  // Only render this page if it's actually visible.
+  render() {
+    console.log("render", this.active);
+    if (this.active) {
+      return this._render();
     }
   }
 
@@ -14,8 +22,7 @@ export class PsrRouterPage extends LitElement {
     document.body.dispatchEvent(navigateEvent);
   }
 
-  // Only render this page if it's actually visible.
-  _shouldRender(props, changedProps, old) {
-    return props.active;
+  _render() {
+    // Implement this!
   }
 }

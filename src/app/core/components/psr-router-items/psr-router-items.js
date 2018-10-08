@@ -8,11 +8,11 @@ import 'SharedComponents/psr-router-item/psr-router-item';
 import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterItems extends PsrRouterPage {
-  _render(props) {
-    var items = props.game ? props.game.items : {};
+  _render() {
+    var items = this.game ? this.game.items : {};
     var itemElements = [];
     for (var i in items) {
-      itemElements.push(html`<psr-router-item id="${i}" item=${items[i]} detailed></psr-router-item>`);
+      itemElements.push(html`<psr-router-item id="${i}" .item=${items[i]} detailed></psr-router-item>`);
     }
     return html`
       ${AppStyles}

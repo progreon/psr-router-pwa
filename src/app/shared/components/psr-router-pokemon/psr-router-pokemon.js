@@ -12,13 +12,13 @@ import { AppStyles } from 'Shared/app-styles';
 // imagine that it could just as well be a third-party element that you
 // got from someone else.
 class PsrRouterPokemon extends LitElement {
-  _render(props) {
-    var typeString = props.pokemon.type1 + (props.pokemon.type2 ? ", " + props.pokemon.type2 : "");
+  render() {
+    var typeString = this.pokemon.type1 + (this.pokemon.type2 ? ", " + this.pokemon.type2 : "");
 
     return html`
       ${AppStyles}
-      <vaadin-item on-click=${e => this._onClick(e)}>
-        <div><strong>${props.pokemon.id} - ${props.pokemon.name}</strong></div>
+      <vaadin-item @click=${this._onClick}>
+        <div><strong>${this.pokemon.id} - ${this.pokemon.name}</strong></div>
         <div>${typeString}</div>
       </vaadin-item>
     `;
