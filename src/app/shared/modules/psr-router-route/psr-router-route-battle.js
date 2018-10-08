@@ -5,31 +5,30 @@ import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util'
 import { RouteEntry } from 'SharedModules/psr-router-route';
 
 /**
- * A class representing a route-entry that gets you a pokemon out of a list of possible pokemon.
+ * A class representing a route-entry that handles battles.
  * @todo WildEncounters
  * @todo parent?
  * @todo writeToString
  * @augments RouteEntry
  */
-class RouteGetPokemon extends RouteEntry {
+class RouteBattle extends RouteEntry {
   /**
    *
    * @param {Game}        game              The Game object this route entry uses.
    * @param {string}      entryString       TEMP
    * @param {string}      [title=""]        A title for this entry.
    * @param {string}      [description=""]  A description for this entry.
-   * @param {Battler[]}   [choices=[]]      The different battlers to choose from.
-   * @param {number}      [preference=0]    The preferred choise.
    * @param {Location}    [location]        The location in the game where this entry occurs.
    */
-  constructor(game, entryString, title="", description="", choices=[], preference=0, location=undefined) {
+  constructor(game, entryString, title="", description="", location=undefined) {
     super(game, title, description, location);
     this.entryString = entryString;
   }
 
   static getEntryType() {
-    return "GetP";
+    return "B";
   }
+
 
   _getRouteFileLines(printerSettings) {
     var str = "";
@@ -55,11 +54,11 @@ class RouteGetPokemon extends RouteEntry {
           // TODO: throw exception
         }
       }
-      return new RouteGetPokemon(game, entryString, title, description);
+      return new RouteBattle(game, entryString, title, description);
     } else {
       // TODO: throw exception
     }
   }
 }
 
-export { RouteGetPokemon };
+export { RouteBattle };

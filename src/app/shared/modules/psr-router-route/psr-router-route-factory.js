@@ -19,9 +19,9 @@ export function GetDummyRoute(game) {
       srNew.addNewDirections("Start a new game, and name yourself and your rival a one character name.");
     var srPallet = route.addNewSection("Pallet Town", "It's time to get rolling!");
       srPallet.addNewDirections("Exit out of your home, and head north towards Route 1. Prof. Oak will stop you and lead you back to his lab. After he and your rival are done talking, select the middle Pokeball on the table to get Squirtle. Name it a one character name, and go to head out of the lab.");
-      srPallet.addNewEntry("Get Pokemon", "#squirtle:5");
+      srPallet.addNewGetPokemon("#squirtle:5", "", "Get Squirtle");
       srPallet.addNewDirections("Your rival will stop you for a battle.");
-      srPallet.addNewEntry("Rival 1", "Tail Whip x1-2, then Tackle until it faints.");
+      srPallet.addNewBattle("rival1", "Rival 1", "Tail Whip x1-2, then Tackle until it faints.");
       srPallet.addNewDirections("Head out of the lab, and north to Route 1");
     var srParcel = route.addNewSection("Getting the Parcel to Oak");
       var srR1 = srParcel.addNewSection("Route 1");
@@ -43,10 +43,10 @@ export function GetDummyRoute(game) {
       srForest.addNewDirections("Avoid encounters as much as possible by walking on encounterless grass tiles.");
       srForest.addNewEntry("GetI: Antidote", "Pick up the antidote on the way up.");
       srForest.addNewEntry("GetI: Potion", "Be at least 10 HP before the Weedle Guy, and pick up the hidden Potion next to him.");
-      srForest.addNewEntry("Weedle Guy", "Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion.");
+      srForest.addNewBattle("bug1", "Weedle Guy", "Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion.");
       srForest.addNewEntry("Swap: 0 1", "After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary.");
     var srPewter = route.addNewSection("Pewter City");
-      srPewter.addNewEntry("Brock", "Switch to Squirtle to share exp, use Bubble to kill Geodude and Onix. If Onix uses Bide on the turn you switch in, use Tail Whip twice, then Bubble.");
+      srPewter.addNewBattle("brock :: 0:0 0:1 1:0 1:1", "Brock", "Switch to Squirtle to share exp, use Bubble to kill Geodude and Onix. If Onix uses Bide on the turn you switch in, use Tail Whip twice, then Bubble.");
       srPewter.addNewEntry("Shop", "Change the battle style option from Shift to Set, and buy 7-10 Potions.");
 
   return route;

@@ -27,7 +27,7 @@ class Route extends RouteSection {
   }
 
   static getEntryType() {
-    return "ROUTE";
+    return "Route";
   }
 
   exportToFile(filename) {

@@ -38,15 +38,25 @@ export function GetEntryListFromLines(parent, lines, startLine=0) {
     var i = sublines[0].line.indexOf(": ");
     var type = sublines[0].line.substring(0, i).toUpperCase();
     switch (type) {
-      case Route.RouteSection.getEntryType().toUpperCase():
-        if (Route.RouteSection.getEntryType() !== "")
+      case Route.RouteBattle.getEntryType().toUpperCase():
+        if (Route.RouteBattle.getEntryType() !== "")
           sublines[0].line = sublines[0].line.substring(i + 2);
-        entries.push(Route.RouteSection.newFromRouteFileLines(parent, sublines));
+        entries.push(Route.RouteBattle.newFromRouteFileLines(parent, sublines));
         break;
       case Route.RouteEntry.getEntryType().toUpperCase():
         if (Route.RouteEntry.getEntryType() !== "")
           sublines[0].line = sublines[0].line.substring(i + 2);
         entries.push(Route.RouteEntry.newFromRouteFileLines(parent, sublines));
+        break;
+      case Route.RouteGetPokemon.getEntryType().toUpperCase():
+        if (Route.RouteGetPokemon.getEntryType() !== "")
+          sublines[0].line = sublines[0].line.substring(i + 2);
+        entries.push(Route.RouteGetPokemon.newFromRouteFileLines(parent, sublines));
+        break;
+      case Route.RouteSection.getEntryType().toUpperCase():
+        if (Route.RouteSection.getEntryType() !== "")
+          sublines[0].line = sublines[0].line.substring(i + 2);
+        entries.push(Route.RouteSection.newFromRouteFileLines(parent, sublines));
         break;
       case Route.RouteDirections.getEntryType().toUpperCase():
         if (Route.RouteDirections.getEntryType() !== "")
