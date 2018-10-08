@@ -37,6 +37,13 @@ class RouteEntry {
      */
     this._children = children;
     //// OTHERS ////
+    /** @type {RouterMessage[]} */
+    this.messages = [];
+    /**
+     * @type {Boolean}
+     * @protected
+     */
+    this._eventsEnabled = true;
     /**
      * @type {Player}
      * @protected
@@ -47,8 +54,6 @@ class RouteEntry {
      * @protected
      */
     this._playerAfter = undefined;
-    /** @type {RouterMessage[]} */
-    this.messages = [];
   }
 
   /** @returns {string} */
@@ -57,12 +62,36 @@ class RouteEntry {
   }
 
   /**
+  * Notify listeners that the data is updated, to tell them to refresh the displayed data.
+  * @protected
+  * @todo Test!!!
+  */
+  _fireDataUpdated() {
+    if (this._eventsEnabled) {
+      this.dispatchEvent(new CustomEvent('data-updated', {detail: {entry: this}}));
+    }
+  }
+
+  /**
    * Notify listeners that the data is updated, to tell them to refresh the displayed data.
    * @protected
    * @todo Test!!!
    */
-  _notifyListeners() {
-    this.dispatchEvent(new CustomEvent('entry-updated', {detail: {entry: this}}));
+  _fireInfoUpdated() {
+    if (this._eventsEnabled) {
+      this.dispatchEvent(new CustomEvent('info-updated', {detail: {entry: this}}));
+    }
+  }
+
+  /**
+   * Notify listeners that the player is updated, to tell them to refresh the displayed data.
+   * @protected
+   * @todo Test!!!
+   */
+  _fireNewPlayer() {
+    if (this._eventsEnabled) {
+      this.dispatchEvent(new CustomEvent('player-updated', {detail: {entry: this}}));
+    }
   }
 
   /**
@@ -116,7 +145,7 @@ class RouteEntry {
    */
   _addEntry(entry) {
     this._children.push(entry);
-    // this._notifyListeners();
+    this._fireDataUpdated();
     return entry;
   }
 
@@ -130,7 +159,7 @@ class RouteEntry {
     if (this._location != location) {
       this._location = location;
       //TODO: this.wildEncounters.reset();
-      this._notifyListeners();
+      this._fireDataUpdated();
     }
   }
 
