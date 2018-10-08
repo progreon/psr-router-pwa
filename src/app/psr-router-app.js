@@ -300,6 +300,13 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
   constructor() {
     super();
+    // listen to the service worker promise in main.js to see if there has been a new update.
+    window['isUpdateAvailable'].then(isAvailable => {
+      if (isAvailable) {
+        console.log("New Update Available! Reload the webapp to see the latest juicy changes.");
+        // TODO: toast
+      }
+    });
     // To force all event listeners for gestures to be passive.
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
