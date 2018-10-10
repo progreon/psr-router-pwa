@@ -12,15 +12,15 @@ import 'SharedComponents/psr-router-route/psr-router-route';
 import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterExample extends PsrRouterPage {
-  _render(props) {
+  _render() {
     return html`
       ${AppStyles}
       <input type="file" id="selFile" hidden>
       <div class="buttons">
-        <vaadin-button id="export" on-click="${e => this.doExport(e)}">Export to file</vaadin-button>
-        <vaadin-button id="import" on-click="${e => this.doImport(e)}">Import file</vaadin-button>
+        <vaadin-button id="export" @click="${this.doExport}">Export to file</vaadin-button>
+        <vaadin-button id="import" @click="${this.doImport}">Import file</vaadin-button>
       </div>
-      <psr-router-route id="the-route" routeEntry=${props.route}></psr-router-route>
+      <psr-router-route id="the-route" .routeEntry=${this.route}></psr-router-route>
     `;
   }
 

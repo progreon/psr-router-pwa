@@ -5,7 +5,7 @@ import { PsrRouterPage } from 'CoreComponents/psr-router-page/psr-router-page';
 import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterHome extends PsrRouterPage {
-  _render(props) {
+  _render() {
     return html`
       ${AppStyles}
       <section>

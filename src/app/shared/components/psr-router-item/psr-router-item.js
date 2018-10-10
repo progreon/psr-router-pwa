@@ -12,17 +12,17 @@ import { AppStyles } from 'Shared/app-styles';
 // imagine that it could just as well be a third-party element that you
 // got from someone else.
 class PsrRouterItem extends LitElement {
-  _render(props) {
+  render() {
     return html`
       ${AppStyles}
-      <vaadin-item hidden?="${!props.detailed}">
-        <div><strong>${props.item.name} (₽${props.item.price})</strong></div>
-        <div>[${props.item.usage()}] ${props.item.type} (${props.item.value})</div>
-        <div><i>${props.item.description}</i></div>
+      <vaadin-item ?hidden="${!this.detailed}">
+        <div><strong>${this.item.name} (₽${this.item.price})</strong></div>
+        <div>[${this.item.usage()}] ${this.item.type} (${this.item.value})</div>
+        <div><i>${this.item.description}</i></div>
       </vaadin-item>
-      <vaadin-item hidden?="${props.detailed}">
-        <div><strong>${props.item.name}</strong></div>
-        <div>₽${props.item.price}</div>
+      <vaadin-item ?hidden="${this.detailed}">
+        <div><strong>${this.item.name}</strong></div>
+        <div>₽${this.item.price}</div>
       </vaadin-item>
     `;
   }
@@ -32,7 +32,7 @@ class PsrRouterItem extends LitElement {
       /* The item object. */
       item: Object,
       /* If this element must display more detailed information. */
-      detailed: Boolean
+      detailed: {type: Boolean, reflect: true}
     }
   };
 

@@ -18,8 +18,8 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 export class PsrRouterRouteSection extends PsrRouterRouteEntry {
-  _renderRouteEntryChildren(props) {
-    var children = props.routeEntry ? props.routeEntry.getChildren() : [];
+  _renderRouteEntryChildren() {
+    var children = super.routeEntry ? super.routeEntry.getChildren() : [];
     var childElements = [];
     for (var i = 0; i < children.length; i++) {
       if (i !== 0)
@@ -30,20 +30,20 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
         //   blabla;
         //   break;
         case Route.RouteBattle.getEntryType():
-          childElements.push(html`<psr-router-route-battle id="${'child-' + i}" routeEntry=${children[i]}></psr-router-route-battle>`);
+          childElements.push(html`<psr-router-route-battle id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-battle>`);
           break;
         case Route.RouteDirections.getEntryType():
-          childElements.push(html`<psr-router-route-directions id="${'child-' + i}" routeEntry=${children[i]}></psr-router-route-directions>`);
+          childElements.push(html`<psr-router-route-directions id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-directions>`);
           break;
         case Route.RouteGetPokemon.getEntryType():
-          childElements.push(html`<psr-router-route-get-pokemon id="${'child-' + i}" routeEntry=${children[i]}></psr-router-route-get-pokemon>`);
+          childElements.push(html`<psr-router-route-get-pokemon id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-get-pokemon>`);
           break;
         case Route.RouteSection.getEntryType():
-          childElements.push(html`<psr-router-route-section id="${'child-' + i}" routeEntry=${children[i]}></psr-router-route-section>`);
+          childElements.push(html`<psr-router-route-section id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-section>`);
           break;
         case Route.RouteEntry.getEntryType():
         default:
-          childElements.push(html`<psr-router-route-entry id="${'child-' + i}" routeEntry=${children[i]}></psr-router-route-entry>`);
+          childElements.push(html`<psr-router-route-entry id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-entry>`);
       }
     }
     return html`
@@ -51,12 +51,12 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
     `;
   }
 
-  _renderRouteEntryContent(props) {
+  _renderRouteEntryContent() {
     // TODO
     return undefined;
   }
 
-  _renderRouteEntryStyle(props) {
+  _renderRouteEntryStyle() {
     // TODO
     return undefined;
   }

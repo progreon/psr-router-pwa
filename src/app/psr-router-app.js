@@ -42,16 +42,17 @@ import {
 } from 'CoreActions/app.js';
 
 class PsrRouterApp extends connect(store)(LitElement) {
-  _render({appTitle, _currentGame, _drawerOpened, _exampleRoute, _offline, _page, _pageList, _searchParams, _snackbarOpened, _wideLayout}) {
+  render() {
     var linkList = [];
     var menuIcon = angleLeftIcon; // Default to back-arrow
+    var athis = this;
     // Creating the menu links
     this._pageList.forEach(function(page) {
-      if (_page === page.name) {
+      if (athis._page === page.name) {
         menuIcon = barsIcon; // Normal menu icon if current page is a level 1 page
       }
       if (!page.is404) {
-        const a = html`<a selected?="${_page === page.name}" href="/${page.name}">${page.title}</a>`;
+        const a = html`<a ?selected="${athis._page === page.name}" href="/${page.name}">${page.title}</a>`;
         linkList.push(a);
       }
     });
@@ -186,8 +187,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
         }
 
         .main-content {
-          /* min-height: 100vh; */
-          /* padding-bottom: var(--app-footer-height); */
+          /* height: 100%; */
           @apply --layout-flex;
           overflow: auto;
           overflow-y: scroll;
@@ -237,7 +237,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
       <app-drawer-layout fullbleed force-narrow>
         <!-- Drawer content -->
         <!-- Add swipe-open if you want the ability to swipe open the drawer -->
-        <app-drawer slot="drawer" class="drawer" swipe-open?="${!_wideLayout}" opened="${_drawerOpened}" on-opened-changed="${e => store.dispatch(updateDrawerState(e.target.opened))}">
+        <app-drawer slot="drawer" class="drawer" ?swipe-open="${!this._wideLayout}" ?opened="${this._drawerOpened}" @opened-changed="${e => store.dispatch(updateDrawerState(e.target.opened))}">
           <app-toolbar class="drawer-top">Menu</app-toolbar>
           <nav class="drawer-list">
             ${linkList}
@@ -249,8 +249,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
           <app-header slot="header" class="toolbar" fixed effects="waterfall">
             <app-toolbar class="toolbar-top" sticky>
               <div class="toolbar-top-content">
-                <button class="menu-btn" title="Menu" onclick="${_ => this._onMenuButtonClicked(menuIcon === angleLeftIcon)}">${menuIcon}</button>
-                <div class="title">${appTitle}</div>
+                <button class="menu-btn" title="Menu" @click="${_ => this._onMenuButtonClicked(menuIcon === angleLeftIcon)}">${menuIcon}</button>
+                <div class="title">${this.appTitle}</div>
               </div>
             </app-toolbar>
 
@@ -262,16 +262,16 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
           <!-- Main content -->
           <main role="main" class="main-content">
-            <psr-router-home class="page" active?="${_page === 'home'}" searchParams="${_searchParams}"></psr-router-home>
-            <psr-router-example class="page" active?="${_page === 'example'}" searchParams="${_searchParams}" game="${_currentGame}" route="${_exampleRoute}"></psr-router-example>
-            <psr-router-items class="page" active?="${_page === 'items'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-items>
-            <psr-router-moves class="page" active?="${_page === 'moves'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-moves>
-            <psr-router-pokemon-info class="page" active?="${_page === 'pokemon-info'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-pokemon-info>
-            <psr-router-pokemon-list class="page" active?="${_page === 'pokemon-list'}" searchParams="${_searchParams}" game="${_currentGame}"></psr-router-pokemon-list>
-            <psr-router-404 class="page" active?="${_page === '404'}" searchParams="${_searchParams}"></psr-router-404>
+            <psr-router-home class="page" ?active="${this._page === 'home'}" .searchParams="${this._searchParams}"></psr-router-home>
+            <psr-router-example class="page" ?active="${this._page === 'example'}" .searchParams="${this._searchParams}" .game="${this._currentGame}" .route="${this._exampleRoute}"></psr-router-example>
+            <psr-router-items class="page" ?active="${this._page === 'items'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-items>
+            <psr-router-moves class="page" ?active="${this._page === 'moves'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-moves>
+            <psr-router-pokemon-info class="page" ?active="${this._page === 'pokemon-info'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-pokemon-info>
+            <psr-router-pokemon-list class="page" ?active="${this._page === 'pokemon-list'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-pokemon-list>
+            <psr-router-404 class="page" ?active="${this._page === '404'}" .searchParams="${this._searchParams}"></psr-router-404>
 
-            <snack-bar active?="${_snackbarOpened}">
-                You are now ${_offline ? 'offline' : 'online'}.</snack-bar>
+            <snack-bar ?active="${this._snackbarOpened}" ?offline="${this._offline}">
+                You are now ${this._offline ? 'offline' : 'online'}.</snack-bar>
           </main>
 
           <footer class="footer">
@@ -301,12 +301,12 @@ class PsrRouterApp extends connect(store)(LitElement) {
   constructor() {
     super();
     // listen to the service worker promise in main.js to see if there has been a new update.
-    window['isUpdateAvailable'].then(isAvailable => {
-      if (isAvailable) {
-        console.log("New Update Available! Reload the webapp to see the latest juicy changes.");
-        // TODO: toast
-      }
-    });
+    // window['isUpdateAvailable'].then(isAvailable => {
+    //   if (isAvailable) {
+    //     console.log("New Update Available! Reload the webapp to see the latest juicy changes.");
+    //     // TODO: toast
+    //   }
+    // });
     // To force all event listeners for gestures to be passive.
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
@@ -343,7 +343,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
     this._exampleRoute = exampleRoute;
   }
 
-  _firstRendered() {
+  firstUpdated(changedProperties) {
     installRouter((location) => {store.dispatch(navigate(location))});
     installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     installMediaQueryWatcher(`(min-width: ${MyAppGlobals.wideWidth})`,
@@ -357,10 +357,10 @@ class PsrRouterApp extends connect(store)(LitElement) {
       window.history.back();
   }
 
-  _didRender(properties, changeList) {
-    if ('_page' in changeList) {
+  updated(changedProperties) {
+    if ('_page' in changedProperties) {
       // TODO: change this to a proper title
-      const pageTitle = properties.appTitle + ' - ' + changeList._page;
+      const pageTitle = changedProperties.appTitle + ' - ' + changedProperties._page;
       updateMetadata({
           title: pageTitle,
           description: pageTitle
