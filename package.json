@@ -76,6 +76,7 @@
   "dependencies": {
     "@polymer/app-layout": "^3.0.1",
     "@polymer/lit-element": "^0.6.2",
+    "@polymer/paper-toast": "^3.0.1",
     "@polymer/polymer": "^3.0.2",
     "@vaadin/vaadin-button": "^2.1.0",
     "@vaadin/vaadin-item": "^2.1.0",

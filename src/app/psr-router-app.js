@@ -22,6 +22,8 @@ import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
+import '@polymer/paper-toast';
+import '@vaadin/vaadin-button/theme/material/vaadin-button';
 import 'CoreComponents/snack-bar/snack-bar';
 
 // Image imports for this element
@@ -187,8 +189,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
         }
 
         .main-content {
-          /* height: 100%; */
-          @apply --layout-flex;
+          height: 100%;
+          /* @apply --layout-flex; */
           overflow: auto;
           overflow-y: scroll;
         }
@@ -213,6 +215,10 @@ class PsrRouterApp extends connect(store)(LitElement) {
           text-align: center;
         }
 
+        paper-toast {
+          width: 100%;
+        }
+
         /* Wide layout: when the viewport width is bigger than 640px, layout
         changes to a wide layout. */
         @media (min-width: ${MyAppGlobals.wideWidth}) {
@@ -230,6 +236,10 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
           .footer {
             display: none;
+          }
+
+          paper-toast {
+            width: auto;
           }
         }
       </style>
@@ -279,6 +289,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
           </footer>
         </app-header-layout>
       </app-drawer-layout>
+
+      <paper-toast id="toast" duration="5000">${this._toastHtml}</paper-toast>
     `;
     return template;
   }
@@ -294,19 +306,13 @@ class PsrRouterApp extends connect(store)(LitElement) {
       _pageList: Object,
       _searchParams: Object,
       _snackbarOpened: Boolean,
+      _toastHtml: Object,
       _wideLayout: Boolean
     };
   }
 
   constructor() {
     super();
-    // listen to the service worker promise in main.js to see if there has been a new update.
-    // window['isUpdateAvailable'].then(isAvailable => {
-    //   if (isAvailable) {
-    //     console.log("New Update Available! Reload the webapp to see the latest juicy changes.");
-    //     // TODO: toast
-    //   }
-    // });
     // To force all event listeners for gestures to be passive.
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
@@ -344,10 +350,33 @@ class PsrRouterApp extends connect(store)(LitElement) {
   }
 
   firstUpdated(changedProperties) {
+    // listen to the service worker promise in main.js to see if there has been a new update.
+    window['isUpdateAvailable'].then(isAvailable => {
+      if (isAvailable) {
+        this._showToast(html`New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}">Reload</vaadin-button>`);
+      }
+    });
     installRouter((location) => {store.dispatch(navigate(location))});
     installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     installMediaQueryWatcher(`(min-width: ${MyAppGlobals.wideWidth})`,
         (matches) => store.dispatch(updateLayout(matches)));
+  }
+
+  updated(changedProperties) {
+    var athis = this;
+    var title = "Where Am I?";
+    this._pageList.forEach(function(page) {
+      if (athis._page === page.name) {
+        title = page.title;
+      }
+    });
+
+    const pageTitle = this.appTitle + ' - ' + title;
+    updateMetadata({
+        title: pageTitle,
+        description: pageTitle
+        // This object also takes an image property, that points to an img src.
+    });
   }
 
   _onMenuButtonClicked(isBackButton) {
@@ -357,16 +386,9 @@ class PsrRouterApp extends connect(store)(LitElement) {
       window.history.back();
   }
 
-  updated(changedProperties) {
-    if ('_page' in changedProperties) {
-      // TODO: change this to a proper title
-      const pageTitle = changedProperties.appTitle + ' - ' + changedProperties._page;
-      updateMetadata({
-          title: pageTitle,
-          description: pageTitle
-          // This object also takes an image property, that points to an img src.
-      });
-    }
+  _showToast(toastHtml) {
+    this._toastHtml = toastHtml;
+    var toast = this.shadowRoot.getElementById('toast').open();
   }
 
   _stateChanged(state) {
