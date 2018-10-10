@@ -11,7 +11,6 @@ export class PsrRouterPage extends LitElement {
 
   // Only render this page if it's actually visible.
   render() {
-    console.log("render", this.active);
     if (this.active) {
       return this._render();
     }

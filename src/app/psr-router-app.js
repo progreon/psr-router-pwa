@@ -187,8 +187,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
         }
 
         .main-content {
-          /* min-height: 100vh; */
-          /* padding-bottom: var(--app-footer-height); */
+          /* height: 100%; */
           @apply --layout-flex;
           overflow: auto;
           overflow-y: scroll;
