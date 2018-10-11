@@ -12,18 +12,18 @@ import { AppStyles } from 'Shared/app-styles';
 // imagine that it could just as well be a third-party element that you
 // got from someone else.
 class PsrRouterMove extends LitElement {
-  _render(props) {
+  render() {
     return html`
       ${AppStyles}
-      <vaadin-item hidden?="${!props.detailed}">
-        <div><strong>${props.move.name} (${props.move.type.name}, ${props.move.category})</strong></div>
-        <div>power: ${props.move.power}, accuracy: ${props.move.accuracy}%, ${props.move.pp}pp</div>
-        <div>effect: ${props.move.effect}</div>
-        <div><i>${props.move.description}</i></div>
+      <vaadin-item ?hidden="${!this.detailed}">
+        <div><strong>${this.move.name} (${this.move.type.name}, ${this.move.category})</strong></div>
+        <div>power: ${this.move.power}, accuracy: ${this.move.accuracy}%, ${this.move.pp}pp</div>
+        <div>effect: ${this.move.effect}</div>
+        <div><i>${this.move.description}</i></div>
       </vaadin-item>
-      <vaadin-item hidden?="${props.detailed}">
-        <div><strong>${props.move.name} (${props.move.type})</strong></div>
-        <div><i>${props.move.description}</i></div>
+      <vaadin-item ?hidden="${this.detailed}">
+        <div><strong>${this.move.name} (${this.move.type})</strong></div>
+        <div><i>${this.move.description}</i></div>
       </vaadin-item>
     `;
   }
@@ -33,7 +33,7 @@ class PsrRouterMove extends LitElement {
       /* The move object. */
       move: Object,
       /* If this element must display more detailed information. */
-      detailed: Boolean
+      detailed: {type: Boolean, reflect: true}
     }
   };
 

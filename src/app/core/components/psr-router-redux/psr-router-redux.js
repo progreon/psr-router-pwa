@@ -21,12 +21,12 @@ import 'SharedComponents/counter-element/counter-element';
 import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterRedux extends connect(store)(PsrRouterPage) {
-  _render(props) {
+  _render() {
     return html`
       ${AppStyles}
       <section>
         <h2>Redux example: simple counter</h2>
-        <div class="circle">${props._value}</div>
+        <div class="circle">${this._value}</div>
         <p>This page contains a reusable <code>&lt;counter-element&gt;</code>. The
         element is not built in a Redux-y way (you can think of it as being a
         third-party element you got from someone else), but this page is connected to the
@@ -37,9 +37,9 @@ class PsrRouterRedux extends connect(store)(PsrRouterPage) {
       </section>
       <section>
         <p>
-          <counter-element value="${props._value}" clicks="${props._clicks}"
-              on-counter-incremented="${() => store.dispatch(increment())}"
-              on-counter-decremented="${() => store.dispatch(decrement())}">
+          <counter-element .value="${this._value}" .clicks="${this._clicks}"
+              @counter-incremented="${store.dispatch(increment())}"
+              @counter-decremented="${store.dispatch(decrement())}">
           </counter-element>
         </p>
       </section>

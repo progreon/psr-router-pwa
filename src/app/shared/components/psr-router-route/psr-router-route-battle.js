@@ -15,14 +15,14 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 class PsrRouterRouteBattle extends PsrRouterRouteEntry {
-  _renderRouteEntryContent(props) {
+  _renderRouteEntryContent() {
     // TODO
     return html`
-      ${props.routeEntry?props.routeEntry.entryString:""}
+      ${super.routeEntry?super.routeEntry.entryString:""}
     `;
   }
 
-  _renderRouteEntryStyle(props) {
+  _renderRouteEntryStyle() {
     // TODO
     return undefined;
   }

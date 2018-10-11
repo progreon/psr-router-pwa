@@ -8,12 +8,12 @@ import 'SharedComponents/psr-router-pokemon/psr-router-pokemon';
 import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterPokemonList extends PsrRouterPage {
-  _render(props) {
-    var pokemon = props.game ? props.game.pokemon : {};
+  _render() {
+    var pokemon = this.game ? this.game.pokemon : {};
     var pokemonElements = [];
     for (var p in pokemon) {
       var name = pokemon[p].name;
-      pokemonElements.push(html`<psr-router-pokemon id="${p}" pokemon=${pokemon[p]} on-click="${e => this.onClick(e.detail.pokemon)}"></psr-router-pokemon>`);
+      pokemonElements.push(html`<psr-router-pokemon id="${p}" .pokemon=${pokemon[p]} @click="${e => this._onClick(e.detail.pokemon)}"></psr-router-pokemon>`);
     }
     return html`
       ${AppStyles}
@@ -32,7 +32,7 @@ class PsrRouterPokemonList extends PsrRouterPage {
     super();
   }
 
-  onClick(pokemon) {
+  _onClick(pokemon) {
     super._navigateTo('pokemon-info?p=' + pokemon.name);
   }
 }
