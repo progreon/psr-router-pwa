@@ -45,6 +45,11 @@ class RouteEntry {
      */
     this._eventsEnabled = true;
     /**
+     * @type {Function[]}
+     * @protected
+     */
+    this._observers = [];
+    /**
      * @type {Player}
      * @protected
      */
@@ -59,39 +64,6 @@ class RouteEntry {
   /** @returns {string} */
   static getEntryType() {
     return "ENTRY";
-  }
-
-  /**
-  * Notify listeners that the data is updated, to tell them to refresh the displayed data.
-  * @protected
-  * @todo Test!!!
-  */
-  _fireDataUpdated() {
-    if (this._eventsEnabled) {
-      this.dispatchEvent(new CustomEvent('data-updated', {detail: {entry: this}}));
-    }
-  }
-
-  /**
-   * Notify listeners that the data is updated, to tell them to refresh the displayed data.
-   * @protected
-   * @todo Test!!!
-   */
-  _fireInfoUpdated() {
-    if (this._eventsEnabled) {
-      this.dispatchEvent(new CustomEvent('info-updated', {detail: {entry: this}}));
-    }
-  }
-
-  /**
-   * Notify listeners that the player is updated, to tell them to refresh the displayed data.
-   * @protected
-   * @todo Test!!!
-   */
-  _fireNewPlayer() {
-    if (this._eventsEnabled) {
-      this.dispatchEvent(new CustomEvent('player-updated', {detail: {entry: this}}));
-    }
   }
 
   /**
@@ -188,6 +160,53 @@ class RouteEntry {
     this.messages.forEach(m => {if (m.type.priority < type.priority) type = m.type});
     return type;
   }
+
+  //// OBSERVER STUFF ////
+
+  /**
+   * Add a listener function to this entry.
+   * Hint: .bind(this)
+   *
+   * @param {Function}  callback
+   */
+  addObserver(callback) {
+    this._observers.push(callback);
+  }
+
+  /**
+  * Notify listeners that the data is updated, to tell them to refresh the displayed data.
+  * @protected
+  * @todo Test!!!
+  */
+  _fireDataUpdated() {
+    this._triggerObservers("data");
+  }
+
+  /**
+   * Notify listeners that the player is updated, to retrigger the apply call.
+   * @protected
+   * @todo Test!!!
+   */
+  _firePlayerUpdated() {
+    this._triggerObservers("player");
+  }
+
+  /**
+   *
+   * @param {String}  type
+   * @protected
+   * @todo Test!!!
+   */
+  _triggerObservers(type) {
+    if (this._eventsEnabled) {
+      var athis = this;
+      this._observers.forEach(function(f) {
+        f(athis, type);
+      });
+    }
+  }
+
+  //// STRINGS ////
 
   /** @returns {string} */
   toString() {

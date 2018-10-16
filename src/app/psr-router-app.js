@@ -190,7 +190,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
         .main-content {
           height: 100%;
-          /* @apply --layout-flex; */
+          @apply --layout-flex;
           overflow: auto;
           overflow-y: scroll;
         }
