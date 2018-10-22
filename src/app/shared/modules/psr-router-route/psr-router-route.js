@@ -2,7 +2,7 @@
 
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
-import { RouteSection } from 'SharedModules/psr-router-route';
+import { RouteEntryInfo, RouteSection } from 'SharedModules/psr-router-route';
 import { saveAs } from 'file-saver/FileSaver';
 import { GetEntryListFromLines } from './psr-router-route-parser';
 
@@ -18,12 +18,12 @@ class Route extends RouteSection {
    *
    * @param {Game}          game              The Game object this route entry uses.
    * @param {string}        title             A title for this entry.
-   * @param {string}        [description=""]  A description for this entry.
+   * @param {string}        [summary=""]      A summary for this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
    */
-  constructor(game, title, description="", location=undefined, children=[]) {
-    super(game, title, description, location, children);
+  constructor(game, title, summary="", location=undefined, children=[]) {
+    super(game, new RouteEntryInfo(title, summary), location, children);
   }
 
   static getEntryType() {
@@ -61,13 +61,13 @@ class Route extends RouteSection {
     if (lines && lines.length > 0 && lines[0].line) {
       var line = lines[0].line;
       var title = line;
-      var description = "";
+      var summary = "";
       var i = line.indexOf(" :: ");
       if (i >= 0) {
         title = line.substring(0, i);
-        description = line.substring(i + 4);
+        summary = line.substring(i + 4);
       }
-      var route = new Route(game, title, description);
+      var route = new Route(game, title, summary);
       var childEntries = GetEntryListFromLines(route, lines, 1);
       for (var ic = 0; ic < childEntries.length; ic++) {
         route._addEntry(childEntries[ic]);

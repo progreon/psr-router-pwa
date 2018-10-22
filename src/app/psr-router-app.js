@@ -93,7 +93,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
           /* SIZES */
           --app-header-height: var(--app-grid-7x);
           --app-drawer-width: 256px;
-          --app-footer-height: var(--app-grid-7x);
+          /* --app-footer-height: var(--app-grid-7x); */
+          --app-footer-height: var(--app-grid-3x);
         }
 
         .drawer {
@@ -239,7 +240,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
           }
 
           paper-toast {
-            width: auto;
+            width: 375px;
+            max-width: 100%;
           }
         }
       </style>
@@ -285,12 +287,12 @@ class PsrRouterApp extends connect(store)(LitElement) {
           </main>
 
           <footer class="footer">
-            <p>[TODO: shortcuts]</p>
+            [TODO: shortcuts]
           </footer>
         </app-header-layout>
       </app-drawer-layout>
 
-      <paper-toast id="toast" duration="5000">${this._toastHtml}</paper-toast>
+      <paper-toast id="toast" duration="10000">${this._toastHtml}</paper-toast>
     `;
     return template;
   }
@@ -353,7 +355,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
     // listen to the service worker promise in main.js to see if there has been a new update.
     window['isUpdateAvailable'].then(isAvailable => {
       if (isAvailable) {
-        this._showToast(html`New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}">Reload</vaadin-button>`);
+        console.log("New Update Available! Reload the web app to get the latest juicy changes. (Oh Yeah!)");
+        this._showToast(html`<div style="display: flex; justify-content: space-between; align-items: baseline;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}">Reload</vaadin-button></div>`);
       }
     });
     installRouter((location) => {store.dispatch(navigate(location))});
@@ -392,7 +395,12 @@ class PsrRouterApp extends connect(store)(LitElement) {
   }
 
   _stateChanged(state) {
-    this._page = state.app.page;
+    if (this._page !== state.app.page) {
+      this._page = state.app.page;
+      if (document.getElementById("overlay")) {
+        document.getElementById("overlay").close();
+      }
+    }
     this._offline = state.app.offline;
     this._searchParams = state.app.searchParams;
     this._snackbarOpened = state.app.snackbarOpened;

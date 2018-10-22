@@ -15,25 +15,21 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 class PsrRouterRouteDirections extends PsrRouterRouteEntry {
-  _renderRouteEntryContent() {
-    // TODO
-    return undefined;
-  }
-
-  _renderRouteEntryStyle() {
-    // TODO
-    return undefined;
-  }
-
-  static get properties() {
-    return {
-      // TODO
+  _renderPopupContent() {
+    if (super.routeEntry.info.description) {
+      var description = super.routeEntry.info.description;
+      description = description.replace(/\[\[(.*?)\]\]/g, "TODO: <img src='$1'></img>");
+      console.log(description);
+      return html`
+          <div style="white-space: pre-wrap;">${description}</div>
+        `;
+    } else {
+      return undefined;
     }
-  };
+  }
 
   constructor(routeEntry=undefined) {
     super(routeEntry);
-    // TODO
   }
 }
 

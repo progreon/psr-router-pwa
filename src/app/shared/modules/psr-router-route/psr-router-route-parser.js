@@ -13,7 +13,7 @@ import * as Model from 'SharedModules/psr-router-model';
 import * as Util from 'SharedModules/psr-router-util';
 import * as Route from 'SharedModules/psr-router-route';
 
-function getEntryLines(lines, startLine=0) {
+export function GetEntryLines(lines, startLine=0) {
   if (lines.length >= startLine) {
     var depth = lines[startLine].depth;
     var endLine = startLine;
@@ -34,7 +34,7 @@ function getEntryLines(lines, startLine=0) {
 export function GetEntryListFromLines(parent, lines, startLine=0) {
   var entries = [];
   while (startLine < lines.length) {
-    var sublines = getEntryLines(lines, startLine);
+    var sublines = GetEntryLines(lines, startLine);
     var i = sublines[0].line.indexOf(": ");
     var type = sublines[0].line.substring(0, i).toUpperCase();
     switch (type) {
@@ -117,7 +117,7 @@ export function ParseRouteText(routeText) {
           throw new Util.RouterError("A game must be defined before the route definition!", "Parser Error");
         }
         linesToParse[currLine].line = linesToParse[currLine].line.substring(i + 2);
-        var lines = getEntryLines(linesToParse, currLine);
+        var lines = GetEntryLines(linesToParse, currLine);
         route = Route.Route.newFromRouteFileLines(game, lines);
         currLine += lines.length;
         break;

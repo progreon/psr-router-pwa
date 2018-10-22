@@ -2,7 +2,7 @@
 
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
-import { RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon } from 'SharedModules/psr-router-route';
+import { RouteEntryInfo, RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon } from 'SharedModules/psr-router-route';
 import { GetEntryListFromLines } from './psr-router-route-parser';
 
 /**
@@ -15,14 +15,13 @@ import { GetEntryListFromLines } from './psr-router-route-parser';
 class RouteSection extends RouteEntry {
   /**
    *
-   * @param {Game}          game              The Game object this route entry uses.
-   * @param {string}        [title=""]        A title for this entry.
-   * @param {string}        [description=""]  A description for this entry.
-   * @param {Location}      [location]        The location in the game where this entry occurs.
-   * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
+   * @param {Game}            game            The Game object this route entry uses.
+   * @param {RouteEntryInfo}  info            The info for this entry.
+   * @param {Location}        [location]      The location in the game where this entry occurs.
+   * @param {RouteEntry[]}    [children=[]]   The child entries of this entry.
    */
-  constructor(game, title="", description="", location=undefined, children=[]) {
-    super(game, title, description, location, children);
+  constructor(game, info, location=undefined, children=[]) {
+    super(game, info, location, children);
   }
 
   static getEntryType() {
@@ -79,56 +78,59 @@ class RouteSection extends RouteEntry {
   }
 
   _addEntry(entry) {
-    super._addEntry(entry);
     entry.addObserver(this._childChanged.bind(this));
+    super._addEntry(entry);
+    return entry;
   }
 
   /**
    * Add a new battle entry.
-   * @param {string}        entryString       TEMP
-   * @param {string}        [title=""]        A title for this entry.
-   * @param {string}        [description=""]  A description for this entry.
-   * @param {Location}      [location]        The location in the game where this entry occurs.
+   * @param {string}        entryString     TEMP
+   * @param {string}        [title=""]      A title for this entry.
+   * @param {string}        [summary=""]    A summary for this entry.
+   * @param {Location}      [location]      The location in the game where this entry occurs.
    * @returns {RouteBattle} The added entry.
    * @todo
    */
-  addNewBattle(entryString, title="", description="", location=undefined) {
-    return this._addEntry(new RouteBattle(this.game, entryString, title, description, undefined, undefined, location ? location : this._location));
+  addNewBattle(entryString, title="", summary="", location=undefined) {
+    return this._addEntry(new RouteBattle(this.game, entryString, new RouteEntryInfo(title, summary), location ? location : this._location));
   }
 
   /**
    * Add new directions.
-   * @param {string}        description       A description for this entry.
+   * @param {string}        summary       The directions summary.
+   * @param {string}        [description=""]    A long description.
+   * @param {string}        [imageUrl=""]     A link to an image (e.g. imgur).
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @returns {RouteSection} The added entry.
    */
-  addNewDirections(description, location=undefined) {
-    return this._addEntry(new RouteDirections(this.game, description, location ? location : this._location));
+  addNewDirections(summary, description="", imageUrl="", location=undefined) {
+    return this._addEntry(new RouteDirections(this.game, new RouteEntryInfo("", summary, description, imageUrl ? [imageUrl] : []), location ? location : this._location));
   }
 
   /**
    * Add a new child entry.
    * @param {string}        [title=""]        A title for this entry.
-   * @param {string}        [description=""]  A description for this entry.
+   * @param {string}        [summary=""]      A summary for this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
    * @returns {RouteEntry} The added entry.
    */
-  addNewEntry(title="", description="", location=undefined, children=[]) {
-    return this._addEntry(new RouteEntry(this.game, title, description, location ? location : this._location, children));
+  addNewEntry(title="", summary="", location=undefined, children=[]) {
+    return this._addEntry(new RouteEntry(this.game, new RouteEntryInfo(title, summary), location ? location : this._location, children));
   }
 
   /**
    * Add a new pokemon entry.
    * @param {string}        entryString       TEMP
    * @param {string}        [title=""]        A title for this entry.
-   * @param {string}        [description=""]  A description for this entry.
+   * @param {string}        [summary=""]      A summary for this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @returns {RouteGetPokemon} The added entry.
    * @todo
    */
-  addNewGetPokemon(entryString, title="", description="", location=undefined) {
-    return this._addEntry(new RouteGetPokemon(this.game, entryString, title, description, undefined, undefined, location ? location : this._location));
+  addNewGetPokemon(entryString, title="", summary="", location=undefined) {
+    return this._addEntry(new RouteGetPokemon(this.game, entryString, new RouteEntryInfo(title, summary), undefined, undefined, location ? location : this._location));
   }
 
   /**
@@ -140,7 +142,7 @@ class RouteSection extends RouteEntry {
    * @returns {RouteSection} The added entry.
    */
   addNewSection(title, description="", location=undefined, children=[]) {
-    return this._addEntry(new RouteSection(this.game, title, description, location ? location : this._location, children));
+    return this._addEntry(new RouteSection(this.game, new RouteEntryInfo(title, description), location ? location : this._location, children));
   }
 
   static newFromRouteFileLines(parent, lines) {

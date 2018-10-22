@@ -79,6 +79,7 @@
     "@polymer/paper-toast": "^3.0.1",
     "@polymer/polymer": "^3.0.2",
     "@vaadin/vaadin-button": "^2.1.0",
+    "@vaadin/vaadin-dialog": "^2.2.0-beta1",
     "@vaadin/vaadin-item": "^2.1.0",
     "@vaadin/vaadin-list-box": "^1.1.0",
     "@webcomponents/webcomponentsjs": "^2.0.2",

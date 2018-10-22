@@ -15,16 +15,16 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 class PsrRouterRouteBattle extends PsrRouterRouteEntry {
-  _renderRouteEntryContent() {
+  _renderExpandingContent() {
     // TODO
     return html`
-      ${super.routeEntry?super.routeEntry.entryString:""}
+      <style>
+        .red {
+          color: red;
+        }
+      </style>
+      <div class="red">${super.routeEntry?super.routeEntry.entryString:""}</div>
     `;
-  }
-
-  _renderRouteEntryStyle() {
-    // TODO
-    return undefined;
   }
 
   static get properties() {

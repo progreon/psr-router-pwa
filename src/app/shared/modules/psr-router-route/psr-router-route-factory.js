@@ -22,7 +22,7 @@ export function GetDummyRoute(game) {
       srPallet.addNewGetPokemon("#squirtle:5", "", "Get Squirtle");
       srPallet.addNewDirections("Your rival will stop you for a battle.");
       srPallet.addNewBattle("rival1", "Rival 1", "Tail Whip x1-2, then Tackle until it faints.");
-      srPallet.addNewDirections("Head out of the lab, and north to Route 1");
+      srPallet.addNewDirections("Head out of the lab, and north to Route 1", "Here there can be a really, really long explanation on how to walk from the lab to route 1, getting the parcel, going back to oak and giving him the parcel.\nAlso with an image: [[https://i.imgur.com/qayAQtA.jpg]]\nAfter this you will get your pokemon and live happily ever after :D");
     var srParcel = route.addNewSection("Getting the Parcel to Oak");
       var srR1 = srParcel.addNewSection("Route 1");
         srR1.addNewEntry("Encounter", "You want to defeat an encounter here so that you have enough experience to get Lvl.8 at the Bug Catcher fight later. Only attempt to kill low level pokemon as higher levels take longer to kill.");

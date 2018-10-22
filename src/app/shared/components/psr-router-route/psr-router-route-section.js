@@ -18,7 +18,7 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 export class PsrRouterRouteSection extends PsrRouterRouteEntry {
-  _renderRouteEntryChildren() {
+  _renderExpandingContent() {
     var children = super.routeEntry ? super.routeEntry.getChildren() : [];
     var childElements = [];
     for (var i = 0; i < children.length; i++) {
@@ -26,9 +26,6 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
         childElements.push(html`<hr />`);
 
       switch (children[i].constructor.getEntryType()) {
-        // case "ENTRY":
-        //   blabla;
-        //   break;
         case Route.RouteBattle.getEntryType():
           childElements.push(html`<psr-router-route-battle id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-battle>`);
           break;
@@ -46,19 +43,15 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
           childElements.push(html`<psr-router-route-entry id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-entry>`);
       }
     }
-    return html`
-      ${childElements}
-    `;
-  }
-
-  _renderRouteEntryContent() {
-    // TODO
-    return undefined;
-  }
-
-  _renderRouteEntryStyle() {
-    // TODO
-    return undefined;
+    if (childElements.length > 0) {
+      return html`
+          <style>
+          </style>
+          ${childElements}
+        `;
+    } else {
+      return undefined;
+    }
   }
 
   static get properties() {
@@ -69,6 +62,7 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
 
   constructor(routeEntry=undefined) {
     super(routeEntry);
+    super.hideContent = false;
     // TODO
   }
 }

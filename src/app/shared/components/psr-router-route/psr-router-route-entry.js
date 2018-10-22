@@ -5,58 +5,59 @@ import { LitElement, html } from '@polymer/lit-element';
 import * as Route from 'SharedModules/psr-router-route';
 
 // Image imports for this element
-import { angleDownIcon, angleUpIcon, circleIcon } from 'Shared/my-icons';
+import { angleDownIcon, angleUpIcon, infoCircle } from 'Shared/my-icons';
 
 // These are the elements needed by this element.
-// import '@vaadin/vaadin-item/vaadin-item';
 import '@vaadin/vaadin-item/theme/material/vaadin-item';
+import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 export class PsrRouterRouteEntry extends LitElement {
-  _renderRouteEntryChildren(props) {
+  _renderPopupContent() {
     return undefined;
   }
 
-  _renderRouteEntryContent(props) {
-    return undefined;
-  }
-
-  _renderRouteEntryStyle(props) {
+  _renderExpandingContent() {
     return undefined;
   }
 
   render() {
-    var icon;
-    if (this.routeEntry && this.routeEntry._children.length > 0) {
-      icon = this.hideChildren ? angleDownIcon : angleUpIcon;
-    }
+    const expandingDOM = this._renderExpandingContent();
+    const popupDOM = this._renderPopupContent();
+
+    var icon = this.hideContent ? angleDownIcon : angleUpIcon;
 
     return html`
       ${AppStyles}
       <style>
+        .buttons {
+          display: flex;
+          align-items: center;
+        }
         .header {
           display: flex;
           justify-content: space-between;
         }
         .icon {
-          padding: 0px 10px 0px 0px;
+          padding-right: 5px;
           align-self: center;
         }
         .icon > svg {
           width: 12px;
           height: 12px;
         }
+        .icon.expand {
+          padding: 0px 0px 0px 5px;
+        }
         .entry {
           align-self: center;
+          flex-grow: 1;
         }
-        .content {
-          padding-left: 20px;
-        }
-        #children {
-          padding-left: 20px;
+        #expand {
+          display: ${expandingDOM ? "flex" : "none"};
           height: auto;
           overflow: hidden;
           -webkit-transition: height 0.3s ease-out;
@@ -64,21 +65,31 @@ export class PsrRouterRouteEntry extends LitElement {
           -o-transition: height 0.3s ease-out;
           transition: height 0.3s ease-out;
         }
+        .content {
+          width: 100%;
+          margin-left: 10px;
+        }
       </style>
-      ${this._renderRouteEntryStyle()}
-      <div class="header" @click=${this._onClick}>
-        <vaadin-item class="entry">
-          <div><strong>${this.routeEntry?this.routeEntry.title:""}</strong></div>
-          <div>${this.routeEntry?this.routeEntry.description:""}</div>
+      <div class="buttons">
+        <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupDOM}">${infoCircle}</div>
+      </div>
+      <div class="header">
+        <vaadin-item class="entry" @click="${this._onClick}">
+          <div><strong>${this.routeEntry?this.routeEntry.info.title:""}</strong></div>
+          <div>${this.routeEntry?this.routeEntry.info.summary:""}</div>
         </vaadin-item>
-        <div class="icon" ?hidden="${icon == undefined}">${icon}</div>
+        <div class="icon expand" @click="${this._onClick}" ?hidden="${!expandingDOM}">${icon}</div>
       </div>
-      <div class="content">
-        ${this._renderRouteEntryContent()}
+      <div id="expand">
+        <div class="content">
+          ${expandingDOM}
+        </div>
       </div>
-      <div id="children">
-        ${this._renderRouteEntryChildren()}
-      </div>
+      <vaadin-dialog id="dialog">
+        <template>
+          ${popupDOM}
+        </template>
+      </vaadin-dialog>
     `;
   }
 
@@ -86,48 +97,69 @@ export class PsrRouterRouteEntry extends LitElement {
     return {
       /* The entry object. */
       routeEntry: Object,
-      hideChildren: Boolean
+      hideContent: Boolean
     }
   };
 
   constructor(routeEntry=undefined) {
     super();
-    this.hideChildren = false;
+    this.hideContent = true;
     this.routeEntry = routeEntry;
     this.addEventListener('data-updated', e => console.log('data updated!', e));
   }
 
-  _collapseChildren(children) {
-    var sectionHeight = children.scrollHeight;
-    var elementTransition = children.style.transition;
-    children.style.transition = '';
-    requestAnimationFrame(function() {
-      children.style.height = sectionHeight + 'px';
-      children.style.transition = elementTransition;
-      requestAnimationFrame(function() {
-        children.style.height = 0 + 'px';
-      });
-    });
+  firstUpdated() {
+    var content = this.shadowRoot.getElementById('expand');
+    if (content.innerHTML)
+      if (this.hideContent)
+        this._collapseContent(content);
   }
 
-  _expandChildren(children) {
-    var sectionHeight = children.scrollHeight;
-    children.style.height = sectionHeight + 'px';
-    children.addEventListener('transitionend', function handler(e) {
-      children.removeEventListener('transitionend', handler);
-      children.style.height = null;
-    });
+  _collapseContent(content, animate) {
+    if (animate) {
+      var sectionHeight = content.scrollHeight;
+      var elementTransition = content.style.transition;
+      content.style.transition = '';
+      requestAnimationFrame(function() {
+        content.style.height = sectionHeight + 'px';
+        content.style.transition = elementTransition;
+        requestAnimationFrame(function() {
+          content.style.height = 0 + 'px';
+        });
+      });
+    } else {
+      content.style.height = 0 + 'px';
+    }
+    this.hideContent = true;
+  }
+
+  _expandContent(content, animate) {
+    if (animate) {
+      var sectionHeight = content.scrollHeight;
+      content.style.height = sectionHeight + 'px';
+      content.addEventListener('transitionend', function handler(e) {
+        content.removeEventListener('transitionend', handler);
+        content.style.height = null;
+      });
+    } else {
+      content.style.height = null;
+    }
+    this.hideContent = false;
   }
 
   _onClick(e) {
     e.cancelBubble = true;
-    var children = this.shadowRoot.getElementById('children');
-    if (this.hideChildren) {
-      this._expandChildren(children);
-    } else {
-      this._collapseChildren(children);
-    }
-    this.hideChildren = !this.hideChildren;
+    var content = this.shadowRoot.getElementById('expand');
+    if (content.innerHTML)
+      if (this.hideContent)
+        this._expandContent(content, true);
+      else
+        this._collapseContent(content, true);
+  }
+
+  _openDialog() {
+    var dialog = this.shadowRoot.getElementById("dialog");
+    dialog.opened = true;
   }
 }
 

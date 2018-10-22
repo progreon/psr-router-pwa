@@ -56,6 +56,13 @@ ${AppColors}
     font-size: 14px;
   }
 
+  pre {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    margin: 0;
+  }
+
   h1 {
     font-size: 36px;
     font-weight: 400;
