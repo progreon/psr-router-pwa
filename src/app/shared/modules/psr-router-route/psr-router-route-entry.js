@@ -37,6 +37,18 @@ class RouteEntry {
      */
     this._children = children;
     //// OTHERS ////
+    /** @type {RouterMessage[]} */
+    this.messages = [];
+    /**
+     * @type {Boolean}
+     * @protected
+     */
+    this._eventsEnabled = true;
+    /**
+     * @type {Function[]}
+     * @protected
+     */
+    this._observers = [];
     /**
      * @type {Player}
      * @protected
@@ -47,22 +59,11 @@ class RouteEntry {
      * @protected
      */
     this._playerAfter = undefined;
-    /** @type {RouterMessage[]} */
-    this.messages = [];
   }
 
   /** @returns {string} */
   static getEntryType() {
     return "ENTRY";
-  }
-
-  /**
-   * Notify listeners that the data is updated, to tell them to refresh the displayed data.
-   * @protected
-   * @todo Test!!!
-   */
-  _notifyListeners() {
-    this.dispatchEvent(new CustomEvent('entry-updated', {detail: {entry: this}}));
   }
 
   /**
@@ -116,7 +117,7 @@ class RouteEntry {
    */
   _addEntry(entry) {
     this._children.push(entry);
-    // this._notifyListeners();
+    this._fireDataUpdated();
     return entry;
   }
 
@@ -130,7 +131,7 @@ class RouteEntry {
     if (this._location != location) {
       this._location = location;
       //TODO: this.wildEncounters.reset();
-      this._notifyListeners();
+      this._fireDataUpdated();
     }
   }
 
@@ -159,6 +160,53 @@ class RouteEntry {
     this.messages.forEach(m => {if (m.type.priority < type.priority) type = m.type});
     return type;
   }
+
+  //// OBSERVER STUFF ////
+
+  /**
+   * Add a listener function to this entry.
+   * Hint: .bind(this)
+   *
+   * @param {Function}  callback
+   */
+  addObserver(callback) {
+    this._observers.push(callback);
+  }
+
+  /**
+  * Notify listeners that the data is updated, to tell them to refresh the displayed data.
+  * @protected
+  * @todo Test!!!
+  */
+  _fireDataUpdated() {
+    this._triggerObservers("data");
+  }
+
+  /**
+   * Notify listeners that the player is updated, to retrigger the apply call.
+   * @protected
+   * @todo Test!!!
+   */
+  _firePlayerUpdated() {
+    this._triggerObservers("player");
+  }
+
+  /**
+   *
+   * @param {String}  type
+   * @protected
+   * @todo Test!!!
+   */
+  _triggerObservers(type) {
+    if (this._eventsEnabled) {
+      var athis = this;
+      this._observers.forEach(function(f) {
+        f(athis, type);
+      });
+    }
+  }
+
+  //// STRINGS ////
 
   /** @returns {string} */
   toString() {

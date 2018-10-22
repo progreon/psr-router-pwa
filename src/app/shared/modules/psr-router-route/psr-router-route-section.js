@@ -29,8 +29,58 @@ class RouteSection extends RouteEntry {
     return "S";
   }
 
+  /**
+   * @todo TESTING!!
+   *
+   * @param {RouteEntry}  [child]
+   */
+  _applyAfterChild(child) {
+    var currChildIdx = 0;
+    if (child) {
+      while (currChildIdx < this._children.length && this._children[currChildIdx] !== child) {
+        currChildIdx++;
+      }
+    } else if (this._children.length > 0) {
+      this._children[0].apply(super.getPlayerAfter());
+    }
+    while (currChildIdx + 1 < this._children.length) {
+      this._children[currChildIdx + 1].apply(this._children[currChildIdx].getPlayerAfter());
+      currChildIdx++;
+    }
+    this._fireDataUpdated();
+    return this.getPlayerAfter();
+  }
+
+  /**
+   * Only for use during an update event!
+   *
+   * @param {RouteEntry}  child
+   * @param {String}      type  data, player, ...
+   * @private
+   */
+  _childChanged(child, type) {
+    if (type === "player") {
+      this._applyAfterChild(child);
+      this._firePlayerUpdated();
+    }
+  }
+
   apply(player) {
-    return super.apply(player);
+    super.apply(player);
+    return this._applyAfterChild();
+  }
+
+  getPlayerAfter() {
+    if (this._children.length > 0) {
+      return this._children[this._children.length - 1].getPlayerAfter();
+    } else {
+      return super.getPlayerAfter();
+    }
+  }
+
+  _addEntry(entry) {
+    super._addEntry(entry);
+    entry.addObserver(this._childChanged.bind(this));
   }
 
   /**
@@ -43,7 +93,7 @@ class RouteSection extends RouteEntry {
    * @todo
    */
   addNewBattle(entryString, title="", description="", location=undefined) {
-    return super._addEntry(new RouteBattle(this.game, entryString, title, description, undefined, undefined, location ? location : this._location));
+    return this._addEntry(new RouteBattle(this.game, entryString, title, description, undefined, undefined, location ? location : this._location));
   }
 
   /**
@@ -53,7 +103,7 @@ class RouteSection extends RouteEntry {
    * @returns {RouteSection} The added entry.
    */
   addNewDirections(description, location=undefined) {
-    return super._addEntry(new RouteDirections(this.game, description, location ? location : this._location));
+    return this._addEntry(new RouteDirections(this.game, description, location ? location : this._location));
   }
 
   /**
@@ -65,7 +115,7 @@ class RouteSection extends RouteEntry {
    * @returns {RouteEntry} The added entry.
    */
   addNewEntry(title="", description="", location=undefined, children=[]) {
-    return super._addEntry(new RouteEntry(this.game, title, description, location ? location : this._location, children));
+    return this._addEntry(new RouteEntry(this.game, title, description, location ? location : this._location, children));
   }
 
   /**
@@ -78,7 +128,7 @@ class RouteSection extends RouteEntry {
    * @todo
    */
   addNewGetPokemon(entryString, title="", description="", location=undefined) {
-    return super._addEntry(new RouteGetPokemon(this.game, entryString, title, description, undefined, undefined, location ? location : this._location));
+    return this._addEntry(new RouteGetPokemon(this.game, entryString, title, description, undefined, undefined, location ? location : this._location));
   }
 
   /**
@@ -90,7 +140,7 @@ class RouteSection extends RouteEntry {
    * @returns {RouteSection} The added entry.
    */
   addNewSection(title, description="", location=undefined, children=[]) {
-    return super._addEntry(new RouteSection(this.game, title, description, location ? location : this._location, children));
+    return this._addEntry(new RouteSection(this.game, title, description, location ? location : this._location, children));
   }
 
   static newFromRouteFileLines(parent, lines) {
