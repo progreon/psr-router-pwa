@@ -46,6 +46,11 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
     if (childElements.length > 0) {
       return html`
           <style>
+            hr {
+              height: 1px;
+              border: 0;
+              border-top: 1px solid var(--app-color-black);
+            }
           </style>
           ${childElements}
         `;

@@ -71,30 +71,53 @@ class PsrRouterApp extends connect(store)(LitElement) {
           --app-dark-text-color: var(--app-secondary-color);
           --app-light-text-color: var(--app-color-white);
 
-          --app-header-background-color: var(--app-color-white);
-          --app-header-text-color: var(--app-dark-text-color);
+          --app-header-background-color: var(--app-color-blue);
+          --app-header-text-color: var(--app-light-text-color);
 
-          --app-header-menu-background-color: var(--app-color-slate);
+          --app-header-menu-background-color: var(--app-color-yellow);
           --app-header-menu-text-color: var(--app-dark-text-color);
           --app-header-menu-selected-color: var(--app-dark-text-color);
 
-          --app-drawer-background-color: var(--app-color-white);
+          --app-drawer-background-color: var(--app-color-yellow);
           --app-drawer-text-color: var(--app-dark-text-color);
           --app-drawer-selected-color: var(--app-dark-text-color);
 
-          --app-drawer-header-background-color: var(--app-color-polymer-blue);
+          --app-drawer-header-background-color: var(--app-color-blue);
           --app-drawer-header-text-color: var(--app-light-text-color);
 
           --app-footer-text-color: var(--app-color-white);
-          --app-footer-background-color: var(--app-color-polymer-blue);
+          --app-footer-background-color: var(--app-color-blue);
+
+          --app-background-color: var(--app-color-white);
+          --app-main-background-color: var(--app-color-white);
 
           color: var(--app-dark-text-color);
+
+          /* DARK MODE */
+          /* --app-header-background-color: var(--app-color-black);
+          --app-header-text-color: var(--app-color-yellow);
+          --app-header-menu-background-color: var(--app-color-black);
+          --app-header-menu-text-color: var(--app-color-blue);
+          --app-header-menu-selected-color: var(--app-color-blue);
+          --app-drawer-background-color: var(--app-color-black);
+          --app-drawer-text-color: var(--app-color-blue);
+          --app-drawer-selected-color: var(--app-color-blue);
+          --app-drawer-header-background-color: var(--app-color-black);
+          --app-drawer-header-text-color: var(--app-color-yellow);
+          --app-footer-text-color: var(--app-color-yellow);
+          --app-footer-background-color: var(--app-color-black);
+          --app-background-color: var(--app-color-blue);
+          --app-main-background-color: var(--app-color-blue); */
 
           /* SIZES */
           --app-header-height: var(--app-grid-7x);
           --app-drawer-width: 256px;
           /* --app-footer-height: var(--app-grid-7x); */
           --app-footer-height: var(--app-grid-3x);
+        }
+
+        .header-layout {
+          background-color: var(--app-background-color);
         }
 
         .drawer {
@@ -126,7 +149,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
         .drawer-list > a[selected] {
           color: var(--app-drawer-selected-color);
-          border-bottom: 1px solid var(--app-drawer-selected-color);
+          /* border-bottom: 1px solid var(--app-drawer-selected-color); */
+          font-weight: bold;
         }
 
         .toolbar {
@@ -187,6 +211,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
         /* Workaround for IE11 displaying <main> as inline */
         main {
           display: block;
+          background-color: var(--app-main-background-color);
         }
 
         .main-content {
@@ -286,9 +311,9 @@ class PsrRouterApp extends connect(store)(LitElement) {
                 You are now ${this._offline ? 'offline' : 'online'}.</snack-bar>
           </main>
 
-          <footer class="footer">
+          <!-- footer class="footer">
             [TODO: shortcuts]
-          </footer>
+          </footer -->
         </app-header-layout>
       </app-drawer-layout>
 

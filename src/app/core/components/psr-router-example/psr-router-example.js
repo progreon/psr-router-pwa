@@ -15,12 +15,19 @@ class PsrRouterExample extends PsrRouterPage {
   _render() {
     return html`
       ${AppStyles}
+      <style>
+        /* ugly solution, I know... */
+        /* .padding {
+          padding-bottom: var(--app-grid-3x);
+        } */
+      </style>
       <input type="file" id="selFile" hidden>
       <div class="buttons">
         <vaadin-button id="export" @click="${this.doExport}">Export to file</vaadin-button>
         <vaadin-button id="import" @click="${this.doImport}">Import file</vaadin-button>
       </div>
       <psr-router-route id="the-route" .routeEntry=${this.route}></psr-router-route>
+      <!-- <div class="padding"></div> -->
     `;
   }
 

@@ -43,6 +43,8 @@ module.exports = (production) => ({
     // field in package.json.
     // By default, your app will be autoprefixed when in production mode
     autoprefix: env.APP_AUTOPREFIX || production,
+
+    version: '0.0.1.SNAPSHOT',
   },
 
   settings: {

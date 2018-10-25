@@ -6,6 +6,7 @@ const config = require('../app.config')(true);
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 module.exports = merge(common(config), {
   mode: 'production',
@@ -24,12 +25,13 @@ module.exports = merge(common(config), {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new FaviconsWebpackPlugin({
-      logo: path.resolve(__dirname, '../../src/polymer-logo.png'),
+      logo: path.resolve(__dirname, '../../icon.png'),
       prefix: 'icons-[hash]/',
       emitStats: true,
       statsFilename: 'iconstats-[hash].json',
       persistentCache: true,
       inject: true,
+      background: '#fafafa',
       title: config.app.name,
       icons: {
         android: true,
@@ -47,6 +49,36 @@ module.exports = merge(common(config), {
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
+    }),
+    new WebpackPwaManifest({
+      name: config.app.name,
+      // short_name: config.app.name,
+      description: config.app.description,
+      background_color: '#ffffff',
+      start_url: '/',
+      ios: true,
+      icons: [
+        {
+          src: path.resolve(__dirname, '../../icon.png'),
+          // sizes: [96, 128, 192, 256, 384, 512],
+          size: '512x512',
+          destination: 'icons/android'
+        },
+        {
+          src: path.resolve(__dirname, '../../icon.png'),
+          // sizes: [96, 128, 192, 256, 384, 512],
+          size: '512x512',
+          destination: 'icons/ios',
+          ios: true
+        },
+        {
+          src: path.resolve(__dirname, '../../icon.png'),
+          // sizes: [96, 128, 192, 256, 384, 512],
+          size: '512x512',
+          destination: 'icons/ios',
+          ios: 'startup'
+        }
+      ]
     })
   ],
   module: {

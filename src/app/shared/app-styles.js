@@ -4,10 +4,12 @@ export const AppColors = html`
 <style>
   :host {
     /* CORPORATE COLORS */
-    --app-color-polymer-blue: #4285f4;
+    --app-color-blue: #1865a9;
+    --app-color-yellow: #ffdd22;
     --app-color-slate: #8c9192;
-    --app-color-white: #ffffff;
-    --app-color-black: #1d1d1b;
+    --app-color-white: #fafafa;
+    /* --app-color-black: #1d1d1b; */
+    --app-color-black: #000000;
     /* PROFILE COLORS */
     --app-color-granite: #3a4448;
     --app-color-fog: #e3e2dd;
