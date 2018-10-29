@@ -60,21 +60,18 @@ module.exports = merge(common(config), {
       icons: [
         {
           src: path.resolve(__dirname, '../../icon.png'),
-          // sizes: [96, 128, 192, 256, 384, 512],
-          size: '512x512',
+          sizes: [96, 128, 192, 256, 384, 512, 1024],
           destination: 'icons/android'
         },
         {
           src: path.resolve(__dirname, '../../icon.png'),
-          // sizes: [96, 128, 192, 256, 384, 512],
-          size: '512x512',
+          sizes: [96, 128, 192, 256, 384, 512, 1024],
           destination: 'icons/ios',
           ios: true
         },
         {
           src: path.resolve(__dirname, '../../icon.png'),
-          // sizes: [96, 128, 192, 256, 384, 512],
-          size: '512x512',
+          sizes: [96, 128, 192, 256, 384, 512, 1024],
           destination: 'icons/ios',
           ios: 'startup'
         }

@@ -30,11 +30,14 @@ class RouteDirections extends RouteEntry {
   _getRouteFileLines(printerSettings) {
     var lines = [this.info.summary];
 
-    var subLines = this.description.split("\n");
-    subLines.forEach(line => {
-      if (line.trim() !== "")
-        lines.push(line.trim());
-    });
+    if (this.info.description) {
+      console.log(this.info.description);
+      var subLines = this.info.description.split("\n");
+      subLines.forEach(line => {
+        if (line.trim() !== "")
+          lines.push("\t" + line.trim());
+      });
+    }
 
     return lines;
   }

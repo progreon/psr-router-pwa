@@ -30,10 +30,10 @@ class RouteBattle extends RouteEntry {
 
 
   _getRouteFileLines(printerSettings) {
-    var str = "";
+    var str = "\t";
     if (this.info.title !== "")
       str += this.info.title +  " :: ";
-    str += this.summary;
+    str += this.info.summary;
     return [this.entryString, str];
   }
 

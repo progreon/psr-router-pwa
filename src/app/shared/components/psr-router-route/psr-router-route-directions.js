@@ -17,12 +17,24 @@ import { AppStyles } from 'Shared/app-styles';
 class PsrRouterRouteDirections extends PsrRouterRouteEntry {
   _renderPopupContent() {
     if (super.routeEntry.info.description) {
+      var dom = [];
       var description = super.routeEntry.info.description;
-      description = description.replace(/\[\[(.*?)\]\]/g, "TODO: <img src='$1'></img>");
-      console.log(description);
-      return html`
-          <div style="white-space: pre-wrap;">${description}</div>
-        `;
+      var is = 0; // istart
+      while (is < description.length) {
+        var i1 = description.indexOf("[[", is);
+        var i2 = i1 >= 0 ? description.indexOf("]]", i1) : -1;
+        if (i2 < 0) {
+          dom.push(html`${description.substring(is)}`);
+          is = description.length;
+        } else {
+          dom.push(html`<div style="white-space: pre-wrap;">${description.substring(is, i1)}</div>`);
+          var img = description.substring(i1 + 2, i2);
+          dom.push(html`<img src="${img}" style="width: 100%;"></img>`);
+          is = i2 + 2;
+        }
+      }
+      console.log(dom);
+      return dom;
     } else {
       return undefined;
     }
