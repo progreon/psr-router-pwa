@@ -25,7 +25,7 @@ export function GetDummyRoute(game) {
       srPallet.addNewDirections("Head out of the lab, and north to Route 1", "Here there can be a really, really long explanation on how to walk from the lab to route 1, getting the parcel, going back to oak and giving him the parcel.\nAlso with an image: [[https://i.imgur.com/qayAQtA.jpg]]\nAfter this you will get your pokemon and live happily ever after :D");
     var srParcel = route.addNewSection("Getting the Parcel to Oak");
       var srR1 = srParcel.addNewSection("Route 1");
-        srR1.addNewEntry("Encounter", "You want to defeat an encounter here so that you have enough experience to get Lvl.8 at the Bug Catcher fight later. Only attempt to kill low level pokemon as higher levels take longer to kill.");
+        srR1.addNewEntry("Encounter", "Defeat an encounter", "You want to defeat an encounter here so that you have enough experience to get Lvl.8 at the Bug Catcher fight later. Only attempt to kill low level pokemon as higher levels take longer to kill.");
         srR1.addNewDirections("Head north through the route to Viridian City.");
       srParcel.addNewDirections("Head straight into the Mart and collect Oak's Parcel. Exit, and head south back to Route 1.");
       srParcel.addNewDirections("Head south, utilizing ledges to avoid as much grass as you can. If you have yet to kill an encounter, take the shorter route through the second-to-last grass patch; otherwise, walk around it.");
@@ -37,17 +37,17 @@ export function GetDummyRoute(game) {
         srViridian1.addNewEntry("Shop", "Buy 3-8 Poke Balls.");
         srViridian1.addNewDirections("Head out of the Mart, and west to Route 22.");
       var srR22 = srNidoran.addNewSection("Route 22");
-        srR22.addNewEntry("Manip", "Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name");
+        srR22.addNewEntry("Manip", "Manip a NidoranM L4", "Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name");
         srR22.addNewDirections("Return to Viridian City and go north, picking up the tree potion, and entering Viridian Forest");
     var srForest = route.addNewSection("Viridian Forest");
       srForest.addNewDirections("Avoid encounters as much as possible by walking on encounterless grass tiles.");
-      srForest.addNewEntry("GetI: Antidote", "Pick up the antidote on the way up.");
-      srForest.addNewEntry("GetI: Potion", "Be at least 10 HP before the Weedle Guy, and pick up the hidden Potion next to him.");
-      srForest.addNewBattle("bug1", "Weedle Guy", "Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion.");
-      srForest.addNewEntry("Swap: 0 1", "After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary.");
+      srForest.addNewEntry("GetI: Antidote", "Get the Antidote", "Pick up the antidote on the way up.");
+      srForest.addNewEntry("GetI: Potion", "Get the Potion", "Be at least 10 HP before the Weedle Guy, and pick up the hidden Potion next to him.");
+      srForest.addNewBattle("bug1", "Weedle Guy", "Tail Whip x2, spam tackle", "If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion.");
+      srForest.addNewEntry("Swap: 0 1", "Swap to Nidoran", "After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary.");
     var srPewter = route.addNewSection("Pewter City");
-      srPewter.addNewBattle("brock :: 0:0 0:1 1:0 1:1", "Brock", "Switch to Squirtle to share exp, use Bubble to kill Geodude and Onix. If Onix uses Bide on the turn you switch in, use Tail Whip twice, then Bubble.");
-      srPewter.addNewEntry("Shop", "Change the battle style option from Shift to Set, and buy 7-10 Potions.");
+      srPewter.addNewBattle("brock :: 0:0 0:1 1:0 1:1", "Brock", "Use switch strats", "Switch to Squirtle to share exp, use Bubble to kill Geodude and Onix. If Onix uses Bide on the turn you switch in, use Tail Whip twice, then Bubble.");
+      srPewter.addNewEntry("Shop", "Do the shopping", "Change the battle style option from Shift to Set, and buy 7-10 Potions.");
 
   return route;
 }

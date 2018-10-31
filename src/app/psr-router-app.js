@@ -217,6 +217,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
         .main-content {
           height: 100%;
           @apply --layout-flex;
+          /* padding: 0px;
+          margin: 0px; */
           overflow: auto;
           overflow-y: scroll;
         }
@@ -311,9 +313,10 @@ class PsrRouterApp extends connect(store)(LitElement) {
                 You are now ${this._offline ? 'offline' : 'online'}.</snack-bar>
           </main>
 
-          <!-- footer class="footer">
-            [TODO: shortcuts]
-          </footer -->
+          <footer class="footer">
+            v${MyAppGlobals.version}
+            <!-- [TODO: shortcuts] -->
+          </footer>
         </app-header-layout>
       </app-drawer-layout>
 

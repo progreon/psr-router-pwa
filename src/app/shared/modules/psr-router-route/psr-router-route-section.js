@@ -92,8 +92,8 @@ class RouteSection extends RouteEntry {
    * @returns {RouteBattle} The added entry.
    * @todo
    */
-  addNewBattle(entryString, title="", summary="", location=undefined) {
-    return this._addEntry(new RouteBattle(this.game, entryString, new RouteEntryInfo(title, summary), location ? location : this._location));
+  addNewBattle(entryString, title="", summary="", description="", location=undefined) {
+    return this._addEntry(new RouteBattle(this.game, entryString, new RouteEntryInfo(title, summary, description), location ? location : this._location));
   }
 
   /**
@@ -116,8 +116,8 @@ class RouteSection extends RouteEntry {
    * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
    * @returns {RouteEntry} The added entry.
    */
-  addNewEntry(title="", summary="", location=undefined, children=[]) {
-    return this._addEntry(new RouteEntry(this.game, new RouteEntryInfo(title, summary), location ? location : this._location, children));
+  addNewEntry(title="", summary="", description="", location=undefined, children=[]) {
+    return this._addEntry(new RouteEntry(this.game, new RouteEntryInfo(title, summary, description), location ? location : this._location, children));
   }
 
   /**
@@ -155,7 +155,7 @@ class RouteSection extends RouteEntry {
         title = line.substring(0, i);
         description = line.substring(i + 4);
       }
-      var routeSection = new RouteSection(parent.game, title, description, parent.getLocation());
+      var routeSection = new RouteSection(parent.game, new RouteEntryInfo(title, description), parent.getLocation());
       var childEntries = GetEntryListFromLines(parent, lines, 1);
       for (var ic = 0; ic < childEntries.length; ic++) {
         routeSection._addEntry(childEntries[ic]);

@@ -31,7 +31,6 @@ class RouteDirections extends RouteEntry {
     var lines = [this.info.summary];
 
     if (this.info.description) {
-      console.log(this.info.description);
       var subLines = this.info.description.split("\n");
       subLines.forEach(line => {
         if (line.trim() !== "")

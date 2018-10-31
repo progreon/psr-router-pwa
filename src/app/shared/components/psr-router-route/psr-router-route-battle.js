@@ -15,7 +15,7 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 class PsrRouterRouteBattle extends PsrRouterRouteEntry {
-  _renderExpandingContent() {
+  _renderPopupContent() {
     // TODO
     return html`
       <style>

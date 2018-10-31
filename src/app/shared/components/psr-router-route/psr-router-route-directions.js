@@ -33,11 +33,14 @@ class PsrRouterRouteDirections extends PsrRouterRouteEntry {
           is = i2 + 2;
         }
       }
-      console.log(dom);
       return dom;
     } else {
       return undefined;
     }
+  }
+
+  _renderExpandingContent() {
+    return undefined;
   }
 
   constructor(routeEntry=undefined) {

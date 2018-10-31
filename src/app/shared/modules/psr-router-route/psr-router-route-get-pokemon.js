@@ -31,11 +31,11 @@ class RouteGetPokemon extends RouteEntry {
   }
 
   _getRouteFileLines(printerSettings) {
-    var str = "";
+    var str = "\t";
     if (this.info.title !== "")
       str += this.info.title +  " :: ";
     str += this.info.summary;
-    return [this.info.entryString, str];
+    return [this.entryString, str];
   }
 
   static newFromRouteFileLines(game, lines) {

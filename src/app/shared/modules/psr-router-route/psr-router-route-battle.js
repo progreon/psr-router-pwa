@@ -3,6 +3,7 @@
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 import { RouteEntryInfo, RouteEntry } from 'SharedModules/psr-router-route';
+import { GetEntryLines } from './psr-router-route-parser';
 
 /**
  * A class representing a route-entry that handles battles.
@@ -34,26 +35,38 @@ class RouteBattle extends RouteEntry {
     if (this.info.title !== "")
       str += this.info.title +  " :: ";
     str += this.info.summary;
-    return [this.entryString, str];
+    var lines = [this.entryString, str];
+
+    if (this.info.description) {
+      var subLines = this.info.description.split("\n");
+      subLines.forEach(line => {
+        if (line.trim() !== "")
+          lines.push("\t" + line.trim());
+      });
+    }
+
+    return lines;
   }
 
   static newFromRouteFileLines(game, lines) {
     if (lines && lines.length > 0 && lines[0].line) {
       var entryString = lines[0].line;
-      var line = "", title = "", summary = "";
-      if (lines.length > 1) {
-        var line = lines[1].line;
+      var line = "", title = "", summary = "", description = "";
+      var entryLines = GetEntryLines(lines);
+      if (entryLines.length > 1) {
+        var line = entryLines[1].line;
         summary = line;
         var i = line.indexOf(" :: ");
         if (i >= 0) {
           title = line.substring(0, i);
           summary = line.substring(i + 4);
         }
-        if (lines.length > 2) {
-          // TODO: throw exception
-        }
       }
-      var info = new RouteEntryInfo(title, summary);
+      for (var i = 2; i < entryLines.length; i++) {
+        description += entryLines[i].line + "\n";
+      }
+      description.trim();
+      var info = new RouteEntryInfo(title, summary, description);
       return new RouteBattle(game, entryString, info);
     } else {
       // TODO: throw exception

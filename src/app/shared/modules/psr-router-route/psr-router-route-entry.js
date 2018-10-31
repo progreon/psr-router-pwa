@@ -3,6 +3,7 @@
 // imports
 import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
 import { RouteEntryInfo } from 'SharedModules/psr-router-route';
+import { GetEntryLines } from './psr-router-route-parser';
 
 /**
  * A class representing a route-entry.
@@ -260,7 +261,17 @@ class RouteEntry {
     var str = this.info.title;
     if (this.info.summary !== "")
       str += " :: " + this.info.summary;
-    return [str];
+    var lines = [str];
+
+    if (this.info.description) {
+      var subLines = this.info.description.split("\n");
+      subLines.forEach(line => {
+        if (line.trim() !== "")
+          lines.push("\t" + line.trim());
+      });
+    }
+
+    return lines;
   }
 
   /**
@@ -281,7 +292,13 @@ class RouteEntry {
         title = line.substring(0, i);
         summary = line.substring(i + 4);
       }
-      var info = new RouteEntryInfo(title, summary);
+      var description = "";
+      var entryLines = GetEntryLines(lines);
+      for (var i = 1; i < entryLines.length; i++) {
+        description += entryLines[i].line + "\n";
+      }
+      description.trim();
+      var info = new RouteEntryInfo(title, summary, description);
       return new RouteEntry(parent.game, info, parent.getLocation());
     } else {
       // TODO: throw exception

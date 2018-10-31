@@ -21,7 +21,27 @@ export class PsrRouterRouteEntry extends LitElement {
   }
 
   _renderExpandingContent() {
-    return undefined;
+    if (this.routeEntry.info.description) {
+      var dom = [];
+      var description = this.routeEntry.info.description;
+      var is = 0; // istart
+      while (is < description.length) {
+        var i1 = description.indexOf("[[", is);
+        var i2 = i1 >= 0 ? description.indexOf("]]", i1) : -1;
+        if (i2 < 0) {
+          dom.push(html`${description.substring(is)}`);
+          is = description.length;
+        } else {
+          dom.push(html`<div style="white-space: pre-wrap;">${description.substring(is, i1)}</div>`);
+          var img = description.substring(i1 + 2, i2);
+          dom.push(html`<img src="${img}" style="width: 100%;"></img>`);
+          is = i2 + 2;
+        }
+      }
+      return dom;
+    } else {
+      return undefined;
+    }
   }
 
   render() {
@@ -69,6 +89,23 @@ export class PsrRouterRouteEntry extends LitElement {
           width: 100%;
           margin-left: 10px;
         }
+
+        .menu-options {
+          list-style: none;
+          margin: 0px;
+          padding: 0px;
+        }
+
+        .menu-options > .menu-option {
+          font-weight: 500;
+          font-size: 14px;
+          padding: 10px 10px;
+          cursor: pointer;
+        }
+
+        .menu-options > .menu-option:hover {
+          background: rgba(0, 0, 0, 0.2);
+        }
       </style>
       <div class="buttons">
         <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupDOM}">${infoCircle}</div>
@@ -90,6 +127,17 @@ export class PsrRouterRouteEntry extends LitElement {
           ${popupDOM}
         </template>
       </vaadin-dialog>
+      <vaadin-dialog id="menu" style="padding: 0px;">
+        <template>
+          <ul class="menu-options">
+            <li class="menu-option">Edit...</li>
+            <li class="menu-option">Copy</li>
+            <li class="menu-option">Paste...</li>
+            <li class="menu-option">New...</li>
+            <li class="menu-option">Delete</li>
+          </ul>
+        </template>
+      </vaadin-dialog>
     `;
   }
 
@@ -106,6 +154,16 @@ export class PsrRouterRouteEntry extends LitElement {
     this.hideContent = true;
     this.routeEntry = routeEntry;
     this.addEventListener('data-updated', e => console.log('data updated!', e));
+    this.addEventListener("contextmenu", this._showMenu.bind(this));
+  }
+
+  _showMenu(e) {
+    e.preventDefault();
+    e.cancelBubble = true;
+    var menu = this.shadowRoot.getElementById("menu");
+    menu.style.left = e.pageX;
+    menu.style.top = e.pageY;
+    menu.opened = true;
   }
 
   firstUpdated() {
