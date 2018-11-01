@@ -20,10 +20,13 @@ class RouteGetPokemon extends RouteEntry {
    * @param {Battler[]}       [choices=[]]      The different battlers to choose from.
    * @param {number}          [preference=0]    The preferred choise.
    * @param {Location}        [location]        The location in the game where this entry occurs.
+   * @todo choices, preference, ...
    */
   constructor(game, entryString, info=undefined, choices=[], preference=0, location=undefined) {
     super(game, info, location);
     this.entryString = entryString;
+    this._choices = choices;
+    this._preference = preference;
   }
 
   static getEntryType() {
@@ -59,6 +62,19 @@ class RouteGetPokemon extends RouteEntry {
     } else {
       // TODO: throw exception
     }
+  }
+
+  getJSONObject() {
+    var obj = super.getJSONObject();
+    obj.entryString = this.entryString;
+    obj.choices = this._choices;
+    obj.preference = this._preference;
+    return obj;
+  }
+
+  static newFromJSONObject(game, obj) {
+    var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
+    return new RouteGetPokemon(game, obj.entryString, info, obj.choices, obj.preference, obj.location);
   }
 }
 

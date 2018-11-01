@@ -19,6 +19,7 @@ class RouteSection extends RouteEntry {
    * @param {RouteEntryInfo}  info            The info for this entry.
    * @param {Location}        [location]      The location in the game where this entry occurs.
    * @param {RouteEntry[]}    [children=[]]   The child entries of this entry.
+   * @todo children in here and not in entry
    */
   constructor(game, info, location=undefined, children=[]) {
     super(game, info, location, children);
@@ -104,8 +105,8 @@ class RouteSection extends RouteEntry {
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @returns {RouteSection} The added entry.
    */
-  addNewDirections(summary, description="", imageUrl="", location=undefined) {
-    return this._addEntry(new RouteDirections(this.game, new RouteEntryInfo("", summary, description, imageUrl ? [imageUrl] : []), location ? location : this._location));
+  addNewDirections(summary, description="", location=undefined) {
+    return this._addEntry(new RouteDirections(this.game, new RouteEntryInfo("", summary, description), location ? location : this._location));
   }
 
   /**
@@ -164,6 +165,40 @@ class RouteSection extends RouteEntry {
     } else {
       // TODO: throw exception
     }
+  }
+
+  getJSONObject() {
+    var obj = super.getJSONObject();
+    obj.entries = [];
+    this._children.forEach(c => obj.entries.push(c.getJSONObject()));
+    return obj;
+  }
+
+  static newFromJSONObject(game, obj) {
+    var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
+    var children = [];
+    obj.entries.forEach(e => {
+      var type = e.type;
+      switch (type) {
+        case RouteBattle.getEntryType().toUpperCase():
+          entries.push(RouteBattle.newFromJSONObject(game, e));
+          break;
+        case RouteEntry.getEntryType().toUpperCase():
+          entries.push(RouteEntry.newFromJSONObject(game, e));
+          break;
+        case RouteGetPokemon.getEntryType().toUpperCase():
+          entries.push(RouteGetPokemon.newFromJSONObject(game, e));
+          break;
+        case RouteSection.getEntryType().toUpperCase():
+          entries.push(RouteSection.newFromJSONObject(game, e));
+          break;
+        case RouteDirections.getEntryType().toUpperCase():
+        default:
+          entries.push(RouteDirections.newFromJSONObject(game, e));
+      }
+    });
+
+    return new RouteSection(game, info, obj.location, children);
   }
 }
 

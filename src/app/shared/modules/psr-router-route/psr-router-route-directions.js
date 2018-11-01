@@ -55,6 +55,15 @@ class RouteDirections extends RouteEntry {
       // TODO: throw exception
     }
   }
+
+  getJSONObject() {
+    return super.getJSONObject();
+  }
+
+  static newFromJSONObject(game, obj) {
+    var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
+    return new RouteDirections(game, info, obj.location);
+  }
 }
 
 export { RouteDirections };

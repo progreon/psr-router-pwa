@@ -9,15 +9,13 @@ class RouteEntryInfo {
    * @param {String}    [description=""]
    * @param {String[]}  [images=[]]
    */
-  constructor(title="", summary="", description="", images=[]) {
+  constructor(title="", summary="", description="") {
     /** @type {String} */
     this.title = title;
     /** @type {String} */
     this.summary = summary;
     /** @type {String} */
     this.description = description;
-    /** @type {String[]} */
-    this.images = images;
   }
 
   /** @returns {string} */

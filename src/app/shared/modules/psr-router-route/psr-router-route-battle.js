@@ -72,6 +72,17 @@ class RouteBattle extends RouteEntry {
       // TODO: throw exception
     }
   }
+
+  getJSONObject() {
+    var obj = super.getJSONObject();
+    obj.entryString = this.entryString;
+    return obj;
+  }
+
+  static newFromJSONObject(game, obj) {
+    var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
+    return new RouteBattle(game, obj.entryString, info, obj.location);
+  }
 }
 
 export { RouteBattle };

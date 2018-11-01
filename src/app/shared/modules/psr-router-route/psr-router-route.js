@@ -21,6 +21,7 @@ class Route extends RouteSection {
    * @param {string}        [summary=""]      A summary for this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
+   * @todo -extends, +rootSection, +game, +otherSettings
    */
   constructor(game, title, summary="", location=undefined, children=[]) {
     super(game, new RouteEntryInfo(title, summary), location, children);
@@ -40,7 +41,8 @@ class Route extends RouteSection {
       var isFileSaverSupported = !!new Blob;
       if (isFileSaverSupported) {
         var blob = new Blob(["Game: " + this.game.info.key, "\r\n\r\n", text], {type: "text/plain;charset=utf-8"});
-        saveAs(blob, filename);
+        // saveAs(blob, filename);
+        console.log(this.getJSONString(null));
       } else {
         window.alert("Exporting to a file is not supported for this browser...");
       }
@@ -76,6 +78,20 @@ class Route extends RouteSection {
     } else {
       // TODO: throw exception
     }
+  }
+
+  getJSONString(printerSettings) {
+    // TODO: handle printerSettings
+    return JSON.stringify(this.getJSONObject(), null, "\t");
+  }
+
+  getJSONObject() {
+    return super.getJSONObject();
+  }
+
+  static newFromJSONObject(game, obj) {
+    var rs = super.newFromJSONObject(game, obj); // TODO: -obj, +obj.root
+    return new Route(rs.game, rs.info.title, rs.info.summary, rs._location, rs._children); // TODO: rs.info
   }
 }
 
