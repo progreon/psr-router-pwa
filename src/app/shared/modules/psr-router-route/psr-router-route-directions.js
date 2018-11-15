@@ -62,7 +62,8 @@ class RouteDirections extends RouteEntry {
 
   static newFromJSONObject(game, obj) {
     var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-    return new RouteDirections(game, info, obj.location);
+    var location = undefined; // TODO, parse from obj.location
+    return new RouteDirections(game, info, location);
   }
 }
 

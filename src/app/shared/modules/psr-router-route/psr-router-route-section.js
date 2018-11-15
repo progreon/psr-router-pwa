@@ -198,7 +198,8 @@ class RouteSection extends RouteEntry {
       }
     });
 
-    return new RouteSection(game, info, obj.location, children);
+    var location = undefined; // TODO, parse from obj.location
+    return new RouteSection(game, info, location, children);
   }
 }
 

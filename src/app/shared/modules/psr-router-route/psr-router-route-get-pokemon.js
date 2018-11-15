@@ -67,14 +67,16 @@ class RouteGetPokemon extends RouteEntry {
   getJSONObject() {
     var obj = super.getJSONObject();
     obj.entryString = this.entryString;
-    obj.choices = this._choices;
+    obj.choices = []; // TODO, parse from this._choices;
     obj.preference = this._preference;
     return obj;
   }
 
   static newFromJSONObject(game, obj) {
     var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-    return new RouteGetPokemon(game, obj.entryString, info, obj.choices, obj.preference, obj.location);
+    var choices = []; // TODO, parse from obj.choices
+    var location = undefined; // TODO, parse from obj.location
+    return new RouteGetPokemon(game, obj.entryString, info, choices, obj.preference, location);
   }
 }
 

@@ -82,7 +82,11 @@ class Route extends RouteSection {
 
   getJSONString(printerSettings) {
     // TODO: handle printerSettings
-    return JSON.stringify(this.getJSONObject(), null, "\t");
+    if (printerSettings && printerSettings.printEmptyFields) {
+      return JSON.stringify(this.getJSONObject(), null, "\t");
+    } else {
+      return JSON.stringify(this.getJSONObject(), (key, val) => (val && (val === [] || val === {})) || val === false ? val : undefined, "\t");
+    }
   }
 
   getJSONObject() {

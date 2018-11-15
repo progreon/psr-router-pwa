@@ -65,8 +65,9 @@ class PsrRouterExample extends PsrRouterPage {
       var fileReader = new FileReader();
       fileReader.onload = function(e) {
         var route = RouteParser.ParseRouteText(e.target.result);
-        console.log(route);
         _this.route = route;
+        console.log("route.getJSONObject:", _this.route.getJSONObject());
+        console.log("route:", _this.route);
       }
       fileReader.readAsText(e.target.files[0]);
     }

@@ -29,7 +29,6 @@ class RouteBattle extends RouteEntry {
     return "B";
   }
 
-
   _getRouteFileLines(printerSettings) {
     var str = "\t";
     if (this.info.title !== "")
@@ -81,7 +80,8 @@ class RouteBattle extends RouteEntry {
 
   static newFromJSONObject(game, obj) {
     var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-    return new RouteBattle(game, obj.entryString, info, obj.location);
+    var location = undefined; // TODO, parse from obj.location
+    return new RouteBattle(game, obj.entryString, info, location);
   }
 }
 

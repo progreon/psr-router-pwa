@@ -313,7 +313,7 @@ class RouteEntry {
     // { type, info: {title, summary, description}, location, data } // data = specific entry data
     var type = this.constructor.getEntryType();
     var info = { title: this.info.title, summary: this.info.summary, description: this.info.description };
-    var location = this._location;
+    var location = ""; // TODO, parse from this._location;
     var obj = { type, info, location };
     return obj;
   }
@@ -323,7 +323,8 @@ class RouteEntry {
    */
   static newFromJSONObject(game, obj) {
     var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-    return new RouteEntry(game, info, obj.location);
+    var location = undefined; // TODO, parse from obj.location
+    return new RouteEntry(game, info, location);
   }
 }
 

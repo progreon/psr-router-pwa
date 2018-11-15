@@ -27,7 +27,7 @@ module.exports = merge(common(config), {
     new FaviconsWebpackPlugin({
       logo: path.resolve(__dirname, '../../icon.png'),
       prefix: 'icons-[hash]/',
-      emitStats: true,
+      emitStats: false,
       statsFilename: 'iconstats-[hash].json',
       persistentCache: true,
       inject: true,
