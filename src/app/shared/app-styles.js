@@ -58,6 +58,10 @@ ${AppColors}
     font-size: 14px;
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   pre {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.5;

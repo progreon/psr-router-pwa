@@ -20,6 +20,10 @@ export class PsrRouterRouteEntry extends LitElement {
     return undefined;
   }
 
+  _renderContent() {
+    return undefined;
+  }
+
   _renderExpandingContent() {
     if (this.routeEntry.info.description) {
       var dom = [];
@@ -45,6 +49,7 @@ export class PsrRouterRouteEntry extends LitElement {
   }
 
   render() {
+    const contentDOM = this._renderContent();
     const expandingDOM = this._renderExpandingContent();
     const popupDOM = this._renderPopupContent();
 
@@ -76,18 +81,27 @@ export class PsrRouterRouteEntry extends LitElement {
           align-self: center;
           flex-grow: 1;
         }
-        #expand {
+        .content {
+          width: 100%;
+          padding-left: 10px;
+          display: flex;
+          flex-direction: column;
+        }
+        .content > * {
+          width: 100%;
+        }
+        .content > #expand {
           display: ${expandingDOM ? "flex" : "none"};
           height: auto;
+          flex-direction: column;
           overflow: hidden;
           -webkit-transition: height 0.3s ease-out;
           -moz-transition: height 0.3s ease-out;
           -o-transition: height 0.3s ease-out;
           transition: height 0.3s ease-out;
         }
-        .content {
+        .content > #expand > * {
           width: 100%;
-          margin-left: 10px;
         }
 
         .menu-options {
@@ -117,8 +131,9 @@ export class PsrRouterRouteEntry extends LitElement {
         </vaadin-item>
         <div class="icon expand" @click="${this._onClick}" ?hidden="${!expandingDOM}">${icon}</div>
       </div>
-      <div id="expand">
-        <div class="content">
+      <div class="content">
+        ${contentDOM}
+        <div id="expand">
           ${expandingDOM}
         </div>
       </div>

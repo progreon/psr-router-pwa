@@ -31,18 +31,18 @@ class Route extends RouteSection {
     return "Route";
   }
 
-  exportToFile(filename) {
+  exportToFile(filename, printerSettings) {
+    console.log(filename, printerSettings);
     // https://www.npmjs.com/package/file-saver
-    if (!filename) {
-      filename = super.toString() + ".txt";
-    }
-    var text = super.toRouteString();
+    var ext = printerSettings && printerSettings.toJSON ? ".json" : ".txt";
+    filename = (filename ? filename : super.toString()) + ext;
+    var text = printerSettings && printerSettings.toJSON ? this.getJSONString(printerSettings) : this.toRouteString();
     try {
       var isFileSaverSupported = !!new Blob;
       if (isFileSaverSupported) {
         var blob = new Blob(["Game: " + this.game.info.key, "\r\n\r\n", text], {type: "text/plain;charset=utf-8"});
-        // saveAs(blob, filename);
-        console.log(this.getJSONString(null));
+        console.log(text);
+        saveAs(blob, filename);
       } else {
         window.alert("Exporting to a file is not supported for this browser...");
       }
@@ -82,10 +82,10 @@ class Route extends RouteSection {
 
   getJSONString(printerSettings) {
     // TODO: handle printerSettings
-    if (printerSettings && printerSettings.printEmptyFields) {
+    if (printerSettings && printerSettings.printEmptyProperties) {
       return JSON.stringify(this.getJSONObject(), null, "\t");
     } else {
-      return JSON.stringify(this.getJSONObject(), (key, val) => (val && (val === [] || val === {})) || val === false ? val : undefined, "\t");
+      return JSON.stringify(this.getJSONObject(), (key, val) => (val && (val !== [] || val !== {})) || val === false ? val : undefined, "\t");
     }
   }
 

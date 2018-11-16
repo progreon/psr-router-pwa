@@ -37,6 +37,12 @@ class PsrRouterExample extends PsrRouterPage {
         /* .padding {
           padding-bottom: var(--app-grid-3x);
         } */
+
+        .menu-options {
+          display: flex;
+          flex-flow: column;
+          align-items: center;
+        }
       </style>
       <div class="buttons">
         <vaadin-button id="export" @click="${this._onExportClicked.bind(this)}">Export to file</vaadin-button>
@@ -47,6 +53,15 @@ class PsrRouterExample extends PsrRouterPage {
       </div>
       <psr-router-route id="the-route" class="noselect" .routeEntry=${this.route}></psr-router-route>
       <!-- <div class="padding"></div> -->
+
+      <vaadin-dialog id="menu" style="padding: 0px;">
+        <template>
+          <div class="menu-options">
+            <vaadin-button class="menu-option" id="menu-json">JSON</vaadin-button>
+            <vaadin-button class="menu-option" id="menu-txt">TXT</vaadin-button>
+          </div>
+        </template>
+      </vaadin-dialog>
     `;
   }
 
@@ -55,6 +70,13 @@ class PsrRouterExample extends PsrRouterPage {
       /* The route object. */
       route: Object
     };
+  }
+
+  constructor() {
+    super();
+    // menu listeners
+    this.jsonClicked = this.doExport.bind(this, {toJSON: true});
+    this.txtClicked = this.doExport.bind(this, {});
   }
 
   firstUpdated(changedProperties) {
@@ -77,13 +99,20 @@ class PsrRouterExample extends PsrRouterPage {
     console.log("_onInput", this, e);
   }
 
-  doExport(e) {
-    this.route.exportToFile("example-route.txt");
+  doExport(printerSettings) {
+    console.log("doExport", printerSettings);
+    console.log("Exporting to route file...");
+    this.route.exportToFile("example-route", printerSettings);
+    document.getElementById('overlay').opened = false;
   }
 
   _onExportClicked(e) {
-    console.log("Exporting to route file...");
-    this.doExport(e);
+    this.shadowRoot.getElementById("menu").opened = true;
+    // bind menu listeners
+    document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-json').addEventListener('click', this.jsonClicked);
+    document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-txt').addEventListener('click', this.txtClicked);
+
+    // this.doExport(e);
   }
 
   _showImportDialog(e) {

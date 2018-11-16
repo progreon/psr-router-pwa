@@ -15,6 +15,14 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 class PsrRouterRoute extends PsrRouterRouteSection {
+  _renderContent() {
+    return super._renderExpandingContent();
+  }
+
+  _renderExpandingContent() {
+    return undefined;
+  }
+
   static get properties() {
     return {
       // TODO
