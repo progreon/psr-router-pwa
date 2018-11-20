@@ -31,6 +31,7 @@ class PsrRouterRoute extends PsrRouterRouteSection {
 
   constructor(routeEntry=undefined) {
     super(routeEntry);
+    this.routeHeader = true;
     // TODO
   }
 }

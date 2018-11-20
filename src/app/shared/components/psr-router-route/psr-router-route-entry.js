@@ -66,6 +66,15 @@ export class PsrRouterRouteEntry extends LitElement {
           display: flex;
           justify-content: space-between;
         }
+        .header[hidden] {
+          display: none;
+        }
+        /* .route-header > * {
+          font-weight: bold;
+        } */
+        .route-header[hidden] {
+          display: none;
+        }
         .icon {
           padding-right: 5px;
           align-self: center;
@@ -83,7 +92,6 @@ export class PsrRouterRouteEntry extends LitElement {
         }
         .content {
           width: 100%;
-          padding-left: 10px;
           display: flex;
           flex-direction: column;
         }
@@ -92,6 +100,7 @@ export class PsrRouterRouteEntry extends LitElement {
         }
         .content > #expand {
           display: ${expandingDOM ? "flex" : "none"};
+          padding-left: 10px;
           height: auto;
           flex-direction: column;
           overflow: hidden;
@@ -124,12 +133,15 @@ export class PsrRouterRouteEntry extends LitElement {
       <div class="buttons">
         <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupDOM}">${infoCircle}</div>
       </div>
-      <div class="header">
+      <div class="header" ?hidden="${this.routeHeader}">
         <vaadin-item class="entry" @click="${this._onClick}">
           <div><strong>${this.routeEntry?this.routeEntry.info.title:""}</strong></div>
           <div>${this.routeEntry?this.routeEntry.info.summary:""}</div>
         </vaadin-item>
         <div class="icon expand" @click="${this._onClick}" ?hidden="${!expandingDOM}">${icon}</div>
+      </div>
+      <div class="route-header" ?hidden="${!this.routeHeader}">
+        <h4><strong>${this.routeEntry?this.routeEntry.info.title:"this.routeEntry.info.title"}</strong></h4>
       </div>
       <div class="content">
         ${contentDOM}
@@ -158,14 +170,15 @@ export class PsrRouterRouteEntry extends LitElement {
 
   static get properties() {
     return {
+      hideContent: Boolean,
       /* The entry object. */
-      routeEntry: Object,
-      hideContent: Boolean
+      routeEntry: Object
     }
   };
 
   constructor(routeEntry=undefined) {
     super();
+    this.routeHeader = false;
     this.hideContent = true;
     this.routeEntry = routeEntry;
     this.addEventListener('data-updated', e => console.log('data updated!', e));
