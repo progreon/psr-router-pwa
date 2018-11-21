@@ -1,5 +1,5 @@
 import { html } from '@polymer/lit-element';
-import { PsrRouterPage } from 'CoreComponents/psr-router-page/psr-router-page';
+import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 
 // These are the shared styles needed by this element.
 import { AppStyles } from 'Shared/app-styles';
