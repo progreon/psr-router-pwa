@@ -1,9 +1,8 @@
 'use strict';
 
 // imports
-import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
-import { RouteEntryInfo } from 'SharedModules/psr-router-route';
-import { GetEntryLines } from './psr-router-route-parser';
+import { RouterMessage, RouterMessageType } from '../psr-router-util';
+import { RouteEntryInfo, RouteParser } from './util';
 
 /**
  * A class representing a route-entry.
@@ -293,7 +292,7 @@ class RouteEntry {
         summary = line.substring(i + 4);
       }
       var description = "";
-      var entryLines = GetEntryLines(lines);
+      var entryLines = RouteParser.GetEntryLines(lines);
       for (var i = 1; i < entryLines.length; i++) {
         description += entryLines[i].line + "\n";
       }

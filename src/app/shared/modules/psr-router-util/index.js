@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 
-import { BadgeBoosts } from './psr-router-util-badge-boosts';
+export { BadgeBoosts } from './badge-boosts';
 // TODO: BattleEntry
-import { DVRange } from './psr-router-util-dv-range';
-import { IntPair } from './psr-router-util-int-pair';
-import { Range } from './psr-router-util-range';
-import { RangePerDV } from './psr-router-util-range-per-dv';
-import { RouterError } from './psr-router-util-router-error';
-import { RouterMessage, RouterMessageType } from './psr-router-util-router-message';
-import { Stages } from './psr-router-util-stages';
-
-export { BadgeBoosts, DVRange, IntPair, Range, RangePerDV, RouterError, RouterMessage, RouterMessageType, Stages };
+export { DVRange } from './dv-range';
+export { IntPair } from './int-pair';
+export { Range } from './range';
+export { RangePerDV } from './range-per-dv';
+export { RouterError } from './router-error';
+export { RouterMessage, RouterMessageType } from './router-message';
+export { Stages } from './stages';

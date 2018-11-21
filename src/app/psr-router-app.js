@@ -5,6 +5,7 @@ import { Data, GetGame } from 'SharedModules/psr-router-data/psr-router-data';
 import * as Model from 'SharedModules/psr-router-model';
 import * as Util from 'SharedModules/psr-router-util';
 import * as Route from 'SharedModules/psr-router-route';
+import { RouteFactory } from 'SharedModules/psr-router-route/util';
 
 // Imports for polymer/pwa
 import { LitElement, html } from '@polymer/lit-element';
@@ -368,7 +369,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
     console.log("Data:", Data);
     var pkmnRed = GetGame("r");
-    var exampleRoute = Route.RouteFactory.GetDummyRoute(pkmnRed);
+    var exampleRoute = RouteFactory.GetDummyRoute(pkmnRed);
     console.log("Game(red):", pkmnRed);
     console.log("Pikachu:", pkmnRed.findPokemonByName("Pikachu"));
     console.log("Model:", Model);

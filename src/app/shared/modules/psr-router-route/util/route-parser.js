@@ -9,7 +9,7 @@ if (!String.prototype.startsWith) {
 
 // JS Imports
 import { GetGame } from 'SharedModules/psr-router-data/psr-router-data';
-import * as Model from 'SharedModules/psr-router-model';
+import * as Model from '../';
 import * as Util from 'SharedModules/psr-router-util';
 import * as Route from 'SharedModules/psr-router-route';
 

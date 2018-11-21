@@ -1,10 +1,10 @@
 'use strict';
 
 // imports
-import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
-import { RouteEntryInfo, RouteSection } from 'SharedModules/psr-router-route';
+import { RouterMessage, RouterMessageType } from '../psr-router-util';
+import { RouteEntryInfo, RouteParser } from './util';
+import { RouteSection } from '.';
 import { saveAs } from 'file-saver/FileSaver';
-import { GetEntryListFromLines } from './psr-router-route-parser';
 
 /**
  * A class representing the root route-entry.
@@ -70,7 +70,7 @@ class Route extends RouteSection {
         summary = line.substring(i + 4);
       }
       var route = new Route(game, title, summary);
-      var childEntries = GetEntryListFromLines(route, lines, 1);
+      var childEntries = RouteParser.GetEntryListFromLines(route, lines, 1);
       for (var ic = 0; ic < childEntries.length; ic++) {
         route._addEntry(childEntries[ic]);
       }

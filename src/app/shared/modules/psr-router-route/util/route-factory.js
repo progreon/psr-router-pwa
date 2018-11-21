@@ -1,10 +1,10 @@
 'use strict';
 
 // JS Imports
-import { GetGame } from 'SharedModules/psr-router-data/psr-router-data';
-import * as Model from 'SharedModules/psr-router-model';
-import * as Util from 'SharedModules/psr-router-util';
-import * as Route from 'SharedModules/psr-router-route';
+import { GetGame } from '../../psr-router-data';
+import * as Model from '../../psr-router-model';
+import * as Util from '../../psr-router-util';
+import * as Route from '../../psr-router-route';
 
 /**
  * Get a dummy route.

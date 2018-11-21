@@ -1,9 +1,9 @@
 'use strict';
 
 // imports
-import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
-import { RouteEntryInfo, RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon } from 'SharedModules/psr-router-route';
-import { GetEntryListFromLines } from './psr-router-route-parser';
+import { RouterMessage, RouterMessageType } from '../psr-router-util';
+import { RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon } from '.';
+import { RouteEntryInfo, RouteParser } from './util';
 
 /**
  * A class representing a route-setions that holds multiple child entries.
@@ -157,7 +157,7 @@ class RouteSection extends RouteEntry {
         description = line.substring(i + 4);
       }
       var routeSection = new RouteSection(parent.game, new RouteEntryInfo(title, description), parent.getLocation());
-      var childEntries = GetEntryListFromLines(parent, lines, 1);
+      var childEntries = RouteParser.GetEntryListFromLines(parent, lines, 1);
       for (var ic = 0; ic < childEntries.length; ic++) {
         routeSection._addEntry(childEntries[ic]);
       }

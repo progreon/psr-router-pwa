@@ -1,36 +1,32 @@
 'use strict';
 
 // imports
-import { RouterMessage, RouterMessageType } from 'SharedModules/psr-router-util';
-import { RouteEntryInfo, RouteEntry } from 'SharedModules/psr-router-route';
+import { RouterMessage, RouterMessageType } from '../psr-router-util';
+import { RouteEntryInfo, RouteParser } from './util';
+import { RouteEntry } from '.';
 
 /**
- * A class representing a route-entry that gets you a pokemon out of a list of possible pokemon.
+ * A class representing a route-entry that handles battles.
  * @todo WildEncounters
  * @todo parent?
  * @todo writeToString
  * @augments RouteEntry
  */
-class RouteGetPokemon extends RouteEntry {
+class RouteBattle extends RouteEntry {
   /**
    *
    * @param {Game}            game              The Game object this route entry uses.
    * @param {string}          entryString       TEMP
    * @param {RouteEntryInfo}  [info]            The info for this entry.
-   * @param {Battler[]}       [choices=[]]      The different battlers to choose from.
-   * @param {number}          [preference=0]    The preferred choise.
    * @param {Location}        [location]        The location in the game where this entry occurs.
-   * @todo choices, preference, ...
    */
-  constructor(game, entryString, info=undefined, choices=[], preference=0, location=undefined) {
+  constructor(game, entryString, info=undefined, location=undefined) {
     super(game, info, location);
     this.entryString = entryString;
-    this._choices = choices;
-    this._preference = preference;
   }
 
   static getEntryType() {
-    return "GetP";
+    return "B";
   }
 
   _getRouteFileLines(printerSettings) {
@@ -38,27 +34,39 @@ class RouteGetPokemon extends RouteEntry {
     if (this.info.title !== "")
       str += this.info.title +  " :: ";
     str += this.info.summary;
-    return [this.entryString, str];
+    var lines = [this.entryString, str];
+
+    if (this.info.description) {
+      var subLines = this.info.description.split("\n");
+      subLines.forEach(line => {
+        if (line.trim() !== "")
+          lines.push("\t" + line.trim());
+      });
+    }
+
+    return lines;
   }
 
   static newFromRouteFileLines(game, lines) {
     if (lines && lines.length > 0 && lines[0].line) {
       var entryString = lines[0].line;
-      var line = "", title = "", summary = "";
-      if (lines.length > 1) {
-        var line = lines[1].line;
+      var line = "", title = "", summary = "", description = "";
+      var entryLines = RouteParser.GetEntryLines(lines);
+      if (entryLines.length > 1) {
+        var line = entryLines[1].line;
         summary = line;
         var i = line.indexOf(" :: ");
         if (i >= 0) {
           title = line.substring(0, i);
           summary = line.substring(i + 4);
         }
-        if (lines.length > 2) {
-          // TODO: throw exception
-        }
       }
-      var info = new RouteEntryInfo(title, summary);
-      return new RouteGetPokemon(game, entryString, info);
+      for (var i = 2; i < entryLines.length; i++) {
+        description += entryLines[i].line + "\n";
+      }
+      description.trim();
+      var info = new RouteEntryInfo(title, summary, description);
+      return new RouteBattle(game, entryString, info);
     } else {
       // TODO: throw exception
     }
@@ -67,17 +75,14 @@ class RouteGetPokemon extends RouteEntry {
   getJSONObject() {
     var obj = super.getJSONObject();
     obj.entryString = this.entryString;
-    obj.choices = []; // TODO, parse from this._choices;
-    obj.preference = this._preference;
     return obj;
   }
 
   static newFromJSONObject(game, obj) {
     var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-    var choices = []; // TODO, parse from obj.choices
     var location = undefined; // TODO, parse from obj.location
-    return new RouteGetPokemon(game, obj.entryString, info, choices, obj.preference, location);
+    return new RouteBattle(game, obj.entryString, info, location);
   }
 }
 
-export { RouteGetPokemon };
+export { RouteBattle };
