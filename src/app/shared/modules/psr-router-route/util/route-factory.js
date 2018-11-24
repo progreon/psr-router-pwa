@@ -5,6 +5,7 @@ import { GetGame } from '../../psr-router-data';
 import * as Model from '../../psr-router-model';
 import * as Util from '../../psr-router-util';
 import * as Route from '../../psr-router-route';
+import * as RouteUtil from '../../psr-router-route/util';
 
 /**
  * Get a dummy route.
@@ -12,7 +13,7 @@ import * as Route from '../../psr-router-route';
  * @returns {Route}
  */
 export function GetDummyRoute(game) {
-  var route = new Route.Route(game, "Red Any% Glitchless - Exarion Route");
+  var route = new Route.Route(game, new RouteUtil.RouteEntryInfo("Red Any% Glitchless - Exarion Route"));
     var srNew = route.addNewSection("New Game");
       srNew.addNewDirections("Clear any existing save file by pressing Up + B + Select on the game title screen.");
       srNew.addNewDirections("New game: text speed fast, animations off, style shift.");

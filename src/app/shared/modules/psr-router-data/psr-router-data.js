@@ -6,7 +6,7 @@ import _types from 'SharedData/types.json';
 // TODO: badges!
 
 // import { Model } from 'SharedModules/psr-router-model/psr-router-model';
-import { Item, Type, Move, Pokemon, Game, GameInfo, ExperienceGroup } from 'SharedModules/psr-router-model';
+import { Item, Type, Move, Pokemon, Game, GameInfo, ExperienceGroup } from '../psr-router-model';
 
 function loadItems(gen) {
   var Items = {};
@@ -114,13 +114,16 @@ export const Data = {
  */
 export function GetGame(gameKey) {
   var info = _games[gameKey];
-  var gameInfo = new GameInfo(gameKey, info.name, info.gen, info.year, _games.platforms[info.platform]);
-  var items = loadItems(gameInfo.gen);
-  var types = loadTypes(gameInfo.gen);
-  var typeChart = loadTypeChart(gameInfo.gen);
-  var moves = loadMoves(gameInfo.gen, types);
-  var pokemon = loadPokemon(gameInfo.gen, types);
-  var experienceGroup = ExperienceGroup; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
-  var game = new Game(experienceGroup, gameInfo, items, types, typeChart, moves, pokemon);
+  var game;
+  if (info) {
+    var gameInfo = new GameInfo(gameKey, info.name, info.gen, info.year, _games.platforms[info.platform]);
+    var items = loadItems(gameInfo.gen);
+    var types = loadTypes(gameInfo.gen);
+    var typeChart = loadTypeChart(gameInfo.gen);
+    var moves = loadMoves(gameInfo.gen, types);
+    var pokemon = loadPokemon(gameInfo.gen, types);
+    var experienceGroup = ExperienceGroup; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
+    var game = new Game(experienceGroup, gameInfo, items, types, typeChart, moves, pokemon);
+  }
   return game;
 };

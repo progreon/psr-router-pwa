@@ -2,7 +2,7 @@ import { html } from '@polymer/lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 
 // JS imports
-import { RouteParser } from 'SharedModules/psr-router-route/util';
+import { RouteParser, RouteIO } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
@@ -48,7 +48,7 @@ class PsrRouterExample extends PsrRouterPage {
         <vaadin-button id="export" @click="${this._onExportClicked.bind(this)}">Export to file</vaadin-button>
         <div class="input-wrapper">
           <vaadin-button id="import">Import file</vaadin-button>
-          <input type="file" id="selFile" name="route" accept=".txt">
+          <input type="file" id="selFile" name="route" accept=".txt,.json">
         </div>
       </div>
       <psr-router-route id="the-route" class="noselect" .routeEntry=${this.route}></psr-router-route>
@@ -85,8 +85,10 @@ class PsrRouterExample extends PsrRouterPage {
     var _this = this;
     fileInput.oninput = function(e) {
       var fileReader = new FileReader();
+      var filename = fileInput.value;
       fileReader.onload = function(e) {
-        var route = RouteParser.ParseRouteText(e.target.result);
+        var route = RouteIO.ImportFromFile(e.target.result, filename.search(/\.json$/) > 0);
+        // var route = RouteParser.ParseRouteText(e.target.result);
         _this.route = route;
         console.log("route.getJSONObject:", _this.route.getJSONObject());
         console.log("route:", _this.route);
@@ -102,7 +104,8 @@ class PsrRouterExample extends PsrRouterPage {
   doExport(printerSettings) {
     console.log("doExport", printerSettings);
     console.log("Exporting to route file...");
-    this.route.exportToFile("example-route", printerSettings);
+    RouteIO.ExportToFile(this.route, "example-route", printerSettings);
+    // this.route.exportToFile("example-route", printerSettings);
     document.getElementById('overlay').opened = false;
   }
 

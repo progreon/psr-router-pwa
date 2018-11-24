@@ -181,20 +181,20 @@ class RouteSection extends RouteEntry {
       var type = e.type;
       switch (type) {
         case RouteBattle.getEntryType().toUpperCase():
-          entries.push(RouteBattle.newFromJSONObject(game, e));
+          children.push(RouteBattle.newFromJSONObject(game, e));
           break;
         case RouteEntry.getEntryType().toUpperCase():
-          entries.push(RouteEntry.newFromJSONObject(game, e));
+          children.push(RouteEntry.newFromJSONObject(game, e));
           break;
         case RouteGetPokemon.getEntryType().toUpperCase():
-          entries.push(RouteGetPokemon.newFromJSONObject(game, e));
+          children.push(RouteGetPokemon.newFromJSONObject(game, e));
           break;
         case RouteSection.getEntryType().toUpperCase():
-          entries.push(RouteSection.newFromJSONObject(game, e));
+          children.push(RouteSection.newFromJSONObject(game, e));
           break;
         case RouteDirections.getEntryType().toUpperCase():
         default:
-          entries.push(RouteDirections.newFromJSONObject(game, e));
+          children.push(RouteDirections.newFromJSONObject(game, e));
       }
     });
 

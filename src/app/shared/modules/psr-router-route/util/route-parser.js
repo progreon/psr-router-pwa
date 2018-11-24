@@ -8,10 +8,10 @@ if (!String.prototype.startsWith) {
 }
 
 // JS Imports
-import { GetGame } from 'SharedModules/psr-router-data/psr-router-data';
-import * as Model from '../';
-import * as Util from 'SharedModules/psr-router-util';
-import * as Route from 'SharedModules/psr-router-route';
+import { GetGame } from '../../psr-router-data/psr-router-data';
+import * as Model from '../../psr-router-model';
+import * as Util from '../../psr-router-util';
+import * as Route from '..';
 
 export function GetEntryLines(lines, startLine=0) {
   if (lines.length >= startLine) {
@@ -145,7 +145,7 @@ function _PARSE3_getRouteJSON(scopedLinesArray) {
       routeEntries = _PARSE3a_getRouteJSONEntries(scopedLines.scope);
     }
   });
-  return { game: gameKey, title: routeTitle, entries: routeEntries };
+  return { game: gameKey, info: { title: routeTitle }, entries: routeEntries };
 }
 
 function _PARSE3a_getRouteJSONEntries(scopedLines) {
@@ -163,12 +163,22 @@ function _PARSE3a_getRouteJSONEntries(scopedLines) {
         entry.choices = [];
         entry.preference = 0;
       case Route.RouteBattle.getEntryType().toUpperCase():
-      case Route.RouteEntry.getEntryType().toUpperCase():
         entry.entryString = scopedLine.untypedLine; // TODO: this is only temporary until route entries are more complete
         if (scopedLine.scope && scopedLine.scope.length > 0) {
           var titleLine = scopedLine.scope.shift();
           var splitted = titleLine.line.split(" :: ");
           entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: "", summary: titleLine.line };
+          entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
+        }
+        break;
+      case Route.RouteEntry.getEntryType().toUpperCase():
+        entry.entryString = scopedLine.untypedLine; // TODO: this is only temporary until route entries are more complete
+        var splitted = scopedLine.untypedLine.split(" :: ");
+        entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: scopedLine.untypedLine, summary: "" };
+        if (scopedLine.scope && scopedLine.scope.length > 0) {
+          // var titleLine = scopedLine.scope.shift();
+          // var splitted = titleLine.line.split(" :: ");
+          // entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: "", summary: titleLine.line };
           entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
         }
         break;
@@ -187,6 +197,16 @@ function _PARSE3a_getRouteJSONEntries(scopedLines) {
   return entries;
 }
 
+export function ExportRouteText(routeJSON) {
+  var scopedLinesArrayR = _PARSE3R_getScopedLinesArray(routeJSON);
+  // console.log("scopedLinesArrayR:", scopedLinesArrayR);
+  var linesToParseR = _PARSE2R_getFileLines(scopedLinesArrayR);
+  // console.log("linesToParseR:", linesToParseR);
+  var routeTextR = _PARSE1R_getRouteText(linesToParseR);
+  // console.log("reversed route text:", routeTextR);
+  return routeTextR;
+}
+
 /**
  * Get a dummy route.
  * @param {string} routeText
@@ -196,17 +216,20 @@ export function ParseRouteText(routeText) {
   // console.log("TODO: Parse these line scopes:");
   var linesToParse = _PARSE1_getFileLines(routeText);
   var scopedLinesArray = _PARSE2_toScopedLinesArray(linesToParse);
-  // console.log("scopedLinesArray:", scopedLinesArray);
+  console.log("scopedLinesArray:", scopedLinesArray);
   var routeJSON = _PARSE3_getRouteJSON(scopedLinesArray);
   console.log("routeJSON:", routeJSON);
+  return routeJSON;
+  // return Route.Route.newFromJSONObject(routeJSON);
+
   // console.log(JSON.stringify(this.getJSONObject(), (key, val) => (val && (val === [] || val === {})) || val === false ? val : undefined, "\t"));
   // check with the reverse!
-  var scopedLinesArrayR = _PARSE3R_getScopedLinesArray(routeJSON);
-  // console.log("scopedLinesArrayR:", scopedLinesArrayR);
-  var linesToParseR = _PARSE2R_getFileLines(scopedLinesArrayR);
-  // console.log("linesToParseR:", linesToParseR);
-  var routeTextR = _PARSE1R_getRouteText(linesToParseR);
-  // console.log("reversed route text:", routeTextR);
+  // var scopedLinesArrayR = _PARSE3R_getScopedLinesArray(routeJSON);
+  // // console.log("scopedLinesArrayR:", scopedLinesArrayR);
+  // var linesToParseR = _PARSE2R_getFileLines(scopedLinesArrayR);
+  // // console.log("linesToParseR:", linesToParseR);
+  // var routeTextR = _PARSE1R_getRouteText(linesToParseR);
+  // // console.log("reversed route text:", routeTextR);
 
 
   var route;
@@ -246,7 +269,7 @@ function _PARSE3R_getScopedLinesArray(routeJSON) {
   var gameLine = { line: "Game: " + (routeJSON.game ? routeJSON.game : "N/A") };
   scopedLinesArray.push(gameLine);
   var routeLine = {
-    line: "Route: " + (routeJSON.title ? routeJSON.title : ""),
+    line: "Route: " + (routeJSON.info ? routeJSON.info.title : ""),
     scope: routeJSON.entries ? _PARSE3R_getScopedEntryLines(routeJSON.entries) : []
   }
   scopedLinesArray.push(routeLine);
@@ -287,13 +310,11 @@ function _PARSE3R_getScopedEntryLines(routeJSONEntries) {
         }
         break;
       case Route.RouteEntry.getEntryType().toUpperCase():
-        scopedLine.line = Route.RouteEntry.getEntryType() + ": " + jsonEntry.entryString; // TODO: this is only temporary until route entries are more complete
         if (jsonEntry.info) {
-          if (jsonEntry.info.summary) {
-            scopedLine.scope.push({ line: (jsonEntry.info.title ? jsonEntry.info.title + " :: " : "") + jsonEntry.info.summary });
-            if (jsonEntry.info.description) {
+          if (jsonEntry.info.title) {
+            scopedLine.line = Route.RouteEntry.getEntryType() + ": " + jsonEntry.info.title + (jsonEntry.info.summary ? " :: " + jsonEntry.info.summary : "");
+            if (jsonEntry.info.description)
               jsonEntry.info.description.split("\n").forEach(d => scopedLine.scope.push({ line: d.trim() }));
-            }
           } else {
             // TODO
           }
