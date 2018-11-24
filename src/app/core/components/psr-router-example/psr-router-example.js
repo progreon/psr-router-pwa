@@ -105,7 +105,6 @@ class PsrRouterExample extends PsrRouterPage {
     console.log("doExport", printerSettings);
     console.log("Exporting to route file...");
     RouteIO.ExportToFile(this.route, "example-route", printerSettings);
-    // this.route.exportToFile("example-route", printerSettings);
     document.getElementById('overlay').opened = false;
   }
 
@@ -114,8 +113,6 @@ class PsrRouterExample extends PsrRouterPage {
     // bind menu listeners
     document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-json').addEventListener('click', this.jsonClicked);
     document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-txt').addEventListener('click', this.txtClicked);
-
-    // this.doExport(e);
   }
 
   _showImportDialog(e) {
@@ -125,22 +122,6 @@ class PsrRouterExample extends PsrRouterPage {
   _onImportClicked(e) {
     console.log("Importing route file...");
   }
-
-  // doImport(e) {
-  //   var fileInput = this.shadowRoot.getElementById("selFile");
-  //   var _this = this;
-  //   fileInput.oninput = function(e) {
-  //     var fileReader = new FileReader();
-  //     fileReader.onload = function(e) {
-  //       var route = RouteParser.ParseRouteText(e.target.result);
-  //       console.log(route);
-  //       _this.route = route;
-  //     }
-  //     fileReader.readAsText(e.target.files[0]);
-  //   }
-  //   console.log(fileInput);
-  //   // fileInput.click();
-  // }
 }
 
 window.customElements.define('psr-router-example', PsrRouterExample);

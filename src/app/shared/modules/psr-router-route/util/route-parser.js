@@ -8,66 +8,28 @@ if (!String.prototype.startsWith) {
 }
 
 // JS Imports
-import { GetGame } from '../../psr-router-data/psr-router-data';
-import * as Model from '../../psr-router-model';
 import * as Util from '../../psr-router-util';
 import * as Route from '..';
 
-export function GetEntryLines(lines, startLine=0) {
-  if (lines.length >= startLine) {
-    var depth = lines[startLine].depth;
-    var endLine = startLine;
-    while (endLine + 1 < lines.length && lines[endLine + 1].depth > depth) {
-      endLine++;
-    }
-    var entryLines = [];
-    while (startLine <= endLine) {
-      entryLines.push(lines[startLine]);
-      startLine++;
-    }
-    return entryLines;
-  } else {
-    return [];
-  }
+/**
+ * Get a dummy route.
+ * // TODO: docu
+ */
+export function ParseRouteText(routeText) {
+  var linesToParse = _PARSE1_getFileLines(routeText);
+  var scopedLinesArray = _PARSE2_toScopedLinesArray(linesToParse);
+  var routeJSON = _PARSE3_getRouteJSON(scopedLinesArray);
+  return routeJSON;
 }
 
-export function GetEntryListFromLines(parent, lines, startLine=0) {
-  var entries = [];
-  while (startLine < lines.length) {
-    var sublines = GetEntryLines(lines, startLine);
-    var i = sublines[0].line.indexOf(": ");
-    var type = sublines[0].line.substring(0, i).toUpperCase();
-    switch (type) {
-      case Route.RouteBattle.getEntryType().toUpperCase():
-        if (Route.RouteBattle.getEntryType() !== "")
-          sublines[0].line = sublines[0].line.substring(i + 2);
-        entries.push(Route.RouteBattle.newFromRouteFileLines(parent, sublines));
-        break;
-      case Route.RouteEntry.getEntryType().toUpperCase():
-        if (Route.RouteEntry.getEntryType() !== "")
-          sublines[0].line = sublines[0].line.substring(i + 2);
-        entries.push(Route.RouteEntry.newFromRouteFileLines(parent, sublines));
-        break;
-      case Route.RouteGetPokemon.getEntryType().toUpperCase():
-        if (Route.RouteGetPokemon.getEntryType() !== "")
-          sublines[0].line = sublines[0].line.substring(i + 2);
-        entries.push(Route.RouteGetPokemon.newFromRouteFileLines(parent, sublines));
-        break;
-      case Route.RouteSection.getEntryType().toUpperCase():
-        if (Route.RouteSection.getEntryType() !== "")
-          sublines[0].line = sublines[0].line.substring(i + 2);
-        entries.push(Route.RouteSection.newFromRouteFileLines(parent, sublines));
-        break;
-      case Route.RouteDirections.getEntryType().toUpperCase():
-        if (Route.RouteDirections.getEntryType() !== "")
-          sublines[0].line = sublines[0].line.substring(i + 2);
-      default:
-        entries.push(Route.RouteDirections.newFromRouteFileLines(parent, sublines));
-    }
-
-    startLine += sublines.length;
-  }
-  return entries;
+/**
+ * // TODO: docu
+ */
+export function ExportRouteText(routeJSON) {
+  var scopedLinesArrayR = _PARSE3R_getScopedLinesArray(routeJSON);
+  var linesToParseR = _PARSE2R_getFileLines(scopedLinesArrayR);
+  var routeTextR = _PARSE1R_getRouteText(linesToParseR);
+  return routeTextR;
 }
 
 function _PARSE1_getFileLines(routeText) {
@@ -145,6 +107,10 @@ function _PARSE3_getRouteJSON(scopedLinesArray) {
       routeEntries = _PARSE3a_getRouteJSONEntries(scopedLines.scope);
     }
   });
+  if (!gameKey) {
+    // TODO: throw exception with line number, etc..
+    throw new Util.RouterError("No game definition found!", "Parser Error");
+  }
   return { game: gameKey, info: { title: routeTitle }, entries: routeEntries };
 }
 
@@ -176,9 +142,6 @@ function _PARSE3a_getRouteJSONEntries(scopedLines) {
         var splitted = scopedLine.untypedLine.split(" :: ");
         entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: scopedLine.untypedLine, summary: "" };
         if (scopedLine.scope && scopedLine.scope.length > 0) {
-          // var titleLine = scopedLine.scope.shift();
-          // var splitted = titleLine.line.split(" :: ");
-          // entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: "", summary: titleLine.line };
           entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
         }
         break;
@@ -195,71 +158,6 @@ function _PARSE3a_getRouteJSONEntries(scopedLines) {
     entries.push(entry);
   });
   return entries;
-}
-
-export function ExportRouteText(routeJSON) {
-  var scopedLinesArrayR = _PARSE3R_getScopedLinesArray(routeJSON);
-  // console.log("scopedLinesArrayR:", scopedLinesArrayR);
-  var linesToParseR = _PARSE2R_getFileLines(scopedLinesArrayR);
-  // console.log("linesToParseR:", linesToParseR);
-  var routeTextR = _PARSE1R_getRouteText(linesToParseR);
-  // console.log("reversed route text:", routeTextR);
-  return routeTextR;
-}
-
-/**
- * Get a dummy route.
- * @param {string} routeText
- * @returns {Route}
- */
-export function ParseRouteText(routeText) {
-  // console.log("TODO: Parse these line scopes:");
-  var linesToParse = _PARSE1_getFileLines(routeText);
-  var scopedLinesArray = _PARSE2_toScopedLinesArray(linesToParse);
-  console.log("scopedLinesArray:", scopedLinesArray);
-  var routeJSON = _PARSE3_getRouteJSON(scopedLinesArray);
-  console.log("routeJSON:", routeJSON);
-  return routeJSON;
-  // return Route.Route.newFromJSONObject(routeJSON);
-
-  // console.log(JSON.stringify(this.getJSONObject(), (key, val) => (val && (val === [] || val === {})) || val === false ? val : undefined, "\t"));
-  // check with the reverse!
-  // var scopedLinesArrayR = _PARSE3R_getScopedLinesArray(routeJSON);
-  // // console.log("scopedLinesArrayR:", scopedLinesArrayR);
-  // var linesToParseR = _PARSE2R_getFileLines(scopedLinesArrayR);
-  // // console.log("linesToParseR:", linesToParseR);
-  // var routeTextR = _PARSE1R_getRouteText(linesToParseR);
-  // // console.log("reversed route text:", routeTextR);
-
-
-  var route;
-  var game;
-  var currLine = 0;
-  while (currLine < linesToParse.length) {
-    var i = linesToParse[currLine].line.indexOf(": ");
-    var prefix = linesToParse[currLine].line.substring(0, i).toUpperCase();
-    switch (prefix) {
-      // TODO: other settings?
-      case "Game".toUpperCase():
-        game = GetGame(linesToParse[currLine].line.substring(i + 2));
-        currLine++;
-        break;
-      case Route.Route.getEntryType().toUpperCase():
-        if (!game) {
-          // TODO: throw exception!
-          throw new Util.RouterError("A game must be defined before the route definition!", "Parser Error");
-        }
-        linesToParse[currLine].line = linesToParse[currLine].line.substring(i + 2);
-        var lines = GetEntryLines(linesToParse, currLine);
-        route = Route.Route.newFromRouteFileLines(game, lines);
-        currLine += lines.length;
-        break;
-      default:
-        currLine++;
-    }
-  }
-
-  return route;
 }
 
 //// THE REVERSE ////

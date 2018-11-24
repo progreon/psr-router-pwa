@@ -27,35 +27,6 @@ class RouteDirections extends RouteEntry {
     return "";
   }
 
-  _getRouteFileLines(printerSettings) {
-    var lines = [this.info.summary];
-
-    if (this.info.description) {
-      var subLines = this.info.description.split("\n");
-      subLines.forEach(line => {
-        if (line.trim() !== "")
-          lines.push("\t" + line.trim());
-      });
-    }
-
-    return lines;
-  }
-
-  static newFromRouteFileLines(parent, lines) {
-    if (lines && lines.length > 0 && lines[0].line) {
-      var summary = lines[0].line;
-      var description = "";
-      var entryLines = RouteParser.GetEntryLines(lines);
-      for (var i = 1; i < entryLines.length; i++) {
-        description += entryLines[i].line + "\n";
-      }
-      description.trim();
-      return new RouteDirections(parent.game, new RouteEntryInfo("", summary, description), parent.getLocation());
-    } else {
-      // TODO: throw exception
-    }
-  }
-
   getJSONObject() {
     return super.getJSONObject();
   }

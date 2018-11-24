@@ -146,27 +146,6 @@ class RouteSection extends RouteEntry {
     return this._addEntry(new RouteSection(this.game, new RouteEntryInfo(title, description), location ? location : this._location, children));
   }
 
-  static newFromRouteFileLines(parent, lines) {
-    if (lines && lines.length > 0 && lines[0].line) {
-      var line = lines[0].line;
-      var title = line;
-      var description = "";
-      var i = line.indexOf(" :: ");
-      if (i >= 0) {
-        title = line.substring(0, i);
-        description = line.substring(i + 4);
-      }
-      var routeSection = new RouteSection(parent.game, new RouteEntryInfo(title, description), parent.getLocation());
-      var childEntries = RouteParser.GetEntryListFromLines(parent, lines, 1);
-      for (var ic = 0; ic < childEntries.length; ic++) {
-        routeSection._addEntry(childEntries[ic]);
-      }
-      return routeSection;
-    } else {
-      // TODO: throw exception
-    }
-  }
-
   getJSONObject() {
     var obj = super.getJSONObject();
     obj.entries = [];
