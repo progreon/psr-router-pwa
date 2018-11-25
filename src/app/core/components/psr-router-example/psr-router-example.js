@@ -5,6 +5,7 @@ import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { RouteParser, RouteIO } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
+import '@vaadin/vaadin-text-field';
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
 import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 import 'SharedComponents/psr-router-route/psr-router-route';
@@ -41,7 +42,10 @@ class PsrRouterExample extends PsrRouterPage {
         .menu-options {
           display: flex;
           flex-flow: column;
-          align-items: center;
+          /* align-items: center; */
+        }
+        .menu-options > * {
+          align-self: center;
         }
       </style>
       <div class="buttons">
@@ -57,8 +61,9 @@ class PsrRouterExample extends PsrRouterPage {
       <vaadin-dialog id="menu" style="padding: 0px;">
         <template>
           <div class="menu-options">
-            <vaadin-button class="menu-option" id="menu-json">JSON</vaadin-button>
-            <vaadin-button class="menu-option" id="menu-txt">TXT</vaadin-button>
+            <vaadin-text-field id="filename"></vaadin-text-field>
+            <vaadin-button id="menu-json">JSON</vaadin-button>
+            <vaadin-button id="menu-txt">TXT</vaadin-button>
           </div>
         </template>
       </vaadin-dialog>
@@ -87,11 +92,10 @@ class PsrRouterExample extends PsrRouterPage {
       var fileReader = new FileReader();
       var filename = fileInput.value;
       fileReader.onload = function(e) {
-        var route = RouteIO.ImportFromFile(e.target.result, filename.search(/\.json$/) > 0);
-        // var route = RouteParser.ParseRouteText(e.target.result);
+        var route = RouteIO.ImportFromFile(e.target.result, filename.search(/\.json$/) > 0, filename);
         _this.route = route;
-        console.log("route.getJSONObject:", _this.route.getJSONObject());
-        console.log("route:", _this.route);
+        console.debug("route.getJSONObject:", _this.route.getJSONObject());
+        console.debug("route:", _this.route);
       }
       fileReader.readAsText(e.target.files[0]);
     }
@@ -103,16 +107,20 @@ class PsrRouterExample extends PsrRouterPage {
 
   doExport(printerSettings) {
     console.log("doExport", printerSettings);
-    console.log("Exporting to route file...");
-    RouteIO.ExportToFile(this.route, "example-route", printerSettings);
+    var filename = document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('filename').value;
+    console.log("Exporting to route file...", filename);
+    RouteIO.ExportToFile(this.route, filename, printerSettings);
     document.getElementById('overlay').opened = false;
   }
 
   _onExportClicked(e) {
-    this.shadowRoot.getElementById("menu").opened = true;
-    // bind menu listeners
-    document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-json').addEventListener('click', this.jsonClicked);
-    document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-txt').addEventListener('click', this.txtClicked);
+    if (this.route) {
+      this.shadowRoot.getElementById("menu").opened = true;
+      // bind menu listeners
+      document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('filename').value = this.route.shortname ? this.route.shortname : this.route.info.title;
+      document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-json').addEventListener('click', this.jsonClicked);
+      document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-txt').addEventListener('click', this.txtClicked);
+    }
   }
 
   _showImportDialog(e) {

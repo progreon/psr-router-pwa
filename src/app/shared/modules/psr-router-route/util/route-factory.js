@@ -13,7 +13,7 @@ import * as RouteUtil from '../../psr-router-route/util';
  * @returns {Route}
  */
 export function GetDummyRoute(game) {
-  var route = new Route.Route(game, new RouteUtil.RouteEntryInfo("Red Any% Glitchless - Exarion Route"));
+  var route = new Route.Route(game, new RouteUtil.RouteEntryInfo("Red Any% Glitchless - Exarion Route"), "Exarions old route");
     var srNew = route.addNewSection("New Game");
       srNew.addNewDirections("Clear any existing save file by pressing Up + B + Select on the game title screen.");
       srNew.addNewDirections("New game: text speed fast, animations off, style shift.");

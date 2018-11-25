@@ -6,13 +6,16 @@ import * as RouteUtil from '.';
 import { saveAs } from 'file-saver/FileSaver';
 
 export function ExportToFile(route, filename, printerSettings) {
+  var ext = printerSettings && printerSettings.toJSON ? ".json" : ".txt";
+  filename = (filename ? filename : route.shortname) + ext;
+  if (filename) {
+    route.shortname = filename;
+  }
   console.log("Exporting...", filename, printerSettings);
   // https://www.npmjs.com/package/file-saver
   try {
     var isFileSaverSupported = !!new Blob;
     if (isFileSaverSupported) {
-      var ext = printerSettings && printerSettings.toJSON ? ".json" : ".txt";
-      filename = (filename ? filename : route.info.title.toString()) + ext;
       var routeJSON = route.getJSONObject();
       var text;
       if (printerSettings && printerSettings.toJSON) {
@@ -34,10 +37,12 @@ export function ExportToFile(route, filename, printerSettings) {
   } catch (e) {
     window.alert("Exporting to a file is not supported for this browser...");
   }
+
+  return route;
 }
 
-export function ImportFromFile(routeText, isJSON) {
-  var routeJSON = isJSON ? JSON.parse(routeText) : RouteUtil.RouteParser.ParseRouteText(routeText);
+export function ImportFromFile(routeText, isJSON, filename) {
+  var routeJSON = isJSON ? JSON.parse(routeText) : RouteUtil.RouteParser.ParseRouteText(routeText, filename);
   console.log("routeJSON:", routeJSON);
   return Route.Route.newFromJSONObject(routeJSON);
 }

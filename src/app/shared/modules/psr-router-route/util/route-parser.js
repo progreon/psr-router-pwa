@@ -15,10 +15,10 @@ import * as Route from '..';
  * Get a dummy route.
  * // TODO: docu
  */
-export function ParseRouteText(routeText) {
+export function ParseRouteText(routeText, filename) {
   var linesToParse = _PARSE1_getFileLines(routeText);
   var scopedLinesArray = _PARSE2_toScopedLinesArray(linesToParse);
-  var routeJSON = _PARSE3_getRouteJSON(scopedLinesArray);
+  var routeJSON = _PARSE3_getRouteJSON(scopedLinesArray, filename);
   return routeJSON;
 }
 
@@ -93,11 +93,10 @@ function _PARSE2a_getScopedLines(lines, startLine=0) {
   return scope;
 }
 
-function _PARSE3_getRouteJSON(scopedLinesArray) {
+function _PARSE3_getRouteJSON(scopedLinesArray, filename) {
   scopedLinesArray = JSON.parse(JSON.stringify(scopedLinesArray)); // deep clone for use
   var gameKey = "";
   var routeTitle = "";
-  // var routeDescription = "";
   var routeEntries = [];
   scopedLinesArray.forEach(scopedLines => {
     if (scopedLines.type === "GAME") {
@@ -111,7 +110,9 @@ function _PARSE3_getRouteJSON(scopedLinesArray) {
     // TODO: throw exception with line number, etc..
     throw new Util.RouterError("No game definition found!", "Parser Error");
   }
-  return { game: gameKey, info: { title: routeTitle }, entries: routeEntries };
+  var regex = /.*[\\\/](.*)(\..*)$/.exec(filename);
+  var shortname = regex && regex.length > 0 ? regex[1] : routeTitle;
+  return { game: gameKey, info: { title: routeTitle }, shortname: shortname, entries: routeEntries };
 }
 
 function _PARSE3a_getRouteJSONEntries(scopedLines) {
