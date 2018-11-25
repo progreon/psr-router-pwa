@@ -3,7 +3,7 @@
 // imports
 import { GetGame } from '../psr-router-data';
 import { RouterMessage, RouterMessageType } from '../psr-router-util';
-import { RouteEntryInfo, RouteParser } from './util';
+import { RouteEntryInfo } from './util';
 import { RouteSection } from '.';
 // import { saveAs } from 'file-saver/FileSaver';
 

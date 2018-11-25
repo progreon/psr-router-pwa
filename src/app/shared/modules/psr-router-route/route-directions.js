@@ -2,7 +2,7 @@
 
 // imports
 import { RouterMessage, RouterMessageType } from '../psr-router-util';
-import { RouteEntryInfo, RouteParser } from './util';
+import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
 
 /**

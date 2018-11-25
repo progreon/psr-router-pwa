@@ -3,7 +3,7 @@
 // imports
 import { RouterMessage, RouterMessageType } from '../psr-router-util';
 import { RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon } from '.';
-import { RouteEntryInfo, RouteParser } from './util';
+import { RouteEntryInfo } from './util';
 
 /**
  * A class representing a route-setions that holds multiple child entries.
@@ -22,7 +22,12 @@ class RouteSection extends RouteEntry {
    * @todo children in here and not in entry
    */
   constructor(game, info, location=undefined, children=[]) {
-    super(game, info, location, children);
+    super(game, info, location);
+    /**
+     * @type {RouteEntry[]}
+     * @private
+     */
+    this._children = children;
   }
 
   static getEntryType() {
@@ -70,6 +75,43 @@ class RouteSection extends RouteEntry {
     return this._applyAfterChild();
   }
 
+  /**
+   * Get only the direct children.
+   * @returns {RouteEntry[]} The list of direct children.
+   */
+  getChildren() {
+    return this._children;
+  }
+
+  /**
+   * Gets all of its entries, including itself as the first one.
+   * @returns {RouteEntry[]} The entry list.
+   */
+  getEntryList() {
+    var entryList = [this];
+
+    if (this._children)
+      this._children.forEach(c => {entryList.push(...c.getEntryList())})
+
+    return entryList;
+  }
+
+  /**
+   * Add a child entry.
+   * @param {RouteEntry}  entry
+   * @param {Function}    [observer]
+   * @returns {RouteEntry} The added entry.
+   * @protected
+   * @todo refresh?
+   */
+  _addEntry(entry, observer) {
+    this._children.push(entry);
+    if (observer)
+      entry.addObserver(observer);
+    this._fireDataUpdated();
+    return entry;
+  }
+
   getPlayerAfter() {
     if (this._children.length > 0) {
       return this._children[this._children.length - 1].getPlayerAfter();
@@ -80,7 +122,7 @@ class RouteSection extends RouteEntry {
 
   _addEntry(entry) {
     entry.addObserver(this._childChanged.bind(this));
-    super._addEntry(entry);
+    this._children.push(entry);
     return entry;
   }
 
@@ -114,11 +156,10 @@ class RouteSection extends RouteEntry {
    * @param {string}        [title=""]        A title for this entry.
    * @param {string}        [summary=""]      A summary for this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
-   * @param {RouteEntry[]}  [children=[]]     The child entries of this entry.
    * @returns {RouteEntry} The added entry.
    */
-  addNewEntry(title="", summary="", description="", location=undefined, children=[]) {
-    return this._addEntry(new RouteEntry(this.game, new RouteEntryInfo(title, summary, description), location ? location : this._location, children));
+  addNewEntry(title="", summary="", description="", location=undefined) {
+    return this._addEntry(new RouteEntry(this.game, new RouteEntryInfo(title, summary, description), location ? location : this._location));
   }
 
   /**

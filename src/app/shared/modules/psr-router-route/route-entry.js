@@ -2,7 +2,7 @@
 
 // imports
 import { RouterMessage, RouterMessageType } from '../psr-router-util';
-import { RouteEntryInfo, RouteParser } from './util';
+import { RouteEntryInfo } from './util';
 
 /**
  * A class representing a route-entry.
@@ -16,9 +16,8 @@ class RouteEntry {
    * @param {Game}            game            The Game object this route entry uses.
    * @param {RouteEntryInfo}  [info=new]      The info for this entry.
    * @param {Location}        [location]      The location in the game where this entry occurs.
-   * @param {RouteEntry[]}    [children=[]]   The child entries of this entry.
    */
-  constructor(game, info=new RouteEntryInfo(), location=undefined, children=[]) {
+  constructor(game, info=new RouteEntryInfo(), location=undefined) {
     //// INPUT VARIABLES ////
     /** @type {Game} */
     this.game = game;
@@ -29,11 +28,6 @@ class RouteEntry {
      * @protected
      */
     this._location = location;
-    /**
-     * @type {RouteEntry[]}
-     * @private
-     */
-    this._children = children;
     //// OTHERS ////
     /** @type {RouterMessage[]} */
     this.messages = [];
@@ -87,40 +81,11 @@ class RouteEntry {
   }
 
   /**
-   * Get only the direct children.
-   * @returns {RouteEntry[]} The list of direct children.
-   */
-  getChildren() {
-    return this._children;
-  }
-
-  /**
    * Gets all of its entries, including itself as the first one.
    * @returns {RouteEntry[]} The entry list.
    */
   getEntryList() {
-    var entryList = [this];
-
-    if (this._children)
-      this._children.forEach(c => {entryList.push(...c.getEntryList())})
-
-    return entryList;
-  }
-
-  /**
-   * Add a child entry.
-   * @param {RouteEntry}  entry
-   * @param {Function}    [observer]
-   * @returns {RouteEntry} The added entry.
-   * @protected
-   * @todo refresh?
-   */
-  _addEntry(entry, observer) {
-    this._children.push(entry);
-    if (observer)
-      entry.addObserver(observer);
-    this._fireDataUpdated();
-    return entry;
+    return [this];
   }
 
   /** @returns {Location} */
