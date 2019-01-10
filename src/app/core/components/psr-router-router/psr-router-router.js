@@ -3,6 +3,7 @@ import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 
 // JS imports
 import { RouteParser, RouteIO } from 'SharedModules/psr-router-route/util';
+import * as Route from 'SharedModules/psr-router-route';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-text-field';
@@ -13,7 +14,7 @@ import 'SharedComponents/psr-router-route/psr-router-route';
 // These are the shared styles needed by this element.
 import { AppStyles } from 'Shared/app-styles';
 
-class PsrRouterExample extends PsrRouterPage {
+class PsrRouterRouter extends PsrRouterPage {
   _render() {
     return html`
       ${AppStyles}
@@ -54,6 +55,7 @@ class PsrRouterExample extends PsrRouterPage {
           <vaadin-button id="import">Import file</vaadin-button>
           <input type="file" id="selFile" name="route" accept=".txt,.json">
         </div>
+        <vaadin-button id="load-route" @click="${this._onLoadRouteClicked.bind(this)}">Load route</vaadin-button>
       </div>
       <psr-router-route id="the-route" class="noselect" .routeEntry=${this.route}></psr-router-route>
       <!-- <div class="padding"></div> -->
@@ -123,6 +125,16 @@ class PsrRouterExample extends PsrRouterPage {
     }
   }
 
+  _onLoadRouteClicked(e) {
+    var _this = this;
+    import('SharedData/routes/red_god_nido_basic.json').then(e => {
+      console.log('SharedData/routes/red_god_nido_basic.json', e);
+      var route = Route.Route.newFromJSONObject(e);
+      console.log(route);
+      this.route = route;
+    });
+  }
+
   _showImportDialog(e) {
     this.shadowRoot.getElementById('dialog').opened = true;
   }
@@ -132,4 +144,4 @@ class PsrRouterExample extends PsrRouterPage {
   }
 }
 
-window.customElements.define('psr-router-example', PsrRouterExample);
+window.customElements.define('psr-router-router', PsrRouterRouter);

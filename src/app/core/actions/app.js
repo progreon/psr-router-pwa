@@ -37,8 +37,8 @@ const loadPage = (page, searchParams) => (dispatch) => {
     // case 'redux':
     //   import('CoreComponents/psr-router-redux/psr-router-redux');
     //   break;
-    case 'example':
-      import('CoreComponents/psr-router-example/psr-router-example');
+    case 'router':
+      import('CoreComponents/psr-router-router/psr-router-router');
       break;
     case 'items':
       import('CoreComponents/psr-router-items/psr-router-items');

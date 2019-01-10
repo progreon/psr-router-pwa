@@ -1,7 +1,7 @@
 'use strict';
 
 // JS Imports
-import { Data, GetGame } from 'SharedModules/psr-router-data/psr-router-data';
+import { GetGame } from 'SharedModules/psr-router-data/psr-router-data';
 import * as Model from 'SharedModules/psr-router-model';
 import * as Util from 'SharedModules/psr-router-util';
 import * as Route from 'SharedModules/psr-router-route';
@@ -303,7 +303,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
           <!-- Main content -->
           <main role="main" class="main-content">
             <psr-router-home class="page" ?active="${this._page === 'home'}" .searchParams="${this._searchParams}"></psr-router-home>
-            <psr-router-example class="page" ?active="${this._page === 'example'}" .searchParams="${this._searchParams}" .game="${this._currentGame}" .route="${this._exampleRoute}"></psr-router-example>
+            <psr-router-router class="page" ?active="${this._page === 'router'}" .searchParams="${this._searchParams}" .game="${this._currentGame}" .route="${this._exampleRoute}"></psr-router-router>
             <psr-router-items class="page" ?active="${this._page === 'items'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-items>
             <psr-router-moves class="page" ?active="${this._page === 'moves'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-moves>
             <psr-router-pokemon-info class="page" ?active="${this._page === 'pokemon-info'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-pokemon-info>
@@ -351,7 +351,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
     this._pageList = [
       {name: 'home', title: "Home", element: 'psr-router-home'},
       // {name: 'redux', title: "Redux Example", element: 'psr-router-redux'},
-      {name: 'example', title: "Example Route", element: 'psr-router-example'},
+      {name: 'router', title: "Route", element: 'psr-router-router'},
       {name: 'items', title: "Item List", element: 'psr-router-items'},
       {name: 'moves', title: "Move List", element: 'psr-router-moves'},
       {name: 'pokemon-list', title: "Pokemon List", element: 'psr-router-pokemon-list'},
@@ -367,7 +367,6 @@ class PsrRouterApp extends connect(store)(LitElement) {
       }
     });
 
-    console.log("Data:", Data);
     var pkmnRed = GetGame("r");
     var exampleRoute = RouteFactory.GetDummyRoute(pkmnRed);
     console.log("Game(red):", pkmnRed);
