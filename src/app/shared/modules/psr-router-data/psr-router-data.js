@@ -6,29 +6,20 @@ import _pokemon1 from 'SharedData/pokemon-1.json';
 import _trainersRB from 'SharedData/trainers-rb.json';
 // TODO: badges!
 
-// import { Model } from 'SharedModules/psr-router-model/psr-router-model';
-import { Item, Type, Move, Pokemon, Game, GameInfo, ExperienceGroup } from '../psr-router-model';
+import * as ModelRBY from '../psr-router-model/model-rby';
 
 function loadItems(gen) {
-  var _items;
-  switch (gen) {
-    case 1:
-      _items = _items1;
-      break;
-    default:
-      _items = {};
-      break;
-  }
-
   var Items = {};
 
-  if (gen == 1) {
-    for (var key in _items) {
-      if (key !== "info") {
-        var item = _items[key];
-        Items[key] = new Item(key, item[0], item[1], item[2], item[3], item[4], item[5]);
+  switch (gen) {
+    case 1:
+      for (var key in _items1) {
+        if (key !== "info") {
+          var item = _items1[key];
+          Items[key] = new ModelRBY.Item(key, item[0], item[1], item[2], item[3], item[4], item[5]);
+        }
       }
-    }
+      break;
   }
 
   return Items;
@@ -39,7 +30,7 @@ function loadTypes(gen) {
 
   for (var i = 0; i < _types["types"].length; i++) {
     var key = _types["types"][i];
-    Types[key] = new Type(key, _types["names"][i], _types["isPhysical"][i]);
+    Types[key] = new ModelRBY.Type(key, _types["names"][i], _types["isPhysical"][i]);
   }
 
   return Types;
@@ -77,51 +68,35 @@ function getTypeMultiplier(typeChart, typeAtk, typeDef1, typeDef2) {
 }
 
 function loadMoves(gen, types) {
-  var _moves;
-  switch (gen) {
-    case 1:
-      _moves = _moves1;
-      break;
-    default:
-      _moves = {};
-      break;
-  }
-
   var Moves = {};
 
-  if (gen == 1) {
-    for (var key in _moves) {
-      if (key !== "info") {
-        var move = _moves[key];
-        var type = types[move[3]];
-        var cat = (type.isPhysical ? "physical" : "special");
-        Moves[key] = new Move(key, move[0], move[1], move[2], type, move[4], move[5], cat, move[6]);
+  switch (gen) {
+    case 1:
+      for (var key in _moves1) {
+        if (key !== "info") {
+          var move = _moves1[key];
+          var type = types[move[3]];
+          var cat = (type.isPhysical ? "physical" : "special");
+          Moves[key] = new ModelRBY.Move(key, move[0], move[1], move[2], type, move[4], move[5], cat, move[6]);
+        }
       }
-    }
+      break;
   }
 
   return Moves;
 }
 
 function loadPokemon(gen, types) {
-  var _pokemon;
-  switch (gen) {
-    case 1:
-      _pokemon = _pokemon1;
-      break;
-    default:
-      _pokemon = {};
-      break;
-  }
-
   var PokemonMap = {};
 
-  if (gen == 1) {
-    for (var id = 1; id < _pokemon.length; id++) {
-      var params = _pokemon[id];
-      var pokemon = new Pokemon(params[0], id, params[1], params[2], params[3], params[4], params[5], params[6], params[7], params[9], params[9], params[8]);
-      PokemonMap[pokemon.key] = pokemon;
-    }
+  switch (gen) {
+    case 1:
+      for (var id = 1; id < _pokemon1.length; id++) {
+        var p = _pokemon1[id];
+        var pokemon = new ModelRBY.Pokemon(p[0], id, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9]);
+        PokemonMap[pokemon.key] = pokemon;
+      }
+      break;
   }
 
   return PokemonMap
@@ -136,14 +111,22 @@ export function GetGame(gameKey) {
   var info = _games[gameKey];
   var game;
   if (info) {
-    var gameInfo = new GameInfo(gameKey, info.name, info.gen, info.year, _games.platforms[info.platform]);
+    var model;
+    var engine;
+    switch (gameKey) {
+      case "r":
+      case "b":
+      case "y":
+        model = ModelRBY;
+    }
+    var gameInfo = new model.GameInfo(gameKey, info.name, info.gen, info.year, _games.platforms[info.platform]);
     var items = loadItems(gameInfo.gen);
     var types = loadTypes(gameInfo.gen);
     var typeChart = loadTypeChart(gameInfo.gen);
     var moves = loadMoves(gameInfo.gen, types);
     var pokemon = loadPokemon(gameInfo.gen, types);
-    var experienceGroup = ExperienceGroup; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
-    var game = new Game(experienceGroup, gameInfo, items, types, typeChart, moves, pokemon);
+    var experienceGroups = model.ExperienceGroups; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
+    var game = new model.Game(model, engine, experienceGroups, gameInfo, items, types, typeChart, moves, pokemon);
   }
   return game;
 };

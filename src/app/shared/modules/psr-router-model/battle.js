@@ -4,12 +4,12 @@
  *
  * @class
  */
-class Battle {
+class Battle1 {
   /**
    *
    * @param {Player}   player   The player that's playing the game
    * @param {Trainer}  opponent The opponent it's facing
-   * @returns {Battle}
+   * @returns {Battle1}
    */
   constructor(player, opponent) {
     this.player = player;
@@ -19,8 +19,8 @@ class Battle {
   }
 
   toString() {
-    return "Battle";
+    return "Gen 1 Battle";
   }
 }
 
-export { Battle };
+export { Battle1 };

@@ -4,16 +4,20 @@
 class Game {
   /**
    *
-   * @param {ExperienceGroup} experienceGroup The experience groups
-   * @param {GameInfo}        info            The info on this game
-   * @param {Item[]}          items           All the items in this game
-   * @param {Type[]}          types           All the types in this game
-   * @param {TypeChart}       typeChart       The type chart this game uses
-   * @param {Move[]}          moves           All the moves in this game
-   * @param {Pokemon[]}       pokemon         All the pokemon in this game
+   * @param {Object}            model           The "model" classes and methods this game uses
+   * @param {Object}            engine          The "engine" classes and methods this game uses
+   * @param {AExperienceGroup}  experienceGroup The experience groups
+   * @param {GameInfo}          info            The info on this game
+   * @param {Item[]}            items           All the items in this game
+   * @param {Type[]}            types           All the types in this game
+   * @param {TypeChart}         typeChart       The type chart this game uses
+   * @param {Move[]}            moves           All the moves in this game
+   * @param {Pokemon[]}         pokemon         All the pokemon in this game
    */
-  constructor(experienceGroup, info, items, types, typeChart, moves, pokemon) {
-    /** @type {ExperienceGroup} */
+  constructor(model, engine, experienceGroup, info, items, types, typeChart, moves, pokemon) {
+    this.model = model;
+    this.engine = engine;
+    /** @type {AExperienceGroup} */
     this.experienceGroup = experienceGroup;
     /** @type {GameInfo} */
     this.info = info;

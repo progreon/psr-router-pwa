@@ -1,7 +1,7 @@
 /**
  * Class representing a Pokemon move.
  */
-class Move {
+class Move1 {
   /**
    *
    * @param {string}  key      The key to use in maps
@@ -40,4 +40,4 @@ class Move {
   }
 }
 
-export { Move };
+export { Move1 };

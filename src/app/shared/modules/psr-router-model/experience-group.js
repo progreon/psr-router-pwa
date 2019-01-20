@@ -114,7 +114,7 @@ class AExperienceGroup {
  * Class representing the SLOW experience group
  * @augments AExperienceGroup
  */
-class SlowExperienceGroup extends AExperienceGroup {
+class SlowExperienceGroup1 extends AExperienceGroup {
   constructor() {
     super("Slow");
   }
@@ -129,7 +129,7 @@ class SlowExperienceGroup extends AExperienceGroup {
  * Class representing the MEDIUM_SLOW experience group
  * @augments AExperienceGroup
  */
-class MediumSlowExperienceGroup extends AExperienceGroup {
+class MediumSlowExperienceGroup1 extends AExperienceGroup {
   constructor() {
     super("Medium Slow");
   }
@@ -144,7 +144,7 @@ class MediumSlowExperienceGroup extends AExperienceGroup {
  * Class representing the MEDIUM_FAST experience group
  * @augments AExperienceGroup
  */
-class MediumFastExperienceGroup extends AExperienceGroup {
+class MediumFastExperienceGroup1 extends AExperienceGroup {
   constructor() {
     super("Medium Fast");
   }
@@ -159,7 +159,7 @@ class MediumFastExperienceGroup extends AExperienceGroup {
  * Class representing the FAST experience group
  * @augments AExperienceGroup
  */
-class FastExperienceGroup extends AExperienceGroup {
+class FastExperienceGroup1 extends AExperienceGroup {
   constructor() {
     super("Fast");
   }
@@ -172,13 +172,13 @@ class FastExperienceGroup extends AExperienceGroup {
 
 /**
  * {SlowExperienceGroup, MediumSlowExperienceGroup, MediumFastExperienceGroup, FastExperienceGroup}
- * @type {{SlowExperienceGroup, MediumSlowExperienceGroup, MediumFastExperienceGroup, FastExperienceGroup}}
+ * @type {{SlowExperienceGroup1, MediumSlowExperienceGroup1, MediumFastExperienceGroup1, FastExperienceGroup1}}
  */
-const ExperienceGroup = {
-  "Slow": new SlowExperienceGroup(),
-  "Medium Slow": new MediumSlowExperienceGroup(),
-  "Medium Fast": new MediumFastExperienceGroup(),
-  "Fast": new FastExperienceGroup()
+const ExperienceGroups1 = {
+  "Slow": new SlowExperienceGroup1(),
+  "Medium Slow": new MediumSlowExperienceGroup1(),
+  "Medium Fast": new MediumFastExperienceGroup1(),
+  "Fast": new FastExperienceGroup1()
 };
 
-export { ExperienceGroup };
+export { ExperienceGroups1 };

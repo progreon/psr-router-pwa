@@ -1,5 +1,5 @@
 /**
- * Class representing an evolutionary stone
+ * Class representing an item
  */
 class Item {
   /**

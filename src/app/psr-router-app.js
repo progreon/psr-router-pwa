@@ -1,8 +1,7 @@
 'use strict';
 
 // JS Imports
-import { GetGame } from 'SharedModules/psr-router-data/psr-router-data';
-import * as Model from 'SharedModules/psr-router-model';
+import { GetGame } from 'SharedModules/psr-router-data';
 import * as Util from 'SharedModules/psr-router-util';
 import * as Route from 'SharedModules/psr-router-route';
 import { RouteFactory } from 'SharedModules/psr-router-route/util';
@@ -371,7 +370,6 @@ class PsrRouterApp extends connect(store)(LitElement) {
     var exampleRoute = RouteFactory.GetDummyRoute(pkmnRed);
     console.log("Game(red):", pkmnRed);
     console.log("Pikachu:", pkmnRed.findPokemonByName("Pikachu"));
-    console.log("Model:", Model);
     console.log("Route:", Route);
     console.log("Util:", Util);
     console.log("Example route:", exampleRoute);
@@ -387,6 +385,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
         this._showToast(html`<div style="display: flex; justify-content: space-between; align-items: baseline;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}">Reload</vaadin-button></div>`);
       }
     });
+    window.onunload = ((e) => console.debug("onunload", e));
     installRouter((location) => {store.dispatch(navigate(location))});
     installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     installMediaQueryWatcher(`(min-width: ${MyAppGlobals.wideWidth})`,

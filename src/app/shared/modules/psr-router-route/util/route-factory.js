@@ -2,7 +2,6 @@
 
 // JS Imports
 import { GetGame } from '../../psr-router-data';
-import * as Model from '../../psr-router-model';
 import * as Util from '../../psr-router-util';
 import * as Route from '../../psr-router-route';
 import * as RouteUtil from '../../psr-router-route/util';

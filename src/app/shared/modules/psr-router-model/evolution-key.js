@@ -6,7 +6,7 @@ class EvolutionKey {
   /**
    *
    * @param {string}  type    One of [level, stone, trade-item].
-   * @param {string}  value   The level, stone type, name of the item.
+   * @param {string}  value   The level, stone type, name of the item (or empty if just trade).
    * @returns {EvolutionKey}
    */
   constructor(type, value) {
