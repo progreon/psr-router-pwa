@@ -39,7 +39,7 @@ class Game {
    * @returns {Pokemon}   The pokemon.
    */
   findPokemonByName(name) {
-    return this.pokemon[name.toUpperCase()];
+    return name ? this.pokemon[name.toUpperCase()] : undefined;
   }
 }
 

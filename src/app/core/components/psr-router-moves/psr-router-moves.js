@@ -9,10 +9,10 @@ import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterMoves extends PsrRouterPage {
   _render() {
-    var moves = this.game ? this.game.moves : {};
+    // var moves = this.game ? this.game.moves : {};
     var moveElements = [];
-    for (var m in moves) {
-      moveElements.push(html`<psr-router-move id="${m}" .move=${moves[m]} detailed></psr-router-move>`);
+    for (var m in this.moves) {
+      moveElements.push(html`<psr-router-move id="${m}" .move=${this.moves[m]} detailed></psr-router-move>`);
     }
     return html`
       ${AppStyles}
@@ -23,12 +23,17 @@ class PsrRouterMoves extends PsrRouterPage {
   static get properties() {
     return {
       /* The moves array. */
-      test: Array
+      moves: Array
     };
   }
 
   constructor() {
     super();
+    this.triggerDataRefresh();
+  }
+
+  triggerDataRefresh() {
+    this.moves = window.app && window.app.game && window.app.game.moves ? window.app.game.moves : {};
   }
 }
 

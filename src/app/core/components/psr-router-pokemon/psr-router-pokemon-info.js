@@ -9,7 +9,7 @@ import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterPokemonInfo extends PsrRouterPage {
   _render() {
-    var pokemon = this.game.findPokemonByName(this.searchParams.p);
+    var pokemon = window.app.game.findPokemonByName(this.searchParams.p) || {};
     return html`
       ${AppStyles}
       <style>
@@ -106,7 +106,7 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
         <div class="section">
           <h2>Evolutions</h2>
         </div>
-        <div class="section" ?hidden="${this._isGen(this.game, 1)}">
+        <div class="section" ?hidden="${this._isGen(window.app.game, 1)}">
           <h2>Breeding</h2>
         </div>
         <div class="section">
@@ -126,9 +126,6 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
 
   constructor() {
     super();
-    // console.log(super.searchParams);
-    // console.log(this._pokemon);
-    // this._pokemon = super.game.findPokemonByName(super.searchParams.p);
   }
 
   _parseIdString(id) {

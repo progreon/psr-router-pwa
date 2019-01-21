@@ -4,7 +4,7 @@ export class PsrRouterPage extends LitElement {
   static get properties() {
     return {
       active: {type: Boolean, reflect: true},
-      game: Object,
+      // game: Object,
       searchParams: Object
     }
   }
@@ -14,6 +14,10 @@ export class PsrRouterPage extends LitElement {
     if (this.active) {
       return this._render();
     }
+  }
+
+  triggerDataRefresh() {
+    // Implement this!
   }
 
   _navigateTo(href, isExternalLink) {

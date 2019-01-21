@@ -301,13 +301,13 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
           <!-- Main content -->
           <main role="main" class="main-content">
-            <psr-router-home class="page" ?active="${this._page === 'home'}" .searchParams="${this._searchParams}"></psr-router-home>
-            <psr-router-router class="page" ?active="${this._page === 'router'}" .searchParams="${this._searchParams}" .game="${this._currentGame}" .route="${this._exampleRoute}"></psr-router-router>
-            <psr-router-items class="page" ?active="${this._page === 'items'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-items>
-            <psr-router-moves class="page" ?active="${this._page === 'moves'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-moves>
-            <psr-router-pokemon-info class="page" ?active="${this._page === 'pokemon-info'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-pokemon-info>
-            <psr-router-pokemon-list class="page" ?active="${this._page === 'pokemon-list'}" .searchParams="${this._searchParams}" .game="${this._currentGame}"></psr-router-pokemon-list>
-            <psr-router-404 class="page" ?active="${this._page === '404'}" .searchParams="${this._searchParams}"></psr-router-404>
+            <psr-router-home id="home" class="page" ?active="${this._page === 'home'}" .searchParams="${this._searchParams}"></psr-router-home>
+            <psr-router-router id="router" class="page" ?active="${this._page === 'router'}" .searchParams="${this._searchParams}"></psr-router-router>
+            <psr-router-items id="items" class="page" ?active="${this._page === 'items'}" .searchParams="${this._searchParams}"></psr-router-items>
+            <psr-router-moves id="moves" class="page" ?active="${this._page === 'moves'}" .searchParams="${this._searchParams}"></psr-router-moves>
+            <psr-router-pokemon-info id="pokemon-info" class="page" ?active="${this._page === 'pokemon-info'}" .searchParams="${this._searchParams}"></psr-router-pokemon-info>
+            <psr-router-pokemon-list id="pokemon-list" class="page" ?active="${this._page === 'pokemon-list'}" .searchParams="${this._searchParams}"></psr-router-pokemon-list>
+            <psr-router-404 id="404" class="page" ?active="${this._page === '404'}" .searchParams="${this._searchParams}"></psr-router-404>
 
             <snack-bar ?active="${this._snackbarOpened}" ?offline="${this._offline}">
                 You are now ${this._offline ? 'offline' : 'online'}.</snack-bar>
@@ -366,15 +366,28 @@ class PsrRouterApp extends connect(store)(LitElement) {
       }
     });
 
-    var pkmnRed = GetGame("r");
-    var exampleRoute = RouteFactory.GetDummyRoute(pkmnRed);
-    console.log("Game(red):", pkmnRed);
-    console.log("Pikachu:", pkmnRed.findPokemonByName("Pikachu"));
-    console.log("Route:", Route);
-    console.log("Util:", Util);
-    console.log("Example route:", exampleRoute);
-    this._currentGame = pkmnRed;
-    this._exampleRoute = exampleRoute;
+    // Load the last saved (json) route from the local storage if there is one
+    // and put it on window.app, else load the default route.
+    if (localStorage.getItem("saved-route")) {
+      var route = Route.Route.newFromJSONObject(JSON.parse(localStorage.getItem("saved-route")));
+      window.app = { route: route, game: route.game };
+      console.log("loaded saved route:", window.app);
+    } else {
+      // TODO: replace with proper default route!
+      var pkmnRed = GetGame("r");
+      var exampleRoute = RouteFactory.GetDummyRoute(pkmnRed);
+      localStorage.setItem("saved-route", JSON.stringify(exampleRoute.getJSONObject()));
+      window.app = { route: exampleRoute, game: exampleRoute.game };
+      console.log("loaded default route:", window.app);
+    }
+    this._currentGame = window.app.game;
+    this._exampleRoute = window.app.route;
+
+    console.log("Game:", window.app.game);
+    console.log("Pikachu:", window.app.game.findPokemonByName("Pikachu"));
+    // console.log("Route:", Route);
+    // console.log("Util:", Util);
+    // console.log("Route:", window.app.route);
   }
 
   firstUpdated(changedProperties) {
@@ -422,17 +435,24 @@ class PsrRouterApp extends connect(store)(LitElement) {
   }
 
   _stateChanged(state) {
-    if (this._page !== state.app.page) {
-      this._page = state.app.page;
-      if (document.getElementById("overlay")) {
-        document.getElementById("overlay").close();
-      }
+    var triggerDataRefresh = false;
+    if (this._page != state.app.page || this._searchParams != state.app.searchParams) {
+      triggerDataRefresh = true;
     }
+    this._page = state.app.page;
     this._offline = state.app.offline;
     this._searchParams = state.app.searchParams;
     this._snackbarOpened = state.app.snackbarOpened;
     this._wideLayout = state.app.wideLayout;
     this._drawerOpened = state.app.drawerOpened;
+    if (triggerDataRefresh) {
+      if (this.shadowRoot.getElementById(this._page).triggerDataRefresh) {
+        this.shadowRoot.getElementById(this._page).triggerDataRefresh();
+      }
+      if (document.getElementById("overlay")) {
+        document.getElementById("overlay").close();
+      }
+    }
   }
 }
 

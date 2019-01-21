@@ -88,6 +88,7 @@ class PsrRouterRouter extends PsrRouterPage {
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
+    this.route = window.app.route;
     var fileInput = this.shadowRoot.getElementById("selFile");
     var _this = this;
     fileInput.oninput = function(e) {
@@ -96,6 +97,7 @@ class PsrRouterRouter extends PsrRouterPage {
       fileReader.onload = function(e) {
         var route = RouteIO.ImportFromFile(e.target.result, filename.search(/\.json$/) > 0, filename);
         _this.route = route;
+        localStorage.setItem("saved-route", JSON.stringify(route.getJSONObject()));
         console.debug("route.getJSONObject:", _this.route.getJSONObject());
         console.debug("route:", _this.route);
       }
@@ -130,6 +132,7 @@ class PsrRouterRouter extends PsrRouterPage {
     import('SharedData/routes/red_god_nido_basic.json').then(e => {
       console.log('SharedData/routes/red_god_nido_basic.json', e);
       var route = Route.Route.newFromJSONObject(e);
+      localStorage.setItem("saved-route", JSON.stringify(route.getJSONObject()));
       console.log(route);
       this.route = route;
     });

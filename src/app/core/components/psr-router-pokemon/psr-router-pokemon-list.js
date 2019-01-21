@@ -9,11 +9,11 @@ import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterPokemonList extends PsrRouterPage {
   _render() {
-    var pokemon = this.game ? this.game.pokemon : {};
+    // var pokemon = this.game ? this.game.pokemon : {};
     var pokemonElements = [];
-    for (var p in pokemon) {
-      var name = pokemon[p].name;
-      pokemonElements.push(html`<psr-router-pokemon id="${p}" .pokemon=${pokemon[p]} @click="${e => this._onClick(e.detail.pokemon)}"></psr-router-pokemon>`);
+    for (var p in this.pokemon) {
+      var name = this.pokemon[p].name;
+      pokemonElements.push(html`<psr-router-pokemon id="${p}" .pokemon=${this.pokemon[p]} @click="${e => this._onClick(e.detail.pokemon)}"></psr-router-pokemon>`);
     }
     return html`
       ${AppStyles}
@@ -23,13 +23,18 @@ class PsrRouterPokemonList extends PsrRouterPage {
 
   static get properties() {
     return {
-      /* The items array. */
-      test: Array
+      /* The pokemon array. */
+      pokemon: Array
     };
   }
 
   constructor() {
     super();
+    this.triggerDataRefresh();
+  }
+
+  triggerDataRefresh() {
+    this.pokemon = window.app && window.app.game && window.app.game.pokemon ? window.app.game.pokemon : {};
   }
 
   _onClick(pokemon) {
