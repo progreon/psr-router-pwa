@@ -15,5 +15,6 @@ export { PokemonLevelPair } from './pokemon-level-pair';
 export { PokemonCountPair } from './pokemon-count-pair';
 export { Stone } from './stone';
 export { Type } from './type';
+export { Trainer } from './trainer';
 
 // export { Battler };

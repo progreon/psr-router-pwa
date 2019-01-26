@@ -99,7 +99,28 @@ function loadPokemon(gen, types) {
       break;
   }
 
-  return PokemonMap
+  return PokemonMap;
+}
+
+function loadTrainers(gameKey) {
+  var Trainers = {};
+
+  switch (gameKey) {
+    case "r":
+    case "b":
+      for (var loc in _trainersRB) {
+        for (var tClass in _trainersRB[loc]) {
+          _trainersRB[loc][tClass].forEach(t => {
+            var party = t.party; // TODO: parse!! (after parsing default pokemon moves)
+            var trainer = new ModelRBY.Trainer(t.key, t.name, tClass, party, loc, t.alias);
+            Trainers[trainer.key.toUpperCase()] = trainer;
+          });
+        }
+      }
+      break;
+  }
+
+  return Trainers;
 }
 
 /**
@@ -126,7 +147,8 @@ export function GetGame(gameKey) {
     var moves = loadMoves(gameInfo.gen, types);
     var pokemon = loadPokemon(gameInfo.gen, types);
     var experienceGroups = model.ExperienceGroups; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
-    var game = new model.Game(model, engine, experienceGroups, gameInfo, items, types, typeChart, moves, pokemon);
+    var trainers = loadTrainers(gameKey);
+    var game = new model.Game(model, engine, experienceGroups, gameInfo, items, types, typeChart, moves, pokemon, trainers);
   }
   return game;
 };

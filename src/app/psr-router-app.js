@@ -374,7 +374,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
     }
 
     // console.debug("Route:", window.app.route);
-    // console.debug("Game:", window.app.game);
+    var game = RouteUtil.RouteManager.GetCurrentGame();
+    console.debug("Game:", game);
     // console.debug("Pikachu:", window.app.game.findPokemonByName("Pikachu"));
     // console.debug("Route:", Route);
     // console.debug("Util:", Util);
