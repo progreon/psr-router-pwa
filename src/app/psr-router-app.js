@@ -4,6 +4,7 @@
 import { GetGame } from 'SharedModules/psr-router-data';
 import * as Util from 'SharedModules/psr-router-util';
 import * as Route from 'SharedModules/psr-router-route';
+import * as RouteUtil from 'SharedModules/psr-router-route/util';
 import { RouteFactory } from 'SharedModules/psr-router-route/util';
 
 // Imports for polymer/pwa
@@ -366,28 +367,17 @@ class PsrRouterApp extends connect(store)(LitElement) {
       }
     });
 
-    // Load the last saved (json) route from the local storage if there is one
-    // and put it on window.app, else load the default route.
-    if (localStorage.getItem("saved-route")) {
-      var route = Route.Route.newFromJSONObject(JSON.parse(localStorage.getItem("saved-route")));
-      window.app = { route: route, game: route.game };
-      console.log("loaded saved route:", window.app);
-    } else {
-      // TODO: replace with proper default route!
-      var pkmnRed = GetGame("r");
-      var exampleRoute = RouteFactory.GetDummyRoute(pkmnRed);
-      localStorage.setItem("saved-route", JSON.stringify(exampleRoute.getJSONObject()));
-      window.app = { route: exampleRoute, game: exampleRoute.game };
-      console.log("loaded default route:", window.app);
+    // Load the last saved (json) route from the local storage if there is one,
+    // else load the default example route.
+    if (!RouteUtil.RouteManager.LoadSavedRoute()) {
+      RouteUtil.RouteManager.LoadExampleRoute();
     }
-    this._currentGame = window.app.game;
-    this._exampleRoute = window.app.route;
 
-    console.log("Game:", window.app.game);
-    console.log("Pikachu:", window.app.game.findPokemonByName("Pikachu"));
-    // console.log("Route:", Route);
-    // console.log("Util:", Util);
-    // console.log("Route:", window.app.route);
+    // console.debug("Route:", window.app.route);
+    // console.debug("Game:", window.app.game);
+    // console.debug("Pikachu:", window.app.game.findPokemonByName("Pikachu"));
+    // console.debug("Route:", Route);
+    // console.debug("Util:", Util);
   }
 
   firstUpdated(changedProperties) {
@@ -398,7 +388,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
         this._showToast(html`<div style="display: flex; justify-content: space-between; align-items: baseline;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}">Reload</vaadin-button></div>`);
       }
     });
-    window.onunload = ((e) => console.debug("onunload", e));
+    // window.onunload = e => RouteUtil.RouteManager.SaveRoute();
     installRouter((location) => {store.dispatch(navigate(location))});
     installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     installMediaQueryWatcher(`(min-width: ${MyAppGlobals.wideWidth})`,

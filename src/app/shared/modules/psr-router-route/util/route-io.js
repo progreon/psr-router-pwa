@@ -8,10 +8,10 @@ import { saveAs } from 'file-saver/FileSaver';
 export function ExportToFile(route, filename, printerSettings) {
   var ext = printerSettings && printerSettings.toJSON ? ".json" : ".txt";
   filename = (filename ? filename : route.shortname) + ext;
-  if (filename) {
+  if (!route.shortname) {
     route.shortname = filename;
   }
-  console.log("Exporting...", filename, printerSettings);
+  console.debug("Exporting...", filename, printerSettings);
   // https://www.npmjs.com/package/file-saver
   try {
     var isFileSaverSupported = !!new Blob;
@@ -28,7 +28,6 @@ export function ExportToFile(route, filename, printerSettings) {
         // parse to txt
         text = RouteUtil.RouteParser.ExportRouteText(routeJSON);
       }
-      console.debug(text);
       var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
       saveAs(blob, filename);
     } else {
@@ -43,6 +42,5 @@ export function ExportToFile(route, filename, printerSettings) {
 
 export function ImportFromFile(routeText, isJSON, filename) {
   var routeJSON = isJSON ? JSON.parse(routeText) : RouteUtil.RouteParser.ParseRouteText(routeText, filename);
-  console.log("routeJSON:", routeJSON);
   return Route.Route.newFromJSONObject(routeJSON);
 }

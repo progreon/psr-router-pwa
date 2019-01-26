@@ -110,8 +110,8 @@ function _PARSE3_getRouteJSON(scopedLinesArray, filename) {
     // TODO: throw exception with line number, etc..
     throw new Util.RouterError("No game definition found!", "Parser Error");
   }
-  var regex = /.*[\\\/](.*)(\..*)$/.exec(filename);
-  var shortname = regex && regex.length > 0 ? regex[1] : routeTitle;
+  var regex = /(.*[\\\/])?(.*)(\..*)$/.exec(filename);
+  var shortname = regex && regex.length > 0 ? regex[2] : routeTitle;
   return { game: gameKey, info: { title: routeTitle }, shortname: shortname, entries: routeEntries };
 }
 

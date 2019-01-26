@@ -1,8 +1,8 @@
 'use strict';
 
-import { RouteEntryInfo } from './route-entry-info';
+export { RouteEntryInfo } from './route-entry-info';
 import * as RouteFactory from './route-factory';
+import * as RouteManager from './route-manager';
 import * as RouteParser from './route-parser';
-import * as RouteIO from './route-io';
 
-export { RouteEntryInfo, RouteFactory, RouteParser, RouteIO };
+export { RouteFactory, RouteParser, RouteManager };

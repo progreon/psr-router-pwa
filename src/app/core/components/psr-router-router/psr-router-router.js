@@ -2,7 +2,7 @@ import { html } from '@polymer/lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 
 // JS imports
-import { RouteParser, RouteIO } from 'SharedModules/psr-router-route/util';
+import { RouteParser, RouteManager } from 'SharedModules/psr-router-route/util';
 import * as Route from 'SharedModules/psr-router-route';
 
 // These are the elements needed by this element.
@@ -90,19 +90,7 @@ class PsrRouterRouter extends PsrRouterPage {
     super.firstUpdated(changedProperties);
     this.route = window.app.route;
     var fileInput = this.shadowRoot.getElementById("selFile");
-    var _this = this;
-    fileInput.oninput = function(e) {
-      var fileReader = new FileReader();
-      var filename = fileInput.value;
-      fileReader.onload = function(e) {
-        var route = RouteIO.ImportFromFile(e.target.result, filename.search(/\.json$/) > 0, filename);
-        _this.route = route;
-        localStorage.setItem("saved-route", JSON.stringify(route.getJSONObject()));
-        console.debug("route.getJSONObject:", _this.route.getJSONObject());
-        console.debug("route:", _this.route);
-      }
-      fileReader.readAsText(e.target.files[0]);
-    }
+    fileInput.oninput = e => RouteManager.LoadRouteFile(e.target.files[0]).then(route => this.route = route);
   }
 
   _onInput(e) {
@@ -110,10 +98,8 @@ class PsrRouterRouter extends PsrRouterPage {
   }
 
   doExport(printerSettings) {
-    console.log("doExport", printerSettings);
     var filename = document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('filename').value;
-    console.log("Exporting to route file...", filename);
-    RouteIO.ExportToFile(this.route, filename, printerSettings);
+    RouteManager.ExportRouteFile(filename, printerSettings, this.route);
     document.getElementById('overlay').opened = false;
   }
 
@@ -128,14 +114,7 @@ class PsrRouterRouter extends PsrRouterPage {
   }
 
   _onLoadRouteClicked(e) {
-    var _this = this;
-    import('SharedData/routes/red_god_nido_basic.json').then(e => {
-      console.log('SharedData/routes/red_god_nido_basic.json', e);
-      var route = Route.Route.newFromJSONObject(e);
-      localStorage.setItem("saved-route", JSON.stringify(route.getJSONObject()));
-      console.log(route);
-      this.route = route;
-    });
+    this.route = RouteManager.LoadExampleRoute("Red God Nido Basic");
   }
 
   _showImportDialog(e) {

@@ -45,7 +45,6 @@ class Route extends RouteSection {
   }
 
   static newFromJSONObject(obj) {
-    console.log("newFromJSONObject", obj);
     if (!obj) {
       // TODO: throw exception?
     } else if (!obj.game) {
