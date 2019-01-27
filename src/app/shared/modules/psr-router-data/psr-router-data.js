@@ -2,6 +2,7 @@ import _games from 'SharedData/games.json';
 import _types from 'SharedData/types.json';
 import _items1 from 'SharedData/items-1.json';
 import _moves1 from 'SharedData/moves-1.json';
+import _movesLearned1 from 'SharedData/moves-learned-1.json';
 import _pokemon1 from 'SharedData/pokemon-1.json';
 import _trainersRB from 'SharedData/trainers-rb.json';
 // TODO: badges!
@@ -96,13 +97,33 @@ function loadPokemon(gen, types) {
         var pokemon = new ModelRBY.Pokemon(p[0], id, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9]);
         PokemonMap[pokemon.key] = pokemon;
       }
+      for (var p in _movesLearned1) {
+        var defaultMoves = [];
+        var tmMoves = [];
+        var learnedMoves = {};
+        _movesLearned1[p].default.forEach(m => defaultMoves.push(m));
+        _movesLearned1[p].tm.forEach(m => tmMoves.push(m));
+        _movesLearned1[p].level.forEach(lm => {
+          var split = lm.split("#");
+          var l = split[0];
+          var m = split[1];
+          if (learnedMoves[l]) { // safety check, this would mean a structure change in Pokemon::learnedMoves
+            console.warn(p, l, m);
+          }
+          learnedMoves[l] = m;
+        });
+        var pokemon = PokemonMap[p.toUpperCase()];
+        pokemon.setDefaultMoves(defaultMoves);
+        pokemon.setLearnedMoves(learnedMoves);
+        pokemon.setTmMoves(tmMoves);
+      }
       break;
   }
 
   return PokemonMap;
 }
 
-function loadTrainers(gameKey) {
+function loadTrainers(gameKey, pokemon) {
   var Trainers = {};
 
   switch (gameKey) {
@@ -111,7 +132,22 @@ function loadTrainers(gameKey) {
       for (var loc in _trainersRB) {
         for (var tClass in _trainersRB[loc]) {
           _trainersRB[loc][tClass].forEach(t => {
-            var party = t.party; // TODO: parse!! (after parsing default pokemon moves)
+            var party = [];
+            t.party.forEach(pl => {
+              var split = pl.split("#");
+              var p = split[0];
+              var l = split[1];
+              party.push(new ModelRBY.Battler(null, pokemon[p.toUpperCase()], null, true, l));
+            });
+            if (t.moves) {
+              t.moves.forEach(pimim => {
+                var split = pimim.split("#");
+                var pi = split[0];
+                var mi = split[1];
+                var m = split[2];
+                party[pi]._moveset[mi] = m;
+              });
+            }
             var trainer = new ModelRBY.Trainer(t.key, t.name, tClass, party, loc, t.alias);
             Trainers[trainer.key.toUpperCase()] = trainer;
           });
@@ -147,7 +183,7 @@ export function GetGame(gameKey) {
     var moves = loadMoves(gameInfo.gen, types);
     var pokemon = loadPokemon(gameInfo.gen, types);
     var experienceGroups = model.ExperienceGroups; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
-    var trainers = loadTrainers(gameKey);
+    var trainers = loadTrainers(gameKey, pokemon);
     var game = new model.Game(model, engine, experienceGroups, gameInfo, items, types, typeChart, moves, pokemon, trainers);
   }
   return game;

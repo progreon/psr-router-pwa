@@ -2,7 +2,7 @@
 // Player
 
 export { Battle1 as Battle } from './battle';
-// import * as Battler from './battler';
+export { Battler1 as Battler } from './battler';
 export { EvolutionKey } from './evolution-key';
 export { ExperienceGroups1 as ExperienceGroups } from './experience-group';
 export { GameInfo } from './game-info';

@@ -55,19 +55,26 @@ class APokemon {
   }
 
   getDefaultMoveset(level) {
-    // TODO
+    var moveset = [];
+    this.defaultMoves.forEach(m => moveset.push(m));
+    for (var l = 1; l <= level; l++) {
+      if (this.learnedMoves[l]) {
+        moveset.push(this.learnedMoves[l]);
+      }
+    }
+    return moveset.slice(-4);
   }
 
-  addLearnedMove(level, move) {
-    // TODO
+  setDefaultMoves(defaultMoves) {
+    this.defaultMoves = defaultMoves;
   }
 
-  getLearnedMoves(level) {
-    // TODO
+  setTmMoves(tmMoves) {
+    this.tmMoves = tmMoves;
   }
 
-  addTmMove(move) {
-    // TODO
+  setLearnedMoves(learnedMoves) {
+    this.learnedMoves = learnedMoves;
   }
 
   getAllMoves() {

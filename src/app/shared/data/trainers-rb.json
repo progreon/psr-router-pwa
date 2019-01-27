@@ -3,7 +3,7 @@
     "Agatha": [
       {
         "key": "Agatha",
-        "moves": [ "5#2#TOXIC" ],
+        "moves": [ "4#2#TOXIC" ],
         "name": "Agatha",
         "party": [ "GENGAR#56", "GOLBAT#56", "HAUNTER#55", "ARBOK#58", "GENGAR#60" ]
       }
@@ -33,7 +33,7 @@
     "Bruno": [
       {
         "key": "Bruno",
-        "moves": [ "5#2#FISSURE" ],
+        "moves": [ "4#2#FISSURE" ],
         "name": "Bruno",
         "party": [ "ONIX#53", "HITMONCHAN#55", "HITMONLEE#55", "ONIX#56", "MACHAMP#58" ]
       }
@@ -315,7 +315,7 @@
     "Lance": [
       {
         "key": "Lance",
-        "moves": [ "5#2#BARRIER" ],
+        "moves": [ "4#2#BARRIER" ],
         "name": "Lance",
         "party": [ "GYARADOS#58", "DRAGONAIR#56", "DRAGONAIR#56", "AERODACTYL#60", "DRAGONITE#62" ]
       }
@@ -325,7 +325,7 @@
     "Lorelei": [
       {
         "key": "Lorelei",
-        "moves": [ "5#2#BLIZZARD" ],
+        "moves": [ "4#2#BLIZZARD" ],
         "name": "Lorelei",
         "party": [ "DEWGONG#54", "CLOYSTER#53", "SLOWBRO#54", "JYNX#56", "LAPRAS#56" ]
       }
@@ -857,7 +857,7 @@
       {
         "key": "Route 11 - Youngster 4",
         "name": "Youngster 4",
-        "party": [ "NIDORAN_M#18", "NIDORINO#18" ]
+        "party": [ "NIDORANM#18", "NIDORINO#18" ]
       }
     ]
   },
@@ -893,7 +893,7 @@
       {
         "key": "Route 12 - JrTrainerM",
         "name": "JrTrainerM",
-        "party": [ "NIDORAN_M#29", "NIDORINO#29" ]
+        "party": [ "NIDORANM#29", "NIDORINO#29" ]
       }
     ],
     "Rocker": [
@@ -991,7 +991,7 @@
       {
         "key": "Route 14 - BirdKeeper 1",
         "name": "BirdKeeper 1",
-        "party": [ "FARFETCHD#33" ]
+        "party": [ "FARFETCH'D#33" ]
       },
       {
         "key": "Route 14 - BirdKeeper 2",
@@ -1049,7 +1049,7 @@
       {
         "key": "Route 15 - BirdKeeper 1",
         "name": "BirdKeeper 1",
-        "party": [ "PIDGEOTTO#26", "FARFETCHD#26", "DODUO#26", "PIDGEY#26" ]
+        "party": [ "PIDGEOTTO#26", "FARFETCH'D#26", "DODUO#26", "PIDGEY#26" ]
       },
       {
         "key": "Route 15 - BirdKeeper 2",
@@ -1421,12 +1421,12 @@
       {
         "key": "Route 24 - Lass 1",
         "name": "Lass 1",
-        "party": [ "PIDGEY#16", "NIDORAN_F#16" ]
+        "party": [ "PIDGEY#16", "NIDORANF#16" ]
       },
       {
         "key": "Route 24 - Lass 2",
         "name": "Lass 2",
-        "party": [ "PIDGEY#14", "NIDORAN_F#14" ]
+        "party": [ "PIDGEY#14", "NIDORANF#14" ]
       }
     ],
     "Rocket": [
@@ -1475,7 +1475,7 @@
       {
         "key": "Route 25 - Lass 1",
         "name": "Lass 1",
-        "party": [ "NIDORAN_M#15", "NIDORAN_F#15" ]
+        "party": [ "NIDORANM#15", "NIDORANF#15" ]
       },
       {
         "key": "Route 25 - Lass 2",
@@ -1528,7 +1528,7 @@
       {
         "key": "Route 3 - Lass 2",
         "name": "Lass 2",
-        "party": [ "RATTATA#10", "NIDORAN_M#10" ]
+        "party": [ "RATTATA#10", "NIDORANM#10" ]
       },
       {
         "key": "Route 3 - Lass 3",
@@ -1614,7 +1614,7 @@
       {
         "key": "Route 8 - Lass 1",
         "name": "Lass 1",
-        "party": [ "NIDORAN_F#23", "NIDORINA#23" ]
+        "party": [ "NIDORANF#23", "NIDORINA#23" ]
       },
       {
         "key": "Route 8 - Lass 2",
@@ -1624,7 +1624,7 @@
       {
         "key": "Route 8 - Lass 3",
         "name": "Lass 3",
-        "party": [ "PIDGEY#19", "RATTATA#19", "NIDORAN_M#19", "MEOWTH#19", "PIKACHU#19" ]
+        "party": [ "PIDGEY#19", "RATTATA#19", "NIDORANM#19", "MEOWTH#19", "PIKACHU#19" ]
       },
       {
         "key": "Route 8 - Lass 4",
@@ -1719,21 +1719,21 @@
       {
         "key": "SS Anne 1F Rooms - Gentleman 2",
         "name": "Gentleman 2",
-        "party": [ "NIDORAN_M#19", "NIDORAN_F#19" ]
+        "party": [ "NIDORANM#19", "NIDORANF#19" ]
       }
     ],
     "Lass": [
       {
         "key": "SS Anne 1F Rooms - Lass",
         "name": "Lass",
-        "party": [ "PIDGEY#18", "NIDORAN_F#18" ]
+        "party": [ "PIDGEY#18", "NIDORANF#18" ]
       }
     ],
     "Youngster": [
       {
         "key": "SS Anne 1F Rooms - Youngster",
         "name": "Youngster",
-        "party": [ "NIDORAN_M#21" ]
+        "party": [ "NIDORANM#21" ]
       }
     ]
   },
@@ -1847,7 +1847,7 @@
         "key": "Sabrina",
         "moves": [ "3#2#PSYWAVE" ],
         "name": "Sabrina",
-        "party": [ "KADABRA#38", "MR_MIME#37", "VENOMOTH#38", "ALAKAZAM#43" ]
+        "party": [ "KADABRA#38", "MRMIME#37", "VENOMOTH#38", "ALAKAZAM#43" ]
       }
     ]
   },
@@ -1873,12 +1873,12 @@
       {
         "key": "Saffron Gym - Psychic 1",
         "name": "Psychic 1",
-        "party": [ "KADABRA#31", "SLOWPOKE#31", "MR_MIME#31", "KADABRA#31" ]
+        "party": [ "KADABRA#31", "SLOWPOKE#31", "MRMIME#31", "KADABRA#31" ]
       },
       {
         "key": "Saffron Gym - Psychic 2",
         "name": "Psychic 2",
-        "party": [ "MR_MIME#34", "KADABRA#34" ]
+        "party": [ "MRMIME#34", "KADABRA#34" ]
       },
       {
         "key": "Saffron Gym - Psychic 3",
@@ -1999,7 +1999,7 @@
       {
         "key": "Silph Co. 5F - Juggler",
         "name": "Juggler",
-        "party": [ "KADABRA#29", "MR_MIME#29" ]
+        "party": [ "KADABRA#29", "MRMIME#29" ]
       }
     ],
     "Rocket": [
@@ -2180,7 +2180,7 @@
       {
         "key": "Victory Road 2F - Juggler 2",
         "name": "Juggler 2",
-        "party": [ "MR_MIME#48" ]
+        "party": [ "MRMIME#48" ]
       }
     ],
     "Pokemaniac": [

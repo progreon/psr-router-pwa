@@ -20,12 +20,12 @@ class ABattler {
      * @type {Game}
      * @protected
      */
-    this._game = game;
+    this._game = game; // TODO: include this?
     /**
      * @type {Pokemon}
      * @protected
      */
-    this._pokemon = pokemon;
+    this._pokemon = pokemon; // TODO: Pokemon or string?
     /**
      * @type {EncounterArea}
      * @protected
@@ -45,7 +45,7 @@ class ABattler {
      * @type {move[]}
      * @protected
      */
-    this._moveset = []; // TODO: hold Move's or strings of keys for Move?
+    this._moveset = pokemon.getDefaultMoveset(level); // TODO: hold Move's or strings of keys for Move?
     /**
      * @type {number}
      * @protected
