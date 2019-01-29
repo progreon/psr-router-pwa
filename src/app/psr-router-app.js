@@ -308,6 +308,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
             <psr-router-moves id="moves" class="page" ?active="${this._page === 'moves'}" .searchParams="${this._searchParams}"></psr-router-moves>
             <psr-router-pokemon-info id="pokemon-info" class="page" ?active="${this._page === 'pokemon-info'}" .searchParams="${this._searchParams}"></psr-router-pokemon-info>
             <psr-router-pokemon-list id="pokemon-list" class="page" ?active="${this._page === 'pokemon-list'}" .searchParams="${this._searchParams}"></psr-router-pokemon-list>
+            <psr-router-trainers id="trainers" class="page" ?active="${this._page === 'trainers'}" .searchParams="${this._searchParams}"></psr-router-trainers>
+            <psr-router-trainer-info id="trainer-info" class="page" ?active="${this._page === 'trainer-info'}" .searchParams="${this._searchParams}"></psr-router-pokemon-info>
             <psr-router-404 id="404" class="page" ?active="${this._page === '404'}" .searchParams="${this._searchParams}"></psr-router-404>
 
             <snack-bar ?active="${this._snackbarOpened}" ?offline="${this._offline}">
@@ -355,6 +357,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
       {name: 'items', title: "Item List", element: 'psr-router-items'},
       {name: 'moves', title: "Move List", element: 'psr-router-moves'},
       {name: 'pokemon-list', title: "Pokemon List", element: 'psr-router-pokemon-list'},
+      {name: 'trainers', title: "Trainer List", element: 'psr-router-trainers'},
       {name: '404', title: "404", element: 'psr-router-404', is404: true}
     ];
     // Handle the navigation caused by js code here.
