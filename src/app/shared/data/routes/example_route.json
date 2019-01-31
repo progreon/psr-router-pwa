@@ -59,7 +59,7 @@
 						"title": "Rival 1",
 						"summary": "Tail Whip x1-2, then Tackle until it faints."
 					},
-					"entryString": "rival1"
+					"entryString": "Rival 1 - Bulbasaur"
 				},
 				{
 					"info": {
@@ -206,7 +206,7 @@
 						"summary": "Tail Whip x2, spam tackle",
 						"description": "If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion."
 					},
-					"entryString": "bug1"
+					"entryString": "Viridian Forest - BugCatcher 3"
 				},
 				{
 					"type": "ENTRY",
@@ -231,7 +231,7 @@
 						"summary": "Use switch strats",
 						"description": "Switch to Squirtle to share exp, use Bubble to kill Geodude and Onix. If Onix uses Bide on the turn you switch in, use Tail Whip twice, then Bubble."
 					},
-					"entryString": "brock :: 0:0 0:1 1:0 1:1"
+					"entryString": "Brock :: 0:0 0:1 1:0 1:1"
 				},
 				{
 					"type": "ENTRY",

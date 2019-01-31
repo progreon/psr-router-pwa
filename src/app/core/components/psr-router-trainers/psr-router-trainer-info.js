@@ -10,7 +10,6 @@ import { AppStyles } from 'Shared/app-styles';
 class PsrRouterTrainerInfo extends PsrRouterPage {
   _render() {
     var trainer = window.app.game.findTrainerByKeyOrAlias(this.searchParams.t) || {};
-    console.log("trainer:", trainer);
     var party = [];
     trainer.party.forEach(b => {
       party.push(html`<div class="column">`);

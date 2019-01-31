@@ -9,26 +9,6 @@
       }
     ]
   },
-  "Blaine": {
-    "Blaine": [
-      {
-        "key": "Blaine",
-        "moves": [ "3#2#FIRE_BLAST" ],
-        "name": "Blaine",
-        "party": [ "GROWLITHE#42", "PONYTA#40", "RAPIDASH#42", "ARCANINE#47" ]
-      }
-    ]
-  },
-  "Brock": {
-    "Brock": [
-      {
-        "key": "Brock",
-        "moves": [ "1#2#BIDE" ],
-        "name": "Brock",
-        "party": [ "GEODUDE#12", "ONIX#14" ]
-      }
-    ]
-  },
   "Bruno": {
     "Bruno": [
       {
@@ -62,6 +42,15 @@
         "key": "Celadon Gym - CooltrainerF",
         "name": "CooltrainerF",
         "party": [ "WEEPINBELL#24", "GLOOM#24", "IVYSAUR#24" ]
+      }
+    ],
+    "Erika": [
+      {
+        "alias": "Erika",
+        "key": "Celadon Gym - Erika",
+        "moves": [ "2#2#MEGA_DRAIN" ],
+        "name": "Erika",
+        "party": [ "VICTREEBEL#29", "TANGELA#24", "VILEPLUME#29" ]
       }
     ],
     "JrTrainerF": [
@@ -121,6 +110,15 @@
         "party": [ "GOLDEEN#19" ]
       }
     ],
+    "Misty": [
+      {
+        "alias": "Misty",
+        "key": "Cerulean Gym - Misty",
+        "moves": [ "1#2#BUBBLEBEAM" ],
+        "name": "Misty",
+        "party": [ "STARYU#18", "STARMIE#21" ]
+      }
+    ],
     "Swimmer": [
       {
         "key": "Cerulean Gym - Swimmer",
@@ -130,6 +128,15 @@
     ]
   },
   "Cinnabar Gym": {
+    "Blaine": [
+      {
+        "alias": "Blaine",
+        "key": "Cinnabar Gym - Blaine",
+        "moves": [ "3#2#FIRE_BLAST" ],
+        "name": "Blaine",
+        "party": [ "GROWLITHE#42", "PONYTA#40", "RAPIDASH#42", "ARCANINE#47" ]
+      }
+    ],
     "Burglar": [
       {
         "key": "Cinnabar Gym - Burglar 1",
@@ -167,16 +174,6 @@
         "key": "Cinnabar Gym - SuperNerd 4",
         "name": "SuperNerd 4",
         "party": [ "GROWLITHE#37", "VULPIX#37" ]
-      }
-    ]
-  },
-  "Erika": {
-    "Erika": [
-      {
-        "key": "Erika",
-        "moves": [ "2#2#MEGA_DRAIN" ],
-        "name": "Erika",
-        "party": [ "VICTREEBEL#29", "TANGELA#24", "VILEPLUME#29" ]
       }
     ]
   },
@@ -230,6 +227,15 @@
         "key": "Fuchsia Gym - Juggler 4",
         "name": "Juggler 4",
         "party": [ "DROWZEE#34", "KADABRA#34" ]
+      }
+    ],
+    "Koga": [
+      {
+        "alias": "Koga",
+        "key": "Fuchsia Gym - Koga",
+        "moves": [ "3#2#TOXIC" ],
+        "name": "Koga",
+        "party": [ "KOFFING#37", "MUK#39", "KOFFING#37", "WEEZING#43" ]
       }
     ],
     "Tamer": [
@@ -301,16 +307,6 @@
       }
     ]
   },
-  "Koga": {
-    "Koga": [
-      {
-        "key": "Koga",
-        "moves": [ "3#2#TOXIC" ],
-        "name": "Koga",
-        "party": [ "KOFFING#37", "MUK#39", "KOFFING#37", "WEEZING#43" ]
-      }
-    ]
-  },
   "Lance": {
     "Lance": [
       {
@@ -331,13 +327,12 @@
       }
     ]
   },
-  "LtSurge": {
-    "LtSurge": [
+  "Mansion 1F": {
+    "Scientist": [
       {
-        "key": "LtSurge",
-        "moves": [ "2#2#THUNDERBOLT" ],
-        "name": "LtSurge",
-        "party": [ "VOLTORB#21", "PIKACHU#18", "RAICHU#24" ]
+        "key": "Mansion 1F - Scientist",
+        "name": "Scientist",
+        "party": [ "ELECTRODE#29", "WEEZING#29" ]
       }
     ]
   },
@@ -379,16 +374,6 @@
         "key": "Mansion B1F - Scientist",
         "name": "Scientist",
         "party": [ "MAGNEMITE#34", "ELECTRODE#34" ]
-      }
-    ]
-  },
-  "Misty": {
-    "Misty": [
-      {
-        "key": "Misty",
-        "moves": [ "1#2#BUBBLEBEAM" ],
-        "name": "Misty",
-        "party": [ "STARYU#18", "STARMIE#21" ]
       }
     ]
   },
@@ -471,6 +456,15 @@
     ]
   },
   "Pewter Gym": {
+    "Brock": [
+      {
+        "alias": "Brock",
+        "key": "Pewter Gym - Brock",
+        "moves": [ "1#2#BIDE" ],
+        "name": "Brock",
+        "party": [ "GEODUDE#12", "ONIX#14" ]
+      }
+    ],
     "JrTrainerM": [
       {
         "key": "Pewter Gym - JrTrainerM",
@@ -655,6 +649,11 @@
         "key": "Rock Tunnel B1F - Hiker 2",
         "name": "Hiker 2",
         "party": [ "GEODUDE#25" ]
+      },
+      {
+        "key": "Rock Tunnel B1F - Hiker 3",
+        "name": "Hiker 3",
+        "party": [ "MACHOP#20", "ONIX#20" ]
       }
     ],
     "JrTrainerF": [
@@ -1412,9 +1411,14 @@
     ],
     "JrTrainerM": [
       {
-        "key": "Route 24 - JrTrainerM",
+        "key": "Route 24 - JrTrainerM 1",
         "name": "JrTrainerM",
         "party": [ "MANKEY#18" ]
+      },
+      {
+        "key": "Route 24 - JrTrainerM 2",
+        "name": "JrTrainerM",
+        "party": [ "RATTATA#14", "EKANS#14" ]
       }
     ],
     "Lass": [
@@ -1444,15 +1448,6 @@
       }
     ]
   },
-  "Route 24/Route 25": {
-    "JrTrainerM": [
-      {
-        "key": "Route 24/Route 25 - JrTrainerM",
-        "name": "JrTrainerM",
-        "party": [ "RATTATA#14", "EKANS#14" ]
-      }
-    ]
-  },
   "Route 25": {
     "Hiker": [
       {
@@ -1469,6 +1464,13 @@
         "key": "Route 25 - Hiker 3",
         "name": "Hiker 3",
         "party": [ "ONIX#17" ]
+      }
+    ],
+    "JrTrainerM": [
+      {
+        "key": "Route 25 - JrTrainerM",
+        "name": "JrTrainerM",
+        "party": [ "RATTATA#14", "EKANS#14" ]
       }
     ],
     "Lass": [
@@ -1673,6 +1675,11 @@
         "key": "Route 9 - Hiker 2",
         "name": "Hiker 2",
         "party": [ "GEODUDE#20", "MACHOP#20", "GEODUDE#20" ]
+      },
+      {
+        "key": "Route 9 - Hiker 3",
+        "name": "Hiker 3",
+        "party": [ "MACHOP#20", "ONIX#20" ]
       }
     ],
     "JrTrainerF": [
@@ -1697,15 +1704,6 @@
         "key": "Route 9 - JrTrainerM 2",
         "name": "JrTrainerM 2",
         "party": [ "RATTATA#19", "DIGLETT#19", "EKANS#19", "SANDSHREW#19" ]
-      }
-    ]
-  },
-  "Route 9/Rock Tunnel B1F": {
-    "Hiker": [
-      {
-        "key": "Route 9/Rock Tunnel B1F - Hiker",
-        "name": "Hiker",
-        "party": [ "MACHOP#20", "ONIX#20" ]
       }
     ]
   },
@@ -1740,19 +1738,19 @@
   "SS Anne 2F": {
     "Green2": [
       {
-        "alias": "SS Anne Rival - Squirtle",
+        "alias": "Boat Rival - Squirtle",
         "key": "SS Anne 2F - Green2 1",
         "name": "Green2 1",
         "party": [ "PIDGEOTTO#19", "RATICATE#16", "KADABRA#18", "WARTORTLE#20" ]
       },
       {
-        "alias": "SS Anne Rival - Bulbasaur",
+        "alias": "Boat Rival - Bulbasaur",
         "key": "SS Anne 2F - Green2 2",
         "name": "Green2 2",
         "party": [ "PIDGEOTTO#19", "RATICATE#16", "KADABRA#18", "IVYSAUR#20" ]
       },
       {
-        "alias": "SS Anne Rival - Charmander",
+        "alias": "Boat Rival - Charmander",
         "key": "SS Anne 2F - Green2 3",
         "name": "Green2 3",
         "party": [ "PIDGEOTTO#19", "RATICATE#16", "KADABRA#18", "CHARMELEON#20" ]
@@ -1769,9 +1767,14 @@
     ],
     "Gentleman": [
       {
-        "key": "SS Anne 2F Rooms - Gentleman",
-        "name": "Gentleman",
+        "key": "SS Anne 2F Rooms - Gentleman 1",
+        "name": "Gentleman 1",
         "party": [ "GROWLITHE#17", "PONYTA#17" ]
+      },
+      {
+        "key": "SS Anne 2F Rooms - Gentleman 2",
+        "name": "Gentleman 2",
+        "party": [ "PIKACHU#23" ]
       }
     ],
     "Lass": [
@@ -1779,15 +1782,6 @@
         "key": "SS Anne 2F Rooms - Lass",
         "name": "Lass",
         "party": [ "RATTATA#18", "PIKACHU#18" ]
-      }
-    ]
-  },
-  "SS Anne 2F Rooms/Vermilion Gym": {
-    "Gentleman": [
-      {
-        "key": "SS Anne 2F Rooms/Vermilion Gym - Gentleman",
-        "name": "Gentleman",
-        "party": [ "PIKACHU#23" ]
       }
     ]
   },
@@ -1841,16 +1835,6 @@
       }
     ]
   },
-  "Sabrina": {
-    "Sabrina": [
-      {
-        "key": "Sabrina",
-        "moves": [ "3#2#PSYWAVE" ],
-        "name": "Sabrina",
-        "party": [ "KADABRA#38", "MRMIME#37", "VENOMOTH#38", "ALAKAZAM#43" ]
-      }
-    ]
-  },
   "Saffron Gym": {
     "Channeler": [
       {
@@ -1889,6 +1873,15 @@
         "key": "Saffron Gym - Psychic 4",
         "name": "Psychic 4",
         "party": [ "SLOWBRO#38" ]
+      }
+    ],
+    "Sabrina": [
+      {
+        "alias": "Sabrina",
+        "key": "Saffron Gym - Sabrina",
+        "moves": [ "3#2#PSYWAVE" ],
+        "name": "Sabrina",
+        "party": [ "KADABRA#38", "MRMIME#37", "VENOMOTH#38", "ALAKAZAM#43" ]
       }
     ]
   },
@@ -1962,12 +1955,10 @@
         "name": "Rocket",
         "party": [ "RATICATE#28", "HYPNO#28", "RATICATE#28" ]
       }
-    ]
-  },
-  "Silph Co. 3F/Mansion 1F": {
+    ],
     "Scientist": [
       {
-        "key": "Silph Co. 3F/Mansion 1F - Scientist",
+        "key": "Silph Co. 3F - Scientist",
         "name": "Scientist",
         "party": [ "ELECTRODE#29", "WEEZING#29" ]
       }
@@ -2132,6 +2123,22 @@
     ]
   },
   "Vermilion Gym": {
+    "Gentleman": [
+      {
+        "key": "Vermilion Gym - Gentleman",
+        "name": "Gentleman",
+        "party": [ "PIKACHU#23" ]
+      }
+    ],
+    "LtSurge": [
+      {
+        "alias": "Surge",
+        "key": "Vermilion Gym - LtSurge",
+        "moves": [ "2#2#THUNDERBOLT" ],
+        "name": "LtSurge",
+        "party": [ "VOLTORB#21", "PIKACHU#18", "RAICHU#24" ]
+      }
+    ],
     "Rocker": [
       {
         "key": "Vermilion Gym - Rocker",
@@ -2280,6 +2287,7 @@
     ],
     "Giovanni": [
       {
+        "alias": "Giovanni",
         "key": "Viridian Gym - Giovanni",
         "moves": [ "4#2#FISSURE" ],
         "name": "Giovanni",
