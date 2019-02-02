@@ -56,10 +56,11 @@ class APokemon {
 
   getDefaultMoveset(level) {
     var moveset = [];
-    this.defaultMoves.forEach(m => moveset.push(m));
+    this.defaultMoves.forEach(m => { if (!moveset.includes(m)) moveset.push(m); });
     for (var l = 1; l <= level; l++) {
-      if (this.learnedMoves[l]) {
-        moveset.push(this.learnedMoves[l]);
+      var m = this.learnedMoves[l];
+      if (m && !moveset.includes(m)) {
+        moveset.push(m);
       }
     }
     return moveset.slice(-4);

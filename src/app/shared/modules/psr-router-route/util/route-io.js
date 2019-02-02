@@ -20,9 +20,9 @@ export function ExportToFile(route, filename, printerSettings) {
       var text;
       if (printerSettings && printerSettings.toJSON) {
         if (printerSettings.printEmptyProperties) {
-          text = JSON.stringify(routeJSON, null, "\t");;
+          text = JSON.stringify(routeJSON, null, "  ");
         } else {
-          text = JSON.stringify(routeJSON, (key, val) => (val && (val !== [] || val !== {})) || val === false ? val : undefined, "\t");
+          text = JSON.stringify(routeJSON, (key, val) => (val && (val !== [] || val !== {})) || val === 0 || val === false ? val : undefined, "  ");
         }
       } else{
         // parse to txt
@@ -35,6 +35,7 @@ export function ExportToFile(route, filename, printerSettings) {
     }
   } catch (e) {
     window.alert("Exporting to a file is not supported for this browser...");
+    console.error(e);
   }
 
   return route;

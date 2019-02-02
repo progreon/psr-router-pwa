@@ -9,6 +9,8 @@ import { angleDownIcon, angleUpIcon, circleIcon } from 'Shared/my-icons';
 // These are the elements needed by this element.
 // import '@vaadin/vaadin-item/vaadin-item';
 import '@vaadin/vaadin-item/theme/material/vaadin-item';
+import 'SharedComponents/psr-router-trainer/psr-router-trainer';
+import { PsrRouterTrainer } from 'SharedComponents/psr-router-trainer/psr-router-trainer';
 
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
@@ -16,15 +18,25 @@ import { AppStyles } from 'Shared/app-styles';
 // TODO: show messages.
 class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   _renderPopupContent() {
-    // TODO
+    var trainer = new PsrRouterTrainer(super.routeEntry ? super.routeEntry.trainer : null);
     return html`
-      <style>
-        .red {
-          color: red;
-        }
-      </style>
-      <div class="red">${super.routeEntry?super.routeEntry.entryString:""}</div>
+      ${trainer.render()}
     `;
+  }
+
+  _renderExpandingContent() {
+    var dom = super._renderExpandingContent();
+    if (super.routeEntry && super.routeEntry.shareExp) {
+      if (!dom) {
+        dom = [];
+      }
+      dom.push(html`<div>${JSON.stringify(super.routeEntry.shareExp)}</div>`);
+    }
+    return dom;
+  }
+
+  _getTitle() {
+    return super._getTitle() || super.routeEntry.trainer.toString();
   }
 
   static get properties() {

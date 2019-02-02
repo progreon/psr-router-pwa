@@ -1,247 +1,257 @@
-﻿{
-	"game": "r",
-	"shortname": "Exarions old route",
-	"info": {
-		"title": "Red Any% Glitchless - Exarion Route"
-	},
-	"entries": [
-		{
-			"type": "S",
-			"info": {
-				"title": "New Game"
-			},
-			"entries": [
-				{
-					"info": {
-						"summary": "Clear any existing save file by pressing Up + B + Select on the game title screen."
-					}
-				},
-				{
-					"info": {
-						"summary": "New game: text speed fast, animations off, style shift."
-					}
-				},
-				{
-					"info": {
-						"summary": "Start a new game, and name yourself and your rival a one character name."
-					}
-				}
-			]
-		},
-		{
-			"type": "S",
-			"info": {
-				"title": "Pallet Town",
-				"summary": "It's time to get rolling!"
-			},
-			"entries": [
-				{
-					"info": {
-						"summary": "Exit out of your home, and head north towards Route 1. Prof. Oak will stop you and lead you back to his lab. After he and your rival are done talking, select the middle Pokeball on the table to get Squirtle. Name it a one character name, and go to head out of the lab."
-					}
-				},
-				{
-					"type": "GetP",
-					"info": {
-						"summary": "Get Squirtle"
-					},
-					"entryString": "#squirtle:5",
-					"choices": []
-				},
-				{
-					"info": {
-						"summary": "Your rival will stop you for a battle."
-					}
-				},
-				{
-					"type": "B",
-					"info": {
-						"title": "Rival 1",
-						"summary": "Tail Whip x1-2, then Tackle until it faints."
-					},
-					"entryString": "Rival 1 - Bulbasaur"
-				},
-				{
-					"info": {
-						"summary": "Head out of the lab, and north to Route 1",
-						"description": "Here there can be a really, really long explanation on how to walk from the lab to route 1, getting the parcel, going back to oak and giving him the parcel.\nAlso with an image: [[https://i.imgur.com/qayAQtA.jpg]]\nAfter this you will get your pokemon and live happily ever after :D"
-					}
-				}
-			]
-		},
-		{
-			"type": "S",
-			"info": {
-				"title": "Getting the Parcel to Oak"
-			},
-			"entries": [
-				{
-					"type": "S",
-					"info": {
-						"title": "Route 1"
-					},
-					"entries": [
-						{
-							"type": "ENTRY",
-							"info": {
-								"title": "Encounter",
-								"summary": "Defeat an encounter",
-								"description": "You want to defeat an encounter here so that you have enough experience to get Lvl.8 at the Bug Catcher fight later. Only attempt to kill low level pokemon as higher levels take longer to kill."
-							}
-						},
-						{
-							"info": {
-								"summary": "Head north through the route to Viridian City."
-							}
-						}
-					]
-				},
-				{
-					"info": {
-						"summary": "Head straight into the Mart and collect Oak's Parcel. Exit, and head south back to Route 1."
-					}
-				},
-				{
-					"info": {
-						"summary": "Head south, utilizing ledges to avoid as much grass as you can. If you have yet to kill an encounter, take the shorter route through the second-to-last grass patch; otherwise, walk around it."
-					}
-				},
-				{
-					"info": {
-						"summary": "Head to the lab, finish the lengthy conversation with Prof. Oak and head back north once more."
-					}
-				}
-			]
-		},
-		{
-			"type": "S",
-			"info": {
-				"title": "Getting Nidoran!"
-			},
-			"entries": [
-				{
-					"info": {
-						"summary": "Head north to Viridian City again, remembering to kill an encounter if you haven't already."
-					}
-				},
-				{
-					"type": "S",
-					"info": {
-						"title": "Viridian City"
-					},
-					"entries": [
-						{
-							"info": {
-								"summary": "Head back into the Mart for the first shopping trip."
-							}
-						},
-						{
-							"type": "ENTRY",
-							"info": {
-								"title": "Shop",
-								"summary": "Buy 3-8 Poke Balls."
-							}
-						},
-						{
-							"info": {
-								"summary": "Head out of the Mart, and west to Route 22."
-							}
-						}
-					]
-				},
-				{
-					"type": "S",
-					"info": {
-						"title": "Route 22"
-					},
-					"entries": [
-						{
-							"type": "ENTRY",
-							"info": {
-								"title": "Manip",
-								"summary": "Manip a NidoranM L4",
-								"description": "Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name"
-							}
-						},
-						{
-							"info": {
-								"summary": "Return to Viridian City and go north, picking up the tree potion, and entering Viridian Forest"
-							}
-						}
-					]
-				}
-			]
-		},
-		{
-			"type": "S",
-			"info": {
-				"title": "Viridian Forest"
-			},
-			"entries": [
-				{
-					"info": {
-						"summary": "Avoid encounters as much as possible by walking on encounterless grass tiles."
-					}
-				},
-				{
-					"type": "ENTRY",
-					"info": {
-						"title": "GetI: Antidote",
-						"summary": "Get the Antidote",
-						"description": "Pick up the antidote on the way up."
-					}
-				},
-				{
-					"type": "ENTRY",
-					"info": {
-						"title": "GetI: Potion",
-						"summary": "Get the Potion",
-						"description": "Be at least 10 HP before the Weedle Guy, and pick up the hidden Potion next to him."
-					}
-				},
-				{
-					"type": "B",
-					"info": {
-						"title": "Weedle Guy",
-						"summary": "Tail Whip x2, spam tackle",
-						"description": "If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion."
-					},
-					"entryString": "Viridian Forest - BugCatcher 3"
-				},
-				{
-					"type": "ENTRY",
-					"info": {
-						"title": "Swap: 0 1",
-						"summary": "Swap to Nidoran",
-						"description": "After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary."
-					}
-				}
-			]
-		},
-		{
-			"type": "S",
-			"info": {
-				"title": "Pewter City"
-			},
-			"entries": [
-				{
-					"type": "B",
-					"info": {
-						"title": "Brock",
-						"summary": "Use switch strats",
-						"description": "Switch to Squirtle to share exp, use Bubble to kill Geodude and Onix. If Onix uses Bide on the turn you switch in, use Tail Whip twice, then Bubble."
-					},
-					"entryString": "Brock :: 0:0 0:1 1:0 1:1"
-				},
-				{
-					"type": "ENTRY",
-					"info": {
-						"title": "Shop",
-						"summary": "Do the shopping",
-						"description": "Change the battle style option from Shift to Set, and buy 7-10 Potions."
-					}
-				}
-			]
-		}
-	]
+{
+  "game": "r",
+  "shortname": "Exarions old route",
+  "info": {
+    "title": "Red Any% Glitchless - Exarion Route"
+  },
+  "entries": [
+    {
+      "type": "S",
+      "info": {
+        "title": "New Game"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Clear any existing save file by pressing Up + B + Select on the game title screen."
+          }
+        },
+        {
+          "info": {
+            "summary": "New game: text speed fast, animations off, style shift."
+          }
+        },
+        {
+          "info": {
+            "summary": "Start a new game, and name yourself and your rival a one character name."
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Pallet Town",
+        "summary": "It's time to get rolling!"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Exit out of your home, and head north towards Route 1. Prof. Oak will stop you and lead you back to his lab. After he and your rival are done talking, select the middle Pokeball on the table to get Squirtle. Name it a one character name, and go to head out of the lab."
+          }
+        },
+        {
+          "type": "GetP",
+          "info": {
+            "summary": "Get Squirtle"
+          },
+          "entryString": "#squirtle:5",
+          "choices": []
+        },
+        {
+          "info": {
+            "summary": "Your rival will stop you for a battle."
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "title": "Rival 1",
+            "summary": "Tail Whip x1-2, then Tackle until it faints."
+          },
+          "trainer": "Rival 1 - Bulbasaur"
+        },
+        {
+          "info": {
+            "summary": "Head out of the lab, and north to Route 1",
+            "description": "Here there can be a really, really long explanation on how to walk from the lab to route 1, getting the parcel, going back to oak and giving him the parcel.\nAlso with an image: [[https://i.imgur.com/qayAQtA.jpg]]\nAfter this you will get your pokemon and live happily ever after :D"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Getting the Parcel to Oak"
+      },
+      "entries": [
+        {
+          "type": "S",
+          "info": {
+            "title": "Route 1"
+          },
+          "entries": [
+            {
+              "type": "ENTRY",
+              "info": {
+                "title": "Encounter",
+                "summary": "Defeat an encounter",
+                "description": "You want to defeat an encounter here so that you have enough experience to get Lvl.8 at the Bug Catcher fight later. Only attempt to kill low level pokemon as higher levels take longer to kill."
+              }
+            },
+            {
+              "info": {
+                "summary": "Head north through the route to Viridian City."
+              }
+            }
+          ]
+        },
+        {
+          "info": {
+            "summary": "Head straight into the Mart and collect Oak's Parcel. Exit, and head south back to Route 1."
+          }
+        },
+        {
+          "info": {
+            "summary": "Head south, utilizing ledges to avoid as much grass as you can. If you have yet to kill an encounter, take the shorter route through the second-to-last grass patch; otherwise, walk around it."
+          }
+        },
+        {
+          "info": {
+            "summary": "Head to the lab, finish the lengthy conversation with Prof. Oak and head back north once more."
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Getting Nidoran!"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Head north to Viridian City again, remembering to kill an encounter if you haven't already."
+          }
+        },
+        {
+          "type": "S",
+          "info": {
+            "title": "Viridian City"
+          },
+          "entries": [
+            {
+              "info": {
+                "summary": "Head back into the Mart for the first shopping trip."
+              }
+            },
+            {
+              "type": "ENTRY",
+              "info": {
+                "title": "Shop",
+                "summary": "Buy 3-8 Poke Balls."
+              }
+            },
+            {
+              "info": {
+                "summary": "Head out of the Mart, and west to Route 22."
+              }
+            }
+          ]
+        },
+        {
+          "type": "S",
+          "info": {
+            "title": "Route 22"
+          },
+          "entries": [
+            {
+              "type": "ENTRY",
+              "info": {
+                "title": "Manip",
+                "summary": "Manip a NidoranM L4",
+                "description": "Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name"
+              }
+            },
+            {
+              "info": {
+                "summary": "Return to Viridian City and go north, picking up the tree potion, and entering Viridian Forest"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Viridian Forest"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Avoid encounters as much as possible by walking on encounterless grass tiles."
+          }
+        },
+        {
+          "type": "ENTRY",
+          "info": {
+            "title": "GetI: Antidote",
+            "summary": "Get the Antidote",
+            "description": "Pick up the antidote on the way up."
+          }
+        },
+        {
+          "type": "ENTRY",
+          "info": {
+            "title": "GetI: Potion",
+            "summary": "Get the Potion",
+            "description": "Be at least 10 HP before the Weedle Guy, and pick up the hidden Potion next to him."
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "title": "Weedle Guy",
+            "summary": "Tail Whip x2, spam tackle",
+            "description": "If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion."
+          },
+          "trainer": "Viridian Forest - BugCatcher 3"
+        },
+        {
+          "type": "ENTRY",
+          "info": {
+            "title": "Swap: 0 1",
+            "summary": "Swap to Nidoran",
+            "description": "After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary."
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Pewter City"
+      },
+      "entries": [
+        {
+          "type": "B",
+          "info": {
+            "title": "Brock",
+            "summary": "Use switch strats",
+            "description": "Switch to Squirtle to share exp, use Bubble to kill Geodude and Onix. If Onix uses Bide on the turn you switch in, use Tail Whip twice, then Bubble."
+          },
+          "trainer": "Brock",
+          "shareExp": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "type": "ENTRY",
+          "info": {
+            "title": "Shop",
+            "summary": "Do the shopping",
+            "description": "Change the battle style option from Shift to Set, and buy 7-10 Potions."
+          }
+        }
+      ]
+    }
+  ]
 }

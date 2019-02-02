@@ -129,11 +129,30 @@ function _PARSE3a_getRouteJSONEntries(scopedLines) {
       case Route.RouteGetPokemon.getEntryType().toUpperCase():
         entry.choices = [];
         entry.preference = 0;
-      case Route.RouteBattle.getEntryType().toUpperCase():
         entry.entryString = scopedLine.untypedLine; // TODO: this is only temporary until route entries are more complete
         if (scopedLine.scope && scopedLine.scope.length > 0) {
           var titleLine = scopedLine.scope.shift();
           var splitted = titleLine.line.split(" :: ");
+          entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: "", summary: titleLine.line };
+          entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
+        }
+        break;
+      case Route.RouteBattle.getEntryType().toUpperCase():
+        let [trainer, shared] = scopedLine.untypedLine.split("::").map(s => s.trim());
+        entry.trainer = trainer;
+        if (shared) {
+          // eg: "0:0,1  2:1"
+          let bs = shared.split(" ");
+          let se = {};
+          bs.forEach(ops => { var [o, ps] = ops.split(":"); if (o && ps) se[o] = ps.split(",").map(p => parseInt(p)); });
+          entry.shareExp = [];
+          for (let i = 0; i <= Math.max(...Object.keys(se)); i++) {
+            entry.shareExp.push(se[i] ? se[i] : [0]);
+          }
+        }
+        if (scopedLine.scope && scopedLine.scope.length > 0) {
+          let titleLine = scopedLine.scope.shift();
+          let splitted = titleLine.line.split(" :: ");
           entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: "", summary: titleLine.line };
           entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
         }
@@ -180,7 +199,8 @@ function _PARSE3R_getScopedEntryLines(routeJSONEntries) {
   routeJSONEntries.forEach(jsonEntry => {
     var scopedLine = { line: "", scope: [] };
     // Now entry type specific stuff
-    switch (jsonEntry.type) {
+    var type = jsonEntry.type && jsonEntry.type.toUpperCase();
+    switch (type) {
       case Route.RouteGetPokemon.getEntryType().toUpperCase():
         // TODO: choices, preference
         scopedLine.line = Route.RouteGetPokemon.getEntryType() + ": " + jsonEntry.entryString; // TODO: this is only temporary until route entries are more complete
@@ -196,7 +216,15 @@ function _PARSE3R_getScopedEntryLines(routeJSONEntries) {
         }
         break;
       case Route.RouteBattle.getEntryType().toUpperCase():
-        scopedLine.line = Route.RouteBattle.getEntryType() + ": " + jsonEntry.entryString; // TODO: this is only temporary until route entries are more complete
+        // scopedLine.line = Route.RouteBattle.getEntryType() + ": " + jsonEntry.entryString; // TODO: this is only temporary until route entries are more complete
+        // eg: "0:0,1 1:0 2:1"
+        scopedLine.line = Route.RouteBattle.getEntryType() + ": " + jsonEntry.trainer;
+        if (jsonEntry.shareExp) {
+          scopedLine.line += " ::";
+          for (let i = 0; i < jsonEntry.shareExp.length; i++) {
+            scopedLine.line += ` ${i}:${jsonEntry.shareExp[i].join(",")}`;
+          }
+        }
         if (jsonEntry.info) {
           if (jsonEntry.info.summary) {
             scopedLine.scope.push({ line: (jsonEntry.info.title ? jsonEntry.info.title + " :: " : "") + jsonEntry.info.summary });

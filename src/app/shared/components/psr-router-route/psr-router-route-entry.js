@@ -48,6 +48,14 @@ export class PsrRouterRouteEntry extends LitElement {
     }
   }
 
+  _getTitle() {
+    return this.routeEntry && this.routeEntry.info.title || "";
+  }
+
+  _getSummary() {
+    return this.routeEntry && this.routeEntry.info.summary || "";
+  }
+
   render() {
     const contentDOM = this._renderContent();
     const expandingDOM = this._renderExpandingContent();
@@ -135,8 +143,8 @@ export class PsrRouterRouteEntry extends LitElement {
       </div>
       <div class="header" ?hidden="${this.routeHeader}">
         <vaadin-item class="entry" @click="${this._onClick}">
-          <div><strong>${this.routeEntry?this.routeEntry.info.title:""}</strong></div>
-          <div>${this.routeEntry?this.routeEntry.info.summary:""}</div>
+          <div><strong>${this._getTitle()}</strong></div>
+          <div>${this._getSummary()}</div>
         </vaadin-item>
         <div class="icon expand" @click="${this._onClick}" ?hidden="${!expandingDOM}">${icon}</div>
       </div>
@@ -246,6 +254,11 @@ export class PsrRouterRouteEntry extends LitElement {
   _openDialog() {
     var dialog = this.shadowRoot.getElementById("dialog");
     dialog.opened = true;
+  }
+
+  _fireEvent(eventName, detail) {
+    const event = new CustomEvent(eventName, { detail });
+    document.body.dispatchEvent(event);
   }
 }
 

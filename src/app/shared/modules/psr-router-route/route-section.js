@@ -198,7 +198,7 @@ class RouteSection extends RouteEntry {
     var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     var children = [];
     obj.entries.forEach(e => {
-      var type = e.type;
+      var type = e.type && e.type.toUpperCase();
       switch (type) {
         case RouteBattle.getEntryType().toUpperCase():
           children.push(RouteBattle.newFromJSONObject(game, e));
