@@ -11,9 +11,9 @@ class PsrRouterMoves extends PsrRouterPage {
   _render() {
     // var moves = this.game ? this.game.moves : {};
     var moveElements = [];
-    for (var m in this.moves) {
+    Object.keys(this.moves).sort((a, b) => (a < b ? -1 : (a > b ? 1 : 0))).forEach(m => {
       moveElements.push(html`<psr-router-move id="${m}" .move=${this.moves[m]} detailed></psr-router-move>`);
-    }
+    });
     return html`
       ${AppStyles}
       ${moveElements}
