@@ -13,7 +13,7 @@ import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings';
 import { connect } from 'pwa-helpers/connect-mixin';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query';
 import { installOfflineWatcher } from 'pwa-helpers/network';
-import { installRouter } from 'pwa-helpers/router';
+import { installRouter } from './custom-router';
 import { updateMetadata } from 'pwa-helpers/metadata';
 
 // Imports for this element
@@ -301,7 +301,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
           </app-header>
 
           <!-- Main content -->
-          <main role="main" class="main-content">
+          <main id="main" role="main" class="main-content">
             <psr-router-home id="home" class="page" ?active="${this._page === 'home'}" .searchParams="${this._searchParams}"></psr-router-home>
             <psr-router-router id="router" class="page" ?active="${this._page === 'router'}" .searchParams="${this._searchParams}"></psr-router-router>
             <psr-router-items id="items" class="page" ?active="${this._page === 'items'}" .searchParams="${this._searchParams}"></psr-router-items>
@@ -360,15 +360,6 @@ class PsrRouterApp extends connect(store)(LitElement) {
       {name: 'trainers', title: "Trainer List", element: 'psr-router-trainers'},
       {name: '404', title: "404", element: 'psr-router-404', is404: true}
     ];
-    // Handle the navigation caused by js code here.
-    document.body.addEventListener('navigate', (e) => {
-      if (e.detail.external) {
-        window.location.href = e.detail.href;
-      } else {
-        window.history.pushState({}, '', e.detail.href);
-        store.dispatch(navigate(window.location));
-      }
-    });
 
     // Load the last saved (json) route from the local storage if there is one,
     // else load the default example route.
@@ -393,7 +384,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
       }
     });
     // window.onunload = e => RouteUtil.RouteManager.SaveRoute();
-    installRouter((location) => {store.dispatch(navigate(location))});
+    installRouter((location, e) => {store.dispatch(navigate(location, e))}, this._getScroll.bind(this), this._setScroll.bind(this));
     installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     installMediaQueryWatcher(`(min-width: ${MyAppGlobals.wideWidth})`,
         (matches) => store.dispatch(updateLayout(matches)));
@@ -414,6 +405,14 @@ class PsrRouterApp extends connect(store)(LitElement) {
         description: pageTitle
         // This object also takes an image property, that points to an img src.
     });
+  }
+
+  _getScroll() {
+    return this.shadowRoot.getElementById("main").scrollTop;
+  }
+
+  _setScroll(scroll=0) {
+    this.shadowRoot.getElementById("main").scrollTop = scroll;
   }
 
   _onMenuButtonClicked(isBackButton) {
@@ -446,6 +445,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
       if (document.getElementById("overlay")) {
         document.getElementById("overlay").close();
       }
+      window.setTimeout(this._setScroll.bind(this, window.history.state && window.history.state.scroll), 20);
     }
   }
 }
