@@ -32,7 +32,7 @@ class RouteBattle extends RouteEntry {
   }
 
   getJSONObject() {
-    var obj = super.getJSONObject();
+    let obj = super.getJSONObject();
     obj.trainer = this.trainer.alias || this.trainer.key;
     if (this.shareExp) {
       obj.shareExp = this.shareExp;
@@ -41,28 +41,10 @@ class RouteBattle extends RouteEntry {
   }
 
   static newFromJSONObject(game, obj) {
-    var trainer;
-    var shareExp;
-    if (obj.entryString) {
-      var split = obj.entryString.split("::");
-      trainer = game.findTrainerByKeyOrAlias(split[0].trim());
-      if (split.length > 1) {
-        shareExp = [];
-        trainer.party.forEach(p => shareExp.push([]));
-        var battleString = split[1].trim().split(" ");
-        battleString.forEach(bs => {
-          var [o, p] = bs.split(":");
-          if (o < trainer.party.length) {
-            shareExp[o].push(parseInt(p));
-          }
-        });
-      }
-    } else {
-      trainer = game.findTrainerByKeyOrAlias(obj.trainer);
-      shareExp = obj.shareExp;
-    }
-    var location = undefined; // TODO, parse from obj.location
-    var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
+    let trainer = game.findTrainerByKeyOrAlias(obj.trainer);
+    let shareExp = obj.shareExp;
+    let location = undefined; // TODO, parse from obj.location
+    let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     return new RouteBattle(game, trainer, info, location, shareExp);
   }
 }

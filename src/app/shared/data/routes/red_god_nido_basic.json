@@ -1,6 +1,6 @@
 {
   "game": "r",
-  "shortname": "Red God Nido Basic",
+  "shortname": "red_god_nido_basic",
   "info": {
     "title": "Red Any% Glitchless - God Nido (by PaperGuy)"
   },
@@ -44,8 +44,12 @@
           "info": {
             "summary": "Choose Squirtle, and give it a one-character name"
           },
-          "entryString": "#squirtle:5",
-          "choices": [],
+          "choices": [
+            {
+              "pokemon": "Squirtle",
+              "level": 5
+            }
+          ],
           "preference": 0
         },
         {

@@ -45,8 +45,13 @@
           "info": {
             "summary": "Get Squirtle"
           },
-          "entryString": "#squirtle:5",
-          "choices": []
+          "choices": [
+            {
+              "pokemon": "Squirtle",
+              "level": 5
+            }
+          ],
+          "preference": 0
         },
         {
           "info": {

@@ -15,17 +15,14 @@ import { RouteEntry } from '.';
 class RouteGetPokemon extends RouteEntry {
   /**
    *
-   * @param {Game}            game              The Game object this route entry uses.
-   * @param {string}          entryString       TEMP
-   * @param {RouteEntryInfo}  [info]            The info for this entry.
-   * @param {Battler[]}       [choices=[]]      The different battlers to choose from.
-   * @param {number}          [preference=0]    The preferred choise.
-   * @param {Location}        [location]        The location in the game where this entry occurs.
-   * @todo choices, preference, ...
+   * @param {Game}                game              The Game object this route entry uses.
+   * @param {PokemonLevelPair[]}  choices           The different battlers to choose from.
+   * @param {number}              [preference=0]    The preferred choise.
+   * @param {RouteEntryInfo}      [info]            The info for this entry.
+   * @param {Location}            [location]        The location in the game where this entry occurs.
    */
-  constructor(game, entryString, info=undefined, choices=[], preference=0, location=undefined) {
+  constructor(game, choices, preference=0, info=undefined, location=undefined) {
     super(game, info, location);
-    this.entryString = entryString;
     this._choices = choices;
     this._preference = preference;
   }
@@ -35,18 +32,19 @@ class RouteGetPokemon extends RouteEntry {
   }
 
   getJSONObject() {
-    var obj = super.getJSONObject();
-    obj.entryString = this.entryString;
-    obj.choices = []; // TODO, parse from this._choices;
+    let obj = super.getJSONObject();
+    obj.choices = []; // TODO, parse from this._choices (array of PokemonLevelPair -> array of {pokemon, level})
+    this._choices.forEach(pl => obj.choices.push({pokemon: pl.pokemon.name, level: pl.level}));
     obj.preference = this._preference;
     return obj;
   }
 
   static newFromJSONObject(game, obj) {
-    var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-    var choices = []; // TODO, parse from obj.choices
-    var location = undefined; // TODO, parse from obj.location
-    return new RouteGetPokemon(game, obj.entryString, info, choices, obj.preference, location);
+    let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
+    let choices = []; // TODO, parse from obj.choices (array of {pokemon, level} -> array of PokemonLevelPair)
+    obj.choices.forEach(pl => choices.push(new game.model.PokemonLevelPair(game.findPokemonByName(pl.pokemon), pl.level)));
+    let location = undefined; // TODO, parse from obj.location
+    return new RouteGetPokemon(game, choices, obj.preference, info, location);
   }
 }
 

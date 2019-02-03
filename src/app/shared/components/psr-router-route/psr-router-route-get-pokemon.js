@@ -18,7 +18,8 @@ class PsrRouterRouteGetPokemon extends PsrRouterRouteEntry {
   _renderExpandingContent() {
     // TODO
     return html`
-      ${super.routeEntry?super.routeEntry.entryString:""}
+      ${super.routeEntry && super.routeEntry._choices.length > 1 ? "Choose one:" : ""}
+      ${super.routeEntry ? super.routeEntry._choices.map(pl => pl.toString()).join(", ") : ""}
     `;
   }
 

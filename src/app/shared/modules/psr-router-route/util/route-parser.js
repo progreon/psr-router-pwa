@@ -128,8 +128,22 @@ function _PARSE3a_getRouteJSONEntries(scopedLines) {
     switch (scopedLine.type) {
       case Route.RouteGetPokemon.getEntryType().toUpperCase():
         entry.choices = [];
-        entry.preference = 0;
-        entry.entryString = scopedLine.untypedLine; // TODO: this is only temporary until route entries are more complete
+        // e.g. "pikachu:5  #bulbasaur:5"
+        let choices = scopedLine.untypedLine.split(" ");
+        let preference = 0;
+        for (let i = 0; i < choices.length; i++) {
+          if (choices[i]) { // in case of choices separated by multiple spaces
+            let [pokemon, level] = choices[i].split(":");
+            if (pokemon.startsWith("#")) {
+              if (entry.preference == undefined) {
+                entry.preference = preference;
+              }
+              pokemon = pokemon.substring(1);
+            }
+            entry.choices.push({pokemon, level});
+            preference++;
+          }
+        }
         if (scopedLine.scope && scopedLine.scope.length > 0) {
           var titleLine = scopedLine.scope.shift();
           var splitted = titleLine.line.split(" :: ");
@@ -202,8 +216,10 @@ function _PARSE3R_getScopedEntryLines(routeJSONEntries) {
     var type = jsonEntry.type && jsonEntry.type.toUpperCase();
     switch (type) {
       case Route.RouteGetPokemon.getEntryType().toUpperCase():
-        // TODO: choices, preference
-        scopedLine.line = Route.RouteGetPokemon.getEntryType() + ": " + jsonEntry.entryString; // TODO: this is only temporary until route entries are more complete
+        scopedLine.line = Route.RouteGetPokemon.getEntryType() + ":";
+        for (let i = 0; i < jsonEntry.choices.length; i++) {
+          scopedLine.line += ` ${jsonEntry.preference == i ? "#" : ""}${jsonEntry.choices[i].pokemon}:${jsonEntry.choices[i].level}`;
+        }
         if (jsonEntry.info) {
           if (jsonEntry.info.summary) {
             scopedLine.scope.push({ line: (jsonEntry.info.title ? jsonEntry.info.title + " :: " : "") + jsonEntry.info.summary });
@@ -216,7 +232,6 @@ function _PARSE3R_getScopedEntryLines(routeJSONEntries) {
         }
         break;
       case Route.RouteBattle.getEntryType().toUpperCase():
-        // scopedLine.line = Route.RouteBattle.getEntryType() + ": " + jsonEntry.entryString; // TODO: this is only temporary until route entries are more complete
         // eg: "0:0,1 1:0 2:1"
         scopedLine.line = Route.RouteBattle.getEntryType() + ": " + jsonEntry.trainer;
         if (jsonEntry.shareExp) {

@@ -128,21 +128,22 @@ class RouteSection extends RouteEntry {
 
   /**
    * Add a new battle entry.
-   * @param {string}        entryString     TEMP
+   * @param {trainer}       trainer         The trainer to battle against.
    * @param {string}        [title=""]      A title for this entry.
    * @param {string}        [summary=""]    A summary for this entry.
+   * @param {string}        [description=""]  A long description.
    * @param {Location}      [location]      The location in the game where this entry occurs.
    * @returns {RouteBattle} The added entry.
    * @todo
    */
-  addNewBattle(entryString, title="", summary="", description="", location=undefined) {
-    return this._addEntry(new RouteBattle(this.game, entryString, new RouteEntryInfo(title, summary, description), location ? location : this._location));
+  addNewBattle(trainer, title="", summary="", description="", location=undefined) {
+    return this._addEntry(new RouteBattle(this.game, trainer, new RouteEntryInfo(title, summary, description), location ? location : this._location));
   }
 
   /**
    * Add new directions.
-   * @param {string}        summary       The directions summary.
-   * @param {string}        [description=""]    A long description.
+   * @param {string}        summary           The directions summary.
+   * @param {string}        [description=""]  A long description.
    * @param {string}        [imageUrl=""]     A link to an image (e.g. imgur).
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @returns {RouteSection} The added entry.
@@ -164,15 +165,16 @@ class RouteSection extends RouteEntry {
 
   /**
    * Add a new pokemon entry.
-   * @param {string}        entryString       TEMP
+   * @param {Object}        choices           The pokemon to choose from.
+   * @param {number}        [preference=0]    The preferred choices.
    * @param {string}        [title=""]        A title for this entry.
    * @param {string}        [summary=""]      A summary for this entry.
    * @param {Location}      [location]        The location in the game where this entry occurs.
    * @returns {RouteGetPokemon} The added entry.
    * @todo
    */
-  addNewGetPokemon(entryString, title="", summary="", location=undefined) {
-    return this._addEntry(new RouteGetPokemon(this.game, entryString, new RouteEntryInfo(title, summary), undefined, undefined, location ? location : this._location));
+  addNewGetPokemon(choices, preference, title="", summary="", location=undefined) {
+    return this._addEntry(new RouteGetPokemon(this.game, choices, preference, new RouteEntryInfo(title, summary), undefined, undefined, location ? location : this._location));
   }
 
   /**

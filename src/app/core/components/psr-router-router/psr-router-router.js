@@ -64,7 +64,7 @@ class PsrRouterRouter extends PsrRouterPage {
         <template>
           <div class="menu-options">
             <vaadin-text-field id="filename"></vaadin-text-field>
-            <vaadin-button id="menu-json">JSON</vaadin-button>
+            <vaadin-button id="menu-json" ?disabled="${!super.searchParams.dev}">JSON</vaadin-button>
             <vaadin-button id="menu-txt">TXT</vaadin-button>
           </div>
         </template>
@@ -75,7 +75,11 @@ class PsrRouterRouter extends PsrRouterPage {
   static get properties() {
     return {
       /* The route object. */
-      route: Object
+      route: Object,
+      _loading: {
+        type: Boolean,
+        value: false
+      }
     };
   }
 
@@ -90,7 +94,17 @@ class PsrRouterRouter extends PsrRouterPage {
     super.firstUpdated(changedProperties);
     this.route = window.app.route;
     var fileInput = this.shadowRoot.getElementById("selFile");
-    fileInput.oninput = e => RouteManager.LoadRouteFile(e.target.files[0]).then(route => this.route = route);
+    fileInput.oninput = e => {
+      this._loading = true;
+      RouteManager.LoadRouteFile(e.target.files[0])
+        .then(route => {
+          this.route = route;
+          fileInput.value = "";
+          this._loading = false;
+        }).catch(e => {
+          this._loading = false;
+        });
+    }
   }
 
   _onInput(e) {
@@ -114,7 +128,7 @@ class PsrRouterRouter extends PsrRouterPage {
   }
 
   _onLoadRouteClicked(e) {
-    this.route = RouteManager.LoadExampleRoute("Red God Nido Basic");
+    this.route = RouteManager.LoadExampleRoute("red_god_nido_basic");
   }
 
   _showImportDialog(e) {

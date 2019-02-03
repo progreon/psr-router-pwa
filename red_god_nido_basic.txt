@@ -18,7 +18,7 @@ Route: Red Any% Glitchless - God Nido (by PaperGuy)
 		Give your character and your rival a one-character name
 	S: Pallet Town
 		Optional: withdraw the PC Potion in your room
-		GetP: #squirtle:5
+		GetP: squirtle:5
 			Choose Squirtle, and give it a one-character name
 		B: Rival 1 - Bulbasaur
 			Rival 1 :: Tail Whip once (or twice if Growl turn 1), then spam Tackle
