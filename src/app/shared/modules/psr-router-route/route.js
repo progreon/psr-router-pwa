@@ -18,7 +18,7 @@ class Route extends RouteSection {
   /**
    *
    * @param {Game}            game              The Game object this route entry uses.
-   * @param {RouteEntryInfo}  title             The info for this entry.
+   * @param {RouteEntryInfo}  info              The info for this entry.
    * @param {String}          [shortname]       A shortname for this route, also the file name.
    * @param {Location}        [location]        The location in the game where this entry occurs.
    * @param {RouteEntry[]}    [children=[]]     The child entries of this entry.

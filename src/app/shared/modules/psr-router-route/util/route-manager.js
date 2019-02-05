@@ -45,6 +45,8 @@ export function SaveRoute(route=null) {
   return route;
 }
 
+// TODO: new route
+
 //// EXAMPLE ROUTES ////
 import exampleRoute from 'SharedData/routes/example_route.json';
 import redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
