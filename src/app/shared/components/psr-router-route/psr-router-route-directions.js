@@ -15,25 +15,34 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 class PsrRouterRouteDirections extends PsrRouterRouteEntry {
-  _renderPopupContent() {
-    if (super.routeEntry.info.description) {
-      var dom = [];
-      var description = super.routeEntry.info.description;
-      var is = 0; // istart
-      while (is < description.length) {
-        var i1 = description.indexOf("[[", is);
-        var i2 = i1 >= 0 ? description.indexOf("]]", i1) : -1;
-        if (i2 < 0) {
-          dom.push(html`${description.substring(is)}`);
-          is = description.length;
-        } else {
-          dom.push(html`<div style="white-space: pre-wrap;">${description.substring(is, i1)}</div>`);
-          var img = description.substring(i1 + 2, i2);
-          dom.push(html`<img src="${img}" style="width: 100%;"></img>`);
-          is = i2 + 2;
+  _getPopupContentRenderer() {
+    if (this.routeEntry.info.description) {
+      return (root, dialog) => {
+        while (root.firstChild) {
+          root.removeChild(root.firstChild);
         }
-      }
-      return dom;
+        var description = this.routeEntry.info.description;
+        var is = 0; // istart
+        while (is < description.length) {
+          var i1 = description.indexOf("[[", is);
+          var i2 = i1 >= 0 ? description.indexOf("]]", i1) : -1;
+          if (i2 < 0) {
+            const div = document.createElement("div");
+            div.innerText = description.substring(is).trim();
+            root.appendChild(div);
+            is = description.length;
+          } else {
+            const div = document.createElement("div");
+            div.innerText = description.substring(is, i1).trim();
+            root.appendChild(div);
+            const img = document.createElement("img");
+            img.src = description.substring(i1 + 2, i2).trim();
+            img.style = "width: 100%;";
+            root.appendChild(img);
+            is = i2 + 2;
+          }
+        }
+      };
     } else {
       return undefined;
     }

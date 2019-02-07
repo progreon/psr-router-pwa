@@ -45,7 +45,6 @@ class PsrRouterHome extends PsrRouterPage {
           left: 0;
           top: 0;
         }
-
         .menu-options {
           display: flex;
           flex-flow: column;
@@ -65,6 +64,7 @@ class PsrRouterHome extends PsrRouterPage {
       <h2>Current route</h2>
       <h3>${route.info.title}</h3>
       <p>${route.shortname}</p>
+      <p ?hidden="${!game.dummyGame}">[GAME NOT SUPPORTED (YET)]</p>
       <b>Game: Pokémon ${game.info.name}</b>
       <br>
       Generation ${game.info.gen}

@@ -1,3 +1,2 @@
-import { Battler1 } from './battler-1';
-
-export { Battler1 };
+export { Battler1 } from './battler-1';
+export { BattlerDummy } from './battler-dummy';

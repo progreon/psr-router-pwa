@@ -23,4 +23,28 @@ class Battle1 {
   }
 }
 
-export { Battle1 };
+/**
+ * Class representing a battle
+ * TODO
+ *
+ * @class
+ */
+class BattleDummy {
+  /**
+   *
+   * @param {Player}   player   The player that's playing the game
+   * @param {Trainer}  opponent The opponent it's facing
+   */
+  constructor(player, opponent) {
+    this.player = player;
+    this.opponent = opponent;
+    // this.usedMoves = [];
+    // this.usedItems = [];
+  }
+
+  toString() {
+    return "Battle Dummy";
+  }
+}
+
+export { Battle1, BattleDummy };

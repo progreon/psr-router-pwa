@@ -16,7 +16,7 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 export class PsrRouterRouteEntry extends LitElement {
-  _renderPopupContent() {
+  _getPopupContentRenderer() {
     return undefined;
   }
 
@@ -59,7 +59,7 @@ export class PsrRouterRouteEntry extends LitElement {
   render() {
     const contentDOM = this._renderContent();
     const expandingDOM = this._renderExpandingContent();
-    const popupDOM = this._renderPopupContent();
+    const popupAvailable = !!this._getPopupContentRenderer();
 
     var icon = this.hideContent ? angleDownIcon : angleUpIcon;
 
@@ -139,7 +139,7 @@ export class PsrRouterRouteEntry extends LitElement {
         }
       </style>
       <div class="buttons">
-        <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupDOM}">${infoCircle}</div>
+        <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupAvailable}">${infoCircle}</div>
       </div>
       <div class="header" ?hidden="${this.routeHeader}">
         <vaadin-item class="entry" @click="${this._onClick}">
@@ -157,11 +157,7 @@ export class PsrRouterRouteEntry extends LitElement {
           ${expandingDOM}
         </div>
       </div>
-      <vaadin-dialog id="dialog">
-        <template>
-          ${popupDOM}
-        </template>
-      </vaadin-dialog>
+      <vaadin-dialog id="dialog"></vaadin-dialog>
       <vaadin-dialog id="menu" style="padding: 0px;">
         <template>
           <ul class="menu-options">
@@ -203,6 +199,11 @@ export class PsrRouterRouteEntry extends LitElement {
   }
 
   firstUpdated() {
+    var dialog = this.shadowRoot.getElementById('dialog');
+    dialog.renderer = this._getPopupContentRenderer();
+    if (dialog.renderer) {
+      dialog.renderer = dialog.renderer.bind(this);
+    }
     var content = this.shadowRoot.getElementById('expand');
     if (content.innerHTML)
       if (this.hideContent)

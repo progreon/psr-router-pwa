@@ -8,6 +8,7 @@ import _trainersRB from 'SharedData/trainers-rb.json';
 // TODO: badges!
 
 import * as ModelRBY from '../psr-router-model/model-rby';
+import * as ModelDummy from '../psr-router-model/model-dummy';
 
 function loadItems(gen) {
   var Items = {};
@@ -165,11 +166,11 @@ function loadTrainers(gameKey, pokemon) {
  * @returns {Game}  The game instance.
  */
 export function GetGame(gameKey) {
-  var info = _games[gameKey];
-  var game;
-  if (info) {
-    var model;
-    var engine;
+  let info = _games[gameKey];
+  let game;
+  if (info && !info.unsupported) {
+    let model;
+    let engine;
     switch (gameKey) {
       case "r":
       case "b":
@@ -184,7 +185,13 @@ export function GetGame(gameKey) {
     var pokemon = loadPokemon(gameInfo.gen, types);
     var experienceGroups = model.ExperienceGroups; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
     var trainers = loadTrainers(gameKey, pokemon);
-    var game = new model.Game(model, engine, experienceGroups, gameInfo, items, types, typeChart, moves, pokemon, trainers);
+    game = new model.Game(model, engine, gameInfo, experienceGroups, items, types, typeChart, moves, pokemon, trainers);
+  }
+  if (!game) {
+    let model = ModelDummy;
+    gameKey = gameKey || "?";
+    let gameInfo = new model.GameInfo(gameKey, info ? info.name : `[${gameKey}]`, info ? info.gen : 0, info ? info.year : "????", info ? _games.platforms[info.platform] : "???");
+    game = new model.Game(model, gameInfo);
   }
   return game;
 };

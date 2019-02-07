@@ -24,7 +24,7 @@ class PsrRouterRouter extends PsrRouterPage {
           padding-bottom: var(--app-grid-3x);
         } */
       </style>
-      <psr-router-route id="the-route" class="noselect" .routeEntry=${this.route}></psr-router-route>
+      <psr-router-route id="the-route" class="noselect" .routeEntry="${this.route}"></psr-router-route>
       <!-- <div class="padding"></div> -->
     `;
   }

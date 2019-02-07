@@ -17,11 +17,11 @@ class Item {
     /** @type {string} */
     this.name = name;
     /** @type {boolean} */
-    this.tossableOutsideBattle = usage.indexOf("T") !== -1;
+    this.tossableOutsideBattle = usage && usage.indexOf("T") !== -1;
     /** @type {boolean} */
-    this.usableOutsideBattle = usage.indexOf("O") !== -1;
+    this.usableOutsideBattle = usage && usage.indexOf("O") !== -1;
     /** @type {boolean} */
-    this.usableInsideBattle = usage.indexOf("I") !== -1;
+    this.usableInsideBattle = usage && usage.indexOf("I") !== -1;
     /** @type {number} */
     this.price = price;
     /** @type {string} */

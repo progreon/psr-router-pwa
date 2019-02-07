@@ -49,11 +49,17 @@ export function SaveRoute(route=null) {
 
 //// EXAMPLE ROUTES ////
 import exampleRoute from 'SharedData/routes/example_route.json';
+import blueDummy from 'SharedData/routes/blue_dummy.json';
+import yellowDummy from 'SharedData/routes/yellow_dummy.json';
+import crystalDummy from 'SharedData/routes/crystal_dummy.json';
 import redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
 
 var exampleRoutes = {};
 exampleRoutes[exampleRoute.shortname] = exampleRoute;
 exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
+exampleRoutes[blueDummy.shortname] = blueDummy;
+exampleRoutes[yellowDummy.shortname] = yellowDummy;
+exampleRoutes[crystalDummy.shortname] = crystalDummy;
 
 export function GetExampleRoutesNames() {
   return Object.keys(exampleRoutes);

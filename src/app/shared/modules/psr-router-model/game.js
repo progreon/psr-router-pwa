@@ -15,7 +15,7 @@ class Game {
    * @param {Pokemon[]}         pokemon         All the pokemon in this game
    * @param {Trainer[]}         trainers        All the trainers in this game
    */
-  constructor(model, engine, experienceGroup, info, items, types, typeChart, moves, pokemon, trainers) {
+  constructor(model, engine, info, experienceGroup, items, types, typeChart, moves, pokemon, trainers) {
     this.model = model;
     this.engine = engine;
     /** @type {AExperienceGroup} */
@@ -45,7 +45,7 @@ class Game {
   /**
    * Find an item by name.
    * @param {string}  name  The name of the item.
-   * @returns {Move}   The item.
+   * @returns {Item}   The item.
    */
   findItemByName(name) {
     return name ? this.items[name.toUpperCase()] : undefined;
@@ -81,11 +81,73 @@ class Game {
   /**
    * Find a type by name.
    * @param {string}  name  The name of the type.
-   * @returns {Pokemon}   The type.
+   * @returns {Type}   The type.
    */
   findTypeByName(name) {
     return name ? this.types[name.toUpperCase()] : undefined;
   }
 }
 
-export { Game };
+/**
+ * Class representing a dummy game.
+ */
+class GameDummy {
+  /**
+   *
+   * @param {Object}            model           The "model" classes and methods this game uses
+   * @param {Object}            engine          The "engine" classes and methods this game uses
+   */
+  constructor(model, info) {
+    this.model = model;
+    /** @type {GameInfo} */
+    this.info = info;
+    this.dummyGame = true;
+  }
+
+  /**
+   * Find an item by name.
+   * @param {string}  name  The name of the item.
+   * @returns {Item}   The item.
+   */
+  findItemByName(name) {
+    return name ? new this.model.Item(name, name) : undefined;
+  }
+
+  /**
+   * Find a move by name.
+   * @param {string}  name  The name of the move.
+   * @returns {Move}   The move.
+   */
+  findMoveByName(name) {
+    return name ? new this.model.Move(name, name) : undefined;
+  }
+
+  /**
+   * Find a pokemon by name.
+   * @param {string}  name  The name of the pokemon.
+   * @returns {Pokemon}   The pokemon.
+   */
+  findPokemonByName(name) {
+    return name ? new this.model.Pokemon(name) : undefined;
+  }
+
+  /**
+   * Find a trainer by its key or alias.
+   * @param {string}  key  The key or alias of the trainer.
+   * @returns {Trainer}   The trainer.
+   */
+  findTrainerByKeyOrAlias(key) {
+    return key ? new this.model.Trainer(key, key, key, []) : undefined;
+  }
+
+  /**
+   * Find a type by name.
+   * @param {string}  name  The name of the type.
+   * @returns {Type}   The type.
+   */
+  findTypeByName(name) {
+    return name ? new this.model.Type(name, name) : undefined;
+  }
+}
+
+export { Game, GameDummy };

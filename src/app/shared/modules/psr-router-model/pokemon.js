@@ -172,4 +172,23 @@ class Pokemon2 extends APokemon {
   }
 }
 
-export { Pokemon1 };
+/**
+ * Class representing a dummy Pokemon
+ */
+class PokemonDummy {
+  /**
+   *
+   * @param {string}    name
+   */
+  constructor(name) {
+    this.name = name;
+    this.id = 0;
+    this.key = name.toUpperCase();
+  }
+
+  toString() {
+    return this.name;
+  }
+}
+
+export { Pokemon1, PokemonDummy };
