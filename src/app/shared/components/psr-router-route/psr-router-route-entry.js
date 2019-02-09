@@ -61,6 +61,27 @@ export class PsrRouterRouteEntry extends LitElement {
     const expandingDOM = this._renderExpandingContent();
     const popupAvailable = !!this._getPopupContentRenderer();
 
+    let messages = [];
+    if (this.routeEntry) {
+      this.routeEntry.messages.forEach(m => {
+        let level;
+        switch (m.type.priority) {
+          case 0:
+            level = "error";
+            break;
+          case 1:
+            level = "warn";
+            break;
+          case 2:
+            level = "info";
+            break;
+        }
+        if (level) {
+          messages.push(html`<div .className="${level}">${m.message}</div>`);
+        }
+      });
+    }
+
     var icon = this.hideContent ? angleDownIcon : angleUpIcon;
 
     return html`
@@ -93,6 +114,15 @@ export class PsrRouterRouteEntry extends LitElement {
         }
         .icon.expand {
           padding: 0px 0px 0px 5px;
+        }
+        .messages > .info {
+          color: var(--app-color-ocean);
+        }
+        .messages > .warn {
+          color: var(--app-color-warning-yellow);
+        }
+        .messages > .error {
+          color: var(--app-color-error-red);
         }
         .entry {
           align-self: center;
@@ -140,6 +170,9 @@ export class PsrRouterRouteEntry extends LitElement {
       </style>
       <div class="buttons">
         <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupAvailable}">${infoCircle}</div>
+      </div>
+      <div class="messages">
+        ${messages}
       </div>
       <div class="header" ?hidden="${this.routeHeader}">
         <vaadin-item class="entry" @click="${this._onClick}">

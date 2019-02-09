@@ -1,3 +1,5 @@
+import * as DummyModel from './model-dummy';
+
 /**
  * Class representing a game.
  */
@@ -17,6 +19,7 @@ class Game {
    */
   constructor(model, engine, info, experienceGroup, items, types, typeChart, moves, pokemon, trainers) {
     this.model = model;
+    this.dummyModel = DummyModel;
     this.engine = engine;
     /** @type {AExperienceGroup} */
     this.experienceGroup = experienceGroup;
@@ -52,12 +55,42 @@ class Game {
   }
 
   /**
+   * Get a dummy item.
+   * @param {string}  name  The name of the item.
+   * @returns {Item}   The item.
+   */
+  getDummyItem(name) {
+    if (!name) {
+      return undefined;
+    } else {
+      let item = new this.dummyModel.Item(name, name, "", 0, "Dummy", name, "Dummy Item");
+      item.dummy = true;
+      return item;
+    }
+  }
+
+  /**
    * Find a move by name.
    * @param {string}  name  The name of the move.
    * @returns {Move}   The move.
    */
   findMoveByName(name) {
     return name ? this.moves[name.toUpperCase()] : undefined;
+  }
+
+  /**
+   * Get a dummy move.
+   * @param {string}  name  The name of the move.
+   * @returns {Move}   The move.
+   */
+  getDummyMove(name) {
+    if (!name) {
+      return undefined;
+    } else {
+      let move = new this.dummyModel.Move(name, name, "", 0, this.getDummyType("N/A"), 0, 0, "Dummy Moves", "Dummy move");
+      move.dummy = true;
+      return move;
+    }
   }
 
   /**
@@ -70,12 +103,43 @@ class Game {
   }
 
   /**
+   * Get a dummy pokemon.
+   * @param {string}  name  The name of the pokemon.
+   * @returns {Pokemon}   The pokemon.
+   */
+  getDummyPokemon(name) {
+    if (!name) {
+      return undefined;
+    } else {
+      let pokemon = new this.dummyModel.Pokemon(name);
+      pokemon.dummy = true;
+      return pokemon;
+    }
+    return name ? new this.dummyModel.Pokemon(name) : undefined;
+  }
+
+  /**
    * Find a trainer by its key or alias.
    * @param {string}  key  The key or alias of the trainer.
    * @returns {Trainer}   The trainer.
    */
   findTrainerByKeyOrAlias(key) {
     return key ? (this.aliasedTrainers[key.toUpperCase()] || this.trainers[key.toUpperCase()]) : undefined;
+  }
+
+  /**
+   * Get a dummy trainer.
+   * @param {string}  name  The name of the trainer.
+   * @returns {Trainer}   The trainer.
+   */
+  getDummyTrainer(name) {
+    if (!name) {
+      return undefined;
+    } else {
+      let trainer = new this.dummyModel.Trainer(name, name, name, []);
+      trainer.dummy = true;
+      return trainer;
+    }
   }
 
   /**
@@ -86,68 +150,21 @@ class Game {
   findTypeByName(name) {
     return name ? this.types[name.toUpperCase()] : undefined;
   }
-}
-
-/**
- * Class representing a dummy game.
- */
-class GameDummy {
-  /**
-   *
-   * @param {Object}            model           The "model" classes and methods this game uses
-   * @param {Object}            engine          The "engine" classes and methods this game uses
-   */
-  constructor(model, info) {
-    this.model = model;
-    /** @type {GameInfo} */
-    this.info = info;
-    this.dummyGame = true;
-  }
 
   /**
-   * Find an item by name.
-   * @param {string}  name  The name of the item.
-   * @returns {Item}   The item.
-   */
-  findItemByName(name) {
-    return name ? new this.model.Item(name, name) : undefined;
-  }
-
-  /**
-   * Find a move by name.
-   * @param {string}  name  The name of the move.
-   * @returns {Move}   The move.
-   */
-  findMoveByName(name) {
-    return name ? new this.model.Move(name, name) : undefined;
-  }
-
-  /**
-   * Find a pokemon by name.
-   * @param {string}  name  The name of the pokemon.
-   * @returns {Pokemon}   The pokemon.
-   */
-  findPokemonByName(name) {
-    return name ? new this.model.Pokemon(name) : undefined;
-  }
-
-  /**
-   * Find a trainer by its key or alias.
-   * @param {string}  key  The key or alias of the trainer.
-   * @returns {Trainer}   The trainer.
-   */
-  findTrainerByKeyOrAlias(key) {
-    return key ? new this.model.Trainer(key, key, key, []) : undefined;
-  }
-
-  /**
-   * Find a type by name.
+   * Get a dummy type.
    * @param {string}  name  The name of the type.
    * @returns {Type}   The type.
    */
-  findTypeByName(name) {
-    return name ? new this.model.Type(name, name) : undefined;
+  getDummyType(name) {
+    if (!name) {
+      return undefined;
+    } else {
+      let type = new this.dummyModel.Type(name, name);
+      type.dummy = true;
+      return type;
+    }
   }
 }
 
-export { Game, GameDummy };
+export { Game };

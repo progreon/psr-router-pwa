@@ -29,6 +29,7 @@ export function LoadSavedRoute() {
   var route = null;
   if (routeJSON) {
     route = Route.Route.newFromJSONObject(JSON.parse(routeJSON));
+    route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
   }
   return SetCurrentRoute(route);
 }
@@ -72,6 +73,7 @@ export function LoadExampleRoute(routeName) {
     routeName = exampleRoute.shortname;
   }
   var route = Route.Route.newFromJSONObject(routeJSON);
+  route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
   return SaveRoute(route);
 }
 
@@ -84,6 +86,7 @@ export function LoadRouteFile(file) {
       var fileReader = new FileReader();
       fileReader.onload = function(e) {
         var route = RouteIO.ImportFromFile(e.target.result, filename.search(/\.json$/) > 0, filename);
+        route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
         resolve(SaveRoute(route));
       }
       fileReader.readAsText(file);

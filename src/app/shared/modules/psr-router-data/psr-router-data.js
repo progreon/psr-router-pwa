@@ -168,30 +168,26 @@ function loadTrainers(gameKey, pokemon) {
 export function GetGame(gameKey) {
   let info = _games[gameKey];
   let game;
-  if (info && !info.unsupported) {
-    let model;
-    let engine;
-    switch (gameKey) {
-      case "r":
-      case "b":
-      case "y":
-        model = ModelRBY;
-    }
-    var gameInfo = new model.GameInfo(gameKey, info.name, info.gen, info.year, _games.platforms[info.platform]);
-    var items = loadItems(gameInfo.gen);
-    var types = loadTypes(gameInfo.gen);
-    var typeChart = loadTypeChart(gameInfo.gen);
-    var moves = loadMoves(gameInfo.gen, types);
-    var pokemon = loadPokemon(gameInfo.gen, types);
-    var experienceGroups = model.ExperienceGroups; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
-    var trainers = loadTrainers(gameKey, pokemon);
-    game = new model.Game(model, engine, gameInfo, experienceGroups, items, types, typeChart, moves, pokemon, trainers);
+  let model;
+  let engine;
+  switch (gameKey) {
+    case "r":
+    case "b":
+    case "y":
+      model = ModelRBY;
+      break;
+    default:
+      model = ModelDummy;
   }
-  if (!game) {
-    let model = ModelDummy;
-    gameKey = gameKey || "?";
-    let gameInfo = new model.GameInfo(gameKey, info ? info.name : `[${gameKey}]`, info ? info.gen : 0, info ? info.year : "????", info ? _games.platforms[info.platform] : "???");
-    game = new model.Game(model, gameInfo);
-  }
+  gameKey = gameKey || "?";
+  let gameInfo = new model.GameInfo(gameKey, info ? info.name : `[${gameKey}]`, info ? info.gen : 0, info ? info.year : "????", info ? _games.platforms[info.platform] : "???", !info || info.unsupported);
+  let items = loadItems(gameInfo.gen);
+  let types = loadTypes(gameInfo.gen);
+  let typeChart = loadTypeChart(gameInfo.gen);
+  let moves = loadMoves(gameInfo.gen, types);
+  let pokemon = loadPokemon(gameInfo.gen, types);
+  let experienceGroups = model.ExperienceGroups; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
+  let trainers = loadTrainers(gameKey, pokemon);
+  game = new model.Game(model, engine, gameInfo, experienceGroups, items, types, typeChart, moves, pokemon, trainers);
   return game;
 };

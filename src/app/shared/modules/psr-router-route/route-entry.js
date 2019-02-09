@@ -118,6 +118,10 @@ class RouteEntry {
     return this._playerAfter;
   }
 
+  addMessage(routerMessage) {
+    this.messages.push(routerMessage);
+  }
+
   /**
    * Gets the most important message type that this entry has.
    * @returns {RouterMessageType} The current message type with the highest priority.

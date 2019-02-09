@@ -41,11 +41,20 @@ class RouteBattle extends RouteEntry {
   }
 
   static newFromJSONObject(game, obj) {
+    let messages = [];
     let trainer = game.findTrainerByKeyOrAlias(obj.trainer);
+    if (!trainer) {
+      trainer = game.getDummyTrainer(obj.trainer);
+      if (!game.info.unsupported) {
+        messages.push(new RouterMessage(`Trainer "${obj.trainer}" not found!`, RouterMessageType.ERROR));
+      }
+    }
     let shareExp = obj.shareExp;
     let location = undefined; // TODO, parse from obj.location
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-    return new RouteBattle(game, trainer, info, location, shareExp);
+    let entry = new RouteBattle(game, trainer, info, location, shareExp);
+    messages.forEach(m => entry.addMessage(m));
+    return entry;
   }
 }
 

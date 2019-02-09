@@ -5,8 +5,8 @@
 const RouterMessageType = { // type => priority
   ERROR: { name: "Error", priority: 0},
   WARNING: { name: "Warning", priority: 1},
-  HINT: { name: "Hint", priority: 2},
-  INFO: { name: "Info", priority: 3}
+  INFO: { name: "Info", priority: 2},
+  DEBUG: { name: "Debug", priority: 3}
 }
 
 /**
@@ -29,7 +29,7 @@ class RouterMessage {
 
   /** @returns {string} */
   toString() {
-    return this.type + ": " + this.message;
+    return this.type.name + ": " + this.message;
   }
 }
 

@@ -33,18 +33,30 @@ class RouteGetPokemon extends RouteEntry {
 
   getJSONObject() {
     let obj = super.getJSONObject();
-    obj.choices = []; // TODO, parse from this._choices (array of PokemonLevelPair -> array of {pokemon, level})
+    obj.choices = [];
     this._choices.forEach(pl => obj.choices.push({pokemon: pl.pokemon.name, level: pl.level}));
     obj.preference = this._preference;
     return obj;
   }
 
   static newFromJSONObject(game, obj) {
+    let messages = [];
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-    let choices = []; // TODO, parse from obj.choices (array of {pokemon, level} -> array of PokemonLevelPair)
-    obj.choices.forEach(pl => choices.push(new game.model.PokemonLevelPair(game.findPokemonByName(pl.pokemon), pl.level)));
+    let choices = [];
+    obj.choices.forEach(pl => {
+      let pokemon = game.findPokemonByName(pl.pokemon);
+      if (!pokemon) {
+        pokemon = game.getDummyPokemon(pl.pokemon);
+        if (!game.info.unsupported) {
+          messages.push(new RouterMessage(`Pokemon "${pl.pokemon}" not found!`, RouterMessageType.ERROR));
+        }
+      }
+      choices.push(new game.model.PokemonLevelPair(pokemon, pl.level))
+    });
     let location = undefined; // TODO, parse from obj.location
-    return new RouteGetPokemon(game, choices, obj.preference, info, location);
+    let entry = new RouteGetPokemon(game, choices, obj.preference, info, location);
+    messages.forEach(m => entry.addMessage(m));
+    return entry;
   }
 }
 

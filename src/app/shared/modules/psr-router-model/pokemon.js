@@ -103,26 +103,6 @@ class APokemon {
   }
 }
 
-// TODO: do it like this?
-// Pokemon.new = function(gen, ...) {
-//     switch (gen) {
-//         case 1:
-//             // TODO
-//             var pokemon = new Pokemon(...);
-//             pokemon.getExp = function(level, participants, isTraded, isTrainer) {
-//                 // TODO
-//             };
-//             break;
-//         case 2-5:
-//             // TODO
-//             break;
-//         default:
-//             // TODO
-//             break;
-//     }
-// }
-// NO, do the following and add all classes to the export:
-
 /**
  * Class representing a gen 1 Pokemon
  * @augments APokemon
