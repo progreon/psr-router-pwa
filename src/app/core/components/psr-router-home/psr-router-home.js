@@ -62,14 +62,14 @@ class PsrRouterHome extends PsrRouterPage {
         }
       </style>
       <h2>Current route</h2>
-      <h3>${route.info.title}</h3>
-      <p>${route.shortname}</p>
-      <p ?hidden="${!game.dummyGame}">[GAME NOT SUPPORTED (YET)]</p>
-      <b>Game: Pokémon ${game.info.name}</b>
+      <h3>${route ? route.info.title : "No route loaded"}</h3>
+      <p>${route && route.shortname}</p>
+      <p ?hidden="${!game || !game.info.unsupported}">[GAME NOT SUPPORTED (YET)]</p>
+      <b ?hidden="${!game}">Game: Pokémon ${game && game.info.name}</b>
       <br>
-      Generation ${game.info.gen}
+      <div ?hidden="${!game}">Generation ${game && game.info.gen}</div>
       <br>
-      ${game.info.year}, ${game.info.platform}
+      <div ?hidden="${!game}">${game && game.info.year}, ${game && game.info.platform}</div>
       <hr>
       <!-- <h2>Manage route</h2> -->
       <div class="buttons">
@@ -89,7 +89,7 @@ class PsrRouterHome extends PsrRouterPage {
           <div class="menu-options">
             <vaadin-text-field id="filename" label="Filename"></vaadin-text-field>
             <div class="options">
-              <vaadin-button id="menu-json" ?disabled="${!super.searchParams.dev}">JSON</vaadin-button>
+              <vaadin-button id="menu-json">JSON</vaadin-button>
               <vaadin-button id="menu-txt">TXT</vaadin-button>
             </div>
             <hr>
@@ -117,8 +117,10 @@ class PsrRouterHome extends PsrRouterPage {
         .then(route => {
           fileInput.value = "";
           this._loading = false;
+          if (route.game.info.unsupported) {
+            this._showUnsupportedToast(route.game.info.name);
+          }
           super._navigateTo("router");
-          // this.requestUpdate();
         }).catch(e => {
           this._loading = false;
           this.requestUpdate();
@@ -132,7 +134,7 @@ class PsrRouterHome extends PsrRouterPage {
   triggerDataRefresh() {
     let comboBox = this.shadowRoot.getElementById("example-routes");
     if (comboBox && comboBox.items && comboBox.items.length) {
-    comboBox.value = comboBox.items[0];
+      comboBox.value = comboBox.items[0];
     }
   }
 
@@ -156,7 +158,9 @@ class PsrRouterHome extends PsrRouterPage {
       this.shadowRoot.getElementById("menu").opened = true;
       // bind menu listeners
       document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('filename').value = route.shortname ? route.shortname : route.info.title;
-      document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-json').addEventListener('click', this.jsonClicked);
+      let menuJson = document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-json');
+      menuJson.disabled = !this.searchParams.dev;
+      menuJson.addEventListener('click', this.jsonClicked);
       document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-txt').addEventListener('click', this.txtClicked);
       document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-cancel').addEventListener('click', this.cancelClicked);
     }
@@ -165,9 +169,11 @@ class PsrRouterHome extends PsrRouterPage {
   _onLoadRouteClicked(e) {
     let comboBox = this.shadowRoot.getElementById("example-routes");
     if (comboBox.value) {
-      RouteManager.LoadExampleRoute(comboBox.value);
+      let route = RouteManager.LoadExampleRoute(comboBox.value);
+      if (route.game.info.unsupported) {
+        this._showUnsupportedToast(route.game.info.name);
+      }
       super._navigateTo("router");
-      // this.requestUpdate();
     }
   }
 
@@ -177,6 +183,10 @@ class PsrRouterHome extends PsrRouterPage {
 
   _onImportClicked(e) {
     console.log("Importing route file...");
+  }
+
+  _showUnsupportedToast(gameTitle) {
+    super.showAppToast(`Game "${gameTitle}" is not (fully) supported yet`);
   }
 }
 

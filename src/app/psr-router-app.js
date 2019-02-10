@@ -246,6 +246,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
         paper-toast {
           width: 100%;
+          max-height: -1px;
         }
 
         /* Wide layout: when the viewport width is bigger than 640px, layout
@@ -268,8 +269,9 @@ class PsrRouterApp extends connect(store)(LitElement) {
           }
 
           paper-toast {
-            width: 375px;
-            max-width: 100%;
+            width: auto;
+            /* width: 375px;
+            max-width: 100%; */
           }
         }
       </style>
@@ -302,15 +304,15 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
           <!-- Main content -->
           <main id="main" role="main" class="main-content">
-            <psr-router-home id="home" class="page" ?active="${this._page === 'home'}" .searchParams="${this._searchParams}"></psr-router-home>
-            <psr-router-router id="router" class="page" ?active="${this._page === 'router'}" .searchParams="${this._searchParams}"></psr-router-router>
-            <psr-router-items id="items" class="page" ?active="${this._page === 'items'}" .searchParams="${this._searchParams}"></psr-router-items>
-            <psr-router-moves id="moves" class="page" ?active="${this._page === 'moves'}" .searchParams="${this._searchParams}"></psr-router-moves>
-            <psr-router-pokemon-info id="pokemon-info" class="page" ?active="${this._page === 'pokemon-info'}" .searchParams="${this._searchParams}"></psr-router-pokemon-info>
-            <psr-router-pokemon-list id="pokemon-list" class="page" ?active="${this._page === 'pokemon-list'}" .searchParams="${this._searchParams}"></psr-router-pokemon-list>
-            <psr-router-trainers id="trainers" class="page" ?active="${this._page === 'trainers'}" .searchParams="${this._searchParams}"></psr-router-trainers>
-            <psr-router-trainer-info id="trainer-info" class="page" ?active="${this._page === 'trainer-info'}" .searchParams="${this._searchParams}"></psr-router-pokemon-info>
-            <psr-router-404 id="404" class="page" ?active="${this._page === '404'}" .searchParams="${this._searchParams}"></psr-router-404>
+            <psr-router-home id="home" class="page" ?active="${this._page === 'home'}" .app="${this}"></psr-router-home>
+            <psr-router-router id="router" class="page" ?active="${this._page === 'router'}" .app="${this}"></psr-router-router>
+            <psr-router-items id="items" class="page" ?active="${this._page === 'items'}" .app="${this}"></psr-router-items>
+            <psr-router-moves id="moves" class="page" ?active="${this._page === 'moves'}" .app="${this}"></psr-router-moves>
+            <psr-router-pokemon-info id="pokemon-info" class="page" ?active="${this._page === 'pokemon-info'}" .app="${this}"></psr-router-pokemon-info>
+            <psr-router-pokemon-list id="pokemon-list" class="page" ?active="${this._page === 'pokemon-list'}" .app="${this}"></psr-router-pokemon-list>
+            <psr-router-trainers id="trainers" class="page" ?active="${this._page === 'trainers'}" .app="${this}"></psr-router-trainers>
+            <psr-router-trainer-info id="trainer-info" class="page" ?active="${this._page === 'trainer-info'}" .app="${this}"></psr-router-pokemon-info>
+            <psr-router-404 id="404" class="page" ?active="${this._page === '404'}" .app="${this}"></psr-router-404>
 
             <snack-bar ?active="${this._snackbarOpened}" ?offline="${this._offline}">
                 You are now ${this._offline ? 'offline' : 'online'}.</snack-bar>
@@ -323,7 +325,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
         </app-header-layout>
       </app-drawer-layout>
 
-      <paper-toast id="toast" duration="10000">${this._toastHtml}</paper-toast>
+      <paper-toast id="toast" duration="5000">${this._toastHtml}</paper-toast>
     `;
     return template;
   }
@@ -342,6 +344,10 @@ class PsrRouterApp extends connect(store)(LitElement) {
       _toastHtml: Object,
       _wideLayout: Boolean
     };
+  }
+
+  get searchParams() {
+    return this._searchParams;
   }
 
   constructor() {
@@ -363,16 +369,13 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
     // Load the last saved (json) route from the local storage if there is one,
     // else load the default example route.
-    if (!RouteUtil.RouteManager.LoadSavedRoute()) {
-      RouteUtil.RouteManager.LoadExampleRoute();
-    }
+    RouteUtil.RouteManager.LoadSavedRoute();
+    // if (!RouteUtil.RouteManager.LoadSavedRoute()) {
+    //   RouteUtil.RouteManager.LoadExampleRoute();
+    // }
 
-    // console.debug("Route:", window.app.route);
     var game = RouteUtil.RouteManager.GetCurrentGame();
-    console.debug("Game:", game);
-    // console.debug("Pikachu:", window.app.game.findPokemonByName("Pikachu"));
-    // console.debug("Route:", Route);
-    // console.debug("Util:", Util);
+    console.debug("Current game:", game);
   }
 
   firstUpdated(changedProperties) {
@@ -380,7 +383,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
     window['isUpdateAvailable'].then(isAvailable => {
       if (isAvailable) {
         console.log("New Update Available! Reload the web app to get the latest juicy changes. (Oh Yeah!)");
-        this._showToast(html`<div style="display: flex; justify-content: space-between; align-items: baseline;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}">Reload</vaadin-button></div>`);
+        this.showToast(html`<div style="display: flex; justify-content: space-between; align-items: baseline;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}">Reload</vaadin-button></div>`);
       }
     });
     // window.onunload = e => RouteUtil.RouteManager.SaveRoute();
@@ -422,9 +425,11 @@ class PsrRouterApp extends connect(store)(LitElement) {
       window.history.back();
   }
 
-  _showToast(toastHtml) {
+  showToast(toastHtml) {
+    var toast = this.shadowRoot.getElementById('toast');
+    toast.hide();
     this._toastHtml = toastHtml;
-    var toast = this.shadowRoot.getElementById('toast').open();
+    toast.open();
   }
 
   _stateChanged(state) {

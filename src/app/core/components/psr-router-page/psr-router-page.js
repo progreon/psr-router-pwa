@@ -1,12 +1,15 @@
-import { LitElement } from '@polymer/lit-element';
+import { LitElement, html } from '@polymer/lit-element';
 
 export class PsrRouterPage extends LitElement {
   static get properties() {
     return {
       active: {type: Boolean, reflect: true},
-      // game: Object,
-      searchParams: Object
+      app: Object
     }
+  }
+
+  get searchParams() {
+    return this.app.searchParams;
   }
 
   // Only render this page if it's actually visible.
@@ -14,6 +17,10 @@ export class PsrRouterPage extends LitElement {
     if (this.active) {
       return this._render();
     }
+  }
+
+  showAppToast(text) {
+    this.app.showToast(html`<div style="display: flex;">${text}</div>`);
   }
 
   triggerDataRefresh() {

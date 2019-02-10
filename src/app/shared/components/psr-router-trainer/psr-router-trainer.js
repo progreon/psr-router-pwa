@@ -46,9 +46,14 @@ class PsrRouterTrainer extends LitElement {
       }
       .flex-container > .section {
         flex-direction: column;
-        border-top: 1px solid gray;
         width: 100%;
         align-items: stretch;
+      }
+      hr {
+        border-width: 1px 0px 0px 0px;
+      }
+      hr[hidden] {
+        border: none;
       }
       .column {
         display: flex;
@@ -70,6 +75,7 @@ class PsrRouterTrainer extends LitElement {
       <h1>${this.trainer ? this.trainer.name : ""}</h1>
       <h3 ?hidden="${!this.trainer || !this.trainer.alias}"><i>${this.trainer ? this.trainer.alias : ""}</i></h3>
       <h3>${this.trainer ? this.trainer.location : ""}</h3>
+      <hr ?hidden="${!this.trainer || this.trainer.party.length == 0}">
       <div class="section">
         ${party}
       </div>

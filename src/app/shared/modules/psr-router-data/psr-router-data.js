@@ -180,7 +180,7 @@ export function GetGame(gameKey) {
       model = ModelDummy;
   }
   gameKey = gameKey || "?";
-  let gameInfo = new model.GameInfo(gameKey, info ? info.name : `[${gameKey}]`, info ? info.gen : 0, info ? info.year : "????", info ? _games.platforms[info.platform] : "???", !info || info.unsupported);
+  let gameInfo = new model.GameInfo(gameKey, info ? info.name : gameKey, info ? info.gen : 0, info ? info.year : "????", info ? _games.platforms[info.platform] : "???", !info || info.unsupported);
   let items = loadItems(gameInfo.gen);
   let types = loadTypes(gameInfo.gen);
   let typeChart = loadTypeChart(gameInfo.gen);

@@ -11,7 +11,7 @@ import { AppStyles } from 'Shared/app-styles';
 class PsrRouterPokemonInfo extends PsrRouterPage {
   _render() {
     let game = RouteManager.GetCurrentGame();
-    let pokemon = game.findPokemonByName(this.searchParams.p) || {};
+    let pokemon = game && game.findPokemonByName(this.searchParams.p) || {};
     let moveLevels = [];
     let moveNames = [];
     if (pokemon.defaultMoves) {
@@ -165,7 +165,7 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
   }
 
   _isGen(game, gen) {
-    return game.info.gen === gen;
+    return game && game.info.gen === gen;
   }
 }
 
