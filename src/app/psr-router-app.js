@@ -47,18 +47,13 @@ import {
 class PsrRouterApp extends connect(store)(LitElement) {
   render() {
     var linkList = [];
-    var menuIcon = angleLeftIcon; // Default to back-arrow
-    var athis = this;
-    // Creating the menu links
-    this._pageList.forEach(function(page) {
-      if (athis._page === page.name) {
-        menuIcon = barsIcon; // Normal menu icon if current page is a level 1 page
-      }
-      if (!page.is404) {
-        const a = html`<a ?selected="${athis._page === page.name}" href="/${page.name}">${page.title}</a>`;
+    var menuIcon = this._pageList[this._page] && (this._pageList[this._page].showInMenu || this._pageList[this._page].is404) ? barsIcon : angleLeftIcon; // Default to back-arrow
+    for (var [page, info] of Object.entries(this._pageList)) {
+      if (info.showInMenu) {
+        const a = html`<a ?selected="${this._page === page}" href="/${page}">${info.title}</a>`;
         linkList.push(a);
       }
-    });
+    }
     const template = html`
       ${AppStyles}
       <style>
@@ -356,16 +351,17 @@ class PsrRouterApp extends connect(store)(LitElement) {
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
     // Setting the list of pages
-    this._pageList = [
-      {name: 'home', title: "Home", element: 'psr-router-home'},
-      // {name: 'redux', title: "Redux Example", element: 'psr-router-redux'},
-      {name: 'router', title: "Route", element: 'psr-router-router'},
-      {name: 'items', title: "Item List", element: 'psr-router-items'},
-      {name: 'moves', title: "Move List", element: 'psr-router-moves'},
-      {name: 'pokemon-list', title: "Pokemon List", element: 'psr-router-pokemon-list'},
-      {name: 'trainers', title: "Trainer List", element: 'psr-router-trainers'},
-      {name: '404', title: "404", element: 'psr-router-404', is404: true}
-    ];
+    this._pageList = {
+      'home': {title: "Home", element: 'psr-router-home', showInMenu: true},
+      'router': {title: "Route", element: 'psr-router-router', showInMenu: true},
+      'items': {title: "Item List", element: 'psr-router-items', showInMenu: true},
+      'moves': {title: "Move List", element: 'psr-router-moves', showInMenu: true},
+      'pokemon-list': {title: "Pokemon List", element: 'psr-router-pokemon-list', showInMenu: true},
+      'pokemon-info': {title: "Pokemon Info", element: 'psr-router-pokemon-info'},
+      'trainers': {title: "Trainer List", element: 'psr-router-trainers', showInMenu: true},
+      'trainer-info': {title: "Trainer Info", element: 'psr-router-trainer-info'},
+      '404': {title: "404", element: 'psr-router-404', is404: true}
+    }
 
     // Load the last saved (json) route from the local storage if there is one,
     // else load the default example route.
@@ -394,19 +390,12 @@ class PsrRouterApp extends connect(store)(LitElement) {
   }
 
   updated(changedProperties) {
-    var athis = this;
-    var title = "Where Am I?";
-    this._pageList.forEach(function(page) {
-      if (athis._page === page.name) {
-        title = page.title;
-      }
-    });
-
+    var title = this._pageList[this._page] ? this._pageList[this._page].title : "Where Am I?";
     const pageTitle = this.appTitle + ' - ' + title;
     updateMetadata({
-        title: pageTitle,
-        description: pageTitle
-        // This object also takes an image property, that points to an img src.
+      title: pageTitle,
+      description: pageTitle
+      // This object also takes an image property, that points to an img src.
     });
   }
 
