@@ -10,6 +10,8 @@ import { angleDownIcon, angleUpIcon, infoCircle } from 'Shared/my-icons';
 // These are the elements needed by this element.
 import '@vaadin/vaadin-item/theme/material/vaadin-item';
 import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
+// import '@vaadin/vaadin-context-menu';
+// import '@vaadin/vaadin-list-box';
 
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
@@ -94,7 +96,11 @@ export class PsrRouterRouteEntry extends LitElement {
         .header {
           display: flex;
           justify-content: space-between;
+          border-radius: 5px;
         }
+        /* .header:hover {
+          background-color: #bbbbbb;
+        } */
         .header[hidden] {
           display: none;
         }
@@ -124,9 +130,14 @@ export class PsrRouterRouteEntry extends LitElement {
         .messages > .error {
           color: var(--app-color-error-red);
         }
+        vaadin-context-menu {
+          align-self: center;
+          flex-grow: 1;
+        }
         .entry {
           align-self: center;
           flex-grow: 1;
+          padding: 4px 0px;
         }
         .content {
           width: 100%;
@@ -175,10 +186,21 @@ export class PsrRouterRouteEntry extends LitElement {
         ${messages}
       </div>
       <div class="header" ?hidden="${this.routeHeader}">
+        <!-- <vaadin-context-menu>
+          <template>
+            <ul class="menu-options">
+              <li class="menu-option">Edit... [TODO]</li>
+              <li class="menu-option">Copy [TODO]</li>
+              <li class="menu-option">Paste... [TODO]</li>
+              <li class="menu-option">New... [TODO]</li>
+              <li class="menu-option">Delete [TODO]</li>
+            </ul>
+          </template> -->
         <vaadin-item class="entry" @click="${this._onClick}">
           <div><strong>${this._getTitle()}</strong></div>
           <div>${this._getSummary()}</div>
         </vaadin-item>
+        <!-- </vaadin-context-menu> -->
         <div class="icon expand" @click="${this._onClick}" ?hidden="${!expandingDOM}">${icon}</div>
       </div>
       <div class="route-header" ?hidden="${!this.routeHeader}">
@@ -191,17 +213,6 @@ export class PsrRouterRouteEntry extends LitElement {
         </div>
       </div>
       <vaadin-dialog id="dialog"></vaadin-dialog>
-      <vaadin-dialog id="menu" style="padding: 0px;">
-        <template>
-          <ul class="menu-options">
-            <li class="menu-option">Edit...</li>
-            <li class="menu-option">Copy</li>
-            <li class="menu-option">Paste...</li>
-            <li class="menu-option">New...</li>
-            <li class="menu-option">Delete</li>
-          </ul>
-        </template>
-      </vaadin-dialog>
     `;
   }
 
@@ -219,16 +230,6 @@ export class PsrRouterRouteEntry extends LitElement {
     this.hideContent = true;
     this.routeEntry = routeEntry;
     this.addEventListener('data-updated', e => console.log('data updated!', e));
-    this.addEventListener("contextmenu", this._showMenu.bind(this));
-  }
-
-  _showMenu(e) {
-    e.preventDefault();
-    e.cancelBubble = true;
-    var menu = this.shadowRoot.getElementById("menu");
-    menu.style.left = e.pageX;
-    menu.style.top = e.pageY;
-    menu.opened = true;
   }
 
   firstUpdated() {
