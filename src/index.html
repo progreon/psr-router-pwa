@@ -15,6 +15,10 @@
         rootPath: '<%= htmlWebpackPlugin.options.config.app.basePath %>',
         wideWidth: '<%= htmlWebpackPlugin.options.config.settings.wideWidth %>'
       };
+      // Setup global variables
+      window.appConfig = {
+        app: "<%= htmlWebpackPlugin.options.config.app.name %>"
+      };
     </script>
 
     <!-- polyfills -->

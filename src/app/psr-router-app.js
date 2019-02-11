@@ -47,8 +47,9 @@ import {
 class PsrRouterApp extends connect(store)(LitElement) {
   render() {
     var linkList = [];
-    var menuIcon = this._pageList[this._page] && (this._pageList[this._page].showInMenu || this._pageList[this._page].is404) ? barsIcon : angleLeftIcon; // Default to back-arrow
-    for (var [page, info] of Object.entries(this._pageList)) {
+    let pageList = window.appConfig.pageList;
+    var menuIcon = pageList[this._page] && (pageList[this._page].showInMenu || pageList[this._page].is404) ? barsIcon : angleLeftIcon; // Default to back-arrow
+    for (var [page, info] of Object.entries(pageList)) {
       if (info.showInMenu) {
         const a = html`<a ?selected="${this._page === page}" href="/${page}">${info.title}</a>`;
         linkList.push(a);
@@ -351,7 +352,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
     // Setting the list of pages
-    this._pageList = {
+    window.appConfig.pageList = {
       'home': {title: "Home", element: 'psr-router-home', showInMenu: true},
       'router': {title: "Route", element: 'psr-router-router', showInMenu: true},
       'items': {title: "Item List", element: 'psr-router-items', showInMenu: true},
@@ -390,7 +391,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
   }
 
   updated(changedProperties) {
-    var title = this._pageList[this._page] ? this._pageList[this._page].title : "Where Am I?";
+    var title = window.appConfig.pageList[this._page] ? window.appConfig.pageList[this._page].title : "Where Am I?";
     const pageTitle = this.appTitle + ' - ' + title;
     updateMetadata({
       title: pageTitle,

@@ -5,7 +5,7 @@ export const UPDATE_DRAWER_STATE = 'UPDATE_DRAWER_STATE';
 export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
 
-export const navigate = (location, e) => (dispatch) => {
+export const navigate = (location, isSubPage) => (dispatch) => {
   const url = new URL(location.href);
 
   // Extract the path and search parameters from the url.
@@ -15,8 +15,20 @@ export const navigate = (location, e) => (dispatch) => {
     searchParams[pair[0]] = pair[1];
   }
 
+  // Redirect to last page you were on
+  if (path === "/" && localStorage.getItem('app-last-page')) {
+    if (localStorage.getItem('app-last-page').startsWith('/')) {
+      localStorage.setItem('app-last-page', localStorage.getItem('app-last-page').substring(1));
+    }
+    document.body.dispatchEvent(new CustomEvent('navigate', { detail: { href: "/" + localStorage.getItem('app-last-page'), external: false } }));
+    return;
+  }
+
   // Extract the page name from path.
   const page = path === '/' ? 'home' : path.slice(1);
+
+  if (window.appConfig.pageList[page] && window.appConfig.pageList[page].showInMenu)
+    localStorage.setItem('app-last-page', page);
 
   // Any other info you might want to extract from the path (like page type),
   // you can do here
