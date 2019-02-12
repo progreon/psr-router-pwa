@@ -61,14 +61,12 @@ class PsrRouterHome extends PsrRouterPage {
           border-width: 1px 0px 0px 0px;
         }
       </style>
-      <h2>Current route</h2>
+      <h2>Current Route</h2>
       <h3>${route ? route.info.title : "No route loaded"}</h3>
       <p>${route && route.shortname}</p>
       <p ?hidden="${!game || !game.info.unsupported}">[GAME NOT SUPPORTED (YET)]</p>
       <b ?hidden="${!game}">Game: Pokémon ${game && game.info.name}</b>
-      <br>
       <div ?hidden="${!game}">Generation ${game && game.info.gen}</div>
-      <br>
       <div ?hidden="${!game}">${game && game.info.year}, ${game && game.info.platform}</div>
       <hr>
       <!-- <h2>Manage route</h2> -->

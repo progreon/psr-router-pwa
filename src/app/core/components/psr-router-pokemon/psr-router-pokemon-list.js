@@ -17,6 +17,11 @@ class PsrRouterPokemonList extends PsrRouterPage {
     }
     return html`
       ${AppStyles}
+      <style>
+        psr-router-pokemon {
+          cursor: pointer;
+        }
+      </style>
       ${pokemonElements}
     `;
   }

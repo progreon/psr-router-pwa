@@ -22,6 +22,11 @@ class PsrRouterTrainers extends PsrRouterPage {
     }
     return html`
       ${AppStyles}
+      <style>
+        vaadin-item {
+          cursor: pointer;
+        }
+      </style>
       ${trainerElements}
     `;
   }

@@ -121,6 +121,9 @@ export class PsrRouterRouteEntry extends LitElement {
         .icon.expand {
           padding: 0px 0px 0px 5px;
         }
+        .icon.info {
+          cursor: pointer;
+        }
         .messages > .info {
           color: var(--app-color-ocean);
         }
@@ -204,7 +207,7 @@ export class PsrRouterRouteEntry extends LitElement {
         <div class="icon expand" @click="${this._onClick}" ?hidden="${!expandingDOM}">${icon}</div>
       </div>
       <div class="route-header" ?hidden="${!this.routeHeader}">
-        <h4><strong>${this.routeEntry?this.routeEntry.info.title:"this.routeEntry.info.title"}</strong></h4>
+        <h4><strong>${this.routeEntry?this.routeEntry.info.title:"No route loaded"}</strong></h4>
       </div>
       <div class="content">
         ${contentDOM}

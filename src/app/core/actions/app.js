@@ -46,9 +46,6 @@ const loadPage = (page, searchParams) => (dispatch) => {
         // navigating to home after psr-router-home.js is loaded.
       });
       break;
-    // case 'redux':
-    //   import('CoreComponents/psr-router-redux/psr-router-redux');
-    //   break;
     case 'router':
       import('CoreComponents/psr-router-router/psr-router-router');
       break;
@@ -58,17 +55,23 @@ const loadPage = (page, searchParams) => (dispatch) => {
     case 'moves':
       import('CoreComponents/psr-router-moves/psr-router-moves');
       break;
+    case 'pokemon-list':
+      import('CoreComponents/psr-router-pokemon/psr-router-pokemon-list');
+      break;
     case 'pokemon-info':
       import('CoreComponents/psr-router-pokemon/psr-router-pokemon-info');
       break;
-    case 'pokemon-list':
-      import('CoreComponents/psr-router-pokemon/psr-router-pokemon-list');
+    case 'trainers':
+      import('CoreComponents/psr-router-trainers/psr-router-trainers');
       break;
     case 'trainer-info':
       import('CoreComponents/psr-router-trainers/psr-router-trainer-info');
       break;
     case 'trainers':
       import('CoreComponents/psr-router-trainers/psr-router-trainers');
+      break;
+    case 'about':
+      import('CoreComponents/psr-router-about/psr-router-about');
       break;
     default:
       page = '404';

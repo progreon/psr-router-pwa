@@ -19,7 +19,7 @@ class PsrRouterTrainer extends LitElement {
         var ms = b.getMoveset();
         party.push(html`
           <div class="column">
-            <h2 @click="${this._onPokemonClicked.bind(this, b.getPokemon().name)}">${b.getPokemon().name} - L${b.getLevel()}</h2>
+            <h2 class="pokemon" @click="${this._onPokemonClicked.bind(this, b.getPokemon().name)}">${b.getPokemon().name} - L${b.getLevel()}</h2>
             <div><div>${ms[0]}</div><div>${ms[1]}</div></div>
             <div><div>${ms[2]}</div><div>${ms[3]}</div></div>
           </div>`);
@@ -43,6 +43,9 @@ class PsrRouterTrainer extends LitElement {
       }
       h1, h2, h3 {
         align-self: center;
+      }
+      .pokemon {
+        cursor: pointer;
       }
       .flex-container > .section {
         flex-direction: column;

@@ -29,6 +29,7 @@ import 'CoreComponents/snack-bar/snack-bar';
 
 // Image imports for this element
 import { barsIcon, angleLeftIcon } from 'Shared/my-icons';
+import PSRRIcon from 'Images/icon.png';
 
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
@@ -107,9 +108,12 @@ class PsrRouterApp extends connect(store)(LitElement) {
           --app-main-background-color: var(--app-color-blue); */
 
           /* SIZES */
-          --app-header-height: var(--app-grid-7x);
           --app-drawer-width: 256px;
-          /* --app-footer-height: var(--app-grid-7x); */
+          --app-wide-content-width: 1200px;
+          --app-header-height: var(--app-grid-7x);
+          --app-header-height-wide: var(--app-grid-7x);
+          /* --app-header-margin-wide: 24px 15px 32px 15px; */
+          --app-header-margin-wide: 0px 15px;
           --app-footer-height: var(--app-grid-3x);
         }
 
@@ -183,12 +187,25 @@ class PsrRouterApp extends connect(store)(LitElement) {
           width: var(--app-grid-2hx);
         }
 
+        .logo-icon {
+          margin: 0px 0px 0px var(--app-grid-2hx);
+          width: var(--app-grid-5x);
+          height: var(--app-grid-5x);
+        }
+
         .title {
           padding: 0px 0px 0px var(--app-grid-2hx);
         }
 
-        .toolbar-list {
+        .toolbar-navbar {
           display: none;
+          background-color: var(--app-header-menu-background-color);
+        }
+
+        .toolbar-list {
+          display: flex;
+          width: var(--app-wide-content-width);
+          padding: 0px var(--app-grid-3x);
           background-color: var(--app-header-menu-background-color);
         }
 
@@ -197,12 +214,13 @@ class PsrRouterApp extends connect(store)(LitElement) {
           color: var(--app-header-menu-text-color);
           text-decoration: none;
           line-height: 30px;
-          padding: 4px 24px;
+          padding: 8px 24px;
         }
 
         .toolbar-list > a[selected] {
           color: var(--app-header-menu-selected-color);
-          border-bottom: 4px solid var(--app-header-menu-selected-color);
+          /* border-bottom: 4px solid var(--app-header-menu-selected-color); */
+          box-shadow: inset 0px -4px var(--app-header-menu-selected-color);
         }
 
         /* Workaround for IE11 displaying <main> as inline */
@@ -223,6 +241,12 @@ class PsrRouterApp extends connect(store)(LitElement) {
         .page {
           display: none;
           padding: 0px var(--app-grid-3x);
+          width: 100%;
+          height: 100%;
+        }
+
+        .page.full-size {
+          padding: 0px;
         }
 
         .page[active] {
@@ -242,15 +266,28 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
         paper-toast {
           width: 100%;
-          max-height: -1px;
         }
 
         /* Wide layout: when the viewport width is bigger than 640px, layout
         changes to a wide layout. */
         @media (min-width: ${MyAppGlobals.wideWidth}) {
+          .toolbar-top {
+            height: auto;
+            padding: 0px;
+            justify-content: center;
+          }
+
+          .toolbar-top-content {
+            height: var(--app-header-height-wide);
+            width: var(--app-wide-content-width);
+            margin: var(--app-header-margin-wide);
+            padding: 0px var(--app-grid-3x);
+          }
+
           /* Uncomment this if you want the toolbar links to be visible when in wide view */
-          .toolbar-list {
-            display: block;
+          .toolbar-navbar {
+            display: flex;
+            justify-content: center;
           }
 
           .menu-btn {
@@ -258,6 +295,18 @@ class PsrRouterApp extends connect(store)(LitElement) {
           }
 
           .main-content {
+            padding: 0px;
+            display: flex;
+            justify-content: center;
+          }
+
+          .page {
+            width: var(--app-wide-content-width);
+            /* padding: 0px var(--app-grid-3x); */
+          }
+
+          .page.full-size {
+            width: 100%;
           }
 
           .footer {
@@ -288,14 +337,17 @@ class PsrRouterApp extends connect(store)(LitElement) {
             <app-toolbar class="toolbar-top" sticky>
               <div class="toolbar-top-content">
                 <button class="menu-btn" title="Menu" @click="${_ => this._onMenuButtonClicked(menuIcon === angleLeftIcon)}">${menuIcon}</button>
+                <img class="logo-icon" src="${PSRRIcon}"></img>
                 <div class="title">${this.appTitle}</div>
               </div>
             </app-toolbar>
 
             <!-- This gets hidden on a small screen-->
-            <nav class="toolbar-list">
-              ${linkList}
-            </nav>
+            <div class="toolbar-navbar">
+              <nav class="toolbar-list">
+                ${linkList}
+              </nav>
+            </div>
           </app-header>
 
           <!-- Main content -->
@@ -307,7 +359,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
             <psr-router-pokemon-info id="pokemon-info" class="page" ?active="${this._page === 'pokemon-info'}" .app="${this}"></psr-router-pokemon-info>
             <psr-router-pokemon-list id="pokemon-list" class="page" ?active="${this._page === 'pokemon-list'}" .app="${this}"></psr-router-pokemon-list>
             <psr-router-trainers id="trainers" class="page" ?active="${this._page === 'trainers'}" .app="${this}"></psr-router-trainers>
-            <psr-router-trainer-info id="trainer-info" class="page" ?active="${this._page === 'trainer-info'}" .app="${this}"></psr-router-pokemon-info>
+            <psr-router-trainer-info id="trainer-info" class="page" ?active="${this._page === 'trainer-info'}" .app="${this}"></psr-router-trainer-info>
+            <psr-router-about id="about" class="page" ?active="${this._page === 'about'}" .app="${this}"></psr-router-about>
             <psr-router-404 id="404" class="page" ?active="${this._page === '404'}" .app="${this}"></psr-router-404>
 
             <snack-bar ?active="${this._snackbarOpened}" ?offline="${this._offline}">
@@ -355,12 +408,13 @@ class PsrRouterApp extends connect(store)(LitElement) {
     window.appConfig.pageList = {
       'home': {title: "Home", element: 'psr-router-home', showInMenu: true},
       'router': {title: "Route", element: 'psr-router-router', showInMenu: true},
-      'items': {title: "Item List", element: 'psr-router-items', showInMenu: true},
-      'moves': {title: "Move List", element: 'psr-router-moves', showInMenu: true},
-      'pokemon-list': {title: "Pokemon List", element: 'psr-router-pokemon-list', showInMenu: true},
-      'pokemon-info': {title: "Pokemon Info", element: 'psr-router-pokemon-info'},
-      'trainers': {title: "Trainer List", element: 'psr-router-trainers', showInMenu: true},
+      'pokemon-list': {title: "Pokémon", element: 'psr-router-pokemon-list', showInMenu: true},
+      'pokemon-info': {title: "Pokémon Info", element: 'psr-router-pokemon-info'},
+      'trainers': {title: "Trainers", element: 'psr-router-trainers', showInMenu: true},
       'trainer-info': {title: "Trainer Info", element: 'psr-router-trainer-info'},
+      'moves': {title: "Moves", element: 'psr-router-moves', showInMenu: true},
+      'items': {title: "Items", element: 'psr-router-items', showInMenu: true},
+      'about': {title: "About", element: 'psr-router-about', showInMenu: true},
       '404': {title: "404", element: 'psr-router-404', is404: true}
     }
 
@@ -380,7 +434,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
     window['isUpdateAvailable'].then(isAvailable => {
       if (isAvailable) {
         console.log("New Update Available! Reload the web app to get the latest juicy changes. (Oh Yeah!)");
-        this.showToast(html`<div style="display: flex; justify-content: space-between; align-items: baseline;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}">Reload</vaadin-button></div>`);
+        this.showToast(html`<div style="display: flex; justify-content: space-between; align-items: baseline;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}" style="cursor: pointer;">Reload</vaadin-button></div>`);
       }
     });
     // window.onunload = e => RouteUtil.RouteManager.SaveRoute();
