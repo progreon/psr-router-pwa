@@ -15,6 +15,15 @@ class PsrRouterItems extends PsrRouterPage {
     }
     return html`
       ${AppStyles}
+      <style>
+        psr-router-item {
+          padding: 0px 5px;
+        }
+        psr-router-item:hover {
+          background-color: #bbbbbb;
+        }
+      </style>
+      <h2>Items</h2>
       ${itemElements}
     `;
   }

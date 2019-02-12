@@ -205,7 +205,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
         .toolbar-list {
           display: flex;
           width: var(--app-wide-content-width);
-          padding: 0px var(--app-grid-3x);
+          /* padding: 0px var(--app-grid-3x); */
           background-color: var(--app-header-menu-background-color);
         }
 
@@ -281,7 +281,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
             height: var(--app-header-height-wide);
             width: var(--app-wide-content-width);
             margin: var(--app-header-margin-wide);
-            padding: 0px var(--app-grid-3x);
+            /* padding: 0px var(--app-grid-3x); */
           }
 
           /* Uncomment this if you want the toolbar links to be visible when in wide view */
@@ -302,7 +302,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
           .page {
             width: var(--app-wide-content-width);
-            /* padding: 0px var(--app-grid-3x); */
+            padding: 0px var(--app-grid-2x);
           }
 
           .page.full-size {

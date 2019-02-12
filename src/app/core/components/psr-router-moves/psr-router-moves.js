@@ -16,6 +16,15 @@ class PsrRouterMoves extends PsrRouterPage {
     });
     return html`
       ${AppStyles}
+      <style>
+        psr-router-move {
+          padding: 0px 5px;
+        }
+        psr-router-move:hover {
+          background-color: #bbbbbb;
+        }
+      </style>
+      <h2>Moves</h2>
       ${moveElements}
     `;
   }

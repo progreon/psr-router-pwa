@@ -52,10 +52,10 @@ class PsrRouterAbout extends PsrRouterPage {
           <li>Pokémon, trainer, move and item info for Pokémon Red and Blue</li>
           <li>Progressive Web Application</li>
           <ul>
-            <li>Mobile friendly</li>
+            <li>Mobile friendly (responsive)</li>
             <li>Installable on mobile & desktop (optional)</li>
             <li>Native mobile feel</li>
-            <li>Fully available when offline!</li>
+            <li>Fully available when offline</li>
             <li>Will update automatically</li>
           </ul>
         </ul>
