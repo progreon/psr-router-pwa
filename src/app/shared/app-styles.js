@@ -44,6 +44,7 @@ ${AppColors}
     --app-grid-2x: 16px;
     --app-grid-2hx: 20px;
     --app-grid-3x: 24px;
+    --app-grid-4x: 32px;
     --app-grid-5x: 40px;
     --app-grid-6x: 48px;
     --app-grid-7x: 56px;

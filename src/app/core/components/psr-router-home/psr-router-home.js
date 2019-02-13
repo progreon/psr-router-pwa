@@ -160,9 +160,11 @@ class PsrRouterHome extends PsrRouterPage {
       // bind menu listeners
       document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('filename').value = route.shortname ? route.shortname : route.info.title;
       let menuJson = document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-json');
-      menuJson.disabled = !this.searchParams.dev;
+      menuJson.hidden = !this.searchParams.dev;
       menuJson.addEventListener('click', this.jsonClicked);
-      document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-txt').addEventListener('click', this.txtClicked);
+      let menuTxt = document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-txt');
+      menuTxt.innerHTML = this.searchParams.dev ? "TXT" : "EXPORT";
+      menuTxt.addEventListener('click', this.txtClicked);
       document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-cancel').addEventListener('click', this.cancelClicked);
     }
   }

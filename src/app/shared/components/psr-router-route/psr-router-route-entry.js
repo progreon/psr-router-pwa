@@ -98,6 +98,9 @@ export class PsrRouterRouteEntry extends LitElement {
           justify-content: space-between;
           border-radius: 5px;
         }
+        .header[pointer] {
+          cursor: pointer;
+        }
         /* .header:hover {
           background-color: #bbbbbb;
         } */
@@ -188,7 +191,7 @@ export class PsrRouterRouteEntry extends LitElement {
       <div class="messages">
         ${messages}
       </div>
-      <div class="header" ?hidden="${this.routeHeader}">
+      <div class="header" ?hidden="${this.routeHeader}" ?pointer="${!this.routeHeader && expandingDOM}">
         <!-- <vaadin-context-menu>
           <template>
             <ul class="menu-options">

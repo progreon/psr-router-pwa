@@ -70,6 +70,9 @@ const loadPage = (page, searchParams) => (dispatch) => {
     case 'trainers':
       import('CoreComponents/psr-router-trainers/psr-router-trainers');
       break;
+    case 'manual':
+      import('CoreComponents/psr-router-manual/psr-router-manual');
+      break;
     case 'about':
       import('CoreComponents/psr-router-about/psr-router-about');
       break;
