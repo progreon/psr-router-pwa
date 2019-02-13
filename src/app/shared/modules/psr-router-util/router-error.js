@@ -10,8 +10,8 @@ class RouterError extends Error {
    * @param {string}  [type="Router Error"]   The type of route entry.
    */
   constructor(message, type="Router Error") {
-    super(type + ": " + message);
-    this.name = this.constructor.name;
+    super(message);
+    this.name = type;
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, this.constructor);
     } else {

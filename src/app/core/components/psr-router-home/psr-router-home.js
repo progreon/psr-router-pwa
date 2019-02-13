@@ -120,7 +120,10 @@ class PsrRouterHome extends PsrRouterPage {
           }
           super._navigateTo("router");
         }).catch(e => {
+          fileInput.value = "";
           this._loading = false;
+          console.warn(e);
+          this.showAppToast(e);
           this.requestUpdate();
         });
     }

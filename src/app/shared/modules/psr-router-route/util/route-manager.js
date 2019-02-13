@@ -85,9 +85,13 @@ export function LoadRouteFile(file) {
       var filename = file.name;
       var fileReader = new FileReader();
       fileReader.onload = function(e) {
-        var route = RouteIO.ImportFromFile(e.target.result, filename.search(/\.json$/) > 0, filename);
-        route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
-        resolve(SaveRoute(route));
+        try {
+          var route = RouteIO.ImportFromFile(e.target.result, filename.search(/\.json$/) > 0, filename);
+          route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+          resolve(SaveRoute(route));
+        } catch (e) {
+          reject(e);
+        }
       }
       fileReader.readAsText(file);
     } else {

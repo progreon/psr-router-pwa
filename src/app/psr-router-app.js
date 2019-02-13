@@ -374,7 +374,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
         </app-header-layout>
       </app-drawer-layout>
 
-      <paper-toast id="toast" duration="5000">${this._toastHtml}</paper-toast>
+      <paper-toast id="toast" duration="10000">${this._toastHtml}</paper-toast>
     `;
     return template;
   }

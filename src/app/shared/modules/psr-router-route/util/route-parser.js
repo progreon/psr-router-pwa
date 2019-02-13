@@ -12,13 +12,12 @@ import * as Util from '../../psr-router-util';
 import * as Route from '..';
 
 /**
- * Get a dummy route.
  * // TODO: docu
  */
 export function ParseRouteText(routeText, filename) {
-  var linesToParse = _PARSE1_getFileLines(routeText);
-  var scopedLinesArray = _PARSE2_toScopedLinesArray(linesToParse);
-  var routeJSON = _PARSE3_getRouteJSON(scopedLinesArray, filename);
+  const linesToParse = _PARSE1_getFileLines(routeText);
+  const scopedLinesArray = _PARSE2_toScopedLinesArray(linesToParse);
+  const routeJSON = _PARSE3_getRouteJSON(scopedLinesArray, filename);
   return routeJSON;
 }
 
@@ -34,14 +33,14 @@ export function ExportRouteText(routeJSON) {
 
 function _PARSE1_getFileLines(routeText) {
   // Windows to Unix endings
-  var str = routeText.replace(/\r\n/g, "\n");
+  const str = routeText.replace(/\r\n/g, "\n");
   // Split into lines
-  var lines = str.split("\n");
-  var fileLines = [];
-  var l = 0;
+  const lines = str.split("\n");
+  let fileLines = [];
+  let l = 0;
   while (l < lines.length && !lines[l].trim().startsWith("===")) {
-    var line = lines[l];
-    var d = 0; // TODO: support spaces?
+    let line = lines[l];
+    let d = 0; // TODO: support spaces?
     while (d < line.length && line.charAt(d) === '\t')
       d++;
 
@@ -57,16 +56,16 @@ function _PARSE1_getFileLines(routeText) {
 function _PARSE2_toScopedLinesArray(lines) {
   lines = JSON.parse(JSON.stringify(lines)); // deep clone for use
   // This can contain multiple scopes, but all starting from the same scope depth
-  var arr = [];
-  var currLine = 0;
+  let arr = [];
+  let currLine = 0;
   while (currLine < lines.length) {
-    var currScope = _PARSE2a_getScopedLines(lines, currLine);
-    var entry = currScope.shift();
-    var newLine = { ln: entry.ln, line: entry.line };
+    const currScope = _PARSE2a_getScopedLines(lines, currLine);
+    const entry = currScope.shift();
+    let newLine = { ln: entry.ln, line: entry.line };
     // while we're here, add some help for the next parser step
-    newLine.type = entry.line.substring(0, entry.line.indexOf(": ")).toUpperCase();
+    newLine.type = entry.line.substring(0, entry.line.indexOf(":")).toUpperCase();
     if (newLine.type !== "") {
-      newLine.untypedLine = entry.line.substring(newLine.type.length + 2).trim();
+      newLine.untypedLine = entry.line.substring(newLine.type.length + 1).trim();
     } else {
       newLine.untypedLine = entry.line;
     }
@@ -81,10 +80,10 @@ function _PARSE2_toScopedLinesArray(lines) {
 }
 
 function _PARSE2a_getScopedLines(lines, startLine=0) {
-  var scope = [];
+  let scope = [];
   if (lines.length >= startLine) {
     scope.push(lines[startLine]);
-    var currLine = startLine + 1;
+    let currLine = startLine + 1;
     while (currLine < lines.length && lines[currLine].depth > lines[startLine].depth) {
       scope.push(lines[currLine]);
       currLine++;
@@ -95,31 +94,41 @@ function _PARSE2a_getScopedLines(lines, startLine=0) {
 
 function _PARSE3_getRouteJSON(scopedLinesArray, filename) {
   scopedLinesArray = JSON.parse(JSON.stringify(scopedLinesArray)); // deep clone for use
-  var gameKey = "";
-  var routeTitle = "";
-  var routeEntries = [];
+  let gameKey = "";
+  let routeTitle = "";
+  let routeEntries = [];
   scopedLinesArray.forEach(scopedLines => {
     if (scopedLines.type === "GAME") {
       gameKey = scopedLines.untypedLine;
+      if (!gameKey) {
+        throw new Util.RouterError(`${filename}:${scopedLines.ln+1} No game definition found`, "Parser Error");
+      }
     } else if (scopedLines.type === "ROUTE") {
       routeTitle = scopedLines.untypedLine;
-      routeEntries = _PARSE3a_getRouteJSONEntries(scopedLines.scope);
+      if (!routeTitle) {
+        throw new Util.RouterError(`${filename}:${scopedLines.ln+1} Please provide a title for the route`, "Parser Error");
+      }
+      routeEntries = _PARSE3a_getRouteJSONEntries(scopedLines.scope, filename);
     }
   });
   if (!gameKey) {
-    // TODO: throw exception with line number, etc..
     throw new Util.RouterError("No game definition found!", "Parser Error");
   }
-  var regex = /(.*[\\\/])?(.*)(\..*)$/.exec(filename);
-  var shortname = regex && regex.length > 0 ? regex[2] : routeTitle;
+  const regex = /(.*[\\\/])?(.*)(\..*)$/.exec(filename);
+  const shortname = regex && regex.length > 0 ? regex[2] : routeTitle;
   return { game: gameKey, info: { title: routeTitle }, shortname: shortname, entries: routeEntries };
 }
 
-function _PARSE3a_getRouteJSONEntries(scopedLines) {
-  var entries = [];
+function _PARSE3a_getRouteJSONEntries(scopedLines, filename) {
+  let entries = [];
+  let title;
+  let summary;
+  let tOrS;
+  let s;
+  let description;
   scopedLines.forEach(scopedLine => {
     // Getting some most used stuff, we can always overwrite it
-    var entry = {
+    let entry = {
       type: scopedLine.type,
       info: { title: "", summary: "", description: "" },
       location: "" // TODO: support this!
@@ -127,18 +136,30 @@ function _PARSE3a_getRouteJSONEntries(scopedLines) {
     // Now entry type specific stuff
     switch (scopedLine.type) {
       case Route.RouteGetPokemon.getEntryType().toUpperCase():
+        // GetP: [#]<option> [[#]<option> [..]]
+        //     [<title> ::] <summary>
+        //     <description lines>
+        // with <option> = <pokemon>:<level>
+        // only one preferred option (with '#') allowed
         entry.choices = [];
         // e.g. "pikachu:5  #bulbasaur:5"
-        let choices = scopedLine.untypedLine.split(" ");
+        let choices = scopedLine.untypedLine.split(" ").filter(spl => !!spl); // filter out the empty strings (in case of multiple spaces)
         let preference = 0;
         for (let i = 0; i < choices.length; i++) {
           if (choices[i]) { // in case of choices separated by multiple spaces
             let [pokemon, level] = choices[i].split(":");
-            if (pokemon.startsWith("#")) {
-              if (entry.preference == undefined) {
-                entry.preference = preference;
+            level = parseInt(level);
+            if (pokemon && !isNaN(level)) {
+              if (pokemon.startsWith("#")) {
+                if (entry.preference == undefined) {
+                  entry.preference = preference;
+                } else {
+                  throw new Util.RouterError(`${filename}:${scopedLine.ln+1} Only one preffered option allowed`, "Parser Error");
+                }
+                pokemon = pokemon.substring(1);
               }
-              pokemon = pokemon.substring(1);
+            } else {
+              throw new Util.RouterError(`${filename}:${scopedLine.ln+1} Invalid pokemon-level pair "${choices[i]}"`, "Parser Error");
             }
             entry.choices.push({pokemon, level});
             preference++;
@@ -146,19 +167,45 @@ function _PARSE3a_getRouteJSONEntries(scopedLines) {
         }
         if (scopedLine.scope && scopedLine.scope.length > 0) {
           var titleLine = scopedLine.scope.shift();
-          var splitted = titleLine.line.split(" :: ");
-          entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: "", summary: titleLine.line };
+          [tOrS, ...s] = titleLine.line.split("::");
+          s = s && s.length > 0 ? s.join("::").trim() : "";
+          entry.info = { title: s ? tOrS.trim() : "", summary: s || tOrS };
           entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
         }
         break;
       case Route.RouteBattle.getEntryType().toUpperCase():
+        // B: <trainer> [:: <shared> [<shared> [..]]]
+        //     [<title> ::] <summary>
+        //     <description lines>
+        // with <shared> = <trainerPartyId>:<playerPartyId>[,<playerPartyId>[..]]
         let [trainer, shared] = scopedLine.untypedLine.split("::").map(s => s.trim());
+        if (!trainer) {
+          throw new Util.RouterError(`${filename}:${scopedLine.ln+1} Please provide a trainer id`, "Parser Error");
+        }
         entry.trainer = trainer;
         if (shared) {
           // eg: "0:0,1  2:1"
-          let bs = shared.split(" ");
+          let bs = shared.split(" ").filter(spl => !!spl); // filter out the empty strings (in case of multiple spaces)
           let se = {};
-          bs.forEach(ops => { var [o, ps] = ops.split(":"); if (o && ps) se[o] = ps.split(",").map(p => parseInt(p)); });
+          bs.forEach(ops => {
+            var [o, ps] = ops.split(":");
+            if (o && ps) {
+              o = parseInt(o);
+              if (isNaN(o)) {
+                throw new Util.RouterError(`${filename}:${scopedLine.ln+1} Invalid share-parameter ${ops} (o${o})`, "Parser Error");
+              }
+              se[o] = ps.split(",").map(function(p) {
+                p = parseInt(p);
+                if (isNaN(p)) {
+                  throw new Util.RouterError(`${filename}:${scopedLine.ln+1} Invalid share-parameter ${ops}`, "Parser Error");
+                }
+                return p;
+              });
+            }
+            else {
+              throw new Util.RouterError(`${filename}:${scopedLine.ln+1} Invalid share-parameter ${ops}`, "Parser Error");
+            }
+          });
           entry.shareExp = [];
           for (let i = 0; i <= Math.max(...Object.keys(se)); i++) {
             entry.shareExp.push(se[i] ? se[i] : [0]);
@@ -166,26 +213,32 @@ function _PARSE3a_getRouteJSONEntries(scopedLines) {
         }
         if (scopedLine.scope && scopedLine.scope.length > 0) {
           let titleLine = scopedLine.scope.shift();
-          let splitted = titleLine.line.split(" :: ");
-          entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: "", summary: titleLine.line };
+          [tOrS, ...s] = titleLine.line.split("::");
+          s = s && s.length > 0 ? s.join("::").trim() : "";
+          entry.info = { title: s ? tOrS.trim() : "", summary: s || tOrS };
           entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
         }
         break;
       case Route.RouteEntry.getEntryType().toUpperCase():
+        // ENTRY: <title> [:: <summary>]
+        //     <description lines>
         entry.entryString = scopedLine.untypedLine; // TODO: this is only temporary until route entries are more complete
-        var splitted = scopedLine.untypedLine.split(" :: ");
-        entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: scopedLine.untypedLine, summary: "" };
-        if (scopedLine.scope && scopedLine.scope.length > 0) {
-          entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
-        }
+        [title, ...summary] = scopedLine.untypedLine.split("::");
+        entry.info = { title: title.trim(), summary: summary.join("::").trim() };
+        entry.info.description = scopedLine.scope ? scopedLine.scope.map(l => l.line).join("\n") : "";
         break;
       case Route.RouteSection.getEntryType().toUpperCase():
-        var splitted = scopedLine.untypedLine.split(" :: ");
-        entry.info = splitted.length > 1 ? { title: splitted.shift().trim(), summary: splitted.join(" :: ").trim() } : { title: scopedLine.untypedLine, summary: "" };
-        entry.entries = scopedLine.scope ? _PARSE3a_getRouteJSONEntries(scopedLine.scope) : [];
+        // S: <title> [:: <summary>]
+        //     <child entries>
+        [title, ...summary] = scopedLine.untypedLine.split("::");
+        entry.info = { title: title.trim(), summary: summary.join("::").trim() };
+        entry.entries = scopedLine.scope ? _PARSE3a_getRouteJSONEntries(scopedLine.scope, filename) : [];
+        // TODO: Message if empty section? If so, when?
         break;
       case Route.RouteDirections.getEntryType().toUpperCase():
       default:
+        // <summary>
+        //     <description lines>
         entry.info.summary = scopedLine.line;
         entry.info.description = scopedLine.scope ? scopedLine.scope.map(l => l.line).join("\n") : "";
     }

@@ -16,7 +16,7 @@ Route: Red Any% Glitchless - God Nido (by PaperGuy)
 		Clear any existing save file by pressing Up + B + Select on the game title screen
 		Set text speed to FAST, battle animation to OFF and battle style to SHIFT
 		Give your character and your rival a one-character name
-	S: Pallet Town
+	S: Pallet Town :: Let's begin!
 		Optional: withdraw the PC Potion in your room
 		GetP: squirtle:5
 			Choose Squirtle, and give it a one-character name
