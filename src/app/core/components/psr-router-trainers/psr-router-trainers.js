@@ -26,6 +26,7 @@ class PsrRouterTrainers extends PsrRouterPage {
         vaadin-item {
           cursor: pointer;
           padding: 0px 5px;
+          border-radius: 5px;
         }
         vaadin-item:hover {
           background-color: #bbbbbb;

@@ -21,6 +21,7 @@ class PsrRouterPokemonList extends PsrRouterPage {
         psr-router-pokemon {
           cursor: pointer;
           padding: 0px 5px;
+          border-radius: 5px;
         }
         psr-router-pokemon:hover {
           background-color: #bbbbbb;

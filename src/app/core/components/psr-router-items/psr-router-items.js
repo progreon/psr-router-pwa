@@ -18,6 +18,7 @@ class PsrRouterItems extends PsrRouterPage {
       <style>
         psr-router-item {
           padding: 0px 5px;
+          border-radius: 5px;
         }
         psr-router-item:hover {
           background-color: #bbbbbb;

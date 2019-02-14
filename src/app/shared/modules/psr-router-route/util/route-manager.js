@@ -49,18 +49,20 @@ export function SaveRoute(route=null) {
 // TODO: new route
 
 //// EXAMPLE ROUTES ////
-import exampleRoute from 'SharedData/routes/example_route.json';
-import blueDummy from 'SharedData/routes/blue_dummy.json';
-import yellowDummy from 'SharedData/routes/yellow_dummy.json';
-import crystalDummy from 'SharedData/routes/crystal_dummy.json';
-import redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
+import redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
+// import exampleRoute from 'SharedData/routes/example_route.json';
+// import blueDummy from 'SharedData/routes/blue_dummy.json';
+// import yellowDummy from 'SharedData/routes/yellow_dummy.json';
+// import crystalDummy from 'SharedData/routes/crystal_dummy.json';
+// import redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
 
 var exampleRoutes = {};
-exampleRoutes[exampleRoute.shortname] = exampleRoute;
-exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
-exampleRoutes[blueDummy.shortname] = blueDummy;
-exampleRoutes[yellowDummy.shortname] = yellowDummy;
-exampleRoutes[crystalDummy.shortname] = crystalDummy;
+exampleRoutes[redAnyGlitchlessBasic.shortname] = redAnyGlitchlessBasic;
+// exampleRoutes[exampleRoute.shortname] = exampleRoute;
+// exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
+// exampleRoutes[blueDummy.shortname] = blueDummy;
+// exampleRoutes[yellowDummy.shortname] = yellowDummy;
+// exampleRoutes[crystalDummy.shortname] = crystalDummy;
 
 export function GetExampleRoutesNames() {
   return Object.keys(exampleRoutes);
@@ -68,13 +70,13 @@ export function GetExampleRoutesNames() {
 
 export function LoadExampleRoute(routeName) {
   var routeJSON = exampleRoutes[routeName];
-  if (!routeJSON) {
-    routeJSON = exampleRoute;
-    routeName = exampleRoute.shortname;
+  if (routeJSON) {
+    var route = Route.Route.newFromJSONObject(routeJSON);
+    route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+    return SaveRoute(route);
+  } else {
+    return undefined;
   }
-  var route = Route.Route.newFromJSONObject(routeJSON);
-  route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
-  return SaveRoute(route);
 }
 
 //// LOAD/EXPORT FROM/TO FILES ////
