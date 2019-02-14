@@ -109,7 +109,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
           /* SIZES */
           --app-drawer-width: 256px;
-          --app-wide-content-width: 1200px;
+          --app-wide-content-width: 1000px;
           --app-header-height: var(--app-grid-7x);
           --app-header-height-wide: var(--app-grid-7x);
           /* --app-header-margin-wide: 24px 15px 32px 15px; */
@@ -119,10 +119,14 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
         .header-layout {
           background-color: var(--app-background-color);
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
         }
 
         .drawer {
           color: var(--app-drawer-text-color);
+          z-index: 1;
         }
 
         .drawer-top {
@@ -200,6 +204,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
         .toolbar-navbar {
           display: none;
           background-color: var(--app-header-menu-background-color);
+          overflow-x: hidden;
         }
 
         .toolbar-list {
@@ -219,7 +224,6 @@ class PsrRouterApp extends connect(store)(LitElement) {
 
         .toolbar-list > a[selected] {
           color: var(--app-header-menu-selected-color);
-          /* border-bottom: 4px solid var(--app-header-menu-selected-color); */
           box-shadow: inset 0px -4px var(--app-header-menu-selected-color);
         }
 
@@ -227,13 +231,11 @@ class PsrRouterApp extends connect(store)(LitElement) {
         main {
           display: block;
           background-color: var(--app-main-background-color);
+          flex-grow: 1;
         }
 
         .main-content {
           height: 100%;
-          @apply --layout-flex;
-          /* padding: 0px;
-          margin: 0px; */
           overflow: auto;
           overflow-y: scroll;
         }
@@ -322,60 +324,58 @@ class PsrRouterApp extends connect(store)(LitElement) {
           }
         }
       </style>
-      <!-- Add force-narrow if you don't want to show the toolbar when in wide view -->
-      <app-drawer-layout fullbleed force-narrow>
-        <!-- Drawer content -->
-        <!-- Add swipe-open if you want the ability to swipe open the drawer -->
-        <app-drawer slot="drawer" class="drawer" ?swipe-open="${!this._wideLayout}" ?opened="${this._drawerOpened}" @opened-changed="${e => store.dispatch(updateDrawerState(e.target.opened))}">
-          <app-toolbar class="drawer-top">Menu</app-toolbar>
-          <nav class="drawer-list">
-            ${linkList}
-          </nav>
-        </app-drawer>
 
-        <!-- Header content -->
-        <app-header-layout fullbleed class="header-layout">
-          <app-header slot="header" class="toolbar" fixed effects="waterfall">
-            <app-toolbar class="toolbar-top" sticky>
-              <div class="toolbar-top-content">
-                <button class="menu-btn" title="Menu" @click="${_ => this._onMenuButtonClicked(menuIcon === angleLeftIcon)}">${menuIcon}</button>
-                <img class="logo-icon" src="${PSRRIcon}"></img>
-                <div class="title">${this.appTitle}</div>
-              </div>
-            </app-toolbar>
+      <!-- Drawer content -->
+      <!-- Add swipe-open if you want the ability to swipe open the drawer -->
+      <app-drawer slot="drawer" class="drawer" ?swipe-open="${!this._wideLayout}" ?opened="${this._drawerOpened}" @opened-changed="${e => store.dispatch(updateDrawerState(e.target.opened))}">
+        <app-toolbar class="drawer-top">Menu</app-toolbar>
+        <nav class="drawer-list">
+          ${linkList}
+        </nav>
+      </app-drawer>
 
-            <!-- This gets hidden on a small screen-->
-            <div class="toolbar-navbar">
-              <nav class="toolbar-list">
-                ${linkList}
-              </nav>
+      <!-- Header content -->
+      <div class="header-layout">
+        <app-header slot="header" class="toolbar" fixed effects="waterfall">
+          <app-toolbar class="toolbar-top" sticky>
+            <div class="toolbar-top-content">
+              <button class="menu-btn" title="Menu" @click="${_ => this._onMenuButtonClicked(menuIcon === angleLeftIcon)}">${menuIcon}</button>
+              <img class="logo-icon" src="${PSRRIcon}"></img>
+              <div class="title">${this.appTitle}</div>
             </div>
-          </app-header>
+          </app-toolbar>
 
-          <!-- Main content -->
-          <main id="main" role="main" class="main-content">
-            <psr-router-home id="home" class="page" ?active="${this._page === 'home'}" .app="${this}"></psr-router-home>
-            <psr-router-router id="router" class="page" ?active="${this._page === 'router'}" .app="${this}"></psr-router-router>
-            <psr-router-items id="items" class="page" ?active="${this._page === 'items'}" .app="${this}"></psr-router-items>
-            <psr-router-moves id="moves" class="page" ?active="${this._page === 'moves'}" .app="${this}"></psr-router-moves>
-            <psr-router-pokemon-info id="pokemon-info" class="page" ?active="${this._page === 'pokemon-info'}" .app="${this}"></psr-router-pokemon-info>
-            <psr-router-pokemon-list id="pokemon-list" class="page" ?active="${this._page === 'pokemon-list'}" .app="${this}"></psr-router-pokemon-list>
-            <psr-router-trainers id="trainers" class="page" ?active="${this._page === 'trainers'}" .app="${this}"></psr-router-trainers>
-            <psr-router-trainer-info id="trainer-info" class="page" ?active="${this._page === 'trainer-info'}" .app="${this}"></psr-router-trainer-info>
-            <psr-router-manual id="manual" class="page" ?active="${this._page === 'manual'}" .app="${this}"></psr-router-manual>
-            <psr-router-about id="about" class="page" ?active="${this._page === 'about'}" .app="${this}"></psr-router-about>
-            <psr-router-404 id="404" class="page" ?active="${this._page === '404'}" .app="${this}"></psr-router-404>
+          <!-- This gets hidden on a small screen-->
+          <div class="toolbar-navbar">
+            <nav class="toolbar-list">
+              ${linkList}
+            </nav>
+          </div>
+        </app-header>
 
-            <snack-bar ?active="${this._snackbarOpened}" ?offline="${this._offline}">
-                You are now ${this._offline ? 'offline' : 'online'}.</snack-bar>
-          </main>
+        <!-- Main content -->
+        <main id="main" role="main" class="main-content">
+          <psr-router-home id="home" class="page" ?active="${this._page === 'home'}" .app="${this}"></psr-router-home>
+          <psr-router-router id="router" class="page" ?active="${this._page === 'router'}" .app="${this}"></psr-router-router>
+          <psr-router-items id="items" class="page" ?active="${this._page === 'items'}" .app="${this}"></psr-router-items>
+          <psr-router-moves id="moves" class="page" ?active="${this._page === 'moves'}" .app="${this}"></psr-router-moves>
+          <psr-router-pokemon-info id="pokemon-info" class="page" ?active="${this._page === 'pokemon-info'}" .app="${this}"></psr-router-pokemon-info>
+          <psr-router-pokemon-list id="pokemon-list" class="page" ?active="${this._page === 'pokemon-list'}" .app="${this}"></psr-router-pokemon-list>
+          <psr-router-trainers id="trainers" class="page" ?active="${this._page === 'trainers'}" .app="${this}"></psr-router-trainers>
+          <psr-router-trainer-info id="trainer-info" class="page" ?active="${this._page === 'trainer-info'}" .app="${this}"></psr-router-trainer-info>
+          <psr-router-manual id="manual" class="page" ?active="${this._page === 'manual'}" .app="${this}"></psr-router-manual>
+          <psr-router-about id="about" class="page" ?active="${this._page === 'about'}" .app="${this}"></psr-router-about>
+          <psr-router-404 id="404" class="page" ?active="${this._page === '404'}" .app="${this}"></psr-router-404>
 
-          <footer class="footer">
-            v${MyAppGlobals.version}
-            <!-- [TODO: shortcuts] -->
-          </footer>
-        </app-header-layout>
-      </app-drawer-layout>
+          <snack-bar ?active="${this._snackbarOpened}" ?offline="${this._offline}">
+              You are now ${this._offline ? 'offline' : 'online'}.</snack-bar>
+        </main>
+
+        <footer class="footer">
+          ${this.appTitle} v${MyAppGlobals.version}
+          <!-- [TODO: shortcuts] -->
+        </footer>
+      </div>
 
       <paper-toast id="toast" duration="10000">${this._toastHtml}</paper-toast>
     `;
@@ -422,12 +422,8 @@ class PsrRouterApp extends connect(store)(LitElement) {
       '404': {title: "404", element: 'psr-router-404', is404: true}
     }
 
-    // Load the last saved (json) route from the local storage if there is one,
-    // else load the default example route.
+    // Load the last saved (json) route from the local storage if there is one
     RouteUtil.RouteManager.LoadSavedRoute();
-    // if (!RouteUtil.RouteManager.LoadSavedRoute()) {
-    //   RouteUtil.RouteManager.LoadExampleRoute();
-    // }
 
     var game = RouteUtil.RouteManager.GetCurrentGame();
     console.debug("Current game:", game);
@@ -438,7 +434,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
     window['isUpdateAvailable'].then(isAvailable => {
       if (isAvailable) {
         console.log("New Update Available! Reload the web app to get the latest juicy changes. (Oh Yeah!)");
-        this.showToast(html`<div style="display: flex; justify-content: space-between; align-items: baseline;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}" style="cursor: pointer;">Reload</vaadin-button></div>`);
+        this.showToast(html`<div style="display: flex; justify-content: space-between; align-items: center;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}" style="cursor: pointer;">Reload</vaadin-button></div>`);
       }
     });
     // window.onunload = e => RouteUtil.RouteManager.SaveRoute();
