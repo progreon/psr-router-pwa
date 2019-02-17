@@ -4,10 +4,12 @@ export const AppColors = html`
 <style>
   :host {
     /* CORPORATE COLORS */
-    --app-color-polymer-blue: #4285f4;
+    --app-color-blue: #1865a9;
+    --app-color-yellow: #ffdd22;
     --app-color-slate: #8c9192;
-    --app-color-white: #ffffff;
-    --app-color-black: #1d1d1b;
+    --app-color-white: #fafafa;
+    /* --app-color-black: #1d1d1b; */
+    --app-color-black: #000000;
     /* PROFILE COLORS */
     --app-color-granite: #3a4448;
     --app-color-fog: #e3e2dd;
@@ -42,6 +44,7 @@ ${AppColors}
     --app-grid-2x: 16px;
     --app-grid-2hx: 20px;
     --app-grid-3x: 24px;
+    --app-grid-4x: 32px;
     --app-grid-5x: 40px;
     --app-grid-6x: 48px;
     --app-grid-7x: 56px;
@@ -54,6 +57,21 @@ ${AppColors}
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.5;
     font-size: 14px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  div[hidden] {
+    display: none;
+  }
+
+  pre {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    margin: 0;
   }
 
   h1 {
@@ -88,6 +106,16 @@ ${AppColors}
 
   p.heading {
     font-weight: bold;
+  }
+
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
   }
 
   @media (min-width: ${MyAppGlobals.wideWidth}) {

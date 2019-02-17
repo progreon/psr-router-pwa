@@ -1,5 +1,5 @@
 import { html } from '@polymer/lit-element';
-import { PsrRouterPage } from 'CoreComponents/psr-router-page/psr-router-page';
+import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 
 // These are the elements needed by this element.
 import 'SharedComponents/psr-router-move/psr-router-move';
@@ -8,14 +8,24 @@ import 'SharedComponents/psr-router-move/psr-router-move';
 import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterMoves extends PsrRouterPage {
-  _render(props) {
-    var moves = props.game ? props.game.moves : {};
+  _render() {
+    // var moves = this.game ? this.game.moves : {};
     var moveElements = [];
-    for (var m in moves) {
-      moveElements.push(html`<psr-router-move id="${m}" move=${moves[m]} detailed></psr-router-move>`);
-    }
+    Object.keys(this.moves).sort((a, b) => (a < b ? -1 : (a > b ? 1 : 0))).forEach(m => {
+      moveElements.push(html`<psr-router-move id="${m}" .move=${this.moves[m]} detailed></psr-router-move>`);
+    });
     return html`
       ${AppStyles}
+      <style>
+        psr-router-move {
+          padding: 0px 5px;
+          border-radius: 5px;
+        }
+        psr-router-move:hover {
+          background-color: #bbbbbb;
+        }
+      </style>
+      <h2>Moves</h2>
       ${moveElements}
     `;
   }
@@ -23,12 +33,17 @@ class PsrRouterMoves extends PsrRouterPage {
   static get properties() {
     return {
       /* The moves array. */
-      test: Array
+      moves: Array
     };
   }
 
   constructor() {
     super();
+    this.triggerDataRefresh();
+  }
+
+  triggerDataRefresh() {
+    this.moves = window.app && window.app.game && window.app.game.moves ? window.app.game.moves : {};
   }
 }
 

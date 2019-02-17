@@ -11,8 +11,13 @@
 
     <script>
       window.MyAppGlobals = {
+        version: '<%= htmlWebpackPlugin.options.config.app.version %>',
         rootPath: '<%= htmlWebpackPlugin.options.config.app.basePath %>',
         wideWidth: '<%= htmlWebpackPlugin.options.config.settings.wideWidth %>'
+      };
+      // Setup global variables
+      window.appConfig = {
+        app: "<%= htmlWebpackPlugin.options.config.app.name %>"
       };
     </script>
 
@@ -27,12 +32,9 @@
 
     <!-- Add any global styles for body, document, etc. -->
     <style>
-      body {
-        background-color: #eeeeee;
-      }
     </style>
   </head>
-  <body>
+  <body style="margin: 0px;">
     <psr-router-app appTitle="<%= htmlWebpackPlugin.options.config.app.name %>"></psr-router-app>
     <noscript>
       Please enable JavaScript to view this website.

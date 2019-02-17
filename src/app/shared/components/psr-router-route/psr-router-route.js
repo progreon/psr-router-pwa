@@ -15,13 +15,11 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 class PsrRouterRoute extends PsrRouterRouteSection {
-  _renderRouteEntryContent(props) {
-    // TODO
-    return undefined;
+  _renderContent() {
+    return super._renderExpandingContent();
   }
 
-  _renderRouteEntryStyle(props) {
-    // TODO
+  _renderExpandingContent() {
     return undefined;
   }
 
@@ -33,6 +31,7 @@ class PsrRouterRoute extends PsrRouterRouteSection {
 
   constructor(routeEntry=undefined) {
     super(routeEntry);
+    this.routeHeader = true;
     // TODO
   }
 }

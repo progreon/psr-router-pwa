@@ -1,12 +1,30 @@
-import { LitElement } from '@polymer/lit-element';
+import { LitElement, html } from '@polymer/lit-element';
 
 export class PsrRouterPage extends LitElement {
   static get properties() {
     return {
-      active: Boolean,
-      game: Object,
-      searchParams: Object
+      active: {type: Boolean, reflect: true},
+      app: Object
     }
+  }
+
+  get searchParams() {
+    return this.app.searchParams;
+  }
+
+  // Only render this page if it's actually visible.
+  render() {
+    if (this.active) {
+      return this._render();
+    }
+  }
+
+  showAppToast(text) {
+    this.app.showToast(html`<div style="display: flex;">${text}</div>`);
+  }
+
+  triggerDataRefresh() {
+    // Implement this!
   }
 
   _navigateTo(href, isExternalLink) {
@@ -14,8 +32,7 @@ export class PsrRouterPage extends LitElement {
     document.body.dispatchEvent(navigateEvent);
   }
 
-  // Only render this page if it's actually visible.
-  _shouldRender(props, changedProps, old) {
-    return props.active;
+  _render() {
+    // Implement this!
   }
 }

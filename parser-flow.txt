@@ -1,0 +1,99 @@
+#Parser flow:
+
+line1
+	line1.1
+		line1.1.1
+//		line1.1.2
+		line1.1.3
+	line1.2
+		line1.2.1
+		line1.2.2
+
+// battle:
+B: entryString
+	[title :: ]summary
+	descriptionLine1
+	descriptionLine2
+
+##_PARSE1_getFileLines
+
+[
+	{ ln: 0, depth: 0, line: "line1" },
+	{ ln: 1, depth: 1, line: "line1.1" },
+	{ ln: 2, depth: 2, line: "line1.1.1" },
+	{ ln: 4, depth: 2, line: "line1.1.3" },
+	{ ln: 5, depth: 1, line: "line1.2" },
+	{ ln: 6, depth: 2, line: "line1.2.1" },
+	{ ln: 7, depth: 2, line: "line1.2.2" },
+	{ ln: 10, depth: 0, line: "entryString" },
+	{ ln: 11, depth: 1, line: "[title :: ]summary" },
+	{ ln: 12, depth: 1, line: "descriptionLine1" },
+	{ ln: 13, depth: 1, line: "descriptionLine2" },
+]
+
+##_PARSE2_toScopedLinesArray
+
+[
+	{
+		ln: 0,
+		line: "line1",
+		scope: [
+			{
+				ln: 1,
+				line: "line1.1",
+				scope: [
+					{
+						ln: 2,
+						line: "line1.1.1"
+					},
+					{
+						ln: 4,
+						line: "line1.1.3"
+					}
+				]
+			},
+			{
+				ln: 5,
+				line: "line1.2"
+				scope: [
+					{
+						ln: 6,
+						line: "line1.2.1"
+					},
+					{
+						ln: 7,
+						line: "line1.2.2"
+					}
+				]
+			}
+		]
+	},
+	{
+		ln: 10,
+		line: "B: entryString",
+		type: "B",
+		untypedLine: "entryString"
+		scope: [
+			{
+				ln: 11,
+				line: "[title :: ]summary",
+				type: "",
+				untypedLine: "[title :: ]summary"
+			},
+			{
+				ln: 12,
+				line: "descriptionLine1",
+				type: "",
+				untypedLine: "descriptionLine1"
+			},
+			{
+				ln: 13,
+				line: "descriptionLine2",
+				type: "",
+				untypedLine: "descriptionLine2"
+			},
+		]
+	}
+]
+
+// TODO: parse to route json, ...

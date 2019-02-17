@@ -33,7 +33,7 @@ module.exports = (production) => ({
 
     // Your application description.
     // This will be used as your description meta tag
-    description: env.APP_DESCRIPTION || 'A web application for routing Pokemon SpeedRuns',
+    description: env.APP_DESCRIPTION || 'A web application for routing Pokémon SpeedRuns',
 
     // Whether to transpile the app for older browsers or not.
     // TODO: fix compiling webcomponents-loader.js: add as entry & fix webpack-dev-server to load it correcetly
@@ -43,6 +43,9 @@ module.exports = (production) => ({
     // field in package.json.
     // By default, your app will be autoprefixed when in production mode
     autoprefix: env.APP_AUTOPREFIX || production,
+
+    // The current version of the app.
+    version: env.APP_VERSION || '0.0.1',
   },
 
   settings: {

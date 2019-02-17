@@ -15,14 +15,15 @@ import { AppStyles } from 'Shared/app-styles';
 
 // TODO: show messages.
 class PsrRouterRouteGetPokemon extends PsrRouterRouteEntry {
-  _renderRouteEntryContent(props) {
+  _renderExpandingContent() {
     // TODO
     return html`
-      ${props.routeEntry?props.routeEntry.entryString:""}
+      ${super.routeEntry && super.routeEntry._choices.length > 1 ? "Choose one:" : ""}
+      ${super.routeEntry ? super.routeEntry._choices.map(pl => pl.toString()).join(", ") : ""}
     `;
   }
 
-  _renderRouteEntryStyle(props) {
+  _renderStyle() {
     // TODO
     return undefined;
   }

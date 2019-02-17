@@ -1,5 +1,6 @@
 import { html } from '@polymer/lit-element';
-import { PsrRouterPage } from 'CoreComponents/psr-router-page/psr-router-page';
+import { PsrRouterPage } from '../psr-router-page/psr-router-page';
+import { RouteManager } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
 import 'SharedComponents/psr-router-pokemon/psr-router-pokemon';
@@ -8,8 +9,23 @@ import 'SharedComponents/psr-router-pokemon/psr-router-pokemon';
 import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterPokemonInfo extends PsrRouterPage {
-  _render(props) {
-    var pokemon = props.game.findPokemonByName(props.searchParams.p);
+  _render() {
+    let game = RouteManager.GetCurrentGame();
+    let pokemon = game && game.findPokemonByName(this.searchParams.p) || {};
+    let moveLevels = [];
+    let moveNames = [];
+    if (pokemon.defaultMoves) {
+      pokemon.defaultMoves.forEach(m => {moveLevels.push(html`<div>0</div>`); moveNames.push(html`<div>${m}</div>`)});
+    }
+    if (pokemon.learnedMoves) {
+      Object.keys(pokemon.learnedMoves).forEach(l => {moveLevels.push(html`<div>${l}</div>`); moveNames.push(html`<div>${pokemon.learnedMoves[l]}</div>`)});
+    }
+    if (pokemon.tmMoves) {
+      pokemon.tmMoves.forEach(m => {
+        moveLevels.push(html`<div>${m}</div>`);
+        moveNames.push(html`<div>${game.findItemByName(m).value}</div>`)
+      });
+    }
     return html`
       ${AppStyles}
       <style>
@@ -25,7 +41,7 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
           margin: 0px;
           display: flex;
         }
-        .flex-container > h1, .flex-container > .type {
+        h1, h2, .type {
           align-self: center;
         }
         .flex-container > .section {
@@ -72,11 +88,11 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
       </style>
 
       <div class="flex-container">
-        <h1>[img]</h1>
+        <!-- <h1>[img]</h1> -->
         <h1>#${this._parseIdString(pokemon.id)} ${pokemon.name}</h1>
         <div class="type">
           <div>${pokemon.type1}</div>
-          <div hidden="${!pokemon.type2}">, ${pokemon.type2}</div>
+          <div ?hidden="${!pokemon.type2}">, ${pokemon.type2}</div>
         </div>
         <div class="section">
           <h2>Base Stats</h2>
@@ -103,15 +119,25 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
             </div>
           </div>
         </div>
-        <div class="section">
-          <h2>Evolutions</h2>
+        <!-- <div class="section">
+          <h2>Evolution</h2>
         </div>
-        <div class="section" hidden?="${this._isGen(props.game, 1)}">
+        <div class="section">
+          <h2>Locations</h2>
+        </div> -->
+        <div class="section">
+          <h2>Moves</h2>
+          <div class="h-table">
+            <div class="column header">
+              ${moveLevels}
+            </div>
+            <div class="column">
+              ${moveNames}
+            </div>
+          </div>
+        </div>
+        <div class="section" ?hidden="${this._isGen(window.app.game, 1)}">
           <h2>Breeding</h2>
-        </div>
-        <div class="section">
-          <paper-button raised>Locations</paper-button>
-          <paper-button raised>Moves</paper-button>
         </div>
       </div>
     `;
@@ -126,9 +152,6 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
 
   constructor() {
     super();
-    // console.log(super.searchParams);
-    // console.log(this._pokemon);
-    // this._pokemon = super.game.findPokemonByName(super.searchParams.p);
   }
 
   _parseIdString(id) {
@@ -142,7 +165,7 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
   }
 
   _isGen(game, gen) {
-    return game.info.gen === gen;
+    return game && game.info.gen === gen;
   }
 }
 

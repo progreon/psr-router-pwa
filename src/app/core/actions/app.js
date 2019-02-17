@@ -5,7 +5,7 @@ export const UPDATE_DRAWER_STATE = 'UPDATE_DRAWER_STATE';
 export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
 
-export const navigate = (location) => (dispatch) => {
+export const navigate = (location, isSubPage) => (dispatch) => {
   const url = new URL(location.href);
 
   // Extract the path and search parameters from the url.
@@ -15,8 +15,20 @@ export const navigate = (location) => (dispatch) => {
     searchParams[pair[0]] = pair[1];
   }
 
+  // Redirect to last page you were on
+  if (path === "/" && localStorage.getItem('app-last-page')) {
+    if (localStorage.getItem('app-last-page').startsWith('/')) {
+      localStorage.setItem('app-last-page', localStorage.getItem('app-last-page').substring(1));
+    }
+    document.body.dispatchEvent(new CustomEvent('navigate', { detail: { href: "/" + localStorage.getItem('app-last-page'), external: false } }));
+    return;
+  }
+
   // Extract the page name from path.
   const page = path === '/' ? 'home' : path.slice(1);
+
+  if (window.appConfig.pageList[page] && window.appConfig.pageList[page].showInMenu)
+    localStorage.setItem('app-last-page', page);
 
   // Any other info you might want to extract from the path (like page type),
   // you can do here
@@ -34,11 +46,8 @@ const loadPage = (page, searchParams) => (dispatch) => {
         // navigating to home after psr-router-home.js is loaded.
       });
       break;
-    // case 'redux':
-    //   import('CoreComponents/psr-router-redux/psr-router-redux');
-    //   break;
-    case 'example':
-      import('CoreComponents/psr-router-example/psr-router-example');
+    case 'router':
+      import('CoreComponents/psr-router-router/psr-router-router');
       break;
     case 'items':
       import('CoreComponents/psr-router-items/psr-router-items');
@@ -46,11 +55,26 @@ const loadPage = (page, searchParams) => (dispatch) => {
     case 'moves':
       import('CoreComponents/psr-router-moves/psr-router-moves');
       break;
+    case 'pokemon-list':
+      import('CoreComponents/psr-router-pokemon/psr-router-pokemon-list');
+      break;
     case 'pokemon-info':
       import('CoreComponents/psr-router-pokemon/psr-router-pokemon-info');
       break;
-    case 'pokemon-list':
-      import('CoreComponents/psr-router-pokemon/psr-router-pokemon-list');
+    case 'trainers':
+      import('CoreComponents/psr-router-trainers/psr-router-trainers');
+      break;
+    case 'trainer-info':
+      import('CoreComponents/psr-router-trainers/psr-router-trainer-info');
+      break;
+    case 'trainers':
+      import('CoreComponents/psr-router-trainers/psr-router-trainers');
+      break;
+    case 'help':
+      import('CoreComponents/psr-router-manual/psr-router-manual');
+      break;
+    case 'about':
+      import('CoreComponents/psr-router-about/psr-router-about');
       break;
     default:
       page = '404';

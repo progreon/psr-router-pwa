@@ -1,0 +1,1545 @@
+{
+  "game": "r",
+  "shortname": "Red God Nido Basic",
+  "info": {
+    "title": "Red Any% Glitchless - God Nido (by PaperGuy)"
+  },
+  "entries": [
+    {
+      "type": "S",
+      "info": {
+        "title": "Before starting"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Clear any existing save file by pressing Up + B + Select on the game title screen"
+          }
+        },
+        {
+          "info": {
+            "summary": "Set text speed to FAST, battle animation to OFF and battle style to SHIFT"
+          }
+        },
+        {
+          "info": {
+            "summary": "Give your character and your rival a one-character name"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Pallet Town"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Optional: withdraw the PC Potion in your room"
+          }
+        },
+        {
+          "type": "GetP",
+          "info": {
+            "summary": "Choose Squirtle, and give it a one-character name"
+          },
+          "choices": [
+            {
+              "pokemon": "Squirtle",
+              "level": 5
+            }
+          ],
+          "preference": 0
+        },
+        {
+          "type": "B",
+          "info": {
+            "title": "Rival 1",
+            "summary": "Tail Whip once (or twice if Growl turn 1), then spam Tackle"
+          },
+          "trainer": "Rival 1 - Bulbasaur"
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Route 1"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "E: Route 1 :: 1:0 3:1 4:0 5:0",
+            "description": "Kill an encounter for experience to get Bubble for Brock"
+          }
+        },
+        {
+          "info": {
+            "summary": "Do parcel stuff"
+          }
+        },
+        {
+          "info": {
+            "summary": "When delivering the Parcel, walk behind or next to Prof. Oak so that your (slow walking) rival takes fewer steps in the cut scene"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Viridian City"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Shop: Buy 3-8 Poke Balls, then go west to Route 22",
+            "description": "6 Poke_Ball"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Route 22"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Manip: Route 22 :: 3 :: 15 15 14 15",
+            "description": "Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Potion",
+            "description": "Return to Viridian City and go north, picking up the tree potion, and entering Viridian Forest"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Viridian Forest"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Avoid encounters as much as possible by walking on encounterless grass tiles"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Antidote",
+            "description": "Pick up the antidote on the way up"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Potion",
+            "description": "Be at least 10 HP before the Weedle Guy, and pick up the hidden Potion next to him"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "title": "Weedle Guy",
+            "summary": "Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion"
+          },
+          "trainer": "Viridian Forest - BugCatcher 3"
+        },
+        {
+          "info": {
+            "summary": "Swap: 0 1",
+            "description": "After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Pewter City"
+      },
+      "entries": [
+        {
+          "type": "B",
+          "info": {
+            "summary": "Switch to Squirtle to share exp, use Bubble to kill Geodude and Onix. If Onix uses Bide on the turn you switch in, use Tail Whip twice, then Bubble"
+          },
+          "trainer": "Brock",
+          "shareExp": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        {
+          "info": {
+            "summary": "Shop: Change the battle style option from Shift to Set, and buy 7-10 Potions",
+            "description": "9 Potion"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Route 3"
+      },
+      "entries": [
+        {
+          "type": "B",
+          "info": {
+            "summary": "Leer + HA x2 on all three, tackle if no kill or in range"
+          },
+          "trainer": "Route 3 - BugCatcher 1"
+        },
+        {
+          "info": {
+            "summary": "Heal to at least 26 HP"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Leer + HA x2 on both (switch HA with Leer on ekans)"
+          },
+          "trainer": "Shorts Guy"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "HA x2, HA x3, HA x2, HA x2 + Tackle"
+          },
+          "trainer": "Route 3 - BugCatcher 2"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "HA x2, HA x3-4"
+          },
+          "trainer": "Route 3 - BugCatcher 3"
+        },
+        {
+          "info": {
+            "summary": "C: Route 3 :: #1",
+            "description": "Catch a Spearow or a Pidgey in the grass patch. Use Poison Sting to weaken Lv. 5 Spearows, HA for Lv. 8 Pidgeys and Tackle for everything else"
+          }
+        },
+        {
+          "info": {
+            "summary": "Take the center before Mt. Moon"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Mt. Moon"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Follow this path up until the Lass",
+            "description": "[[http://i.imgur.com/F91yw13.png]]"
+          }
+        },
+        {
+          "info": {
+            "summary": "If you see a Paras, catch it, or kill it for experience and get Paras using the manip"
+          }
+        },
+        {
+          "info": {
+            "summary": "E: Mt. Moon 1F :: 0:0 1:0 2:0 3:2 4:0",
+            "description": "You need 138 total exp, kill two Zubats with a compined level of 18"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "HA x3, HA x2 + Poison Sting"
+          },
+          "trainer": "Mt. Moon 1F - SuperNerd"
+        },
+        {
+          "info": {
+            "summary": "GetI: Rare_Candy"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Escape_Rope"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "HA x2 + PS, HA x2, you should reach Lv. 16 and evolve into Nidorino here"
+          },
+          "trainer": "Mt. Moon 1F - Lass 1"
+        },
+        {
+          "info": {
+            "summary": "GetI: Moon_Stone",
+            "description": "Do the Mt. Moon manip to get an encounterless path up to the rocket, with a paras at the end"
+          }
+        },
+        {
+          "info": {
+            "summary": "Manip: Mt. Moon B2F :: 6 :: 14 15 14 3 // TODO: change slot"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: Evolve to Nidoking",
+            "description": "USE: Moon_Stone"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "title": "Rocket",
+            "summary": "HA + PS, HA x2"
+          },
+          "trainer": "Mt. Moon B2F - Rocket 1"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "HA x2, HA + PS, HA x2 + PS"
+          },
+          "trainer": "Mt. Moon B2F - SuperNerd"
+        },
+        {
+          "info": {
+            "summary": "GetI: Helix_Fossil",
+            "description": "Choose the Helix Fossil (Heil Helix!)"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Cerulean City"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Take the center"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Rare_Candy",
+            "description": "Get the hidden Rare Candy behind the top-left house"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Nugget Bridge"
+      },
+      "entries": [
+        {
+          "type": "B",
+          "info": {
+            "title": "Bridge Rival",
+            "summary": "HA x3, HA, HA + PS, HA x2, if you get SA'd by Pidgeotto, switch to flier and let it die"
+          },
+          "trainer": "Bridge Rival - Bulbasaur"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "HA + PS, HA + PS"
+          },
+          "trainer": "Route 24 - BugCatcher"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "HA + PS, HA x2, stay in if SA'd"
+          },
+          "trainer": "Route 24 - Lass 2"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "HA, HA + PS, HA"
+          },
+          "trainer": "Route 24 - Youngster"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "HA + PS, HA x2, stay in if SA'd"
+          },
+          "trainer": "Route 24 - Lass 1"
+        },
+        {
+          "info": {
+            "summary": "Menu: Rare Candy to level 23 and teach Thrash over PS",
+            "description": "USE: Rare_Candy :: 2"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "title": "Mankey Guy",
+            "summary": "Thrash, switch HA with Thrash"
+          },
+          "trainer": "Route 24 - JrTrainerM 1"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Route 24 - Rocket"
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Route 25"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Fight the top hiker"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Route 25 - Hiker 1"
+        },
+        {
+          "info": {
+            "summary": "GetI: Elixer",
+            "description": "Get the hidden elixer above the hiker if you didn't use your antidote"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Route 25 - Lass 1"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Route 25 - JrTrainerM"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Route 25 - Lass 2"
+        },
+        {
+          "info": {
+            "summary": "If you used your antidote, pick up the ether on the wall right of the Lass"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: Say YES to Bill, then heal to around 47-60 HP, Escape Rope back to Cerulean City and walk to the gym",
+            "description": "USE: Escape_Rope"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Cerulean City (Gym)"
+      },
+      "entries": [
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Cerulean Gym - JrTrainerF"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash and pray"
+          },
+          "trainer": "Misty"
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Underground & Route 6"
+      },
+      "entries": [
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Cerulean City - Rocket"
+        },
+        {
+          "info": {
+            "summary": "GetI: Full_Restore",
+            "description": "Pick up the Full Restore in the underground path with the jyngle skip"
+          }
+        },
+        {
+          "info": {
+            "summary": "Oddish? + avoid the Bug Catcher on the right"
+          }
+        },
+        {
+          "info": {
+            "summary": "Heal to 16+ HP for the first trainer, 9+ for the second. If you need to heal, teach BB in this menu"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Route 6 - JrTrainerF 2"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Route 6 - JrTrainerM 2"
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Vermilion City"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Shop: If you're out of Poke Balls, only sell the Nugget",
+            "description": "-1 TM_34\n-1 Nugget\n3 Repels"
+          }
+        },
+        {
+          "type": "S",
+          "info": {
+            "title": "SS Anne"
+          },
+          "entries": [
+            {
+              "info": {
+                "summary": "Menu: Heal to 20-30 HP for the rival battle, and teach Bubblebeam over Tackle",
+                "description": "TM: Bubblebeam :: 0 :: Tackle"
+              }
+            },
+            {
+              "type": "B",
+              "info": {
+                "title": "Boat Rival",
+                "summary": "HA x2 or BB x2, Thrash or HA x2 or BB x2, Thrash, if you get SA'd or confused, sacrifice your weakest slave"
+              },
+              "trainer": "Boat Rival - Bulbasaur"
+            },
+            {
+              "info": {
+                "summary": "GetI: HM_01",
+                "description": "Get HM01 from the captain, then leave and head to the gym"
+              }
+            }
+          ]
+        },
+        {
+          "type": "S",
+          "info": {
+            "title": "Vermilion Gym"
+          },
+          "entries": [
+            {
+              "info": {
+                "summary": "Menu: On the tile before the Cut bush, teach BB over tackle if you haven't yet",
+                "description": "SWAP: Repel :: 0\nTM: Cut :: 3 // TODO: fix \"TM: HM_01 :: 3\"\nTM: Dig :: 3"
+              }
+            },
+            {
+              "info": {
+                "summary": "Then Cut the bush, save one tile below it, do the can manip and fight Surge"
+              }
+            },
+            {
+              "type": "B",
+              "info": {
+                "summary": "BB x2, Thrash"
+              },
+              "trainer": "Surge"
+            },
+            {
+              "info": {
+                "summary": "GetI: Bike_Voucher",
+                "description": "After the fight, pick up the Bike Voucher from the chairman of the fan club, theb Dig back to Cerulean"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Cerulean City"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "GetI: Bicycle :: Bike_Voucher",
+            "description": "Get the Bicycle from the bike shop"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: After leaving the shop",
+            "description": "SWAP: Bicycle :: 1\nTM: Thunderbolt :: 0 :: Leer"
+          }
+        },
+        {
+          "info": {
+            "summary": "Get on the bike and head east to Route 9, cutting the two bushes in your way"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Route 9"
+      },
+      "entries": [
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash, if you get confused and are at low HP: switch to your weakest slave and back, if you get put to sleep: use your Full Restore"
+          },
+          "trainer": "Route 9 - JrTrainerF 1"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Route 9 - BugCatcher 2"
+        },
+        {
+          "info": {
+            "summary": "Menu: Use a Repel a few steps before entering Rock Tunnel",
+            "description": "USE: Repel"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Rock Tunnel"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Map to get through Rock Tunnel",
+            "description": "1F[[http://i.imgur.com/oPBnthL.png]]2F[[http://i.imgur.com/SMZikOB.png]]"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "BB, TB"
+          },
+          "trainer": "Rock Tunnel 1F - Pokemaniac"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "TB"
+          },
+          "trainer": "Rock Tunnel B1F - Pokemaniac 3"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Rock Tunnel B1F - JrTrainerF 2"
+        },
+        {
+          "info": {
+            "summary": "Menu: Use your second Repel a bit after the last fight",
+            "description": "USE: Repel"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: Use your third Repel before fighting the Hiker",
+            "description": "USE: Repel"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "BB, BB, BB"
+          },
+          "trainer": "Rock Tunnel B1F - Hiker 1"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash"
+          },
+          "trainer": "Rock Tunnel 1F - JrTrainerF 2"
+        },
+        {
+          "info": {
+            "summary": "After exiting, head south to Lavender Town and west to Route 8"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Route 8"
+      },
+      "entries": [
+        {
+          "type": "B",
+          "info": {
+            "summary": "Thrash or BB, Thrash"
+          },
+          "trainer": "Route 8 - Gambler 2"
+        },
+        {
+          "info": {
+            "summary": "Take the underground path to Celadon City"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Elixer",
+            "description": "Pick up the hidden Elixer in the underground"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Celadon City"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Go to the mart"
+          }
+        },
+        {
+          "info": {
+            "summary": "Shop: 2F: 2 or 3 super potions?",
+            "description": "1 TM_07\n10 Super_Repel\n2 Super_Potion"
+          }
+        },
+        {
+          "info": {
+            "summary": "Shop: 4F",
+            "description": "1 Poke_Doll"
+          }
+        },
+        {
+          "info": {
+            "summary": "Shop: 6F",
+            "description": "1 Fresh_Water\n1 Soda_Pop"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: TM_13 :: Fresh_Water",
+            "description": "Get Ice Beam from the girl"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: TM_48 :: Soda_Pop",
+            "description": "Get Rock Slide from the girl"
+          }
+        },
+        {
+          "info": {
+            "summary": "Shop: Before going down again",
+            "description": "1 Fresh_Water"
+          }
+        },
+        {
+          "info": {
+            "summary": "Shop: 5F",
+            "description": "11 X_Accuracy\n6 X_Special\n4 X_Speed"
+          }
+        },
+        {
+          "info": {
+            "summary": "Take the elevator down to 1F and leave"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: HM_02",
+            "description": "Bike west, cut the bush, go through the building and get Fly from the girl in the house"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: Upon exiting the house, use a Potion if below 19 HP",
+            "description": "SWAP: Super_Repel :: 1\nTM: Horn_Drill :: 0 :: Horn_Attack\nUSE: Super_Repel\nSWAP: X_Accuracy :: 2\nTM: Fly :: 2\nTM: Rock_Slide :: 0 :: Bubblebeam"
+          }
+        },
+        {
+          "info": {
+            "summary": "Fly to Lavender (3 down), and walk to the tower"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Pokemon Tower"
+      },
+      "entries": [
+        {
+          "type": "B",
+          "info": {
+            "title": "Tower Rival",
+            "summary": "X Accuracy + HD all (x5)"
+          },
+          "trainer": "Tower Rival - Bulbasaur"
+        },
+        {
+          "info": {
+            "summary": "Use a Potion if below 24 HP"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Rock Slide, Rock slide"
+          },
+          "trainer": "Pokémon Tower 4F - Channeler 2"
+        },
+        {
+          "info": {
+            "summary": "GetI: Elixer",
+            "description": "Get the Elixer item ball immediately after the Channeler"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Elixer",
+            "description": "Get the hidden Elixer on 5F"
+          }
+        },
+        {
+          "info": {
+            "summary": "Take the free heal on 5F"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Rock Slide"
+          },
+          "trainer": "Pokémon Tower 6F - Channeler 2"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Rock Slide"
+          },
+          "trainer": "Pokémon Tower 6F - Channeler 3"
+        },
+        {
+          "info": {
+            "summary": "GetI: Rare_Candy",
+            "description": "Get the Rare Candy that blocks the way, then enter the Ghost battle and escape using the Poke Doll"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: Battle menu. Swap Elixers if you used the antidote",
+            "description": "SWAP: Elixer :: 3\nUSE: Poke_Doll"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "TB, TB, TB"
+          },
+          "trainer": "Pokémon Tower 7F - Rocket 1"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "X Accuracy + HD, HD"
+          },
+          "trainer": "Pokémon Tower 7F - Rocket 2"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "TB, TB or Thrash, Thrash"
+          },
+          "trainer": "Pokémon Tower 7F - Rocket 3"
+        },
+        {
+          "info": {
+            "summary": "GetI: Poke_Flute",
+            "description": "Talk to Mr. Fuji to warp to his house and get the Poke Flute, then walk out and Fly to Celadon City (1 down)"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Celadon City"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Take the center to set the warp point for Dig"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: Upon exiting, use a Super Repel and bike west to the Snorlax and Cycling Road",
+            "description": "USE: Super_Repel\nUSE: Bicycle"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: On the tile before the Snorlax",
+            "description": "SWAP: X_Speed :: 4\nUSE: Poke_Flute"
+          }
+        },
+        {
+          "info": {
+            "summary": "Run from the Snorlax"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Cycling road"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "GetI: Rare_Candy",
+            "description": "Pick up the hidden Rare Candy"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: After exiting the Cycling road building",
+            "description": "USE: Super_repel\nTM: Ice_Beam :: 0 :: Rock_Slide\nUSE: Bicycle"
+          }
+        },
+        {
+          "info": {
+            "summary": "Bike to the Safari Zone, going around the bushes"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Safari Zone"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Map of the Safari Zone",
+            "description": "[[http://i.imgur.com/oBebL5z.jpg]]"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Full_Restore",
+            "description": "Get the Full Restore in the second area if you've already used your first one"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: At the end of the first hill in the second area, move the cursor 1 up after",
+            "description": "USE: Super_Repel"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Gold_Teeth",
+            "description": "In the fourth area, get the Gold Teeth outside"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: HM_03",
+            "description": "Get Surf from the guy in the house, then Dig back to Celadon"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Celadon City"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Bike east to Silph Co. in Saffron City, giving the Fresh Water to the guard in the house"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Silph Co."
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Take the elevator to 10F, then go left and down to fight the Rocket, avoiding the Scientist"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "X Acc + HD"
+          },
+          "trainer": "Silph Co. 10F - Rocket"
+        },
+        {
+          "info": {
+            "summary": "GetI: TM_26"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Rare_Candy"
+          }
+        },
+        {
+          "info": {
+            "summary": "Take the stairs to 9F"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: Once on 9F",
+            "description": "SWAP: X_Special :: 5\nTM: Surf :: 1 :: Tail_Whip\nTM: Earthquake :: 0 :: Thrash"
+          }
+        },
+        {
+          "info": {
+            "summary": "Hug the east wall, then the south wall and take the teleporter to 5F"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "EQ (switch EQ & HD)"
+          },
+          "trainer": "Silph Co. 5F - Rocket 1"
+        },
+        {
+          "info": {
+            "summary": "GetI: Card_Key",
+            "description": "Go right to pick up the Card Key"
+          }
+        },
+        {
+          "info": {
+            "summary": "Take the teleporter to 9F and back to 5F, then open the door to your left and take the teleporter to 3F"
+          }
+        },
+        {
+          "info": {
+            "summary": "Walk right, up, then open the door to your left, and take the teleporter to 7F"
+          }
+        },
+        {
+          "info": {
+            "summary": "Heal?"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "title": "Silph Rival",
+            "summary": "X_Accuracy + X_Speed + X_Special + HD, TB, EQ, EQ, HD (the \"safe\" option)"
+          },
+          "trainer": "Silph Rival - Bulbasaur"
+        },
+        {
+          "info": {
+            "summary": "Take the teleporter to 11F"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "IB, EQ, IB"
+          },
+          "trainer": "Silph Co. 11F - Rocket 2"
+        },
+        {
+          "type": "B",
+          "info": {
+            "title": "Silph Gio",
+            "summary": "X_Accuracy + EQ, HD, IB, HD"
+          },
+          "trainer": "Silph Co. 11F - Giovanni"
+        },
+        {
+          "info": {
+            "summary": "Dig back to Celadon, then Fly to Fuchsia (2 down) and walk to the gym"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Fuchsia Gym"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Hug the right wall when going up"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "EQ all (x4)"
+          },
+          "trainer": "Fuchsia Gym - Juggler 1"
+        },
+        {
+          "info": {
+            "summary": "Menu: Elixer, Candy and heal to 50+ HP to tank a confusion",
+            "description": "USE: Elixer :: 1 :: 0\nUSE: Rare_Candy :: 1 :: 0"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "EQ, EQ + TB"
+          },
+          "trainer": "Fuchsia Gym - Juggler 2"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "X_Accuracy + HD, HD, HD, TB x2 and Pokeflute until Selfdestruct"
+          },
+          "trainer": "Koga"
+        },
+        {
+          "info": {
+            "summary": "GetI: HM_04",
+            "description": "Bike east to the warden's house to get Strength, then fly to Pallet Town"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Pallet Town"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Menu: Use the remaining Rare Candies",
+            "description": "USE: Super_Repel\nUSE: Rare_Candy :: 2\nUSE: Bicycle"
+          }
+        },
+        {
+          "info": {
+            "summary": "Bike to the water and Surf south to Cinnabar Mansion"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Cinnabar Mansion"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Take this path through the Cinnabar Mansion, flipping the switches and taking the candies on the way",
+            "description": "[[http://i.imgur.com/UktHB4j.jpg]]"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: After falling down and taking the stairs",
+            "description": "USE: Super_Repel\nTM: Strength :: 1 :: Tackle"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Rare_Candy",
+            "description": "Get the Rare Candy item ball in the room on the north"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Rare_Candy",
+            "description": "Get the hidden Rare Candy"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: Candy to L45",
+            "description": "USE: Rare_Candy :: 2 :: 0"
+          }
+        },
+        {
+          "info": {
+            "summary": "GetI: Secret_Key",
+            "description": "Get the Secret Key, then Dig out and bike to Erika's Gym"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Celadon Gym"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Hug the left wall and Cut the bush in the top-left corner"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "IB"
+          },
+          "trainer": "Celadon Gym - Beauty 3"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "IB all (x3)"
+          },
+          "trainer": "Erika"
+        },
+        {
+          "info": {
+            "summary": "Walk out, then Fly to Cinnabar (2 down)"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Cinnabar Gym"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Answers: ABBBAB"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "EQ all (x4)"
+          },
+          "trainer": "Blaine"
+        },
+        {
+          "info": {
+            "summary": "Dig out and bike to Saffron Gym"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Saffron Gym"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Teleporters: diagonal, diagonal, down"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "EQ all (x4)"
+          },
+          "trainer": "Sabrina"
+        },
+        {
+          "info": {
+            "summary": "Dig out on the teleporter, then Fly to Viridian (1 up) and bike to the gym"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Viridian Gym"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Menu: Once in Viridian, use an elixer and then bike to the gym",
+            "description": "USE: Elixer :: 1 :: 0"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "IB"
+          },
+          "trainer": "Viridian Gym - CooltrainerM 3"
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "EQ all (x3)"
+          },
+          "trainer": "Viridian Gym - Blackbelt 3"
+        },
+        {
+          "info": {
+            "summary": "Reload the positions of the trainers"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "IB, IB, EQ, EQ, IB x2"
+          },
+          "trainer": "Giovanni"
+        },
+        {
+          "info": {
+            "summary": "Menu: When outside of the gym",
+            "description": "USE: Super_Repel\nUSE: Bicycle"
+          }
+        },
+        {
+          "info": {
+            "summary": "Bike west to Route 22 and Victory road"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Route 22"
+      },
+      "entries": [
+        {
+          "type": "B",
+          "info": {
+            "title": "Viridian Rival",
+            "summary": "X_Accuracy + X_Special + IB, IB, TB, EQ, EQ, HD"
+          },
+          "trainer": "Viridian Rival - Bulbasaur"
+        },
+        {
+          "info": {
+            "summary": "Bike toward Victory Road"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: After leaving the water",
+            "description": "USE: Super_Repel"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Victory Road"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Use Strength upon entering and push the first boulder onto the switch on the right, then bike to the ladder in the top-left corner"
+          }
+        },
+        {
+          "info": {
+            "summary": "Use Strength again, push the boulder below onto the switch, bike up the steps hugging the north edge and use a Super Repel"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu:",
+            "description": "USE: Super_Repel"
+          }
+        },
+        {
+          "info": {
+            "summary": "Bike to the right, down the stairs, then right and up to the ladder"
+          }
+        },
+        {
+          "info": {
+            "summary": "Use strength again and push the boulder onto the switch to the left, then bike to the bottom-right corner and push the boulder down the hole and go down the hole"
+          }
+        },
+        {
+          "info": {
+            "summary": "Menu: Use Strength first, then your last Super Repel",
+            "description": "USE: Super_Repel\nUSE: Bicycle"
+          }
+        },
+        {
+          "info": {
+            "summary": "Push the boulder onto the switch to the left, bike back to where you fell down and follow the ladders to the exit"
+          }
+        }
+      ]
+    },
+    {
+      "type": "S",
+      "info": {
+        "title": "Elite Four"
+      },
+      "entries": [
+        {
+          "info": {
+            "summary": "Deposit all but Nidoking and flier"
+          }
+        },
+        {
+          "info": {
+            "summary": "Shop: Optional if you have 2 Full Restores",
+            "description": "5 Full_Restores"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "Switch to flier and let it die, X_Accuracy + HD, HD, HD, EQ, HD"
+          },
+          "trainer": "Lorelei"
+        },
+        {
+          "info": {
+            "summary": "Menu: Elixer before fighting Bruno",
+            "description": "USE: Elixer :: 1 :: 0"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "X_Accuracy + IB, HD, HD, IB, HD"
+          },
+          "trainer": "Bruno"
+        },
+        {
+          "info": {
+            "summary": "Heal to full"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "X_Special (or X_Speed if you want to play safe) + EQ, IB, EQ, EQ, EQ, if you get put to sleep, use the Poke Flute immediately. If you get Hazed, you lose your X Accuracy, so IB 2x Golbat and EQ Arbok"
+          },
+          "trainer": "Agatha"
+        },
+        {
+          "info": {
+            "summary": "Menu: At least 2 steps before Lance, heal to ~130 HP to manipulate red bar from Gyarados and use your last PP item",
+            "description": "USE: Elixer :: 1 :: 0"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "summary": "X_Special + TB, X_Speed + IB, IB, IB, IB"
+          },
+          "trainer": "Lance"
+        },
+        {
+          "info": {
+            "summary": "Heal to 55+ HP and use your last PP item if you didn't already"
+          }
+        },
+        {
+          "type": "B",
+          "info": {
+            "title": "Champion",
+            "summary": "X_Special + X_Accuracy + HD, HD, IB, HD, HD, HD, if Sky Attack turn 1, use a Full Restore"
+          },
+          "trainer": "Champion - Bulbasaur"
+        },
+        {
+          "info": {
+            "summary": "END"
+          }
+        }
+      ]
+    }
+  ]
+}
