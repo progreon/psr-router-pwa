@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 
 // These are the shared styles needed by this element.
 import { AppStyles } from 'Shared/app-styles';

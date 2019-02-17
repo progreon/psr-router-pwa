@@ -8,7 +8,7 @@ import * as RouteUtil from 'SharedModules/psr-router-route/util';
 import { RouteFactory } from 'SharedModules/psr-router-route/util';
 
 // Imports for polymer/pwa
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings';
 import { connect } from 'pwa-helpers/connect-mixin';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query';

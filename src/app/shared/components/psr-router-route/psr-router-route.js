@@ -1,5 +1,5 @@
 // Imports for this element
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import { PsrRouterRouteSection } from './psr-router-route-section';
 import * as Route from 'SharedModules/psr-router-route';
 

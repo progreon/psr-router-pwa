@@ -1,5 +1,5 @@
 // JS Imports
-import { html } from '@polymer/lit-element';
+import { html } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { RouteManager } from 'SharedModules/psr-router-route/util';
 

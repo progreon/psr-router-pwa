@@ -1,7 +1,7 @@
 'use strict';
 
 // Imports for this element
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import * as Route from 'SharedModules/psr-router-route';
 
 // Image imports for this element

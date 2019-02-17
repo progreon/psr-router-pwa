@@ -1,5 +1,5 @@
 // Imports for this element
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 
 // These are the elements needed by this element.
 // import '@vaadin/vaadin-item/vaadin-item';

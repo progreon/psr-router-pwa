@@ -1,5 +1,5 @@
 // JS Imports
-import { html } from '@polymer/lit-element';
+import { html } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 
 // These are the elements needed by this element.

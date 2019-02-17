@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 
 // These are the elements needed by this element.
 import { plusIcon, minusIcon } from 'Shared/my-icons.js';
