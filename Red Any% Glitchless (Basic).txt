@@ -28,7 +28,7 @@ Route: Red Any% Glitchless (Basic)
 
 	S: Viridian Forest
 		Follow this path (only red tiles can produce encounters)
-			[[http://i.imgur.com/3o7klcA.png]]
+			[[https://i.imgur.com/3o7klcA.png]]
 		Get the Antidote
 		Get the hidden Potion in front of the Weedle Guy
 		Heal to 10+ HP for Weedle Guy
@@ -54,9 +54,10 @@ Route: Red Any% Glitchless (Basic)
 	S: Route 3
 		You need to use one fewer Horn Attack than what's listed below, so finish enemies with Tackle when it will kill
 		B: Route 3 - BugCatcher 1
-			Leer+Horn Attack+Horn Attack on all three
+			Leer + Horn Attack x2 on all three
 		Heal to full and save before the Youngster (aka Shorts Guy)
 		B: Shorts Guy
+			Leer + HA x2 on both
 			Quick Attack does 8-10 (13-16 critical, or after a Tail Whip)
 			Wrap does 3 (4 critical, or after a Tail Whip)
 		Fight the Bug Catcher below, not the Lass above
@@ -132,7 +133,7 @@ Route: Red Any% Glitchless (Basic)
 		B: Cerulean City - Rocket
 			Thrash x2-4
 		Hop the ledge and enter the gym
-		S: Cerulean City (Gym)
+		S: Cerulean Gym
 			B: Cerulean Gym - JrTrainerF
 				Thrash
 			B: Misty
@@ -226,8 +227,8 @@ Route: Red Any% Glitchless (Basic)
 		Bike to the mart and do the shopping
 			2F: TM07, 2 Super Potions, 10 Super Repels
 			4F: 1 Poke Doll
-		6F: 1 Soda_Pop. Give it to the girl for TM48, then buy 1 more Fresh Water
-		5F: Buy 11 X Accuracy, 2 X Special and 5 X Speed
+			6F: 1 Soda Pop. Give it to the girl for TM48, then buy 1 more Fresh Water
+			5F: Buy 11 X Accuracy, 2 X Special and 5 X Speed
 		Take the elevator to 1F, then leave
 		Bike west, cut the bush, then go through the building and get HM02 from the girl in the house
 		Menu upon exiting the house

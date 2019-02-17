@@ -64,7 +64,7 @@ class PsrRouterHome extends PsrRouterPage {
       <h2>Current Route</h2>
       <h3>${route ? route.info.title : "No route loaded"}</h3>
       <p>${route && route.shortname}</p>
-      <p ?hidden="${!game || !game.info.unsupported}">[GAME NOT SUPPORTED (YET)]</p>
+      <p ?hidden="${!game || !game.info.unsupported}">[GAME NOT (fully) SUPPORTED (yet)!]</p>
       <b ?hidden="${!game}">Game: Pokémon ${game && game.info.name}</b>
       <div ?hidden="${!game}">Generation ${game && game.info.gen}</div>
       <div ?hidden="${!game}">${game && game.info.year}, ${game && game.info.platform}</div>
@@ -109,7 +109,7 @@ class PsrRouterHome extends PsrRouterPage {
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     let fileInput = this.shadowRoot.getElementById("selFile");
-    fileInput.oninput = e => {
+    fileInput.onchange = e => {
       this._loading = true;
       RouteManager.LoadRouteFile(e.target.files[0])
         .then(route => {
@@ -189,7 +189,7 @@ class PsrRouterHome extends PsrRouterPage {
   }
 
   _showUnsupportedToast(gameTitle) {
-    super.showAppToast(`Game "${gameTitle}" is not (fully) supported yet`);
+    super.showAppToast(`Game "Pokémon ${gameTitle}" is not (fully) supported. (YET!)`);
   }
 }
 

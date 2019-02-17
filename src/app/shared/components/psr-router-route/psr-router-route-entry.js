@@ -35,7 +35,7 @@ export class PsrRouterRouteEntry extends LitElement {
         var i1 = description.indexOf("[[", is);
         var i2 = i1 >= 0 ? description.indexOf("]]", i1) : -1;
         if (i2 < 0) {
-          dom.push(html`${description.substring(is)}`);
+          dom.push(html`<div style="white-space: pre-wrap;">${description.substring(is)}</div>`);
           is = description.length;
         } else {
           dom.push(html`<div style="white-space: pre-wrap;">${description.substring(is, i1)}</div>`);

@@ -2,7 +2,7 @@ import _games from 'SharedData/games.json';
 import _types from 'SharedData/types.json';
 import _items1 from 'SharedData/items-1.json';
 import _moves1 from 'SharedData/moves-1.json';
-import _movesLearned1 from 'SharedData/moves-learned-1.json';
+import _movesLearnedRB from 'SharedData/moves-learned-1.json';
 import _pokemon1 from 'SharedData/pokemon-1.json';
 import _trainersRB from 'SharedData/trainers-rb.json';
 // TODO: badges!
@@ -88,23 +88,29 @@ function loadMoves(gen, types) {
   return Moves;
 }
 
-function loadPokemon(gen, types) {
+function loadPokemon(gameKey, types) {
   var PokemonMap = {};
 
-  switch (gen) {
-    case 1:
+  switch (gameKey) {
+    case "r":
+    case "b":
+    case "y":
       for (var id = 1; id < _pokemon1.length; id++) {
         var p = _pokemon1[id];
         var pokemon = new ModelRBY.Pokemon(p[0], id, p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9]);
         PokemonMap[pokemon.key] = pokemon;
       }
-      for (var p in _movesLearned1) {
+  }
+  switch (gameKey) {
+    case "r":
+    case "b":
+      for (var p in _movesLearnedRB) {
         var defaultMoves = [];
         var tmMoves = [];
         var learnedMoves = {};
-        _movesLearned1[p].default.forEach(m => defaultMoves.push(m));
-        _movesLearned1[p].tm.forEach(m => tmMoves.push(m));
-        _movesLearned1[p].level.forEach(lm => {
+        _movesLearnedRB[p].default.forEach(m => defaultMoves.push(m));
+        _movesLearnedRB[p].tm.forEach(m => tmMoves.push(m));
+        _movesLearnedRB[p].level.forEach(lm => {
           var split = lm.split("#");
           var l = split[0];
           var m = split[1];
@@ -114,9 +120,11 @@ function loadPokemon(gen, types) {
           learnedMoves[l] = m;
         });
         var pokemon = PokemonMap[p.toUpperCase()];
-        pokemon.setDefaultMoves(defaultMoves);
-        pokemon.setLearnedMoves(learnedMoves);
-        pokemon.setTmMoves(tmMoves);
+        if (pokemon) {
+          pokemon.setDefaultMoves(defaultMoves);
+          pokemon.setLearnedMoves(learnedMoves);
+          pokemon.setTmMoves(tmMoves);
+        }
       }
       break;
   }
@@ -185,7 +193,7 @@ export function GetGame(gameKey) {
   let types = loadTypes(gameInfo.gen);
   let typeChart = loadTypeChart(gameInfo.gen);
   let moves = loadMoves(gameInfo.gen, types);
-  let pokemon = loadPokemon(gameInfo.gen, types);
+  let pokemon = loadPokemon(gameKey, types);
   let experienceGroups = model.ExperienceGroups; // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
   let trainers = loadTrainers(gameKey, pokemon);
   game = new model.Game(model, engine, gameInfo, experienceGroups, items, types, typeChart, moves, pokemon, trainers);

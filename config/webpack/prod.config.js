@@ -96,6 +96,16 @@ module.exports = merge(common(config), {
           'style-loader',
           'css-loader'
         ]
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+            loader: "babel-loader",
+            options: {
+                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-proposal-object-rest-spread"]
+            }
+        }
       }
     ]
   }

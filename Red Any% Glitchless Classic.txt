@@ -1,0 +1,727 @@
+Game: r
+
+Route: Red Any% Glitchless Classic
+	S: Before starting
+		Clear any existing save file by pressing Up+B+Select on the title screen
+		Set text speed to FAST, battle animation to OFF and battle style to SHIFT
+		Give your character and your rival a 1-character name
+
+	S: Pallet Town :: Let's begin!
+		GetP: squirtle:5
+			Choose Squirtle, and give it a 1-character name
+		B: Rival 1 - Bulbasaur
+			Rival 1 :: Tail Whip once, then spam Tackle (use a second Tail Whip if you get Growled turn 1)
+			Reset if you lose the fight
+			If the fight goes poorly (Bulbasaur faints at 2:50 or later), you might consider checking Squirtle's Lv. 6 stats and resetting if you see 11 Special
+
+	S: Route 1
+		Kill a Lv. 2-3 Rattata or Lv. 2-3 Pidgey using Tackle. You need the experience to get Bubble for Brock
+		When walking down to deliver Oak's Parcel, cut through the second-to-last patch of grass if you haven't yet fought an encounter
+
+	S: Pallet Town
+		When delivering the Parcel, walk behind or next to Prof. Oak so that your (slow walking) rival takes fewer steps in the cutscene
+
+	S: Viridian City
+		Buy 8 Poke Balls
+
+	S: Route 22
+		Route 1 -> 22 DSUM
+			> Any L3 Pidgey     8 in, 6 out, search
+			> L3 Pidgey (1)     10 in, 9 out, repeat 13/9/13/10
+			> L3 Rattata        2 out, repeat 14/9/14/8
+			> L2 Rattata        8 out, repeat 13/10/13/9
+			> L2 Pidgey         10 out, repeat 13/10/13/9
+			> L3 Pidgey (6-7)   3 in, 10 out, repeat 13/10/13/9
+			> L4 Rattata        5 in, 11 out, repeat 4/2/6/11
+			> L4 Pidgey         6 in, 11 out, repeat 4/2/6/11
+			> L5 Pidgey         6 in, 11 out, repeat 4/2/6/11
+		Catch a Lv. 3 or Lv. 4 Nidoran-M, and give it a one-character name. Tackle Lv. 3 Nidoran once before throwing Poke Balls. Just chuck balls at Lv. 4 Nidoran.
+			Use DSum manipulation after the first encounter
+			> L3 Rattata: 14 in, 11 out, then alternate 12 in 12 out
+			> L4 Rattata: 10 out
+			> L2 Rattata: 4 in 12 out
+			> L2 NidoM:   6 in 12 out
+			> L3 Spearow: 2 out 6 in 12 out
+			> L5 Spearow: 3 out 6 in 12 out
+			> L3 NidoF:   4 out 6 in 12 out
+			> L4 NidoF:   5 out 6 in 12 out
+			In case you miss the nido and want to keep cycling: 4 2 6 11 4 2 6 11 (4 and 6 are in)
+			Then walk in grass (after two cycles it's too hard to manip)
+			For chaining magic:
+			> L3 NidoM:   6 out
+			> L4 NidoM:   13 out
+		If you encounter a Lv. 5 Spearow, try to catch it. If you catch it on the first ball, DSum off it by walking 5 out, 6 in, 12 out, then the standard DSum (4 in, 2 out, 6 in, 11 out).
+			If you waste at least half your Poke Balls against Spearow, Tackle Lv. 4 Nidorans once or twice to avoid running out.
+		Always pick up the hidden tree Potion. It is safer than waiting to pick up the Weedle Guy Potion, and it is just as fast.
+
+	S: Viridian Forest
+		Follow this path (only red tiles can produce encounters)
+			[[https://i.imgur.com/3o7klcA.png]]
+		Pick up the Antidote on the way up
+		If Squirtle is at <10 HP, use your Potion before the Weedle Guy fight, then pick up the Weedle Guy Potion
+		If Squirtle is at 10+ HP, do not heal or pick up the Weedle Guy Potion before the fight
+		B: Viridian Forest - BugCatcher 3
+			Weedle Guy :: Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion.
+			If Squirtle is at 4 HP and Weedle likely won't die on the next turn, use your Potion immediately. If Squirtle is at 3 HP, use your Potion immediately.
+		Pick up the Weedle Guy Potion after the fight if necessary. In most cases, you want at least 15 HP and a spare Potion for Brock. Squirtles with bad defense (15 at Lv. 8) should have at least 17 HP entering the fight, and Squirtles with bad Special (13 at Lv. 8) may need more HP.
+		Use the Antidote on the same menu as using your Potion and switching Nidoran to the lead for Brock. If you do this while still in the Viridian Forest grass, you could get an encounter that Nidoran can't escape from, but this is unlikely, especially with a Lv. 4 Nidoran. If you do this after exiting the grass, Squirtle will take 3 damage from poison. Use your judgment to decide what's most important.
+
+	S: Pewter Gym
+		Save before Brock
+		B: Brock :: 0:0,1 1:0,1
+			Bubble x2-3, Bubble x2-3
+			Immediately switch to Squirtle
+			Geodude: Bubble x2-3
+			Switch to Nidoran after killing Geodude, then immediately switch to Squirtle
+			Onix: Bubble x2-3. If Onix uses Bide on the turn you switch to Squirtle, use Tail Whip twice, then Bubble
+			Onix does 6 damage with Tackle
+			If Squirtle is at <8 HP (<9 HP with bad defense) and Geodude won't die on the next turn, use a Potion if you have one. With Onix, the threshold is <7 HP (<8 HP with bad defense), unless he landed a Screech, in which case the threshold is about <12 HP (<14 HP with bad defense).
+			If Nidoran has 21+ HP when it's out against Onix, heal Squirtle immediately if it's at <12 HP.
+			If Onix uses Bide on the turn you switch back to Squirtle, use Tail Whip twice, then Bubble
+			If you can't 2-shot Onix and it uses Bide on the turn Squirtle uses its first Bubble, switch to Spearow after the second hit if you have it. Spearow will die to the Bide, and Squirtle can return to the fight safely. If you don't have Spearow, the run ends if you get a 2-turn Bide.
+		Check Nidoran's stats after killing Geodude. If you see 10 Attack at Lv. 5 or 11 Attack at Lv. 6, your Attack DV is terrible, and it's probably best to reset.
+		Check Nidoran's stats at Lv. 8 (after killing Onix). Perfect stats are 16/14/15/13. Anything is runnable at this point except 14 Attack or 15/11/13/11, although you might want to reset if your time and Nidoran are below average.
+
+	S: Pewter City
+		Go to the mart
+		Buy Potions until you have 9 or 10. It's usually best to buy to 10 unless your Nidoran had 12-13 Defense, 15 Speed and 13 Special at Lv. 8. With 13 Speed, you might want to buy to 11 if possible.
+		Change the battle style option from SHIFT to SET before entering Route 3
+
+	S: Route 3
+		You need to conserve Horn Attack PP on this route, and this is much more important with lower Attack and Speed DVs. If you have good Attack and Speed, you may be able to Horn Attack when a Tackle would kill, but in general, use Tackle when it will kill.
+		Listed below are the four fights on this route and the standard number of Horn Attacks needed to defeat the Pokemon in each fight. You need to use one fewer Horn Attack than what's listed to avoid running out on the second Metapod.
+		B: Route 3 - BugCatcher 1
+			Leer + Horn Attack x2 on all three
+			The Weedle and the second Caterpie are good candidates to use Tackle on turn 3, saving one Horn Attack. If the first Caterpie doesn't die to two Horn Attacks, finish it with Tackle.
+			If you caught a Lv. 4 Nidoran, it will be Lv. 10 for the second Caterpie. In this case, if you have 19 Attack at Lv. 10 and had 14 Speed at Lv. 8, you should Horn Attack right away instead of using Leer. You'll likely 2-shot the Caterpie if one of the Horn Attacks criticals.
+		Check your stats at Lv. 9 and Lv. 10. If you had average to below-average stats at Lv. 8 and you see 17 Attack at Lv. 10, consider resetting.
+		Heal to full or nearly full for Shorts Guy.
+		B: Shorts Guy
+			Leer + HA x2 on both
+			After using Leer on Ekans, switch Leer with Horn Attack so that HA is in slot 1.
+			If you saw 13 Defense at Lv. 10 and get Tail Whip turn 1, Rattata will easily 2-shot you with Quick Attack (and likely with QA + Tackle), so you'll have to heal after getting hit until he uses Tail Whip again. If you saw 14-15 Defense and get Tail Whip turn 1, you're more likely to survive Tackle x2 or Tackle + Quick Attack. Use your judgment about the status of your run, how good your Nidoran is, and your number of Potions to determine how risky to play this situation. You normally heal twice on the first two fights of Route 3, and healing more than four times will likely cause problems later in the run. Also, if you have a bad combination of HP and defense, it's advisable to risk dying to a crit Tackle/Quick Attack, because you can't really avoid this situation.
+			If you saw 19 Attack at Lv. 10, use Horn Attack on Rattata right away instead of using Leer. You might 2-shot it with a critical. Do this even if you're concerned about Horn Attack PP, because you should be more concerned about dying or losing time on this fight. You rarely need to Horn Attack three times anyway; a Tackle on turn 3 will usually kill. When using Leer strats, you can sometimes use Tackle on turn 3.
+			You'll be faster than Ekans if you saw 15 Speed at Lv. 8, and you'll be slower if you saw 13 Speed. If you saw 14 Speed, you'll be speedtied with 8-11 DV and slower with 6-7 DV. If you get Wrap, heal if you would die to a two- or three-turn Wrap. If you would die to a four- or five-turn Wrap, heal after the third turn if you get it. You'll always take 2 damage from Poison Sting and 3 from Wrap when your Defense hasn't been lowered. When your defense has been lowered once, you'll take 2 from PS and 4 from Wrap on the top half of defense DVs and 3/5 on the bottom half.
+		Heal before the next fight only if you're at 1 HP.
+		B: Route 3 - BugCatcher 2
+			HA x2, HA x3, HA x2, HA x3 (or HA x2 + Tackle)
+			Caterpie does 3 damage with Tackle, so heal as necessary.
+			If you get hit by String Shot(s), be careful not to waste Horn Attacks. You'll need at least five, probably more, for the next fight.
+			Two String Shots make you slower than the Kakuna and speedtied with the Metapod at best. One String Shot makes you slower than the Caterpie, which also has String Shot. Your Speed DV determines whether you'll be slower than, speedtied with or faster than the Kakuna after one String Shot.
+			If you caught a Lv. 4 Nidoran, you'll be Lv. 12 to start this fight. That means any String Shots will boost your Attack until you're Lv. 13 for the Metapod. This will sometimes allow you to save a Horn Attack on the Caterpie. If you caught a Lv. 3 Nidoran, you'll be Lv. 11 and will lose any badge boosts upon leveling up on the Weedle.
+		Heal before the next fight if you're at <5 HP (or <4 HP if you saw 19 Defense at Lv. 13)
+		B: Route 3 - BugCatcher 3
+			HA x2, HA x4
+			This fight is similar to the last one in that it greatly depends on your Attack and Speed DVs and whether you get String Shot from Caterpie. If you have <4 Horn Attack PP entering this fight, you should save a Horn Attack on the Caterpie even if it takes an extra turn.
+		If you didn't catch a Spearow in the Route 22 grass, enter the first patch of grass here on the step before the Lass, and catch the first Pidgey or Spearow you see.
+			Use Poison Sting to weaken Lv. 5 Spearows, Horn Attack to weaken Lv. 8 Pidgeys and Tackle to weaken everything else. If Nidoran dies from a Gust or Peck, you can continue by switching to Squirtle, since you'll be taking the Pokemon Center before Mt. Moon.
+		Take the center before Mt. Moon
+
+	S: Mt. Moon
+		In general, take the Water Gun TM and fight the Mt Moon Hiker with an Attack DV of between 5 and 8, otherwise fight Mt Moon Trainers as normal killing the necessary experience to get Thrash early.
+		Exp to gather in Mt. Moon: 138 (L4 nido)
+		If at any point you see a Paras, catch it. Use Horn Attack to weaken it in most situations.
+			Exceptions:
+			> A Lv. 16-17 Nidorino should Tackle a Lv. 8 Paras
+			> A Lv. 16 Nidoking with 15 DV Attack should Tackle a Lv. 10 Paras
+			> A Lv. 17-18 Nidoking should Tackle a Lv. 10 Paras
+			> A Lv. 18 Nidoking with 13-15 DV Attack should Tackle a Lv. 12 Paras.
+		B: Mt. Moon 1F - SuperNerd
+			Horn Attack x2, Poison Sting for both.
+			Horn Attack a third time if Magnemite has 6+ HP after the first two
+		Pick up the Rare Candy and the Escape Rope before the Lass fight
+			If you didn't get an encounter within two steps of the Rare Candy, move one tile to the right after picking it up, then move up and bonk into the Escape Rope from the left. The bonk costs frames, but you avoid a turn frame on which you can get an encounter.
+		B: Mt. Moon 1F - Lass 1
+			Horn Attack x2-3, Horn Attack x2
+		If you got Water Gun and are fighting the upcoming Hiker, teach it over Leer two steps before the Hiker.
+		B: Mt. Moon 1F - Hiker
+			Hiker (optional) :: Water Gun all 3
+		Pick up the Moon Stone in the top-left corner of the first floor
+		Evolve?
+			With good Attack, Nidorino can reliably kill Lv. 9 Zubats if necessary. If you're on standard Lv. 4 Nidoran strats (kill two encounters for 138 exp.) and you've killed one Lv. 9 Zubat or one Lv. 8/10 Paras by the end of the second floor, it's probably best to evolve to Nidoking on the step before the ladder to the last floor. Nidoking can kill Lv. 10-11 Zubats, which appear 15 percent of the time on the last floor.
+			If you haven't killed any encounters to this point or you need Paras, it's probably best to wait to evolve. Nidoking's cry wastes 0.6 extra seconds with each encounter, it is more likely to crit Paras, it is more likely to kill Paras with a crit, and you're decently likely to not get the two encounters you need.
+			If you kill a Lv. 9 Zubat on the last floor as Nidorino, evolve to Nidoking two steps afterward. If you didn't evolve Nidoking to kill encounters, do it two steps before the Rocket.
+		B: Mt. Moon B2F - Rocket 1
+			Rocket :: HA x2 + PS, HA x2
+			If the Zubat confuses you and you're at risk of dying if you hurt yourself, switch out to Squirtle, then switch back to Nidoking.
+		After fighting the Rocket, take one step to the right, then head directly up and talk to the Super Nerd.
+		B: Mt. Moon B2F - SuperNerd
+			HA x2, HA + PS, HA x2 + PS
+			Horn Attack Voltorb a second time if you have bad Attack or get a low roll.
+			This fight is straightforward unless Grimer disables Horn Attack. In that case, the strategies vary based on how long HA is disabled, but it's generally best to spam your next-strongest move (Tackle or Water Gun).
+		Choose the Helix Fossil
+			When the cut scene ends, move two tiles up, one tile to the left, then up and left. This movement allows you to walk on three encounterless tiles
+
+	S: Cerulean City
+		Take the Pokemon Center to set a warp point for your Escape Rope
+		Get the hidden Rare Candy behind the house in the top-left corner of the city, then head to Nugget Bridge to meet your rival
+
+	S: Nugget Bridge
+		B: Bridge Rival - Bulbasaur
+			Bridge Rival :: HA x3 + PS, HA, HA + PS, HA x2 + PS
+			Pidgeotto always dies in three hits unless you have really bad Attack or didn't get experience in Mt. Moon.
+			If you get hit by Sand-Attack, sacrifice your flier once Pidgeotto is in range to die to one Horn Attack. This is because you want to avoid getting hit by Sand-Attack again once you've switched in.
+			Exceptions: The badge boost from Sand-Attack is necessary to 1-shot the Pidgeotto; the badge boost could allow you to 1-shot the Rattata (only true with high Attack); you want to keep your slaves alive for risky Surge strats; or you have a really bad time.
+		B: Route 24 - BugCatcher
+			HA + PS both
+			If you used a few extra Horn Attack PP against Cerulean Rival, you have good Attack and you're not on Hiker strats, Poison Sting the Caterpie on turn 1. A critical might not kill, but it's likely to.
+		B: Route 24 - Lass 2
+			HA + PS, HA x2
+			Don't switch out if Pidgey Sand-Attacks you; it can't kill your slaves as easily as Pidgeotto, and you only need to land three attacks to finish the fight.
+			Exception: You get hit by multiple Sand-Attacks and/or Growls from Nidoran-F, and your HP or Horn Attack PP is low.
+		If you fought enough encounters to reach Lv. 20 after this fight but not Lv. 21 after the fourth trainer, you can Rare Candy twice here to increase your HP and your chance of hitting a few damage ranges. This is recommended unless you have taken little damage and have 14 DV Attack.
+		B: Route 24 - Youngster
+			HA + PS, HA x2, HA + PS
+			If you didn't fight encounters in Mt. Moon, you'll be Lv. 19 for Rattata.
+			Horn Attack is a damage range at Lv. 19 and a guaranteed 1-shot at Lv. 20.
+			Rattata usually does 6 damage with Quick Attack and 11 with Hyper Fang.
+			If necessary, heal on turn 1 rather than before the fight.
+			Rattata might use the extra turn to Tail Whip you, in which case you'll get a useful Attack boost.
+		If you fought the Mt. Moon Hiker, you'll get Lv. 21 after this fight, in which case you should use your two Rare Candies to reach Lv. 23 and learn Thrash.
+		Teach Thrash over Poison Sting (slot 4). Swap Thrash to slot 1 at the first opportunity.
+		B: Route 24 - Lass 1
+			Thrash (or Horn Attack, Poison Sting), Thrash (or Horn Attack x2)
+			Treat this fight like the second trainer (stay in if SA'd, ...)
+		If you got enough experience in Mt. Moon and didn't fight the Hiker, you'll be Lv. 21 after this fight. Use your Rare Candies to reach Lv. 23 and learn Thrash.
+		B: Route 24 - JrTrainerM 1
+			Mankey Guy :: Thrash (or Horn Attack, Poison Sting)
+			Mankey's Karate Chop always criticals, and it does up to 18 damage if you're Lv. 20.
+			Generally, it's best to heal before the fight if you're at risk of dying, but if your HP is high enough and you have enough Potions, you can heal during the fight to keep red bar for Nidoking's cry. This saves about one second.
+			If you have a decent time, avoid the temptation to stall for red bar in this fight. Mankey can troll you with Leer, and you'll need to heal off any damage you take before Misty anyway. Exception: You're on Hiker strats and have 16-20 HP.
+		You'll reach Lv. 21 after this fight if you didn't already. Use your Rare Candies to reach Lv. 23 and learn Thrash.
+		B: Route 24 - Rocket
+			Thrash
+
+	S: Route 25
+		If you skipped Water Gun in Mt. Moon, fight the top Hiker. If you got Water Gun, fight the bottom one.
+		B: Route 25 - Hiker 1
+			Top Hiker (or Bottom Hiker) :: Thrash, Thrash x3
+			If you have bad Attack and a critical Karate Chop from Machop will put you at 9+ HP (11+ HP with 0-2 DV Defense), use Horn Attack + Poison Sting on the Machop. This will decrease the chance that you get confused on Geodude, and it could help you get red bar.
+			Geodude can go very quickly (Thrash + crit Thrash) or very slowly (no criticals + several Defense Curls).
+			If you get confused and are at risk of dying, switch to Squirtle and finish Geodude with Bubble. Squirtle is usually faster, and it takes little damage from Tackle.
+			If you got enough experience in Mt. Moon to get early Thrash, switching to Squirtle will undo a few benefits of that experience, such as being Lv. 25 for Staryu and Lv. 30 for Oddish in Rock Tunnel.
+			If you try to fight through confusion, use Horn Attack if it will kill, as it is faster than restarting Thrash.
+		Get the hidden Elixer.
+		B: Route 25 - Hiker 3
+			Bottom Hiker (or Top Hiker) :: Water Gun
+		B: Route 25 - Lass 1
+			Thrash
+		B: Route 25 - JrTrainerM
+			Thrash
+		B: Route 25 - Lass 2
+			Thrash
+		Get the hidden Ether if you didn't get the Elixer
+		Say yes to Bill
+		After the cut scene in Bill's house, open the menu and heal to full HP before Misty
+			If you're too low on Potions, take the Cerulean center again.
+			If you have good HP and/or 12-15 DV Special, you can get away with healing to nearly full HP.
+			If you have 13-15 DV Speed, you'll be faster than Misty's Starmie, so you can heal to only ~50 HP. However, on a good time, it's better to heal to 70+ HP if you have the Potions for it.
+		After healing, use your Escape Rope to warp back to Cerulean, and walk to the gym.
+
+	S: Cerulean City
+		S: Cerulean Gym
+			B: Cerulean Gym - JrTrainerF
+				Thrash
+			After the fight, heal off damage from Peck and/or Supersonic if necessary. The extra time menuing is generally worth it to make Misty a safer fight.
+			B: Misty
+				Thrash and pray
+				Staryu is a range at Lv. 24 unless you have 14-15 DV Attack.
+				If you miss the range and/or don't 2-shot Starmie, you might get confused from Thrash. In this case, you should almost always switch out.
+				Switch to Squirtle if you need a turn to heal Nidoking, and switch to your flier if you don't need a turn.
+				If Squirtle is out, Nidoking is slower than/speedtied with Starmie, and you don't need to (or can't) heal Nidoking, use Bubble in hopes of lowering Starmie's speed.
+				Starmie BB damage:
+				> 35-42 on 12-15 Special
+				> 37-44 on 4-11 Special
+				> 40-48 on 0-3 Special
+				A critical Bubblebeam does up to 84 damage, and a critical Water Gun does up to 54.
+		Walk through the Dig house
+		B: Cerulean City - Rocket
+			Thrash
+			Machop is a safe 1-shot with 12-15 DV Attack.
+			It does 9-12 damage with critical Karate Chop, and it criticals about 55 percent of the time.
+			Similar to the Mankey fight, you can heal before the fight to be safe, or you can heal on turn 1 of the fight to skip Nidoking's cry and possibly get back into red bar.
+			If you heal before the fight, teach Bubblebeam over Tackle or Water Gun (or Poison Sting if you have it).
+
+	S: Route 5
+		Enter the building in the southeast corner, and take the stairs to the underground path
+		Pick up the hidden Full Restore in the underground path
+			You can skip the hidden item jingle by holding A (not mashing) as soon as you begin moving left from the staircase.
+
+	S: Route 6
+		If you have Spearow or Paras, take the fewest number of steps in the grass as possible while dodging the Bug Catcher.
+		If you have Spearow but not Paras, and you see an Oddish anyway, Tackle it once if you have it, then throw Poke Balls.
+			Use Bubblebeam to weaken Oddish if you have it instead of Tackle; otherwise, run.
+		If you need to catch Oddish, use the DSum chart below
+			This is tougher than Nidoran DSum because the fastest path to Vermilion City involves going in and out of the grass anyway. The strategy for handling this is too complex to put in a chart, and it's likely you'll have to think on your feet if you get an encounter in the first two grass patches.
+			If you don't get an encounter in the first two patches, walk (or corner bonk) in the grass patch to the left of the two Jr. Trainers until you get Oddish. To catch Oddish, Tackle if you have it; otherwise, teach Bubblebeam early and use it.
+		Oddish DSum manipulation
+			> Lv. 13 Pidgey - 8 in, 10 out, 12 in, 10 out, 12 in, etc.
+			> Lv. 15 Pidgey - 3 in, 3 out, 3 in, 12 out, 4 in, 3 out, 3 in, 12 out, etc.
+			> Lv. 10 Mankey - 3 out, 4 in, 3 out, 3 in, 12 out, 4 in, 3 out, 3 in, 12 out, etc.
+			> Lv. 12 Mankey - 5 out, 4 in, 3 out, 3 in, 12 out, 4 in, 3 out, 3 in, 12 out, etc.
+			> Lv. 16 Pidgey - 10 out, 4 in, 3 out, 3 in, 12 out, 4 in, 3 out, 3 in, 12 out, etc.
+			> Lv. 14 Mankey - 11 out, 4 in, 3 out, 3 in, 12 out, 4 in, 3 out, 3 in, 12 out, etc.
+			> Lv. 16 Mankey - 12 out, 4 in, 3 out, 3 in, 12 out, etc.
+		If you fought the Hiker in Mt. Moon and get an encounter here, kill it unless it's an Oddish you need to catch. This allows you to be Lv. 28 for Voltorb so that you can Thrash it.
+		If you have a Cut slave (or Spearow) and 13-15 HP, or 12 HP with 10-15 DV Defense, walk into the last grass patch so that you can fight the male Jr. Trainer first.
+			This allows you to preserve red bar for one of the two Jr. Trainers with no risk.
+			If you fight the female Jr. Trainer first, you'll die to three Quick Attacks from the Pidgeys (5 damage each).
+			With <11 HP, you should always heal and fight the female Jr. Trainer first.
+			Exactly 11 HP is awkward, as you'll die to a critical Quick Attack from Raticate, but you'll survive two non-critical Quick Attacks from the Pidgeys.
+		If you Potion before one of the Jr. Trainers, do it after you've exited the grass for the last time.
+			You want to preserve red bar for any encounters you get.
+			Also, teach Bubblebeam on the Potion menu if you haven't already.
+		B: Route 6 - JrTrainerF 2
+			Thrash
+		B: Route 6 - JrTrainerM 2
+			Thrash
+
+	S: Vermilion City
+		At the mart
+			> Buy 3 Repels
+			> Sell Poke Balls (unless 14+ DV Attack)
+			> Sell TM34
+			> Sell Antidote
+			> Sell Nugget
+		Go to the S.S. Anne
+		S: SS Anne
+			Heal to 23+ HP (15 HP if want to play risky and/or you're low on Potions)
+				Exceptions: 19 HP is safe with 15 DV Defense, and 21 HP is safe with 10-15 DV (and 5-9 DV if you got experience in Mt. Moon).
+			Teach Bubblebeam on the Potion menu if you haven't already.
+			If you haven't taught Bubblebeam and don't need to heal before fighting your rival, you might want to teach Bubblebeam anyway.
+				Whether you do this depends on whether you plan to use Bubblebeam or Thrash on Raticate.
+				You won't know your strategy for sure until you kill Pidgeotto, but in general, it's best to teach Bubblebeam if one of your slaves has died, or if you want to get into red bar for the Fly split.
+			Take the left stairs, then go down and right to meet your rival
+			B: Boat Rival - Bulbasaur
+				Boat Rival :: HA + BB, Thrash (or BB x2), Thrash
+				If Pidgeotto lands Sand-Attack, switch out to your flier (or Paras if your flier is dead, or your Cut slave if both are dead).
+				Quick Attack does 8 damage (6 if you have 15 DV Defense), so heal if it can kill you with that.
+				Use Horn Attack on turn 2 if you haven't taught Bubblebeam yet.
+				If you use Thrash and get confused against Ivysaur, sacrifice Squirtle to Vine Whip or your flier to Tackle.
+			Get HM01 from the captain, then leave the boat
+		Take the mart if you haven't already
+		If you have Spearow but no Cut slave, trade it for Dux in the house above the tree blocking Surge's gym
+		Menu on the tile before the Cut bush
+			> Heal to 25+ HP on the way down if necessary
+			> Teach TM11 (Bubblebeam) over [?] if you havent already
+			> Swap your slot 1 item with Repels
+			> Teach HM01 (Cut) to Paras
+			> Teach TM28 (Dig) to Paras (or Squirtle if you don't have Paras)
+			> Cut the bush
+			If your HP is <25, you may want to heal before Surge. This depends on several factors, the most important of which is your Attack DV.
+			With good Attack -- or with any Attack if you fought the Hiker and killed a Route 6 encounter -- you're a favorite to 1-shot the Voltorb with Thrash, which makes the fight faster and safer if you want to stay in red bar.
+			With bad Attack, you'll likely give Voltorb a turn, and it has Sonicboom.
+			You'll always 1-shot Pikachu, but it uses Quick Attack almost half the time, which does 4 damage.
+			You'll level up before Pikachu, likely gaining 3 HP, unless you skipped Mt. Moon experience.
+			If Voltorb and Pikachu can kill you with Sonicboom + QA, it's usually best to heal if you have bad Attack, but not if you have good Attack.
+		In Surge's gym, check the cans in this order until you get the first one
+			> bottom-left
+			> bottom-middle
+			> middle-left
+			> top-middle
+			> top-left
+			> middle-right
+			> top-right
+			> bottom-right
+			[[https://i.imgur.com/mCgVe4w.png]]
+		S: Vermilion Gym
+			B: Surge
+				Thrash (or Horn Attack + Bubblebeam, or Bubblebeam x2), Thrash, Thrash x2
+				> Lead with Thrash if you're Lv. 28 or your Attack DV is 9-15 and your HP is <25 (<22 HP if you'll level up after Pikachu)
+				> Lead with Horn Attack if you're Lv. 27 and your Attack DV is 0-8 and your HP is <25 (<22 if you'll level up after Pikachu)
+				> Lead with Bubblebeam if you want to manipulate red bar off Voltorb's Sonicboom, which is usually a good idea when you can survive Sonicboom + Quick Attack
+				If you lead with Thrash, your only decision is what to do on Raichu if you get confused. If you can't survive a hit in confusion (13-17 damage; less if you get Growled), sacrifice Squirtle or your flier. If you can, try to fight through with Horn Attack (or Thrash if you get Growled after a low roll).
+				If you lead with Horn Attack, simply use Bubblebeam to finish Voltorb and Thrash the rest of the fight.
+				If you lead with Bubblebeam in hopes of manipulating red bar, pay attention to whether you get the speed fall. If you don't get it and Surge uses X Speed on Voltorb, it will be faster than Nidoking, so you'll need to kill it the next turn (and not get red bar unless it uses Sonicboom that turn). Otherwise, you can use Leer if you have it until you get Sonicboom (or until he has used enough Screeches and/or Tackles to put you at risk of dying). When finishing Voltorb, use Horn Attack if the first Bubblebeam did less than half damage.
+		Go to the house above the gym, talk to the chair of the fan club to get the Bike Voucher, then Dig back to Cerulean
+
+	S: Cerulean City
+		Get the Bicycle from the bike shop
+		Menu after leaving the shop
+			Swap your slot 2 item with the Bicycle
+			Teach TM24 (Thunderbolt) over Leer (or Water Gun)
+		Get on the bike and head east to Route 9, cutting the two bushes in your way
+		Mid game move order
+			Mid game move order should be:
+			Slot 1: Thrash
+			Slot 2: Horn Attack
+			Slot 3: Thunderbolt
+			Slot 4: Bubblebeam
+
+	S: Route 9
+		B: Route 9 - JrTrainerF 1
+			4-turn Thrash Girl :: Thrash, Thrash, Thrash, Thrash (Horn Attack)
+			If you don't get a 4-turn Thrash and can't survive a hit in confusion (12-15 damage) and the first turn of Wrap (2 damage), swap out to a slave, then swap back to Nidoking and finish Bellsprout with horn Attack.
+			If possible, swap to a slave that has a short cry or won't gain a level after 162 experience (243 if it's Dux).
+			Oddish is preferred if you have it, because Poisonpowder doesn't affect it.
+		B: Route 9 - BugCatcher 2
+			Thrash (or Thunderbolt), Thrash, Thrash
+			Thunderbolt the Caterpie if your Attack DV is 0-12, because Thrash might not kill Venonat, which could leave you confused while in red bar.
+
+	S: Rock Tunnel
+		Map to get through Rock Tunnel
+			1F[[https://i.imgur.com/oPBnthL.png]]2F[[https://i.imgur.com/SMZikOB.png]]
+		Use a Repel one step after entering
+		If you need to Potion in the cave, try to do it on the same menu in which you Repel
+		Your last Repel normally wears off about 40 steps after you exit Rock Tunnel, so there is a decent amount of flexibility with this
+		B: Rock Tunnel 1F - Pokemaniac
+			BB, TB
+			If you're not in red bar, you can try to manipulate it off either Pokemon, because they will always use their super-effective attacking move on turn 1
+			Cubone does 22-26 damage with Bone Club (20-24 on 10-15 DV Defense)
+			Slowpoke does 17-20 with Confusion (15-18 on 13-15 DV Special)
+			Cubone uses Growl half the time on turn 2
+			If manipulating red bar off Cubone, use Thunderbolt; for Slowpoke, use Bubblebeam
+			Be careful not to put yourself at <6 HP if you skipped Mt. Moon experience, because you'll be Lv. 29 for the upcoming Oddish, which does 5 damage with Absorb
+			Also avoid manipulating red bar if your Special DV is 0-5, because the upcoming Lv. 25 Slowpoke will have a 14-33 percent chance of surviving Thunderbolt and killing you with Confusion
+		B: Rock Tunnel B1F - Pokemaniac 3
+			TB
+			With 0-5 DV Special, this Slowpoke can be a good option for manipulating red bar
+			It will always die after a Bubblebeam and Thunderbolt, and it does 20-24 damage (17-20 on 12-15 DV Special)
+		B: Rock Tunnel B1F - JrTrainerF 2
+			Thrash (& pray if L29)
+			If you're Lv. 29 for this fight, Oddish has at least a 45 percent chance to live
+			If you're Lv. 30, Oddish will likely die unless you have terrible Attack
+			Bulbasaur is a favorable range at Lv. 29
+			Two of its moves -- Absorb and Poisonpowder -- are generally harmless, but Stun Spore can waste a lot of time, and Sleep Powder will likely end your run if you're in red bar
+			If you get paralyzed, use your Full Restore as soon as you can after killing Oddish (if you use it on Oddish, it can paralyze you again or put you to sleep)
+			If you get put to sleep, you won't be able to do anything until you wake up, because you'll be locked into Thrash
+			When you have a status condition, Oddish will always use Absorb (5 damage on 5-15 DV Special, 6 on 0-4)
+			You'll be Lv. 30 for Bulbasaur unless you skipped Mt. Moon experience and split experience on both the top Hiker fight on Route 25 and the 4-turn Thrash fight on Route 9
+		Use your second Repel somewhere near the yellow tile on the map above
+		Use your third Repel on the blue/yellow tile immediately before the Hiker
+		B: Rock Tunnel B1F - Hiker 1
+			BB x3
+		B: Rock Tunnel 1F - JrTrainerF 2
+			Thrash
+			Pidgey does 6 damage with Quick Attack (5 with 10-15 DV Defense), heal before the fight if necessary
+		After exiting, head south to Lavender Town and west to Route 8
+
+	S: Route 8
+		B: Route 8 - Gambler 2
+			BB (or Thrash), Thrash
+			Vulpix does 4 with Quick Attack
+			In general, it's better lead with Bubblebeam unless your Attack DV is at least 5 higher than your Special DV
+			With 15 DV Attack, Growlithe has a 15 percent chance to live; with 15 DV Special, it always dies
+			If necessary, heal on turn 1, rather than before the fight. Growlithe can use the extra turn to boost your Attack with Leer or put you back into red bar with Ember or Bite, which do less than 10 damage.
+		If Growlithe burns you, you'll need to buy a Burn Heal and use it when you exit the Celadon Mart
+			This will likely mean buying one fewer X Special (you normally purchase 2 spares for Silph Rival)
+			Alternatively, you could use your Full Restore, but you'll lose red bar and have to pick up the Safari Zone Full Restore before Koga
+		Take the underground path to Celadon City
+		Pick up the hidden Elixer in the underground
+
+	S: Celadon City
+		Bike to the mart and do the shopping
+			2F: 4 Super Potions, 10 Super Repels
+			6F: 1 Fresh Water, 1 Soda Pop. Give both to the girl for TM13 and TM48, then buy 1 more Fresh Water
+			5F: Buy 12 X Accuracy, 5 X Special and 6 X Speed
+			On 2F: When walking left from the stairs, note the position of the female NPC. If she moved up, take the lower path from the counter to the stairs on the way back. If she moved down, take the higher path.
+		Take the elevator to 1F, then leave
+		Bike west, cut the bush, then go through the building and get HM02 from the girl in the house
+		Menu upon exiting the house
+			> Swap your slot 2 item with Super Repels
+			> Teach HM02 (Fly) to your flier
+			> Swap your slot 3 item with X Accuracies
+			> Fly to Celadon (? down)
+		Bike down to the Game Corner
+		S: Rocket Hideout
+			Talk to the Grunt standing in front of the poster at the back of the Game Corner
+			Use Thunderbolt instead of Thrash on the Rockets if only have one Thrash PP left
+			B: Game Corner - Rocket
+				Poster Grunt :: Thrash
+			Press the switch behind the poster and take the stairs to the right
+			Take the stairs to the right
+			Walk down and left avoiding the Rocket and take the stairs down again
+			Take the Spinning tile on the left and follow them path down to the next set of stairs
+			Walk toward the Grunt in the top left and fight him
+			B: Rocket Hideout B4F - Rocket 3
+				Lift Key Grunt :: Thrash
+			Talk to the Grunt again to get him to drop the Lift Key
+			Pick up the Lift Key and head back the way you came
+			Take the spinning tiles back to the previous floor, taking the Rare Candy along the way
+			Take the spinning tiles to the left
+			Pick up the TM07 item ball
+			Follow the path to the Elevator
+			Take the elevator to B4F
+			Menu before the grunts
+				> Swap Elixers up to slot 4
+				> Teach TM07 Horn Drill over Horn Attack (Slot 2)
+			B: Rocket Hideout B4F - Rocket 2
+				Right Grunt :: (X Acc +) TB, (X Acc +) HD, HD
+				Teach TM07 Horn Drill over Horn Attack (Slot 2)
+			Swap Bubblebeam with Thrash on the next fight
+			B: Rocket Hideout B4F - Rocket 1
+				Left Grunt :: BB, X Acc + TB, HD
+			Heal to 22+ HP for Giovanni (21+ with 4-8 DV Defense, 20+ with 9-15 DV Defense), or X Accuracy on Onix if you are between 14 to 20-22 HP, however this risks taking a Bind from Onix.
+				Having 10-13 HP is awkward here at taking any damage on this fight will put you at risk of dying to Pidgeotto or Ivysaur on the Tower Rival fight
+				The Rhyhorn only has Horn Attack so it is 75% chance to damage you as Giovanni has a 25% chance to use a Guard Spec
+			B: Rocket Hideout B4F - Giovanni
+				Giovanni :: (X Acc +) BB, (X Acc +) BB, HD
+			Take the Silph Scope and Dig out
+		Fly to Lavender Town
+
+	S: Lavender Town
+		Walk to the tower
+		S: Pokemon Tower
+			B: Tower Rival - Bulbasaur
+				Tower Rival :: TB, TB, BB, Thrash..
+			Use a Super Repel and teach TM48 Rock Slide over Bubblebeam
+			B: Pokémon Tower 4F - Channeler 2
+				Rock Slide x2
+				If you're in red bar for this fight, you'll die to a Night Shade
+				Gastly's other two moves, Lick and Confuse Ray, can end the run as well
+				If you get confused, switch out to your weakest Pokemon, let it die, then bring Nidoking back in
+				If you get paralyzed, use your Full Restore
+				Using a Potion before the fight generally isn't worth it, because you're 81 percent likely to hit both Rock Slides
+				If Nidoking dies here, you can continue your run if your Dig slave is lucky enough to defeat the Gastlies with Dig
+			Go down and to the left to pick up the Elixer item ball
+			On the next floor, go right one tile and down two to pick up a hidden Elixer
+			Take the free heal on 5F
+			B: Pokémon Tower 6F - Channeler 2
+				Rock Slide
+			With this fight and the next one, use your Full Restore to heal paralysis after the fight. If you already used your Full Restore, go back to 5F to take the healing pad.
+			B: Pokémon Tower 6F - Channeler 3
+				Rock Slide
+			Teach TM07 (Horn Drill) over Rock Slide
+			Pick up the Rare Candy blocking your path
+			Teach TM13 Ice Beam over Rock Slide before the Marowak fight
+			Cubone's Mother: IB
+			B: Pokémon Tower 7F - Rocket 1
+				IB x3
+			B: Pokémon Tower 7F - Rocket 2
+				Thrash
+				Drowzee can be a range with less than 6DV Attack if you had level 30 for Oddish or less than 9DV if you didn't
+			B: Pokémon Tower 7F - Rocket 3
+				IB, Thrash
+			Talk to Mr. Fuji to warp to his house
+		Talk to Mr. Fuji again to get the Poke Flute, then walk out and Fly to Celadon City (1 down)
+
+	S: Celadon City
+		Take the center and set the warp point for Dig (if you have not already)
+		Bike east to Saffron City and Silph Co.
+
+	S: Silph Co.
+		Take the stairs to 5F
+		Get the Elixer in the tree
+		Walk down and talk to the Rocket
+		B: Silph Co. 5F - Rocket 1
+			Thrash (x2-3)
+		Take the teleporter to 9F, then take it back to 5F
+		Get the Card Key
+		Use your Full Restore if paralyzed
+		Take the teleporter to 9F, then take it back to 5F, then open the door to your left
+		Take the teleporter to 3F
+		Walk right, then up, then open the door to your left, and take the teleporter to 7F
+		Once on 7F, walk one step up, then left to meet your rival
+		B: Silph Rival - Bulbasaur
+			Silph Rival :: X Acc, X Speed, Drill x5
+		Use an Elixer (or the Ether if you picked it up) unless you need to take damage to die to selfdestruct
+		If you picked up the Ether and ran out of Potions after selling Poke Balls, save the Ether until before Bruno
+		You can Elixer/Ether or X Accuracy on the Drowzee if you are still near full HP to ensure you take enough damage before Koga
+		Take the teleporter to 11F
+		B: Silph Co. 11F - Rocket 2
+			X Acc + IB, Drill x2
+		If you have <16 HP after this fight (<17 with bad defense), Nidorino will likely kill with Horn Attack, so you might want to use a Potion or Super Potion
+		B: Silph Co. 11F - Giovanni
+			Silph Gio :: X Acc, Drill x2, IB, Drill
+		Backtrack to 3F, then take the elevator to 10F
+		If you have 0, 5-7 or 11-12 DV Speed, pick up the Carbos below the Rocket, and use it before picking up more items
+			Use the Carbos straight away to make space in your inventory for TM26, unless you ran out of Potions or Poke Balls
+			If ran out delay using the Carbos until Mansion
+		Get the Rare Candy
+		Get TM26
+		Teach TM26 Earthquake over Thrash and Dig out
+		Late game move order
+			Late game move order should be:
+			Slot 1: Ice Beam
+			Slot 2: Horn Drill
+			Slot 3: Thunderbolt
+			Slot 4: Earthquake
+
+	S: Celadon City
+		Bike west
+		Menu on the tile before the Snorlax
+			> Use a Super Repel
+			> Swap up X Specials
+			> Use the Poke Flute
+		Run from the Snorlax
+
+	S: Cycling Road
+		Get the hidden Rare Candy
+		Get the hidden PP Up (unless you have 14+ DV Attack)
+		Menu after exiting the Cycling Road building
+			> Use a Super Repel
+			> Rare Candy x3
+			> Use the PP Up on Horn Drill
+			> Get on the bike
+			If you skipped the PP Up just Rare Candy x4
+		Bike to the Safari Zone through the Cut bushes
+
+	S: Safari Zone
+		Map of the Safari Zone
+			[[https://i.imgur.com/oBebL5z.jpg]]
+		Get on your bike
+		If you have 5 DV Speed grab the Carbos and use in the next Repel menu
+		If you used your Full Restore, pick up another one toward the end of the second area
+		Use a repel at the end of the first hill in the second area, move the cursor 1 up after
+		Get the Gold Teeth in the fourth area
+		Get HM03 from the guy in the house, then walk outside and Dig back to Celadon
+
+	S: Celadon City
+		Fly to Fuchsia, then bike to the gym
+
+	S: Fuchsia City
+		S: Fuchsia Gym
+			Walk as far right as you can, then up, then talk to the Juggler that faces right
+			B: Fuchsia Gym - Juggler 1
+				EQ x4
+			// Heal to 47+ HP (but ideally no higher than 80)
+			Hug the east wall, then the north wall, then walk down into the Juggler's vision
+			B: Fuchsia Gym - Juggler 2
+				EQ, EQ (+ TB)
+			B: Koga
+				EQ x3, then use an Elixer on Weezing, stall with Thunderbolt or Poke Flute
+				The goal is to die to Selfdestruct, but it's OK if you don't
+		Get HM04 from the warden, then Fly to Pallet Town
+
+	S: Pallet Town
+		Menu after entering Pallet Town
+			> Use a Super Repel
+			> Teach HM03 (Surf) to Squirtle
+			> Candy Nidoking OR toss Poke Balls if you candied four times in Fuschia (?)
+			> Bike to the water (?)
+		Surf south to Cinnabar Mansion
+
+	S: Cinnabar Mansion
+		Use this map to get through Cinnabar Mansion, doing the following actions along the way (don't take the candies)
+			[[https://i.imgur.com/UktHB4j.jpg]]
+		Pick up the Carbos in the fourth area if you have 0-1, 5-8 or 11-13 DV Speed
+		Menu after picking up the Carbos
+			> Use a Super Repel
+			> Teach HM04 to Squirtle
+			> Use the Carbos if you got it
+			Whether you used the Carbos or didn't, you should scroll down to the bottom of your menu before exiting it (the cursor should be on "Cancel")
+		Pick up the Rare Candy item ball on the way to the Secret Key, skipping the hidden Rare Candy
+		Menu 2 steps before the key
+			> Use the Candy
+			If you scrolled to the bottom of your menu after repelling, you should be able to mash A to use the candy (just be careful not to use it on Squirtle)
+			If you do you can pick up the hidden Rare Candy to the left of the Secret Key as a backup
+		After using the candy, pick up the Secret Key, then Dig back to Celadon
+
+	S: Celadon City
+		Gym order
+			>= 7DV Special: Erika -> Blaine -> Sabrina
+			<= 6DV Special: Blaine -> Sabrina -> Erika
+			Bike to Erika & Sabrina
+			Fly (2 down) + walk to Blaine
+			Walk out of Erika's
+			Dig out of Blaine's
+			Use teleporter before Digging out of Sabrina's
+			Once you've defeated all three gym leaders, fly to Viridian City
+
+	S: Celadon Gym
+		Hug the left wall and Cut the bush in the top-left corner
+		B: Celadon Gym - Beauty 3
+			IB
+		B: Erika
+			IB x3
+
+	S: Cinnabar Gym
+		Answers: ABBBAB
+		B: Blaine
+			X Acc + EQ, Drill x3 (Drill Growlithe if Blaine uses a Super Potion)
+
+	S: Saffron Gym
+		Teleporters: diagonal, diagonal, down
+		B: Sabrina
+			EQ, (X Speed +) EQ, EQ, EQ
+			X Speed on Mr. Mime if you have 0-4 DV Speed
+			If you have to X Speed on Mr. Mime, it can kill you with Confusion or buy itself an extra turn with Barrier
+			If it uses Barrier and you don't critical through it, finish it with Thunderbolt
+
+	S: Viridian City
+		Bike to Giovanni's gym
+		S: Viridian Gym
+			Go left 2 tiles, then up to fight the first required trainer
+			B: Viridian Gym - CooltrainerM 3
+				IB
+			B: Viridian Gym - Blackbelt 3
+				EQ, EQ (or Thunderbolt if Leer badge boost with 5+ DV Spc), EQ
+				This fight will generally be simple and fast, but because you're in red bar, the Machokes can end your run with a critical Karate Chop
+				The Machokes range from a 57% range to a 92% range depending on your Attack DV
+			Exit and re-enter the gym to reset Blackbelt's position and clear the path to Giovanni
+			Use an Elixer after re-entering the Gym to kill the turn frame
+			B: Giovanni
+				IB, IB, EQ, EQ, IB x2
+		When outside of the gym, use a Super Repel, then bike west to Route 22
+
+	S: Route 22
+		B: Viridian Rival - Bulbasaur
+			Viridian Rival :: X Acc, X Speed, IB x2, IB, TB, EQ, EQ, Drill
+		Bike to Route 23
+
+	S: Route 23
+		Bike to the water
+		There is a hidden Max Ether on the top-left square of the island after you show the Marsh Badge
+			If you don't have enough PP for Lorelei (at least 4 Horn Drills and 1 EQ, or 5 Horn Drills if you have bad Attack or are underleveled), you'll need to grab this
+			To make room for it, use your Ether before getting on your bike at the beginning of the outdoor area
+			If you only have Elixers, toss a useless item instead
+		After exiting the water, use another Super Repel and bike to Victory Road
+
+	S: Victory Road
+		Use these maps to help you get through Victory Road
+			1F: [[https://cdn.bulbagarden.net/upload/5/56/Victory_Road_1F_RBY.png]]
+			2F: [[https://cdn.bulbagarden.net/upload/1/11/Victory_Road_2F_RBY.png]]
+			3F: [[https://cdn.bulbagarden.net/upload/e/e5/Victory_Road_3F_RBY.png]]
+		Use Strength upon entering and push the first boulder onto the switch on the right, then bike to the ladder in the top-left corner
+		Use Strength again, push the boulder below onto the switch, bike up the steps hugging the north edge and use a Super Repel. Bike to the right, down the stairs, then right and up to the ladder
+		Use strength again and push the boulder onto the switch to the left, then bike to the bottom-right corner and push the boulder down the hole and go down the hole
+		Use Strength one last time, use your last Super Repel, then get on your bike and push the boulder onto the switch in the bottom-left, bike back to where you fell down and follow the ladders to the exit
+
+	S: Indigo Plateau
+		Depositing your HM slaves into the PC before the Elite Four is generally faster than taking them, but it depends on your slaves and your strat
+			If you have Paras or Oddish, deposit Squirtle and Paras/Oddish (but not your flier) if you plan on using the normal safe strat against Lorelei
+			Deposit all three slaves if you plan to YOLO Lorelei (50 percent chance to die, 20-second save if you live)
+			If you have Dux, don't deposit either of your slaves unless you plan to YOLO Lorelei (50 percent to die, 13-second save if you live)
+		Don't take the center
+		If you are really far ahead and low on healing items, you might want to buy Full Restores. However, it's very unlikely you'll need more than one Full Restore for the Elite Four
+
+	S: Elite Four
+		B: Lorelei
+			Switch to your flier, let it die, then X Acc, Drill x5 (Earthquake Jynx if 14+ DV Attack)
+			You'll win using the shift strat unless Dewgong Gen 1 misses Aurora Beam
+			If you need to make up time, you can just use an X Accuracy without switching
+			Dewgong will either kill you with Aurora Beam (50%) or use Rest (50%)
+		Use an Elixer before Bruno
+		B: Bruno
+			X Acc + IB, HD, HD, IB, HD
+			Onix does up to 22 damage with Slam (up to 20 with good defense), but Slam can miss, and its other moves do only <11 damage, so healing is never worth it unless you took damage from Blackbelt
+		Super Potion or Full Restore before Agatha
+		B: Agatha
+			(X Speed +) EQ, IB x2, EQ, EQ, EQ
+			You normally want to be at 57+ HP for Agatha, which usually means using a Super Potion or your Full Restore
+			From there, use an X Speed on turn 1 (unless you have 11+ DV Speed and got Carbos)
+			However, if you have taken no damage since reviving you will have enough HP to survive a Wing Attack from Golbat
+			If you outspeed the first Gengar carrying red bar through this fight can save a significant amount of time but this risks dying to a Golbat critical or Night Shade from the last Gengar
+		Menu at least 2 steps before Lance
+			Use your last PP healing item and heal to above Hydro Pump range (129+ HP?)
+		B: Lance
+			X Spec + TB, IB, X Speed + IB, IB, IB
+			This Gyarados behaves the same as Silph Rival's Gyarados
+			It does 122-144 damage with Hydro Pump on 0 DV Special and 107-126 damage on 14-15 DV
+			None of Lance's other Pokemon is a threat, so you want to heal before the fight so that Hydro Pump puts you in red bar
+			Do not heal to full unless you lack the Potions/Super Potions to heal to a good number for red bar
+			If Gyarados misses Hydro Pump, you can stall with Earthquake to get red bar, but only do this if you need the red bar to meet your goal time
+			Also note that Aerodactyl is a 95% range on 0 Special
+		Heal to 26+ before Champ
+		B: Champion - Bulbasaur
+			Champion :: X Speed + X Acc + Drill x6 (EQ Alakazam if 14+ DV Attack)
+			You generally don't need to heal for this fight unless you're deep in red bar, as Pidgeot's only threats are critical Wing Attack (4.4% chance), double Wing Attack (6.3%) and turn 1 Sky Attack (25%)
+			If you can afford a slight time loss, heal from deep red bar into high red bar (~26 HP). If you can afford a significant time loss, heal to at least 50 HP
+			Pidgeot does up to 28 damage with Wing Attack before you use the X Speed/Special, and 25 damage after
+			If you enter the fight with your HP in the mid-20s, consider using the X Speed/Special first so that you have a better chance of surviving a non-crit Wing Attack
+			Also use the X Speed first if your HP is 35-60 and you have a Super Potion, because it will help you survive a turn 1 Sky Attack if you use the Super Potion on turn 2
+			If you can't survive a Sky Attack after using a Super Potion, you can use a Full Restore, but you'll still die to a critical Sky Attack unless you have great stats and get a low roll, and a non-crit won't put you close to red bar
+			If you're so far ahead that you can afford to heal to full for this fight, it's usually best to give Alakazam a turn if Pidgeot uses Sky Attack on turn 1
+			Just use your X Accuracy on turn 1, use Horn Drill on Pidgeot, then use your X Speed on Alakazam
+			You'll survive a non-crit Psychic from Alakazam unless your combination of HP and Special is below average
+	END

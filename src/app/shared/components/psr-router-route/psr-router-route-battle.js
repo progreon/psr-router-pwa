@@ -19,7 +19,7 @@ import { AppStyles } from 'Shared/app-styles';
 // TODO: show messages.
 class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   _getPopupContentRenderer() {
-    if (this.routeEntry && this.routeEntry.trainer) {
+    if (this.routeEntry && this.routeEntry.trainer && !this.routeEntry.trainer.dummy) {
       return (root, dialog) => {
         while (root.firstChild) {
           root.removeChild(root.firstChild);

@@ -129,7 +129,7 @@
         {
           "info": {
             "summary": "Follow this path (only red tiles can produce encounters)",
-            "description": "[[http://i.imgur.com/3o7klcA.png]]"
+            "description": "[[https://i.imgur.com/3o7klcA.png]]"
           }
         },
         {
@@ -230,7 +230,7 @@
         {
           "type": "B",
           "info": {
-            "summary": "Leer+Horn Attack+Horn Attack on all three"
+            "summary": "Leer + Horn Attack x2 on all three"
           },
           "trainer": "Route 3 - BugCatcher 1"
         },
@@ -242,8 +242,8 @@
         {
           "type": "B",
           "info": {
-            "summary": "Quick Attack does 8-10 (13-16 critical, or after a Tail Whip)",
-            "description": "Wrap does 3 (4 critical, or after a Tail Whip)"
+            "summary": "Leer + HA x2 on both",
+            "description": "Quick Attack does 8-10 (13-16 critical, or after a Tail Whip)\nWrap does 3 (4 critical, or after a Tail Whip)"
           },
           "trainer": "Shorts Guy"
         },
@@ -509,7 +509,7 @@
         {
           "type": "S",
           "info": {
-            "title": "Cerulean City (Gym)"
+            "title": "Cerulean Gym"
           },
           "entries": [
             {
@@ -840,17 +840,7 @@
         {
           "info": {
             "summary": "Bike to the mart and do the shopping",
-            "description": "2F: TM07, 2 Super Potions, 10 Super Repels\n4F: 1 Poke Doll"
-          }
-        },
-        {
-          "info": {
-            "summary": "6F: 1 Soda_Pop. Give it to the girl for TM48, then buy 1 more Fresh Water"
-          }
-        },
-        {
-          "info": {
-            "summary": "5F: Buy 11 X Accuracy, 2 X Special and 5 X Speed"
+            "description": "2F: TM07, 2 Super Potions, 10 Super Repels\n4F: 1 Poke Doll\n6F: 1 Soda Pop. Give it to the girl for TM48, then buy 1 more Fresh Water\n5F: Buy 11 X Accuracy, 2 X Special and 5 X Speed"
           }
         },
         {

@@ -340,7 +340,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
           <app-toolbar class="toolbar-top" sticky>
             <div class="toolbar-top-content">
               <button class="menu-btn" title="Menu" @click="${_ => this._onMenuButtonClicked(menuIcon === angleLeftIcon)}">${menuIcon}</button>
-              <img class="logo-icon" src="${PSRRIcon}"></img>
+              <img class="logo-icon" src="${PSRRIcon}">
               <div class="title">${this.appTitle}</div>
             </div>
           </app-toolbar>
@@ -363,7 +363,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
           <psr-router-pokemon-list id="pokemon-list" class="page" ?active="${this._page === 'pokemon-list'}" .app="${this}"></psr-router-pokemon-list>
           <psr-router-trainers id="trainers" class="page" ?active="${this._page === 'trainers'}" .app="${this}"></psr-router-trainers>
           <psr-router-trainer-info id="trainer-info" class="page" ?active="${this._page === 'trainer-info'}" .app="${this}"></psr-router-trainer-info>
-          <psr-router-manual id="manual" class="page" ?active="${this._page === 'manual'}" .app="${this}"></psr-router-manual>
+          <psr-router-manual id="help" class="page" ?active="${this._page === 'manual'}" .app="${this}"></psr-router-manual>
           <psr-router-about id="about" class="page" ?active="${this._page === 'about'}" .app="${this}"></psr-router-about>
           <psr-router-404 id="404" class="page" ?active="${this._page === '404'}" .app="${this}"></psr-router-404>
 
@@ -417,7 +417,7 @@ class PsrRouterApp extends connect(store)(LitElement) {
       'trainer-info': {title: "Trainer Info", element: 'psr-router-trainer-info'},
       'moves': {title: "Moves", element: 'psr-router-moves', showInMenu: true},
       'items': {title: "Items", element: 'psr-router-items', showInMenu: true},
-      'manual': {title: "Help", element: 'psr-router-manual', showInMenu: true},
+      'help': {title: "Help", element: 'psr-router-manual', showInMenu: true},
       'about': {title: "About", element: 'psr-router-about', showInMenu: true},
       '404': {title: "404", element: 'psr-router-404', is404: true}
     }

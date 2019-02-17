@@ -25,6 +25,16 @@ class PsrRouterAbout extends PsrRouterPage {
         <p>So hold on tight and enjoy the wonderful ride that is Pokémon Speedruns ;)</p>
       </section>
       <section>
+        <h3>Browser Support</h3>
+        <ul>
+          <li>Chrome: The best, recommended</li>
+          <li>Firefox: Tiny bit slower</li>
+          <li>Edge: Really slow, no offline support, not recommended</li>
+          <li>Internet Explorer: Unsupported</li>
+          <li>Others: Unknown</li>
+        </ul>
+      </section>
+      <section>
         <h3>Related Links</h3>
         <ul>
           <li>PSR on <a href="https://www.speedrun.com/pokemon" target="_blank">speedrun.com</a></li>
@@ -48,6 +58,10 @@ class PsrRouterAbout extends PsrRouterPage {
         <h3>0.0.1 - Let's get this ball rolling!</h3>
         <ul>
           <li>Loading some example routes</li>
+          <ul>
+            <li>Red Any% Glitchless (Basic)</li>
+            <li>Red Any% Glitchless Classic</li>
+          </ul>
           <li>Load/export from/to a text file</li>
           <li>Pokémon, trainer, move and item info for Pokémon Red and Blue</li>
           <li>Progressive Web Application</li>
