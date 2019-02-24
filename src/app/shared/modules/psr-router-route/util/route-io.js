@@ -4,6 +4,7 @@
 import * as Route from '..';
 import * as RouteUtil from '.';
 import { saveAs } from 'file-saver/FileSaver';
+// TODO: Checkout https://www.npmjs.com/package/bson
 
 export function ExportToFile(route, filename, printerSettings) {
   var ext = printerSettings && printerSettings.toJSON ? ".json" : ".txt";

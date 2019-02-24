@@ -4,6 +4,7 @@
 import { RouterMessage, RouterMessageType } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
+import * as Model from 'SharedModules/psr-router-model/Model';
 
 /**
  * A class representing a route-entry that gets you a pokemon out of a list of possible pokemon.
@@ -51,7 +52,7 @@ class RouteGetPokemon extends RouteEntry {
           messages.push(new RouterMessage(`Pokemon "${pl.pokemon}" not found!`, RouterMessageType.ERROR));
         }
       }
-      choices.push(new game.model.PokemonLevelPair(pokemon, pl.level))
+      choices.push(new Model.PokemonLevelPair(pokemon, pl.level))
     });
     let location = undefined; // TODO, parse from obj.location
     let entry = new RouteGetPokemon(game, choices, obj.preference, info, location);

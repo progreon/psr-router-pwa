@@ -16,10 +16,10 @@ class PsrRouterTrainer extends LitElement {
     var party = [];
     if (this.trainer) {
       this.trainer.party.forEach(b => {
-        var ms = b.getMoveset();
+        var ms = b.moveset;
         party.push(html`
           <div class="column">
-            <h2 class="pokemon" @click="${this._onPokemonClicked.bind(this, b.getPokemon().name)}">${b.getPokemon().name} - L${b.getLevel()}</h2>
+            <h2 class="pokemon" @click="${this._onPokemonClicked.bind(this, b.pokemon.name)}">${b.pokemon.name} - L${b.level}</h2>
             <div><div>${ms[0]}</div><div>${ms[1]}</div></div>
             <div><div>${ms[2]}</div><div>${ms[3]}</div></div>
           </div>`);

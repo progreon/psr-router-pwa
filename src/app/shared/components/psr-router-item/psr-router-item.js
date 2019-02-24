@@ -17,7 +17,7 @@ class PsrRouterItem extends LitElement {
       ${AppStyles}
       <vaadin-item ?hidden="${!this.detailed}">
         <div><strong>${this.item.name} (₽${this.item.price})</strong></div>
-        <div>[${this.item.usage()}] ${this.item.type} (${this.item.value})</div>
+        <div>[${this.item.usage}] ${this.item.type} (${this.item.value})</div>
         <div><i>${this.item.description}</i></div>
       </vaadin-item>
       <vaadin-item ?hidden="${this.detailed}">

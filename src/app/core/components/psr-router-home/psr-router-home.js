@@ -66,8 +66,8 @@ class PsrRouterHome extends PsrRouterPage {
       <p>${route && route.shortname}</p>
       <p ?hidden="${!game || !game.info.unsupported}">[GAME NOT (fully) SUPPORTED (yet)!]</p>
       <b ?hidden="${!game}">Game: Pokémon ${game && game.info.name}</b>
-      <div ?hidden="${!game}">Generation ${game && game.info.gen}</div>
-      <div ?hidden="${!game}">${game && game.info.year}, ${game && game.info.platform}</div>
+      <div ?hidden="${!game}">Generation ${game && game.info.gen || "?"}</div>
+      <div ?hidden="${!game}">${game && game.info.year || "????"}, ${game && game.info.platform}</div>
       <hr>
       <!-- <h2>Manage route</h2> -->
       <div class="buttons">

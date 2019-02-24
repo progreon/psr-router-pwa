@@ -1,7 +1,7 @@
 'use strict';
 
 // imports
-import { GetGame } from '../psr-router-data';
+import { GetGame } from '../psr-router-game-factory';
 import { RouterMessage, RouterMessageType } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteSection } from '.';

@@ -22,6 +22,7 @@ module.exports = (config) => ({
     path: path.resolve(__dirname, '../..', config.outputDir)
   },
   resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
     alias: {
       App: path.resolve(__dirname, '../../src/app/'),
       Core: path.resolve(__dirname, '../../src/app/core/'),
@@ -171,6 +172,11 @@ module.exports = (config) => ({
         use: [
           'xml-loader'
         ]
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       }
     ]
   }

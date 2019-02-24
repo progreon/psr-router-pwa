@@ -52,10 +52,10 @@ export function SaveRoute(route=null) {
 import redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
 import redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
 // import exampleRoute from 'SharedData/routes/example_route.json';
-// import blueDummy from 'SharedData/routes/blue_dummy.json';
-// import yellowDummy from 'SharedData/routes/yellow_dummy.json';
-// import crystalDummy from 'SharedData/routes/crystal_dummy.json';
 // import redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
+// import blueDummy from 'SharedData/routes/blue_dummy.json';
+import yellowDummy from 'SharedData/routes/yellow_dummy.json';
+import crystalDummy from 'SharedData/routes/crystal_dummy.json';
 
 var exampleRoutes = {};
 exampleRoutes[redAnyGlitchlessBasic.shortname] = redAnyGlitchlessBasic;
@@ -63,8 +63,8 @@ exampleRoutes[redAnyGlitchlessClassic.shortname] = redAnyGlitchlessClassic;
 // exampleRoutes[exampleRoute.shortname] = exampleRoute;
 // exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
 // exampleRoutes[blueDummy.shortname] = blueDummy;
-// exampleRoutes[yellowDummy.shortname] = yellowDummy;
-// exampleRoutes[crystalDummy.shortname] = crystalDummy;
+exampleRoutes[yellowDummy.shortname] = yellowDummy;
+exampleRoutes[crystalDummy.shortname] = crystalDummy;
 
 export function GetExampleRoutesNames() {
   return Object.keys(exampleRoutes);

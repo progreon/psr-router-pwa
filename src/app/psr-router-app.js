@@ -1,11 +1,11 @@
 'use strict';
 
 // JS Imports
-import { GetGame } from 'SharedModules/psr-router-data';
-import * as Util from 'SharedModules/psr-router-util';
-import * as Route from 'SharedModules/psr-router-route';
+// import { GetGame } from 'SharedModules/psr-router-game-factory';
+// import * as Util from 'SharedModules/psr-router-util';
+// import * as Route from 'SharedModules/psr-router-route';
 import * as RouteUtil from 'SharedModules/psr-router-route/util';
-import { RouteFactory } from 'SharedModules/psr-router-route/util';
+// import { RouteFactory } from 'SharedModules/psr-router-route/util';
 
 // Imports for polymer/pwa
 import { LitElement, html } from 'lit-element';
