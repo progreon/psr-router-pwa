@@ -1,20 +1,21 @@
 // JS imports
 import * as Route from 'SharedModules/psr-router-route';
 import * as RouteIO from './route-io';
+import { Game } from '../../psr-router-model/Game';
 
 if (!window.app) {
   window.app = {};
 }
 
-export function GetCurrentRoute() {
+export function GetCurrentRoute(): Route.Route {
   return window.app.route;
 }
 
-export function GetCurrentGame() {
+export function GetCurrentGame(): Game {
   return window.app.game;
 }
 
-export function SetCurrentRoute(route=null) {
+export function SetCurrentRoute(route: Route.Route = null): Route.Route {
   window.app.route = route;
   window.app.game = route ? route.game : null;
   return route;
@@ -24,9 +25,9 @@ export function SetCurrentRoute(route=null) {
 
 const lsKeySavedRoute = "saved-route";
 
-export function LoadSavedRoute() {
-  var routeJSON = localStorage.getItem(lsKeySavedRoute);
-  var route = null;
+export function LoadSavedRoute(): Route.Route {
+  let routeJSON = localStorage.getItem(lsKeySavedRoute);
+  let route: Route.Route = null;
   if (routeJSON) {
     route = Route.Route.newFromJSONObject(JSON.parse(routeJSON));
     route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
@@ -34,11 +35,11 @@ export function LoadSavedRoute() {
   return SetCurrentRoute(route);
 }
 
-export function SaveRoute(route=null) {
+export function SaveRoute(route: Route.Route = null): Route.Route {
   if (!route) {
     route = GetCurrentRoute();
   } else {
-    SetCurrentRoute(route);
+    route = SetCurrentRoute(route);
   }
   if (route) {
     localStorage.setItem(lsKeySavedRoute, JSON.stringify(route.getJSONObject()));
@@ -49,15 +50,15 @@ export function SaveRoute(route=null) {
 // TODO: new route
 
 //// EXAMPLE ROUTES ////
-import redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
-import redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
-// import exampleRoute from 'SharedData/routes/example_route.json';
-// import redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
-// import blueDummy from 'SharedData/routes/blue_dummy.json';
-import yellowDummy from 'SharedData/routes/yellow_dummy.json';
-import crystalDummy from 'SharedData/routes/crystal_dummy.json';
+import * as redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
+import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
+// import * as exampleRoute from 'SharedData/routes/example_route.json';
+// import * as redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
+// import * as blueDummy from 'SharedData/routes/blue_dummy.json';
+import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
+import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
 
-var exampleRoutes = {};
+let exampleRoutes: { [key: string]: any; } = {};
 exampleRoutes[redAnyGlitchlessBasic.shortname] = redAnyGlitchlessBasic;
 exampleRoutes[redAnyGlitchlessClassic.shortname] = redAnyGlitchlessClassic;
 // exampleRoutes[exampleRoute.shortname] = exampleRoute;
@@ -66,33 +67,35 @@ exampleRoutes[redAnyGlitchlessClassic.shortname] = redAnyGlitchlessClassic;
 exampleRoutes[yellowDummy.shortname] = yellowDummy;
 exampleRoutes[crystalDummy.shortname] = crystalDummy;
 
-export function GetExampleRoutesNames() {
+export function GetExampleRoutesNames(): string[] {
   return Object.keys(exampleRoutes);
 }
 
-export function LoadExampleRoute(routeName) {
-  var routeJSON = exampleRoutes[routeName];
+export function LoadExampleRoute(routeName: string): Route.Route {
+  let routeJSON = exampleRoutes[routeName];
   if (routeJSON) {
-    var route = Route.Route.newFromJSONObject(routeJSON);
+    let route = Route.Route.newFromJSONObject(routeJSON);
     route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
     return SaveRoute(route);
   } else {
-    return undefined;
+    return null;
   }
 }
 
 //// LOAD/EXPORT FROM/TO FILES ////
 
-export function LoadRouteFile(file) {
+export function LoadRouteFile(file: File): Promise<Route.Route> {
   return new Promise((resolve, reject) => {
     if (file) {
-      var filename = file.name;
-      var fileReader = new FileReader();
-      fileReader.onload = function(e) {
+      let filename = file.name;
+      let fileReader = new FileReader();
+      fileReader.onload = function (e) {
         try {
-          var route = RouteIO.ImportFromFile(e.target.result, filename.search(/\.json$/) > 0, filename);
+          console.log(e);
+          let route = RouteIO.ImportFromFile(<string>((<FileReader>(e.target)).result), filename.search(/\.json$/) > 0, filename);
           route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
           resolve(SaveRoute(route));
+          // reject(e);
         } catch (e) {
           reject(e);
         }
@@ -104,7 +107,7 @@ export function LoadRouteFile(file) {
   });
 }
 
-export function ExportRouteFile(filename, printerSettings, route) {
+export function ExportRouteFile(filename: string, printerSettings: any, route: Route.Route): Route.Route {
   console.debug("Exporting to route file...", filename, printerSettings);
   if (!route) {
     route = GetCurrentRoute();

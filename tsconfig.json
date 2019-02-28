@@ -7,6 +7,7 @@
     "allowSyntheticDefaultImports": false,
     "noImplicitReturns": true,
     "baseUrl": "./",
+    // "typeRoots": ["node_modules/@types", "src/app"],
     "paths": {
       "App/*": ["src/app/*"],
       "Core/*": ["src/app/core/*"],
@@ -21,16 +22,13 @@
     }
   },
   "include": [
+    "src/window.d.ts",
     // "src/**/*",
     // "src/app/**/*",
     // "src/app/shared/**/*",
-    "src/app/shared/data/**/*",
     // "src/app/shared/components/**/*",
-    // "src/app/shared/modules/**/*",
-    "src/app/shared/modules/psr-router-engine/**/*",
-    "src/app/shared/modules/psr-router-game-factory/**/*",
-    "src/app/shared/modules/psr-router-model/**/*",
-    // "src/app/shared/modules/psr-router-route/**/*",
-    "src/app/shared/modules/psr-router-util/**/*"
+    // "src/app/shared/components/psr-router-item/**/*",
+    "src/app/shared/data/**/*",
+    "src/app/shared/modules/**/*"
   ]
 }

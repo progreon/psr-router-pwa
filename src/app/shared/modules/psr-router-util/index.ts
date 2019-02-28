@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-export { BadgeBoosts } from './badge-boosts';
+export { BadgeBoosts } from './BadgeBoosts';
 // TODO: BattleEntry
-export { DVRange } from './dv-range';
-export { Range } from './range';
-export { RangePerDV } from './range-per-dv';
-export { RouterError } from './router-error';
-export { RouterMessage, RouterMessageType } from './router-message';
-export { Stages } from './stages';
+export { DVRange } from './DVRange';
+export { Range } from './Range';
+export { RangePerDV } from './RangePerDV';
+export { RouterError } from './RouteError';
+export { RouterMessage } from './RouterMessage';
+export { Stages } from './Stages';

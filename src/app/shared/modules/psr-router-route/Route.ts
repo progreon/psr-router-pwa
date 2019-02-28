@@ -2,9 +2,12 @@
 
 // imports
 import { GetGame } from '../psr-router-game-factory';
-import { RouterMessage, RouterMessageType } from '../psr-router-util';
+import { RouterMessage } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteSection } from '.';
+import { Game } from '../psr-router-model/Game';
+import { Location } from '../psr-router-model/Model';
+import { RouteEntry } from './RouteEntry';
 // import { saveAs } from 'file-saver/FileSaver';
 
 /**
@@ -14,7 +17,9 @@ import { RouteSection } from '.';
  * @todo writeToString
  * @augments RouteSection
  */
-class Route extends RouteSection {
+export class Route extends RouteSection {
+  public static readonly ENTRY_TYPE: string = "Route";
+  public shortname: string;
   /**
    *
    * @param {Game}            game              The Game object this route entry uses.
@@ -24,18 +29,18 @@ class Route extends RouteSection {
    * @param {RouteEntry[]}    [children=[]]     The child entries of this entry.
    * @todo -extends, +rootSection, +game, +otherSettings
    */
-  constructor(game, info, shortname=undefined, location=undefined, children=[]) {
+  constructor(game: Game, info: RouteEntryInfo, shortname?: string, location?: Location, children: RouteEntry[] = []) {
     super(game, info, location, children);
     this.shortname = shortname ? shortname : info.title;
   }
 
-  static getEntryType() {
-    return "Route";
+  public get entryType(): string {
+    return Route.ENTRY_TYPE;
   }
 
-  getJSONObject() {
-    var routeSectionJSON = super.getJSONObject();
-    var routeJSON = {
+  getJSONObject(): any {
+    let routeSectionJSON = super.getJSONObject();
+    let routeJSON = {
       game: this.game.info.key,
       shortname: this.shortname,
       info: routeSectionJSON.info,
@@ -44,19 +49,17 @@ class Route extends RouteSection {
     return routeJSON;
   }
 
-  static newFromJSONObject(obj) {
+  static newFromJSONObject(obj: any): Route {
     if (!obj) {
       // TODO: throw exception?
     } else if (!obj.game) {
       // TODO: throw exception?
     }
-    var game = GetGame(obj.game);
+    let game = GetGame(obj.game);
     if (!game) {
       // TODO: throw exception?
     }
-    var rs = RouteSection.newFromJSONObject(game, obj);
-    return new Route(rs.game, new RouteEntryInfo(rs.info.title, rs.info.summary), obj.shortname, rs._location, rs._children); // TODO: rs.info
+    let rs = RouteSection.newFromJSONObject(game, obj);
+    return new Route(rs.game, new RouteEntryInfo(rs.info.title, rs.info.summary), obj.shortname, rs.location, rs.children); // TODO: rs.info
   }
 }
-
-export { Route };

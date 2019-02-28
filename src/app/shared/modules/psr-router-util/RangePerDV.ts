@@ -1,4 +1,4 @@
-import { Range } from './';
+import { Range } from '.';
 
 /**
  * Class representing a number pair
