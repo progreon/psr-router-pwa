@@ -1,4 +1,4 @@
-import './app/psr-router-app.js';
+import './app/psr-router-app';
 
 // Load and register pre-caching Service Worker
 window.isUpdateAvailable = new Promise(function(resolve, reject) {

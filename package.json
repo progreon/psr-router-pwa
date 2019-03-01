@@ -45,6 +45,7 @@
     "@babel/core": "^7.0.0-beta.54",
     "@babel/polyfill": "^7.0.0-beta.54",
     "@babel/preset-env": "^7.3.1",
+    "@types/file-saver": "^2.0.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "clean-webpack-plugin": "^0.1.19",
@@ -96,6 +97,8 @@
     "pwa-helpers": "^0.8.3",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.3",
     "url-polyfill": "^1.0.13",
     "whatwg-fetch": "^2.0.4"
   },
