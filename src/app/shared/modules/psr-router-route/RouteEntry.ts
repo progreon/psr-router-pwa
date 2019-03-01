@@ -175,7 +175,7 @@ export class RouteEntry {
    */
   getJSONObject(): any {
     // { type, info: {title, summary, description}, location, data } // data = specific entry data
-    let type = this.constructor["getEntryType"]();
+    let type = this.entryType;
     let info = { title: this.info.title, summary: this.info.summary, description: this.info.description };
     let location = ""; // TODO, parse from this._location;
     let obj = { type, info, location };

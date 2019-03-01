@@ -6,6 +6,7 @@
     "module": "commonjs",
     "allowSyntheticDefaultImports": false,
     "noImplicitReturns": true,
+    "experimentalDecorators": true,
     "baseUrl": "./",
     // "typeRoots": ["node_modules/@types", "src/app"],
     "paths": {
@@ -18,17 +19,8 @@
       "SharedComponents/*": ["src/app/shared/components/*"],
       "SharedData/*": ["src/app/shared/data/*"],
       "SharedModules/*": ["src/app/shared/modules/*"],
-      "Shared/*": ["src/app/shared*"]
+      "Shared/*": ["src/app/shared/*"]
     }
   },
-  "include": [
-    "src/window.d.ts",
-    // "src/**/*",
-    // "src/app/**/*",
-    // "src/app/shared/**/*",
-    // "src/app/shared/components/**/*",
-    // "src/app/shared/components/psr-router-item/**/*",
-    "src/app/shared/data/**/*",
-    "src/app/shared/modules/**/*"
-  ]
+  "include": ["src/app/**/*"]
 }

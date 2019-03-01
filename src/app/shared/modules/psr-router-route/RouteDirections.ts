@@ -34,8 +34,8 @@ export class RouteDirections extends RouteEntry {
   }
 
   static newFromJSONObject(game: Game, obj: any): RouteDirections {
-    var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-    var location: Location = null; // TODO, parse from obj.location
+    let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
+    let location: Location = null; // TODO, parse from obj.location
     return new RouteDirections(game, info, location);
   }
 }

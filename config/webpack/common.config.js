@@ -63,17 +63,17 @@ module.exports = (config) => ({
       if (chunk.name) {
         return chunk.name;
       } else {
-        var a = [];
+        let a = [];
         chunk._modules.forEach(m => {
-          var id = m.id.replace(/.*\/(.*?)\..*?$/, '$1');
+          let id = m.id.replace(/.*\/(.*?)\..*?$/, '$1');
           if (!a.includes(id))
             a.push(id)
         });
         if (a.length > 10) {
-          var s = a.join("_");
+          let s = a.join("_");
           a = a.slice(0, 10);
           // Add hash
-          var h = 0, l = s.length, i = 0;
+          let h = 0, l = s.length, i = 0;
           if ( l > 0 )
             while (i < l)
               h = (h << 5) - h + s.charCodeAt(i++) | 0;

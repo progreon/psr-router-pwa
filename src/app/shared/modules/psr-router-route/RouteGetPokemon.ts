@@ -16,6 +16,7 @@ export class RouteGetPokemon extends RouteEntry {
   public static readonly ENTRY_TYPE: string = "GetP";
   private _choices: Model.PokemonLevelPair[];
   private _preference: number;
+  public get choices() { return this._choices; }
   /**
    *
    * @param game        The Game object this route entry uses.

@@ -26,7 +26,7 @@ export abstract class ExperienceGroup {
    */
   private _initExpCurve(): number[] {
     let ec = [];
-    for (var l = 0; l < 101; l++)
+    for (let l = 0; l < 101; l++)
       ec[l] = this._getExpForLevel(l);
     return ec;
   }

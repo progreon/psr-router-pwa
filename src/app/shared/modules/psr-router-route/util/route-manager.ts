@@ -107,7 +107,7 @@ export function LoadRouteFile(file: File): Promise<Route.Route> {
   });
 }
 
-export function ExportRouteFile(filename: string, printerSettings: any, route: Route.Route): Route.Route {
+export function ExportRouteFile(filename: string, printerSettings: any, route?: Route.Route): Route.Route {
   console.debug("Exporting to route file...", filename, printerSettings);
   if (!route) {
     route = GetCurrentRoute();

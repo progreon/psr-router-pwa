@@ -14,7 +14,7 @@ class Stages {
 
   /**
    * Set the stages and returns this object.
-   * (for example, you can run: var stages = new Stages().set(atk, def, spd, spc);)
+   * (for example, you can run: let stages = new Stages().set(atk, def, spd, spc);)
    * @returns {Stages}
    */
   setStages(atk: number, def: number, spd: number, spc: number): Stages {

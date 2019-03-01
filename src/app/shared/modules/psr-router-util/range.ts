@@ -155,7 +155,7 @@ class Range {
    * @returns The new range
    */
   substract(s: number): Range {
-    var newRange: Range = new Range();
+    let newRange: Range = new Range();
 
     this._values.forEach((count, value) => newRange.addValues(value - s, count));
 
@@ -168,10 +168,10 @@ class Range {
    * @todo What is this used for?
    */
   substractRange(rs: Range): Range {
-    var newRange = new Range();
+    let newRange = new Range();
 
-    for (var value1 in this._values)
-      for (var value2 in rs._values)
+    for (let value1 in this._values)
+      for (let value2 in rs._values)
         newRange.addValues(+value1 - +value2, this._values[value1] * rs._values[value2]);
 
     return newRange;
@@ -185,7 +185,7 @@ class Range {
   }
 
   clone(): Range {
-    var range = new Range();
+    let range = new Range();
     range._values = this._values;
     range._count = this._count;
     range._min = this._min;

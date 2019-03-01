@@ -39,7 +39,7 @@ export class RouteSection extends RouteEntry {
    * @todo TESTING!!
    */
   _applyAfterChild(child?: RouteEntry) {
-    var currChildIdx = 0;
+    let currChildIdx = 0;
     if (child) {
       while (currChildIdx < this._children.length && this._children[currChildIdx] !== child) {
         currChildIdx++;
@@ -87,7 +87,7 @@ export class RouteSection extends RouteEntry {
    * @returns The entry list.
    */
   public get entryList(): RouteEntry[] {
-    var entryList: RouteEntry[] = [this];
+    let entryList: RouteEntry[] = [this];
 
     if (this._children)
       this._children.forEach(c => { entryList.push(...c.getEntryList()) })
@@ -189,17 +189,17 @@ export class RouteSection extends RouteEntry {
   }
 
   getJSONObject(): any {
-    var obj = super.getJSONObject();
+    let obj = super.getJSONObject();
     obj.entries = [];
     this._children.forEach(c => obj.entries.push(c.getJSONObject()));
     return obj;
   }
 
   static newFromJSONObject(game: Game, obj: any): RouteSection {
-    var info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-    var children: RouteEntry[] = [];
+    let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
+    let children: RouteEntry[] = [];
     obj.entries.forEach(e => {
-      var type = e.type && e.type.toUpperCase();
+      let type = e.type && e.type.toUpperCase();
       switch (type) {
         case RouteBattle.ENTRY_TYPE.toUpperCase():
           children.push(RouteBattle.newFromJSONObject(game, e));
@@ -219,7 +219,7 @@ export class RouteSection extends RouteEntry {
       }
     });
 
-    var location = undefined; // TODO, parse from obj.location
+    let location = undefined; // TODO, parse from obj.location
     return new RouteSection(game, info, location, children);
   }
 }

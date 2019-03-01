@@ -24,7 +24,7 @@ class DVRange {
    * @returns The minimum value of this range.
    */
   getMin(): number {
-    var min = 15;
+    let min = 15;
     this._dvs.forEach(dv => {
       if (dv < min)
         min = dv;
@@ -37,7 +37,7 @@ class DVRange {
    * @returns The maximum value of this range.
    */
   getMax(): number {
-    var max = 0;
+    let max = 0;
     this._dvs.forEach(dv => {
       if (dv > max)
         max = dv;
@@ -50,7 +50,7 @@ class DVRange {
    * @param dvRange The DVRange to combine this with.
    */
   combine(dvRange: DVRange) {
-    var dvrThis = this;
+    let dvrThis = this;
     dvRange._dvs.forEach(dv => dvrThis.addDV(dv));
   }
 

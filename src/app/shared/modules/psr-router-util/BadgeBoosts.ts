@@ -30,7 +30,7 @@ class BadgeBoosts {
     // spc = parseInt(spc);
     this._values = [atk, def, spd, spc];
 
-    for (var i = 0; i < this._values.length; i++)
+    for (let i = 0; i < this._values.length; i++)
       if (this._values[i] < BadgeBoosts.MIN)
         this._values[i] = BadgeBoosts.MIN;
       else if (this._values[i] > BadgeBoosts.MAX)

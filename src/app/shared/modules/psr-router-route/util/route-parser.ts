@@ -25,9 +25,9 @@ export function ParseRouteText(routeText, filename) {
  * // TODO: docu
  */
 export function ExportRouteText(routeJSON) {
-  var scopedLinesArrayR = _PARSE3R_getScopedLinesArray(routeJSON);
-  var linesToParseR = _PARSE2R_getFileLines(scopedLinesArrayR);
-  var routeTextR = _PARSE1R_getRouteText(linesToParseR);
+  let scopedLinesArrayR = _PARSE3R_getScopedLinesArray(routeJSON);
+  let linesToParseR = _PARSE2R_getFileLines(scopedLinesArrayR);
+  let routeTextR = _PARSE1R_getRouteText(linesToParseR);
   return routeTextR;
 }
 
@@ -166,7 +166,7 @@ function _PARSE3a_getRouteJSONEntries(scopedLines, filename) {
           }
         }
         if (scopedLine.scope && scopedLine.scope.length > 0) {
-          var titleLine = scopedLine.scope.shift();
+          let titleLine = scopedLine.scope.shift();
           [tOrS, ...s] = titleLine.line.split("::");
           s = s && s.length > 0 ? s.join("::").trim() : "";
           entry.info = { title: s ? tOrS.trim() : "", summary: s || tOrS };
@@ -189,7 +189,7 @@ function _PARSE3a_getRouteJSONEntries(scopedLines, filename) {
           let se: { [key: number]: number[]; } = {};
           let seMax = 0;
           bs.forEach(ops => {
-            var [o, ps] = ops.split(":");
+            let [o, ps] = ops.split(":");
             if (o && ps) {
               o = parseInt(o);
               if (isNaN(o)) {
@@ -252,10 +252,10 @@ function _PARSE3a_getRouteJSONEntries(scopedLines, filename) {
 //// THE REVERSE ////
 
 function _PARSE3R_getScopedLinesArray(routeJSON) {
-  var scopedLinesArray = []; // each line containing { line, scope }, with scope: linesArray
-  var gameLine = { line: "Game: " + (routeJSON.game ? routeJSON.game : "N/A") };
+  let scopedLinesArray = []; // each line containing { line, scope }, with scope: linesArray
+  let gameLine = { line: "Game: " + (routeJSON.game ? routeJSON.game : "N/A") };
   scopedLinesArray.push(gameLine);
-  var routeLine = {
+  let routeLine = {
     line: "Route: " + (routeJSON.info ? routeJSON.info.title : ""),
     scope: routeJSON.entries ? _PARSE3R_getScopedEntryLines(routeJSON.entries) : []
   }
@@ -264,11 +264,11 @@ function _PARSE3R_getScopedLinesArray(routeJSON) {
 }
 
 function _PARSE3R_getScopedEntryLines(routeJSONEntries) {
-  var scopedLines = [];
+  let scopedLines = [];
   routeJSONEntries.forEach(jsonEntry => {
-    var scopedLine = { line: "", scope: [] };
+    let scopedLine = { line: "", scope: [] };
     // Now entry type specific stuff
-    var type = jsonEntry.type && jsonEntry.type.toUpperCase();
+    let type = jsonEntry.type && jsonEntry.type.toUpperCase();
     switch (type) {
       case Route.RouteGetPokemon.ENTRY_TYPE.toUpperCase():
         scopedLine.line = Route.RouteGetPokemon.ENTRY_TYPE + ":";
@@ -346,7 +346,7 @@ function _PARSE3R_getScopedEntryLines(routeJSONEntries) {
 }
 
 function _PARSE2R_getFileLines(scopedLinesArray, depth=0) {
-  var lines = [];
+  let lines = [];
   scopedLinesArray.forEach(scopedLines => {
     lines.push({ line: scopedLines.line, depth: depth })
     if (scopedLines.scope && scopedLines.scope.length > 0) {
@@ -358,10 +358,10 @@ function _PARSE2R_getFileLines(scopedLinesArray, depth=0) {
 
 function _PARSE1R_getRouteText(fileLines, printerSettings?) {
   const le = printerSettings && printerSettings.lineEnding ? printerSettings.lineEnding : "\r\n";
-  var routeText = "";
+  let routeText = "";
   fileLines.forEach(fileLine => {
-    var newLine = "";
-    for (var d = 0; d < fileLine.depth; d++) {
+    let newLine = "";
+    for (let d = 0; d < fileLine.depth; d++) {
       newLine += "\t";
     }
     newLine += fileLine.line;

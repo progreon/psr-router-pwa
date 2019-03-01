@@ -1,4 +1,6 @@
 import { EvolutionKey, Type } from "../Model";
+import { Move } from "../move/Move";
+import { Game } from "../Game";
 /**
  * Class representing an abstract pokemon
  * @todo
@@ -57,13 +59,15 @@ export abstract class Pokemon {
   setTmMoves(tmMoves: string[]) {
     this.tmMoves = tmMoves;
   }
-  setLearnedMoves(learnedMoves: {
-    [key: number]: string;
-  }) {
+  setLearnedMoves(learnedMoves: { [key: number]: string; }) {
     this.learnedMoves = learnedMoves;
   }
-  getAllMoves() {
-    // TODO
+  getMoves(game: Game): { level: string, move: string }[] {
+    let moves: { level: string, move: string }[] = [];
+    this.defaultMoves.forEach(m => moves.push({level: "0", move: m}));
+    Object.keys(this.learnedMoves).forEach(l => moves.push({level: l, move: this.learnedMoves[l]}));
+    this.tmMoves.forEach(m => moves.push({level: m, move: game.findItemByName(m).value}));
+    return moves;
   }
   abstract getExp(level: number, participants: number, isTraded: boolean, isTrainer: boolean): number;
   abstract getCritRatio(): number;

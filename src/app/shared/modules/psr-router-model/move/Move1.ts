@@ -18,7 +18,7 @@ export class Move1 extends Move {
    * @param description A description
    */
   constructor(key: string, name: string, effect: string, power: number, type: Type, accuracy: number, pp: number, physical: boolean, description: string) {
-    super(key, name, effect, power, type, accuracy, pp, description);
+    super(key, name, effect, power, type, accuracy, pp, description, physical ? "physical" : "special");
     this.physical = physical;
   }
 }

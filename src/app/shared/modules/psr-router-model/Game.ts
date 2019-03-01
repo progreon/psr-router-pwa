@@ -35,7 +35,7 @@ export class Game {
   ) {
     this.dummyModel = DummyModel;
     this.aliasedTrainers = {};
-    for (var key in this.trainers) {
+    for (let key in this.trainers) {
       if (this.trainers[key].alias) {
         this.aliasedTrainers[this.trainers[key].alias.toUpperCase()] = this.trainers[key];
       }

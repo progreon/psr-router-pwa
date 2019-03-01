@@ -22,10 +22,10 @@ export abstract class Move {
     public readonly type: Type, //
     public readonly accuracy: number, //
     public readonly pp: number, //
-    public readonly description: string //
-    // public readonly category: string,
+    public readonly description: string, //
+    public readonly category?: string,
   ) {
-    // this.category = (category ? category : "other");
+    this.category = (category ? category : "other");
   }
   toString(): string {
     return this.name;
