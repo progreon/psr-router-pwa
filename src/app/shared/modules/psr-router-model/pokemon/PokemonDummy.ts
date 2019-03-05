@@ -7,7 +7,7 @@ export class PokemonDummy extends Pokemon {
   public readonly dummy = true;
 
   constructor(name: string) {
-    super(name, PokemonDummy.LastID++, null, null, 0, "", 0, 0, 0, 0, 0, 0);
+    super(name, PokemonDummy.LastID++, null, null, 0, null, 0, 0, 0, 0, 0, 0);
   }
 
   getExp(level: number, participants: number, isTraded: boolean, isTrainer: boolean): number {

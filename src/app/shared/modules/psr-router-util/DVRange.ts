@@ -45,6 +45,12 @@ class DVRange {
     return max;
   }
 
+  get values(): number[] {
+    let values: number[] = [];
+    this._dvs.forEach(dv => values.push(dv));
+    return values;
+  }
+
   /**
    * Combine another range into this one.
    * @param dvRange The DVRange to combine this with.

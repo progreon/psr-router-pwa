@@ -1,6 +1,7 @@
 import { EvolutionKey, Type } from "../Model";
 import { Move } from "../move/Move";
 import { Game } from "../Game";
+import { ExperienceGroup } from "../ModelAbstract";
 /**
  * Class representing an abstract pokemon
  * @todo
@@ -9,16 +10,15 @@ import { Game } from "../Game";
 export abstract class Pokemon {
   public readonly key: string;
   private evolutions: { [key: string]: Pokemon; };
-  private defaultMoves: string[];
-  private learnedMoves: { [key: number]: string; };
-  private tmMoves: string[];
+  private _luMoves: { level: number, move: string }[];
+  private _tmMoves: string[];
   constructor(
     public readonly name: string,
     public readonly id: number,
     public readonly type1: Type,
     public readonly type2: Type,
     public readonly expGiven: number,
-    public readonly expGroup: string, // TODO: to ExperienceGroup
+    public readonly expGroup: ExperienceGroup, // TODO: to ExperienceGroup
     public readonly hp: number,
     public readonly atk: number,
     public readonly def: number,
@@ -27,9 +27,8 @@ export abstract class Pokemon {
     public readonly spd: number) {
     this.key = name.toUpperCase();
     this.evolutions = {};
-    this.defaultMoves = [];
-    this.learnedMoves = {};
-    this.tmMoves = [];
+    this._luMoves = [];
+    this._tmMoves = [];
   }
   /**
    * @param evolutionKey
@@ -39,35 +38,30 @@ export abstract class Pokemon {
   addEvolution(evolutionKey: EvolutionKey, pokemon: Pokemon) {
     this.evolutions[evolutionKey.toString()] = pokemon;
   }
+  getEvolution(evolutionKey: EvolutionKey): Pokemon {
+    return this.evolutions[evolutionKey.toString()];
+  }
+  addLevelupMove(level: number, move: string) {
+    this._luMoves.push({ level, move });
+  }
+  addTmMove(tm: string) {
+    this._tmMoves.push(tm);
+  }
+
+  get levelupMoves() { return this._luMoves; }
+  get tmMoves() { return this._tmMoves; }
+
+  getLearnedMoves(level: number): string[] {
+    return this._luMoves.filter(lm => lm.level == level).map(lm => lm.move);
+  }
   getDefaultMoveset(level: number): string[] {
     let moveset = [];
-    this.defaultMoves.forEach(m => {
-      if (!moveset.includes(m))
-        moveset.push(m);
-    });
-    for (let l = 1; l <= level; l++) {
-      let m = this.learnedMoves[l];
-      if (m && !moveset.includes(m)) {
-        moveset.push(m);
+    this._luMoves.forEach(lm => {
+      if (lm.level <= level && !moveset.includes(lm.move)) {
+        moveset.push(lm.move);
       }
-    }
+    });
     return moveset.slice(-4);
-  }
-  setDefaultMoves(defaultMoves: string[]) {
-    this.defaultMoves = defaultMoves;
-  }
-  setTmMoves(tmMoves: string[]) {
-    this.tmMoves = tmMoves;
-  }
-  setLearnedMoves(learnedMoves: { [key: number]: string; }) {
-    this.learnedMoves = learnedMoves;
-  }
-  getMoves(game: Game): { level: string, move: string }[] {
-    let moves: { level: string, move: string }[] = [];
-    this.defaultMoves.forEach(m => moves.push({level: "0", move: m}));
-    Object.keys(this.learnedMoves).forEach(l => moves.push({level: l, move: this.learnedMoves[l]}));
-    this.tmMoves.forEach(m => moves.push({level: m, move: game.findItemByName(m).value}));
-    return moves;
   }
   abstract getExp(level: number, participants: number, isTraded: boolean, isTrainer: boolean): number;
   abstract getCritRatio(): number;

@@ -16,10 +16,13 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
     let moveLevels = [];
     let moveNames = [];
     if (pokemon) {
-      let moves = pokemon.getMoves(game);
-      moves.forEach(m => {
-        moveLevels.push(html`<div>${m.level}</div>`);
-        moveNames.push(html`<div>${m.move}</div>`);
+      pokemon.levelupMoves.forEach(lm => {
+        moveLevels.push(html`<div>${lm.level}</div>`);
+        moveNames.push(html`<div>${lm.move}</div>`);
+      });
+      pokemon.tmMoves.forEach(move => {
+        moveLevels.push(html`<div>${move}</div>`);
+        moveNames.push(html`<div>${game.findItemByName(move).value}</div>`);
       });
     }
     return html`

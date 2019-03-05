@@ -6,6 +6,7 @@ import { Type } from "../ModelAbstract";
 
 import { DVRange } from "SharedModules/psr-router-util";
 import { Range } from 'SharedModules/psr-router-util';
+import { EvolutionKey } from "../EvolutionKey";
 
 /**
  * Class representing a battler
@@ -48,10 +49,10 @@ export abstract class Battler {
 
   /**
    * Tries to evolve the battler with the specified item.
-   * @param item  The item which triggers the evolution
+   * @param key The level/item/.. which triggers the evolution
    * @returns Returns the evolved battler or null if it couldn't evolve
    */
-  abstract evolve(item: Item): Battler;
+  abstract evolve(key: EvolutionKey): Battler;
 
   /**
    * Add experience, this battler is modified but not evolved.
@@ -97,7 +98,7 @@ export abstract class Battler {
 
     for (let i = 0; i < count; i++)
       if (this.level < 100)
-        newBattler = newBattler.addXP(this.game.experienceGroup[this.pokemon.expGroup].getDeltaExp(this.level, this.level + 1, this._levelExp));
+        newBattler = newBattler.addXP(this.pokemon.expGroup.getDeltaExp(this.level, this.level + 1, this._levelExp));
 
     return newBattler;
   }
@@ -151,19 +152,22 @@ export abstract class Battler {
   abstract getDVRanges(): DVRange[];
 
   abstract get hp(): Range;
-
   abstract get atk(): Range;
-
   abstract get def(): Range;
-
   abstract get spcAtk(): Range;
-
   abstract get spcDef(): Range;
-
   abstract get spd(): Range;
-
   // TODO: only define this in battler-1
   abstract get spc(): Range;
+
+  abstract get hpXP(): number;
+  abstract get atkXP(): number;
+  abstract get defXP(): number;
+  abstract get spcAtkXP(): number;
+  abstract get spcDefXP(): number;
+  abstract get spdXP(): number;
+  // TODO: only define this in battler-1
+  abstract get spcXP(): number;
 
   /**
    * Get the current attack stat value with boosts.
@@ -232,7 +236,7 @@ export abstract class Battler {
    * @param xItemCount
    * @returns The current stat value with boosts.
    */
-  abstract getBoostedStat(statRange: Range, badgeBoostCount: number, xItemCount: number): Range;
+  protected abstract getBoostedStat(statRange: Range, badgeBoostCount: number, xItemCount: number): Range;
 
   /**
    * Check if the battler has the given type.
