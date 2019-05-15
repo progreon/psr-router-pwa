@@ -260,48 +260,26 @@
       }
     ]
   },
-  "Green1": {
-    "Green1": [
-      {
-        "alias": "Rival 1 - Squirtle",
-        "key": "Green1 1",
-        "name": "Green1 1",
-        "party": [ "SQUIRTLE#5" ]
-      },
-      {
-        "alias": "Rival 1 - Bulbasaur",
-        "key": "Green1 2",
-        "name": "Green1 2",
-        "party": [ "BULBASAUR#5" ]
-      },
-      {
-        "alias": "Rival 1 - Charmander",
-        "key": "Green1 3",
-        "name": "Green1 3",
-        "party": [ "CHARMANDER#5" ]
-      }
-    ]
-  },
   "Green3": {
     "Green3": [
       {
         "alias": "Champion - Squirtle",
         "key": "Green3 1",
-        "moves": [ "0#2#SKY_ATTACK","5#2#BLIZZARD" ],
+        "moves": [ "0#2#SKY_ATTACK", "5#2#BLIZZARD" ],
         "name": "Green3 1",
         "party": [ "PIDGEOT#61", "ALAKAZAM#59", "RHYDON#61", "ARCANINE#61", "EXEGGUTOR#63", "BLASTOISE#65" ]
       },
       {
         "alias": "Champion - Bulbasaur",
         "key": "Green3 2",
-        "moves": [ "0#2#SKY_ATTACK","5#2#MEGA_DRAIN" ],
+        "moves": [ "0#2#SKY_ATTACK", "5#2#MEGA_DRAIN" ],
         "name": "Green3 2",
         "party": [ "PIDGEOT#61", "ALAKAZAM#59", "RHYDON#61", "GYARADOS#61", "ARCANINE#63", "VENUSAUR#65" ]
       },
       {
         "alias": "Champion - Charmander",
         "key": "Green3 3",
-        "moves": [ "0#2#SKY_ATTACK","5#2#FIRE_BLAST" ],
+        "moves": [ "0#2#SKY_ATTACK", "5#2#FIRE_BLAST" ],
         "name": "Green3 3",
         "party": [ "PIDGEOT#61", "ALAKAZAM#59", "RHYDON#61", "EXEGGUTOR#61", "GYARADOS#63", "CHARIZARD#65" ]
       }
@@ -452,6 +430,28 @@
         "key": "Mt. Moon B2F - SuperNerd",
         "name": "SuperNerd",
         "party": [ "GRIMER#12", "VOLTORB#12", "KOFFING#12" ]
+      }
+    ]
+  },
+  "Oaks Lab": {
+    "Green1": [
+      {
+        "alias": "Rival 1 - Squirtle",
+        "key": "Green1 1",
+        "name": "Green1 1",
+        "party": [ "SQUIRTLE#5" ]
+      },
+      {
+        "alias": "Rival 1 - Bulbasaur",
+        "key": "Green1 2",
+        "name": "Green1 2",
+        "party": [ "BULBASAUR#5" ]
+      },
+      {
+        "alias": "Rival 1 - Charmander",
+        "key": "Green1 3",
+        "name": "Green1 3",
+        "party": [ "CHARMANDER#5" ]
       }
     ]
   },
@@ -1412,12 +1412,12 @@
     "JrTrainerM": [
       {
         "key": "Route 24 - JrTrainerM 1",
-        "name": "JrTrainerM",
+        "name": "JrTrainerM 1",
         "party": [ "MANKEY#18" ]
       },
       {
         "key": "Route 24 - JrTrainerM 2",
-        "name": "JrTrainerM",
+        "name": "JrTrainerM 2",
         "party": [ "RATTATA#14", "EKANS#14" ]
       }
     ],

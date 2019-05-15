@@ -56,7 +56,7 @@ import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless 
 // import * as redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
 // import * as blueDummy from 'SharedData/routes/blue_dummy.json';
 import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
-import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
+// import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
 
 let exampleRoutes: { [key: string]: any; } = {};
 exampleRoutes[redAnyGlitchlessBasic.shortname] = redAnyGlitchlessBasic;
@@ -65,7 +65,7 @@ exampleRoutes[redAnyGlitchlessClassic.shortname] = redAnyGlitchlessClassic;
 // exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
 // exampleRoutes[blueDummy.shortname] = blueDummy;
 exampleRoutes[yellowDummy.shortname] = yellowDummy;
-exampleRoutes[crystalDummy.shortname] = crystalDummy;
+// exampleRoutes[crystalDummy.shortname] = crystalDummy;
 
 export function GetExampleRoutesNames(): string[] {
   return Object.keys(exampleRoutes);
