@@ -10,6 +10,7 @@ import * as _types from 'SharedData/types.json';
 import * as _items from 'SharedData/items-1.json';
 import * as _moves from 'SharedData/moves-1.json';
 import * as _movesLearnedRB from 'SharedData/moves-learned-rb.json';
+import * as _movesLearnedY from 'SharedData/moves-learned-y.json';
 import * as _pokemon from 'SharedData/pokemon-1.json';
 import * as _trainersRB from 'SharedData/trainers-rb.json';
 import * as _trainersY from 'SharedData/trainers-y.json';
@@ -143,6 +144,28 @@ export class GameFactory1 extends GameFactory {
             let p = _pokemon[id];
             let pokemon = new Model1.Pokemon1(<string>p[0], id, types[(<string>p[1]).toUpperCase()], types[(<string>p[2]).toUpperCase()], <number>p[3], <string>p[4], <number>p[5], <number>p[6], <number>p[7], <number>p[8], <number>p[9]);
             pokemonMap[pokemon.key] = pokemon;
+          }
+          for (let p in _movesLearnedY) {
+            let defaultMoves: string[] = [];
+            let tmMoves: string[] = [];
+            let learnedMoves: { [key: number]: string; } = {};
+            _movesLearnedY[p].default.forEach((m: string) => defaultMoves.push(m));
+            _movesLearnedY[p].tm.forEach((m: string) => tmMoves.push(m));
+            _movesLearnedY[p].level.forEach((lm: string) => {
+              let split = lm.split("#");
+              let l = split[0];
+              let m = split[1];
+              if (learnedMoves[l]) { // safety check, this would mean a structure change in Pokemon::learnedMoves
+                console.warn(p, l, m);
+              }
+              learnedMoves[l] = m;
+            });
+            let pokemon = pokemonMap[p.toUpperCase()];
+            if (pokemon) {
+              pokemon.setDefaultMoves(defaultMoves);
+              pokemon.setLearnedMoves(learnedMoves);
+              pokemon.setTmMoves(tmMoves);
+            }
           }
           GameFactory1._pokemonPerGame["y"] = pokemonMap;
         }

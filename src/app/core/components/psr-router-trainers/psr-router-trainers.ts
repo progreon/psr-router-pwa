@@ -19,11 +19,13 @@ class PsrRouterTrainers extends PsrRouterPage {
     Object.keys(this.trainers).sort((ta, tb) => ta.toString().localeCompare(tb.toString())).forEach(t => {
       let trainer = this.trainers[t];
       trainerElements.push(html`
-        <vaadin-item id="${t}" @click="${this._onClick.bind(this, trainer)}">
-          <div><strong>${trainer.key}</strong></div>
-          <div>Exp. Points: ${trainer.getTotalExp()}</div>
-          <div ?hidden="${!trainer.alias}">Alias: ${trainer.alias || "-"}</div>
-        </vaadin-item>
+        <div class="item">
+          <vaadin-item id="${t}" @click="${this._onClick.bind(this, trainer)}">
+            <div><strong>${trainer.key}</strong></div>
+            <div>Exp. Points: ${trainer.getTotalExp()}</div>
+            <div ?hidden="${!trainer.alias}">Alias: ${trainer.alias || "-"}</div>
+          </vaadin-item>
+        </div>
       `);
     });
     // for (let t in this.trainers) {
@@ -39,12 +41,12 @@ class PsrRouterTrainers extends PsrRouterPage {
     return html`
       ${AppStyles}
       <style>
-        vaadin-item {
+        .item {
           cursor: pointer;
           padding: 0px 5px;
           border-radius: 5px;
         }
-        vaadin-item:hover {
+        .item:hover {
           background-color: #bbbbbb;
         }
       </style>
