@@ -12,6 +12,7 @@ class PsrRouterAbout extends PsrRouterPage {
     return html`
       ${AppStyles}
       <h2>About</h2>
+      <p>Current version: ${window.MyAppGlobals.version}</p>
       <section>
         <h3>Welcome to the Pokémon Speedruns Router application!</h3>
         <p>Work In Progress!</p>
@@ -49,6 +50,16 @@ class PsrRouterAbout extends PsrRouterPage {
         </ul>
       </section>
       <h2>Release Notes</h2>
+      <section>
+        <h3>0.0.2 - ...</h3>
+        <ul>
+          <li>More data!</li>
+          <ul>
+            <li>Added pokémon, trainer and move info for Pokémon Yellow</li>
+            <li>[TEMP] Added dummy route for Pokémon Yellow</li>
+          </ul>
+        </ul>
+      </section>
       <section>
         <h3>0.0.1 - Let's get this ball rolling!</h3>
         <ul>

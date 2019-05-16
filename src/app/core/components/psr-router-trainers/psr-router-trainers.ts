@@ -16,24 +16,37 @@ class PsrRouterTrainers extends PsrRouterPage {
 
   _render() {
     let trainerElements = [];
-    for (let t in this.trainers) {
+    Object.keys(this.trainers).sort((ta, tb) => ta.toString().localeCompare(tb.toString())).forEach(t => {
       let trainer = this.trainers[t];
       trainerElements.push(html`
-        <vaadin-item id="${t}" @click="${this._onClick.bind(this, trainer)}">
-          <div><strong>${trainer.key}</strong></div>
-          <div>alias: ${trainer.alias || "-"}</div>
-        </vaadin-item>
+        <div class="item">
+          <vaadin-item id="${t}" @click="${this._onClick.bind(this, trainer)}">
+            <div><strong>${trainer.key}</strong></div>
+            <div>Exp. Points: ${trainer.getTotalExp()}</div>
+            <div ?hidden="${!trainer.alias}">Alias: ${trainer.alias || "-"}</div>
+          </vaadin-item>
+        </div>
       `);
-    }
+    });
+    // for (let t in this.trainers) {
+    //   let trainer = this.trainers[t];
+    //   trainerElements.push(html`
+    //     <vaadin-item id="${t}" @click="${this._onClick.bind(this, trainer)}">
+    //       <div><strong>${trainer.key}</strong></div>
+    //       <div>Exp. Points: ${trainer.getTotalExp()}</div>
+    //       <div ?hidden="${!trainer.alias}">Alias: ${trainer.alias || "-"}</div>
+    //     </vaadin-item>
+    //   `);
+    // }
     return html`
       ${AppStyles}
       <style>
-        vaadin-item {
+        .item {
           cursor: pointer;
           padding: 0px 5px;
           border-radius: 5px;
         }
-        vaadin-item:hover {
+        .item:hover {
           background-color: #bbbbbb;
         }
       </style>

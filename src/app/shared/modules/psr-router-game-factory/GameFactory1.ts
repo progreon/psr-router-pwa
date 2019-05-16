@@ -9,9 +9,11 @@ import * as Model1 from 'SharedModules/psr-router-model/Model1';
 import * as _types from 'SharedData/types.json';
 import * as _items from 'SharedData/items-1.json';
 import * as _moves from 'SharedData/moves-1.json';
-import * as _movesLearnedRB from 'SharedData/moves-learned-1.json';
+import * as _movesLearnedRB from 'SharedData/moves-learned-rb.json';
+import * as _movesLearnedY from 'SharedData/moves-learned-y.json';
 import * as _pokemon from 'SharedData/pokemon-1.json';
 import * as _trainersRB from 'SharedData/trainers-rb.json';
+import * as _trainersY from 'SharedData/trainers-y.json';
 
 export class GameFactory1 extends GameFactory {
   private static readonly ENGINE = new Engine1();
@@ -136,6 +138,38 @@ export class GameFactory1 extends GameFactory {
         }
         return GameFactory1._pokemonPerGame["rb"];
       case "y":
+        if (!GameFactory1._pokemonPerGame["y"]) {
+          let pokemonMap = {};
+          for (let id = 1; id < _pokemon.length; id++) {
+            let p = _pokemon[id];
+            let pokemon = new Model1.Pokemon1(<string>p[0], id, types[(<string>p[1]).toUpperCase()], types[(<string>p[2]).toUpperCase()], <number>p[3], <string>p[4], <number>p[5], <number>p[6], <number>p[7], <number>p[8], <number>p[9]);
+            pokemonMap[pokemon.key] = pokemon;
+          }
+          for (let p in _movesLearnedY) {
+            let defaultMoves: string[] = [];
+            let tmMoves: string[] = [];
+            let learnedMoves: { [key: number]: string; } = {};
+            _movesLearnedY[p].default.forEach((m: string) => defaultMoves.push(m));
+            _movesLearnedY[p].tm.forEach((m: string) => tmMoves.push(m));
+            _movesLearnedY[p].level.forEach((lm: string) => {
+              let split = lm.split("#");
+              let l = split[0];
+              let m = split[1];
+              if (learnedMoves[l]) { // safety check, this would mean a structure change in Pokemon::learnedMoves
+                console.warn(p, l, m);
+              }
+              learnedMoves[l] = m;
+            });
+            let pokemon = pokemonMap[p.toUpperCase()];
+            if (pokemon) {
+              pokemon.setDefaultMoves(defaultMoves);
+              pokemon.setLearnedMoves(learnedMoves);
+              pokemon.setTmMoves(tmMoves);
+            }
+          }
+          GameFactory1._pokemonPerGame["y"] = pokemonMap;
+        }
+        return GameFactory1._pokemonPerGame["y"];
       default:
         return {};
     }
@@ -146,36 +180,51 @@ export class GameFactory1 extends GameFactory {
       GameFactory1._trainersPerGame = {};
     }
     let pokemon = this.getPokemon(gameInfo);
+    let trainerFile;
+    let key;
     switch (gameInfo.key) {
       case "r":
       case "b":
-        if (!GameFactory1._trainersPerGame["rb"]) {
-          let trainers = {};
-          for (let loc in _trainersRB) {
-            for (let tClass in _trainersRB[loc]) {
-              _trainersRB[loc][tClass].forEach(t => {
-                let party = [];
-                t.party.forEach((pl: string) => {
-                  let [p, l] = pl.split("#");
-                  party.push(new Model1.Battler1(null, pokemon[p.toUpperCase()], null, true, parseInt(l)));
-                });
-                if (t.moves) {
-                  t.moves.forEach((pimim: string) => {
-                    let [pi, mi, m] = pimim.split("#");
-                    party[pi].moveset[mi] = m;
-                  });
-                }
-                let trainer = new Model.Trainer(t.key, t.name, tClass, party, loc, t.alias);
-                trainers[trainer.key.toUpperCase()] = trainer;
-              });
-            }
-          }
-          GameFactory1._trainersPerGame["rb"] = trainers;
-        }
-        return GameFactory1._trainersPerGame["rb"];
+        trainerFile = _trainersRB;
+        key = "rb";
+        break;
+        // return GameFactory1._trainersPerGame["rb"];
       case "y":
-      default:
-        return {};
+        trainerFile = _trainersY;
+        key = "y";
+        break;;
+    }
+    if (trainerFile && key) {
+      if (!GameFactory1._trainersPerGame[key]) {
+        let trainers = {};
+        for (let loc in trainerFile) {
+          for (let tClass in trainerFile[loc]) {
+            trainerFile[loc][tClass].forEach(t => {
+              let party = [];
+              t.party.forEach((pl: string) => {
+                let [p, l] = pl.split("#");
+                let poke = pokemon[p.toUpperCase()];
+                if (!poke) {
+                  console.log(p + " not found");
+                }
+                party.push(new Model1.Battler1(null, pokemon[p.toUpperCase()], null, true, parseInt(l)));
+              });
+              if (t.moves) {
+                t.moves.forEach((pimim: string) => {
+                  let [pi, mi, m] = pimim.split("#");
+                  party[pi].moveset[mi] = m;
+                });
+              }
+              let trainer = new Model.Trainer(t.key, t.name, tClass, party, loc, t.alias);
+              trainers[trainer.key.toUpperCase()] = trainer;
+            });
+          }
+        }
+        GameFactory1._trainersPerGame[key] = trainers;
+      }
+      return GameFactory1._trainersPerGame[key];
+    } else {
+      return {};
     }
   }
 }
