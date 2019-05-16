@@ -251,9 +251,8 @@ export abstract class Battler {
    * Get the experience a battler gets for battling this pokemon.
    * @param participants  The number of participants in the battle.
    * @returns The experience.
-   * @todo return type number?
    */
-  getExp(participants: number): any {
+  getExp(participants: number = 1): number {
     return this.pokemon.getExp(this.level, participants, false, this.isTrainerMon);
   }
 

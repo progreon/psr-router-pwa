@@ -1,0 +1,2226 @@
+{
+  "Route 3": {
+    "Youngster": [
+      {
+        "key": "Route 3 - Youngster 1",
+        "name": "Youngster 1",
+        "party": [ "RATTATA#11", "EKANS#11" ]
+      },
+      {
+        "key": "Route 3 - Youngster 2",
+        "name": "Youngster 2",
+        "party": [ "SPEAROW#14" ]
+      }
+    ],
+    "BugCatcher": [
+      {
+        "key": "Route 3 - BugCatcher 1",
+        "name": "BugCatcher 1",
+        "party": [ "CATERPIE#10", "WEEDLE#10", "CATERPIE#10" ]
+      },
+      {
+        "key": "Route 3 - BugCatcher 2",
+        "name": "BugCatcher 2",
+        "party": [ "WEEDLE#9", "KAKUNA#9", "CATERPIE#9", "METAPOD#9" ]
+      },
+      {
+        "key": "Route 3 - BugCatcher 3",
+        "name": "BugCatcher 3",
+        "party": [ "CATERPIE#11", "METAPOD#11" ]
+      }
+    ],
+    "Lass": [
+      {
+        "key": "Route 3 - Lass 1",
+        "name": "Lass 1",
+        "party": [ "PIDGEY#9", "PIDGEY#9" ]
+      },
+      {
+        "key": "Route 3 - Lass 2",
+        "name": "Lass 2",
+        "party": [ "RATTATA#10", "NIDORANM#10" ]
+      },
+      {
+        "key": "Route 3 - Lass 3",
+        "name": "Lass 3",
+        "party": [ "JIGGLYPUFF#14" ]
+      }
+    ]
+  },
+  "Mt Moon 1F": {
+    "Youngster": [
+      {
+        "key": "Mt Moon 1F - Youngster",
+        "name": "Youngster",
+        "party": [ "RATTATA#10", "RATTATA#10", "ZUBAT#10" ]
+      }
+    ],
+    "BugCatcher": [
+      {
+        "key": "Mt Moon 1F - BugCatcher 1",
+        "name": "BugCatcher 1",
+        "party": [ "WEEDLE#11", "KAKUNA#11" ]
+      },
+      {
+        "key": "Mt Moon 1F - BugCatcher 2",
+        "name": "BugCatcher 2",
+        "party": [ "CATERPIE#10", "METAPOD#10", "CATERPIE#10" ]
+      }
+    ],
+    "Lass": [
+      {
+        "key": "Mt Moon 1F - Lass 1",
+        "name": "Lass 1",
+        "party": [ "ODDISH#11", "BELLSPROUT#11" ]
+      },
+      {
+        "key": "Mt Moon 1F - Lass 2",
+        "name": "Lass 2",
+        "party": [ "CLEFAIRY#14" ]
+      }
+    ],
+    "SuperNerd": [
+      {
+        "key": "Mt Moon 1F - SuperNerd",
+        "name": "SuperNerd",
+        "party": [ "MAGNEMITE#11", "VOLTORB#11" ]
+      }
+    ],
+    "Hiker": [
+      {
+        "key": "Mt Moon 1F - Hiker",
+        "name": "Hiker",
+        "party": [ "GEODUDE#10", "GEODUDE#10", "ONIX#10" ]
+      }
+    ]
+  },
+  "Route 24": {
+    "Youngster": [
+      {
+        "key": "Route 24 - Youngster",
+        "name": "Youngster",
+        "party": [ "RATTATA#14", "EKANS#14", "ZUBAT#14" ]
+      }
+    ],
+    "BugCatcher": [
+      {
+        "key": "Route 24 - BugCatcher",
+        "name": "BugCatcher",
+        "party": [ "CATERPIE#14", "WEEDLE#14" ]
+      }
+    ],
+    "Lass": [
+      {
+        "key": "Route 24 - Lass 1",
+        "name": "Lass 1",
+        "party": [ "PIDGEY#16", "NIDORANF#16" ]
+      },
+      {
+        "key": "Route 24 - Lass 2",
+        "name": "Lass 2",
+        "party": [ "PIDGEY#14", "NIDORANF#14" ]
+      }
+    ],
+    "JrTrainerM": [
+      {
+        "key": "Route 24 - JrTrainerM",
+        "name": "JrTrainerM",
+        "party": [ "MANKEY#18" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Route 24 - Rocket",
+        "name": "Rocket",
+        "party": [ "EKANS#15", "ZUBAT#15" ]
+      }
+    ]
+  },
+  "Route 25": {
+    "Youngster": [
+      {
+        "key": "Route 25 - Youngster 1",
+        "name": "Youngster 1",
+        "party": [ "RATTATA#15", "SPEAROW#15" ]
+      },
+      {
+        "key": "Route 25 - Youngster 2",
+        "name": "Youngster 2",
+        "party": [ "SLOWPOKE#17" ]
+      },
+      {
+        "key": "Route 25 - Youngster 3",
+        "name": "Youngster 3",
+        "party": [ "EKANS#14", "SANDSHREW#14" ]
+      }
+    ],
+    "Lass": [
+      {
+        "key": "Route 25 - Lass 1",
+        "name": "Lass 1",
+        "party": [ "NIDORANM#15", "NIDORANF#15" ]
+      },
+      {
+        "key": "Route 25 - Lass 2",
+        "name": "Lass 2",
+        "party": [ "ODDISH#13", "PIDGEY#13", "ODDISH#13" ]
+      }
+    ],
+    "Hiker": [
+      {
+        "key": "Route 25 - Hiker 1",
+        "name": "Hiker 1",
+        "party": [ "MACHOP#15", "GEODUDE#15" ]
+      },
+      {
+        "key": "Route 25 - Hiker 2",
+        "name": "Hiker 2",
+        "party": [ "GEODUDE#13", "GEODUDE#13", "MACHOP#13", "GEODUDE#13" ]
+      },
+      {
+        "key": "Route 25 - Hiker 3",
+        "name": "Hiker 3",
+        "party": [ "ONIX#17" ]
+      }
+    ]
+  },
+  "SSAnne 1FRooms": {
+    "Youngster": [
+      {
+        "key": "SSAnne 1FRooms - Youngster",
+        "name": "Youngster",
+        "party": [ "NIDORANM#21" ]
+      }
+    ],
+    "Lass": [
+      {
+        "key": "SSAnne 1FRooms - Lass",
+        "name": "Lass",
+        "party": [ "PIDGEY#18", "NIDORANF#18" ]
+      }
+    ],
+    "Gentleman": [
+      {
+        "key": "SSAnne 1FRooms - Gentleman 1",
+        "name": "Gentleman 1",
+        "party": [ "GROWLITHE#18", "GROWLITHE#18" ]
+      },
+      {
+        "key": "SSAnne 1FRooms - Gentleman 2",
+        "name": "Gentleman 2",
+        "party": [ "NIDORANM#19", "NIDORANF#19" ]
+      }
+    ]
+  },
+  "Route 11": {
+    "Youngster": [
+      {
+        "key": "Route 11 - Youngster 1",
+        "name": "Youngster 1",
+        "party": [ "EKANS#21" ]
+      },
+      {
+        "key": "Route 11 - Youngster 2",
+        "name": "Youngster 2",
+        "party": [ "SANDSHREW#19", "ZUBAT#19" ]
+      },
+      {
+        "key": "Route 11 - Youngster 3",
+        "name": "Youngster 3",
+        "party": [ "RATTATA#17", "RATTATA#17", "RATICATE#17" ]
+      },
+      {
+        "key": "Route 11 - Youngster 4",
+        "name": "Youngster 4",
+        "party": [ "NIDORANM#18", "NIDORINO#18" ]
+      }
+    ],
+    "Engineer": [
+      {
+        "key": "Route 11 - Engineer 1",
+        "name": "Engineer 1",
+        "party": [ "MAGNEMITE#21" ]
+      },
+      {
+        "key": "Route 11 - Engineer 2",
+        "name": "Engineer 2",
+        "party": [ "MAGNEMITE#18", "MAGNEMITE#18", "MAGNETON#18" ]
+      }
+    ],
+    "Gambler": [
+      {
+        "key": "Route 11 - Gambler 1",
+        "name": "Gambler 1",
+        "party": [ "POLIWAG#18", "HORSEA#18" ]
+      },
+      {
+        "key": "Route 11 - Gambler 2",
+        "name": "Gambler 2",
+        "party": [ "BELLSPROUT#18", "ODDISH#18" ]
+      },
+      {
+        "key": "Route 11 - Gambler 3",
+        "name": "Gambler 3",
+        "party": [ "VOLTORB#18", "MAGNEMITE#18" ]
+      },
+      {
+        "key": "Route 11 - Gambler 4",
+        "name": "Gambler 4",
+        "party": [ "GROWLITHE#18", "VULPIX#18" ]
+      }
+    ]
+  },
+  "Route 9": {
+    "Youngster": [
+      {
+        "key": "Route 9 - Youngster",
+        "moves": [ "0#3#FISSURE" ],
+        "name": "Youngster",
+        "party": [ "SANDSHREW#24" ]
+      }
+    ],
+    "BugCatcher": [
+      {
+        "key": "Route 9 - BugCatcher 1",
+        "name": "BugCatcher 1",
+        "party": [ "BEEDRILL#19", "BEEDRILL#19" ]
+      },
+      {
+        "key": "Route 9 - BugCatcher 2",
+        "name": "BugCatcher 2",
+        "party": [ "CATERPIE#20", "WEEDLE#20", "VENONAT#20" ]
+      }
+    ],
+    "JrTrainerM": [
+      {
+        "key": "Route 9 - JrTrainerM",
+        "name": "JrTrainerM",
+        "party": [ "RATTATA#19", "DIGLETT#19", "EKANS#19", "SANDSHREW#19" ]
+      }
+    ],
+    "JrTrainerF": [
+      {
+        "key": "Route 9 - JrTrainerF 1",
+        "name": "JrTrainerF 1",
+        "party": [ "ODDISH#18", "BELLSPROUT#18", "ODDISH#18", "BELLSPROUT#18" ]
+      },
+      {
+        "key": "Route 9 - JrTrainerF 2",
+        "name": "JrTrainerF 2",
+        "party": [ "MEOWTH#23" ]
+      }
+    ],
+    "Hiker": [
+      {
+        "key": "Route 9 - Hiker 1",
+        "name": "Hiker 1",
+        "party": [ "GEODUDE#21", "ONIX#21" ]
+      },
+      {
+        "key": "Route 9 - Hiker 2",
+        "name": "Hiker 2",
+        "party": [ "GEODUDE#20", "MACHOP#20", "GEODUDE#20" ]
+      }
+    ]
+  },
+  "Viridian Forest": {
+    "BugCatcher": [
+      {
+        "key": "Viridian Forest - BugCatcher 1",
+        "name": "BugCatcher 1",
+        "party": [ "CATERPIE#7", "CATERPIE#7" ]
+      },
+      {
+        "key": "Viridian Forest - BugCatcher 2",
+        "name": "BugCatcher 2",
+        "party": [ "METAPOD#6", "CATERPIE#6", "METAPOD#6" ]
+      },
+      {
+        "key": "Viridian Forest - BugCatcher 3",
+        "name": "BugCatcher 3",
+        "party": [ "CATERPIE#10" ]
+      },
+      {
+        "key": "Viridian Forest - BugCatcher 4",
+        "moves": [ "1#1#TACKLE", "1#2#STRING_SHOT" ],
+        "name": "BugCatcher 4",
+        "party": [ "CATERPIE#8", "METAPOD#8" ]
+      }
+    ],
+    "Lass": [
+      {
+        "key": "Viridian Forest - Lass",
+        "name": "Lass",
+        "party": [ "NIDORANF#6", "NIDORANM#6" ]
+      }
+    ]
+  },
+  "Route 6": {
+    "BugCatcher": [
+      {
+        "key": "Route 6 - BugCatcher 1",
+        "name": "BugCatcher 1",
+        "party": [ "WEEDLE#16", "CATERPIE#16", "WEEDLE#16" ]
+      },
+      {
+        "key": "Route 6 - BugCatcher 2",
+        "name": "BugCatcher 2",
+        "party": [ "BUTTERFREE#20" ]
+      }
+    ],
+    "JrTrainerM": [
+      {
+        "key": "Route 6 - JrTrainerM 1",
+        "name": "JrTrainerM 1",
+        "party": [ "SPEAROW#16", "RATICATE#16" ]
+      },
+      {
+        "key": "Route 6 - JrTrainerM 2",
+        "name": "JrTrainerM 2",
+        "party": [ "WEEPINBELL#16" ]
+      }
+    ],
+    "JrTrainerF": [
+      {
+        "key": "Route 6 - JrTrainerF 1",
+        "name": "JrTrainerF 1",
+        "party": [ "PIDGEY#16", "PIDGEY#16", "PIDGEY#16" ]
+      },
+      {
+        "key": "Route 6 - JrTrainerF 2",
+        "name": "JrTrainerF 2",
+        "party": [ "CUBONE#20" ]
+      }
+    ]
+  },
+  "Route 4": {
+    "Lass": [
+      {
+        "key": "Route 4 - Lass",
+        "name": "Lass",
+        "party": [ "PARAS#31", "PARAS#31", "PARASECT#31" ]
+      }
+    ]
+  },
+  "SSAnne 2FRooms": {
+    "Lass": [
+      {
+        "key": "SSAnne 2FRooms - Lass",
+        "name": "Lass",
+        "party": [ "JIGGLYPUFF#20" ]
+      }
+    ],
+    "Fisher": [
+      {
+        "key": "SSAnne 2FRooms - Fisher",
+        "name": "Fisher",
+        "party": [ "GOLDEEN#17", "TENTACOOL#17", "GOLDEEN#17" ]
+      }
+    ],
+    "Gentleman": [
+      {
+        "key": "SSAnne 2FRooms - Gentleman",
+        "name": "Gentleman",
+        "party": [ "GROWLITHE#17", "PONYTA#17" ]
+      }
+    ]
+  },
+  "Route 8": {
+    "Lass": [
+      {
+        "key": "Route 8 - Lass 1",
+        "name": "Lass 1",
+        "party": [ "NIDORANF#23", "NIDORINA#23" ]
+      },
+      {
+        "key": "Route 8 - Lass 2",
+        "name": "Lass 2",
+        "party": [ "MEOWTH#24", "MEOWTH#24", "MEOWTH#24" ]
+      },
+      {
+        "key": "Route 8 - Lass 3",
+        "name": "Lass 3",
+        "party": [ "PIDGEY#19", "RATTATA#19", "NIDORANF#19", "MEOWTH#19", "NIDORANM#19" ]
+      },
+      {
+        "key": "Route 8 - Lass 4",
+        "name": "Lass 4",
+        "party": [ "CLEFAIRY#22", "CLEFAIRY#22" ]
+      }
+    ],
+    "SuperNerd": [
+      {
+        "key": "Route 8 - SuperNerd 1",
+        "name": "SuperNerd 1",
+        "party": [ "VOLTORB#20", "KOFFING#20", "VOLTORB#20", "MAGNEMITE#20" ]
+      },
+      {
+        "key": "Route 8 - SuperNerd 2",
+        "name": "SuperNerd 2",
+        "party": [ "GRIMER#22", "MUK#22", "GRIMER#22" ]
+      },
+      {
+        "key": "Route 8 - SuperNerd 3",
+        "name": "SuperNerd 3",
+        "party": [ "KOFFING#26" ]
+      }
+    ],
+    "Gambler": [
+      {
+        "key": "Route 8 - Gambler 1",
+        "name": "Gambler 1",
+        "party": [ "POLIWAG#22", "POLIWAG#22", "POLIWHIRL#22" ]
+      },
+      {
+        "key": "Route 8 - Gambler 2",
+        "name": "Gambler 2",
+        "party": [ "GROWLITHE#24", "VULPIX#24" ]
+      }
+    ]
+  },
+  "Celadon Gym": {
+    "Lass": [
+      {
+        "key": "Celadon Gym - Lass 1",
+        "name": "Lass 1",
+        "party": [ "BELLSPROUT#23", "WEEPINBELL#23" ]
+      },
+      {
+        "key": "Celadon Gym - Lass 2",
+        "name": "Lass 2",
+        "party": [ "ODDISH#23", "GLOOM#23" ]
+      }
+    ],
+    "JrTrainerF": [
+      {
+        "key": "Celadon Gym - JrTrainerF",
+        "name": "JrTrainerF",
+        "party": [ "BULBASAUR#24", "IVYSAUR#24" ]
+      }
+    ],
+    "Beauty": [
+      {
+        "key": "Celadon Gym - Beauty 1",
+        "name": "Beauty 1",
+        "party": [ "ODDISH#21", "BELLSPROUT#21", "ODDISH#21", "BELLSPROUT#21" ]
+      },
+      {
+        "key": "Celadon Gym - Beauty 2",
+        "name": "Beauty 2",
+        "party": [ "BELLSPROUT#24", "BELLSPROUT#24" ]
+      },
+      {
+        "key": "Celadon Gym - Beauty 3",
+        "name": "Beauty 3",
+        "party": [ "EXEGGCUTE#26" ]
+      }
+    ],
+    "CooltrainerF": [
+      {
+        "key": "Celadon Gym - CooltrainerF",
+        "name": "CooltrainerF",
+        "party": [ "WEEPINBELL#24", "GLOOM#24", "IVYSAUR#24" ]
+      }
+    ],
+    "Erika": [
+      {
+        "key": "Celadon Gym - Erika",
+        "moves": [ "0#2#MEGA_DRAIN", "1#0#RAZOR_LEAF", "2#0#PETAL_DANCE" ],
+        "name": "Erika",
+        "party": [ "TANGELA#30", "WEEPINBELL#32", "GLOOM#32" ]
+      }
+    ]
+  },
+  "SSAnne Bow": {
+    "Sailor": [
+      {
+        "key": "SSAnne Bow - Sailor 1",
+        "name": "Sailor 1",
+        "party": [ "MACHOP#18", "SHELLDER#18" ]
+      },
+      {
+        "key": "SSAnne Bow - Sailor 2",
+        "name": "Sailor 2",
+        "party": [ "MACHOP#17", "TENTACOOL#17" ]
+      }
+    ]
+  },
+  "SSAnne B1FRooms": {
+    "Sailor": [
+      {
+        "key": "SSAnne B1FRooms - Sailor 1",
+        "name": "Sailor 1",
+        "party": [ "SHELLDER#21" ]
+      },
+      {
+        "key": "SSAnne B1FRooms - Sailor 2",
+        "name": "Sailor 2",
+        "party": [ "HORSEA#17", "SHELLDER#17", "TENTACOOL#17" ]
+      },
+      {
+        "key": "SSAnne B1FRooms - Sailor 3",
+        "name": "Sailor 3",
+        "party": [ "TENTACOOL#18", "STARYU#18" ]
+      },
+      {
+        "key": "SSAnne B1FRooms - Sailor 4",
+        "name": "Sailor 4",
+        "party": [ "HORSEA#17", "HORSEA#17", "HORSEA#17" ]
+      },
+      {
+        "key": "SSAnne B1FRooms - Sailor 5",
+        "name": "Sailor 5",
+        "party": [ "MACHOP#20" ]
+      }
+    ],
+    "Fisher": [
+      {
+        "key": "SSAnne B1FRooms - Fisher",
+        "name": "Fisher",
+        "party": [ "TENTACOOL#17", "STARYU#17", "SHELLDER#17" ]
+      }
+    ]
+  },
+  "Vermilion Gym": {
+    "Sailor": [
+      {
+        "key": "Vermilion Gym - Sailor",
+        "name": "Sailor",
+        "party": [ "MAGNEMITE#24" ]
+      }
+    ],
+    "Rocker": [
+      {
+        "key": "Vermilion Gym - Rocker",
+        "name": "Rocker",
+        "party": [ "VOLTORB#20", "VOLTORB#20", "VOLTORB#20" ]
+      }
+    ],
+    "LtSurge": [
+      {
+        "key": "Vermilion Gym - LtSurge",
+        "moves": [ "0#0#THUNDERBOLT", "0#1#MEGA_PUNCH", "0#2#MEGA_KICK", "0#3#GROWL" ],
+        "name": "LtSurge",
+        "party": [ "RAICHU#28" ]
+      }
+    ]
+  },
+  "Pewter Gym": {
+    "JrTrainerM": [
+      {
+        "key": "Pewter Gym - JrTrainerM",
+        "name": "JrTrainerM",
+        "party": [ "DIGLETT#9", "SANDSHREW#9" ]
+      }
+    ],
+    "Brock": [
+      {
+        "key": "Pewter Gym - Brock",
+        "moves": [ "1#2#BIND", "1#3#BIDE" ],
+        "name": "Brock",
+        "party": [ "GEODUDE#10", "ONIX#12" ]
+      }
+    ]
+  },
+  "Route 24,Route 25": {
+    "JrTrainerM": [
+      {
+        "key": "Route 24,Route 25 - JrTrainerM",
+        "name": "JrTrainerM",
+        "party": [ "RATTATA#14", "EKANS#14" ]
+      }
+    ]
+  },
+  "Route 12": {
+    "JrTrainerM": [
+      {
+        "key": "Route 12 - JrTrainerM",
+        "name": "JrTrainerM",
+        "party": [ "NIDORANM#29", "NIDORINO#29" ]
+      }
+    ],
+    "Fisher": [
+      {
+        "key": "Route 12 - Fisher 1",
+        "name": "Fisher 1",
+        "party": [ "GOLDEEN#22", "POLIWAG#22", "GOLDEEN#22" ]
+      },
+      {
+        "key": "Route 12 - Fisher 2",
+        "name": "Fisher 2",
+        "party": [ "TENTACOOL#24", "GOLDEEN#24" ]
+      },
+      {
+        "key": "Route 12 - Fisher 3",
+        "name": "Fisher 3",
+        "party": [ "GOLDEEN#27" ]
+      },
+      {
+        "key": "Route 12 - Fisher 4",
+        "name": "Fisher 4",
+        "party": [ "POLIWAG#21", "SHELLDER#21", "GOLDEEN#21", "HORSEA#21" ]
+      },
+      {
+        "key": "Route 12 - Fisher 5",
+        "name": "Fisher 5",
+        "party": [ "MAGIKARP#24", "MAGIKARP#24" ]
+      }
+    ],
+    "Rocker": [
+      {
+        "key": "Route 12 - Rocker",
+        "name": "Rocker",
+        "party": [ "VOLTORB#29", "ELECTRODE#29" ]
+      }
+    ]
+  },
+  "Cerulean Gym": {
+    "JrTrainerF": [
+      {
+        "key": "Cerulean Gym - JrTrainerF",
+        "name": "JrTrainerF",
+        "party": [ "GOLDEEN#19" ]
+      }
+    ],
+    "Swimmer": [
+      {
+        "key": "Cerulean Gym - Swimmer",
+        "name": "Swimmer",
+        "party": [ "HORSEA#16", "SHELLDER#16" ]
+      }
+    ],
+    "Misty": [
+      {
+        "key": "Cerulean Gym - Misty",
+        "moves": [ "1#3#BUBBLEBEAM" ],
+        "name": "Misty",
+        "party": [ "STARYU#18", "STARMIE#21" ]
+      }
+    ]
+  },
+  "Route 10": {
+    "JrTrainerF": [
+      {
+        "key": "Route 10 - JrTrainerF 1",
+        "name": "JrTrainerF 1",
+        "party": [ "JIGGLYPUFF#20", "CLEFAIRY#20" ]
+      },
+      {
+        "key": "Route 10 - JrTrainerF 2",
+        "name": "JrTrainerF 2",
+        "party": [ "PIDGEY#21", "PIDGEOTTO#21" ]
+      }
+    ],
+    "Pokemaniac": [
+      {
+        "key": "Route 10 - Pokemaniac 1",
+        "name": "Pokemaniac 1",
+        "party": [ "RHYHORN#30", "LICKITUNG#30" ]
+      },
+      {
+        "key": "Route 10 - Pokemaniac 2",
+        "name": "Pokemaniac 2",
+        "party": [ "CUBONE#20", "SLOWPOKE#20" ]
+      }
+    ],
+    "Hiker": [
+      {
+        "key": "Route 10 - Hiker 1",
+        "name": "Hiker 1",
+        "party": [ "GEODUDE#21", "ONIX#21" ]
+      },
+      {
+        "key": "Route 10 - Hiker 2",
+        "name": "Hiker 2",
+        "party": [ "ONIX#19", "GRAVELER#19" ]
+      }
+    ]
+  },
+  "Rock Tunnel B1F": {
+    "JrTrainerF": [
+      {
+        "key": "Rock Tunnel B1F - JrTrainerF 1",
+        "name": "JrTrainerF 1",
+        "party": [ "JIGGLYPUFF#21", "PIDGEY#21", "MEOWTH#21" ]
+      },
+      {
+        "key": "Rock Tunnel B1F - JrTrainerF 2",
+        "name": "JrTrainerF 2",
+        "party": [ "ODDISH#22", "BULBASAUR#22" ]
+      }
+    ],
+    "Pokemaniac": [
+      {
+        "key": "Rock Tunnel B1F - Pokemaniac 1",
+        "name": "Pokemaniac 1",
+        "party": [ "SLOWPOKE#20", "SLOWPOKE#20", "SLOWPOKE#20" ]
+      },
+      {
+        "key": "Rock Tunnel B1F - Pokemaniac 2",
+        "name": "Pokemaniac 2",
+        "party": [ "CHARMANDER#22", "CUBONE#22" ]
+      },
+      {
+        "key": "Rock Tunnel B1F - Pokemaniac 3",
+        "name": "Pokemaniac 3",
+        "party": [ "SLOWPOKE#25" ]
+      }
+    ],
+    "Hiker": [
+      {
+        "key": "Rock Tunnel B1F - Hiker 1",
+        "name": "Hiker 1",
+        "party": [ "GEODUDE#21", "GEODUDE#21", "GRAVELER#21" ]
+      },
+      {
+        "key": "Rock Tunnel B1F - Hiker 2",
+        "name": "Hiker 2",
+        "party": [ "GEODUDE#25" ]
+      }
+    ]
+  },
+  "Route 13": {
+    "JrTrainerF": [
+      {
+        "key": "Route 13 - JrTrainerF 1",
+        "name": "JrTrainerF 1",
+        "party": [ "PIDGEY#24", "MEOWTH#24", "RATTATA#24", "PIDGEY#24", "MEOWTH#24" ]
+      },
+      {
+        "key": "Route 13 - JrTrainerF 2",
+        "name": "JrTrainerF 2",
+        "party": [ "POLIWAG#30", "POLIWAG#30" ]
+      },
+      {
+        "key": "Route 13 - JrTrainerF 3",
+        "name": "JrTrainerF 3",
+        "party": [ "PIDGEY#27", "MEOWTH#27", "PIDGEY#27", "PIDGEOTTO#27" ]
+      },
+      {
+        "key": "Route 13 - JrTrainerF 4",
+        "name": "JrTrainerF 4",
+        "party": [ "GOLDEEN#28", "POLIWAG#28", "HORSEA#28" ]
+      }
+    ],
+    "Biker": [
+      {
+        "key": "Route 13 - Biker",
+        "name": "Biker",
+        "party": [ "KOFFING#28", "KOFFING#28", "KOFFING#28" ]
+      }
+    ],
+    "Beauty": [
+      {
+        "key": "Route 13 - Beauty 1",
+        "name": "Beauty 1",
+        "party": [ "RATTATA#27", "VULPIX#27", "RATTATA#27" ]
+      },
+      {
+        "key": "Route 13 - Beauty 2",
+        "name": "Beauty 2",
+        "party": [ "CLEFAIRY#29", "MEOWTH#29" ]
+      }
+    ],
+    "BirdKeeper": [
+      {
+        "key": "Route 13 - BirdKeeper 1",
+        "name": "BirdKeeper 1",
+        "party": [ "PIDGEY#29", "PIDGEOTTO#29" ]
+      },
+      {
+        "key": "Route 13 - BirdKeeper 2",
+        "name": "BirdKeeper 2",
+        "party": [ "SPEAROW#25", "PIDGEY#25", "PIDGEY#25", "SPEAROW#25", "SPEAROW#25" ]
+      },
+      {
+        "key": "Route 13 - BirdKeeper 3",
+        "name": "BirdKeeper 3",
+        "party": [ "PIDGEY#26", "PIDGEOTTO#26", "SPEAROW#26", "FEAROW#26" ]
+      }
+    ]
+  },
+  "Route 20": {
+    "JrTrainerF": [
+      {
+        "key": "Route 20 - JrTrainerF 1",
+        "name": "JrTrainerF 1",
+        "party": [ "GOLDEEN#31", "SEAKING#31" ]
+      },
+      {
+        "key": "Route 20 - JrTrainerF 2",
+        "name": "JrTrainerF 2",
+        "party": [ "TENTACOOL#30", "HORSEA#30", "SEEL#30" ]
+      }
+    ],
+    "Swimmer": [
+      {
+        "key": "Route 20 - Swimmer 1",
+        "name": "Swimmer 1",
+        "party": [ "SHELLDER#31", "CLOYSTER#31" ]
+      },
+      {
+        "key": "Route 20 - Swimmer 2",
+        "name": "Swimmer 2",
+        "party": [ "STARYU#35" ]
+      },
+      {
+        "key": "Route 20 - Swimmer 3",
+        "name": "Swimmer 3",
+        "party": [ "HORSEA#28", "HORSEA#28", "SEADRA#28", "HORSEA#28" ]
+      }
+    ],
+    "Beauty": [
+      {
+        "key": "Route 20 - Beauty 1",
+        "name": "Beauty 1",
+        "party": [ "SEAKING#35" ]
+      },
+      {
+        "key": "Route 20 - Beauty 2",
+        "name": "Beauty 2",
+        "party": [ "SHELLDER#30", "SHELLDER#30", "CLOYSTER#30" ]
+      },
+      {
+        "key": "Route 20 - Beauty 3",
+        "name": "Beauty 3",
+        "party": [ "POLIWAG#31", "SEAKING#31" ]
+      },
+      {
+        "key": "Route 20 - Beauty 4",
+        "name": "Beauty 4",
+        "party": [ "SEADRA#30", "HORSEA#30", "SEADRA#30" ]
+      }
+    ],
+    "BirdKeeper": [
+      {
+        "key": "Route 20 - BirdKeeper",
+        "name": "BirdKeeper",
+        "party": [ "FEAROW#30", "FEAROW#30", "PIDGEOTTO#30" ]
+      }
+    ]
+  },
+  "Rock Tunnel 1F": {
+    "JrTrainerF": [
+      {
+        "key": "Rock Tunnel 1F - JrTrainerF 1",
+        "name": "JrTrainerF 1",
+        "party": [ "BELLSPROUT#22", "CLEFAIRY#22" ]
+      },
+      {
+        "key": "Rock Tunnel 1F - JrTrainerF 2",
+        "name": "JrTrainerF 2",
+        "party": [ "MEOWTH#20", "ODDISH#20", "PIDGEY#20" ]
+      },
+      {
+        "key": "Rock Tunnel 1F - JrTrainerF 3",
+        "name": "JrTrainerF 3",
+        "party": [ "PIDGEY#19", "RATTATA#19", "RATTATA#19", "BELLSPROUT#19" ]
+      }
+    ],
+    "Pokemaniac": [
+      {
+        "key": "Rock Tunnel 1F - Pokemaniac",
+        "name": "Pokemaniac",
+        "party": [ "CUBONE#23", "SLOWPOKE#23" ]
+      }
+    ],
+    "Hiker": [
+      {
+        "key": "Rock Tunnel 1F - Hiker 1",
+        "name": "Hiker 1",
+        "party": [ "GEODUDE#19", "MACHOP#19", "GEODUDE#19", "GEODUDE#19" ]
+      },
+      {
+        "key": "Rock Tunnel 1F - Hiker 2",
+        "name": "Hiker 2",
+        "party": [ "ONIX#20", "ONIX#20", "GEODUDE#20" ]
+      },
+      {
+        "key": "Rock Tunnel 1F - Hiker 3",
+        "name": "Hiker 3",
+        "party": [ "GEODUDE#21", "GRAVELER#21" ]
+      }
+    ]
+  },
+  "Route 15": {
+    "JrTrainerF": [
+      {
+        "key": "Route 15 - JrTrainerF 1",
+        "name": "JrTrainerF 1",
+        "party": [ "GLOOM#28", "ODDISH#28", "ODDISH#28" ]
+      },
+      {
+        "key": "Route 15 - JrTrainerF 2",
+        "name": "JrTrainerF 2",
+        "party": [ "PIDGEY#29", "PIDGEOTTO#29" ]
+      },
+      {
+        "key": "Route 15 - JrTrainerF 3",
+        "name": "JrTrainerF 3",
+        "party": [ "CLEFAIRY#33" ]
+      },
+      {
+        "key": "Route 15 - JrTrainerF 4",
+        "name": "JrTrainerF 4",
+        "party": [ "BELLSPROUT#29", "ODDISH#29", "TANGELA#29" ]
+      }
+    ],
+    "Biker": [
+      {
+        "key": "Route 15 - Biker 1",
+        "name": "Biker 1",
+        "party": [ "KOFFING#25", "KOFFING#25", "WEEZING#25", "KOFFING#25", "GRIMER#25" ]
+      },
+      {
+        "key": "Route 15 - Biker 2",
+        "name": "Biker 2",
+        "party": [ "KOFFING#28", "GRIMER#28", "WEEZING#28" ]
+      }
+    ],
+    "Beauty": [
+      {
+        "key": "Route 15 - Beauty 1",
+        "name": "Beauty 1",
+        "party": [ "PIDGEOTTO#29", "WIGGLYTUFF#29" ]
+      },
+      {
+        "key": "Route 15 - Beauty 2",
+        "name": "Beauty 2",
+        "party": [ "BULBASAUR#29", "IVYSAUR#29" ]
+      }
+    ],
+    "BirdKeeper": [
+      {
+        "key": "Route 15 - BirdKeeper 1",
+        "name": "BirdKeeper 1",
+        "party": [ "PIDGEOTTO#26", "FARFETCH'D#26", "DODUO#26", "PIDGEY#26" ]
+      },
+      {
+        "key": "Route 15 - BirdKeeper 2",
+        "name": "BirdKeeper 2",
+        "party": [ "DODRIO#28", "DODUO#28", "DODUO#28" ]
+      }
+    ]
+  },
+  "Victory Road 2F": {
+    "Pokemaniac": [
+      {
+        "key": "Victory Road 2F - Pokemaniac",
+        "name": "Pokemaniac",
+        "party": [ "CHARMELEON#40", "LAPRAS#40", "LICKITUNG#40" ]
+      }
+    ],
+    "Juggler": [
+      {
+        "key": "Victory Road 2F - Juggler 1",
+        "name": "Juggler 1",
+        "party": [ "DROWZEE#41", "HYPNO#41", "KADABRA#41", "KADABRA#41" ]
+      },
+      {
+        "key": "Victory Road 2F - Juggler 2",
+        "name": "Juggler 2",
+        "party": [ "MRMIME#48" ]
+      }
+    ],
+    "Tamer": [
+      {
+        "key": "Victory Road 2F - Tamer",
+        "name": "Tamer",
+        "party": [ "PERSIAN#44", "GOLDUCK#44" ]
+      }
+    ],
+    "Blackbelt": [
+      {
+        "key": "Victory Road 2F - Blackbelt",
+        "name": "Blackbelt",
+        "party": [ "MACHOKE#43", "MACHOP#43", "MACHOKE#43" ]
+      }
+    ]
+  },
+  "Mt Moon B2F": {
+    "SuperNerd": [
+      {
+        "key": "Mt Moon B2F - SuperNerd",
+        "name": "SuperNerd",
+        "party": [ "GRIMER#12", "VOLTORB#12", "KOFFING#12" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Mt Moon B2F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "RATTATA#13", "ZUBAT#13" ]
+      },
+      {
+        "key": "Mt Moon B2F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "SANDSHREW#11", "RATTATA#11", "ZUBAT#11" ]
+      },
+      {
+        "key": "Mt Moon B2F - Rocket 3",
+        "name": "Rocket 3",
+        "party": [ "ZUBAT#12", "EKANS#12" ]
+      },
+      {
+        "key": "Mt Moon B2F - Rocket 4",
+        "name": "Rocket 4",
+        "party": [ "EKANS#14", "MEOWTH#14", "KOFFING#14" ]
+      }
+    ]
+  },
+  "Cinnabar Gym": {
+    "SuperNerd": [
+      {
+        "key": "Cinnabar Gym - SuperNerd 1",
+        "name": "SuperNerd 1",
+        "party": [ "VULPIX#36", "VULPIX#36", "NINETALES#36" ]
+      },
+      {
+        "key": "Cinnabar Gym - SuperNerd 2",
+        "name": "SuperNerd 2",
+        "party": [ "PONYTA#34", "CHARMANDER#34", "VULPIX#34", "GROWLITHE#34" ]
+      },
+      {
+        "key": "Cinnabar Gym - SuperNerd 3",
+        "name": "SuperNerd 3",
+        "party": [ "RAPIDASH#41" ]
+      },
+      {
+        "key": "Cinnabar Gym - SuperNerd 4",
+        "name": "SuperNerd 4",
+        "party": [ "GROWLITHE#37", "VULPIX#37" ]
+      }
+    ],
+    "Burglar": [
+      {
+        "key": "Cinnabar Gym - Burglar 1",
+        "name": "Burglar 1",
+        "party": [ "GROWLITHE#36", "VULPIX#36", "NINETALES#36" ]
+      },
+      {
+        "key": "Cinnabar Gym - Burglar 2",
+        "name": "Burglar 2",
+        "party": [ "PONYTA#41" ]
+      },
+      {
+        "key": "Cinnabar Gym - Burglar 3",
+        "name": "Burglar 3",
+        "party": [ "VULPIX#37", "GROWLITHE#37" ]
+      }
+    ],
+    "Blaine": [
+      {
+        "key": "Cinnabar Gym - Blaine",
+        "moves": [ "0#0#FLAMETHROWER", "0#3#CONFUSE_RAY", "2#0#FLAMETHROWER", "2#1#FIRE_BLAST", "2#2#REFLECT" ],
+        "name": "Blaine",
+        "party": [ "NINETALES#48", "RAPIDASH#50", "ARCANINE#54" ]
+      }
+    ]
+  },
+  "Rock Tunnel B1F,Route 9": {
+    "Hiker": [
+      {
+        "key": "Rock Tunnel B1F,Route 9 - Hiker",
+        "name": "Hiker",
+        "party": [ "MACHOP#20", "ONIX#20" ]
+      }
+    ]
+  },
+  "Route 14": {
+    "Biker": [
+      {
+        "key": "Route 14 - Biker 1",
+        "name": "Biker 1",
+        "party": [ "KOFFING#29", "GRIMER#29" ]
+      },
+      {
+        "key": "Route 14 - Biker 2",
+        "name": "Biker 2",
+        "party": [ "KOFFING#26", "KOFFING#26", "GRIMER#26", "KOFFING#26" ]
+      },
+      {
+        "key": "Route 14 - Biker 3",
+        "name": "Biker 3",
+        "party": [ "GRIMER#28", "GRIMER#28", "KOFFING#28" ]
+      },
+      {
+        "key": "Route 14 - Biker 4",
+        "name": "Biker 4",
+        "party": [ "KOFFING#29", "MUK#29" ]
+      }
+    ],
+    "BirdKeeper": [
+      {
+        "key": "Route 14 - BirdKeeper 1",
+        "name": "BirdKeeper 1",
+        "party": [ "FARFETCH'D#33" ]
+      },
+      {
+        "key": "Route 14 - BirdKeeper 2",
+        "name": "BirdKeeper 2",
+        "party": [ "SPEAROW#29", "FEAROW#29" ]
+      },
+      {
+        "key": "Route 14 - BirdKeeper 3",
+        "name": "BirdKeeper 3",
+        "party": [ "PIDGEY#28", "DODUO#28", "PIDGEOTTO#28" ]
+      },
+      {
+        "key": "Route 14 - BirdKeeper 4",
+        "name": "BirdKeeper 4",
+        "party": [ "PIDGEY#26", "SPEAROW#26", "PIDGEY#26", "FEAROW#26" ]
+      },
+      {
+        "key": "Route 14 - BirdKeeper 5",
+        "name": "BirdKeeper 5",
+        "party": [ "PIDGEOTTO#29", "FEAROW#29" ]
+      },
+      {
+        "key": "Route 14 - BirdKeeper 6",
+        "name": "BirdKeeper 6",
+        "party": [ "SPEAROW#28", "DODUO#28", "FEAROW#28" ]
+      }
+    ]
+  },
+  "Route 16": {
+    "Biker": [
+      {
+        "key": "Route 16 - Biker 1",
+        "name": "Biker 1",
+        "party": [ "GRIMER#29", "KOFFING#29" ]
+      },
+      {
+        "key": "Route 16 - Biker 2",
+        "name": "Biker 2",
+        "party": [ "WEEZING#33" ]
+      },
+      {
+        "key": "Route 16 - Biker 3",
+        "name": "Biker 3",
+        "party": [ "GRIMER#26", "GRIMER#26", "GRIMER#26", "GRIMER#26" ]
+      }
+    ],
+    "CueBall": [
+      {
+        "key": "Route 16 - CueBall 1",
+        "name": "CueBall 1",
+        "party": [ "MACHOP#28", "MANKEY#28", "MACHOP#28" ]
+      },
+      {
+        "key": "Route 16 - CueBall 2",
+        "name": "CueBall 2",
+        "party": [ "MANKEY#29", "MACHOP#29" ]
+      },
+      {
+        "key": "Route 16 - CueBall 3",
+        "name": "CueBall 3",
+        "party": [ "MACHOP#33" ]
+      }
+    ]
+  },
+  "Route 17": {
+    "Biker": [
+      {
+        "key": "Route 17 - Biker 1",
+        "name": "Biker 1",
+        "party": [ "WEEZING#28", "KOFFING#28", "WEEZING#28" ]
+      },
+      {
+        "key": "Route 17 - Biker 2",
+        "name": "Biker 2",
+        "party": [ "MUK#33" ]
+      },
+      {
+        "key": "Route 17 - Biker 3",
+        "name": "Biker 3",
+        "party": [ "VOLTORB#29", "VOLTORB#29" ]
+      },
+      {
+        "key": "Route 17 - Biker 4",
+        "name": "Biker 4",
+        "party": [ "WEEZING#29", "MUK#29" ]
+      },
+      {
+        "key": "Route 17 - Biker 5",
+        "name": "Biker 5",
+        "party": [ "KOFFING#25", "WEEZING#25", "KOFFING#25", "KOFFING#25", "WEEZING#25" ]
+      }
+    ],
+    "CueBall": [
+      {
+        "key": "Route 17 - CueBall 1",
+        "name": "CueBall 1",
+        "party": [ "MANKEY#29", "PRIMEAPE#29" ]
+      },
+      {
+        "key": "Route 17 - CueBall 2",
+        "name": "CueBall 2",
+        "party": [ "MACHOP#29", "MACHOKE#29" ]
+      },
+      {
+        "key": "Route 17 - CueBall 3",
+        "name": "CueBall 3",
+        "party": [ "MACHOKE#33" ]
+      },
+      {
+        "key": "Route 17 - CueBall 4",
+        "name": "CueBall 4",
+        "party": [ "MANKEY#26", "MANKEY#26", "MACHOKE#26", "MACHOP#26" ]
+      },
+      {
+        "key": "Route 17 - CueBall 5",
+        "name": "CueBall 5",
+        "party": [ "PRIMEAPE#29", "MACHOKE#29" ]
+      }
+    ]
+  },
+  "Pokemon Mansion 2F": {
+    "Burglar": [
+      {
+        "key": "Pokemon Mansion 2F - Burglar",
+        "name": "Burglar",
+        "party": [ "CHARMANDER#34", "CHARMELEON#34" ]
+      }
+    ]
+  },
+  "Pokemon Mansion 3F": {
+    "Burglar": [
+      {
+        "key": "Pokemon Mansion 3F - Burglar",
+        "name": "Burglar",
+        "party": [ "NINETALES#38" ]
+      }
+    ],
+    "Scientist": [
+      {
+        "key": "Pokemon Mansion 3F - Scientist",
+        "name": "Scientist",
+        "party": [ "MAGNEMITE#33", "MAGNETON#33", "VOLTORB#33" ]
+      }
+    ]
+  },
+  "Pokemon Mansion B1F": {
+    "Burglar": [
+      {
+        "key": "Pokemon Mansion B1F - Burglar",
+        "name": "Burglar",
+        "party": [ "GROWLITHE#34", "PONYTA#34" ]
+      }
+    ],
+    "Scientist": [
+      {
+        "key": "Pokemon Mansion B1F - Scientist",
+        "name": "Scientist",
+        "party": [ "MAGNEMITE#34", "ELECTRODE#34" ]
+      }
+    ]
+  },
+  "none": {},
+  "Route 21": {
+    "Fisher": [
+      {
+        "key": "Route 21 - Fisher 1",
+        "name": "Fisher 1",
+        "party": [ "SEAKING#28", "GOLDEEN#28", "SEAKING#28", "SEAKING#28" ]
+      },
+      {
+        "key": "Route 21 - Fisher 2",
+        "name": "Fisher 2",
+        "party": [ "SHELLDER#31", "CLOYSTER#31" ]
+      },
+      {
+        "key": "Route 21 - Fisher 3",
+        "name": "Fisher 3",
+        "party": [ "MAGIKARP#27", "MAGIKARP#27", "MAGIKARP#27", "MAGIKARP#27", "MAGIKARP#27", "MAGIKARP#27" ]
+      },
+      {
+        "key": "Route 21 - Fisher 4",
+        "name": "Fisher 4",
+        "party": [ "SEAKING#33", "GOLDEEN#33" ]
+      }
+    ],
+    "Swimmer": [
+      {
+        "key": "Route 21 - Swimmer 1",
+        "name": "Swimmer 1",
+        "party": [ "SEADRA#33", "TENTACRUEL#33" ]
+      },
+      {
+        "key": "Route 21 - Swimmer 2",
+        "name": "Swimmer 2",
+        "party": [ "STARMIE#37" ]
+      },
+      {
+        "key": "Route 21 - Swimmer 3",
+        "name": "Swimmer 3",
+        "party": [ "STARYU#33", "WARTORTLE#33" ]
+      },
+      {
+        "key": "Route 21 - Swimmer 4",
+        "name": "Swimmer 4",
+        "party": [ "POLIWHIRL#32", "TENTACOOL#32", "SEADRA#32" ]
+      }
+    ],
+    "CueBall": [
+      {
+        "key": "Route 21 - CueBall",
+        "name": "CueBall",
+        "party": [ "TENTACOOL#31", "TENTACOOL#31", "TENTACRUEL#31" ]
+      }
+    ]
+  },
+  "Route 19": {
+    "Swimmer": [
+      {
+        "key": "Route 19 - Swimmer 1",
+        "name": "Swimmer 1",
+        "party": [ "TENTACOOL#30", "SHELLDER#30" ]
+      },
+      {
+        "key": "Route 19 - Swimmer 2",
+        "name": "Swimmer 2",
+        "party": [ "GOLDEEN#29", "HORSEA#29", "STARYU#29" ]
+      },
+      {
+        "key": "Route 19 - Swimmer 3",
+        "name": "Swimmer 3",
+        "party": [ "POLIWAG#30", "POLIWHIRL#30" ]
+      },
+      {
+        "key": "Route 19 - Swimmer 4",
+        "name": "Swimmer 4",
+        "party": [ "HORSEA#27", "TENTACOOL#27", "TENTACOOL#27", "GOLDEEN#27" ]
+      },
+      {
+        "key": "Route 19 - Swimmer 5",
+        "name": "Swimmer 5",
+        "party": [ "GOLDEEN#29", "SHELLDER#29", "SEAKING#29" ]
+      },
+      {
+        "key": "Route 19 - Swimmer 6",
+        "name": "Swimmer 6",
+        "party": [ "HORSEA#30", "HORSEA#30" ]
+      },
+      {
+        "key": "Route 19 - Swimmer 7",
+        "name": "Swimmer 7",
+        "party": [ "TENTACOOL#27", "TENTACOOL#27", "STARYU#27", "HORSEA#27", "TENTACRUEL#27" ]
+      }
+    ],
+    "Beauty": [
+      {
+        "key": "Route 19 - Beauty 1",
+        "name": "Beauty 1",
+        "party": [ "POLIWAG#27", "GOLDEEN#27", "SEAKING#27", "GOLDEEN#27", "POLIWAG#27" ]
+      },
+      {
+        "key": "Route 19 - Beauty 2",
+        "name": "Beauty 2",
+        "party": [ "GOLDEEN#30", "SEAKING#30" ]
+      },
+      {
+        "key": "Route 19 - Beauty 3",
+        "name": "Beauty 3",
+        "party": [ "STARYU#29", "STARYU#29", "STARYU#29" ]
+      }
+    ]
+  },
+  "Saffron Gym": {
+    "Psychic": [
+      {
+        "key": "Saffron Gym - Psychic 1",
+        "name": "Psychic 1",
+        "party": [ "KADABRA#31", "SLOWPOKE#31", "MRMIME#31", "KADABRA#31" ]
+      },
+      {
+        "key": "Saffron Gym - Psychic 2",
+        "name": "Psychic 2",
+        "party": [ "MRMIME#34", "KADABRA#34" ]
+      },
+      {
+        "key": "Saffron Gym - Psychic 3",
+        "name": "Psychic 3",
+        "party": [ "SLOWPOKE#33", "SLOWPOKE#33", "SLOWBRO#33" ]
+      },
+      {
+        "key": "Saffron Gym - Psychic 4",
+        "name": "Psychic 4",
+        "party": [ "SLOWBRO#38" ]
+      }
+    ],
+    "Sabrina": [
+      {
+        "key": "Saffron Gym - Sabrina",
+        "moves": [ "0#0#FLASH", "1#0#KINESIS", "1#3#PSYWAVE", "2#0#PSYWAVE" ],
+        "name": "Sabrina",
+        "party": [ "ABRA#50", "KADABRA#50", "ALAKAZAM#50" ]
+      }
+    ],
+    "Channeler": [
+      {
+        "key": "Saffron Gym - Channeler 1",
+        "name": "Channeler 1",
+        "party": [ "GASTLY#34", "HAUNTER#34" ]
+      },
+      {
+        "key": "Saffron Gym - Channeler 2",
+        "name": "Channeler 2",
+        "party": [ "HAUNTER#38" ]
+      },
+      {
+        "key": "Saffron Gym - Channeler 3",
+        "name": "Channeler 3",
+        "party": [ "GASTLY#33", "GASTLY#33", "HAUNTER#33" ]
+      }
+    ]
+  },
+  "Silph Co 5F": {
+    "Juggler": [
+      {
+        "key": "Silph Co 5F - Juggler",
+        "name": "Juggler",
+        "party": [ "KADABRA#29", "MRMIME#29" ]
+      }
+    ],
+    "Scientist": [
+      {
+        "key": "Silph Co 5F - Scientist",
+        "name": "Scientist",
+        "party": [ "MAGNETON#26", "KOFFING#26", "WEEZING#26", "MAGNEMITE#26" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Silph Co 5F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "ARBOK#33" ]
+      },
+      {
+        "key": "Silph Co 5F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "HYPNO#33" ]
+      }
+    ]
+  },
+  "Fuchsia Gym": {
+    "Juggler": [
+      {
+        "key": "Fuchsia Gym - Juggler 1",
+        "name": "Juggler 1",
+        "party": [ "DROWZEE#31", "DROWZEE#31", "KADABRA#31", "DROWZEE#31" ]
+      },
+      {
+        "key": "Fuchsia Gym - Juggler 2",
+        "name": "Juggler 2",
+        "party": [ "DROWZEE#34", "HYPNO#34" ]
+      },
+      {
+        "key": "Fuchsia Gym - Juggler 3",
+        "name": "Juggler 3",
+        "party": [ "HYPNO#38" ]
+      },
+      {
+        "key": "Fuchsia Gym - Juggler 4",
+        "name": "Juggler 4",
+        "party": [ "DROWZEE#34", "KADABRA#34" ]
+      }
+    ],
+    "Tamer": [
+      {
+        "key": "Fuchsia Gym - Tamer 1",
+        "name": "Tamer 1",
+        "party": [ "SANDSLASH#34", "ARBOK#34" ]
+      },
+      {
+        "key": "Fuchsia Gym - Tamer 2",
+        "name": "Tamer 2",
+        "party": [ "ARBOK#33", "SANDSLASH#33", "ARBOK#33" ]
+      }
+    ],
+    "Koga": [
+      {
+        "key": "Fuchsia Gym - Koga",
+        "moves": [ "0#0#TOXIC", "0#1#TACKLE", "1#0#TOXIC", "1#2#SUPERSONIC", "2#0#TOXIC", "2#1#DOUBLE_EDGE", "3#0#LEECH_LIFE", "3#1#DOUBLE_TEAM", "3#2#PSYCHIC_M", "3#3#TOXIC" ],
+        "name": "Koga",
+        "party": [ "VENONAT#44", "VENONAT#46", "VENONAT#48", "VENOMOTH#50" ]
+      }
+    ]
+  },
+  "Viridian Gym": {
+    "Tamer": [
+      {
+        "key": "Viridian Gym - Tamer 1",
+        "name": "Tamer 1",
+        "party": [ "RHYHORN#43" ]
+      },
+      {
+        "key": "Viridian Gym - Tamer 2",
+        "name": "Tamer 2",
+        "party": [ "ARBOK#39", "TAUROS#39" ]
+      }
+    ],
+    "Blackbelt": [
+      {
+        "key": "Viridian Gym - Blackbelt 1",
+        "name": "Blackbelt 1",
+        "party": [ "MACHOP#40", "MACHOKE#40" ]
+      },
+      {
+        "key": "Viridian Gym - Blackbelt 2",
+        "name": "Blackbelt 2",
+        "party": [ "MACHOKE#43" ]
+      },
+      {
+        "key": "Viridian Gym - Blackbelt 3",
+        "name": "Blackbelt 3",
+        "party": [ "MACHOKE#38", "MACHOP#38", "MACHOKE#38" ]
+      }
+    ],
+    "Giovanni": [
+      {
+        "key": "Viridian Gym - Giovanni",
+        "moves": [ "0#2#FISSURE", "1#1#DOUBLE_TEAM", "2#0#EARTHQUAKE", "2#2#THUNDER", "3#0#EARTHQUAKE", "3#1#LEER", "3#2#THUNDER", "4#0#ROCK_SLIDE", "4#3#EARTHQUAKE" ],
+        "name": "Giovanni",
+        "party": [ "DUGTRIO#50", "PERSIAN#53", "NIDOQUEEN#53", "NIDOKING#55", "RHYDON#55" ]
+      }
+    ],
+    "CooltrainerM": [
+      {
+        "key": "Viridian Gym - CooltrainerM 1",
+        "name": "CooltrainerM 1",
+        "party": [ "NIDORINO#39", "NIDOKING#39" ]
+      },
+      {
+        "key": "Viridian Gym - CooltrainerM 2",
+        "name": "CooltrainerM 2",
+        "party": [ "SANDSLASH#39", "DUGTRIO#39" ]
+      },
+      {
+        "key": "Viridian Gym - CooltrainerM 3",
+        "name": "CooltrainerM 3",
+        "party": [ "RHYHORN#43" ]
+      }
+    ]
+  },
+  "Route 18": {
+    "BirdKeeper": [
+      {
+        "key": "Route 18 - BirdKeeper 1",
+        "name": "BirdKeeper 1",
+        "party": [ "SPEAROW#29", "FEAROW#29" ]
+      },
+      {
+        "key": "Route 18 - BirdKeeper 2",
+        "name": "BirdKeeper 2",
+        "party": [ "DODRIO#34" ]
+      },
+      {
+        "key": "Route 18 - BirdKeeper 3",
+        "name": "BirdKeeper 3",
+        "party": [ "SPEAROW#26", "SPEAROW#26", "FEAROW#26", "SPEAROW#26" ]
+      }
+    ]
+  },
+  "Fighting Dojo": {
+    "Blackbelt": [
+      {
+        "key": "Fighting Dojo - Blackbelt 1",
+        "name": "Blackbelt 1",
+        "party": [ "HITMONLEE#37", "HITMONCHAN#37" ]
+      },
+      {
+        "key": "Fighting Dojo - Blackbelt 2",
+        "name": "Blackbelt 2",
+        "party": [ "MANKEY#31", "MANKEY#31", "PRIMEAPE#31" ]
+      },
+      {
+        "key": "Fighting Dojo - Blackbelt 3",
+        "name": "Blackbelt 3",
+        "party": [ "MACHOP#32", "MACHOKE#32" ]
+      },
+      {
+        "key": "Fighting Dojo - Blackbelt 4",
+        "name": "Blackbelt 4",
+        "party": [ "PRIMEAPE#36" ]
+      },
+      {
+        "key": "Fighting Dojo - Blackbelt 5",
+        "name": "Blackbelt 5",
+        "party": [ "MACHOP#31", "MANKEY#31", "PRIMEAPE#31" ]
+      }
+    ]
+  },
+  "Oaks Lab": {
+    "Green1": [
+      {
+        "key": "Oaks Lab - Green1",
+        "name": "Green1",
+        "party": [ "EEVEE#5" ]
+      }
+    ]
+  },
+  "Route 22": {
+    "Green1": [
+      {
+        "key": "Route 22 - Green1",
+        "name": "Green1",
+        "party": [ "SPEAROW#9", "EEVEE#8" ]
+      }
+    ],
+    "Green2": [
+      {
+        "key": "Route 22 - Green2 1",
+        "name": "Green2 1",
+        "party": [ "SANDSLASH#47", "EXEGGCUTE#45", "NINETALES#45", "CLOYSTER#47", "KADABRA#50", "JOLTEON#53" ]
+      },
+      {
+        "key": "Route 22 - Green2 2",
+        "name": "Green2 2",
+        "party": [ "SANDSLASH#47", "EXEGGCUTE#45", "CLOYSTER#45", "MAGNETON#47", "KADABRA#50", "FLAREON#53" ]
+      },
+      {
+        "key": "Route 22 - Green2 3",
+        "name": "Green2 3",
+        "party": [ "SANDSLASH#47", "EXEGGCUTE#45", "MAGNETON#45", "NINETALES#47", "KADABRA#50", "VAPOREON#53" ]
+      }
+    ]
+  },
+  "Cerulean City": {
+    "Green1": [
+      {
+        "key": "Cerulean City - Green1",
+        "name": "Green1",
+        "party": [ "SPEAROW#18", "SANDSHREW#15", "RATTATA#15", "EEVEE#17" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Cerulean City - Rocket",
+        "name": "Rocket",
+        "party": [ "MACHOP#17", "DROWZEE#17" ]
+      }
+    ]
+  },
+  "Silph Co 2F": {
+    "Scientist": [
+      {
+        "key": "Silph Co 2F - Scientist 1",
+        "name": "Scientist 1",
+        "party": [ "GRIMER#26", "WEEZING#26", "KOFFING#26", "WEEZING#26" ]
+      },
+      {
+        "key": "Silph Co 2F - Scientist 2",
+        "name": "Scientist 2",
+        "party": [ "MAGNEMITE#28", "VOLTORB#28", "MAGNETON#28" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Silph Co 2F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "CUBONE#29", "ZUBAT#29" ]
+      },
+      {
+        "key": "Silph Co 2F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "GOLBAT#25", "ZUBAT#25", "ZUBAT#25", "RATICATE#25", "ZUBAT#25" ]
+      }
+    ]
+  },
+  "Pokemon Mansion 1F,Silph Co 3F": {
+    "Scientist": [
+      {
+        "key": "Pokemon Mansion 1F,Silph Co 3F - Scientist",
+        "name": "Scientist",
+        "party": [ "ELECTRODE#29", "WEEZING#29" ]
+      }
+    ]
+  },
+  "Silph Co 4F": {
+    "Scientist": [
+      {
+        "key": "Silph Co 4F - Scientist",
+        "name": "Scientist",
+        "party": [ "ELECTRODE#33" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Silph Co 4F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "MACHOP#29", "DROWZEE#29" ]
+      },
+      {
+        "key": "Silph Co 4F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "EKANS#28", "ZUBAT#28", "CUBONE#28" ]
+      }
+    ]
+  },
+  "Silph Co 6F": {
+    "Scientist": [
+      {
+        "key": "Silph Co 6F - Scientist",
+        "name": "Scientist",
+        "party": [ "VOLTORB#25", "KOFFING#25", "MAGNETON#25", "MAGNEMITE#25", "KOFFING#25" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Silph Co 6F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "MACHOP#29", "MACHOKE#29" ]
+      },
+      {
+        "key": "Silph Co 6F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "ZUBAT#28", "ZUBAT#28", "GOLBAT#28" ]
+      }
+    ]
+  },
+  "Silph Co 7F": {
+    "Scientist": [
+      {
+        "key": "Silph Co 7F - Scientist",
+        "name": "Scientist",
+        "party": [ "ELECTRODE#29", "MUK#29" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Silph Co 7F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "RATICATE#26", "ARBOK#26", "KOFFING#26", "GOLBAT#26" ]
+      },
+      {
+        "key": "Silph Co 7F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "CUBONE#29", "CUBONE#29" ]
+      },
+      {
+        "key": "Silph Co 7F - Rocket 3",
+        "name": "Rocket 3",
+        "party": [ "SANDSHREW#29", "SANDSLASH#29" ]
+      }
+    ],
+    "Green2": [
+      {
+        "key": "Silph Co 7F - Green2 1",
+        "name": "Green2 1",
+        "party": [ "SANDSLASH#38", "NINETALES#35", "CLOYSTER#37", "KADABRA#35", "JOLTEON#40" ]
+      },
+      {
+        "key": "Silph Co 7F - Green2 2",
+        "name": "Green2 2",
+        "party": [ "SANDSLASH#38", "CLOYSTER#35", "MAGNETON#37", "KADABRA#35", "FLAREON#40" ]
+      },
+      {
+        "key": "Silph Co 7F - Green2 3",
+        "name": "Green2 3",
+        "party": [ "SANDSLASH#38", "MAGNETON#35", "NINETALES#37", "KADABRA#35", "VAPOREON#40" ]
+      }
+    ]
+  },
+  "Silph Co 8F": {
+    "Scientist": [
+      {
+        "key": "Silph Co 8F - Scientist",
+        "name": "Scientist",
+        "party": [ "GRIMER#29", "ELECTRODE#29" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Silph Co 8F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "RATICATE#26", "ZUBAT#26", "GOLBAT#26", "RATTATA#26" ]
+      },
+      {
+        "key": "Silph Co 8F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "WEEZING#28", "GOLBAT#28", "KOFFING#28" ]
+      }
+    ]
+  },
+  "Silph Co 9F": {
+    "Scientist": [
+      {
+        "key": "Silph Co 9F - Scientist",
+        "name": "Scientist",
+        "party": [ "VOLTORB#28", "KOFFING#28", "MAGNETON#28" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Silph Co 9F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "DROWZEE#28", "GRIMER#28", "MACHOP#28" ]
+      },
+      {
+        "key": "Silph Co 9F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "GOLBAT#28", "DROWZEE#28", "HYPNO#28" ]
+      }
+    ]
+  },
+  "Silph Co 10F": {
+    "Scientist": [
+      {
+        "key": "Silph Co 10F - Scientist",
+        "name": "Scientist",
+        "party": [ "MAGNEMITE#29", "KOFFING#29" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Silph Co 10F - Rocket",
+        "name": "Rocket",
+        "party": [ "MACHOKE#33" ]
+      }
+    ]
+  },
+  "Rocket Hideout B4F": {
+    "Giovanni": [
+      {
+        "key": "Rocket Hideout B4F - Giovanni",
+        "name": "Giovanni",
+        "party": [ "ONIX#25", "RHYHORN#24", "PERSIAN#29" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Rocket Hideout B4F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "KOFFING#21", "ZUBAT#21" ]
+      },
+      {
+        "key": "Rocket Hideout B4F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "KOFFING#25", "MEOWTH#25", "EKANS#25" ]
+      }
+    ]
+  },
+  "Silph Co 11F": {
+    "Giovanni": [
+      {
+        "key": "Silph Co 11F - Giovanni",
+        "name": "Giovanni",
+        "party": [ "NIDORINO#37", "PERSIAN#35", "RHYHORN#37", "NIDOQUEEN#41" ]
+      }
+    ],
+    "Rocket": [
+      {
+        "key": "Silph Co 11F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "RATTATA#25", "RATTATA#25", "ZUBAT#25", "RATTATA#25", "EKANS#25" ]
+      },
+      {
+        "key": "Silph Co 11F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "WEEZING#31", "ARBOK#31", "MEOWTH#31" ]
+      }
+    ]
+  },
+  "Celadon Game Corner": {
+    "Rocket": [
+      {
+        "key": "Celadon Game Corner - Rocket",
+        "name": "Rocket",
+        "party": [ "RATICATE#20", "ZUBAT#20" ]
+      }
+    ]
+  },
+  "Rocket Hideout B1F": {
+    "Rocket": [
+      {
+        "key": "Rocket Hideout B1F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "DROWZEE#21", "MACHOP#21" ]
+      },
+      {
+        "key": "Rocket Hideout B1F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "RATICATE#21", "RATICATE#21" ]
+      },
+      {
+        "key": "Rocket Hideout B1F - Rocket 3",
+        "name": "Rocket 3",
+        "party": [ "GRIMER#20", "KOFFING#20", "KOFFING#20" ]
+      },
+      {
+        "key": "Rocket Hideout B1F - Rocket 4",
+        "name": "Rocket 4",
+        "party": [ "RATTATA#19", "RATICATE#19", "RATICATE#19", "RATTATA#19" ]
+      },
+      {
+        "key": "Rocket Hideout B1F - Rocket 5",
+        "name": "Rocket 5",
+        "party": [ "GRIMER#22", "KOFFING#22" ]
+      }
+    ]
+  },
+  "Rocket Hideout B2F": {
+    "Rocket": [
+      {
+        "key": "Rocket Hideout B2F - Rocket",
+        "name": "Rocket",
+        "party": [ "ZUBAT#17", "KOFFING#17", "GRIMER#17", "ZUBAT#17", "RATICATE#17" ]
+      }
+    ]
+  },
+  "Rocket Hideout B3F": {
+    "Rocket": [
+      {
+        "key": "Rocket Hideout B3F - Rocket 1",
+        "name": "Rocket 1",
+        "party": [ "RATTATA#20", "RATICATE#20", "DROWZEE#20" ]
+      },
+      {
+        "key": "Rocket Hideout B3F - Rocket 2",
+        "name": "Rocket 2",
+        "party": [ "MACHOP#21", "MACHOP#21" ]
+      }
+    ]
+  },
+  "Silph Co 3F": {
+    "Rocket": [
+      {
+        "key": "Silph Co 3F - Rocket",
+        "name": "Rocket",
+        "party": [ "RATICATE#28", "HYPNO#28", "RATICATE#28" ]
+      }
+    ]
+  },
+  "essieJamesData:": {},
+  "Pokemon Tower 7F": {
+    "Rocket": [
+      {
+        "key": "Pokemon Tower 7F - Rocket",
+        "name": "Rocket",
+        "party": [ "MEOWTH#27", "ARBOK#27", "WEEZING#27" ]
+      }
+    ]
+  },
+  "Victory Road 3F": {
+    "CooltrainerM": [
+      {
+        "key": "Victory Road 3F - CooltrainerM 1",
+        "name": "CooltrainerM 1",
+        "party": [ "EXEGGUTOR#43", "CLOYSTER#43", "ARCANINE#43" ]
+      },
+      {
+        "key": "Victory Road 3F - CooltrainerM 2",
+        "name": "CooltrainerM 2",
+        "party": [ "KINGLER#43", "TENTACRUEL#43", "BLASTOISE#43" ]
+      }
+    ],
+    "CooltrainerF": [
+      {
+        "key": "Victory Road 3F - CooltrainerF 1",
+        "name": "CooltrainerF 1",
+        "party": [ "BELLSPROUT#43", "WEEPINBELL#43", "VICTREEBEL#43" ]
+      },
+      {
+        "key": "Victory Road 3F - CooltrainerF 2",
+        "name": "CooltrainerF 2",
+        "party": [ "PARASECT#43", "DEWGONG#43", "CHANSEY#43" ]
+      }
+    ]
+  },
+  "Victory Road 1F": {
+    "CooltrainerM": [
+      {
+        "key": "Victory Road 1F - CooltrainerM",
+        "name": "CooltrainerM",
+        "party": [ "IVYSAUR#42", "WARTORTLE#42", "CHARMELEON#42", "CHARIZARD#42" ]
+      }
+    ],
+    "CooltrainerF": [
+      {
+        "key": "Victory Road 1F - CooltrainerF",
+        "name": "CooltrainerF",
+        "party": [ "PERSIAN#44", "NINETALES#44" ]
+      }
+    ]
+  },
+  "Bruno": {
+    "Bruno": [
+      {
+        "key": "Bruno",
+        "moves": [ "0#0#ROCK_SLIDE", "0#1#SCREECH", "0#3#DIG", "1#2#FIRE_PUNCH", "1#3#DOUBLE_TEAM", "2#0#DOUBLE_KICK", "2#1#MEGA_KICK", "2#3#DOUBLE_TEAM", "3#0#ROCK_SLIDE", "3#1#SCREECH", "3#3#EARTHQUAKE", "4#1#KARATE_CHOP", "4#2#STRENGTH" ],
+        "name": "Bruno",
+        "party": [ "ONIX#53", "HITMONCHAN#55", "HITMONLEE#55", "ONIX#56", "MACHAMP#58" ]
+      }
+    ]
+  },
+  "SSAnne 2FRooms,Vermilion Gym": {
+    "Gentleman": [
+      {
+        "key": "SSAnne 2FRooms,Vermilion Gym - Gentleman",
+        "name": "Gentleman",
+        "party": [ "VOLTORB#22", "MAGNEMITE#22" ]
+      }
+    ]
+  },
+  "SSAnne 2F": {
+    "Green2": [
+      {
+        "key": "SSAnne 2F - Green2",
+        "name": "Green2",
+        "party": [ "SPEAROW#19", "RATTATA#16", "SANDSHREW#18", "EEVEE#20" ]
+      }
+    ]
+  },
+  "Pokemon Tower 2F": {
+    "Green2": [
+      {
+        "key": "Pokemon Tower 2F - Green2 1",
+        "name": "Green2 1",
+        "party": [ "FEAROW#25", "SHELLDER#23", "VULPIX#22", "SANDSHREW#20", "EEVEE#25" ]
+      },
+      {
+        "key": "Pokemon Tower 2F - Green2 2",
+        "name": "Green2 2",
+        "party": [ "FEAROW#25", "MAGNEMITE#23", "SHELLDER#22", "SANDSHREW#20", "EEVEE#25" ]
+      },
+      {
+        "key": "Pokemon Tower 2F - Green2 3",
+        "name": "Green2 3",
+        "party": [ "FEAROW#25", "VULPIX#23", "MAGNEMITE#22", "SANDSHREW#20", "EEVEE#25" ]
+      }
+    ]
+  },
+  "Green3": {
+    "Green3": [
+      {
+        "key": "Green3 1",
+        "moves": [ "0#2#EARTHQUAKE", "1#3#KINESIS", "2#3#LEECH_SEED", "3#0#ICE_BEAM", "4#0#CONFUSE_RAY", "4#3#FIRE_SPIN", "5#2#QUICK_ATTACK" ],
+        "name": "Green3 1",
+        "party": [ "SANDSLASH#61", "ALAKAZAM#59", "EXEGGUTOR#61", "CLOYSTER#61", "NINETALES#63", "JOLTEON#65" ]
+      },
+      {
+        "key": "Green3 2",
+        "moves": [ "0#2#EARTHQUAKE", "1#3#KINESIS", "2#3#LEECH_SEED", "3#0#THUNDERBOLT", "4#0#ICE_BEAM", "5#1#REFLECT", "5#2#QUICK_ATTACK" ],
+        "name": "Green3 2",
+        "party": [ "SANDSLASH#61", "ALAKAZAM#59", "EXEGGUTOR#61", "MAGNETON#61", "CLOYSTER#63", "FLAREON#65" ]
+      },
+      {
+        "key": "Green3 3",
+        "moves": [ "0#2#EARTHQUAKE", "1#3#KINESIS", "2#3#LEECH_SEED", "3#0#CONFUSE_RAY", "3#3#FIRE_SPIN", "4#0#THUNDERBOLT", "5#0#AURORA_BEAM", "5#2#QUICK_ATTACK" ],
+        "name": "Green3 3",
+        "party": [ "SANDSLASH#61", "ALAKAZAM#59", "EXEGGUTOR#61", "NINETALES#61", "MAGNETON#63", "VAPOREON#65" ]
+      }
+    ]
+  },
+  "Lorelei": {
+    "Lorelei": [
+      {
+        "key": "Lorelei",
+        "moves": [ "0#0#BUBBLEBEAM", "1#2#ICE_BEAM", "2#0#PSYCHIC_M", "2#1#SURF", "3#2#LOVELY_KISS", "4#2#BLIZZARD" ],
+        "name": "Lorelei",
+        "party": [ "DEWGONG#54", "CLOYSTER#53", "SLOWBRO#54", "JYNX#56", "LAPRAS#56" ]
+      }
+    ]
+  },
+  "Pokemon Tower 3F": {
+    "Channeler": [
+      {
+        "key": "Pokemon Tower 3F - Channeler 1",
+        "name": "Channeler 1",
+        "party": [ "GASTLY#23" ]
+      },
+      {
+        "key": "Pokemon Tower 3F - Channeler 2",
+        "name": "Channeler 2",
+        "party": [ "GASTLY#24" ]
+      },
+      {
+        "key": "Pokemon Tower 3F - Channeler 3",
+        "name": "Channeler 3",
+        "party": [ "GASTLY#22" ]
+      }
+    ]
+  },
+  "Pokemon Tower 4F": {
+    "Channeler": [
+      {
+        "key": "Pokemon Tower 4F - Channeler 1",
+        "name": "Channeler 1",
+        "party": [ "GASTLY#24" ]
+      },
+      {
+        "key": "Pokemon Tower 4F - Channeler 2",
+        "name": "Channeler 2",
+        "party": [ "GASTLY#23", "GASTLY#23" ]
+      },
+      {
+        "key": "Pokemon Tower 4F - Channeler 3",
+        "name": "Channeler 3",
+        "party": [ "GASTLY#22" ]
+      }
+    ]
+  },
+  "Pokemon Tower 5F": {
+    "Channeler": [
+      {
+        "key": "Pokemon Tower 5F - Channeler 1",
+        "name": "Channeler 1",
+        "party": [ "HAUNTER#23" ]
+      },
+      {
+        "key": "Pokemon Tower 5F - Channeler 2",
+        "name": "Channeler 2",
+        "party": [ "GASTLY#22" ]
+      },
+      {
+        "key": "Pokemon Tower 5F - Channeler 3",
+        "name": "Channeler 3",
+        "party": [ "GASTLY#24" ]
+      },
+      {
+        "key": "Pokemon Tower 5F - Channeler 4",
+        "name": "Channeler 4",
+        "party": [ "HAUNTER#22" ]
+      }
+    ]
+  },
+  "Pokemon Tower 6F": {
+    "Channeler": [
+      {
+        "key": "Pokemon Tower 6F - Channeler 1",
+        "name": "Channeler 1",
+        "party": [ "GASTLY#22", "GASTLY#22", "GASTLY#22" ]
+      },
+      {
+        "key": "Pokemon Tower 6F - Channeler 2",
+        "name": "Channeler 2",
+        "party": [ "GASTLY#24" ]
+      },
+      {
+        "key": "Pokemon Tower 6F - Channeler 3",
+        "name": "Channeler 3",
+        "party": [ "GASTLY#24" ]
+      }
+    ]
+  },
+  "Agatha": {
+    "Agatha": [
+      {
+        "key": "Agatha",
+        "moves": [ "0#1#SUBSTITUTE", "0#2#LICK", "0#3#MEGA_DRAIN", "1#1#TOXIC", "1#3#LEECH_LIFE", "2#1#LICK", "3#0#WRAP", "4#1#PSYCHIC_M" ],
+        "name": "Agatha",
+        "party": [ "GENGAR#56", "GOLBAT#56", "HAUNTER#55", "ARBOK#58", "GENGAR#60" ]
+      }
+    ]
+  },
+  "Lance": {
+    "Lance": [
+      {
+        "key": "Lance",
+        "moves": [ "0#0#DRAGON_RAGE", "1#0#THUNDER_WAVE", "1#2#THUNDERBOLT", "2#0#BUBBLEBEAM", "2#1#WRAP", "2#2#ICE_BEAM", "3#0#WING_ATTACK", "3#1#SWIFT", "3#2#FLY", "4#0#BLIZZARD", "4#1#FIRE_BLAST", "4#2#THUNDER" ],
+        "name": "Lance",
+        "party": [ "GYARADOS#58", "DRAGONAIR#56", "DRAGONAIR#56", "AERODACTYL#60", "DRAGONITE#62" ]
+      }
+    ]
+  }
+}

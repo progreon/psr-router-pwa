@@ -24,6 +24,10 @@ export class Trainer {
     public readonly boost?: string //
   ) { }
 
+  getTotalExp(): number {
+    return this.party.map(b => b.getExp()).reduce((prev, curr) => prev + curr);
+  }
+
   toString(): string {
     return (this.alias ? this.alias : this.key);
   }

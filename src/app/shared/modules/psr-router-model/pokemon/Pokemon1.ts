@@ -20,7 +20,14 @@ export class Pokemon1 extends Pokemon {
     super(name, id, type1, type2, expGiven, expGroup, hp, atk, def, spc, spc, spd);
   }
   getExp(level: number, participants: number, isTraded: boolean, isTrainer: boolean): number {
-    throw new Error("Method not implemented.");
+    let a = Math.trunc((this.expGiven / participants) * level / 7);
+    if (isTraded) {
+        a = a + Math.trunc(a / 2);
+    }
+    if (isTrainer) {
+        a = a + Math.trunc(a / 2);
+    }
+    return a;
   }
   getCritRatio(): number {
     throw new Error("Method not implemented.");

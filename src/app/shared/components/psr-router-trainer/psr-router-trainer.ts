@@ -24,7 +24,8 @@ class PsrRouterTrainer extends LitElement {
         let ms = b.moveset;
         party.push(html`
           <div class="column">
-            <h2 class="pokemon" @click="${this._onPokemonClicked.bind(this, b.pokemon.name)}">${b.pokemon.name} L${b.level}</h2>
+            <h2 class="pokemon" @click="${this._onPokemonClicked.bind(this, b.pokemon.name)}">${b.pokemon.name} - L${b.level}</h2>
+            <div class="center">${b.getExp()} exp. points</div>
             <div><div>${ms[0]}</div><div>${ms[1]}</div></div>
             <div><div>${ms[2]}</div><div>${ms[3]}</div></div>
           </div>`);
@@ -72,6 +73,10 @@ class PsrRouterTrainer extends LitElement {
         display: flex;
         flex-direction: row;
         margin: 0px;
+      }
+      .column > .center {
+        display: block;
+        text-align: center;
       }
       .column > * > * {
         flex: 1;
