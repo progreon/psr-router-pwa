@@ -6,7 +6,7 @@ import { RouterMessage } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteSection } from '.';
 import { Game } from '../psr-router-model/Game';
-import { Location } from '../psr-router-model/Model';
+import { Location, Player } from '../psr-router-model/Model';
 import { RouteEntry } from './RouteEntry';
 // import { saveAs } from 'file-saver/FileSaver';
 
@@ -38,6 +38,12 @@ export class Route extends RouteSection {
     return Route.ENTRY_TYPE;
   }
 
+  getAllMessages(): RouterMessage[] {
+    let messages = [];
+    this.entryList.forEach(e => e.messages.forEach(m => messages.push(m)));
+    return messages;
+  }
+
   getJSONObject(): any {
     let routeSectionJSON = super.getJSONObject();
     let routeJSON = {
@@ -60,6 +66,9 @@ export class Route extends RouteSection {
       // TODO: throw exception?
     }
     let rs = RouteSection.newFromJSONObject(game, obj);
-    return new Route(rs.game, new RouteEntryInfo(rs.info.title, rs.info.summary), obj.shortname, rs.location, rs.children); // TODO: rs.info
+    let player = new Player(game.info.name);
+    let route = new Route(rs.game, new RouteEntryInfo(rs.info.title, rs.info.summary), obj.shortname, rs.location, rs.children); // TODO: rs.info
+    route._playerBefore = player;
+    return route;
   }
 }

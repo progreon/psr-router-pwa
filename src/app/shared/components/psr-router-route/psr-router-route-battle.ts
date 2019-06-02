@@ -26,11 +26,35 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
 
   _renderExpandingContent() {
     let dom = super._renderExpandingContent();
-    if (super.routeEntry && (<Route.RouteBattle>super.routeEntry).shareExp) {
-      if (!dom) {
-        dom = [];
+    let battleEntry: Route.RouteBattle = <Route.RouteBattle>super.routeEntry;
+    if (!dom) {
+      dom = [];
+    } else {
+      dom.push(html`<hr>`);
+    }
+    if (battleEntry.playerBefore) {
+      if (battleEntry.playerBefore.getFrontBattler()) {
+        let before = [];
+        for (let i = 0; i < battleEntry.trainer.party.length; i++) {
+          let player = battleEntry.playersBefore[i];
+          let pp = [];
+          player.team.forEach(b => {
+            pp.push(html`<li>${b.toString()} (${b.levelExp} - ${b.getCurrentExpToNextLevel()} exp. left)</li>`);
+          });
+          let ob = battleEntry.trainer.party[i];
+          before.push(html`<li>${ob.toString()} (gives ${ob.getExp()} exp.)<ul>${pp}</ul></li>`);
+        }
+        let after = [];
+        battleEntry.playerAfter.team.forEach(b => {
+          after.push(html`<li>${b.toString()} (${b.levelExp} - ${b.getCurrentExpToNextLevel()} exp. left)</li>`);
+        });
+        dom.push(html`<div>Battle:</div><ul>${before}</ul>`);
+        dom.push(html`<div>After the battle:</div><ul>${after}</ul>`);
+      } else {
+        dom.push(html`<div>You don't have a team to battle with! (or maybe you blacked out? :Kappa:)</div>`);
       }
-      dom.push(html`<div>${JSON.stringify((<Route.RouteBattle>super.routeEntry).shareExp)}</div>`);
+    } else {
+      dom.push(html`<div>No player set!</div>`);
     }
     return dom;
   }

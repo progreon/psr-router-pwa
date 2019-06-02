@@ -97,7 +97,7 @@ export class RouteEntry {
    * Gets all of its entries, including itself as the first one.
    * @returns The entry list.
    */
-  getEntryList(): RouteEntry[] {
+  public get entryList(): RouteEntry[] {
     return [this];
   }
 
@@ -156,10 +156,7 @@ export class RouteEntry {
    */
   protected _triggerObservers(type: string) {
     if (this._eventsEnabled) {
-      let athis = this;
-      this._observers.forEach(function (f) {
-        f(athis, type);
-      });
+      this._observers.forEach(f => f(this, type));
     }
   }
 

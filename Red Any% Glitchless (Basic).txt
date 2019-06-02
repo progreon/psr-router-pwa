@@ -24,6 +24,8 @@ Route: Red Any% Glitchless (Basic)
 
 	S: Route 22
 		Manip Nidoran: https://pastebin.com/027sfdrS
+		GetP: NidoranM:4
+			TEMP: getting nidoran
 		Get the hidden tree Potion
 
 	S: Viridian Forest
@@ -34,7 +36,8 @@ Route: Red Any% Glitchless (Basic)
 		Heal to 10+ HP for Weedle Guy
 		B: Viridian Forest - BugCatcher 3
 			Weedle Guy :: Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion
-		After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary
+		Swap: 0 1
+			After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary
 
 	S: Pewter Gym
 		Save before Brock

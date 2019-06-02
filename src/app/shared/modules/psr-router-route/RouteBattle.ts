@@ -5,7 +5,7 @@ import { RouterMessage } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
 import { Game } from '../psr-router-model/Game';
-import { Trainer, Location } from '../psr-router-model/Model';
+import { Trainer, Location, Player } from '../psr-router-model/Model';
 
 /**
  * A class representing a route-entry that handles battles.
@@ -17,6 +17,8 @@ export class RouteBattle extends RouteEntry {
   public static readonly ENTRY_TYPE: string = "B";
   public readonly trainer: Trainer;
   public readonly shareExp: number[][];
+
+  public readonly playersBefore: Player[];
   /**
    *
    * @param {Game}            game              The Game object this route entry uses.
@@ -29,10 +31,43 @@ export class RouteBattle extends RouteEntry {
     super(game, info, location);
     this.trainer = trainer;
     this.shareExp = shareExp;
+    this.playersBefore = [];
+    trainer.party.forEach(b => this.playersBefore.push(undefined));
   }
 
   public get entryType(): string {
     return RouteBattle.ENTRY_TYPE;
+  }
+
+  apply(player?: Player): Player {
+    player = super.apply(player);
+    // prepare the shareExp array
+    let shareExp = this.shareExp;
+    if (!shareExp) {
+      shareExp = [];
+      this.trainer.party.forEach(p => shareExp.push([0]));
+    }
+
+    this.playersBefore.splice(0);
+    for (let p = 0; p < this.trainer.party.length; p++) {
+      this.playersBefore.push(player);
+      player = player.clone();
+
+      let sharedCount = shareExp[p].length;
+      shareExp[p].forEach(sh => {
+        if (sh >= player.team.length) {
+          this.addMessage(new RouterMessage(`The player doesn't have ${sh + 1} pokemon to share experience with!`, RouterMessage.Type.Error));
+        } else {
+          // Only evolve at the end of the battle
+          let evoBattler = player.team[sh].defeatBattler(this.trainer.party[p], sharedCount);
+          if (p + 1 == this.trainer.party.length) {
+            player.team[sh] = evoBattler;
+          }
+        }
+      });
+    }
+    this._playerAfter = player;
+    return player;
   }
 
   getJSONObject(): any {

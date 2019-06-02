@@ -2,7 +2,7 @@
 
 // imports
 import { RouterMessage } from '../psr-router-util';
-import { RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon } from '.';
+import { RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon, RouteSwapPokemon } from '.';
 import { RouteEntryInfo } from './util';
 import { Game } from '../psr-router-model/Game';
 import { Location, Player, Trainer } from '../psr-router-model/Model';
@@ -45,7 +45,7 @@ export class RouteSection extends RouteEntry {
         currChildIdx++;
       }
     } else if (this._children.length > 0) {
-      this._children[0].apply(this.playerAfter);
+      this._children[0].apply(super.playerAfter);
     }
     while (currChildIdx + 1 < this._children.length) {
       this._children[currChildIdx + 1].apply(this._children[currChildIdx].playerAfter);
@@ -90,7 +90,7 @@ export class RouteSection extends RouteEntry {
     let entryList: RouteEntry[] = [this];
 
     if (this._children)
-      this._children.forEach(c => { entryList.push(...c.getEntryList()) })
+      this._children.forEach(c => { entryList.push(...c.entryList) })
 
     return entryList;
   }
@@ -209,6 +209,9 @@ export class RouteSection extends RouteEntry {
           break;
         case RouteGetPokemon.ENTRY_TYPE.toUpperCase():
           children.push(RouteGetPokemon.newFromJSONObject(game, e));
+          break;
+        case RouteSwapPokemon.ENTRY_TYPE.toUpperCase():
+          children.push(RouteSwapPokemon.newFromJSONObject(game, e));
           break;
         case RouteSection.ENTRY_TYPE.toUpperCase():
           children.push(RouteSection.newFromJSONObject(game, e));

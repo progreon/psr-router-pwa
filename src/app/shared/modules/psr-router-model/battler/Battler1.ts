@@ -74,7 +74,7 @@ export class Battler1 extends Battler {
   }
 
   evolve(key: EvolutionKey): Battler {
-    let p = this.pokemon.getEvolution(key)
+    let p = this.pokemon.getEvolution(key);
     if (p) {
       let evo = new Battler1(this.game, p, this.catchLocation, this.isTrainerMon, this.level);
       // TODO: evolution moves?
@@ -84,7 +84,7 @@ export class Battler1 extends Battler {
       evo._updateCurrentStats();
       return evo;
     } else {
-      return null;
+      return this;
     }
   }
 
@@ -95,6 +95,7 @@ export class Battler1 extends Battler {
   addXP(exp: number): Battler {
     this._levelExp += exp;
     let totExp = this.pokemon.expGroup.getTotalExp(this.level, this._levelExp);
+    let oldLevel = this.level;
     let newLevel = this.pokemon.expGroup.getLevel(totExp);
     if (this.level != newLevel) {
       this._levelExp -= this.pokemon.expGroup.getDeltaExp(this.level, newLevel);
@@ -111,8 +112,11 @@ export class Battler1 extends Battler {
       });
     }
 
-    let evo = this.evolve(new EvolutionKey(EvolutionKey.Type.Level, `${this.level}`));
-    return evo ? evo : this;
+    let evo: Battler = this;
+    for (let l = 1; l <= newLevel; l++) {
+      evo = evo.evolve(new EvolutionKey(EvolutionKey.Type.Level, `${l}`));
+    }
+    return evo;
   }
 
   useHPUp(count = 1): boolean {

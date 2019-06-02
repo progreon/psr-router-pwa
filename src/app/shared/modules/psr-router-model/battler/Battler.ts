@@ -45,7 +45,7 @@ export abstract class Battler {
    * @param participants  The number of participants in the battle (defaults to 1)
    * @returns Returns the modified/evolved battler (not a deep copy)
    */
-  abstract defeatBattler(battler: Battler, participants: number): Battler;
+  abstract defeatBattler(battler: Battler, participants?: number): Battler;
 
   /**
    * Tries to evolve the battler with the specified item.
@@ -254,6 +254,14 @@ export abstract class Battler {
    */
   getExp(participants: number = 1): number {
     return this.pokemon.getExp(this.level, participants, false, this.isTrainerMon);
+  }
+
+  getCurrentTotalExp() {
+    return this.pokemon.expGroup.getTotalExp(this.level, this.levelExp);
+  }
+
+  getCurrentExpToNextLevel() {
+    return this.pokemon.expGroup.getDeltaExp(this.level, this.level+1, this.levelExp);
   }
 
   abstract equals(battler: Battler): boolean;

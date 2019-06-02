@@ -9,7 +9,7 @@ import { ExperienceGroup } from "../ModelAbstract";
  */
 export abstract class Pokemon {
   public readonly key: string;
-  private evolutions: { [key: string]: Pokemon; };
+  public evolutions: { [key: string]: Pokemon; };
   private _luMoves: { level: number, move: string }[];
   private _tmMoves: string[];
   constructor(
@@ -18,7 +18,7 @@ export abstract class Pokemon {
     public readonly type1: Type,
     public readonly type2: Type,
     public readonly expGiven: number,
-    public readonly expGroup: ExperienceGroup, // TODO: to ExperienceGroup
+    public readonly expGroup: ExperienceGroup,
     public readonly hp: number,
     public readonly atk: number,
     public readonly def: number,

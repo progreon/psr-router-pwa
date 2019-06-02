@@ -135,6 +135,23 @@ function _PARSE3a_getRouteJSONEntries(scopedLines, filename) {
     };
     // Now entry type specific stuff
     switch (scopedLine.type) {
+      case Route.RouteSwapPokemon.ENTRY_TYPE.toUpperCase():
+        // Swap: <index1> <index2>
+        //     [<title> ::] <summary>
+        //     <description lines>
+        let indices = scopedLine.untypedLine.split(" ");
+        if (indices.length != 2 || indices[0] < 0 || indices[1] < 0) {
+          throw new Util.RouterError(`${filename}:${scopedLine.ln+1} Swap expects 2 positive indices`, "Parser Error");
+        }
+        entry.swaps = { index1: indices[0], index2: indices[1] };
+        if (scopedLine.scope && scopedLine.scope.length > 0) {
+          let titleLine = scopedLine.scope.shift();
+          [tOrS, ...s] = titleLine.line.split("::");
+          s = s && s.length > 0 ? s.join("::").trim() : "";
+          entry.info = { title: s ? tOrS.trim() : "", summary: s || tOrS };
+          entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
+        }
+        break;
       case Route.RouteGetPokemon.ENTRY_TYPE.toUpperCase():
         // GetP: [#]<option> [[#]<option> [..]]
         //     [<title> ::] <summary>
@@ -270,6 +287,20 @@ function _PARSE3R_getScopedEntryLines(routeJSONEntries) {
     // Now entry type specific stuff
     let type = jsonEntry.type && jsonEntry.type.toUpperCase();
     switch (type) {
+      case Route.RouteSwapPokemon.ENTRY_TYPE.toUpperCase():
+        scopedLine.line = Route.RouteSwapPokemon.ENTRY_TYPE + ":";
+        scopedLine.line += ` ${jsonEntry.swaps.index1} ${jsonEntry.swaps.index2}`;
+        if (jsonEntry.info) {
+          if (jsonEntry.info.summary) {
+            scopedLine.scope.push({ line: (jsonEntry.info.title ? jsonEntry.info.title + " :: " : "") + jsonEntry.info.summary });
+            if (jsonEntry.info.description) {
+              jsonEntry.info.description.split("\n").forEach(d => scopedLine.scope.push({ line: d.trim() }));
+            }
+          } else {
+            // TODO
+          }
+        }
+        break;
       case Route.RouteGetPokemon.ENTRY_TYPE.toUpperCase():
         scopedLine.line = Route.RouteGetPokemon.ENTRY_TYPE + ":";
         for (let i = 0; i < jsonEntry.choices.length; i++) {

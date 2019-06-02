@@ -9,7 +9,7 @@ class SlowExperienceGroup1 extends ExperienceGroup {
   }
 
   _getExpForLevel(l: number): number {
-    return 5 * l * l * l / 4;
+    return Math.floor(5 * l * l * l / 4);
   }
 }
 
@@ -23,7 +23,7 @@ class MediumSlowExperienceGroup1 extends ExperienceGroup {
 
   /** @inheritdoc */
   _getExpForLevel(l: number): number {
-    return 6 * l * l * l / 5 - 15 * l * l + 100 * l - 140;
+    return Math.floor(6 * l * l * l / 5) - 15 * l * l + 100 * l - 140;
   }
 }
 
@@ -51,7 +51,7 @@ class FastExperienceGroup1 extends ExperienceGroup {
 
   /** @inheritdoc */
   _getExpForLevel(l: number): number {
-    return 4 * l * l * l / 5;
+    return Math.floor(4 * l * l * l / 5);
   }
 }
 

@@ -114,6 +114,19 @@
           }
         },
         {
+          "type": "GetP",
+          "info": {
+            "summary": "TEMP: getting nidoran"
+          },
+          "choices": [
+            {
+              "pokemon": "NidoranM",
+              "level": 4
+            }
+          ],
+          "preference": 0
+        },
+        {
           "info": {
             "summary": "Get the hidden tree Potion"
           }
@@ -156,8 +169,13 @@
           "trainer": "Viridian Forest - BugCatcher 3"
         },
         {
+          "type": "Swap",
           "info": {
             "summary": "After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary"
+          },
+          "swaps": {
+            "index1": "0",
+            "index2": "1"
           }
         }
       ]

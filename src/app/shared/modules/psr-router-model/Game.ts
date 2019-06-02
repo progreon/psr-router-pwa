@@ -10,7 +10,7 @@ export class Game {
   private aliasedTrainers: { [key: string]: Trainer; };
   /**
    *
-   * @param model           The "model" classes and methods this game uses
+   * @param model           The "model" classes and methods this game uses. Use this to avoid circular references
    * @param engine          The "engine" classes and methods this game uses
    * @param experienceGroup The experience groups
    * @param info            The info on this game
@@ -106,7 +106,7 @@ export class Game {
     if (!name) {
       return undefined;
     } else {
-      return new DummyModel.PokemonDummy(name);
+      return new DummyModel.PokemonDummy(this, name);
     }
   }
 

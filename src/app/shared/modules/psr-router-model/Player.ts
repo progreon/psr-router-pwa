@@ -49,10 +49,10 @@ export class Player {
    * @param currentLocation
    */
   constructor( //
-    public readonly name: string, //
-    public readonly info: string, //
-    public readonly team: Battler[], //
-    public currentLocation: string // TODO: to Location?
+    public readonly name: string = "Red", //
+    public readonly info: string = "", //
+    public readonly team: Battler[] = [], //
+    public currentLocation: string = "" // TODO: to Location?
   ) {
     this._money = 0;
     this._bagItems = [];

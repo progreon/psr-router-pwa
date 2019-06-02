@@ -18,6 +18,9 @@ export function GetCurrentGame(): Game {
 export function SetCurrentRoute(route: Route.Route = null): Route.Route {
   window.app.route = route;
   window.app.game = route ? route.game : null;
+  if (route.getAllMessages().length == 0) {
+    route.apply();
+  }
   return route;
 }
 
@@ -30,7 +33,7 @@ export function LoadSavedRoute(): Route.Route {
   let route: Route.Route = null;
   if (routeJSON) {
     route = Route.Route.newFromJSONObject(JSON.parse(routeJSON));
-    route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+    route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
   }
   return SetCurrentRoute(route);
 }
@@ -75,7 +78,7 @@ export function LoadExampleRoute(routeName: string): Route.Route {
   let routeJSON = exampleRoutes[routeName];
   if (routeJSON) {
     let route = Route.Route.newFromJSONObject(routeJSON);
-    route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+    route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
     return SaveRoute(route);
   } else {
     return null;
@@ -93,7 +96,7 @@ export function LoadRouteFile(file: File): Promise<Route.Route> {
         try {
           console.log(e);
           let route = RouteIO.ImportFromFile(<string>((<FileReader>(e.target)).result), filename.search(/\.json$/) > 0, filename);
-          route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+          route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
           resolve(SaveRoute(route));
           // reject(e);
         } catch (e) {
