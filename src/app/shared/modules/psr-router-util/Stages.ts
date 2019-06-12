@@ -29,28 +29,28 @@ class Stages {
   /**
    * Get the attack stage.
    */
-  atk(): number {
+  public get atk(): number {
     return this._values[0];
   }
 
   /**
    * Get the defense stage.
    */
-  def(): number {
+  public get def(): number {
     return this._values[1];
   }
 
   /**
    * Get the speed stage.
    */
-  spd(): number {
+  public get spd(): number {
     return this._values[2];
   }
 
   /**
    * Get the special stage.
    */
-  spc(): number {
+  public get spc(): number {
     return this._values[3];
   }
 
@@ -66,11 +66,11 @@ class Stages {
   }
 
   toString(): string {
-    return "{atk:" + this.atk() + ", def:" + this.def() + ", spd:" + this.spd() + ", spc:" + this.spc() + "}";
+    return "{atk:" + this.atk + ", def:" + this.def + ", spd:" + this.spd + ", spc:" + this.spc + "}";
   }
 
   clone(): Stages {
-    return new Stages().setStages(this.atk(), this.def(), this.spd(), this.spc());
+    return new Stages().setStages(this.atk, this.def, this.spd, this.spc);
   }
 }
 

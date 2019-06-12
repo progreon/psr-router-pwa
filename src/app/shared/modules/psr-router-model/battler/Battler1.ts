@@ -22,6 +22,7 @@ export class Battler1 extends Battler {
     this._initPossibleDVs();
     this._statExp = [0, 0, 0, 0, 0];
     // this._statExp = [new Range(), new Range(), new Range(), new Range(), new Range()];
+    this._updateCurrentStats();
   }
 
   private _initPossibleDVs() {
@@ -190,7 +191,7 @@ export class Battler1 extends Battler {
   }
 
   getDVRanges(): DVRange[] {
-    let ranges: DVRange[];
+    let ranges: DVRange[] = [];
     for (let s = 0; s < 5; s++) {
       ranges.push(this.getDVRange(s));
     }

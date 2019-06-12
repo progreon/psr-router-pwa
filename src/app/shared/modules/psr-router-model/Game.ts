@@ -1,6 +1,6 @@
 import * as DummyModel from './ModelDummy';
 import { GameInfo, Item, Type, Trainer } from './Model';
-import { Move, Pokemon } from './ModelAbstract';
+import { Move, Pokemon, Engine } from './ModelAbstract';
 
 /**
  * Class representing a game.
@@ -23,7 +23,7 @@ export class Game {
    */
   constructor(
     public readonly model: any,
-    public readonly engine: any,
+    public readonly engine: Engine,
     public readonly info: GameInfo,
     public readonly experienceGroup: any,
     private items: { [key: string]: Item; },
@@ -156,5 +156,13 @@ export class Game {
       type.dummy = true;
       return type;
     }
+  }
+
+  getTypeMultiplier(typeAttacker: Type, typeDefender1: Type, typeDefender2: Type): number {
+    let f = this.typeChart[typeAttacker.key] && this.typeChart[typeAttacker.key][typeDefender1.key];
+    if (typeDefender2) {
+      f * this.typeChart[typeAttacker.key] && this.typeChart[typeAttacker.key][typeDefender2.key];
+    }
+    return f;
   }
 }
