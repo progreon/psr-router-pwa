@@ -18,7 +18,7 @@ export function GetCurrentGame(): Game {
 export function SetCurrentRoute(route: Route.Route = null): Route.Route {
   window.app.route = route;
   window.app.game = route ? route.game : null;
-  if (route.getAllMessages().length == 0) {
+  if (route && route.getAllMessages().length == 0) {
     route.apply();
   }
   return route;

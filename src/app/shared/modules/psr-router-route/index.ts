@@ -6,4 +6,4 @@ export { RouteDirections } from './RouteDirections';
 export { RouteGetPokemon } from './RouteGetPokemon';
 export { RouteSection } from './RouteSection';
 export { RouteSwapPokemon } from './RouteSwapPokemon';
-export { Route } from './route';
+export { Route } from './Route';

@@ -6,6 +6,7 @@ import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import * as ModelAbstract from 'SharedModules/psr-router-model/ModelAbstract';
+import { EntryJSON } from './parse/EntryJSON';
 // import * as Model1 from 'SharedModules/psr-router-model/Model1';
 
 /**
@@ -58,20 +59,20 @@ export class RouteGetPokemon extends RouteEntry {
     return player;
   }
 
-  getJSONObject(): any {
+  getJSONObject(): EntryJSON {
     let obj = super.getJSONObject();
-    obj.choices = [];
-    this._choices.forEach(pl => obj.choices.push({ pokemon: pl.pokemon.name, level: pl.level }));
-    obj.preference = this._preference;
+    obj.properties.choices = [];
+    this._choices.forEach(pl => obj.properties.choices.push({ pokemon: pl.pokemon.name, level: pl.level }));
+    obj.properties.preference = this._preference;
     return obj;
   }
 
-  static newFromJSONObject(game: Model.Game, obj: any): RouteGetPokemon {
+  static newFromJSONObject(obj: EntryJSON, game: Model.Game): RouteGetPokemon {
     let messages: RouterMessage[] = [];
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     let location = undefined; // TODO, parse from obj.location
     let choices: ModelAbstract.Battler[] = [];
-    obj.choices.forEach((pl: { pokemon: string; level: number; }) => {
+    obj.properties.choices.forEach((pl: { pokemon: string; level: number; }) => {
       let pokemon = game.findPokemonByName(pl.pokemon);
       if (!pokemon) {
         pokemon = game.getDummyPokemon(pl.pokemon);
@@ -85,7 +86,7 @@ export class RouteGetPokemon extends RouteEntry {
         messages.push(new RouterMessage(`Not supported in gen2+ yet!`, RouterMessage.Type.Error));
       }
     });
-    let entry = new RouteGetPokemon(game, choices, obj.preference, info, location);
+    let entry = new RouteGetPokemon(game, choices, obj.properties.preference, info, location);
     messages.forEach(m => entry.addMessage(m));
     return entry;
   }

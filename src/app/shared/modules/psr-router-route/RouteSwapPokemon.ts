@@ -5,6 +5,7 @@ import { RouterMessage } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
 import * as Model from 'SharedModules/psr-router-model/Model';
+import { EntryJSON } from './parse/EntryJSON';
 // import * as Model1 from 'SharedModules/psr-router-model/Model1';
 
 /**
@@ -51,19 +52,19 @@ export class RouteSwapPokemon extends RouteEntry {
     return player;
   }
 
-  getJSONObject(): any {
+  getJSONObject(): EntryJSON {
     let obj = super.getJSONObject();
-    obj.swaps = { index1: this.index1, index2: this.index2 };
+    obj.properties.swaps = { index1: this.index1, index2: this.index2 };
     return obj;
   }
 
-  static newFromJSONObject(game: Model.Game, obj: any): RouteSwapPokemon {
+  static newFromJSONObject(obj: EntryJSON, game: Model.Game): RouteSwapPokemon {
     let messages: RouterMessage[] = [];
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     let location = undefined; // TODO, parse from obj.location
 
-    let index1 = obj.swaps.index1;
-    let index2 = obj.swaps.index2;
+    let index1 = obj.properties.swaps.index1;
+    let index2 = obj.properties.swaps.index2;
     if (index1 < 0 || index2 < 0) {
       messages.push(new RouterMessage("Wrong indices", RouterMessage.Type.Error));
     }

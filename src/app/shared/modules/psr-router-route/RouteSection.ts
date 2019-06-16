@@ -6,6 +6,7 @@ import { RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon, RouteSwapPok
 import { RouteEntryInfo } from './util';
 import { Game } from '../psr-router-model/Game';
 import { Location, Player, Trainer } from '../psr-router-model/Model';
+import { EntryJSON } from './parse/EntryJSON';
 
 /**
  * A class representing a route-setions that holds multiple child entries.
@@ -188,37 +189,37 @@ export class RouteSection extends RouteEntry {
     return <RouteSection>this._addEntry(new RouteSection(this.game, new RouteEntryInfo(title, description), location ? location : super._location, children));
   }
 
-  getJSONObject(): any {
+  getJSONObject(): EntryJSON {
     let obj = super.getJSONObject();
     obj.entries = [];
     this._children.forEach(c => obj.entries.push(c.getJSONObject()));
     return obj;
   }
 
-  static newFromJSONObject(game: Game, obj: any): RouteSection {
+  static newFromJSONObject(obj: EntryJSON, game: Game): RouteSection {
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     let children: RouteEntry[] = [];
     obj.entries.forEach(e => {
       let type = e.type && e.type.toUpperCase();
       switch (type) {
         case RouteBattle.ENTRY_TYPE.toUpperCase():
-          children.push(RouteBattle.newFromJSONObject(game, e));
+          children.push(RouteBattle.newFromJSONObject(e, game));
           break;
         case RouteEntry.ENTRY_TYPE.toUpperCase():
-          children.push(RouteEntry.newFromJSONObject(game, e));
+          children.push(RouteEntry.newFromJSONObject(e, game));
           break;
         case RouteGetPokemon.ENTRY_TYPE.toUpperCase():
-          children.push(RouteGetPokemon.newFromJSONObject(game, e));
+          children.push(RouteGetPokemon.newFromJSONObject(e, game));
           break;
         case RouteSwapPokemon.ENTRY_TYPE.toUpperCase():
-          children.push(RouteSwapPokemon.newFromJSONObject(game, e));
+          children.push(RouteSwapPokemon.newFromJSONObject(e, game));
           break;
         case RouteSection.ENTRY_TYPE.toUpperCase():
-          children.push(RouteSection.newFromJSONObject(game, e));
+          children.push(RouteSection.newFromJSONObject(e, game));
           break;
         case RouteDirections.ENTRY_TYPE.toUpperCase():
         default:
-          children.push(RouteDirections.newFromJSONObject(game, e));
+          children.push(RouteDirections.newFromJSONObject(e, game));
       }
     });
 

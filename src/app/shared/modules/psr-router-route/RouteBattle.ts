@@ -6,6 +6,7 @@ import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
 import { Game } from '../psr-router-model/Game';
 import { Trainer, Location, Player } from '../psr-router-model/Model';
+import { EntryJSON } from './parse/EntryJSON';
 
 /**
  * A class representing a route-entry that handles battles.
@@ -70,25 +71,25 @@ export class RouteBattle extends RouteEntry {
     return player;
   }
 
-  getJSONObject(): any {
-    let obj = super.getJSONObject();
-    obj.trainer = this.trainer.alias || this.trainer.key;
+  getJSONObject(): EntryJSON {
+    let obj: EntryJSON = super.getJSONObject();
+    obj.properties.trainer = this.trainer.alias || this.trainer.key;
     if (this.shareExp) {
-      obj.shareExp = this.shareExp;
+      obj.properties.shareExp = this.shareExp;
     }
     return obj;
   }
 
-  static newFromJSONObject(game: Game, obj: any): RouteBattle {
+  static newFromJSONObject(obj: EntryJSON, game: Game): RouteBattle {
     let messages: RouterMessage[] = [];
-    let trainer = game.findTrainerByKeyOrAlias(obj.trainer);
+    let trainer = game.findTrainerByKeyOrAlias(obj.properties.trainer);
     if (!trainer) {
-      trainer = game.getDummyTrainer(obj.trainer);
+      trainer = game.getDummyTrainer(obj.properties.trainer);
       if (!game.info.unsupported) {
-        messages.push(new RouterMessage(`Trainer "${obj.trainer}" not found!`, RouterMessage.Type.Error));
+        messages.push(new RouterMessage(`Trainer "${obj.properties.trainer}" not found!`, RouterMessage.Type.Error));
       }
     }
-    let shareExp = obj.shareExp;
+    let shareExp = obj.properties.shareExp;
     let location = undefined; // TODO, parse from obj.location
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     let entry = new RouteBattle(game, trainer, info, location, shareExp);

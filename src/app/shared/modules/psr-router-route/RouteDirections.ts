@@ -6,6 +6,7 @@ import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
 import { Game } from '../psr-router-model/Game';
 import { Location } from '../psr-router-model/Model';
+import { EntryJSON } from './parse/EntryJSON';
 
 /**
  * A class representing a route-entry.
@@ -29,11 +30,11 @@ export class RouteDirections extends RouteEntry {
     return RouteDirections.ENTRY_TYPE;
   }
 
-  getJSONObject(): any {
+  getJSONObject(): EntryJSON {
     return super.getJSONObject();
   }
 
-  static newFromJSONObject(game: Game, obj: any): RouteDirections {
+  static newFromJSONObject(obj: EntryJSON, game: Game): RouteDirections {
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     let location: Location = null; // TODO, parse from obj.location
     return new RouteDirections(game, info, location);

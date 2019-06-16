@@ -8,6 +8,8 @@ import { RouteSection } from '.';
 import { Game } from '../psr-router-model/Game';
 import { Location, Player } from '../psr-router-model/Model';
 import { RouteEntry } from './RouteEntry';
+import { EntryJSON } from './parse/EntryJSON';
+import { RouteJSON } from './parse/RouteJSON';
 // import { saveAs } from 'file-saver/FileSaver';
 
 /**
@@ -44,18 +46,12 @@ export class Route extends RouteSection {
     return messages;
   }
 
-  getJSONObject(): any {
+  getJSONObject(): EntryJSON {
     let routeSectionJSON = super.getJSONObject();
-    let routeJSON = {
-      game: this.game.info.key,
-      shortname: this.shortname,
-      info: routeSectionJSON.info,
-      entries: routeSectionJSON.entries
-    };
-    return routeJSON;
+    return new RouteJSON(this.game.info.key, this.shortname, routeSectionJSON.info, routeSectionJSON.entries);
   }
 
-  static newFromJSONObject(obj: any): Route {
+  static newFromJSONObject(obj: RouteJSON): Route {
     if (!obj) {
       // TODO: throw exception?
     } else if (!obj.game) {
@@ -65,7 +61,7 @@ export class Route extends RouteSection {
     if (!game) {
       // TODO: throw exception?
     }
-    let rs = RouteSection.newFromJSONObject(game, obj);
+    let rs = RouteSection.newFromJSONObject(obj, game);
     let player = new Player(game.info.name);
     let route = new Route(rs.game, new RouteEntryInfo(rs.info.title, rs.info.summary), obj.shortname, rs.location, rs.children); // TODO: rs.info
     route._playerBefore = player;
