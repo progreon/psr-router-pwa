@@ -32,8 +32,13 @@ export function LoadSavedRoute(): Route.Route {
   let routeJSON = localStorage.getItem(lsKeySavedRoute);
   let route: Route.Route = null;
   if (routeJSON) {
-    route = Route.Route.newFromJSONObject(JSON.parse(routeJSON));
-    route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+    try {
+      route = Route.Route.newFromJSONObject(JSON.parse(routeJSON));
+      route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+    } catch (e) {
+      console.error(e);
+      window.setTimeout(() => window.alert("Something went wrong while loading the last opened route, please load a new route. Check the console for more details."), 100);
+    }
   }
   return SetCurrentRoute(route);
 }

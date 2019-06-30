@@ -16,13 +16,15 @@ export class Battler1 extends Battler {
   private _statExp: number[];
   // private _statExp: Range[];
 
-  constructor(game: Game, pokemon: Pokemon, catchLocation: any, isTrainerMon: boolean, level: number) {
+  constructor(game: Game, pokemon: Pokemon, catchLocation: any, isTrainerMon: boolean, level: number, isClone?: boolean) {
     super(game, pokemon, catchLocation, isTrainerMon, level);
     this._currentStats = [new Range(), new Range(), new Range(), new Range(), new Range()];
     this._initPossibleDVs();
     this._statExp = [0, 0, 0, 0, 0];
     // this._statExp = [new Range(), new Range(), new Range(), new Range(), new Range()];
-    this._updateCurrentStats();
+    if (!isClone) {
+      this._updateCurrentStats();
+    }
   }
 
   private _initPossibleDVs() {
@@ -335,7 +337,7 @@ export class Battler1 extends Battler {
   }
 
   clone(): Battler {
-    let newB = new Battler1(this.game, this.pokemon, this.catchLocation, this.isTrainerMon, this.level);
+    let newB = new Battler1(this.game, this.pokemon, this.catchLocation, this.isTrainerMon, this.level, true);
 
     newB._moveset = this._moveset.slice(0);
     newB._levelExp = this._levelExp;

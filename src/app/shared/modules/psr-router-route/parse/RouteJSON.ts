@@ -5,7 +5,7 @@ export class RouteJSON extends EntryJSON {
         public game: string,
         public shortname: string,
         info: { title?: string, summary?: string, description?: string },
-        entries: EntryJSON[] = []
+        entries: EntryJSON[]
     ) {
         super("Route", info, null, entries, null);
     }
