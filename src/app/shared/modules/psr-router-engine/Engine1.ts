@@ -48,8 +48,8 @@ export class Engine1 implements Engine {
 
     // (1), (2), (4)
     // console.log("_getDamageRange", m.key);
-    let atkRange = isPhysical ? a.getBoostedAtk(isCrit ? 0 : bbA.atk, isCrit ? 0 : stagesA.atk) : a.getBoostedAtk(isCrit ? 0 : bbA.spc, isCrit ? 0 : stagesA.spc);
-    let defRange = isPhysical ? d.getBoostedAtk(isCrit ? 0 : bbD.atk, isCrit ? 0 : stagesD.atk) : d.getBoostedAtk(isCrit ? 0 : bbD.spc, isCrit ? 0 : stagesD.spc);
+    let atkRange = isPhysical ? a.getBoostedAtk(isCrit ? 0 : bbA.atk, isCrit ? 0 : stagesA.atk) : a.getBoostedSpc(isCrit ? 0 : bbA.spc, isCrit ? 0 : stagesA.spc);
+    let defRange = isPhysical ? d.getBoostedDef(isCrit ? 0 : bbD.atk, isCrit ? 0 : stagesD.atk) : d.getBoostedSpc(isCrit ? 0 : bbD.spc, isCrit ? 0 : stagesD.spc);
     // console.log("_getDamageRange", "---", atkRange.toString(), defRange.toString());
     atkRange.getValuesArray().forEach(atk => {
       // TODO: (3) attacker is burned

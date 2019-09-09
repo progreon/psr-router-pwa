@@ -61,7 +61,7 @@ export function SaveRoute(route: Route.Route = null): Route.Route {
 import * as redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
 import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
 // import * as exampleRoute from 'SharedData/routes/example_route.json';
-// import * as redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
+import * as redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
 // import * as blueDummy from 'SharedData/routes/blue_dummy.json';
 import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
 // import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
@@ -70,7 +70,7 @@ let exampleRoutes: { [key: string]: any; } = {};
 exampleRoutes[redAnyGlitchlessBasic.shortname] = redAnyGlitchlessBasic;
 exampleRoutes[redAnyGlitchlessClassic.shortname] = redAnyGlitchlessClassic;
 // exampleRoutes[exampleRoute.shortname] = exampleRoute;
-// exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
+exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
 // exampleRoutes[blueDummy.shortname] = blueDummy;
 exampleRoutes[yellowDummy.shortname] = yellowDummy;
 // exampleRoutes[crystalDummy.shortname] = crystalDummy;
