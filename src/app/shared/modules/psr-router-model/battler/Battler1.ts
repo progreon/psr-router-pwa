@@ -16,10 +16,10 @@ export class Battler1 extends Battler {
   private _statExp: number[];
   // private _statExp: Range[];
 
-  constructor(game: Game, pokemon: Pokemon, catchLocation: any, isTrainerMon: boolean, level: number, isClone?: boolean) {
+  constructor(game: Game, pokemon: Pokemon, catchLocation: any, isTrainerMon: boolean, level: number, isClone?: boolean, dvRanges?: DVRange[]) {
     super(game, pokemon, catchLocation, isTrainerMon, level);
     this._currentStats = [new Range(), new Range(), new Range(), new Range(), new Range()];
-    this._initPossibleDVs();
+    this._initPossibleDVs(dvRanges);
     this._statExp = [0, 0, 0, 0, 0];
     // this._statExp = [new Range(), new Range(), new Range(), new Range(), new Range()];
     if (!isClone) {
@@ -27,10 +27,14 @@ export class Battler1 extends Battler {
     }
   }
 
-  private _initPossibleDVs() {
+  private _initPossibleDVs(dvRanges?: DVRange[]) {
     // TODO: with encounter rate
+    // Clear DVs
     this._possibleDVs = [[], [], [], [], []];
-    if (this.isTrainerMon) {
+    if (dvRanges) {
+      // TODO: handle hp dv's as well?
+      this._initDVs(dvRanges[1].values, dvRanges[2].values, dvRanges[3].values, dvRanges[4].values);
+    } else if (this.isTrainerMon) {
       this._initDVs([9], [8], [8], [8]);
     } else {
       for (let i = 0; i < 5; i++) {

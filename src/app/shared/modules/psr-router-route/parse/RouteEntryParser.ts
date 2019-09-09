@@ -13,7 +13,7 @@ import { RouteEntry } from "../RouteEntry";
  *     type,
  *     info: { title, summary, description },
  *     location, // TODO
- *     entryString // TEMP
+ *     properties: { entryString } // TEMP
  * }
  */
 export class RouteEntryParser implements IRouteEntryParser {

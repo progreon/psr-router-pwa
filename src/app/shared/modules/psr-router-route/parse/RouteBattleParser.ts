@@ -16,8 +16,10 @@ import { RouteBattle } from "../RouteBattle";
  *     type,
  *     info: { title, summary, description },
  *     location, // TODO
- *     trainer
- *     shareExp
+ *     properties: {
+ *         trainer,
+ *         shareExp
+ *     }
  * }
  */
 export class RouteBattleParser implements IRouteEntryParser {

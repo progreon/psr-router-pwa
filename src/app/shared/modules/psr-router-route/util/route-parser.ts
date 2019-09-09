@@ -42,8 +42,9 @@ function _PARSE1_getFileLines(routeText: string): ParserLine[] {
     while (d < line.length && line.charAt(d) === '\t')
       d++;
 
-    line = line.trim();
-    if (line !== "" && !line.startsWith("//")) {
+    let ss = line.indexOf('//');
+    line = ss < 0 ? line.trim() : line.substr(0, ss).trim(); // comments like these work now!
+    if (line !== "") {
       fileLines.push(new ParserLine(d, line, l));
     }
     l++;

@@ -44,13 +44,15 @@
           "info": {
             "summary": "Choose Squirtle, and give it a one-character name"
           },
-          "choices": [
-            {
-              "pokemon": "Squirtle",
-              "level": 5
-            }
-          ],
-          "preference": 0
+          "properties": {
+            "choices": [
+              {
+                "pokemon": "Squirtle",
+                "level": 5
+              }
+            ],
+            "preference": 0
+          }
         },
         {
           "type": "B",
@@ -58,7 +60,9 @@
             "title": "Rival 1",
             "summary": "Tail Whip once (or twice if Growl turn 1), then spam Tackle"
           },
-          "trainer": "Rival 1 - Bulbasaur"
+          "properties": {
+            "trainer": "Rival 1 - Bulbasaur"
+          }
         }
       ]
     },
@@ -107,9 +111,20 @@
       },
       "entries": [
         {
+          "type": "Manip",
           "info": {
-            "summary": "Manip: Route 22 :: 3 :: 15 15 14 15",
-            "description": "Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name"
+            "summary": "Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name"
+          },
+          "properties": {
+            "pokemon": "NIDORANM",
+            "level": 4,
+            "dvs": [
+              "13",
+              "15",
+              "15",
+              "14",
+              "15"
+            ]
           }
         },
         {
@@ -149,12 +164,20 @@
             "title": "Weedle Guy",
             "summary": "Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion"
           },
-          "trainer": "Viridian Forest - BugCatcher 3"
+          "properties": {
+            "trainer": "Viridian Forest - BugCatcher 3"
+          }
         },
         {
+          "type": "Swap",
           "info": {
-            "summary": "Swap: 0 1",
-            "description": "After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary"
+            "summary": "After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary"
+          },
+          "properties": {
+            "swaps": {
+              "index1": "0",
+              "index2": "1"
+            }
           }
         }
       ]
@@ -170,17 +193,19 @@
           "info": {
             "summary": "Switch to Squirtle to share exp, use Bubble to kill Geodude and Onix. If Onix uses Bide on the turn you switch in, use Tail Whip twice, then Bubble"
           },
-          "trainer": "Brock",
-          "shareExp": [
-            [
-              0,
-              1
-            ],
-            [
-              0,
-              1
+          "properties": {
+            "trainer": "Brock",
+            "shareExp": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                1
+              ]
             ]
-          ]
+          }
         },
         {
           "info": {
@@ -201,7 +226,9 @@
           "info": {
             "summary": "Leer + HA x2 on all three, tackle if no kill or in range"
           },
-          "trainer": "Route 3 - BugCatcher 1"
+          "properties": {
+            "trainer": "Route 3 - BugCatcher 1"
+          }
         },
         {
           "info": {
@@ -213,21 +240,27 @@
           "info": {
             "summary": "Leer + HA x2 on both (switch HA with Leer on ekans)"
           },
-          "trainer": "Shorts Guy"
+          "properties": {
+            "trainer": "Shorts Guy"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "HA x2, HA x3, HA x2, HA x2 + Tackle"
           },
-          "trainer": "Route 3 - BugCatcher 2"
+          "properties": {
+            "trainer": "Route 3 - BugCatcher 2"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "HA x2, HA x3-4"
           },
-          "trainer": "Route 3 - BugCatcher 3"
+          "properties": {
+            "trainer": "Route 3 - BugCatcher 3"
+          }
         },
         {
           "info": {
@@ -251,7 +284,7 @@
         {
           "info": {
             "summary": "Follow this path up until the Lass",
-            "description": "[[http://i.imgur.com/F91yw13.png]]"
+            "description": "[[http:"
           }
         },
         {
@@ -270,7 +303,9 @@
           "info": {
             "summary": "HA x3, HA x2 + Poison Sting"
           },
-          "trainer": "Mt. Moon 1F - SuperNerd"
+          "properties": {
+            "trainer": "Mt. Moon 1F - SuperNerd"
+          }
         },
         {
           "info": {
@@ -287,7 +322,9 @@
           "info": {
             "summary": "HA x2 + PS, HA x2, you should reach Lv. 16 and evolve into Nidorino here"
           },
-          "trainer": "Mt. Moon 1F - Lass 1"
+          "properties": {
+            "trainer": "Mt. Moon 1F - Lass 1"
+          }
         },
         {
           "info": {
@@ -296,8 +333,18 @@
           }
         },
         {
-          "info": {
-            "summary": "Manip: Mt. Moon B2F :: 6 :: 14 15 14 3 // TODO: change slot"
+          "type": "Manip",
+          "info": {},
+          "properties": {
+            "pokemon": "PARAS",
+            "level": 11,
+            "dvs": [
+              "5",
+              "14",
+              "15",
+              "14",
+              "3"
+            ]
           }
         },
         {
@@ -312,14 +359,18 @@
             "title": "Rocket",
             "summary": "HA + PS, HA x2"
           },
-          "trainer": "Mt. Moon B2F - Rocket 1"
+          "properties": {
+            "trainer": "Mt. Moon B2F - Rocket 1"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "HA x2, HA + PS, HA x2 + PS"
           },
-          "trainer": "Mt. Moon B2F - SuperNerd"
+          "properties": {
+            "trainer": "Mt. Moon B2F - SuperNerd"
+          }
         },
         {
           "info": {
@@ -360,35 +411,45 @@
             "title": "Bridge Rival",
             "summary": "HA x3, HA, HA + PS, HA x2, if you get SA'd by Pidgeotto, switch to flier and let it die"
           },
-          "trainer": "Bridge Rival - Bulbasaur"
+          "properties": {
+            "trainer": "Bridge Rival - Bulbasaur"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "HA + PS, HA + PS"
           },
-          "trainer": "Route 24 - BugCatcher"
+          "properties": {
+            "trainer": "Route 24 - BugCatcher"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "HA + PS, HA x2, stay in if SA'd"
           },
-          "trainer": "Route 24 - Lass 2"
+          "properties": {
+            "trainer": "Route 24 - Lass 2"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "HA, HA + PS, HA"
           },
-          "trainer": "Route 24 - Youngster"
+          "properties": {
+            "trainer": "Route 24 - Youngster"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "HA + PS, HA x2, stay in if SA'd"
           },
-          "trainer": "Route 24 - Lass 1"
+          "properties": {
+            "trainer": "Route 24 - Lass 1"
+          }
         },
         {
           "info": {
@@ -402,14 +463,18 @@
             "title": "Mankey Guy",
             "summary": "Thrash, switch HA with Thrash"
           },
-          "trainer": "Route 24 - JrTrainerM 1"
+          "properties": {
+            "trainer": "Route 24 - JrTrainerM 1"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 24 - Rocket"
+          "properties": {
+            "trainer": "Route 24 - Rocket"
+          }
         }
       ]
     },
@@ -429,7 +494,9 @@
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 25 - Hiker 1"
+          "properties": {
+            "trainer": "Route 25 - Hiker 1"
+          }
         },
         {
           "info": {
@@ -442,21 +509,27 @@
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 25 - Lass 1"
+          "properties": {
+            "trainer": "Route 25 - Lass 1"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 25 - JrTrainerM"
+          "properties": {
+            "trainer": "Route 25 - JrTrainerM"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 25 - Lass 2"
+          "properties": {
+            "trainer": "Route 25 - Lass 2"
+          }
         },
         {
           "info": {
@@ -482,14 +555,18 @@
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Cerulean Gym - JrTrainerF"
+          "properties": {
+            "trainer": "Cerulean Gym - JrTrainerF"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash and pray"
           },
-          "trainer": "Misty"
+          "properties": {
+            "trainer": "Misty"
+          }
         }
       ]
     },
@@ -504,7 +581,9 @@
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Cerulean City - Rocket"
+          "properties": {
+            "trainer": "Cerulean City - Rocket"
+          }
         },
         {
           "info": {
@@ -527,14 +606,18 @@
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 6 - JrTrainerF 2"
+          "properties": {
+            "trainer": "Route 6 - JrTrainerF 2"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 6 - JrTrainerM 2"
+          "properties": {
+            "trainer": "Route 6 - JrTrainerM 2"
+          }
         }
       ]
     },
@@ -568,7 +651,9 @@
                 "title": "Boat Rival",
                 "summary": "HA x2 or BB x2, Thrash or HA x2 or BB x2, Thrash, if you get SA'd or confused, sacrifice your weakest slave"
               },
-              "trainer": "Boat Rival - Bulbasaur"
+              "properties": {
+                "trainer": "Boat Rival - Bulbasaur"
+              }
             },
             {
               "info": {
@@ -587,7 +672,7 @@
             {
               "info": {
                 "summary": "Menu: On the tile before the Cut bush, teach BB over tackle if you haven't yet",
-                "description": "SWAP: Repel :: 0\nTM: Cut :: 3 // TODO: fix \"TM: HM_01 :: 3\"\nTM: Dig :: 3"
+                "description": "SWAP: Repel :: 0\nTM: Cut :: 3\nTM: Dig :: 3"
               }
             },
             {
@@ -600,7 +685,9 @@
               "info": {
                 "summary": "BB x2, Thrash"
               },
-              "trainer": "Surge"
+              "properties": {
+                "trainer": "Surge"
+              }
             },
             {
               "info": {
@@ -648,14 +735,18 @@
           "info": {
             "summary": "Thrash, if you get confused and are at low HP: switch to your weakest slave and back, if you get put to sleep: use your Full Restore"
           },
-          "trainer": "Route 9 - JrTrainerF 1"
+          "properties": {
+            "trainer": "Route 9 - JrTrainerF 1"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 9 - BugCatcher 2"
+          "properties": {
+            "trainer": "Route 9 - BugCatcher 2"
+          }
         },
         {
           "info": {
@@ -674,7 +765,7 @@
         {
           "info": {
             "summary": "Map to get through Rock Tunnel",
-            "description": "1F[[http://i.imgur.com/oPBnthL.png]]2F[[http://i.imgur.com/SMZikOB.png]]"
+            "description": "1F[[http:"
           }
         },
         {
@@ -682,21 +773,27 @@
           "info": {
             "summary": "BB, TB"
           },
-          "trainer": "Rock Tunnel 1F - Pokemaniac"
+          "properties": {
+            "trainer": "Rock Tunnel 1F - Pokemaniac"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "TB"
           },
-          "trainer": "Rock Tunnel B1F - Pokemaniac 3"
+          "properties": {
+            "trainer": "Rock Tunnel B1F - Pokemaniac 3"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Rock Tunnel B1F - JrTrainerF 2"
+          "properties": {
+            "trainer": "Rock Tunnel B1F - JrTrainerF 2"
+          }
         },
         {
           "info": {
@@ -715,14 +812,18 @@
           "info": {
             "summary": "BB, BB, BB"
           },
-          "trainer": "Rock Tunnel B1F - Hiker 1"
+          "properties": {
+            "trainer": "Rock Tunnel B1F - Hiker 1"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Rock Tunnel 1F - JrTrainerF 2"
+          "properties": {
+            "trainer": "Rock Tunnel 1F - JrTrainerF 2"
+          }
         },
         {
           "info": {
@@ -742,7 +843,9 @@
           "info": {
             "summary": "Thrash or BB, Thrash"
           },
-          "trainer": "Route 8 - Gambler 2"
+          "properties": {
+            "trainer": "Route 8 - Gambler 2"
+          }
         },
         {
           "info": {
@@ -846,7 +949,9 @@
             "title": "Tower Rival",
             "summary": "X Accuracy + HD all (x5)"
           },
-          "trainer": "Tower Rival - Bulbasaur"
+          "properties": {
+            "trainer": "Tower Rival - Bulbasaur"
+          }
         },
         {
           "info": {
@@ -858,7 +963,9 @@
           "info": {
             "summary": "Rock Slide, Rock slide"
           },
-          "trainer": "Pokémon Tower 4F - Channeler 2"
+          "properties": {
+            "trainer": "Pokémon Tower 4F - Channeler 2"
+          }
         },
         {
           "info": {
@@ -882,14 +989,18 @@
           "info": {
             "summary": "Rock Slide"
           },
-          "trainer": "Pokémon Tower 6F - Channeler 2"
+          "properties": {
+            "trainer": "Pokémon Tower 6F - Channeler 2"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Rock Slide"
           },
-          "trainer": "Pokémon Tower 6F - Channeler 3"
+          "properties": {
+            "trainer": "Pokémon Tower 6F - Channeler 3"
+          }
         },
         {
           "info": {
@@ -908,21 +1019,27 @@
           "info": {
             "summary": "TB, TB, TB"
           },
-          "trainer": "Pokémon Tower 7F - Rocket 1"
+          "properties": {
+            "trainer": "Pokémon Tower 7F - Rocket 1"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "X Accuracy + HD, HD"
           },
-          "trainer": "Pokémon Tower 7F - Rocket 2"
+          "properties": {
+            "trainer": "Pokémon Tower 7F - Rocket 2"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "TB, TB or Thrash, Thrash"
           },
-          "trainer": "Pokémon Tower 7F - Rocket 3"
+          "properties": {
+            "trainer": "Pokémon Tower 7F - Rocket 3"
+          }
         },
         {
           "info": {
@@ -996,7 +1113,7 @@
         {
           "info": {
             "summary": "Map of the Safari Zone",
-            "description": "[[http://i.imgur.com/oBebL5z.jpg]]"
+            "description": "[[http:"
           }
         },
         {
@@ -1054,7 +1171,9 @@
           "info": {
             "summary": "X Acc + HD"
           },
-          "trainer": "Silph Co. 10F - Rocket"
+          "properties": {
+            "trainer": "Silph Co. 10F - Rocket"
+          }
         },
         {
           "info": {
@@ -1087,7 +1206,9 @@
           "info": {
             "summary": "EQ (switch EQ & HD)"
           },
-          "trainer": "Silph Co. 5F - Rocket 1"
+          "properties": {
+            "trainer": "Silph Co. 5F - Rocket 1"
+          }
         },
         {
           "info": {
@@ -1116,7 +1237,9 @@
             "title": "Silph Rival",
             "summary": "X_Accuracy + X_Speed + X_Special + HD, TB, EQ, EQ, HD (the \"safe\" option)"
           },
-          "trainer": "Silph Rival - Bulbasaur"
+          "properties": {
+            "trainer": "Silph Rival - Bulbasaur"
+          }
         },
         {
           "info": {
@@ -1128,7 +1251,9 @@
           "info": {
             "summary": "IB, EQ, IB"
           },
-          "trainer": "Silph Co. 11F - Rocket 2"
+          "properties": {
+            "trainer": "Silph Co. 11F - Rocket 2"
+          }
         },
         {
           "type": "B",
@@ -1136,7 +1261,9 @@
             "title": "Silph Gio",
             "summary": "X_Accuracy + EQ, HD, IB, HD"
           },
-          "trainer": "Silph Co. 11F - Giovanni"
+          "properties": {
+            "trainer": "Silph Co. 11F - Giovanni"
+          }
         },
         {
           "info": {
@@ -1161,7 +1288,9 @@
           "info": {
             "summary": "EQ all (x4)"
           },
-          "trainer": "Fuchsia Gym - Juggler 1"
+          "properties": {
+            "trainer": "Fuchsia Gym - Juggler 1"
+          }
         },
         {
           "info": {
@@ -1174,14 +1303,18 @@
           "info": {
             "summary": "EQ, EQ + TB"
           },
-          "trainer": "Fuchsia Gym - Juggler 2"
+          "properties": {
+            "trainer": "Fuchsia Gym - Juggler 2"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "X_Accuracy + HD, HD, HD, TB x2 and Pokeflute until Selfdestruct"
           },
-          "trainer": "Koga"
+          "properties": {
+            "trainer": "Koga"
+          }
         },
         {
           "info": {
@@ -1219,7 +1352,7 @@
         {
           "info": {
             "summary": "Take this path through the Cinnabar Mansion, flipping the switches and taking the candies on the way",
-            "description": "[[http://i.imgur.com/UktHB4j.jpg]]"
+            "description": "[[http:"
           }
         },
         {
@@ -1270,14 +1403,18 @@
           "info": {
             "summary": "IB"
           },
-          "trainer": "Celadon Gym - Beauty 3"
+          "properties": {
+            "trainer": "Celadon Gym - Beauty 3"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "IB all (x3)"
           },
-          "trainer": "Erika"
+          "properties": {
+            "trainer": "Erika"
+          }
         },
         {
           "info": {
@@ -1302,7 +1439,9 @@
           "info": {
             "summary": "EQ all (x4)"
           },
-          "trainer": "Blaine"
+          "properties": {
+            "trainer": "Blaine"
+          }
         },
         {
           "info": {
@@ -1327,7 +1466,9 @@
           "info": {
             "summary": "EQ all (x4)"
           },
-          "trainer": "Sabrina"
+          "properties": {
+            "trainer": "Sabrina"
+          }
         },
         {
           "info": {
@@ -1353,14 +1494,18 @@
           "info": {
             "summary": "IB"
           },
-          "trainer": "Viridian Gym - CooltrainerM 3"
+          "properties": {
+            "trainer": "Viridian Gym - CooltrainerM 3"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "EQ all (x3)"
           },
-          "trainer": "Viridian Gym - Blackbelt 3"
+          "properties": {
+            "trainer": "Viridian Gym - Blackbelt 3"
+          }
         },
         {
           "info": {
@@ -1372,7 +1517,9 @@
           "info": {
             "summary": "IB, IB, EQ, EQ, IB x2"
           },
-          "trainer": "Giovanni"
+          "properties": {
+            "trainer": "Giovanni"
+          }
         },
         {
           "info": {
@@ -1399,7 +1546,9 @@
             "title": "Viridian Rival",
             "summary": "X_Accuracy + X_Special + IB, IB, TB, EQ, EQ, HD"
           },
-          "trainer": "Viridian Rival - Bulbasaur"
+          "properties": {
+            "trainer": "Viridian Rival - Bulbasaur"
+          }
         },
         {
           "info": {
@@ -1481,7 +1630,9 @@
           "info": {
             "summary": "Switch to flier and let it die, X_Accuracy + HD, HD, HD, EQ, HD"
           },
-          "trainer": "Lorelei"
+          "properties": {
+            "trainer": "Lorelei"
+          }
         },
         {
           "info": {
@@ -1494,7 +1645,9 @@
           "info": {
             "summary": "X_Accuracy + IB, HD, HD, IB, HD"
           },
-          "trainer": "Bruno"
+          "properties": {
+            "trainer": "Bruno"
+          }
         },
         {
           "info": {
@@ -1506,7 +1659,9 @@
           "info": {
             "summary": "X_Special (or X_Speed if you want to play safe) + EQ, IB, EQ, EQ, EQ, if you get put to sleep, use the Poke Flute immediately. If you get Hazed, you lose your X Accuracy, so IB 2x Golbat and EQ Arbok"
           },
-          "trainer": "Agatha"
+          "properties": {
+            "trainer": "Agatha"
+          }
         },
         {
           "info": {
@@ -1519,7 +1674,9 @@
           "info": {
             "summary": "X_Special + TB, X_Speed + IB, IB, IB, IB"
           },
-          "trainer": "Lance"
+          "properties": {
+            "trainer": "Lance"
+          }
         },
         {
           "info": {
@@ -1532,7 +1689,9 @@
             "title": "Champion",
             "summary": "X_Special + X_Accuracy + HD, HD, IB, HD, HD, HD, if Sky Attack turn 1, use a Full Restore"
           },
-          "trainer": "Champion - Bulbasaur"
+          "properties": {
+            "trainer": "Champion - Bulbasaur"
+          }
         },
         {
           "info": {

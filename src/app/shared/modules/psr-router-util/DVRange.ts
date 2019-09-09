@@ -1,5 +1,6 @@
 /**
  * Class representing a DV-range.
+ * @todo store min and max values and sort the values
  */
 class DVRange {
   /**

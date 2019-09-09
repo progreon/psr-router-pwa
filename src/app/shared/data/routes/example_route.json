@@ -45,13 +45,15 @@
           "info": {
             "summary": "Get Squirtle"
           },
-          "choices": [
-            {
-              "pokemon": "Squirtle",
-              "level": 5
-            }
-          ],
-          "preference": 0
+          "properties": {
+            "choices": [
+              {
+                "pokemon": "Squirtle",
+                "level": 5
+              }
+            ],
+            "preference": 0
+          }
         },
         {
           "info": {
@@ -64,7 +66,9 @@
             "title": "Rival 1",
             "summary": "Tail Whip x1-2, then Tackle until it faints."
           },
-          "trainer": "Rival 1 - Bulbasaur"
+          "properties": {
+            "trainer": "Rival 1 - Bulbasaur"
+          }
         },
         {
           "info": {
@@ -161,11 +165,22 @@
           },
           "entries": [
             {
-              "type": "ENTRY",
+              "type": "Manip",
               "info": {
                 "title": "Manip",
                 "summary": "Manip a NidoranM L4",
                 "description": "Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name"
+              },
+              "properties": {
+                "pokemon": "NIDORANM",
+                "level": 4,
+                "dvs": [
+                  "13",
+                  "15",
+                  "15",
+                  "14",
+                  "15"
+                ]
               }
             },
             {
@@ -211,7 +226,9 @@
             "summary": "Tail Whip x2, spam tackle",
             "description": "If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion."
           },
-          "trainer": "Viridian Forest - BugCatcher 3"
+          "properties": {
+            "trainer": "Viridian Forest - BugCatcher 3"
+          }
         },
         {
           "type": "ENTRY",
@@ -236,17 +253,19 @@
             "summary": "Use switch strats",
             "description": "Switch to Squirtle to share exp, use Bubble to kill Geodude and Onix. If Onix uses Bide on the turn you switch in, use Tail Whip twice, then Bubble."
           },
-          "trainer": "Brock",
-          "shareExp": [
-            [
-              0,
-              1
-            ],
-            [
-              0,
-              1
+          "properties": {
+            "trainer": "Brock",
+            "shareExp": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                1
+              ]
             ]
-          ]
+          }
         },
         {
           "type": "ENTRY",

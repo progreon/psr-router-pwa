@@ -2,13 +2,14 @@ import { EntryJSON } from "./EntryJSON";
 import { IRouteEntryParser } from "./IRouteEntryParser";
 import { ScopedLine } from "./ScopedLine";
 import * as Util from '../../psr-router-util';
-import { RouteSwapPokemon } from "../RouteSwapPokemon";
+import { RouteManip } from "../RouteManip";
 
 /**
  * lines:
- * Swap: <index1> <index2>
+ * Manip: <pokemon>:<level> <dvs>
  *     [<title> ::] <summary>
  *     <description lines>
+ * with <dvs> being a space-separated list of dv's
  *
  * json:
  * {
@@ -16,18 +17,34 @@ import { RouteSwapPokemon } from "../RouteSwapPokemon";
  *     info: { title, summary, description },
  *     location, // TODO
  *     properties: {
- *         swaps: { index1, index2 }
+ *         pokemon,
+ *         level,
+ *         dvs: dv-string[]
  *     }
  * }
  */
-export class RouteSwapPokemonParser implements IRouteEntryParser {
+export class RouteManipParser implements IRouteEntryParser {
     public linesToJSON(scopedLine: ScopedLine, filename: string): EntryJSON {
         let entry = new EntryJSON(scopedLine.type);
-        let indices = scopedLine.untypedLine.split(" ");
-        if (indices.length != 2 || +indices[0] < 0 || +indices[1] < 0) {
-            throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Swap expects 2 positive indices`, "Parser Error");
+
+        // set pokemon
+        let [pl, ...dvs] = scopedLine.untypedLine.split(" ").filter(spl => spl !== '');
+        let [pokemon, l] = pl.split(":");
+        let level = parseInt(l);
+        if (!pokemon || isNaN(level)) {
+            throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Invalid pokemon-level pair "${pl}"`, "Parser Error");
         }
-        entry.properties.swaps = { index1: indices[0], index2: indices[1] };
+        entry.properties.pokemon = pokemon;
+        entry.properties.level = level;
+
+        // check dv-strings
+        if (dvs.length == 0) {
+            throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Please include the manipulated dv's`, "Parser Error");
+        }
+        dvs.forEach(dv => dv.split(',').forEach(d => { if (isNaN(parseInt(d))) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Please include valid dv numbers`, "Parser Error"); }));
+        entry.properties.dvs = dvs;
+
+        // set info
         if (scopedLine.scope && scopedLine.scope.length > 0) {
             let titleLine = scopedLine.scope.shift();
             let [tOrS, ...s] = titleLine.line.split("::");
@@ -37,9 +54,11 @@ export class RouteSwapPokemonParser implements IRouteEntryParser {
         }
         return entry;
     }
+
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {
-        let scopedLine = new ScopedLine(RouteSwapPokemon.ENTRY_TYPE + ":");
-        scopedLine.line += ` ${jsonEntry.properties.swaps.index1} ${jsonEntry.properties.swaps.index2}`;
+        let scopedLine = new ScopedLine(RouteManip.ENTRY_TYPE + ":");
+        scopedLine.line += `${jsonEntry.properties.pokemon}:${jsonEntry.properties.level} ${jsonEntry.properties.dvs.join(' ')}`;
+
         if (jsonEntry.info) {
             if (jsonEntry.info.summary) {
                 scopedLine.scope.push(new ScopedLine((jsonEntry.info.title ? jsonEntry.info.title + " :: " : "") + jsonEntry.info.summary));

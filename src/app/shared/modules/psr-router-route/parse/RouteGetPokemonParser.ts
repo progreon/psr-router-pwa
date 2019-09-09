@@ -17,8 +17,10 @@ import { RouteGetPokemon } from "../RouteGetPokemon";
  *     type,
  *     info: { title, summary, description },
  *     location, // TODO
- *     choices: { pokemon, level }[],
- *     preference
+ *     properties: {
+ *         choices: { pokemon, level }[],
+ *         preference
+ *     }
  * }
  */
 export class RouteGetPokemonParser implements IRouteEntryParser {

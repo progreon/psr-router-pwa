@@ -3,11 +3,12 @@ import { ScopedLine } from "./ScopedLine";
 import * as Route from '..';
 
 import { IRouteEntryParser } from "./IRouteEntryParser";
-import { RouteEntryParser } from '../parse/RouteEntryParser';
-import { RouteDirectionsParser } from '../parse/RouteDirectionsParser';
-import { RouteSwapPokemonParser } from '../parse/RouteSwapPokemonParser';
-import { RouteGetPokemonParser } from '../parse/RouteGetPokemonParser';
 import { RouteBattleParser } from '../parse/RouteBattleParser';
+import { RouteDirectionsParser } from '../parse/RouteDirectionsParser';
+import { RouteEntryParser } from '../parse/RouteEntryParser';
+import { RouteManipParser } from '../parse/RouteManipParser';
+import { RouteGetPokemonParser } from '../parse/RouteGetPokemonParser';
+import { RouteSwapPokemonParser } from '../parse/RouteSwapPokemonParser';
 
 /**
  * lines:
@@ -72,9 +73,10 @@ export class RouteSectionParser implements IRouteEntryParser {
     }
 }
 
-RouteSectionParser.parsers[Route.RouteEntry.ENTRY_TYPE.toUpperCase()] = new RouteEntryParser();
-RouteSectionParser.parsers[Route.RouteDirections.ENTRY_TYPE.toUpperCase()] = new RouteDirectionsParser();
-RouteSectionParser.parsers[Route.RouteSwapPokemon.ENTRY_TYPE.toUpperCase()] = new RouteSwapPokemonParser();
-RouteSectionParser.parsers[Route.RouteGetPokemon.ENTRY_TYPE.toUpperCase()] = new RouteGetPokemonParser();
 RouteSectionParser.parsers[Route.RouteBattle.ENTRY_TYPE.toUpperCase()] = new RouteBattleParser();
+RouteSectionParser.parsers[Route.RouteDirections.ENTRY_TYPE.toUpperCase()] = new RouteDirectionsParser();
+RouteSectionParser.parsers[Route.RouteEntry.ENTRY_TYPE.toUpperCase()] = new RouteEntryParser();
+RouteSectionParser.parsers[Route.RouteManip.ENTRY_TYPE.toUpperCase()] = new RouteManipParser();
+RouteSectionParser.parsers[Route.RouteGetPokemon.ENTRY_TYPE.toUpperCase()] = new RouteGetPokemonParser();
 RouteSectionParser.parsers[Route.RouteSection.ENTRY_TYPE.toUpperCase()] = new RouteSectionParser();
+RouteSectionParser.parsers[Route.RouteSwapPokemon.ENTRY_TYPE.toUpperCase()] = new RouteSwapPokemonParser();
