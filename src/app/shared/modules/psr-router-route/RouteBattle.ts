@@ -1,7 +1,7 @@
 'use strict';
 
 // imports
-import { RouterMessage } from '../psr-router-util';
+import { RouterMessage, BadgeBoosts } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
 import { Game } from '../psr-router-model/Game';
@@ -67,9 +67,36 @@ export class RouteBattle extends RouteEntry {
         }
       });
     }
+    switch (this.trainer.name.toUpperCase()) {
+      case "BROCK":
+        player.addBadge("attack");
+        break;
+      case "SURGE":
+        player.addBadge("defense");
+        break;
+      case "KOGA":
+        player.addBadge("speed");
+        break;
+      case "BLAINE":
+        player.addBadge("special");
+        break;
+    }
     this._playerAfter = player;
     return player;
   }
+
+  public getActualBadgeBoosts(): BadgeBoosts {
+    if (this.playerBefore) {
+      // Only apply badge boosts when the player has the badge
+      let atk = this.playerBefore.hasBadge("attack") ? 1 : 0;
+      let def = this.playerBefore.hasBadge("defense") ? 1 : 0;
+      let spd = this.playerBefore.hasBadge("speed") ? 1 : 0;
+      let spc = this.playerBefore.hasBadge("special") ? 1 : 0;
+      return new BadgeBoosts().setValues(atk, def, spd, spc);
+    } else {
+      return new BadgeBoosts();
+    }
+}
 
   getJSONObject(): EntryJSON {
     let obj: EntryJSON = super.getJSONObject();

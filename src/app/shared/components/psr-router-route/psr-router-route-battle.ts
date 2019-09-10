@@ -81,12 +81,12 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
             let b = playerBattlers[bi];
             let movesAttacker = [];
             b.moveset.forEach(strMove => {
-              let damageRange = battleEntry.game.engine.getDamageRange(battleEntry.game, strMove, b, ob, new Stages(), new Stages(), new BadgeBoosts(), new BadgeBoosts());
+              let damageRange = battleEntry.game.engine.getDamageRange(battleEntry.game, strMove, b, ob, new Stages(), new Stages(), battleEntry.getActualBadgeBoosts(), new BadgeBoosts());
               movesAttacker.push(`${strMove}: ${damageRange.range.toString()} (${damageRange.critRange.toString()})`);
             });
             let movesDefender = [];
             ob.moveset.forEach(strMove => {
-              let damageRange = battleEntry.game.engine.getDamageRange(battleEntry.game, strMove, ob, b, new Stages(), new Stages(), new BadgeBoosts(), new BadgeBoosts());
+              let damageRange = battleEntry.game.engine.getDamageRange(battleEntry.game, strMove, ob, b, new Stages(), new Stages(), new BadgeBoosts(), battleEntry.getActualBadgeBoosts());
               movesDefender.push(`${strMove}: ${damageRange.range.toString()} (${damageRange.critRange.toString()})`);
             });
             let movesGrid = html`
@@ -94,7 +94,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 <tr>
                   <th>BB</th>
                   <th>Stages</th>
-                  <th class="click" @click="${this._showBattlerDialog.bind(this, b, null, null, true)}">${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.)</th>
+                  <th class="click" @click="${this._showBattlerDialog.bind(this, b, null, battleEntry.getActualBadgeBoosts(), true)}">${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.)</th>
                   <th class="click" @click="${this._showBattlerDialog.bind(this, ob, null, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</th>
                   <th>Stages</th>
                 </tr>

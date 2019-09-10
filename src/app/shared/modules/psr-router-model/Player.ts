@@ -60,6 +60,16 @@ export class Player {
     this._badges = [];
   }
 
+  public addBadge(badge: string) {
+    if (!this.hasBadge(badge)) {
+      this._badges.push(badge.toUpperCase());
+    }
+  }
+
+  public hasBadge(badge: string): boolean {
+    return this._badges.indexOf(badge.toUpperCase()) >= 0;
+  }
+
   /**
    * Add a battler to the team.
    * @param battler

@@ -290,7 +290,7 @@ export class Battler1 extends Battler {
     let boostedRange = statRange.clone();
     boostedRange = boostedRange.multiplyBy(Engine1.getStageMultiplier(xItemCount)).divideBy(Engine1.getStageDivider(xItemCount));
     for (let bb = 0; bb < badgeBoostCount; bb++) {
-      boostedRange = boostedRange.multiplyBy(9).divideBy(8);
+      boostedRange = boostedRange.multiplyBy(9).divideBy(8).floor();
     }
     return boostedRange;
   }

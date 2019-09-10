@@ -178,6 +178,16 @@ class Range {
     return newRange;
   }
 
+  /**
+   * Returns a new range with the values floored.
+   * @returns The new range
+   */
+  floor(): Range {
+    let newRange = new Range();
+    this.getValuesArray().forEach(v => newRange.addValue(Math.floor(v)));
+    return newRange;
+  }
+
   toString(): string {
     if (this._min === this._max)
       return this._min + '';
