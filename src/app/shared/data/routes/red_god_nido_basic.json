@@ -334,10 +334,12 @@
         },
         {
           "type": "Manip",
-          "info": {},
+          "info": {
+            "summary": "Manip Paras Lv. 12"
+          },
           "properties": {
             "pokemon": "PARAS",
-            "level": 11,
+            "level": 12,
             "dvs": [
               "5",
               "14",
