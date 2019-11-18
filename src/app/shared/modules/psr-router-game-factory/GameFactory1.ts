@@ -15,6 +15,9 @@ import * as _pokemon from 'SharedData/pokemon-1.json';
 import * as _evolutions from 'SharedData/evolutions-1.json';
 import * as _trainersRB from 'SharedData/trainers-rb.json';
 import * as _trainersY from 'SharedData/trainers-y.json';
+import * as _encountersR from 'SharedData/encounters/encounters-r.json';
+import * as _encountersB from 'SharedData/encounters/encounters-b.json';
+import * as _encountersY from 'SharedData/encounters/encounters-y.json';
 
 export class GameFactory1 extends GameFactory {
   private static readonly ENGINE = new Engine1();

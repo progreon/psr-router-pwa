@@ -3,10 +3,11 @@ import { html } from 'lit-element';
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 import { Battler } from 'App/shared/modules/psr-router-model/ModelAbstract';
-import { Stages, BadgeBoosts } from 'App/shared/modules/psr-router-util';
+import { Stages, BadgeBoosts, Range } from 'App/shared/modules/psr-router-util';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
+// import '@vaadin/vaadin-text-field/theme/material/vaadin-number-field';
 import 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import 'SharedComponents/psr-router-model/psr-router-battler';
 import { PsrRouterTrainer } from 'SharedComponents/psr-router-trainer/psr-router-trainer';
@@ -38,26 +39,44 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     }
     dom.push(html`
       <style>
-        table {
+        .table {
           width: 100%;
+          display: flex;
+          flex-direction: row;
         }
-        table[odd] {
+        .table[odd] {
           background-color: lightgray;
         }
-        th {
-          text-align: center;
+        .col {
+          display: flex;
+          flex-direction: column;
         }
-        table, th, td {
+        .table, .col > * {
           border: 1px solid black;
           border-collapse: collapse;
           white-space: nowrap;
         }
-        td {
-          text-align: right;
+        .col > * {
+          padding-left: 4px;
+          display: flex;
+          justify-content: space-between;
+          flex-grow: 1;
         }
-        table td:nth-child(3), table td:nth-child(4) {
+        .col div:first-child {
+          font-weight: bold;
+          /* text-align: center; */
+        }
+        /* .col > * vaadin-number-field {
+          width: 75px;
+          margin-left: 5px;
+        } */
+        .bcol {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: row;
+        }
+        .bcol > * {
           width: 50%;
-          text-align: left;
         }
         .click {
           cursor: pointer;
@@ -68,41 +87,82 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     if (battleEntry.playerBefore) {
       if (battleEntry.playerBefore.team.length > 0) {
         let battle = [];
-        for (let obi = 0; obi < battleEntry.trainer.party.length; obi++) {
-          let ob = battleEntry.trainer.party[obi];
-          let player = battleEntry.playersBefore[obi];
-          let playerBattlers : Battler[] = [];
-          if (battleEntry.shareExp) {
-            battleEntry.shareExp[obi].forEach(pli => player.team[pli] && playerBattlers.push(player.team[pli]));
-          } else {
-            playerBattlers.push(player.team[0]);
-          }
-          for (let bi = 0; bi < playerBattlers.length; bi++) {
-            let b = playerBattlers[bi];
-            let movesAttacker = [];
-            b.moveset.forEach(strMove => {
-              let damageRange = battleEntry.game.engine.getDamageRange(battleEntry.game, strMove, b, ob, new Stages(), new Stages(), battleEntry.getActualBadgeBoosts(), new BadgeBoosts());
-              movesAttacker.push(`${strMove}: ${damageRange.range.toString()} (${damageRange.critRange.toString()})`);
-            });
-            let movesDefender = [];
-            ob.moveset.forEach(strMove => {
-              let damageRange = battleEntry.game.engine.getDamageRange(battleEntry.game, strMove, ob, b, new Stages(), new Stages(), new BadgeBoosts(), battleEntry.getActualBadgeBoosts());
-              movesDefender.push(`${strMove}: ${damageRange.range.toString()} (${damageRange.critRange.toString()})`);
-            });
+        if (!this._battleStateCache) {
+          this._updateBattleStateCache();
+        }
+        for (let obi = 0; obi < this._battleStateCache.length; obi++) {
+          for (let bi = 0; bi < this._battleStateCache[obi].length; bi++) {
+            let b = this._battleStateCache[obi][bi].playerB;
+            let bdr = this._battleStateCache[obi][bi].playerDR;
+            let ob = this._battleStateCache[obi][bi].trainerB;
+            let obdr = this._battleStateCache[obi][bi].trainerDR;
+            let movesAttacker = b.moveset.map((strMove, i) => `${strMove}: ${bdr[i].range.toString()} (${bdr[i].critRange.toString()})`);
+            let movesDefender = ob.moveset.map((strMove, i) => `${strMove}: ${obdr[i].range.toString()} (${obdr[i].critRange.toString()})`);
+            let actualBB = battleEntry.getActualBadgeBoosts();
             let movesGrid = html`
-              <table ?odd="${obi % 2 == 1}">
-                <tr>
-                  <th>BB</th>
-                  <th>Stages</th>
-                  <th class="click" @click="${this._showBattlerDialog.bind(this, b, null, battleEntry.getActualBadgeBoosts(), true)}">${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.)</th>
-                  <th class="click" @click="${this._showBattlerDialog.bind(this, ob, null, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</th>
-                  <th>Stages</th>
-                </tr>
-                <tr><td>atk: cmb</td><td>atk: cmb</td><td>${movesAttacker[0] || "-"}</td><td>${movesDefender[0] || "-"}</td><td>atk: cmb</td></tr>
-                <tr><td>def: cmb</td><td>def: cmb</td><td>${movesAttacker[1] || "-"}</td><td>${movesDefender[1] || "-"}</td><td>def: cmb</td></tr>
-                <tr><td>spd: cmb</td><td>spd: cmb</td><td>${movesAttacker[2] || "-"}</td><td>${movesDefender[2] || "-"}</td><td>spd: cmb</td></tr>
-                <tr><td>spc: cmb</td><td>spc: cmb</td><td>${movesAttacker[3] || "-"}</td><td>${movesDefender[3] || "-"}</td><td>spc: cmb</td></tr>
-              </table>
+              <div class="table" ?odd="${obi % 2 == 1}">
+                <div class="col">
+                  <div>BB</div>
+                  <!-- <div>atk <input type="number" min="-99" max="99" step="1" value="${actualBB.atk}"></div>
+                  <div>def <input type="number" min="-99" max="99" step="1" value="${actualBB.def}"></div>
+                  <div>spd <input type="number" min="-99" max="99" step="1" value="${actualBB.spd}"></div>
+                  <div>spc <input type="number" min="-99" max="99" step="1" value="${actualBB.spc}"></div> -->
+                  <!-- <div>atk <vaadin-number-field min="-99" max="99" step="1" has-controls .value="${actualBB.atk}"></vaadin-number-field></div>
+                  <div>def <vaadin-number-field min="-99" max="99" step="1" has-controls .value="${actualBB.def}"></vaadin-number-field></div>
+                  <div>spd <vaadin-number-field min="-99" max="99" step="1" has-controls .value="${actualBB.spd}"></vaadin-number-field></div>
+                  <div>spc <vaadin-number-field min="-99" max="99" step="1" has-controls .value="${actualBB.spc}"></vaadin-number-field></div> -->
+                  <div>atk [< ${actualBB.atk} >]</div>
+                  <div>def [< ${actualBB.def} >]</div>
+                  <div>spd [< ${actualBB.spd} >]</div>
+                  <div>spc [< ${actualBB.spc} >]</div>
+                </div>
+                <div class="col">
+                  <div>Stages</div>
+                  <!-- <div>atk <input type="number" min="-6" max="6" step="1" value="0"></div>
+                  <div>def <input type="number" min="-6" max="6" step="1" value="0"></div>
+                  <div>spd <input type="number" min="-6" max="6" step="1" value="0"></div>
+                  <div>spc <input type="number" min="-6" max="6" step="1" value="0"></div> -->
+                  <!-- <div>atk <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
+                  <div>def <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
+                  <div>spd <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
+                  <div>spc <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div> -->
+                  <div>atk [< 0 >]</div>
+                  <div>def [< 0 >]</div>
+                  <div>spd [< 0 >]</div>
+                  <div>spc [< 0 >]</div>
+                </div>
+                <div class="bcol">
+                  <div class="col">
+                    <div class="click" @click="${this._showBattlerDialog.bind(this, b, null, battleEntry.getActualBadgeBoosts(), true)}">${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.)</div>
+                    <div>${movesAttacker[0] || "-"}</div>
+                    <div>${movesAttacker[1] || "-"}</div>
+                    <div>${movesAttacker[2] || "-"}</div>
+                    <div>${movesAttacker[3] || "-"}</div>
+                  </div>
+                  <div class="col">
+                  <div class="click" @click="${this._showBattlerDialog.bind(this, ob, null, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</div>
+                    <div>${movesDefender[0] || "-"}</div>
+                    <div>${movesDefender[1] || "-"}</div>
+                    <div>${movesDefender[2] || "-"}</div>
+                    <div>${movesDefender[3] || "-"}</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div>Stages</div>
+                  <!-- <div>atk <input type="number" min="-6" max="6" step="1" value="0"></div>
+                  <div>def <input type="number" min="-6" max="6" step="1" value="0"></div>
+                  <div>spd <input type="number" min="-6" max="6" step="1" value="0"></div>
+                  <div>spc <input type="number" min="-6" max="6" step="1" value="0"></div> -->
+                  <!-- <div>atk <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
+                  <div>def <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
+                  <div>spd <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
+                  <div>spc <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div> -->
+                  <div>atk [< 0 >]</div>
+                  <div>def [< 0 >]</div>
+                  <div>spd [< 0 >]</div>
+                  <div>spc [< 0 >]</div>
+                </div>
+              </div>
             `;
             battle.push(movesGrid);
           }
@@ -117,9 +177,44 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     return dom;
   }
 
-  constructor(routeEntry=undefined) {
+  private _battleStateCache: {
+    playerB: Battler,
+    playerDR: { range: Range, critRange: Range }[],
+    trainerB: Battler,
+    trainerDR: { range: Range, critRange: Range }[]
+  }[][];
+
+  constructor(routeEntry = undefined) {
     super(routeEntry);
+    this._battleStateCache;
     // TODO
+  }
+
+  _updateBattleStateCache() {
+    // Update damage range cache
+    this._battleStateCache = [];
+    let battleEntry: Route.RouteBattle = <Route.RouteBattle>super.routeEntry;
+
+    if (battleEntry.playerBefore && battleEntry.playerBefore.team.length > 0) {
+      for (let obi = 0; obi < battleEntry.trainer.party.length; obi++) {
+        this._battleStateCache.push([]);
+        let actualBB = battleEntry.getActualBadgeBoosts();
+        let ob = battleEntry.trainer.party[obi];
+        let player = battleEntry.playersBefore[obi];
+        let playerBattlers: Battler[] = [];
+        if (battleEntry.shareExp) {
+          battleEntry.shareExp[obi].forEach(pli => player.team[pli] && playerBattlers.push(player.team[pli]));
+        } else {
+          playerBattlers.push(player.team[0]);
+        }
+        for (let bi = 0; bi < playerBattlers.length; bi++) {
+          let b = playerBattlers[bi];
+          this._battleStateCache[obi].push({ playerB: b, playerDR: [], trainerB: ob, trainerDR: [] });
+          b.moveset.forEach(strMove => this._battleStateCache[obi][bi].playerDR.push(battleEntry.game.engine.getDamageRange(battleEntry.game, strMove, b, ob, new Stages(), new Stages(), actualBB, new BadgeBoosts())));
+          ob.moveset.forEach(strMove => this._battleStateCache[obi][bi].trainerDR.push(battleEntry.game.engine.getDamageRange(battleEntry.game, strMove, ob, b, new Stages(), new Stages(), new BadgeBoosts(), actualBB)));
+        }
+      }
+    }
   }
 
   _getTitle(): string {
@@ -131,7 +226,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     dialog.renderer = (root: HTMLElement, dialog: any) => {
       let battlerElement: any = document.createElement('psr-router-battler');
       battlerElement.battler = battler;
-      battlerElement.stages = stages ||new Stages();
+      battlerElement.stages = stages || new Stages();
       battlerElement.badgeBoosts = badgeBoosts || new BadgeBoosts();
       battlerElement.isPlayerBattler = !!isPlayerBattler;
       root.appendChild(battlerElement);

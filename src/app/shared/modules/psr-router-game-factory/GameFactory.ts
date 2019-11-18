@@ -21,15 +21,19 @@ export abstract class GameFactory {
    * @returns {Game}  The game instance.
    */
   public GetGame(gameInfo: Model.GameInfo): Model.Game {
-    let engine = this.getEngine(gameInfo);
-    let model = this.getModel(gameInfo);
-    let items = this.getItems(gameInfo);
-    let types = this.getTypes(gameInfo);
-    let typeChart = this.getTypeChart(gameInfo);
-    let moves = this.getMoves(gameInfo);
-    let pokemon = this.getPokemon(gameInfo);
-    let experienceGroups = this.getExperienceGroups(gameInfo); // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
-    let trainers = this.getTrainers(gameInfo);
-    return new Model.Game(model, engine, gameInfo, experienceGroups, items, types, typeChart, moves, pokemon, trainers);
+    // let gb = new Model.Game.Builder();
+    return new Model.Game.Builder()
+      .setInfo(gameInfo)
+      .setEngine(this.getEngine(gameInfo))
+      .setModel(this.getModel(gameInfo))
+      .setItems(this.getItems(gameInfo))
+      .setTypes(this.getTypes(gameInfo))
+      .setTypeChart(this.getTypeChart(gameInfo))
+      .setMoves(this.getMoves(gameInfo))
+      .setPokemon(this.getPokemon(gameInfo))
+      .setExperienceGroups(this.getExperienceGroups(gameInfo)) // TODO: gen dependent OR static in Game-class OR only use it in Pokemon-class
+      .setTrainers(this.getTrainers(gameInfo))
+      .build();
+    // return new Model.Game(model, engine, gameInfo, experienceGroups, items, types, typeChart, moves, pokemon, trainers);
   };
 }

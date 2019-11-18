@@ -93,6 +93,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           --app-dark-text-color: var(--app-secondary-color);
           --app-light-text-color: var(--app-color-white);
 
+          /* LIGHT MODE */
           --app-header-background-color: var(--app-color-blue);
           --app-header-text-color: var(--app-light-text-color);
 
@@ -113,8 +114,6 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           --app-background-color: var(--app-color-white);
           --app-main-background-color: var(--app-color-white);
 
-          color: var(--app-dark-text-color);
-
           /* DARK MODE */
           /* --app-header-background-color: var(--app-color-black);
           --app-header-text-color: var(--app-color-yellow);
@@ -130,6 +129,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           --app-footer-background-color: var(--app-color-black);
           --app-background-color: var(--app-color-blue);
           --app-main-background-color: var(--app-color-blue); */
+
+          color: var(--app-dark-text-color);
 
           /* SIZES */
           --app-drawer-width: 256px;

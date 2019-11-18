@@ -6,33 +6,36 @@ import { Move, Pokemon, Engine } from './ModelAbstract';
  * Class representing a game.
  */
 export class Game {
+
+  public readonly model: any;
+  public readonly engine: Engine;
+  public readonly info: GameInfo;
+  public readonly experienceGroups: any;
+  private items: { [key: string]: Item; };
+  private types: { [key: string]: Type; };
+  private typeChart: any;
+  private moves: { [key: string]: Move; };
+  private pokemon: { [key: string]: Pokemon; };
+  private trainers: { [key: string]: Trainer; };
+
   public readonly dummyModel: any;
   private aliasedTrainers: { [key: string]: Trainer; };
   /**
    *
-   * @param model           The "model" classes and methods this game uses. Use this to avoid circular references
-   * @param engine          The "engine" classes and methods this game uses
-   * @param experienceGroup The experience groups
-   * @param info            The info on this game
-   * @param items           All the items in this game
-   * @param types           All the types in this game
-   * @param typeChart       The type chart this game uses
-   * @param moves           All the moves in this game
-   * @param pokemon         All the pokemon in this game
-   * @param trainers        All the trainers in this game
+   * @param builder   The builder instance to build this game with
    */
-  constructor(
-    public readonly model: any,
-    public readonly engine: Engine,
-    public readonly info: GameInfo,
-    public readonly experienceGroup: any,
-    private items: { [key: string]: Item; },
-    private types: { [key: string]: Type; },
-    private typeChart: any,
-    private moves: { [key: string]: Move; },
-    private pokemon: { [key: string]: Pokemon; },
-    private trainers: { [key: string]: Trainer; }
-  ) {
+  constructor(builder: Game.Builder) {
+    this.model = builder.model;
+    this.engine = builder.engine;
+    this.info = builder.info
+    this.experienceGroups = builder.experienceGroups;
+    this.items = builder.items;
+    this.types = builder.types;
+    this.typeChart = builder.typeChart;
+    this.moves = builder.moves;
+    this.pokemon = builder.pokemon;
+    this.trainers = builder.trainers;
+
     this.dummyModel = DummyModel;
     this.aliasedTrainers = {};
     for (let key in this.trainers) {
@@ -164,5 +167,84 @@ export class Game {
       f * this.typeChart[typeAttacker.key] && this.typeChart[typeAttacker.key][typeDefender2.key];
     }
     return f;
+  }
+}
+
+export namespace Game {
+  export class Builder {
+
+    private _model: any;
+    public get model() { return this._model; }
+    public setModel(model: any): Builder {
+      this._model = model;
+      return this;
+    }
+
+    private _engine: Engine;
+    public get engine() { return this._engine; }
+    public setEngine(engine: Engine): Builder {
+      this._engine = engine;
+      return this;
+    }
+
+    private _info: GameInfo;
+    public get info() { return this._info; }
+    public setInfo(info: GameInfo): Builder {
+      this._info = info;
+      return this;
+    }
+
+    private _experienceGroups: any;
+    public get experienceGroups() { return this._experienceGroups; }
+    public setExperienceGroups(experienceGroups: any): Builder {
+      this._experienceGroups = experienceGroups;
+      return this;
+    }
+
+    private _items: { [key: string]: Item; };
+    public get items() { return this._items; }
+    public setItems(items: { [key: string]: Item; }): Builder {
+      this._items = items;
+      return this;
+    }
+
+    private _types: { [key: string]: Type; };
+    public get types() { return this._types; }
+    public setTypes(types: { [key: string]: Type; }): Builder {
+      this._types = types;
+      return this;
+    }
+
+    private _typeChart: any;
+    public get typeChart() { return this._typeChart; }
+    public setTypeChart(typeChart: any): Builder {
+      this._typeChart = typeChart;
+      return this;
+    }
+
+    private _moves: { [key: string]: Move; };
+    public get moves() { return this._moves; }
+    public setMoves(moves: { [key: string]: Move; }): Builder {
+      this._moves = moves;
+      return this;
+    }
+
+    private _pokemon: { [key: string]: Pokemon; };
+    public get pokemon() { return this._pokemon; }
+    public setPokemon(pokemon: { [key: string]: Pokemon; }): Builder {
+      this._pokemon = pokemon;
+      return this;
+    }
+
+    private _trainers: { [key: string]: Trainer; };
+    public get trainers() { return this._trainers; }
+    public setTrainers(trainers: { [key: string]: Trainer; }): Builder {
+      this._trainers = trainers;
+      return this;
+    }
+
+    public build() {
+      return new Game(this);
+    }
   }
 }
