@@ -28,12 +28,52 @@ export function SetCurrentRoute(route: Route.Route = null): Route.Route {
 
 const lsKeySavedRoute = "saved-route";
 
+function entryV1(entryV0: any) {
+  entryV0.properties = {};
+  let keys = Object.keys(entryV0);
+  keys.forEach(key => {
+    if (key != "info"
+      && key != "type"
+      && key != "location"
+      && key != "entries"
+      && key != "properties") {
+      let value = entryV0[key];
+      entryV0.properties[key] = value;
+      entryV0[key] = undefined;
+    }
+  });
+  if (entryV0.entries) {
+    for (let i = 0; i < entryV0.entries.length; i++) {
+      entryV1(entryV0.entries[i]);
+    }
+  }
+}
+
+function v1(routeV0: any): Boolean {
+  if (!routeV0.v) {
+    console.log("Before: ", JSON.parse(JSON.stringify(routeV0)));
+    for (let i = 0; i < routeV0.entries.length; i++) {
+      entryV1(routeV0.entries[i]);
+    }
+    routeV0.type = "Route";
+    routeV0.v = 1;
+    console.log("After: ", JSON.parse(JSON.stringify(routeV0)));
+    return true;
+  } else {
+    return false;
+  }
+}
+
 export function LoadSavedRoute(): Route.Route {
   let routeJSON = localStorage.getItem(lsKeySavedRoute);
   let route: Route.Route = null;
   if (routeJSON) {
+    let routeObj = JSON.parse(routeJSON);
+    if (v1(routeObj)) {
+      localStorage.setItem(lsKeySavedRoute, JSON.stringify(routeObj));
+    }
     try {
-      route = Route.Route.newFromJSONObject(JSON.parse(routeJSON));
+      route = Route.Route.newFromJSONObject(routeObj);
       route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
     } catch (e) {
       console.error(e);
@@ -62,7 +102,7 @@ import * as redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (B
 import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
 // import * as exampleRoute from 'SharedData/routes/example_route.json';
 import * as redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
-// import * as blueDummy from 'SharedData/routes/blue_dummy.json';
+import * as blueDummy from 'SharedData/routes/blue_dummy.json';
 import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
 // import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
 
@@ -71,7 +111,7 @@ exampleRoutes[redAnyGlitchlessBasic.shortname] = redAnyGlitchlessBasic;
 exampleRoutes[redAnyGlitchlessClassic.shortname] = redAnyGlitchlessClassic;
 // exampleRoutes[exampleRoute.shortname] = exampleRoute;
 exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
-// exampleRoutes[blueDummy.shortname] = blueDummy;
+exampleRoutes[blueDummy.shortname] = blueDummy;
 exampleRoutes[yellowDummy.shortname] = yellowDummy;
 // exampleRoutes[crystalDummy.shortname] = crystalDummy;
 
@@ -82,6 +122,9 @@ export function GetExampleRoutesNames(): string[] {
 export function LoadExampleRoute(routeName: string): Route.Route {
   let routeJSON = exampleRoutes[routeName];
   if (routeJSON) {
+    if (v1(routeJSON)) {
+      localStorage.setItem(lsKeySavedRoute, JSON.stringify(routeJSON));
+    }
     let route = Route.Route.newFromJSONObject(routeJSON);
     route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
     return SaveRoute(route);
