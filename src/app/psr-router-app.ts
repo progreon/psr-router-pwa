@@ -25,7 +25,7 @@ import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/paper-toast';
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
-import 'CoreComponents/snack-bar/snack-bar';
+// import 'CoreComponents/snack-bar/snack-bar';
 
 // Image imports for this element
 import { barsIcon, angleLeftIcon } from 'Shared/my-icons';
@@ -93,6 +93,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           --app-dark-text-color: var(--app-secondary-color);
           --app-light-text-color: var(--app-color-white);
 
+          /* LIGHT MODE */
           --app-header-background-color: var(--app-color-blue);
           --app-header-text-color: var(--app-light-text-color);
 
@@ -113,8 +114,6 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           --app-background-color: var(--app-color-white);
           --app-main-background-color: var(--app-color-white);
 
-          color: var(--app-dark-text-color);
-
           /* DARK MODE */
           /* --app-header-background-color: var(--app-color-black);
           --app-header-text-color: var(--app-color-yellow);
@@ -130,6 +129,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           --app-footer-background-color: var(--app-color-black);
           --app-background-color: var(--app-color-blue);
           --app-main-background-color: var(--app-color-blue); */
+
+          color: var(--app-dark-text-color);
 
           /* SIZES */
           --app-drawer-width: 256px;
@@ -390,9 +391,6 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           <psr-router-manual id="help" class="page" ?active="${this._page === 'help'}" .app="${this}"></psr-router-manual>
           <psr-router-about id="about" class="page" ?active="${this._page === 'about'}" .app="${this}"></psr-router-about>
           <psr-router-404 id="404" class="page" ?active="${this._page === '404'}" .app="${this}"></psr-router-404>
-
-          <snack-bar ?active="${this._snackbarOpened}" ?offline="${this._offline}">
-              You are now ${this._offline ? 'offline' : 'online'}.</snack-bar>
         </main>
 
         <footer class="footer">

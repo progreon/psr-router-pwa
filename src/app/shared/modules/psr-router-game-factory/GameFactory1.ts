@@ -12,8 +12,12 @@ import * as _moves from 'SharedData/moves-1.json';
 import * as _movesLearnedRB from 'SharedData/moves-learned-rb.json';
 import * as _movesLearnedY from 'SharedData/moves-learned-y.json';
 import * as _pokemon from 'SharedData/pokemon-1.json';
+import * as _evolutions from 'SharedData/evolutions-1.json';
 import * as _trainersRB from 'SharedData/trainers-rb.json';
 import * as _trainersY from 'SharedData/trainers-y.json';
+import * as _encountersR from 'SharedData/encounters/encounters-r.json';
+import * as _encountersB from 'SharedData/encounters/encounters-b.json';
+import * as _encountersY from 'SharedData/encounters/encounters-y.json';
 
 export class GameFactory1 extends GameFactory {
   private static readonly ENGINE = new Engine1();
@@ -106,32 +110,29 @@ export class GameFactory1 extends GameFactory {
       case "r":
       case "b":
         if (!GameFactory1._pokemonPerGame["rb"]) {
-          let pokemonMap = {};
+          let pokemonMap: { [key: string]: Model1.Pokemon1 } = {};
           for (let id = 1; id < _pokemon.length; id++) {
             let p = _pokemon[id];
-            let pokemon = new Model1.Pokemon1(<string>p[0], id, types[(<string>p[1]).toUpperCase()], types[(<string>p[2]).toUpperCase()], <number>p[3], <string>p[4], <number>p[5], <number>p[6], <number>p[7], <number>p[8], <number>p[9]);
+            let pokemon = new Model1.Pokemon1(<string>p[0], id, types[(<string>p[1]).toUpperCase()], types[(<string>p[2]).toUpperCase()], <number>p[3], Model1.ExperienceGroups1[<string>p[4]], <number>p[5], <number>p[6], <number>p[7], <number>p[8], <number>p[9]);
             pokemonMap[pokemon.key] = pokemon;
           }
           for (let p in _movesLearnedRB) {
-            let defaultMoves: string[] = [];
-            let tmMoves: string[] = [];
-            let learnedMoves: { [key: number]: string; } = {};
-            _movesLearnedRB[p].default.forEach((m: string) => defaultMoves.push(m));
-            _movesLearnedRB[p].tm.forEach((m: string) => tmMoves.push(m));
-            _movesLearnedRB[p].level.forEach((lm: string) => {
-              let split = lm.split("#");
-              let l = split[0];
-              let m = split[1];
-              if (learnedMoves[l]) { // safety check, this would mean a structure change in Pokemon::learnedMoves
-                console.warn(p, l, m);
-              }
-              learnedMoves[l] = m;
-            });
             let pokemon = pokemonMap[p.toUpperCase()];
             if (pokemon) {
-              pokemon.setDefaultMoves(defaultMoves);
-              pokemon.setLearnedMoves(learnedMoves);
-              pokemon.setTmMoves(tmMoves);
+              _movesLearnedRB[p].default.forEach((m: string) => pokemon.addLevelupMove(0, m));
+              _movesLearnedRB[p].level.forEach((lm: string) => {
+                let [l, m] = lm.split("#");
+                pokemon.addLevelupMove(parseInt(l), m);
+              });
+              _movesLearnedRB[p].tm.forEach((m: string) => pokemon.addTmMove(m));
+            }
+          }
+          for (let p in _evolutions) {
+            let pokemon = pokemonMap[p.toUpperCase()];
+            for (let e in _evolutions[p]) {
+              let evolution = pokemonMap[e.toUpperCase()];
+              let keyType = Model.EvolutionKey.Type[<string> _evolutions[p][e].type];
+              pokemon.addEvolution(new Model.EvolutionKey(keyType, _evolutions[p][e].value), evolution);
             }
           }
           GameFactory1._pokemonPerGame["rb"] = pokemonMap;
@@ -139,32 +140,29 @@ export class GameFactory1 extends GameFactory {
         return GameFactory1._pokemonPerGame["rb"];
       case "y":
         if (!GameFactory1._pokemonPerGame["y"]) {
-          let pokemonMap = {};
+          let pokemonMap: { [key: string]: Model1.Pokemon1 } = {};
           for (let id = 1; id < _pokemon.length; id++) {
             let p = _pokemon[id];
-            let pokemon = new Model1.Pokemon1(<string>p[0], id, types[(<string>p[1]).toUpperCase()], types[(<string>p[2]).toUpperCase()], <number>p[3], <string>p[4], <number>p[5], <number>p[6], <number>p[7], <number>p[8], <number>p[9]);
+            let pokemon = new Model1.Pokemon1(<string>p[0], id, types[(<string>p[1]).toUpperCase()], types[(<string>p[2]).toUpperCase()], <number>p[3], Model1.ExperienceGroups1[<string>p[4]], <number>p[5], <number>p[6], <number>p[7], <number>p[8], <number>p[9]);
             pokemonMap[pokemon.key] = pokemon;
           }
           for (let p in _movesLearnedY) {
-            let defaultMoves: string[] = [];
-            let tmMoves: string[] = [];
-            let learnedMoves: { [key: number]: string; } = {};
-            _movesLearnedY[p].default.forEach((m: string) => defaultMoves.push(m));
-            _movesLearnedY[p].tm.forEach((m: string) => tmMoves.push(m));
-            _movesLearnedY[p].level.forEach((lm: string) => {
-              let split = lm.split("#");
-              let l = split[0];
-              let m = split[1];
-              if (learnedMoves[l]) { // safety check, this would mean a structure change in Pokemon::learnedMoves
-                console.warn(p, l, m);
-              }
-              learnedMoves[l] = m;
-            });
             let pokemon = pokemonMap[p.toUpperCase()];
             if (pokemon) {
-              pokemon.setDefaultMoves(defaultMoves);
-              pokemon.setLearnedMoves(learnedMoves);
-              pokemon.setTmMoves(tmMoves);
+              _movesLearnedY[p].default.forEach((m: string) => pokemon.addLevelupMove(0, m));
+              _movesLearnedY[p].level.forEach((lm: string) => {
+                let [l, m] = lm.split("#");
+                pokemon.addLevelupMove(parseInt(l), m);
+              });
+              _movesLearnedY[p].tm.forEach((m: string) => pokemon.addTmMove(m));
+            }
+          }
+          for (let p in _evolutions) {
+            let pokemon = pokemonMap[p.toUpperCase()];
+            for (let e in _evolutions[p]) {
+              let evolution = pokemonMap[e.toUpperCase()];
+              let keyType = Model.EvolutionKey.Type[<string> _evolutions[p][e].type];
+              pokemon.addEvolution(new Model.EvolutionKey(keyType, _evolutions[p][e].value), evolution);
             }
           }
           GameFactory1._pokemonPerGame["y"] = pokemonMap;
@@ -207,7 +205,7 @@ export class GameFactory1 extends GameFactory {
                 if (!poke) {
                   console.log(p + " not found");
                 }
-                party.push(new Model1.Battler1(null, pokemon[p.toUpperCase()], null, true, parseInt(l)));
+                party.push(new Model1.Battler1(null, poke, null, true, parseInt(l)));
               });
               if (t.moves) {
                 t.moves.forEach((pimim: string) => {
@@ -215,7 +213,7 @@ export class GameFactory1 extends GameFactory {
                   party[pi].moveset[mi] = m;
                 });
               }
-              let trainer = new Model.Trainer(t.key, t.name, tClass, party, loc, t.alias);
+              let trainer = new Model.Trainer(t.key, t.name, tClass, party, loc, t.alias, t.boost);
               trainers[trainer.key.toUpperCase()] = trainer;
             });
           }

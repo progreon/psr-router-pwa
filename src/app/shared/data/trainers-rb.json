@@ -131,6 +131,7 @@
     "Blaine": [
       {
         "alias": "Blaine",
+        "boost": "spc",
         "key": "Cinnabar Gym - Blaine",
         "moves": [ "3#2#FIRE_BLAST" ],
         "name": "Blaine",
@@ -232,6 +233,7 @@
     "Koga": [
       {
         "alias": "Koga",
+        "boost": "spd",
         "key": "Fuchsia Gym - Koga",
         "moves": [ "3#2#TOXIC" ],
         "name": "Koga",
@@ -459,6 +461,7 @@
     "Brock": [
       {
         "alias": "Brock",
+        "boost": "atk",
         "key": "Pewter Gym - Brock",
         "moves": [ "1#2#BIDE" ],
         "name": "Brock",
@@ -2133,6 +2136,7 @@
     "LtSurge": [
       {
         "alias": "Surge",
+        "boost": "def",
         "key": "Vermilion Gym - LtSurge",
         "moves": [ "2#2#THUNDERBOLT" ],
         "name": "LtSurge",

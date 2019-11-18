@@ -43,7 +43,7 @@ class BadgeBoosts {
    * Get the attack badge boost.
    * @returns The attack badge boost.
    */
-  atk(): number {
+  public get atk(): number {
     return this._values[0];
   }
 
@@ -51,7 +51,7 @@ class BadgeBoosts {
    * Get the defense badge boost.
    * @returns The defense badge boost.
    */
-  def(): number {
+  public get def(): number {
     return this._values[1];
   }
 
@@ -59,7 +59,7 @@ class BadgeBoosts {
    * Get the speed badge boost.
    * @returns The speed badge boost.
    */
-  spd(): number {
+  public get spd(): number {
     return this._values[2];
   }
 
@@ -67,7 +67,7 @@ class BadgeBoosts {
    * Get the special badge boost.
    * @returns The special badge boost.
    */
-  spc(): number {
+  public get spc(): number {
     return this._values[3];
   }
 
@@ -81,11 +81,11 @@ class BadgeBoosts {
   }
 
   toString(): string {
-    return '[' + this.atk() + ', ' + this.def() + ', ' + this.spd() + ', ' + this.spc() + ']';
+    return '[' + this.atk + ', ' + this.def + ', ' + this.spd + ', ' + this.spc + ']';
   }
 
   clone(): BadgeBoosts {
-    return new BadgeBoosts().setValues(this.atk(), this.def(), this.spd(), this.spc());
+    return new BadgeBoosts().setValues(this.atk, this.def, this.spd, this.spc);
   }
 }
 

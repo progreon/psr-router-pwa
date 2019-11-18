@@ -20,7 +20,8 @@ export class Trainer {
     public readonly trainerClass: string, //
     public readonly party: Battler[], //
     public readonly location: string, //
-    public readonly alias?: string //
+    public readonly alias?: string, //
+    public readonly boost?: string //
   ) { }
 
   getTotalExp(): number {

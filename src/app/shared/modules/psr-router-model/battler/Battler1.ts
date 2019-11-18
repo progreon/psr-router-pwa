@@ -1,6 +1,10 @@
 import { Game, Item } from "../Model";
 import { Battler, Pokemon } from "../ModelAbstract";
 import { DVRange, Range } from "SharedModules/psr-router-util";
+import { Move1 } from "../move/Move1";
+import { Pokemon1 } from "../pokemon/Pokemon1";
+import { EvolutionKey } from "../EvolutionKey";
+import { Engine1 } from "../../psr-router-engine/Engine1";
 
 export class Battler1 extends Battler {
   private static readonly TRAINER_DVS = [8, 9, 8, 8, 8];
@@ -8,56 +12,196 @@ export class Battler1 extends Battler {
   private static readonly MAX_STATEXP = 25600;
 
   private _currentStats: Range[];
-  private _possibleDVs: number[][];
+  private _possibleDVs: boolean[][];
   private _statExp: number[];
   // private _statExp: Range[];
 
-  constructor(game: Game, pokemon: Pokemon, catchLocation: any, isTrainerMon: boolean, level: number) {
+  constructor(game: Game, pokemon: Pokemon, catchLocation: any, isTrainerMon: boolean, level: number, isClone?: boolean, dvRanges?: DVRange[]) {
     super(game, pokemon, catchLocation, isTrainerMon, level);
     this._currentStats = [new Range(), new Range(), new Range(), new Range(), new Range()];
-    this._possibleDVs = [[],[],[],[],[]];
+    this._initPossibleDVs(dvRanges);
     this._statExp = [0, 0, 0, 0, 0];
     // this._statExp = [new Range(), new Range(), new Range(), new Range(), new Range()];
+    if (!isClone) {
+      this._updateCurrentStats();
+    }
   }
 
-  defeatBattler(battler: Battler, participants = 1): Battler {
-    throw new Error("Method not implemented.");
+  private _initPossibleDVs(dvRanges?: DVRange[]) {
+    // TODO: with encounter rate
+    // Clear DVs
+    this._possibleDVs = [[], [], [], [], []];
+    if (dvRanges) {
+      // TODO: handle hp dv's as well?
+      this._initDVs(dvRanges[1].values, dvRanges[2].values, dvRanges[3].values, dvRanges[4].values);
+    } else if (this.isTrainerMon) {
+      this._initDVs([9], [8], [8], [8]);
+    } else {
+      for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < 16; j++) {
+          this._possibleDVs[i].push(true);
+        }
+      }
+    }
   }
 
-  evolve(item: Item): Battler {
-    throw new Error("Method not implemented.");
+  private _initDVs(atkDV: number[], defDV: number[], spdDV: number[], spcDV: number[]) {
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 16; j++) {
+        this._possibleDVs[i].push(false);
+      }
+    }
+    atkDV.forEach(atk => {
+      defDV.forEach(def => {
+        spdDV.forEach(spd => {
+          spcDV.forEach(spc => {
+            let hp = (atk % 2) * 8 + (def % 2) * 4 + (spd % 2) * 2 + (spc % 2);
+            this._possibleDVs[0][hp] = true;
+            this._possibleDVs[1][atk] = true;
+            this._possibleDVs[2][def] = true;
+            this._possibleDVs[3][spd] = true;
+            this._possibleDVs[4][spc] = true;
+          });
+        });
+      });
+    });
+  }
+
+  defeatBattler(battler: Battler1, participants = 1): Battler {
+    this.addStatXP(battler.pokemon.hp, battler.pokemon.atk, battler.pokemon.def, battler.pokemon.spd, (<Pokemon1>battler.pokemon).spc, participants);
+    return this.addXP(battler.getExp(participants));
+  }
+
+  private addStatXP(hp: number, atk: number, def: number, spd: number, spc: number, nrOfPkmn: number) {
+    this._statExp[0] += hp / nrOfPkmn;
+    this._statExp[1] += atk / nrOfPkmn;
+    this._statExp[2] += def / nrOfPkmn;
+    this._statExp[3] += spd / nrOfPkmn;
+    this._statExp[4] += spc / nrOfPkmn;
+  }
+
+  evolve(key: EvolutionKey): Battler {
+    let p = this.pokemon.getEvolution(key);
+    if (p) {
+      let evo = new Battler1(this.game, p, this.catchLocation, this.isTrainerMon, this.level);
+      // TODO: evolution moves?
+      evo._moveset = this._moveset;
+      evo._statExp = this._statExp;
+      evo._levelExp = this._levelExp;
+      evo._updateCurrentStats();
+      return evo;
+    } else {
+      return this;
+    }
+  }
+
+  resetStatXP() {
+    this._statExp = [0, 0, 0, 0, 0];
   }
 
   addXP(exp: number): Battler {
-    throw new Error("Method not implemented.");
+    this._levelExp += exp;
+    let totExp = this.pokemon.expGroup.getTotalExp(this.level, this._levelExp);
+    let oldLevel = this.level;
+    let newLevel = this.pokemon.expGroup.getLevel(totExp);
+    if (this.level != newLevel) {
+      this._levelExp -= this.pokemon.expGroup.getDeltaExp(this.level, newLevel);
+      this._level = newLevel;
+      this._updateCurrentStats(); // Handle it the RBY way
+      // List<Move> newMoves = pokemon.getLearnedMoves(level); // Handle it the RBY way
+      let newMoves = this.pokemon.getLearnedMoves(this.level); // Handle it the RBY way
+      newMoves.forEach(nm => {
+        this._moveset.push(nm);
+        if (this._moveset.length > 4) {
+          // TODO: check what move to override -> make Battler settings?
+          this._moveset = this._moveset.slice(-4);
+        }
+      });
+    }
+
+    let evo: Battler = this;
+    for (let l = 1; l <= newLevel; l++) {
+      evo = evo.evolve(new EvolutionKey(EvolutionKey.Type.Level, `${l}`));
+    }
+    return evo;
   }
 
   useHPUp(count = 1): boolean {
-    throw new Error("Method not implemented.");
+    let success = true;
+    for (let i = 0; i < count; i++) {
+      if (this._statExp[0] < Battler1.MAX_STATEXP) {
+        this._statExp[0] = Math.min(this._statExp[0] + Battler1.DELTA_STATEXP, Battler1.MAX_STATEXP);
+      } else {
+        success = false;
+      }
+    }
+    return success;
   }
 
   useProtein(count = 1): boolean {
-    throw new Error("Method not implemented.");
+    let success = true;
+    for (let i = 0; i < count; i++) {
+      if (this._statExp[1] < Battler1.MAX_STATEXP) {
+        this._statExp[1] = Math.min(this._statExp[1] + Battler1.DELTA_STATEXP, Battler1.MAX_STATEXP);
+      } else {
+        success = false;
+      }
+    }
+    return success;
   }
 
   useIron(count = 1): boolean {
-    throw new Error("Method not implemented.");
+    let success = true;
+    for (let i = 0; i < count; i++) {
+      if (this._statExp[2] < Battler1.MAX_STATEXP) {
+        this._statExp[2] = Math.min(this._statExp[2] + Battler1.DELTA_STATEXP, Battler1.MAX_STATEXP);
+      } else {
+        success = false;
+      }
+    }
+    return success;
   }
 
   useCarbos(count = 1): boolean {
-    throw new Error("Method not implemented.");
+    let success = true;
+    for (let i = 0; i < count; i++) {
+      if (this._statExp[3] < Battler1.MAX_STATEXP) {
+        this._statExp[3] = Math.min(this._statExp[3] + Battler1.DELTA_STATEXP, Battler1.MAX_STATEXP);
+      } else {
+        success = false;
+      }
+    }
+    return success;
   }
 
   useCalcium(count = 1): boolean {
-    throw new Error("Method not implemented.");
+    let success = true;
+    for (let i = 0; i < count; i++) {
+      if (this._statExp[4] < Battler1.MAX_STATEXP) {
+        this._statExp[4] = Math.min(this._statExp[4] + Battler1.DELTA_STATEXP, Battler1.MAX_STATEXP);
+      } else {
+        success = false;
+      }
+    }
+    return success;
   }
 
   getDVRange(stat: number): DVRange {
-    throw new Error("Method not implemented.");
+    let range = new DVRange();
+    for (let dv = 0; dv < 16; dv++) {
+      if (this._possibleDVs[stat][dv]) {
+        range.addDV(dv);
+      }
+    }
+    return range;
   }
 
   getDVRanges(): DVRange[] {
-    throw new Error("Method not implemented.");
+    let ranges: DVRange[] = [];
+    for (let s = 0; s < 5; s++) {
+      ranges.push(this.getDVRange(s));
+    }
+    return ranges;
   }
 
   get hp(): Range { return this._currentStats[0]; }
@@ -68,16 +212,147 @@ export class Battler1 extends Battler {
   get spd(): Range { return this._currentStats[3]; }
   get spc(): Range { return this._currentStats[4]; }
 
-  getBoostedStat(statRange: Range, badgeBoostCount: number, xItemCount: number): Range {
-    throw new Error("Method not implemented.");
+  get hpXP(): number { return this._statExp[0]; }
+  get atkXP(): number { return this._statExp[1]; }
+  get defXP(): number { return this._statExp[2]; }
+  get spcAtkXP(): number { throw new Error("Method not implemented."); }
+  get spcDefXP(): number { throw new Error("Method not implemented."); }
+  get spdXP(): number { return this._statExp[3]; }
+  get spcXP(): number { return this._statExp[4]; }
+
+  private _updateCurrentStats() {
+    this._currentStats[0] = this._calculateHP();
+    this._currentStats[1] = this._calculateAtk();
+    this._currentStats[2] = this._calculateDef();
+    this._currentStats[3] = this._calculateSpd();
+    this._currentStats[4] = this._calculateSpc();
   }
 
+  private _calculateHP(): Range {
+    let dvR = this.getDVRange(0);
+    let extraStats = 0;
+    if (this.hpXP - 1 >= 0) {
+      extraStats = Math.floor(Math.floor((Math.sqrt(this.hpXP - 1) + 1)) / 4);
+    }
+    let r = new Range();
+    dvR.values.forEach(dv => {
+      r.addValue(Math.floor((((this.pokemon.hp + dv + 50) * 2 + extraStats) * this.level / 100) + 10));
+    });
+    return r;
+  }
+
+  private _calculateAtk() {
+    let dvR = this.getDVRange(1);
+    let r = new Range();
+    dvR.values.forEach(dv => {
+      r.addValue(this._calculateStat(this.level, this.pokemon.atk, dv, this.atkXP));
+    });
+    return r;
+  }
+
+  private _calculateDef() {
+    let dvR = this.getDVRange(2);
+    let r = new Range();
+    dvR.values.forEach(dv => {
+      r.addValue(this._calculateStat(this.level, this.pokemon.def, dv, this.defXP));
+    });
+    return r;
+  }
+
+  private _calculateSpd() {
+    let dvR = this.getDVRange(3);
+    let r = new Range();
+    dvR.values.forEach(dv => {
+      r.addValue(this._calculateStat(this.level, this.pokemon.spd, dv, this.spdXP));
+    });
+    return r;
+  }
+
+  private _calculateSpc() {
+    let dvR = this.getDVRange(4);
+    let r = new Range();
+    dvR.values.forEach(dv => {
+      r.addValue(this._calculateStat(this.level, (<Pokemon1>this.pokemon).spc, dv, this.spcXP));
+    });
+    return r;
+  }
+
+  private _calculateStat(level: number, base: number, DV: number, XP: number) {
+    let extraStats = 0;
+    if (XP - 1 >= 0) {
+      extraStats = Math.floor(Math.floor(Math.sqrt(XP - 1) + 1) / 4);
+    }
+    let statValue = Math.floor((((base + DV) * 2 + extraStats) * level / 100) + 5);
+    return statValue;
+  }
+
+  protected getBoostedStat(statRange: Range, badgeBoostCount: number, xItemCount: number): Range {
+    let boostedRange = statRange.clone();
+    boostedRange = boostedRange.multiplyBy(Engine1.getStageMultiplier(xItemCount)).divideBy(Engine1.getStageDivider(xItemCount));
+    for (let bb = 0; bb < badgeBoostCount; bb++) {
+      boostedRange = boostedRange.multiplyBy(9).divideBy(8).floor();
+    }
+    return boostedRange;
+  }
+
+  //     public int getHPStatIfDV(int DV) {
+  //         double extraStats = 0;
+  //         if (hpXP - 1 >= 0) {
+  //             extraStats = Math.floor(Math.floor((Math.sqrt(hpXP - 1) + 1)) / 4);
+  //         }
+  //         double statValue = Math.floor((((pokemon.hp + DV + 50) * 2 + extraStats) * level / 100) + 10);
+  //         return (int) statValue;
+  //     }
+  //
+  //     public int getAtkStatIfDV(int DV) {
+  //         int stat = calculateStat(level, pokemon.atk, DV, atkXP);
+  //         return stat;
+  //     }
+  //
+  //     public int getDefStatIfDV(int DV) {
+  //         int stat = calculateStat(level, pokemon.def, DV, defXP);
+  //         return stat;
+  //     }
+  //
+  //     public int getSpdStatIfDV(int DV) {
+  //         int stat = calculateStat(level, pokemon.spd, DV, spdXP);
+  //         return stat;
+  //     }
+  //
+  //     public int getSpcStatIfDV(int DV) {
+  //         int stat = calculateStat(level, pokemon.spc, DV, spcXP);
+  //         return stat;
+  //     }
+
   equals(battler: Battler): boolean {
-    throw new Error("Method not implemented.");
+    if (battler instanceof Battler1) {
+      let b = <Battler1> battler;
+      return this.game == b.game
+          && this.pokemon == b.pokemon
+          && this.moveset == b.moveset // TODO: check if this works!
+          && this.catchLocation == b.catchLocation
+          && this.level == b.level
+          && this.levelExp == b.levelExp
+          && this._statExp == b._statExp // TODO: check if this works!
+          && this._possibleDVs == b._possibleDVs; // TODO: check if this works!
+    } else {
+      return false;
+    }
   }
 
   clone(): Battler {
-    throw new Error("Method not implemented.");
+    let newB = new Battler1(this.game, this.pokemon, this.catchLocation, this.isTrainerMon, this.level, true);
+
+    newB._moveset = this._moveset.slice(0);
+    newB._levelExp = this._levelExp;
+    newB._statExp = this._statExp.slice(0); // TODO: deep copy if using ranges!
+
+    newB._possibleDVs = [];
+    this._possibleDVs.forEach(pdvs => newB._possibleDVs.push(pdvs.slice(0)));
+    newB._currentStats = [];
+    this._currentStats.forEach(cs => newB._currentStats.push(cs.clone()));
+
+    return newB;
   }
 
 }
@@ -147,367 +422,6 @@ export class Battler1 extends Battler {
 //         initDefaultMoveSet(pokemon, level);
 //         initPossibleDVs(atkDV, defDV, spdDV, spcDV);
 //         updateCurrentStats();
-//     }
-//
-//     private void initPossibleDVs() {
-// //        if (isTrainerMon) {
-// //            initPossibleDVs(9, 8, 8, 8);
-// //        } else {
-//         this.possibleDVs = new boolean[5][16];
-//         for (int i = 0; i < 5; i++) {
-//             for (int j = 0; j < 16; j++) {
-//                 this.possibleDVs[i][j] = true;
-//             }
-//         }
-// //        }
-//     }
-//
-//     private void initPossibleDVs(int atkDV, int defDV, int spdDV, int spcDV) {
-//         this.possibleDVs = new boolean[5][16];
-//         for (int i = 0; i < 5; i++) {
-//             for (int j = 0; j < 16; j++) {
-//                 this.possibleDVs[i][j] = false;
-//             }
-//         }
-//         int hpDV = (atkDV % 2) * 8 + (defDV % 2) * 4 + (spdDV % 2) * 2 + (spcDV % 2);
-//         this.possibleDVs[0][hpDV] = true;
-//         this.possibleDVs[1][atkDV] = true;
-//         this.possibleDVs[2][defDV] = true;
-//         this.possibleDVs[3][spdDV] = true;
-//         this.possibleDVs[4][spcDV] = true;
-//     }
-//
-//     private void initDefaultMoveSet(Pokemon pokemon, int level) {
-//         moveset = pokemon.getDefaultMoveset(level);
-//     }
-//
-//     @Override
-//     public Battler getDeepCopy() {
-//         BattlerImpl newBattler = new BattlerImpl(rd, pokemon, catchLocation, level);
-//
-//         newBattler.moveset = this.moveset.clone();
-//         newBattler.levelExp = this.levelExp;
-// //        newBattler.totalXP = this.totalXP;
-//
-//         newBattler.hpXP = this.hpXP;
-//         newBattler.atkXP = this.atkXP;
-//         newBattler.defXP = this.defXP;
-//         newBattler.spdXP = this.spdXP;
-//         newBattler.spcXP = this.spcXP;
-//
-//         newBattler.possibleDVs = new boolean[this.possibleDVs.length][];
-//         for (int i = 0; i < this.possibleDVs.length; i++) {
-//             newBattler.possibleDVs[i] = this.possibleDVs[i].clone();
-//         }
-//         for (int i = 0; i < this.currentStats.length; i++) {
-//             newBattler.currentStats[i] = new Range(this.currentStats[i]);
-//         }
-//
-//         return newBattler;
-//     }
-//
-//     @Override
-//     public Battler defeatBattler(Battler b, int participants = 1) {
-//         addStatXP(b.pokemon.hp, b.pokemon.atk, b.pokemon.def, b.pokemon.spd, b.pokemon.spc, participants);
-//         return addXP(b.getExp(participants));
-//     }
-//
-//     @Override
-//     protected Battler evolve(Evolution.Key key) {
-//         if (pokemon.evolution != null && pokemon.evolution.get(key) != null) {
-//             BattlerImpl evo = new BattlerImpl(rd, pokemon.evolution.get(key), catchLocation, level);
-//             // TODO: evolution moves?
-//             evo.moveset = moveset;
-//             evo.possibleDVs = possibleDVs;
-//             evo.hpXP = hpXP;
-//             evo.atkXP = atkXP;
-//             evo.defXP = defXP;
-//             evo.spdXP = spdXP;
-//             evo.spcXP = spcXP;
-//             evo.levelExp = levelExp;
-//             evo.updateCurrentStats();
-//             return evo;
-//         } else {
-//             return null;
-//         }
-//     }
-//
-//     public void addStatXP(int hp, int atk, int def, int spd, int spc, int nrOfPkmn) {
-//         hpXP += hp / nrOfPkmn;
-//         atkXP += atk / nrOfPkmn;
-//         defXP += def / nrOfPkmn;
-//         spdXP += spd / nrOfPkmn;
-//         spcXP += spc / nrOfPkmn;
-//     }
-//
-//     public void resetStatXP() {
-//         hpXP = 0;
-//         atkXP = 0;
-//         defXP = 0;
-//         spdXP = 0;
-//         spcXP = 0;
-//     }
-//
-//     @Override
-//     public Battler addXP(int exp) {
-//         levelExp += exp;
-//         int totExp = pokemon.expGroup.getTotalExp(level, levelExp);
-//         int newLevel = pokemon.expGroup.getLevel(totExp);
-//         if (level != newLevel) {
-//             levelExp -= pokemon.expGroup.getDeltaExp(level, newLevel);
-//             level = newLevel;
-//             updateCurrentStats(); // Handle it the RBY way
-//             List<Move> newMoves = pokemon.getLearnedMoves(level); // Handle it the RBY way
-//             if (newMoves != null) {
-//                 int numCurMoves = 0;
-//                 while (numCurMoves < moveset.length && moveset[numCurMoves] != null) {
-//                     numCurMoves++;
-//                 }
-//                 int i = 0;
-//                 while (numCurMoves + i < moveset.length && i < newMoves.size()) {
-//                     moveset[numCurMoves + i] = newMoves.get(i);
-//                     i++;
-//                 }
-//                 while (i < newMoves.size()) {
-//                     // TODO check what move to override -> make Battler settings?
-//                     Move oldMove = rd.getMoveReplaced(pokemon, newMoves.get(i));
-//                     int oldIdx = 0;
-//                     boolean found = false;
-//                     while (!found && oldIdx < moveset.length) {
-//                         if (oldMove == moveset[oldIdx]) {
-//                             found = true;
-//                         } else {
-//                             oldIdx++;
-//                         }
-//                     }
-//                     if (found) {
-//                         moveset[oldIdx] = newMoves.get(i);
-//                     }
-//                     i++;
-//                 }
-//             }
-//         }
-//         Battler evolution = evolve(new Evolution.Level(level));
-//         if (evolution != null) {
-//             return evolution;
-//         } else {
-//             return this;
-//         }
-//     }
-//
-//     @Override
-//     public boolean useHPUp(int count) {
-//         boolean success = true;
-//         for (int i = 0; i < count; i++) {
-//             if (hpXP < MAX_STATEXP) {
-//                 hpXP = Math.min(hpXP + DELTA_STATEXP, MAX_STATEXP);
-//             } else {
-//                 success = false;
-//             }
-//         }
-//         return success;
-//     }
-//
-//     @Override
-//     public boolean useProtein(int count) {
-//         boolean success = true;
-//         for (int i = 0; i < count; i++) {
-//             if (atkXP < MAX_STATEXP) {
-//                 atkXP = Math.min(atkXP + DELTA_STATEXP, MAX_STATEXP);
-//             } else {
-//                 success = false;
-//             }
-//         }
-//         return success;
-//     }
-//
-//     @Override
-//     public boolean useIron(int count) {
-//         boolean success = true;
-//         for (int i = 0; i < count; i++) {
-//             if (defXP < MAX_STATEXP) {
-//                 defXP = Math.min(defXP + DELTA_STATEXP, MAX_STATEXP);
-//             } else {
-//                 success = false;
-//             }
-//         }
-//         return success;
-//     }
-//
-//     @Override
-//     public boolean useCarbos(int count) {
-//         boolean success = true;
-//         for (int i = 0; i < count; i++) {
-//             if (spdXP < MAX_STATEXP) {
-//                 spdXP = Math.min(spdXP + DELTA_STATEXP, MAX_STATEXP);
-//             } else {
-//                 success = false;
-//             }
-//         }
-//         return success;
-//     }
-//
-//     @Override
-//     public boolean useCalcium(int count) {
-//         boolean success = true;
-//         for (int i = 0; i < count; i++) {
-//             if (spcXP < MAX_STATEXP) {
-//                 spcXP = Math.min(spcXP + DELTA_STATEXP, MAX_STATEXP);
-//             } else {
-//                 success = false;
-//             }
-//         }
-//         return success;
-//     }
-//
-//     @Override
-//     public DVRange getDVRange(int stat) {
-//         DVRange range = new DVRange();
-//         if (isTrainerMon) {
-//             range.add(trainerDVs[stat]);
-//         } else {
-//             for (int DV = 0; DV < 16; DV++) {
-//                 if (possibleDVs[stat][DV]) {
-//                     range.add(DV);
-//                 }
-//             }
-//         }
-//         return range;
-//     }
-//
-//     @Override
-//     public DVRange[] getDVRanges() {
-//         DVRange[] ranges = new DVRange[5];
-//         for (int s = 0; s < 5; s++) {
-//             ranges[s] = getDVRange(s);
-//         }
-//         return ranges;
-//     }
-//
-//     private void updateCurrentStats() {
-//         currentStats[0] = calculateHP();
-//         currentStats[1] = calculateAtk();
-//         currentStats[2] = calculateDef();
-//         currentStats[3] = calculateSpd();
-//         currentStats[4] = calculateSpc();
-//     }
-//
-//     private Range calculateHP() {
-//         DVRange dvRange = getDVRange(0);
-//         double extraStats = 0;
-//         if (hpXP - 1 >= 0) {
-//             extraStats = Math.floor(Math.floor((Math.sqrt(hpXP - 1) + 1)) / 4);
-//         }
-//         Range range = new Range();
-//         for (int dv : dvRange.getValues()) {
-//             range.addValue((int) Math.floor((((pokemon.hp + dv + 50) * 2 + extraStats) * level / 100) + 10));
-//         }
-//         return range;
-//     }
-//
-//     private Range calculateAtk() {
-//         DVRange dvRange = getDVRange(1);
-//         Range range = new Range();
-//         for (int dv : dvRange.getValues()) {
-//             range.addValue(calculateStat(level, pokemon.atk, dv, atkXP));
-//         }
-//         return range;
-//     }
-//
-//     private Range calculateDef() {
-//         DVRange dvRange = getDVRange(2);
-//         Range range = new Range();
-//         for (int dv : dvRange.getValues()) {
-//             range.addValue(calculateStat(level, pokemon.def, dv, defXP));
-//         }
-//         return range;
-//     }
-//
-//     private Range calculateSpd() {
-//         DVRange dvRange = getDVRange(3);
-//         Range range = new Range();
-//         for (int dv : dvRange.getValues()) {
-//             range.addValue(calculateStat(level, pokemon.spd, dv, spdXP));
-//         }
-//         return range;
-//     }
-//
-//     private Range calculateSpc() {
-//         DVRange dvRange = getDVRange(4);
-//         Range range = new Range();
-//         for (int dv : dvRange.getValues()) {
-//             range.addValue(calculateStat(level, pokemon.spc, dv, spcXP));
-//         }
-//         return range;
-//     }
-//
-//     private int calculateStat(int level, int base, int DV, int XP) {
-//         double extraStats = 0;
-//         if (XP - 1 >= 0) {
-//             extraStats = Math.floor(Math.floor(Math.sqrt(XP - 1) + 1) / 4);
-//         }
-//         double statValue = Math.floor((((base + DV) * 2 + extraStats) * level / 100) + 5);
-//         return (int) statValue;
-//     }
-//
-//     @Override
-//     protected Range getBoostedStat(Range statRange, int badgeBoostCount, int xItemCount) {
-//         Range boostedRange = new Range(statRange);
-//         boostedRange = boostedRange.multiplyBy(multipliers[xItemCount + 6]).divideBy(divisors[xItemCount + 6]);
-//         for (int bb = 0; bb < badgeBoostCount; bb++) {
-//             boostedRange = boostedRange.multiplyBy(9).divideBy(8);
-//         }
-//         return boostedRange;
-//     }
-//
-//     public int getHPStatIfDV(int DV) {
-//         double extraStats = 0;
-//         if (hpXP - 1 >= 0) {
-//             extraStats = Math.floor(Math.floor((Math.sqrt(hpXP - 1) + 1)) / 4);
-//         }
-//         double statValue = Math.floor((((pokemon.hp + DV + 50) * 2 + extraStats) * level / 100) + 10);
-//         return (int) statValue;
-//     }
-//
-//     public int getAtkStatIfDV(int DV) {
-//         int stat = calculateStat(level, pokemon.atk, DV, atkXP);
-//         return stat;
-//     }
-//
-//     public int getDefStatIfDV(int DV) {
-//         int stat = calculateStat(level, pokemon.def, DV, defXP);
-//         return stat;
-//     }
-//
-//     public int getSpdStatIfDV(int DV) {
-//         int stat = calculateStat(level, pokemon.spd, DV, spdXP);
-//         return stat;
-//     }
-//
-//     public int getSpcStatIfDV(int DV) {
-//         int stat = calculateStat(level, pokemon.spc, DV, spcXP);
-//         return stat;
-//     }
-//
-//     @Override
-//     public boolean equals(Object obj) {
-//         if (obj instanceof BattlerImpl) {
-//             BattlerImpl b = (BattlerImpl) obj;
-//             return rd == b.rd
-//                     && pokemon == b.pokemon
-//                     && Arrays.equals(moveset, b.moveset)
-//                     && catchLocation == b.catchLocation
-//                     && level == b.level
-//                     && levelExp == b.levelExp
-//                     && hpXP == b.hpXP
-//                     && atkXP == b.atkXP
-//                     && defXP == b.defXP
-//                     && spdXP == b.spdXP
-//                     && spcXP == b.spcXP
-//                     && Arrays.deepEquals(possibleDVs, b.possibleDVs);
-//         } else {
-//             return false;
-//         }
 //     }
 //
 //     @Override

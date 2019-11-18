@@ -1,0 +1,418 @@
+[
+  {
+    "location": "Pallet Town",
+    "subLocations": [
+      { "location": "Blue's House" },
+      { "location": "Oak's Lab" },
+      {
+        "location": "Red's House",
+        "subLocations": [
+          { "location": "Red's House 1F" },
+          { "location": "Red's House 2F" }
+        ]
+      }
+    ]
+  },
+  { "location": "Route 1" },
+  {
+    "location": "Viridian City",
+    "subLocations": [
+      { "location": "School" },
+      { "location": "Viridian Gym" },
+      { "location": "Viridian House" },
+      { "location": "Viridian Mart" },
+      { "location": "Viridian Pokecenter" }
+    ]
+  },
+  {
+    "location": "Route 2",
+    "subLocations": [
+      { "location": "Route 2 Gate" },
+      { "location": "Route 2 House" }
+    ]
+  },
+  {
+    "location": "Viridian Forest",
+    "subLocations": [
+      { "location": "Viridian Forest Entrance" },
+      { "location": "Viridian Forest Exit" }
+    ]
+  },
+  {
+    "location": "Diglett's Cave",
+    "subLocations": [
+      { "location": "Diglett's Cave Route 2 Entrance" },
+      { "location": "Diglett's Cave Route 11 Entrance" }
+    ]
+  },
+  {
+    "location": "Pewter City",
+    "subLocations": [
+      {
+        "location": "Museum",
+        "subLocations": [
+          { "location": "Museum 1F" },
+          { "location": "Museum 2F" }
+        ]
+      },
+      { "location": "Pewter Gym" },
+      { "location": "Pewter House 1" },
+      { "location": "Pewter House 2" },
+      { "location": "Pewter Mart" },
+      { "location": "Pewter Pokecenter" }
+    ]
+  },
+  { "location": "Route 3" },
+  {
+    "location": "Mt. Moon",
+    "subLocations": [
+      { "location": "Mt. Moon 1F" },
+      { "location": "Mt. Moon B1F" },
+      { "location": "Mt. Moon B2F" }
+    ]
+  },
+  {
+    "location": "Route 4",
+    "subLocations": [
+      { "location": "Mt. Moon Pokecenter" }
+    ]
+  },
+  {
+    "location": "Cerulean City",
+    "subLocations": [
+      { "location": "Bike Shop" },
+      { "location": "Cerulean Badge House" },
+      { "location": "Cerulean Gym" },
+      { "location": "Cerulean Mart" },
+      { "location": "Cerulean Pokecenter" },
+      { "location": "Cerulean Trade House" },
+      { "location": "Cerulean Trashed House" }
+    ]
+  },
+  { "location": "Route 24" },
+  { "location": "Route 25" },
+  { "location": "Bill's House" },
+  {
+    "location": "Route 5",
+    "subLocations": [
+      { "location": "Daycare" },
+      { "location": "Route 5 Gate" }
+    ]
+  },
+  {
+    "location": "Underground Path Route 5 6",
+    "subLocations": [
+      { "location": "Underground Path Route 5 Entrance" },
+      { "location": "Underground Path Route 6 Entrance" }
+    ]
+  },
+  {
+    "location": "Route 6",
+    "subLocations": [
+      { "location": "Route 6 Gate" }
+    ]
+  },
+  {
+    "location": "Vermilion City",
+    "subLocations": [
+      { "location": "Fan Club" },
+      { "location": "Vermilion Dock" },
+      { "location": "Vermilion Fishing House" },
+      { "location": "Vermilion Gym" },
+      { "location": "Vermilion House 1" },
+      { "location": "Vermilion House 2" },
+      { "location": "Vermilion Mart" },
+      { "location": "Vermilion Pokecenter" }
+    ]
+  },
+  {
+    "location": "SS Anne",
+    "subLocations": [
+      { "location": "SS Anne 1F // 1" },
+      { "location": "SS Anne 1F Kitchen? // 6" },
+      { "location": "SS Anne 1F Rooms // 8" },
+      { "location": "SS Anne 2F // 2" },
+      { "location": "SS Anne 2F Rooms // 9" },
+      { "location": "SS Anne 3F // 3" },
+      { "location": "SS Anne 3F Deck // 5" },
+      { "location": "SS Anne 3F Stern // 7" },
+      { "location": "SS Anne B1F // 4" },
+      { "location": "SS Anne B1F Rooms // 10" }
+    ]
+  },
+  {
+    "location": "Route 9",
+    "subLocations": [
+      { "location": "Rock Tunnel Pokecenter" }
+    ]
+  },
+  {
+    "location": "Rock Tunnel",
+    "subLocations": [
+      { "location": "Rock Tunnel 1F" },
+      { "location": "Rock Tunnel B1F" }
+    ]
+  },
+  { "location": "Route 10" },
+  {
+    "location": "Lavender Town",
+    "subLocations": [
+      { "location": "Fuji's House" },
+      { "location": "Lavender House" },
+      { "location": "Lavender Mart" },
+      { "location": "Lavender Pokecenter" },
+      { "location": "Name Rater" }
+    ]
+  },
+  {
+    "location": "Pokemon Tower",
+    "subLocations": [
+      { "location": "Pokemon Tower 1F" },
+      { "location": "Pokemon Tower 2F" },
+      { "location": "Pokemon Tower 3F" },
+      { "location": "Pokemon Tower 4F" },
+      { "location": "Pokemon Tower 5F" },
+      { "location": "Pokemon Tower 6F" },
+      { "location": "Pokemon Tower 7F" }
+    ]
+  },
+  {
+    "location": "Route 8",
+    "subLocations": [
+      { "location": "Route 8 Gate" }
+    ]
+  },
+  {
+    "location": "Underground Path Route 7 8",
+    "subLocations": [
+      { "location": "Underground Path Route 7 Entrance" },
+      { "location": "Underground Path Route 8 Entrance" }
+    ]
+  },
+  {
+    "location": "Route 7",
+    "subLocations": [
+      { "location": "Route 7 Gate" }
+    ]
+  },
+  {
+    "location": "Celadon City",
+    "subLocations": [
+      {
+        "location": "Celadon Dept Store",
+        "subLocations": [
+          { "location": "Celadon Dept Store 1F" },
+          { "location": "Celadon Dept Store 2F" },
+          { "location": "Celadon Dept Store 3F" },
+          { "location": "Celadon Dept Store 4F" },
+          { "location": "Celadon Dept Store 5F" },
+          { "location": "Celadon Dept Store Elevator" },
+          { "location": "Celadon Dept Store Roof" }
+        ]
+      },
+      { "location": "Celadon Diner" },
+      { "location": "Celadon Game Corner" },
+      { "location": "Celadon Gym" },
+      { "location": "Celadon Hotel" },
+      { "location": "Celadon House" },
+      {
+        "location": "Celadon Mansion",
+        "subLocations": [
+          { "location": "Celadon Mansion 1F" },
+          { "location": "Celadon Mansion 2F" },
+          { "location": "Celadon Mansion 3F" },
+          { "location": "Celadon Mansion 4F Inside" },
+          { "location": "Celadon Mansion 4F Outside" }
+        ]
+      },
+      { "location": "Celadon Pokecenter" },
+      { "location": "Celadon Prize Room" },
+      {
+        "location": "Rocket Hideout",
+        "subLocations": [
+          { "location": "Rocket Hideout B1F" },
+          { "location": "Rocket Hideout B2F" },
+          { "location": "Rocket Hideout B3F" },
+          { "location": "Rocket Hideout B4F" },
+          { "location": "Rocket Hideout Elevator" }
+        ]
+      }
+    ]
+  },
+  {
+    "location": "Saffron City",
+    "subLocations": [
+      {
+        "location": "Copycat's House",
+        "subLocations": [
+          { "location": "Copycat's House 1F" },
+          { "location": "Copycat's House 2F" }
+        ]
+      },
+      { "location": "Fighting Dojo" },
+      { "location": "Mr. Psychic's House" },
+      { "location": "Saffron Gym" },
+      { "location": "Saffron House" },
+      { "location": "Saffron Mart" },
+      { "location": "Saffron Pokecenter" },
+      {
+        "location": "Silph Co.",
+        "subLocations": [
+          { "location": "Silph Co. 1F" },
+          { "location": "Silph Co. 2F" },
+          { "location": "Silph Co. 3F" },
+          { "location": "Silph Co. 4F" },
+          { "location": "Silph Co. 5F" },
+          { "location": "Silph Co. 6F" },
+          { "location": "Silph Co. 7F" },
+          { "location": "Silph Co. 8F" },
+          { "location": "Silph Co. 9F" },
+          { "location": "Silph Co. 10F" },
+          { "location": "Silph Co. 11F" },
+          { "location": "Silph Co. Elevator" }
+        ]
+      }
+    ]
+  },
+  {
+    "location": "Route 11",
+    "subLocations": [
+      { "location": "Route 11 Gate" },
+      { "location": "Route 11 Gate Upstairs" }
+    ]
+  },
+  {
+    "location": "Route 12",
+    "subLocations": [
+      { "location": "Route 12 Gate" },
+      { "location": "Route 12 Gate Upstairs" },
+      { "location": "Route 12 House" }
+    ]
+  },
+  { "location": "Route 13" },
+  { "location": "Route 14" },
+  {
+    "location": "Route 15",
+    "subLocations": [
+      { "location": "Route 15 Gate" },
+      { "location": "Route 15 Gate Upstairs" }
+    ]
+  },
+  {
+    "location": "Route 16",
+    "subLocations": [
+      { "location": "Route 16 Gate" },
+      { "location": "Route 16 Gate Upstairs" },
+      { "location": "Route 16 House" }
+    ]
+  },
+  { "location": "Route 17" },
+  {
+    "location": "Route 18",
+    "subLocations": [
+      { "location": "Route 18 Gate" },
+      { "location": "Route 18 Gate Upstairs" }
+    ]
+  },
+  {
+    "location": "Fuchsia City",
+    "subLocations": [
+      { "location": "Fuchsia Fishing House" },
+      { "location": "Fuchsia Gym" },
+      { "location": "Fuchsia House" },
+      { "location": "Fuchsia Mart" },
+      { "location": "Fuchsia Meeting Room" },
+      { "location": "Fuchsia Pokecenter" },
+      { "location": "Warden's House" }
+    ]
+  },
+  {
+    "location": "Safari Zone",
+    "subLocations": [
+      { "location": "Safari Zone Center" },
+      { "location": "Safari Zone East" },
+      { "location": "Safari Zone Entrance" },
+      { "location": "Safari Zone North" },
+      { "location": "Safari Zone Rest House 1" },
+      { "location": "Safari Zone Rest House 2" },
+      { "location": "Safari Zone Rest House 3" },
+      { "location": "Safari Zone Rest House 4" },
+      { "location": "Safari Zone Secret House" },
+      { "location": "Safari Zone West" }
+    ]
+  },
+  { "location": "Route 19" },
+  {
+    "location": "Seafoam Islands",
+    "subLocations": [
+      { "location": "Seafoam Islands 1F" },
+      { "location": "Seafoam Islands B1F" },
+      { "location": "Seafoam Islands B2F" },
+      { "location": "Seafoam Islands B3F" },
+      { "location": "Seafoam Islands B4F" }
+    ]
+  },
+  { "location": "Route 20" },
+  {
+    "location": "Cinnabar Island",
+    "subLocations": [
+      { "location": "Cinnabar Gym" },
+      {
+        "location": "Cinnabar Lab",
+        "subLocations": [
+          { "location": "Cinnabar Lab Fossil Room" },
+          { "location": "Cinnabar Lab Metronome Room" },
+          { "location": "Cinnabar Lab Trade Room" }
+        ]
+      },
+      {
+        "location": "Cinnabar Mansion",
+        "subLocations": [
+          { "location": "Cinnabar Mansion 1F" },
+          { "location": "Cinnabar Mansion 2F" },
+          { "location": "Cinnabar Mansion 3F" },
+          { "location": "Cinnabar Mansion B1F" }
+        ]
+      },
+      { "location": "Cinnabar Mart" },
+      { "location": "Cinnabar Pokecenter" }
+    ]
+  },
+  { "location": "Route 21" },
+  {
+    "location": "Route 22",
+    "subLocations": [
+      { "location": "Pokemon League Gate" }
+    ]
+  },
+  { "location": "Route 23" },
+  {
+    "location": "Victory Road",
+    "subLocations": [
+      { "location": "Victory Road 1F" },
+      { "location": "Victory Road 2F" },
+      { "location": "Victory Road 3F" }
+    ]
+  },
+  {
+    "location": "Indigo Plateau",
+    "subLocations": [
+      { "location": "Indigo Plateau Lobby" },
+      { "location": "Lorelei" },
+      { "location": "Bruno" },
+      { "location": "Agatha" },
+      { "location": "Lance" },
+      { "location": "Champion" },
+      { "location": "Hall Of Fame" }
+    ]
+  },
+  { "location": "Power Plant" },
+  {
+    "location": "Unknown Dungeon",
+    "subLocations": [
+      { "location": "Unknown Dungeon 1F" },
+      { "location": "Unknown Dungeon 2F" },
+      { "location": "Unknown Dungeon B1F" }
+    ]
+  }
+]

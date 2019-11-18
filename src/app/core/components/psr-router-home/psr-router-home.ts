@@ -126,7 +126,12 @@ class PsrRouterHome extends PsrRouterPage {
           if (route.game.info.unsupported) {
             this._showUnsupportedToast(route.game.info.name);
           }
-          super._navigateTo("router");
+          if (route.getAllMessages().length > 0) {
+            let str = route.getAllMessages().map(m => m.toString()).join("\n");
+            alert(str);
+          } else {
+            super._navigateTo("router");
+          }
         }).catch(e => {
           fileInput.value = "";
           this._loading = false;
@@ -184,7 +189,12 @@ class PsrRouterHome extends PsrRouterPage {
       if (route.game.info.unsupported) {
         this._showUnsupportedToast(route.game.info.name);
       }
-      super._navigateTo("router");
+      if (route.getAllMessages().length > 0) {
+        let str = route.getAllMessages().map(m => m.toString()).join("\n");
+        alert(str);
+      } else {
+        super._navigateTo("router");
+      }
     }
   }
 

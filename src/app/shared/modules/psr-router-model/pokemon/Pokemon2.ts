@@ -1,5 +1,6 @@
 import { Type } from "../Model";
 import { Pokemon } from "./Pokemon";
+import { ExperienceGroup } from "../experience-group/ExperienceGroup";
 /**
  * Class representing a gen 2 Pokemon
  */
@@ -10,7 +11,7 @@ export class Pokemon2 extends Pokemon {
     type1: Type,
     type2: Type,
     expGiven: number,
-    expGroup: string, // TODO ...
+    expGroup: ExperienceGroup,
     hp: number,
     atk: number,
     def: number,

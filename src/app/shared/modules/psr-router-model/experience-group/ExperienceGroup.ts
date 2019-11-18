@@ -81,6 +81,6 @@ export abstract class ExperienceGroup {
     return this._expCurve[level] + levelExp;
   }
   toString(): string {
-    return `${this.name} experience group`;
+    return this.name;
   }
 }

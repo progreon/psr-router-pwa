@@ -49,15 +49,25 @@ export class Player {
    * @param currentLocation
    */
   constructor( //
-    public readonly name: string, //
-    public readonly info: string, //
-    public readonly team: Battler[], //
-    public currentLocation: string // TODO: to Location?
+    public readonly name: string = "Red", //
+    public readonly info: string = "", //
+    public readonly team: Battler[] = [], //
+    public currentLocation: string = "" // TODO: to Location?
   ) {
     this._money = 0;
     this._bagItems = [];
     this._pcItems = [];
     this._badges = [];
+  }
+
+  public addBadge(badge: string) {
+    if (!this.hasBadge(badge)) {
+      this._badges.push(badge.toUpperCase());
+    }
+  }
+
+  public hasBadge(badge: string): boolean {
+    return this._badges.indexOf(badge.toUpperCase()) >= 0;
   }
 
   /**

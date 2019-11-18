@@ -5,7 +5,7 @@
 export class EvolutionKey {
   /**
    *
-   * @param type  One of [level, stone, trade-item].
+   * @param type  One of [level, stone, trade, trade-item].
    * @param value The level, stone type, name of the item (or empty if just trade).
    */
   constructor(
@@ -22,6 +22,7 @@ export namespace EvolutionKey {
   export enum Type {
     Level,
     Stone,
+    Trade,
     TradeItem
   }
 }

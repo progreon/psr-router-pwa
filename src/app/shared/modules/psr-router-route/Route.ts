@@ -6,8 +6,10 @@ import { RouterMessage } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteSection } from '.';
 import { Game } from '../psr-router-model/Game';
-import { Location } from '../psr-router-model/Model';
+import { Location, Player } from '../psr-router-model/Model';
 import { RouteEntry } from './RouteEntry';
+import { EntryJSON } from './parse/EntryJSON';
+import { RouteJSON } from './parse/RouteJSON';
 // import { saveAs } from 'file-saver/FileSaver';
 
 /**
@@ -38,18 +40,18 @@ export class Route extends RouteSection {
     return Route.ENTRY_TYPE;
   }
 
-  getJSONObject(): any {
-    let routeSectionJSON = super.getJSONObject();
-    let routeJSON = {
-      game: this.game.info.key,
-      shortname: this.shortname,
-      info: routeSectionJSON.info,
-      entries: routeSectionJSON.entries
-    };
-    return routeJSON;
+  getAllMessages(): RouterMessage[] {
+    let messages = [];
+    this.entryList.forEach(e => e.messages.forEach(m => messages.push(m)));
+    return messages;
   }
 
-  static newFromJSONObject(obj: any): Route {
+  getJSONObject(): EntryJSON {
+    let routeSectionJSON = super.getJSONObject();
+    return new RouteJSON(this.game.info.key, this.shortname, routeSectionJSON.info, routeSectionJSON.entries);
+  }
+
+  static newFromJSONObject(obj: RouteJSON): Route {
     if (!obj) {
       // TODO: throw exception?
     } else if (!obj.game) {
@@ -59,7 +61,10 @@ export class Route extends RouteSection {
     if (!game) {
       // TODO: throw exception?
     }
-    let rs = RouteSection.newFromJSONObject(game, obj);
-    return new Route(rs.game, new RouteEntryInfo(rs.info.title, rs.info.summary), obj.shortname, rs.location, rs.children); // TODO: rs.info
+    let rs = RouteSection.newFromJSONObject(obj, game);
+    let player = new Player(game.info.name);
+    let route = new Route(rs.game, new RouteEntryInfo(rs.info.title, rs.info.summary), obj.shortname, rs.location, rs.children); // TODO: rs.info
+    route._playerBefore = player;
+    return route;
   }
 }

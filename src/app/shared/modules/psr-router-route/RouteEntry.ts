@@ -5,6 +5,7 @@ import { RouterMessage } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { Game } from '../psr-router-model/Game';
 import { Player, Location } from '../psr-router-model/Model';
+import { EntryJSON } from './parse/EntryJSON';
 
 /**
  * A class representing a route-entry.
@@ -97,7 +98,7 @@ export class RouteEntry {
    * Gets all of its entries, including itself as the first one.
    * @returns The entry list.
    */
-  getEntryList(): RouteEntry[] {
+  public get entryList(): RouteEntry[] {
     return [this];
   }
 
@@ -156,10 +157,7 @@ export class RouteEntry {
    */
   protected _triggerObservers(type: string) {
     if (this._eventsEnabled) {
-      let athis = this;
-      this._observers.forEach(function (f) {
-        f(athis, type);
-      });
+      this._observers.forEach(f => f(this, type));
     }
   }
 
@@ -173,19 +171,19 @@ export class RouteEntry {
    * @todo doc
    * @todo lcoation
    */
-  getJSONObject(): any {
+  getJSONObject(): EntryJSON {
     // { type, info: {title, summary, description}, location, data } // data = specific entry data
     let type = this.entryType;
     let info = { title: this.info.title, summary: this.info.summary, description: this.info.description };
     let location = ""; // TODO, parse from this._location;
-    let obj = { type, info, location };
+    let obj = new EntryJSON(type, info, location);
     return obj;
   }
 
   /**
    * @todo doc
    */
-  static newFromJSONObject(game: Game, obj: any): RouteEntry {
+  static newFromJSONObject(obj: EntryJSON, game: Game): RouteEntry {
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     let location = undefined; // TODO, parse from obj.location
     return new RouteEntry(game, info, location);

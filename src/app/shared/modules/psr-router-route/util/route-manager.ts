@@ -18,6 +18,9 @@ export function GetCurrentGame(): Game {
 export function SetCurrentRoute(route: Route.Route = null): Route.Route {
   window.app.route = route;
   window.app.game = route ? route.game : null;
+  if (route && route.getAllMessages().length == 0) {
+    route.apply();
+  }
   return route;
 }
 
@@ -29,8 +32,13 @@ export function LoadSavedRoute(): Route.Route {
   let routeJSON = localStorage.getItem(lsKeySavedRoute);
   let route: Route.Route = null;
   if (routeJSON) {
-    route = Route.Route.newFromJSONObject(JSON.parse(routeJSON));
-    route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+    try {
+      route = Route.Route.newFromJSONObject(JSON.parse(routeJSON));
+      route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+    } catch (e) {
+      console.error(e);
+      window.setTimeout(() => window.alert("Something went wrong while loading the last opened route, please load a new route. Check the console for more details."), 100);
+    }
   }
   return SetCurrentRoute(route);
 }
@@ -53,7 +61,7 @@ export function SaveRoute(route: Route.Route = null): Route.Route {
 import * as redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
 import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
 // import * as exampleRoute from 'SharedData/routes/example_route.json';
-// import * as redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
+import * as redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
 // import * as blueDummy from 'SharedData/routes/blue_dummy.json';
 import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
 // import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
@@ -62,7 +70,7 @@ let exampleRoutes: { [key: string]: any; } = {};
 exampleRoutes[redAnyGlitchlessBasic.shortname] = redAnyGlitchlessBasic;
 exampleRoutes[redAnyGlitchlessClassic.shortname] = redAnyGlitchlessClassic;
 // exampleRoutes[exampleRoute.shortname] = exampleRoute;
-// exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
+exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
 // exampleRoutes[blueDummy.shortname] = blueDummy;
 exampleRoutes[yellowDummy.shortname] = yellowDummy;
 // exampleRoutes[crystalDummy.shortname] = crystalDummy;
@@ -75,7 +83,7 @@ export function LoadExampleRoute(routeName: string): Route.Route {
   let routeJSON = exampleRoutes[routeName];
   if (routeJSON) {
     let route = Route.Route.newFromJSONObject(routeJSON);
-    route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+    route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
     return SaveRoute(route);
   } else {
     return null;
@@ -93,7 +101,7 @@ export function LoadRouteFile(file: File): Promise<Route.Route> {
         try {
           console.log(e);
           let route = RouteIO.ImportFromFile(<string>((<FileReader>(e.target)).result), filename.search(/\.json$/) > 0, filename);
-          route.getEntryList().forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+          route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
           resolve(SaveRoute(route));
           // reject(e);
         } catch (e) {

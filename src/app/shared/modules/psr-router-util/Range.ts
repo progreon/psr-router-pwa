@@ -2,7 +2,7 @@
  * Class holding a range of numbers and keeps count of how many per number.
  */
 class Range {
-  private _values: Map<number, number>;
+  private _values: { [key: number]: number };
   private _count: number;
   public get count() {
     return this._count;
@@ -19,7 +19,7 @@ class Range {
    *
    */
   constructor() {
-    this._values = new Map();
+    this._values = {};
     this._count = 0;
     this._min = 0;
     this._max = 0;
@@ -60,7 +60,7 @@ class Range {
    * @param range
    */
   combine(range: Range) {
-    range._values.forEach((count, value) => this.addValues(value, count));
+    Object.keys(range._values).forEach((value: any) => this.addValues(value, range._values[value]));
   }
 
   /**
@@ -88,7 +88,8 @@ class Range {
     let vs: number[] = [];
 
     for (let i in this._values)
-      vs.push(this._values[i]);
+      for (let j = 0; j < this._values[i]; j++)
+        vs.push(<number><any>i);
 
     vs.sort((a, b) => a - b);
     return vs;
@@ -99,10 +100,10 @@ class Range {
    * @param d The divider.
    * @returns The new range
    */
-  divideBy(d: number): Range {
+  divideBy(d: number, floor?: boolean): Range {
     let newRange: Range = new Range();
 
-    this._values.forEach((count, value) => newRange.addValues(value / d, count));
+    Object.keys(this._values).forEach((value: any) => newRange.addValues(floor ? Math.floor(value / d) : value / d, this._values[value]));
 
     return newRange;
   }
@@ -112,10 +113,10 @@ class Range {
    * @param m The multiplier.
    * @returns The new range
    */
-  multiplyBy(m: number): Range {
+  multiplyBy(m: number, floor?: boolean): Range {
     let newRange: Range = new Range();
 
-    this._values.forEach((count, value) => newRange.addValues(value * m, count));
+    Object.keys(this._values).forEach((value: any) => newRange.addValues(floor ? Math.floor(value * m) : value * m, this._values[value]));
 
     return newRange;
   }
@@ -128,7 +129,7 @@ class Range {
   add(a: number): Range {
     let newRange: Range = new Range();
 
-    this._values.forEach((count, value) => newRange.addValues(value + a, count));
+    Object.keys(this._values).forEach((value: any) => newRange.addValues(+value + a, this._values[value]));
 
     return newRange;
   }
@@ -142,8 +143,8 @@ class Range {
   addRange(ra: Range): Range {
     let newRange: Range = new Range();
 
-    for (let value1 in this._values.keys())
-      for (let value2 in ra._values.keys())
+    for (let value1 in Object.keys(this._values))
+      for (let value2 in Object.keys(ra._values))
         newRange.addValues(+value1 + +value2, this._values[value1] * ra._values[value2]);
 
     return newRange;
@@ -157,7 +158,7 @@ class Range {
   substract(s: number): Range {
     let newRange: Range = new Range();
 
-    this._values.forEach((count, value) => newRange.addValues(value - s, count));
+    Object.keys(this._values).forEach((value: any) => newRange.addValues(value - s, this._values[value]));
 
     return newRange;
   }
@@ -174,6 +175,16 @@ class Range {
       for (let value2 in rs._values)
         newRange.addValues(+value1 - +value2, this._values[value1] * rs._values[value2]);
 
+    return newRange;
+  }
+
+  /**
+   * Returns a new range with the values floored.
+   * @returns The new range
+   */
+  floor(): Range {
+    let newRange = new Range();
+    this.getValuesArray().forEach(v => newRange.addValue(Math.floor(v)));
     return newRange;
   }
 

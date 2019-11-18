@@ -1,5 +1,6 @@
 /**
  * Class representing a DV-range.
+ * @todo store min and max values and sort the values
  */
 class DVRange {
   /**
@@ -43,6 +44,12 @@ class DVRange {
         max = dv;
     });
     return max;
+  }
+
+  get values(): number[] {
+    let values: number[] = [];
+    this._dvs.forEach(dv => values.push(dv));
+    return values;
   }
 
   /**
