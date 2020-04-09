@@ -50,7 +50,7 @@ function entryV1(entryV0: any) {
 }
 
 function v1(routeV0: any): Boolean {
-  if (!routeV0.v) {
+  if (!routeV0.v && !routeV0.properties) {
     console.log("Before: ", JSON.parse(JSON.stringify(routeV0)));
     for (let i = 0; i < routeV0.entries.length; i++) {
       entryV1(routeV0.entries[i]);
@@ -60,6 +60,7 @@ function v1(routeV0: any): Boolean {
     console.log("After: ", JSON.parse(JSON.stringify(routeV0)));
     return true;
   } else {
+    routeV0.v = 1;
     return false;
   }
 }
