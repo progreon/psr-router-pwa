@@ -24,10 +24,6 @@ class BadgeBoosts {
    * @returns This object
    */
   setValues(atk: number, def: number, spd: number, spc: number): BadgeBoosts {
-    // atk = parseInt(atk);
-    // def = parseInt(def);
-    // spd = parseInt(spd);
-    // spc = parseInt(spc);
     this._values = [atk, def, spd, spc];
 
     for (let i = 0; i < this._values.length; i++)
@@ -77,6 +73,8 @@ class BadgeBoosts {
    * @returns The badge boost
    */
   getValue(index: number): number {
+    if (index < 0 || index >= 4)
+      throw new RangeError("Index must be in range [0,3]!");
     return this._values[index];
   }
 

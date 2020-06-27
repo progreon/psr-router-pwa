@@ -84,7 +84,7 @@ module.exports = merge(common(config), {
         test: /\.js$/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env'],
+          presets: ['@babel/preset-env', '@babel/preset-typescript'],
           plugins: [
             'syntax-dynamic-import',
           ],

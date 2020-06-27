@@ -2,5 +2,6 @@ build/
 dist/
 jsdoc/
 node_modules/
+coverage/
 stats.json
 yarn-error.log

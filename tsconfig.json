@@ -22,5 +22,5 @@
       "Shared/*": ["src/app/shared/*"]
     }
   },
-  "include": ["src/app/**/*"]
+  "include": ["src/app/**/*", "__tests__/**/*"]
 }

@@ -9,6 +9,7 @@ export class RouterMessage {
   }
 }
 
+/* istanbul ignore next */
 export namespace RouterMessage {
   export enum Type {
     Error, Warning, Info, Debug
