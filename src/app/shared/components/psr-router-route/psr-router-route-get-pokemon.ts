@@ -13,6 +13,10 @@ class PsrRouterRouteGetPokemon extends PsrRouterRouteEntry {
     `;
   }
 
+  protected _hasExpandingContent(): boolean {
+    return true;
+  }
+
   _renderStyle() {
     // TODO
     return undefined;

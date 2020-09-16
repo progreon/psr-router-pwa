@@ -56,6 +56,11 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
     }
   }
 
+  protected _hasExpandingContent(): boolean {
+    let children = super.routeEntry ? (<Route.RouteSection>super.routeEntry).children : [];
+    return children.length > 0;
+  }
+
   constructor(routeSection?: Route.RouteSection) {
     super(routeSection);
     super.hideContent = false;

@@ -69,6 +69,7 @@ class PsrRouterHome extends PsrRouterPage {
           border-width: 1px 0px 0px 0px;
         }
       </style>
+      <vaadin-button @click="${this._switchTheme.bind(this)}">Switch theme</vaadin-button>
       <h2>Current Route</h2>
       <h3>${route ? route.info.title : "No route loaded"}</h3>
       <p>${route && route.shortname}</p>
@@ -208,6 +209,17 @@ class PsrRouterHome extends PsrRouterPage {
 
   _showUnsupportedToast(gameTitle) {
     super.showAppToast(`Game "Pokémon ${gameTitle}" is not (fully) supported. (YET!)`);
+  }
+
+  _switchTheme() {
+    let theme = window.localStorage.getItem("app-theme") || "light";
+    if (theme === "light") {
+      theme = "dark";
+    } else {
+      theme = "light";
+    }
+    window.localStorage.setItem("app-theme", theme);
+    window.location.reload();
   }
 }
 

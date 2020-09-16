@@ -103,14 +103,6 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
               <div class="table" ?odd="${obi % 2 == 1}">
                 <div class="col">
                   <div>BB</div>
-                  <!-- <div>atk <input type="number" min="-99" max="99" step="1" value="${actualBB.atk}"></div>
-                  <div>def <input type="number" min="-99" max="99" step="1" value="${actualBB.def}"></div>
-                  <div>spd <input type="number" min="-99" max="99" step="1" value="${actualBB.spd}"></div>
-                  <div>spc <input type="number" min="-99" max="99" step="1" value="${actualBB.spc}"></div> -->
-                  <!-- <div>atk <vaadin-number-field min="-99" max="99" step="1" has-controls .value="${actualBB.atk}"></vaadin-number-field></div>
-                  <div>def <vaadin-number-field min="-99" max="99" step="1" has-controls .value="${actualBB.def}"></vaadin-number-field></div>
-                  <div>spd <vaadin-number-field min="-99" max="99" step="1" has-controls .value="${actualBB.spd}"></vaadin-number-field></div>
-                  <div>spc <vaadin-number-field min="-99" max="99" step="1" has-controls .value="${actualBB.spc}"></vaadin-number-field></div> -->
                   <div>atk [< ${actualBB.atk} >]</div>
                   <div>def [< ${actualBB.def} >]</div>
                   <div>spd [< ${actualBB.spd} >]</div>
@@ -118,14 +110,6 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 </div>
                 <div class="col">
                   <div>Stages</div>
-                  <!-- <div>atk <input type="number" min="-6" max="6" step="1" value="0"></div>
-                  <div>def <input type="number" min="-6" max="6" step="1" value="0"></div>
-                  <div>spd <input type="number" min="-6" max="6" step="1" value="0"></div>
-                  <div>spc <input type="number" min="-6" max="6" step="1" value="0"></div> -->
-                  <!-- <div>atk <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
-                  <div>def <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
-                  <div>spd <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
-                  <div>spc <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div> -->
                   <div>atk [< 0 >]</div>
                   <div>def [< 0 >]</div>
                   <div>spd [< 0 >]</div>
@@ -140,7 +124,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                     <div>${movesAttacker[3] || "-"}</div>
                   </div>
                   <div class="col">
-                  <div class="click" @click="${this._showBattlerDialog.bind(this, ob, null, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</div>
+                    <div class="click" @click="${this._showBattlerDialog.bind(this, ob, null, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</div>
                     <div>${movesDefender[0] || "-"}</div>
                     <div>${movesDefender[1] || "-"}</div>
                     <div>${movesDefender[2] || "-"}</div>
@@ -149,14 +133,6 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 </div>
                 <div class="col">
                   <div>Stages</div>
-                  <!-- <div>atk <input type="number" min="-6" max="6" step="1" value="0"></div>
-                  <div>def <input type="number" min="-6" max="6" step="1" value="0"></div>
-                  <div>spd <input type="number" min="-6" max="6" step="1" value="0"></div>
-                  <div>spc <input type="number" min="-6" max="6" step="1" value="0"></div> -->
-                  <!-- <div>atk <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
-                  <div>def <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
-                  <div>spd <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div>
-                  <div>spc <vaadin-number-field min="-6" max="6" step="1" has-controls value="0"></vaadin-number-field></div> -->
                   <div>atk [< 0 >]</div>
                   <div>def [< 0 >]</div>
                   <div>spd [< 0 >]</div>
@@ -175,6 +151,10 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
       dom.push(html`<div>No player set!</div>`);
     }
     return dom;
+  }
+
+  protected _hasExpandingContent(): boolean {
+    return true;
   }
 
   private _battleStateCache: {

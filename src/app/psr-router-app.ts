@@ -69,6 +69,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
   private _toastHtml: any;
   @property({type: Boolean})
   private _wideLayout: boolean;
+  private _appTheme: string;
 
   render() {
     let linkList = [];
@@ -80,11 +81,9 @@ export class PsrRouterApp extends connect(store)(LitElement) {
         linkList.push(a);
       }
     }
-    const template = html`
-      ${AppStyles}
+    let baseColors = html`
       <style>
         :host {
-          /* COLORS */
           --app-profile-color: var(--app-color-grass);
           --app-profile-color-light: var(--app-color-grass-light);
 
@@ -92,8 +91,12 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           --app-secondary-color: var(--app-color-black);
           --app-dark-text-color: var(--app-secondary-color);
           --app-light-text-color: var(--app-color-white);
-
-          /* LIGHT MODE */
+        }
+      </style>
+    `;
+    let lightTheme = html`
+      <style>
+        :host {
           --app-header-background-color: var(--app-color-blue);
           --app-header-text-color: var(--app-light-text-color);
 
@@ -113,23 +116,40 @@ export class PsrRouterApp extends connect(store)(LitElement) {
 
           --app-background-color: var(--app-color-white);
           --app-main-background-color: var(--app-color-white);
-
-          /* DARK MODE */
-          /* --app-header-background-color: var(--app-color-black);
+        }
+      </style>
+    `;
+    let darkTheme = html`
+      <style>
+        :host {
+          --app-header-background-color: var(--app-color-black);
           --app-header-text-color: var(--app-color-yellow);
+
           --app-header-menu-background-color: var(--app-color-black);
           --app-header-menu-text-color: var(--app-color-blue);
           --app-header-menu-selected-color: var(--app-color-blue);
+
           --app-drawer-background-color: var(--app-color-black);
           --app-drawer-text-color: var(--app-color-blue);
           --app-drawer-selected-color: var(--app-color-blue);
+
           --app-drawer-header-background-color: var(--app-color-black);
           --app-drawer-header-text-color: var(--app-color-yellow);
+
           --app-footer-text-color: var(--app-color-yellow);
           --app-footer-background-color: var(--app-color-black);
-          --app-background-color: var(--app-color-blue);
-          --app-main-background-color: var(--app-color-blue); */
 
+          --app-background-color: var(--app-color-blue);
+          --app-main-background-color: var(--app-color-blue);
+        }
+      </style>
+    `;
+    const template = html`
+      ${AppStyles}
+      ${baseColors}
+      ${this._appTheme == "light" ? lightTheme : darkTheme}
+      <style>
+        :host {
           color: var(--app-dark-text-color);
 
           /* SIZES */
@@ -433,6 +453,10 @@ export class PsrRouterApp extends connect(store)(LitElement) {
 
     let game = RouteUtil.RouteManager.GetCurrentGame();
     console.debug("Current game:", game);
+    this._appTheme = window.localStorage.getItem("app-theme");
+    if (!this._appTheme) {
+      window.localStorage.setItem("app-theme", this._appTheme = "light");
+    }
   }
 
   firstUpdated(changedProperties) {

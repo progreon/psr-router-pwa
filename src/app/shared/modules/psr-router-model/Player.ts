@@ -1,4 +1,4 @@
-import { Item } from "./item";
+import { Item } from "./Item";
 import { Battler } from "./battler/Battler";
 import { Battle } from "./battle/Battle";
 

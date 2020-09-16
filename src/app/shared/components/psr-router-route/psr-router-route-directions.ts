@@ -41,6 +41,10 @@ class PsrRouterRouteDirections extends PsrRouterRouteEntry {
     return undefined;
   }
 
+  protected _hasExpandingContent(): boolean {
+    return false;
+  }
+
   constructor(routeDirections?: Route.RouteDirections) {
     super(routeDirections);
   }

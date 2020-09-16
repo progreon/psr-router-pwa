@@ -12,6 +12,10 @@ class PsrRouterRoute extends PsrRouterRouteSection {
     return undefined;
   }
 
+  protected _hasExpandingContent(): boolean {
+    return false;
+  }
+
   constructor(route?: Route.Route) {
     super(route);
     this.routeHeader = true;
