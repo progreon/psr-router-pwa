@@ -234,7 +234,6 @@ export class PsrRouterRouteEntry extends LitElement {
           ${expandingDOM}
         </div>
       </div>
-      <vaadin-dialog id="dialog"></vaadin-dialog>
     `;
   }
 
@@ -247,11 +246,6 @@ export class PsrRouterRouteEntry extends LitElement {
   }
 
   firstUpdated() {
-    let dialog: any = this.shadowRoot.getElementById('dialog');
-    dialog.renderer = this._getPopupContentRenderer();
-    if (dialog.renderer) {
-      dialog.renderer = dialog.renderer.bind(this);
-    }
     let content = this.shadowRoot.getElementById('expand');
     if (this._hasExpandingContent() && this.hideContent)
       this._collapseContent(content);
@@ -318,8 +312,24 @@ export class PsrRouterRouteEntry extends LitElement {
   }
 
   private _openDialog() {
+    // add a dialog to the html (it is checked, but it shouldn't exist), and remove it when it closes
+    // this is waaay more performant than if we add it to the html beforehand, because of some warnings it's throwing
     let dialog: any = this.shadowRoot.getElementById("dialog");
+    if (!dialog) {
+      dialog = document.createElement('vaadin-dialog');
+      dialog.id = "dialog";
+      dialog.renderer = this._getPopupContentRenderer().bind(this);
+      this.shadowRoot.appendChild(dialog);
+      dialog.addEventListener('opened-changed', this._dialogClosed.bind(this))
+    }
     dialog.opened = true;
+  }
+
+  private _dialogClosed(e: any) {
+    if (!e.detail.value) {
+      let dialog: any = this.shadowRoot.getElementById("dialog");
+      this.shadowRoot.removeChild(dialog);
+    }
   }
 
   protected _fireEvent(eventName: string, detail: any): void {
