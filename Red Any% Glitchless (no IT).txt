@@ -25,9 +25,8 @@ Route: Red Any% Glitchless (no IT)
 			4 POKE_BALL
 
 	S: Route 22
-		Manip Nidoran: https://pastebin.com/027sfdrS
-		GetP: NidoranM:4
-			TEMP: getting nidoran
+		Manip: NidoranM:4 13 15 15 14 15
+			Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name (https://pastebin.com/027sfdrS)
 		GetI: POTION
 			Get the hidden tree Potion (optional)
 
