@@ -7,4 +7,5 @@ export { RouteGetPokemon } from './RouteGetPokemon';
 export { RouteManip } from './RouteManip';
 export { RouteSection } from './RouteSection';
 export { RouteSwapPokemon } from './RouteSwapPokemon';
+export { RouteMenu } from './RouteMenu';
 export { Route } from './Route';

@@ -250,7 +250,7 @@ export class Player {
    * @returns Returns true if success.
    * @todo Finish and test.
    */
-  useItem(item: Item, partyIndex: number = -1, battle: Battle = undefined): boolean {
+  useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battle: Battle = undefined): boolean {
     let index = this.getItemIndex(item, false);
     if (index < 0) {
       return false;
