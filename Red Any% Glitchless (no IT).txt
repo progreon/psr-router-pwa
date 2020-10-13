@@ -41,9 +41,9 @@ Route: Red Any% Glitchless (no IT)
 		Swap: 0 1
 			TEMP: Swap Squirtle & Nidoran
 		Menu: After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary
-			SwapP: 1 :: 2
-			Use: POTION :: ? :: 2
-			ANTIDOTE :: ? :: 2
+			SwapP: 1 2
+			Use: POTION ? 2
+			Use: ANTIDOTE ? 2
 
 	S: Pewter Gym
 		Save before Brock
@@ -99,11 +99,10 @@ Route: Red Any% Glitchless (no IT)
 			Rocket :: HA x2 + PS, HA x2
 			Zubat does 6-8 with Leech Life (10-12 after 1 Tail Whip). Consider healing or switching if you're at low HP or confused
 		Menu: One tile before the Super Nerd: use the Rare Candy to reach L16 and evolve, teach Water Gun over Tackle, use the Moon Stone, teach Mega Punch over Leer
-			// [Use:]|Swap: ITEM [:: COUNT [:: POKEMON [:: MOVE]]]
-			Use: RARE_CANDY :: 1 :: 1
-			Use: TM_12 :: 1 :: 1 :: 2
-			Use: MOON_STONE :: 1 :: 1
-			Use: TM_01 :: 1 :: 1 :: 1
+			Use: RARE_CANDY 1 1
+			Use: TM_12 1 1 2
+			Use: MOON_STONE 1 1
+			Use: TM_01 1 1 1
 		B: Mt. Moon B2F - SuperNerd
 			HA x2, MP (+PS), MP + HA
 		GetI: HELIX_FOSSIL
@@ -154,7 +153,7 @@ Route: Red Any% Glitchless (no IT)
 			Get the hidden Ether
 		Say yes to Bill (you'll lose instant text here)
 		Menu: After the Bill cutscene: heal to 55+, candy to L24, Escape Rope back to Cerulean
-			POTION :: 2
+			POTION 2
 			RARE_CANDY
 			ESCAPE_ROPE
 
@@ -204,9 +203,9 @@ Route: Red Any% Glitchless (no IT)
 			4 REPEL
 			4 PARLYZ_HEAL
 		Menu: On the tile before the Cut bush
-			TM_11 :: 1 :: 1 :: 4
-			HM_01 :: 1 :: 4
-			TM_28 :: 1 :: 4
+			TM_11 1 1 4
+			HM_01 1 4
+			TM_28 1 4
 		Cut the bush
 		RNG manipulate the trash cans puzzle by replicating the inputs in this video: https://www.youtube.com/watch?v=AqY-8Wa2q_4
 			The manip has a 3/60 chance to fail
@@ -222,8 +221,8 @@ Route: Red Any% Glitchless (no IT)
 		GetI: BICYCLE :: BIKE_VOUCHER
 			Get the Bicycle from the bike shop
 		Menu: After leaving the shop
-			Swap: 1 :: BICYCLE
-			TM_24 :: 1 :: 1 :: 3
+			Swap: 1 BICYCLE
+			TM_24 1 1 3
 			BICYCLE
 		Get on the bike and head east to Route 9, cutting the two bushes in your way
 
@@ -291,11 +290,11 @@ Route: Red Any% Glitchless (no IT)
 		Bike west, cut the bush, then go through the building and get HM02 from the girl in the house
 		GetI: HM_02
 		Menu: Upon exiting the house
-			Swap: 2 :: TM_07
+			Swap: 2 TM_07
 			SUPER_REPEL
 			TM_48
-			Swap: 4 :: X_ACCURACY
-			HM_02 :: 1 :: 3
+			Swap: 4 X_ACCURACY
+			HM_02 1 3
 		Fly to Lavender (3 down), and walk to the tower
 
 	S: Pokemon Tower
@@ -319,7 +318,7 @@ Route: Red Any% Glitchless (no IT)
 			TM_07
 		Enter the Ghost battle and escape using the Poke Doll
 		Menu: During the Ghost battle (TEMP: should be menu in fight)
-			Swap: 4 :: SUPER_REPEL
+			Swap: 4 SUPER_REPEL
 			POKE_DOLL
 		B: Pokémon Tower 7F - Rocket 1
 			TB x3
@@ -378,7 +377,7 @@ Route: Red Any% Glitchless (no IT)
 		Bike west
 		Menu: On the tile before the Snorlax
 			SUPER_REPEL
-			Swap: 5 :: RARE_CANDY
+			Swap: 5 RARE_CANDY
 			POKE_FLUTE
 		Run from the Snorlax
 
@@ -387,8 +386,8 @@ Route: Red Any% Glitchless (no IT)
 			Get the hidden Rare Candy
 		Menu: After exiting the Cycling Road building
 			SUPER_REPEL
-			Swap: 6 :: X_SPECIAL
-			TM_26 :: 1 :: 1 :: 2
+			Swap: 6 X_SPECIAL
+			TM_26 1 1 2
 			BICYCLE
 		Bike to the Safari Zone
 
@@ -397,6 +396,7 @@ Route: Red Any% Glitchless (no IT)
 			[[https://i.imgur.com/oBebL5z.jpg]]
 		Upon entering, get on the bike
 		Menu: Use a super repel above the last hill in the second area
+			Use: SUPER_REPEL
 		GetI: GOLD_TEETH
 			Get the Gold Teeth in the fourth area
 		GetI: HM_03
@@ -429,7 +429,7 @@ Route: Red Any% Glitchless (no IT)
 	S: Pallet Town
 		Menu: Walk to the water, and menu
 			SUPER_REPEL
-			HM_03 :: 1 :: 2
+			HM_03 1 2
 		Surf to Cinnabar
 
 	S: Cinnabar Mansion
@@ -441,8 +441,8 @@ Route: Red Any% Glitchless (no IT)
 		After falling, go left and down to dodge the Scientist, then take the stairs to the right
 		GetI: TM_14
 		Menu: After picking up Blizzard
-			HM_04 :: 1 :: 2
-			TM_14 :: 1 :: 1 :: 4
+			HM_04 1 2
+			TM_14 1 1 4
 			REPEL
 		Activate the switch to the left, then follow the path to the northeast corner to activate the second switch
 		GetI: SECRET_KEY
@@ -493,7 +493,7 @@ Route: Red Any% Glitchless (no IT)
 			Viridian Rival :: X Acc, X Speed, Blizzard (+Blizzard), Blizzard, TB, EQ x2, Drill
 		Menu: TEMP: this is done in the battle
 			X_ACCURACY
-			X_SPEED :: 2
+			X_SPEED 2
 		Bike to Route 23
 
 	S: Route 23
@@ -507,7 +507,7 @@ Route: Red Any% Glitchless (no IT)
 			2F: [[https://cdn.bulbagarden.net/upload/1/11/Victory_Road_2F_RBY.png]]
 			3F: [[https://cdn.bulbagarden.net/upload/e/e5/Victory_Road_3F_RBY.png]]
 		Menu:
-			SUPER_REPEL :: 2
+			SUPER_REPEL 2
 		Use Strength upon entering and push the first boulder onto the switch on the right, then bike to the ladder in the top-left corner
 		Use Strength again, push the boulder below onto the switch, bike up the steps hugging the north edge and use a Super Repel. Bike to the right, down the stairs, then right and up to the ladder
 		Use strength again and push the boulder onto the switch to the left, then bike to the bottom-right corner and push the boulder down the hole and go down the hole

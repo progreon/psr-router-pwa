@@ -17,16 +17,17 @@ import { EntryJSON } from './parse/EntryJSON';
  */
 export class RouteMenu extends RouteEntry {
   public static readonly ENTRY_TYPE: string = "Menu";
+  public readonly actions: RouteMenu.Action[];
   /**
    *
    * @param game        The Game object this route entry uses.
-   * TODO
+   * @param actions     The menu actions that happen.
    * @param info        The info for this entry.
    * @param location    The location in the game where this entry occurs.
    */
-  constructor(game: Model.Game, info: RouteEntryInfo = null, location: Model.Location = null) {
+  constructor(game: Model.Game, actions: RouteMenu.Action[], info: RouteEntryInfo = null, location: Model.Location = null) {
     super(game, info, location);
-    // TODO
+    this.actions = actions;
   }
 
   public get entryType(): string {
@@ -44,8 +45,19 @@ export class RouteMenu extends RouteEntry {
 
   getJSONObject(): EntryJSON {
     let obj = super.getJSONObject();
-    obj.properties.choices = [];
-    // TODO
+    obj.properties.actions = [];
+    this.actions.forEach(action => {
+      console.log(action);
+      obj.properties.actions.push({
+        action: action.type.key,
+        description: action.description,
+        item1: action.item1.key,
+        item2: action.item2.key,
+        index1: action.index1,
+        index2: action.index2,
+        count: action.count
+      });
+    })
     return obj;
   }
 
@@ -53,70 +65,83 @@ export class RouteMenu extends RouteEntry {
     let messages: RouterMessage[] = [];
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     let location = undefined; // TODO, parse from obj.location
-    // TODO
-    // let choices: ModelAbstract.Battler[] = [];
-    // obj.properties.choices.forEach((pl: { pokemon: string; level: number; }) => {
-    //   let pokemon = game.findPokemonByName(pl.pokemon);
-    //   if (!pokemon) {
-    //     pokemon = game.getDummyPokemon(pl.pokemon);
-    //     if (!game.info.unsupported) {
-    //       messages.push(new RouterMessage(`Pokemon "${pl.pokemon}" not found!`, RouterMessage.Type.Error));
-    //     }
-    //   }
-    //   if (game.info.gen == 1) {
-    //     choices.push(new game.model.Battler1(game, pokemon, location, false, pl.level));
-    //   } else {
-    //     messages.push(new RouterMessage(`Not supported in gen2+ yet!`, RouterMessage.Type.Error));
-    //   }
-    // });
-    let entry = new RouteMenu(game, info, location);
+    let actions: RouteMenu.Action[] = [];
+
+    obj.properties.actions.forEach((ma: { type: string, description: string, item1: string, item2: string, index1: number, index2: number, count: number }) => {
+      if (ma.type && !RouteMenu.Type.ALL[ma.type.toUpperCase()]) {
+        messages.push(new RouterMessage("Action '" + ma.type + "' is not known, falling back to default action", RouterMessage.Type.Warning));
+      }
+      let aType = RouteMenu.Type.ALL[ma.type] || RouteMenu.Type.DEFAULT;
+      let aItem1 = game.findItemByName(ma.item1);
+      let aItem2 = game.findItemByName(ma.item2);
+      let action = new RouteMenu.Action(aType, ma.description, aItem1, aItem2, ma.index1, ma.index2, ma.count);
+      actions.push(action);
+    });
+
+    let entry = new RouteMenu(game, actions, info, location);
     messages.forEach(m => entry.addMessage(m));
     return entry;
   }
 }
 
 export namespace RouteMenu {
-  class Type {
+  export class Type {
+    static ALL: { [key: string]: Type } = {};
+    static DEFAULT: Type;
 
     public static readonly USE = new Type(
-      (player, action) => {
+      "Use",
+      (player, action, entry) => {
         player.useItem(action.item1, action.index1, action.index2);
+        entry.addMessage(new RouterMessage("USE action not fully implemented yet", RouterMessage.Type.Warning));
         return player;
       }
     );
 
     public static readonly SWAP = new Type(
-      (player, action)  => {
+      "Swap",
+      (player, action, entry) => {
         // TODO
+        entry.addMessage(new RouterMessage("SWAP action not implemented yet", RouterMessage.Type.Warning));
         return player;
       }
     );
 
     public static readonly TEACH = new Type(
-      (player, action) => {
+      "Teach",
+      (player, action, entry) => {
         // TODO
+        entry.addMessage(new RouterMessage("TEACH action not implemented yet", RouterMessage.Type.Warning));
         return player;
       }
     );
 
     public static readonly TOSS = new Type(
-      (player, action) => {
+      "Toss",
+      (player, action, entry) => {
         // TODO
+        entry.addMessage(new RouterMessage("TOSS action not implemented yet", RouterMessage.Type.Warning));
         return player;
       }
     );
 
     public static readonly DESCRIPTION = new Type(
-      (player, action) => player
+      "D",
+      (player, action, entry) => player,
+      true
     );
 
     constructor(
-      public apply: (player: Model.Player, action: Action) => Model.Player
-    ) { }
+      public readonly key: string,
+      public apply: (player: Model.Player, action: Action, entry: RouteMenu) => Model.Player,
+      public isDefault = false
+    ) {
+      Type.ALL[key.toUpperCase()] = this;
+      if (isDefault) Type.DEFAULT = this;
+    }
   }
 
-  class Action {
-    // { type, description, item1, item2, index1, index2, count }
+  export class Action {
     constructor(
       public type: Type,
       public description: string,
@@ -127,8 +152,8 @@ export namespace RouteMenu {
       public count = 1
     ) { }
 
-    public apply(player: Model.Player): Model.Player {
-      return this.type.apply(player, this);
+    public apply(player: Model.Player, entry: RouteMenu): Model.Player {
+      return this.type.apply(player, this, entry);
     }
   }
 }
