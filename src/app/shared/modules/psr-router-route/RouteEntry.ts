@@ -79,7 +79,7 @@ export class RouteEntry {
    */
   apply(player: Player = null): Player {
     let newPlayer: Player;
-    this.messages.length = 0; // Clear the messages
+    this.messages.splice(0, this.messages.length); // Clear the messages
     if (player)
       this._playerBefore = player;
 

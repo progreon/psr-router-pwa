@@ -29,37 +29,49 @@ import { RouteMenu } from "../RouteMenu";
  */
 export class RouteMenuParser implements IRouteEntryParser {
     public linesToJSON(scopedLine: ScopedLine, filename: string): EntryJSON {
+        // TODO validation checks
         let entry = new EntryJSON(scopedLine.type);
         entry.properties.actions = [];
         if (scopedLine.scope) {
             scopedLine.scope.forEach(line => {
-                console.log(line);
                 let [type, valuesText] = [line.type, line.untypedLine];
                 let description;
                 if (valuesText.indexOf('::') >= 0) {
-                    [valuesText, description] = [valuesText.substr(0, valuesText.indexOf('::')).trim(), valuesText.substr(valuesText.indexOf('::') + 1).trim()];
+                    [valuesText, description] = [valuesText.substr(0, valuesText.indexOf('::')).trim(), valuesText.substr(valuesText.indexOf('::') + 2).trim()];
                 }
                 let values = valuesText.split(/[, ]/).filter(v => !!v);
-                let item1, item2, index1, index2, count;
+                let item1: string, item2: string, index1: number, index2: number, count: string;
                 switch (type.trim().toUpperCase()) {
                     case "USE":
-                        [item1, count, index1, index2] = values;
+                        item1 = values[0]; // TODO: check
+                        if (!item1) throw new Util.RouterError(`${filename}:${line.ln + 1} Missing item`, "Parser Error");
+                        count = values[1]; // TODO: check
+                        if (!count) count = undefined;
+                        index1 = +values[2] - 1; // TODO: check
+                        if (!index1) index1 = undefined;
+                        index2 = +values[3] - 1; // TODO: check
+                        if (!index2) index2 = undefined;
                         break;
                     case "SWAP":
-                        // TODO
+                        // TODO: check
+                        [index1, item1] = (+values[0] + 0 == +values[0]) ? [+values[0] - 1, undefined] : [undefined, values[0]];
+                        [index2, item2] = (+values[1] + 0 == +values[1]) ? [+values[1] - 1, undefined] : [undefined, values[1]];
                         break;
                     case "TEACH":
-                        // TODO
+                        item1 = values[0]; // TODO: check
+                        index1 = values[1] === undefined ? undefined : +values[1] - 1; // TODO: check
+                        index2 = values[2] === undefined ? undefined : +values[2] - 1; // TODO: check
                         break;
                     case "TOSS":
-                        // TODO
+                        item1 = values[0]; // TODO: check
+                        count = values[1]; // TODO: check
                         break;
                     case "D":
                     default:
-                        description = valuesText;
+                        description = line.line;
                         break;
                 }
-                entry.properties.actions.push({ type, description, item1, item2, index1: +index1 - 1, index2: +index2 - 1, count });
+                entry.properties.actions.push({ type, description, item1, item2, index1, index2, count });
             });
         }
         if (scopedLine.untypedLine) {
@@ -69,7 +81,6 @@ export class RouteMenuParser implements IRouteEntryParser {
             entry.info = { title: summ ? tOrS.trim() : "", summary: summ || tOrS, description: "" };
             entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
         }
-        console.log(entry);
         return entry;
     }
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {

@@ -42,7 +42,8 @@ Route: Red Any% Glitchless (no IT)
 			TEMP: Swap Squirtle & Nidoran
 		Menu: After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary
 			SwapP: 1 2
-			Use: POTION ? 2
+			This: is a description
+			Use: POTION, ?, 2 :: This is also a description
 			Use: ANTIDOTE ? 2
 
 	S: Pewter Gym
@@ -153,9 +154,9 @@ Route: Red Any% Glitchless (no IT)
 			Get the hidden Ether
 		Say yes to Bill (you'll lose instant text here)
 		Menu: After the Bill cutscene: heal to 55+, candy to L24, Escape Rope back to Cerulean
-			POTION 2
-			RARE_CANDY
-			ESCAPE_ROPE
+			Use: POTION 2
+			Use: RARE_CANDY
+			Use: ESCAPE_ROPE
 
 	S: Cerulean City
 		Walk through the Dig house to fight the Rocket
@@ -203,9 +204,9 @@ Route: Red Any% Glitchless (no IT)
 			4 REPEL
 			4 PARLYZ_HEAL
 		Menu: On the tile before the Cut bush
-			TM_11 1 1 4
-			HM_01 1 4
-			TM_28 1 4
+			Use: TM_11 1 1 4
+			Use: HM_01 1 4
+			Use: TM_28 1 4
 		Cut the bush
 		RNG manipulate the trash cans puzzle by replicating the inputs in this video: https://www.youtube.com/watch?v=AqY-8Wa2q_4
 			The manip has a 3/60 chance to fail
@@ -222,8 +223,8 @@ Route: Red Any% Glitchless (no IT)
 			Get the Bicycle from the bike shop
 		Menu: After leaving the shop
 			Swap: 1 BICYCLE
-			TM_24 1 1 3
-			BICYCLE
+			Use: TM_24 1 1 3
+			Use: BICYCLE
 		Get on the bike and head east to Route 9, cutting the two bushes in your way
 
 	S: Route 9
@@ -237,7 +238,7 @@ Route: Red Any% Glitchless (no IT)
 		Map to get through Rock Tunnel
 			1F[[https://i.imgur.com/oPBnthL.png]]2F[[https://i.imgur.com/SMZikOB.png]]
 		Menu: Use a Repel one step after entering
-			REPEL
+			Use: REPEL
 		B: Rock Tunnel 1F - Pokemaniac
 			BB, TB
 		B: Rock Tunnel B1F - Pokemaniac 3
@@ -247,9 +248,9 @@ Route: Red Any% Glitchless (no IT)
 			Thrash
 			If you get paralyzed, use your Full Restore
 		Menu: Use your second Repel somewhere near the yellow tile on the map above
-			REPEL
+			Use: REPEL
 		Menu: Use your third Repel on the blue/yellow tile immediately before the Hiker
-			REPEL
+			Use: REPEL
 		B: Rock Tunnel B1F - Hiker 1
 			BB x3
 		B: Rock Tunnel 1F - JrTrainerF 2
@@ -291,10 +292,10 @@ Route: Red Any% Glitchless (no IT)
 		GetI: HM_02
 		Menu: Upon exiting the house
 			Swap: 2 TM_07
-			SUPER_REPEL
-			TM_48
+			Use: SUPER_REPEL
+			Teach: TM_48
 			Swap: 4 X_ACCURACY
-			HM_02 1 3
+			Teach: HM_02 3
 		Fly to Lavender (3 down), and walk to the tower
 
 	S: Pokemon Tower
@@ -315,17 +316,17 @@ Route: Red Any% Glitchless (no IT)
 		GetI: RARE_CANDY
 			Get the Rare Candy that blocks the way
 		Menu: Teach TM07 (Horn Drill) over Rock Slide
-			TM_07
+			Teach: TM_07
 		Enter the Ghost battle and escape using the Poke Doll
 		Menu: During the Ghost battle (TEMP: should be menu in fight)
 			Swap: 4 SUPER_REPEL
-			POKE_DOLL
+			Use: POKE_DOLL
 		B: Pokémon Tower 7F - Rocket 1
 			TB x3
 		B: Pokémon Tower 7F - Rocket 2
 			X Accuracy + HD x2
 		Menu: TEMP: should be menu in fight
-			X_ACCURACY
+			Use: X_ACCURACY
 		B: Pokémon Tower 7F - Rocket 3
 			TB x2, Thrash x2-3
 		Talk to Mr. Fuji to warp to his house
@@ -354,20 +355,20 @@ Route: Red Any% Glitchless (no IT)
 		B: Silph Rival - Bulbasaur
 			Silph Rival :: X Acc, X Speed, Drill x5
 		Menu: TEMP: should be menu in fight
-			X_ACCURACY
-			X_SPEED
+			Use: X_ACCURACY
+			Use: X_SPEED
 		NOTE: In this split we want to take a bit of damage to do a strat on Koga called Boom strats
 		Menu: If you have less than 78 HP use ether on HD before the next fight
-			ETHER
+			Use: ETHER
 		Take the teleporter to 11F
 		B: Silph Co. 11F - Rocket 2
 			X Acc, BB, Drill x2. Use Ether turn 1 if you need damage
 		Menu: TEMP: should be menu in fight
-			X_ACCURACY
+			Use: X_ACCURACY
 		B: Silph Co. 11F - Giovanni
 			Silph Gio :: X Acc, Drill x2, BB, Drill
 		Menu: TEMP: should be menu in fight
-			X_ACCURACY
+			Use: X_ACCURACY
 		Backtrack to 3F, then take the elevator to 10F
 		GetI: TM_26
 		GetI: RARE_CANDY
@@ -376,19 +377,19 @@ Route: Red Any% Glitchless (no IT)
 	S: Celadon City
 		Bike west
 		Menu: On the tile before the Snorlax
-			SUPER_REPEL
+			Use: SUPER_REPEL
 			Swap: 5 RARE_CANDY
-			POKE_FLUTE
+			Use: POKE_FLUTE
 		Run from the Snorlax
 
 	S: Cycling Road
 		GetI: RARE_CANDY
 			Get the hidden Rare Candy
 		Menu: After exiting the Cycling Road building
-			SUPER_REPEL
+			Use: SUPER_REPEL
 			Swap: 6 X_SPECIAL
-			TM_26 1 1 2
-			BICYCLE
+			Use: TM_26 1 1 2
+			Use: BICYCLE
 		Bike to the Safari Zone
 
 	S: Safari Zone
@@ -419,17 +420,17 @@ Route: Red Any% Glitchless (no IT)
 				If Koga uses an X Attack, stall with flute
 				The goal is to die to Selfdestruct, but it's OK if you don't
 		Menu: TEMP: should be menu in fight
-			ELIXER
+			Use: ELIXER
 		Menu: Revive with candies and bike to the Warden's house
-			3 RARE_CANDY
-			BICYCLE
+			Use: 3 RARE_CANDY
+			Use: BICYCLE
 		GetI: HM_04 :: GOLD_TEETH
 			Get HM04 from the warden, then Fly to Pallet Town
 
 	S: Pallet Town
 		Menu: Walk to the water, and menu
-			SUPER_REPEL
-			HM_03 1 2
+			Use: SUPER_REPEL
+			Use: HM_03 1 2
 		Surf to Cinnabar
 
 	S: Cinnabar Mansion
@@ -441,9 +442,9 @@ Route: Red Any% Glitchless (no IT)
 		After falling, go left and down to dodge the Scientist, then take the stairs to the right
 		GetI: TM_14
 		Menu: After picking up Blizzard
-			HM_04 1 2
-			TM_14 1 1 4
-			REPEL
+			Teach: HM_04 1 2
+			Use: TM_14 1 1 4
+			Use: REPEL
 		Activate the switch to the left, then follow the path to the northeast corner to activate the second switch
 		GetI: SECRET_KEY
 		Dig out, then bike to the Celadon Gym
@@ -461,7 +462,7 @@ Route: Red Any% Glitchless (no IT)
 		B: Blaine
 			X Acc, EQ, Drill x3 (Drill Growlithe if Blaine uses a Super Potion)
 		Menu: TEMP: this is done in the battle
-			X_ACCURACY
+			Use: X_ACCURACY
 		Dig out, then bike to the Saffron Gym
 
 	S: Saffron Gym
@@ -478,22 +479,22 @@ Route: Red Any% Glitchless (no IT)
 		B: Viridian Gym - Blackbelt 3
 			X Acc, Drill, Blizzard, Drill
 		Menu: TEMP: this is done in the battle
-			X_ACCURACY
+			Use: X_ACCURACY
 		Exit and re-enter the gym to reset Blackbelt's position and clear the path to Giovanni
 		Menu: Use an Elixer
-			ELIXER
+			Use: ELIXER
 		B: Giovanni
 			EQ x4, Blizzard (x1-2)
 		Menu: When outside of the gym, use a Super Repel, then bike west to Route 22
-			SUPER_REPEL
-			BICYCLE
+			Use: SUPER_REPEL
+			Use: BICYCLE
 
 	S: Route 22
 		B: Viridian Rival - Bulbasaur
 			Viridian Rival :: X Acc, X Speed, Blizzard (+Blizzard), Blizzard, TB, EQ x2, Drill
 		Menu: TEMP: this is done in the battle
-			X_ACCURACY
-			X_SPEED 2
+			Use: X_ACCURACY
+			Use: X_SPEED 2
 		Bike to Route 23
 
 	S: Route 23
@@ -507,7 +508,7 @@ Route: Red Any% Glitchless (no IT)
 			2F: [[https://cdn.bulbagarden.net/upload/1/11/Victory_Road_2F_RBY.png]]
 			3F: [[https://cdn.bulbagarden.net/upload/e/e5/Victory_Road_3F_RBY.png]]
 		Menu:
-			SUPER_REPEL 2
+			Use: SUPER_REPEL 2
 		Use Strength upon entering and push the first boulder onto the switch on the right, then bike to the ladder in the top-left corner
 		Use Strength again, push the boulder below onto the switch, bike up the steps hugging the north edge and use a Super Repel. Bike to the right, down the stairs, then right and up to the ladder
 		Use strength again and push the boulder onto the switch to the left, then bike to the bottom-right corner and push the boulder down the hole and go down the hole
@@ -517,17 +518,17 @@ Route: Red Any% Glitchless (no IT)
 		B: Lorelei
 			Switch to your flier, let it die, then X Acc, Drill x5 (Dewgong will always use Rest turn 2)
 		Menu: TEMP: this is done in the battle
-			X_ACCURACY
+			Use: X_ACCURACY
 		Elixer and save before fighting Bruno. If below 20 HP, use a Full Restore, and save before Agatha instead
 		Menu:
-			ELIXER
+			Use: ELIXER
 		B: Bruno
 			X Acc, Drill x5
 		Menu: TEMP: this is done in the battle
-			X_ACCURACY
+			Use: X_ACCURACY
 		Menu: Before Agatha
-			SUPER_POTION
-			RARE_CANDY
+			Use: SUPER_POTION
+			Use: RARE_CANDY
 		B: Agatha
 			X Special, EQ, Blizzard, EQ x3
 			If you get put to sleep, use the Poke Flute immediately
@@ -535,23 +536,23 @@ Route: Red Any% Glitchless (no IT)
 			If you get Hazed, use an X Speed on Haunter
 			The second Gengar outspeeds you and has Night Shade (60 damage)
 		Menu: TEMP: this is done in the battle
-			X_SPECIAL
+			Use: X_SPECIAL
 		Menu: At least 2 steps before Lance, heal to 129+ HP
-			SUPER_POTION
-			ELIXER
+			Use: SUPER_POTION
+			Use: ELIXER
 		Save
 		B: Lance
 			X Special, TB, Blizzard, X Speed, Blizzard, TB, Blizzard
 			If you run out of Blizzards, TB the Dragonite
 		Menu: TEMP: this is done in the battle
-			X_SPECIAL
-			X_SPEED
+			Use: X_SPECIAL
+			Use: X_SPEED
 		Menu: Heal to 55+ HP
-			POTION
+			Use: POTION
 		B: Champion - Bulbasaur
 			Champion :: X Speed, X Acc, Drill x6
 			If Pidgeot charges Sky Attack on turn 1, use a Full Restore
 		Menu: TEMP: this is done in the battle
-			X_SPEED
-			X_ACCURACY
+			Use: X_SPEED
+			Use: X_ACCURACY
 		END

@@ -37,7 +37,7 @@ export class RouteMenu extends RouteEntry {
   apply(player?: Model.Player): Model.Player {
     player = super.apply(player);
 
-    // TODO
+    this.actions.forEach(action => player = action.apply(player, this));
 
     super._playerAfter = player;
     return player;
@@ -47,12 +47,11 @@ export class RouteMenu extends RouteEntry {
     let obj = super.getJSONObject();
     obj.properties.actions = [];
     this.actions.forEach(action => {
-      console.log(action);
       obj.properties.actions.push({
-        action: action.type.key,
+        type: action.type.key,
         description: action.description,
-        item1: action.item1.key,
-        item2: action.item2.key,
+        item1: action.item1 && action.item1.key,
+        item2: action.item2 && action.item2.key,
         index1: action.index1,
         index2: action.index2,
         count: action.count
@@ -69,9 +68,9 @@ export class RouteMenu extends RouteEntry {
 
     obj.properties.actions.forEach((ma: { type: string, description: string, item1: string, item2: string, index1: number, index2: number, count: number }) => {
       if (ma.type && !RouteMenu.Type.ALL[ma.type.toUpperCase()]) {
-        messages.push(new RouterMessage("Action '" + ma.type + "' is not known, falling back to default action", RouterMessage.Type.Warning));
+        messages.push(new RouterMessage("Action '" + ma.type + "' is not known, falling back to default action", RouterMessage.Type.Info));
       }
-      let aType = RouteMenu.Type.ALL[ma.type] || RouteMenu.Type.DEFAULT;
+      let aType = RouteMenu.Type.ALL[ma.type.toUpperCase()] || RouteMenu.Type.DEFAULT;
       let aItem1 = game.findItemByName(ma.item1);
       let aItem2 = game.findItemByName(ma.item2);
       let action = new RouteMenu.Action(aType, ma.description, aItem1, aItem2, ma.index1, ma.index2, ma.count);
@@ -92,7 +91,18 @@ export namespace RouteMenu {
     public static readonly USE = new Type(
       "Use",
       (player, action, entry) => {
-        player.useItem(action.item1, action.index1, action.index2);
+        if (!action.item1) {
+          entry.addMessage(new RouterMessage("No item defined", RouterMessage.Type.Error));
+          return player;
+        }
+        if (!!action.item1.type && !player.team[action.index1]) {
+          entry.addMessage(new RouterMessage("Party index out of range: " + action.index1, RouterMessage.Type.Error));
+          return player;
+        }
+        let result = player.useItem(action.item1, action.index1, action.index2);
+        if (!result) {
+          entry.addMessage(new RouterMessage("Unable to use " + action.item1.toString() + (!!action.item1.type && " on " + player.team[action.index1].toString() || " here"), RouterMessage.Type.Error));
+        }
         entry.addMessage(new RouterMessage("USE action not fully implemented yet", RouterMessage.Type.Warning));
         return player;
       }
@@ -110,8 +120,7 @@ export namespace RouteMenu {
     public static readonly TEACH = new Type(
       "Teach",
       (player, action, entry) => {
-        // TODO
-        entry.addMessage(new RouterMessage("TEACH action not implemented yet", RouterMessage.Type.Warning));
+        Type.USE.apply(player, action, entry);
         return player;
       }
     );
@@ -153,7 +162,12 @@ export namespace RouteMenu {
     ) { }
 
     public apply(player: Model.Player, entry: RouteMenu): Model.Player {
+      // console.log("applying ", this);
       return this.type.apply(player, this, entry);
+    }
+
+    public toString(): string {
+      return this.type.key; // TODO
     }
   }
 }
