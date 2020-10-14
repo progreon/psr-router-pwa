@@ -93,7 +93,7 @@ export namespace RouteMenu {
           return { player, actionString: "[Use error]" };
         }
         let actionString = `Use ${action.count == '0' ? "all " : ""}${action.item1.name}`;
-        if (+action.count > 0) {
+        if (+action.count > 1) {
           actionString = `${actionString} ${action.count} times`;
         }
         if (action.item1.isUsedOnPokemon()) {
@@ -102,24 +102,25 @@ export namespace RouteMenu {
             return { player, actionString };
           }
           actionString = `${actionString} on ${player.team[action.index1]}`;
-          // TODO: ", on <move>" if it's an elixir or pp up?
+          if (action.item1.isUsedOnMove()) {
+            if (action.index2 >= 0 && action.index2 < player.team[action.index1].moveset.length) {
+              actionString = `${actionString}, on ${player.team[action.index1].moveset[action.index2]}`;
+            } else {
+              entry.addMessage(new RouterMessage("Move index out of range: " + action.index2, RouterMessage.Type.Error));
+            }
+          }
         }
         if (action.count == "?") {
           actionString = `${actionString}?`;
         }
         let result = player.useItem(action.item1, action.index1, action.index2);
-        if (action.count == "0") {
-          // TODO: for now, just guess that if it works once it works n times, in the future get the exact item count up front
-          while (result) {
-            result = player.useItem(action.item1, action.index1, action.index2);
-          }
-          result = true;
-        } else {
-          let i = 1, count = action.count; // TODO: replace 0
+        if (result) {
+          let i = 1, count = action.count == "0" ? player.getItemCount(action.item1) : action.count;
           while (result && i < +count) {
             result = player.useItem(action.item1, action.index1, action.index2);
             i++;
           }
+          if (i == +count) result = true;
         }
         if (!result) {
           entry.addMessage(new RouterMessage("Unable to use " + action.item1.toString() + (+action.count > 1 ? action.count + " times" : "") + (!!action.item1.type && " on " + player.team[action.index1].toString() || " here"), RouterMessage.Type.Error));
@@ -134,7 +135,7 @@ export namespace RouteMenu {
       (player, action, entry) => {
         // TODO
         entry.addMessage(new RouterMessage("SWAP action not implemented yet", RouterMessage.Type.Warning));
-        return { player, actionString: ""}; // TODO
+        return { player, actionString: "" }; // TODO
       }
     );
 
@@ -149,7 +150,7 @@ export namespace RouteMenu {
           actionString = "[Swap error]";
           entry.addMessage(new RouterMessage("Invalid party indices (ignoring)", RouterMessage.Type.Error));
         }
-        return { player, actionString}; // TODO
+        return { player, actionString }; // TODO
       }
     );
 
@@ -158,7 +159,7 @@ export namespace RouteMenu {
       (player, action, entry) => {
         // TODO: generate actionString
         Type.USE.apply(player, action, entry);
-        return { player, actionString: ""}; // TODO
+        return { player, actionString: "" }; // TODO
       }
     );
 
@@ -167,7 +168,7 @@ export namespace RouteMenu {
       (player, action, entry) => {
         // TODO
         entry.addMessage(new RouterMessage("TOSS action not implemented yet", RouterMessage.Type.Warning));
-        return { player, actionString: ""}; // TODO
+        return { player, actionString: "" }; // TODO
       }
     );
 

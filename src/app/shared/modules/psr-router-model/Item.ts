@@ -40,6 +40,11 @@ export class Item {
     return !!this.type;
   }
 
+  isUsedOnMove(): boolean {
+    return this.type == "TM" // TM's
+          || this.type == "PP_RESTORE" && this.value == "SINGLE"; // ether & max ether
+  }
+
   equals(item: Item): boolean {
     return item && this.key === item.key;
   }

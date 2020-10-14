@@ -1,6 +1,7 @@
 import { Item } from "./Item";
 import { Battler } from "./battler/Battler";
 import { Battle } from "./battle/Battle";
+import { EvolutionKey } from "./EvolutionKey";
 
 const MAX_SLOTS = 20;
 const MAX_PC_SLOTS = 50; // TODO
@@ -251,24 +252,38 @@ export class Player {
    * @todo Finish and test.
    */
   useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battle: Battle = undefined): boolean {
-    let index = this.getItemIndex(item, false);
-    if (index < 0) {
-      return false;
-    } else {
-      let success = false;
-      if (battle && item.usableInsideBattle) {
-        // TODO
-        // success = item.useInBattle(battle, partyIndex);
-      } else if (item.usableOutsideBattle) {
-        // TODO
-        // success = item.use(this, partyIndex);
-      }
-      if (success) {
-        return this.tossItemByIndex(index, 1);
-      } else {
-        return false;
-      }
+    // let index = this.getItemIndex(item, false); // TODO: temporarily disabled because no GetI implementation yet!
+    // if (index < 0) {
+    //   return false;
+    // } else {
+    if (battle && !item.usableInsideBattle) return false;
+    if (!battle && !item.usableOutsideBattle) return false;
+    switch (item.type) {
+      case "STONE":
+        // TODO: arg check
+        console.log("TODO: check evolve");
+        let newBattler = this.team[partyIndex].evolve(new EvolutionKey(EvolutionKey.Type.Stone, item.key));
+        if (newBattler == this.team[partyIndex]) return false;
+        this.team[partyIndex] = newBattler;
+        break;
+      case "STAT":
+        // TODO: others & arg check
+        if (item.value == "LV") {
+          this.team[partyIndex] = this.team[partyIndex].useCandy();
+        } else {
+          return false;
+        }
+        break;
+      case "TM":
+        // TODO: arg check
+        let oldMove = this.team[partyIndex].moveset[moveIndex];
+        if (!this.team[partyIndex].learnTmMove(item.value, oldMove)) return false;
+        break;
     }
+    // TODO: others?
+    // return this.tossItemByIndex(index, 1);
+    return true; // TODO: temporarily 'true' because no GetI implementation yet!
+    // }
   }
 
   /**
@@ -341,6 +356,21 @@ export class Player {
         return false;
       }
     }
+  }
+
+  /**
+   * @param item
+   * @param pc
+   */
+  getItemCount(item: Item, pc = false): number {
+    let items = pc ? this._pcItems : this._bagItems;
+    let count = 0;
+    items.forEach(slot => {
+      if (slot.isItem(item)) {
+        count += slot.count;
+      }
+    });
+    return count;
   }
 
   clone(): Player {

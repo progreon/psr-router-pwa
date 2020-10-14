@@ -81,6 +81,7 @@ export class Battler1 extends Battler {
   }
 
   evolve(key: EvolutionKey): Battler {
+    // TODO: check
     let p = this.pokemon.getEvolution(key);
     if (p) {
       let evo = new Battler1(this.game, p, this.catchLocation, this.isTrainerMon, this.level);
