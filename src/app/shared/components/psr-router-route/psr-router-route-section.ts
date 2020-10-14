@@ -10,6 +10,7 @@ import './psr-router-route-battle';
 import './psr-router-route-directions';
 import './psr-router-route-get-pokemon';
 import './psr-router-route-swap-pokemon';
+import './psr-router-route-menu';
 
 export class PsrRouterRouteSection extends PsrRouterRouteEntry {
   _renderExpandingContent() {
@@ -31,6 +32,9 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
           break;
         case Route.RouteSwapPokemon.ENTRY_TYPE:
           childElements.push(html`<psr-router-route-swap-pokemon id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-swap-pokemon>`);
+          break;
+        case Route.RouteMenu.ENTRY_TYPE:
+          childElements.push(html`<psr-router-route-menu id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-menu>`);
           break;
         case Route.RouteSection.ENTRY_TYPE:
           childElements.push(html`<psr-router-route-section id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-section>`);

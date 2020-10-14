@@ -36,6 +36,10 @@ export class Item {
     return (this.tossableOutsideBattle ? "T" : "") + (this.usableOutsideBattle ? "O" : "") + (this.usableInsideBattle ? "I" : "");
   }
 
+  isUsedOnPokemon(): boolean {
+    return !!this.type;
+  }
+
   equals(item: Item): boolean {
     return item && this.key === item.key;
   }

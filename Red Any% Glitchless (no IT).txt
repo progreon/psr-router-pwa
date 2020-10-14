@@ -38,8 +38,6 @@ Route: Red Any% Glitchless (no IT)
 		Heal to 10+ HP for Weedle Guy
 		B: Viridian Forest - BugCatcher 3
 			Weedle Guy :: Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion
-		Swap: 0 1
-			TEMP: Swap Squirtle & Nidoran
 		Menu: After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary
 			SwapP: 1 2
 			This: is a description
@@ -422,7 +420,7 @@ Route: Red Any% Glitchless (no IT)
 		Menu: TEMP: should be menu in fight
 			Use: ELIXER
 		Menu: Revive with candies and bike to the Warden's house
-			Use: 3 RARE_CANDY
+			Use: RARE_CANDY 0 :: Use all of your rare candies
 			Use: BICYCLE
 		GetI: HM_04 :: GOLD_TEETH
 			Get HM04 from the warden, then Fly to Pallet Town

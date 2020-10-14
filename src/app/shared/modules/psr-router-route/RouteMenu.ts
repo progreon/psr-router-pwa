@@ -66,10 +66,7 @@ export class RouteMenu extends RouteEntry {
     let location = undefined; // TODO, parse from obj.location
     let actions: RouteMenu.Action[] = [];
 
-    obj.properties.actions.forEach((ma: { type: string, description: string, item1: string, item2: string, index1: number, index2: number, count: number }) => {
-      if (ma.type && !RouteMenu.Type.ALL[ma.type.toUpperCase()]) {
-        messages.push(new RouterMessage("Action '" + ma.type + "' is not known, falling back to default action", RouterMessage.Type.Info));
-      }
+    obj.properties.actions.forEach((ma: { type: string, description: string, item1: string, item2: string, index1: number, index2: number, count: string }) => {
       let aType = RouteMenu.Type.ALL[ma.type.toUpperCase()] || RouteMenu.Type.DEFAULT;
       let aItem1 = game.findItemByName(ma.item1);
       let aItem2 = game.findItemByName(ma.item2);
@@ -93,18 +90,42 @@ export namespace RouteMenu {
       (player, action, entry) => {
         if (!action.item1) {
           entry.addMessage(new RouterMessage("No item defined", RouterMessage.Type.Error));
-          return player;
+          return { player, actionString: "[Use error]" };
         }
-        if (!!action.item1.type && !player.team[action.index1]) {
-          entry.addMessage(new RouterMessage("Party index out of range: " + action.index1, RouterMessage.Type.Error));
-          return player;
+        let actionString = `Use ${action.count == '0' ? "all " : ""}${action.item1.name}`;
+        if (+action.count > 0) {
+          actionString = `${actionString} ${action.count} times`;
+        }
+        if (action.item1.isUsedOnPokemon()) {
+          if (!player.team[action.index1]) {
+            entry.addMessage(new RouterMessage("Party index out of range: " + action.index1, RouterMessage.Type.Error));
+            return { player, actionString };
+          }
+          actionString = `${actionString} on ${player.team[action.index1]}`;
+          // TODO: ", on <move>" if it's an elixir or pp up?
+        }
+        if (action.count == "?") {
+          actionString = `${actionString}?`;
         }
         let result = player.useItem(action.item1, action.index1, action.index2);
+        if (action.count == "0") {
+          // TODO: for now, just guess that if it works once it works n times, in the future get the exact item count up front
+          while (result) {
+            result = player.useItem(action.item1, action.index1, action.index2);
+          }
+          result = true;
+        } else {
+          let i = 1, count = action.count; // TODO: replace 0
+          while (result && i < +count) {
+            result = player.useItem(action.item1, action.index1, action.index2);
+            i++;
+          }
+        }
         if (!result) {
-          entry.addMessage(new RouterMessage("Unable to use " + action.item1.toString() + (!!action.item1.type && " on " + player.team[action.index1].toString() || " here"), RouterMessage.Type.Error));
+          entry.addMessage(new RouterMessage("Unable to use " + action.item1.toString() + (+action.count > 1 ? action.count + " times" : "") + (!!action.item1.type && " on " + player.team[action.index1].toString() || " here"), RouterMessage.Type.Error));
         }
         entry.addMessage(new RouterMessage("USE action not fully implemented yet", RouterMessage.Type.Warning));
-        return player;
+        return { player, actionString }; // TODO
       }
     );
 
@@ -113,15 +134,31 @@ export namespace RouteMenu {
       (player, action, entry) => {
         // TODO
         entry.addMessage(new RouterMessage("SWAP action not implemented yet", RouterMessage.Type.Warning));
-        return player;
+        return { player, actionString: ""}; // TODO
+      }
+    );
+
+    public static readonly SWAPP = new Type(
+      "SwapP",
+      (player, action, entry) => {
+        let actionString;
+        if (action.index1 >= 0 && action.index1 < player.team.length && action.index2 >= 0 && action.index2 < player.team.length) {
+          actionString = `Swap ${player.team[action.index1]} with ${player.team[action.index2]}`;
+          player.swapBattlers(action.index1, action.index2);
+        } else {
+          actionString = "[Swap error]";
+          entry.addMessage(new RouterMessage("Invalid party indices (ignoring)", RouterMessage.Type.Error));
+        }
+        return { player, actionString}; // TODO
       }
     );
 
     public static readonly TEACH = new Type(
       "Teach",
       (player, action, entry) => {
+        // TODO: generate actionString
         Type.USE.apply(player, action, entry);
-        return player;
+        return { player, actionString: ""}; // TODO
       }
     );
 
@@ -130,19 +167,19 @@ export namespace RouteMenu {
       (player, action, entry) => {
         // TODO
         entry.addMessage(new RouterMessage("TOSS action not implemented yet", RouterMessage.Type.Warning));
-        return player;
+        return { player, actionString: ""}; // TODO
       }
     );
 
     public static readonly DESCRIPTION = new Type(
       "D",
-      (player, action, entry) => player,
+      (player, action, entry) => { return { player, actionString: "" } },
       true
     );
 
     constructor(
       public readonly key: string,
-      public apply: (player: Model.Player, action: Action, entry: RouteMenu) => Model.Player,
+      public apply: (player: Model.Player, action: Action, entry: RouteMenu) => { player: Model.Player, actionString: string },
       public isDefault = false
     ) {
       Type.ALL[key.toUpperCase()] = this;
@@ -151,6 +188,7 @@ export namespace RouteMenu {
   }
 
   export class Action {
+    private actionString: string;
     constructor(
       public type: Type,
       public description: string,
@@ -158,16 +196,21 @@ export namespace RouteMenu {
       public item2: Model.Item,
       public index1 = 0,
       public index2 = 0,
-      public count = 1
+      public count = "1"
     ) { }
 
     public apply(player: Model.Player, entry: RouteMenu): Model.Player {
-      // console.log("applying ", this);
-      return this.type.apply(player, this, entry);
+      let result = this.type.apply(player, this, entry);
+      this.actionString = result.actionString;
+      return result.player;
     }
 
     public toString(): string {
-      return this.type.key; // TODO
+      if (this.actionString && this.description) {
+        return this.actionString + ": " + this.description;
+      } else {
+        return this.actionString || this.description || this.type.key; // TODO
+      }
     }
   }
 }

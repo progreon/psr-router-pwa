@@ -13,6 +13,7 @@ import { RouteMenu } from "../RouteMenu";
  * with <option> being one of the following:
  *     Use: <item> [<count:1> [<pokemon index:1> [<move index:1>]]]
  *     Swap: <index|item> <index|item>
+ *     SwapP: <index> <index>
  *     Teach: <tm|hm> [<pokemon index:1> [<move index:1>]]
  *     Toss: <item> [<count:1>]
  *     [D:] <description>
@@ -29,7 +30,6 @@ import { RouteMenu } from "../RouteMenu";
  */
 export class RouteMenuParser implements IRouteEntryParser {
     public linesToJSON(scopedLine: ScopedLine, filename: string): EntryJSON {
-        // TODO validation checks
         let entry = new EntryJSON(scopedLine.type);
         entry.properties.actions = [];
         if (scopedLine.scope) {
@@ -40,31 +40,62 @@ export class RouteMenuParser implements IRouteEntryParser {
                     [valuesText, description] = [valuesText.substr(0, valuesText.indexOf('::')).trim(), valuesText.substr(valuesText.indexOf('::') + 2).trim()];
                 }
                 let values = valuesText.split(/[, ]/).filter(v => !!v);
+                if (values.length == 0) throw new Util.RouterError(`${filename}:${line.ln + 1} Missing parameters`, "Parser Error");
                 let item1: string, item2: string, index1: number, index2: number, count: string;
                 switch (type.trim().toUpperCase()) {
                     case "USE":
-                        item1 = values[0]; // TODO: check
-                        if (!item1) throw new Util.RouterError(`${filename}:${line.ln + 1} Missing item`, "Parser Error");
-                        count = values[1]; // TODO: check
-                        if (!count) count = undefined;
-                        index1 = +values[2] - 1; // TODO: check
-                        if (!index1) index1 = undefined;
-                        index2 = +values[3] - 1; // TODO: check
-                        if (!index2) index2 = undefined;
+                        // Use: <item> [<count:1> [<pokemon index:1> [<move index:1>]]]
+                        item1 = values[0];
+                        if (values.length > 1) {
+                            count = values[1];
+                            if (isNaN(+count) && (count !== "?" || +count < 0)) throw new Util.RouterError(`${filename}:${line.ln + 1} Count must be a positive number or '?'`, "Parser Error");
+                            if (values.length > 2) {
+                                if (isNaN(+values[2]) || +values[2] < 1) throw new Util.RouterError(`${filename}:${line.ln + 1} Index must be a number > 0`, "Parser Error");
+                                index1 = +values[2] - 1;
+                                if (values.length > 3) {
+                                    if (isNaN(+values[3]) || +values[3] < 1) throw new Util.RouterError(`${filename}:${line.ln + 1} Index must be a number > 0`, "Parser Error");
+                                    index2 = +values[3] - 1;
+                                }
+                            }
+                        }
                         break;
                     case "SWAP":
-                        // TODO: check
-                        [index1, item1] = (+values[0] + 0 == +values[0]) ? [+values[0] - 1, undefined] : [undefined, values[0]];
-                        [index2, item2] = (+values[1] + 0 == +values[1]) ? [+values[1] - 1, undefined] : [undefined, values[1]];
+                        // Swap: <index|item> <index|item>
+                        if (values.length != 2) throw new Util.RouterError(`${filename}:${line.ln + 1} 'Swap' takes 2 parameters`, "Parser Error");
+
+                        [index1, item1] = isNaN(+values[0]) ? [+values[0] - 1, undefined] : [undefined, values[0]];
+                        [index2, item2] = isNaN(+values[1]) ? [+values[1] - 1, undefined] : [undefined, values[1]];
+                        if (!isNaN(index1) && index1 < 0) throw new Util.RouterError(`${filename}:${line.ln + 1} Index must be a number > 0`, "Parser Error");
+                        if (!isNaN(index2) && index2 < 0) throw new Util.RouterError(`${filename}:${line.ln + 1} Index must be a number > 0`, "Parser Error");
+                        break;
+                    case "SWAPP":
+                        // Swap: <index> <index>
+                        if (values.length != 2) throw new Util.RouterError(`${filename}:${line.ln + 1} 'SwapP' takes 2 parameters`, "Parser Error");
+
+                        index1 = +values[0] - 1;
+                        index2 = +values[1] - 1;
+                        if (!isNaN(index1) && index1 < 0) throw new Util.RouterError(`${filename}:${line.ln + 1} Index must be a number > 0`, "Parser Error");
+                        if (!isNaN(index2) && index2 < 0) throw new Util.RouterError(`${filename}:${line.ln + 1} Index must be a number > 0`, "Parser Error");
                         break;
                     case "TEACH":
-                        item1 = values[0]; // TODO: check
-                        index1 = values[1] === undefined ? undefined : +values[1] - 1; // TODO: check
-                        index2 = values[2] === undefined ? undefined : +values[2] - 1; // TODO: check
+                        // Teach: <tm|hm> [<pokemon index:1> [<move index:1>]]
+                        item1 = values[0];
+                        if (values.length > 1) {
+                            if (isNaN(+values[1]) || +values[1] < 1) throw new Util.RouterError(`${filename}:${line.ln + 1} Index must be a number > 0`, "Parser Error");
+                            index1 = +values[1] - 1;
+                            if (values.length > 2) {
+                                if (isNaN(+values[2]) || +values[2] < 1) throw new Util.RouterError(`${filename}:${line.ln + 1} Index must be a number > 0`, "Parser Error");
+                                index2 = +values[2] - 1;
+                            }
+                        }
                         break;
                     case "TOSS":
-                        item1 = values[0]; // TODO: check
-                        count = values[1]; // TODO: check
+                        // Toss: <item> [<count:1>]
+                        item1 = values[0];
+                        if (values.length > 1) {
+                            count = values[1];
+                            if (isNaN(+count) && (count !== "?" || +count < 0)) throw new Util.RouterError(`${filename}:${line.ln + 1} Count must be a positive number or '?'`, "Parser Error");
+                        }
                         break;
                     case "D":
                     default:
@@ -79,7 +110,6 @@ export class RouteMenuParser implements IRouteEntryParser {
             let [tOrS, ...s] = titleLine.split("::");
             let summ = s && s.length > 0 ? s.join("::").trim() : "";
             entry.info = { title: summ ? tOrS.trim() : "", summary: summ || tOrS, description: "" };
-            entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
         }
         return entry;
     }
