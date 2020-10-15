@@ -36,10 +36,10 @@ export abstract class Pokemon {
    * @todo
    */
   addEvolution(evolutionKey: EvolutionKey, pokemon: Pokemon) {
-    this.evolutions[evolutionKey.toString()] = pokemon;
+    this.evolutions[evolutionKey.toString().toUpperCase()] = pokemon;
   }
   getEvolution(evolutionKey: EvolutionKey): Pokemon {
-    return this.evolutions[evolutionKey.toString()];
+    return this.evolutions[evolutionKey.toString().toUpperCase()];
   }
   addLevelupMove(level: number, move: string) {
     this._luMoves.push({ level, move });

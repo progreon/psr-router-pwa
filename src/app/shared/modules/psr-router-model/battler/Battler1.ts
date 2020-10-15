@@ -81,7 +81,6 @@ export class Battler1 extends Battler {
   }
 
   evolve(key: EvolutionKey): Battler {
-    // TODO: check
     let p = this.pokemon.getEvolution(key);
     if (p) {
       let evo = new Battler1(this.game, p, this.catchLocation, this.isTrainerMon, this.level);
@@ -327,15 +326,15 @@ export class Battler1 extends Battler {
 
   equals(battler: Battler): boolean {
     if (battler instanceof Battler1) {
-      let b = <Battler1> battler;
+      let b = <Battler1>battler;
       return this.game == b.game
-          && this.pokemon == b.pokemon
-          && this.moveset == b.moveset // TODO: check if this works!
-          && this.catchLocation == b.catchLocation
-          && this.level == b.level
-          && this.levelExp == b.levelExp
-          && this._statExp == b._statExp // TODO: check if this works!
-          && this._possibleDVs == b._possibleDVs; // TODO: check if this works!
+        && this.pokemon == b.pokemon
+        && this.moveset == b.moveset // TODO: check if this works!
+        && this.catchLocation == b.catchLocation
+        && this.level == b.level
+        && this.levelExp == b.levelExp
+        && this._statExp == b._statExp // TODO: check if this works!
+        && this._possibleDVs == b._possibleDVs; // TODO: check if this works!
     } else {
       return false;
     }

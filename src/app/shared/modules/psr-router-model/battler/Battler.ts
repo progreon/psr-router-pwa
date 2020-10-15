@@ -4,7 +4,7 @@ import { Move } from "../ModelAbstract";
 import { Pokemon } from "../ModelAbstract";
 import { Type } from "../ModelAbstract";
 
-import { DVRange } from "SharedModules/psr-router-util";
+import { DVRange, RouterError } from "SharedModules/psr-router-util";
 import { Range } from 'SharedModules/psr-router-util';
 import { EvolutionKey } from "../EvolutionKey";
 
@@ -69,10 +69,12 @@ export abstract class Battler {
    * @param oldMove
    * @returns Returns true if success.
    */
-  learnTmMove(newMove: string, oldMove?: string): boolean {
+  learnTmMove(tm: Item, oldMove?: string): boolean {
     let success = false;
+    let newMoveTM = tm.key;
+    let canLearn = this.pokemon.tmMoves.includes(newMoveTM);
+    let newMove = this.game.findMoveByName(tm.value)?.key;
     let moves = this._moveset;
-    let canLearn = false; // TODO
     if (canLearn && !moves.includes(newMove)) {
       if (!oldMove || moves.includes(oldMove)) {
         let i = 0;

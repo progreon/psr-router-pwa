@@ -35,7 +35,7 @@ class PsrRouterRouter extends PsrRouterPage {
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     this.route = RouteManager.GetCurrentRoute();
-    console.log(this.route);
+    console.debug(this.route);
   }
 
   triggerDataRefresh() {

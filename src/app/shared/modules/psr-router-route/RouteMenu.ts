@@ -123,7 +123,7 @@ export namespace RouteMenu {
           if (i == +count) result = true;
         }
         if (!result) {
-          entry.addMessage(new RouterMessage("Unable to use " + action.item1.toString() + (+action.count > 1 ? action.count + " times" : "") + (!!action.item1.type && " on " + player.team[action.index1].toString() || " here"), RouterMessage.Type.Error));
+          entry.addMessage(new RouterMessage("Unable to use " + action.item1.toString() + (+action.count > 1 ? action.count + " times" : "") + (!!action.item1.type && " on " + player.team[action.index1].toString() || " here") + ", do you have it?", RouterMessage.Type.Error));
         }
         entry.addMessage(new RouterMessage("USE action not fully implemented yet", RouterMessage.Type.Warning));
         return { player, actionString }; // TODO

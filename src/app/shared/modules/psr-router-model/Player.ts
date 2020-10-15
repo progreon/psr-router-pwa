@@ -252,6 +252,7 @@ export class Player {
    * @todo Finish and test.
    */
   useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battle: Battle = undefined): boolean {
+    // TODO: force usage option (which skips the availability check)
     // let index = this.getItemIndex(item, false); // TODO: temporarily disabled because no GetI implementation yet!
     // if (index < 0) {
     //   return false;
@@ -261,7 +262,6 @@ export class Player {
     switch (item.type) {
       case "STONE":
         // TODO: arg check
-        console.log("TODO: check evolve");
         let newBattler = this.team[partyIndex].evolve(new EvolutionKey(EvolutionKey.Type.Stone, item.key));
         if (newBattler == this.team[partyIndex]) return false;
         this.team[partyIndex] = newBattler;
@@ -277,11 +277,11 @@ export class Player {
       case "TM":
         // TODO: arg check
         let oldMove = this.team[partyIndex].moveset[moveIndex];
-        if (!this.team[partyIndex].learnTmMove(item.value, oldMove)) return false;
+        if (!this.team[partyIndex].learnTmMove(item, oldMove)) return false;
         break;
     }
     // TODO: others?
-    // return this.tossItemByIndex(index, 1);
+    // return this.tossItemByIndex(index, 1); // TODO: don't toss if forced?
     return true; // TODO: temporarily 'true' because no GetI implementation yet!
     // }
   }
