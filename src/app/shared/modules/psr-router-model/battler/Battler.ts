@@ -16,9 +16,11 @@ export abstract class Battler {
   protected _level: number;
   protected _moveset: string[];
   protected _levelExp: number;
+  protected _settings = new Battler.Settings();
   public get level(): number { return this._level; }
   public get moveset(): string[] { return this._moveset; }
   public get levelExp(): number { return this._levelExp; }
+  public get settings(): Battler.Settings { return this._settings; }
 
   /**
    *
@@ -78,7 +80,7 @@ export abstract class Battler {
     if (canLearn && !moves.includes(newMove)) {
       if (!oldMove || moves.includes(oldMove)) {
         let i = 0;
-        while ( i < 4 && oldMove != this._moveset[i] && this._moveset[i] != null)
+        while (i < 4 && oldMove != this._moveset[i] && this._moveset[i] != null)
           i++;
         // only remove the move if no more room!
         if (i < 4) {
@@ -263,7 +265,7 @@ export abstract class Battler {
   }
 
   getCurrentExpToNextLevel() {
-    return this.pokemon.expGroup.getDeltaExp(this.level, this.level+1, this.levelExp);
+    return this.pokemon.expGroup.getDeltaExp(this.level, this.level + 1, this.levelExp);
   }
 
   abstract equals(battler: Battler): boolean;
@@ -272,5 +274,11 @@ export abstract class Battler {
 
   toString(): string {
     return `${this.pokemon.name} Lv.${this.level}`;
+  }
+}
+
+export namespace Battler {
+  export class Settings {
+    levelUpMoves: { [key: string]: string } = {}; // teach => over
   }
 }

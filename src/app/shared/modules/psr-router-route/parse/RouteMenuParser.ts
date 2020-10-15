@@ -63,8 +63,8 @@ export class RouteMenuParser implements IRouteEntryParser {
                         // Swap: <index|item> <index|item>
                         if (values.length != 2) throw new Util.RouterError(`${filename}:${line.ln + 1} 'Swap' takes 2 parameters`, "Parser Error");
 
-                        [index1, item1] = isNaN(+values[0]) ? [+values[0] - 1, undefined] : [undefined, values[0]];
-                        [index2, item2] = isNaN(+values[1]) ? [+values[1] - 1, undefined] : [undefined, values[1]];
+                        [index1, item1] = isNaN(+values[0]) ? [undefined, values[0]] : [+values[0] - 1, undefined];
+                        [index2, item2] = isNaN(+values[1]) ? [undefined, values[1]] : [+values[1] - 1, undefined];
                         if (!isNaN(index1) && index1 < 0) throw new Util.RouterError(`${filename}:${line.ln + 1} Index must be a number > 0`, "Parser Error");
                         if (!isNaN(index2) && index2 < 0) throw new Util.RouterError(`${filename}:${line.ln + 1} Index must be a number > 0`, "Parser Error");
                         break;

@@ -111,11 +111,18 @@ export class Battler1 extends Battler {
       // List<Move> newMoves = pokemon.getLearnedMoves(level); // Handle it the RBY way
       let newMoves = this.pokemon.getLearnedMoves(this.level); // Handle it the RBY way
       newMoves.forEach(nm => {
-        this._moveset.push(nm);
-        if (this._moveset.length > 4) {
-          // TODO: check what move to override -> make Battler settings?
-          this._moveset = this._moveset.slice(-4);
+        // TODO: check what move to override -> make Battler settings?
+        if (this._moveset.length < 4) {
+          this._moveset.push(nm);
+        } else {
+          let i = this._moveset.indexOf(this.settings.levelUpMoves[nm]);
+          if (i > 0) {
+            this._moveset[i] = nm;
+          }
         }
+        // if (this._moveset.length > 4) {
+        //   this._moveset = this._moveset.slice(-4);
+        // }
       });
     }
 
@@ -351,6 +358,8 @@ export class Battler1 extends Battler {
     this._possibleDVs.forEach(pdvs => newB._possibleDVs.push(pdvs.slice(0)));
     newB._currentStats = [];
     this._currentStats.forEach(cs => newB._currentStats.push(cs.clone()));
+
+    newB._settings = this._settings;
 
     return newB;
   }

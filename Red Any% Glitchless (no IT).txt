@@ -98,6 +98,8 @@ Route: Red Any% Glitchless (no IT)
 			Rocket :: HA x2 + PS, HA x2
 			Zubat does 6-8 with Leech Life (10-12 after 1 Tail Whip). Consider healing or switching if you're at low HP or confused
 		Menu: One tile before the Super Nerd: use the Rare Candy to reach L16 and evolve, teach Water Gun over Tackle, use the Moon Stone, teach Mega Punch over Leer
+			Toss: POKE_BALL 0
+			Toss: ANTIDOTE 0
 			Use: RARE_CANDY 1 1
 			Use: TM_12 1 1 2
 			Use: MOON_STONE 1 1

@@ -125,7 +125,7 @@ export namespace RouteMenu {
         if (!result) {
           entry.addMessage(new RouterMessage("Unable to use " + action.item1.toString() + (+action.count > 1 ? action.count + " times" : "") + (!!action.item1.type && " on " + player.team[action.index1].toString() || " here") + ", do you have it?", RouterMessage.Type.Error));
         }
-        entry.addMessage(new RouterMessage("USE action not fully implemented yet", RouterMessage.Type.Warning));
+        // entry.addMessage(new RouterMessage("USE action not fully implemented yet", RouterMessage.Type.Warning));
         return { player, actionString }; // TODO
       }
     );
@@ -133,9 +133,10 @@ export namespace RouteMenu {
     public static readonly SWAP = new Type(
       "Swap",
       (player, action, entry) => {
-        // TODO
+        // TODO: implement GetI-entry first
+        let actionString = `Swap ${action.item1?.name || "slot " + (+action.index1 + 1)} with ${action.item2?.name || "slot " + (+action.index2 + 1)}`;
         entry.addMessage(new RouterMessage("SWAP action not implemented yet", RouterMessage.Type.Warning));
-        return { player, actionString: "" }; // TODO
+        return { player, actionString }; // TODO
       }
     );
 
@@ -150,7 +151,7 @@ export namespace RouteMenu {
           actionString = "[Swap error]";
           entry.addMessage(new RouterMessage("Invalid party indices (ignoring)", RouterMessage.Type.Error));
         }
-        return { player, actionString }; // TODO
+        return { player, actionString };
       }
     );
 
@@ -158,17 +159,18 @@ export namespace RouteMenu {
       "Teach",
       (player, action, entry) => {
         // TODO: generate actionString
-        Type.USE.apply(player, action, entry);
-        return { player, actionString: "" }; // TODO
+        return Type.USE.apply(player, action, entry);
+        // return { player, actionString: "" }; // TODO
       }
     );
 
     public static readonly TOSS = new Type(
       "Toss",
       (player, action, entry) => {
-        // TODO
+        // TODO: implement GetI-entry first
+        let actionString = `Toss ${action.count == "0" ? "all" : action.count} ${action.item1.name}`;
         entry.addMessage(new RouterMessage("TOSS action not implemented yet", RouterMessage.Type.Warning));
-        return { player, actionString: "" }; // TODO
+        return { player, actionString }; // TODO
       }
     );
 
