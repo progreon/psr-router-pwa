@@ -97,7 +97,7 @@ export class RouteMenuParser implements IRouteEntryParser {
                             if (isNaN(+count) && (count !== "?" || +count < 0)) throw new Util.RouterError(`${filename}:${line.ln + 1} Count must be a positive number or '?'`, "Parser Error");
                         }
                         break;
-                    case "D":
+                    case "D": // remove the 'D' bit?
                     default:
                         description = line.line;
                         break;

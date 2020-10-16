@@ -5,9 +5,7 @@ import { RouterMessage } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
 import * as Model from 'SharedModules/psr-router-model/Model';
-import * as ModelAbstract from 'SharedModules/psr-router-model/ModelAbstract';
 import { EntryJSON } from './parse/EntryJSON';
-// import * as Model1 from 'SharedModules/psr-router-model/Model1';
 
 /**
  * A class representing a route-entry that does a menu sequence.
@@ -80,6 +78,7 @@ export class RouteMenu extends RouteEntry {
   }
 }
 
+// TODO: move all of this to the new action classes
 export namespace RouteMenu {
   export class Type {
     static ALL: { [key: string]: Type } = {};
