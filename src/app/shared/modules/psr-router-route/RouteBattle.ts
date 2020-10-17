@@ -71,7 +71,7 @@ export class RouteBattle extends RouteEntry {
       case "BROCK":
         player.addBadge("attack");
         break;
-      case "SURGE":
+      case "LTSURGE":
         player.addBadge("defense");
         break;
       case "KOGA":

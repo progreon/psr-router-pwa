@@ -422,7 +422,7 @@ Route: Red Any% Glitchless (no IT)
 		Menu: TEMP: should be menu in fight
 			Use: ELIXER
 		Menu: Revive with candies and bike to the Warden's house
-			Use: RARE_CANDY 0 :: Use all of your rare candies
+			Use: RARE_CANDY 3 :: Use all of your rare candies
 			Use: BICYCLE
 		GetI: HM_04 :: GOLD_TEETH
 			Get HM04 from the warden, then Fly to Pallet Town

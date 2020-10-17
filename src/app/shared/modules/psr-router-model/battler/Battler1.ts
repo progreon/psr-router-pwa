@@ -88,6 +88,7 @@ export class Battler1 extends Battler {
       evo._moveset = this._moveset;
       evo._statExp = this._statExp;
       evo._levelExp = this._levelExp;
+      evo._possibleDVs = this._possibleDVs;
       evo._updateCurrentStats();
       return evo;
     } else {
