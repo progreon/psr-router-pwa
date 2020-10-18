@@ -1,29 +1,47 @@
 // imports
 import { RouterMessage } from '../../psr-router-util';
-import { RouteEntryInfo } from '../util';
 import { RouteEntry } from '..';
 import * as Model from 'SharedModules/psr-router-model/Model';
-import { EntryJSON } from '../parse/EntryJSON';
-import { IAction } from './IAction';
+import { AAction } from './AAction';
+import { ActionJSON } from '../parse/actions/ActionJSON';
 
-export class SwapPokemonAction implements IAction {
+export class SwapPokemonAction extends AAction {
+    public static readonly ACTION_TYPE: string = "SwapP";
+
     constructor(
         private partyIndex1: number,
-        private partyIndex2: number,
-        private description: string) { }
-
-    public getActionType(): string {
-        return "SwapP";
+        private partyIndex2: number = 0,
+        description: string = ""
+    ) {
+        super(description);
     }
 
-    public apply(player: Model.Player, entry: RouteEntry): Model.Player {
-        // TODO
-        entry.addMessage(new RouterMessage("The 'Swap Pokemon' action is not implemented yet", RouterMessage.Type.Warning));
+    public get actionType(): string {
+        return SwapPokemonAction.ACTION_TYPE;
+    }
+
+    public applyAction(player: Model.Player, entry: RouteEntry): Model.Player {
+        // TODO: also handle in battle swapping
+        if (this.partyIndex1 >= 0 && this.partyIndex1 < player.team.length && this.partyIndex2 >= 0 && this.partyIndex2 < player.team.length) {
+            this.actionString = `Swap ${player.team[this.partyIndex1]} with ${player.team[this.partyIndex2]}`;
+            player.swapBattlers(this.partyIndex1, this.partyIndex2);
+        } else {
+            this.actionString = "[Swap error]";
+            entry.addMessage(new RouterMessage("Invalid party indices (ignoring)", RouterMessage.Type.Error));
+        }
         return player;
     }
 
-    public toString(): string {
-        // TODO
-        return "The 'Swap Pokemon' action is not implemented yet";
+    static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {
+        let partyIndex1 = obj.properties.partyIndex1;
+        let partyIndex2 = obj.properties.partyIndex2;
+        return new SwapPokemonAction(partyIndex1, partyIndex2, obj.description);
+    }
+
+    public getJSONObject(): ActionJSON {
+        let obj = new ActionJSON(this.actionType, this.description);
+        obj.properties.partyIndex1 = this.partyIndex1;
+        obj.properties.partyIndex2 = this.partyIndex2;
+        return obj;
     }
 }

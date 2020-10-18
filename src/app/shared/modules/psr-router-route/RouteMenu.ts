@@ -6,6 +6,7 @@ import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { EntryJSON } from './parse/EntryJSON';
+import { AAction } from './psr-router-route-actions/AAction';
 
 /**
  * A class representing a route-entry that does a menu sequence.
@@ -54,7 +55,7 @@ export class RouteMenu extends RouteEntry {
         index2: action.index2,
         count: action.count
       });
-    })
+    });
     return obj;
   }
 

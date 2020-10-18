@@ -1,24 +1,34 @@
 // imports
 import { RouteEntry } from '..';
 import * as Model from 'SharedModules/psr-router-model/Model';
-import { IAction } from './IAction';
+import { AAction } from './AAction';
+import { ActionJSON } from '../parse/actions/ActionJSON';
 
 /**
  * @todo cover multiline description? (with indentations)
  */
-export class DirectionAction implements IAction {
-    constructor(
-        private description: string) { }
+export class DirectionAction extends AAction {
+    public static readonly ACTION_TYPE: string = "";
 
-    public getActionType(): string {
-        return "";
+    constructor(
+        description: string
+    ) {
+        super(description);
     }
 
-    public apply(player: Model.Player, entry: RouteEntry): Model.Player {
+    public get actionType(): string {
+        return DirectionAction.ACTION_TYPE;
+    }
+
+    public applyAction(player: Model.Player, entry: RouteEntry): Model.Player {
         return player;
     }
 
-    public toString(): string {
-        return this.description;
+    static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {
+        return new DirectionAction(obj.description);
+    }
+
+    public getJSONObject(): ActionJSON {
+        return new ActionJSON(this.actionType, this.description);
     }
 }

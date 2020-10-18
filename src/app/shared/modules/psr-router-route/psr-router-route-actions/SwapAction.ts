@@ -1,31 +1,48 @@
 // imports
 import { RouterMessage } from '../../psr-router-util';
-import { RouteEntryInfo } from '../util';
 import { RouteEntry } from '..';
 import * as Model from 'SharedModules/psr-router-model/Model';
-import { EntryJSON } from '../parse/EntryJSON';
-import { IAction } from './IAction';
+import { AAction } from './AAction';
+import { ActionJSON } from '../parse/actions/ActionJSON';
 
-export class SwapAction implements IAction {
+export class SwapAction extends AAction {
+    public static readonly ACTION_TYPE: string = "Swap";
+
     constructor(
         private item1: Model.Item,
         private item2: Model.Item,
         private itemIndex1: number,
         private itemIndex2: number,
-        private description: string) { }
-
-    public getActionType(): string {
-        return "Swap";
+        description: string = ""
+    ) {
+        super(description);
     }
 
-    public apply(player: Model.Player, entry: RouteEntry): Model.Player {
-        // TODO
-        entry.addMessage(new RouterMessage("The 'Swap' action is not implemented yet", RouterMessage.Type.Warning));
+    public get actionType(): string {
+        return SwapAction.ACTION_TYPE;
+    }
+
+    public applyAction(player: Model.Player, entry: RouteEntry): Model.Player {
+        // TODO: implement GetI-entry first
+        this.actionString = `Swap ${this.item1?.name || "slot " + (+this.itemIndex1 + 1)} with ${this.item2?.name || "slot " + (+this.itemIndex2 + 1)}`;
+        entry.addMessage(new RouterMessage("The 'Swap' action is not fully implemented yet", RouterMessage.Type.Warning));
         return player;
     }
 
-    public toString(): string {
-        // TODO
-        return "The 'Swap' action is not implemented yet";
+    static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {
+        let item1 = game.findItemByName(obj.properties.item1);
+        let item2 = game.findItemByName(obj.properties.item2);
+        let itemIndex1 = obj.properties.itemIndex1;
+        let itemIndex2 = obj.properties.itemIndex2;
+        return new SwapAction(item1, item2, itemIndex1, itemIndex2, obj.description);
+    }
+
+    public getJSONObject(): ActionJSON {
+        let obj = new ActionJSON(this.actionType, this.description);
+        obj.properties.item1 = this.item1?.key;
+        obj.properties.item2 = this.item2?.key;
+        obj.properties.itemIndex1 = this.itemIndex1;
+        obj.properties.itemIndex2 = this.itemIndex2;
+        return obj;
     }
 }
