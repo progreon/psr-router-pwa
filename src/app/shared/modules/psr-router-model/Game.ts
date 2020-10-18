@@ -164,7 +164,7 @@ export class Game {
   getTypeMultiplier(typeAttacker: Type, typeDefender1: Type, typeDefender2: Type): number {
     let f = this.typeChart[typeAttacker.key] && this.typeChart[typeAttacker.key][typeDefender1.key];
     if (typeDefender2) {
-      f * this.typeChart[typeAttacker.key] && this.typeChart[typeAttacker.key][typeDefender2.key];
+      f *= this.typeChart[typeAttacker.key] && this.typeChart[typeAttacker.key][typeDefender2.key];
     }
     return f;
   }
