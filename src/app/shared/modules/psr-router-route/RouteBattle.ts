@@ -54,6 +54,7 @@ export class RouteBattle extends RouteEntry {
       this.playersBefore.push(player);
       player = player.clone();
 
+      if (shareExp[p] == undefined) shareExp[p] = [];
       let sharedCount = shareExp[p].length;
       shareExp[p].forEach(sh => {
         if (sh >= player.team.length) {

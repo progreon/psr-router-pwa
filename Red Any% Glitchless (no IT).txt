@@ -415,7 +415,7 @@ Route: Red Any% Glitchless (no IT)
 			Hug the east wall, then the north wall, then walk down into the Juggler's vision
 			B: Fuchsia Gym - Juggler 2
 				EQ, EQ + TB
-			B: Koga
+			B: Koga :: 0:0 1:0 2:0
 				EQ x3, then use an Elixer on Weezing (to stall for selfdestruct)
 				If Koga uses an X Attack, stall with flute
 				The goal is to die to Selfdestruct, but it's OK if you don't
