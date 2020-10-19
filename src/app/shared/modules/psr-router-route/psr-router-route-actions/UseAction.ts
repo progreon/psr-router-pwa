@@ -75,6 +75,7 @@ export class UseAction extends AAction {
     public getJSONObject(): ActionJSON {
         let obj = new ActionJSON(this.actionType, this.description);
         obj.properties.item = this.item?.key;
+        obj.properties.count = this.count;
         obj.properties.partyIndex = this.partyIndex;
         obj.properties.moveIndex = this.moveIndex;
         return obj;

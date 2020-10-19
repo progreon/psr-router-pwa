@@ -1,21 +1,26 @@
+// TODO: naming?
 import { ActionJSON } from "./ActionJSON";
 import { IActionParser } from "./IActionParser";
 import { ScopedLine } from "../ScopedLine";
 
 /**
  * lines:
- * SwapP: <index> <index> :: <description>
+ * Opp: <opp index> :: <description>
+ *     <action>
+ *     [<action>
+ *     ...]
  *
  * json:
  * {
  *     type,
  *     description,
  *     properties: {
- *         partyIndex1, partyIndex2
+ *         opponent
  *     }
+ *     actions
  * }
  */
-export class SwapPokemonActionParser implements IActionParser {
+export class OpponentActionParser implements IActionParser {
     public linesToJSON(scopedLine: ScopedLine, filename: string): ActionJSON {
         // TODO
         throw new Error("Method not implemented.");

@@ -1,3 +1,7 @@
-import { IRouteEntryParser } from "../IRouteEntryParser";
+import { ScopedLine } from "../ScopedLine";
+import { ActionJSON } from "./ActionJSON";
 
-export interface IRouteActionParser extends IRouteEntryParser { }
+export interface IActionParser {
+    linesToJSON(scopedLine: ScopedLine, filename: string): ActionJSON;
+    jsonToLines(jsonEntry: ActionJSON): ScopedLine;
+}
