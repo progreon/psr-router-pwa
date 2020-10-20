@@ -2,8 +2,8 @@ export class ActionJSON {
     public constructor(
         public type: string = "",
         public description: string = "",
-        public actions: ActionJSON[] = [],
-        public properties: { [key: string]: any } = {}
+        public properties: { [key: string]: any } = {},
+        public actions: ActionJSON[] = []
     ) { }
 
     public getJSONObject(): any {

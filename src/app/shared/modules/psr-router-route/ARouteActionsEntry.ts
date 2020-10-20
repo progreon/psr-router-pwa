@@ -3,15 +3,15 @@ import { RouteEntry } from "./RouteEntry";
 // TODO: have RouteMenu and RouteBattle implement this
 
 // imports
-import { RouterMessage } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { Game } from '../psr-router-model/Game';
-import { Location, Player } from '../psr-router-model/Model';
+import { Location } from '../psr-router-model/Model';
 import { EntryJSON } from './parse/EntryJSON';
-import { OpponentAction } from "./psr-router-route-actions/OpponentAction";
 import { AAction } from "./psr-router-route-actions/AAction";
+import { ActionJSON } from "./parse/actions/ActionJSON";
 
 export abstract class ARouteActionsEntry extends RouteEntry {
+    private _actions: AAction[] = [];
     /**
      *
      * @param game      The Game object this route entry uses.
@@ -22,19 +22,31 @@ export abstract class ARouteActionsEntry extends RouteEntry {
         super(game, info, location);
     }
 
-    public get entryType(): string {
-        return undefined;
+    public abstract get entryType(): string;
+
+    public getJSONObject(): EntryJSON {
+        let obj = super.getJSONObject();
+
+        let actions = [];
+        this._actions.forEach(action => {
+            actions.push(action.getJSONObject());
+        });
+        obj.properties.actions = actions;
+
+        return obj;
     }
 
-    getJSONObject(): EntryJSON {
-        return super.getJSONObject();
-    }
-
-    static newFromJSONObject(obj: EntryJSON, game: Game): ARouteActionsEntry {
-        let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
-        let location: Location = null; // TODO, parse from obj.location
-        // TODO
-        // return new RouteDirections(game, info, location);
-        return undefined;
+    public setActionsFromJSONObject(
+        obj: EntryJSON,
+        possibleActions: { [key: string]: (obj: ActionJSON, game: Game) => AAction },
+        game: Game
+    ) {
+        this._actions = [];
+        obj.properties.actions.forEach(action => {
+            if (possibleActions[action.type.toUpperCase()]) {
+                // Just a check for extra safety
+                this._actions.push(possibleActions[action.type.toUpperCase()](action, game))
+            }
+        });
     }
 }

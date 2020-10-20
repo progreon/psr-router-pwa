@@ -10,7 +10,8 @@ export class BSettingsAction extends AAction {
     public static readonly ACTION_TYPE: string = "BSettings";
 
     constructor(
-        private settings: { [key: string]: string }, // TEMP
+        private settings: { key: string, value: string[] }[],
+        private partyIndex: number = 0,
         description: string = ""
     ) {
         super(description);
@@ -28,12 +29,12 @@ export class BSettingsAction extends AAction {
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {
-        let settings = obj.properties.settings;
-        return new BSettingsAction(settings, obj.description);
+        return new BSettingsAction(obj.properties.settings, obj.properties.partyIndex, obj.description);
     }
 
     public getJSONObject(): ActionJSON {
         let obj = new ActionJSON(this.actionType, this.description);
+        obj.properties.partyIndex = this.partyIndex;
         obj.properties.settings = this.settings;
         return obj;
     }
