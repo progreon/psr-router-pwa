@@ -38,12 +38,11 @@ export abstract class ARouteActionsParser implements IRouteEntryParser {
 
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {
         let scopedLine = new ScopedLine();
-        let actionLines: ScopedLine[] = [];
 
         let actions: ActionJSON[] = jsonEntry.properties.actions;
         actions.forEach(action => {
             let parser = this.parsers[action.type.toUpperCase()];
-            actionLines.push(parser.jsonToLines(action));
+            scopedLine.scope.push(parser.jsonToLines(action));
         });
 
         return scopedLine;

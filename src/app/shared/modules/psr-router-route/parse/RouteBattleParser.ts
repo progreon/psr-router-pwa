@@ -1,8 +1,35 @@
 import { EntryJSON } from "./EntryJSON";
-import { IRouteEntryParser } from "./IRouteEntryParser";
 import { ScopedLine } from "./ScopedLine";
 import * as Util from '../../psr-router-util';
 import { RouteBattle } from "../RouteBattle";
+
+import { UseAction } from "../psr-router-route-actions/UseAction";
+import { SwapAction } from "../psr-router-route-actions/SwapAction";
+import { SwapPokemonAction } from "../psr-router-route-actions/SwapPokemonAction";
+import { TmAction } from "../psr-router-route-actions/TmAction";
+import { TossAction } from "../psr-router-route-actions/TossAction";
+import { DirectionAction } from "../psr-router-route-actions/DirectionAction";
+import { BSettingsAction } from "../psr-router-route-actions/BSettingsAction";
+
+import { ARouteActionsParser } from "./ARouteActionsParser";
+
+import { IActionParser } from "./actions/IActionParser";
+import { UseActionParser } from "./actions/UseActionParser";
+import { SwapActionParser } from "./actions/SwapActionParser";
+import { SwapPokemonActionParser } from "./actions/SwapPokemonActionParser";
+import { TmActionParser } from "./actions/TmActionParser";
+import { TossActionParser } from "./actions/TossActionParser";
+import { DirectionActionParser } from "./actions/DirectionActionParser";
+import { BSettingsActionParser } from "./actions/BSettingsActionParser";
+
+const parsers: { [key: string]: IActionParser } = {};
+parsers[UseAction.ACTION_TYPE.toUpperCase()] = new UseActionParser();
+parsers[SwapAction.ACTION_TYPE.toUpperCase()] = new SwapActionParser();
+parsers[SwapPokemonAction.ACTION_TYPE.toUpperCase()] = new SwapPokemonActionParser();
+parsers[TmAction.ACTION_TYPE.toUpperCase()] = new TmActionParser();
+parsers[TossAction.ACTION_TYPE.toUpperCase()] = new TossActionParser();
+parsers[DirectionAction.ACTION_TYPE.toUpperCase()] = new DirectionActionParser();
+parsers[BSettingsAction.ACTION_TYPE.toUpperCase()] = new BSettingsActionParser();
 
 /**
  * lines:
@@ -22,14 +49,20 @@ import { RouteBattle } from "../RouteBattle";
  *     }
  * }
  */
-export class RouteBattleParser implements IRouteEntryParser {
+export class RouteBattleParser extends ARouteActionsParser {
+    public static readonly PARSERS = parsers;
+    public get parsers(): { [key: string]: IActionParser; } {
+        return parsers;
+    }
+
     public linesToJSON(scopedLine: ScopedLine, filename: string): EntryJSON {
-        let entry = new EntryJSON(scopedLine.type);
+        let entry = super.linesToJSON(scopedLine, filename);
         let [trainer, shared] = scopedLine.untypedLine.split("::").map(s => s.trim());
         if (!trainer) {
             throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Please provide a trainer id`, "Parser Error");
         }
         entry.properties.trainer = trainer;
+        // TODO: move this to OpponentAction
         if (shared) {
             // eg: "0:0,1  2:1"
             let bs = shared.split(" ").filter(spl => !!spl); // filter out the empty strings (in case of multiple spaces)
@@ -60,6 +93,7 @@ export class RouteBattleParser implements IRouteEntryParser {
                 entry.properties.shareExp.push(se[i] ? se[i] : [0]);
             }
         }
+        // TODO: move this to entry-line
         if (scopedLine.scope && scopedLine.scope.length > 0) {
             let titleLine = scopedLine.scope.shift();
             let [tOrS, ...s] = titleLine.line.split("::");
