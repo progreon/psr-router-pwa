@@ -6,7 +6,7 @@ import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
 
 export class TmAction extends AAction {
-    public static readonly ACTION_TYPE: string = "Tm";
+    public static readonly ACTION_TYPE: string = "Teach";
 
     constructor(
         private tm: Model.Item,
@@ -15,7 +15,7 @@ export class TmAction extends AAction {
         description: string = ""
     ) {
         super(description);
-        this.actionString = "The 'Tm' action is not implemented yet";
+        this.actionString = "The 'Teach' action is not implemented yet";
     }
 
     public get actionType(): string {
@@ -24,7 +24,7 @@ export class TmAction extends AAction {
 
     public applyAction(player: Model.Player, entry: RouteEntry): Model.Player {
         // TODO
-        entry.addMessage(new RouterMessage("The 'Tm' action is not implemented yet", RouterMessage.Type.Warning));
+        entry.addMessage(new RouterMessage("The 'Teach' action is not implemented yet", RouterMessage.Type.Warning));
         return player;
     }
 

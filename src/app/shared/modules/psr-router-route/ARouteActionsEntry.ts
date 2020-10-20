@@ -11,7 +11,7 @@ import { AAction } from "./psr-router-route-actions/AAction";
 import { ActionJSON } from "./parse/actions/ActionJSON";
 
 export abstract class ARouteActionsEntry extends RouteEntry {
-    private _actions: AAction[] = [];
+    protected _actions: AAction[] = [];
     /**
      *
      * @param game      The Game object this route entry uses.
@@ -23,6 +23,10 @@ export abstract class ARouteActionsEntry extends RouteEntry {
     }
 
     public abstract get entryType(): string;
+
+    public get actions(): AAction[] {
+        return this._actions;
+    }
 
     public getJSONObject(): EntryJSON {
         let obj = super.getJSONObject();

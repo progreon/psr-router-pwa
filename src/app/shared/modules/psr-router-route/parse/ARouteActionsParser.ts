@@ -32,6 +32,7 @@ export abstract class ARouteActionsParser implements IRouteEntryParser {
             }
         });
 
+        entry.properties.actions = actions;
         return entry;
     }
 

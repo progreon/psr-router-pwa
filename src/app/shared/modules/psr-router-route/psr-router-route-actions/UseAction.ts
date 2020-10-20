@@ -28,26 +28,26 @@ export class UseAction extends AAction {
             this.actionString = "[Use error]";
             return player;
         }
-        let actionString = `Use ${this.count == '0' ? "all " : ""}${this.item.name}`;
+        this.actionString = `Use ${this.count == '0' ? "all " : ""}${this.item.name}`;
         if (+this.count > 1) {
-            actionString = `${actionString} ${this.count} times`;
+            this.actionString = `${this.actionString} ${this.count} times`;
         }
         if (this.item.isUsedOnPokemon()) {
             if (!player.team[this.partyIndex]) {
                 entry.addMessage(new RouterMessage("Party index out of range: " + this.partyIndex, RouterMessage.Type.Error));
                 return player;
             }
-            actionString = `${actionString} on ${player.team[this.partyIndex]}`;
+            this.actionString = `${this.actionString} on ${player.team[this.partyIndex]}`;
             if (this.item.isUsedOnMove()) {
                 if (this.moveIndex >= 0 && this.moveIndex < player.team[this.partyIndex].moveset.length) {
-                    actionString = `${actionString}, on ${player.team[this.partyIndex].moveset[this.moveIndex]}`;
+                    this.actionString = `${this.actionString}, on ${player.team[this.partyIndex].moveset[this.moveIndex]}`;
                 } else {
                     entry.addMessage(new RouterMessage("Move index out of range: " + this.moveIndex, RouterMessage.Type.Error));
                 }
             }
         }
         if (this.count == "?") {
-            actionString = `${actionString}?`;
+            this.actionString = `${this.actionString}?`;
         }
         let result = player.useItem(this.item, this.partyIndex, this.moveIndex);
         if (result) {

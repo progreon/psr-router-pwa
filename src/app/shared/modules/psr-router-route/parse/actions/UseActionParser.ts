@@ -24,7 +24,7 @@ export class UseActionParser implements IActionParser {
             [valuesText, description] = [valuesText.substr(0, valuesText.indexOf('::')).trim(), valuesText.substr(valuesText.indexOf('::') + 2).trim()];
         }
         let values = valuesText.split(/[, ]/).filter(v => !!v);
-        if (values.length != 2) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} 'Swap' takes 2 parameters`, "Parser Error");
+        if (values.length == 0) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} 'Use' takes 2 parameters`, "Parser Error");
 
         let item: string, count: string, partyIndex: number, moveIndex: number;
         item = values[0];

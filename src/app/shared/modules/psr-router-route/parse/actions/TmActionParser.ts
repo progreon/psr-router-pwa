@@ -26,7 +26,7 @@ export class TmActionParser implements IActionParser {
             [valuesText, description] = [valuesText.substr(0, valuesText.indexOf('::')).trim(), valuesText.substr(valuesText.indexOf('::') + 2).trim()];
         }
         let values = valuesText.split(/[, ]/).filter(v => !!v);
-        if (values.length != 2) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} 'Swap' takes 2 parameters`, "Parser Error");
+        if (values.length == 0) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} 'Tm' takes 1 or more parameters`, "Parser Error");
 
         let tm: string, partyIndex: number, moveIndex: number;
         tm = values[0];
