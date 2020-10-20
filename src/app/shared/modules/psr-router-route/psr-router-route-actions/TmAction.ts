@@ -6,7 +6,7 @@ import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
 
 export class TmAction extends AAction {
-    public static readonly ACTION_TYPE: string = "Teach";
+    public static readonly ACTION_TYPE: string = "Tm";
 
     constructor(
         private tm: Model.Item,

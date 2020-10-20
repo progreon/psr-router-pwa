@@ -16,6 +16,7 @@ import { SwapPokemonAction } from './psr-router-route-actions/SwapPokemonAction'
 import { TmAction } from './psr-router-route-actions/TmAction';
 import { TossAction } from './psr-router-route-actions/TossAction';
 import { DirectionAction } from './psr-router-route-actions/DirectionAction';
+import { BSettingsAction } from './psr-router-route-actions/BSettingsAction';
 
 const possibleActions: { [key: string]: (obj: ActionJSON, game: Model.Game) => AAction } = {};
 possibleActions[UseAction.ACTION_TYPE.toUpperCase()] = UseAction.newFromJSONObject;
@@ -24,6 +25,7 @@ possibleActions[SwapPokemonAction.ACTION_TYPE.toUpperCase()] = SwapPokemonAction
 possibleActions[TmAction.ACTION_TYPE.toUpperCase()] = TmAction.newFromJSONObject;
 possibleActions[TossAction.ACTION_TYPE.toUpperCase()] = TossAction.newFromJSONObject;
 possibleActions[DirectionAction.ACTION_TYPE.toUpperCase()] = DirectionAction.newFromJSONObject;
+possibleActions[BSettingsAction.ACTION_TYPE.toUpperCase()] = BSettingsAction.newFromJSONObject;
 
 /**
  * A class representing a route-entry that does a menu sequence.

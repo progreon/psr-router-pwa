@@ -116,7 +116,7 @@ export class Battler1 extends Battler {
         if (this._moveset.length < 4) {
           this._moveset.push(nm);
         } else {
-          let i = this._moveset.indexOf(this.settings.levelUpMoves[nm]);
+          let i = this._moveset.indexOf(this.settings.levelUpMoves[nm]?.key);
           if (i > 0) {
             this._moveset[i] = nm;
           }

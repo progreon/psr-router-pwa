@@ -15,7 +15,7 @@ export class BSettingsAction extends AAction {
         description: string = ""
     ) {
         super(description);
-        this.actionString = "The 'BSettings' action is not implemented yet";
+        this.actionString = "The 'BSettings' action is not fully implemented yet";
     }
 
     public get actionType(): string {
@@ -23,8 +23,28 @@ export class BSettingsAction extends AAction {
     }
 
     public applyAction(player: Model.Player, entry: RouteEntry): Model.Player {
-        // TODO
-        entry.addMessage(new RouterMessage("The 'BSettings' action is not implemented yet", RouterMessage.Type.Warning));
+        this.settings.forEach(setting => {
+            switch (setting.key.toUpperCase()) {
+                case "TEACH":
+                    if (setting.value.length != 2) {
+                        entry.addMessage(new RouterMessage(`The '${setting.key}' action requiers 2 values`, RouterMessage.Type.Error));
+                    } else {
+                        let newMove = entry.game.findMoveByName(setting.value[0]);
+                        let oldMove = entry.game.findMoveByName(setting.value[1]);
+                        if (!newMove) {
+                            entry.addMessage(new RouterMessage(`Could not find move ${setting.value[0]}`, RouterMessage.Type.Error));
+                        } else if (!oldMove) {
+                            entry.addMessage(new RouterMessage(`Could not find move ${setting.value[1]}`, RouterMessage.Type.Error));
+                        } else {
+                            this.actionString = ""; // TODO
+                            player.team[this.partyIndex].settings.addLevelUpMove(newMove, oldMove);
+                        }
+                    }
+                    break;
+                default:
+                    entry.addMessage(new RouterMessage(`The '${setting.key}' action is not implemented (yet)`, RouterMessage.Type.Warning));
+            }
+        });
         return player;
     }
 

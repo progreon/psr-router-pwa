@@ -8,6 +8,7 @@ import { SwapPokemonAction } from "../psr-router-route-actions/SwapPokemonAction
 import { TmAction } from "../psr-router-route-actions/TmAction";
 import { TossAction } from "../psr-router-route-actions/TossAction";
 import { DirectionAction } from "../psr-router-route-actions/DirectionAction";
+import { BSettingsAction } from "../psr-router-route-actions/BSettingsAction";
 
 import { ARouteActionsParser } from "./ARouteActionsParser";
 
@@ -18,6 +19,7 @@ import { SwapPokemonActionParser } from "./actions/SwapPokemonActionParser";
 import { TmActionParser } from "./actions/TmActionParser";
 import { TossActionParser } from "./actions/TossActionParser";
 import { DirectionActionParser } from "./actions/DirectionActionParser";
+import { BSettingsActionParser } from "./actions/BSettingsActionParser";
 
 const parsers: { [key: string]: IActionParser } = {};
 parsers[UseAction.ACTION_TYPE.toUpperCase()] = new UseActionParser();
@@ -26,6 +28,7 @@ parsers[SwapPokemonAction.ACTION_TYPE.toUpperCase()] = new SwapPokemonActionPars
 parsers[TmAction.ACTION_TYPE.toUpperCase()] = new TmActionParser();
 parsers[TossAction.ACTION_TYPE.toUpperCase()] = new TossActionParser();
 parsers[DirectionAction.ACTION_TYPE.toUpperCase()] = new DirectionActionParser();
+parsers[BSettingsAction.ACTION_TYPE.toUpperCase()] = new BSettingsActionParser();
 
 /**
  * lines:

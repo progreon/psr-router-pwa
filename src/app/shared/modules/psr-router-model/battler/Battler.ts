@@ -279,6 +279,9 @@ export abstract class Battler {
 
 export namespace Battler {
   export class Settings {
-    levelUpMoves: { [key: string]: string } = {}; // teach => over
+    levelUpMoves: { [key: string]: Move } = {}; // teach => over
+    addLevelUpMove(newMove: Move, oldMove: Move) {
+      this.levelUpMoves[newMove.key] = oldMove;
+    }
   }
 }

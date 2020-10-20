@@ -104,6 +104,8 @@ Route: Red Any% Glitchless (no IT)
 			Use: TM_12 1 1 2
 			Use: MOON_STONE 1 1
 			Use: TM_01 1 1 1
+			BSettings: 1
+				Teach: THRASH WATER_GUN
 		B: Mt. Moon B2F - SuperNerd
 			HA x2, MP (+PS), MP + HA
 		GetI: HELIX_FOSSIL
@@ -148,7 +150,7 @@ Route: Red Any% Glitchless (no IT)
 			Bottom Hiker :: WG x2, MP (+ HA), WG
 		B: Route 25 - Lass 2
 			MP, HA, MP (HA Oddishes with 0-2 Mega Punch PP)
-			THRASH :: WATER_GUN (TEMP)
+			Teach: THRASH WATER_GUN //(TEMP)
 		// Learn Thrash over Water Gun
 		GetI: ETHER
 			Get the hidden Ether
@@ -293,9 +295,9 @@ Route: Red Any% Glitchless (no IT)
 		Menu: Upon exiting the house
 			Swap: 2 TM_07
 			Use: SUPER_REPEL
-			Teach: TM_48
+			Tm: TM_48
 			Swap: 4 X_ACCURACY
-			Teach: HM_02 3
+			Tm: HM_02 3
 		Fly to Lavender (3 down), and walk to the tower
 
 	S: Pokemon Tower
@@ -316,7 +318,7 @@ Route: Red Any% Glitchless (no IT)
 		GetI: RARE_CANDY
 			Get the Rare Candy that blocks the way
 		Menu: Teach TM07 (Horn Drill) over Rock Slide
-			Teach: TM_07
+			Tm: TM_07
 		Enter the Ghost battle and escape using the Poke Doll
 		Menu: During the Ghost battle (TEMP: should be menu in fight)
 			Swap: 4 SUPER_REPEL
@@ -442,7 +444,7 @@ Route: Red Any% Glitchless (no IT)
 		After falling, go left and down to dodge the Scientist, then take the stairs to the right
 		GetI: TM_14
 		Menu: After picking up Blizzard
-			Teach: HM_04 1 2
+			Tm: HM_04 1 2
 			Use: TM_14 1 1 4
 			Use: REPEL
 		Activate the switch to the left, then follow the path to the northeast corner to activate the second switch
