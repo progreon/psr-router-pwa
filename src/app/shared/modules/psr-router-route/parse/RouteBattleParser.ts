@@ -1,4 +1,5 @@
 import { EntryJSON } from "./EntryJSON";
+import { ActionJSON } from "./actions/ActionJSON";
 import { ScopedLine } from "./ScopedLine";
 import * as Util from '../../psr-router-util';
 import { RouteBattle } from "../RouteBattle";
@@ -6,10 +7,9 @@ import { RouteBattle } from "../RouteBattle";
 import { UseAction } from "../psr-router-route-actions/UseAction";
 import { SwapAction } from "../psr-router-route-actions/SwapAction";
 import { SwapPokemonAction } from "../psr-router-route-actions/SwapPokemonAction";
-import { TmAction } from "../psr-router-route-actions/TmAction";
-import { TossAction } from "../psr-router-route-actions/TossAction";
 import { DirectionAction } from "../psr-router-route-actions/DirectionAction";
 import { BSettingsAction } from "../psr-router-route-actions/BSettingsAction";
+import { OpponentAction } from "../psr-router-route-actions/OpponentAction";
 
 import { ARouteActionsParser } from "./ARouteActionsParser";
 
@@ -17,26 +17,24 @@ import { IActionParser } from "./actions/IActionParser";
 import { UseActionParser } from "./actions/UseActionParser";
 import { SwapActionParser } from "./actions/SwapActionParser";
 import { SwapPokemonActionParser } from "./actions/SwapPokemonActionParser";
-import { TmActionParser } from "./actions/TmActionParser";
-import { TossActionParser } from "./actions/TossActionParser";
 import { DirectionActionParser } from "./actions/DirectionActionParser";
 import { BSettingsActionParser } from "./actions/BSettingsActionParser";
+import { OpponentActionParser } from "./actions/OpponentActionParser";
 
 const parsers: { [key: string]: IActionParser } = {};
 parsers[UseAction.ACTION_TYPE.toUpperCase()] = new UseActionParser();
 parsers[SwapAction.ACTION_TYPE.toUpperCase()] = new SwapActionParser();
 parsers[SwapPokemonAction.ACTION_TYPE.toUpperCase()] = new SwapPokemonActionParser();
-parsers[TmAction.ACTION_TYPE.toUpperCase()] = new TmActionParser();
-parsers[TossAction.ACTION_TYPE.toUpperCase()] = new TossActionParser();
 parsers[DirectionAction.ACTION_TYPE.toUpperCase()] = new DirectionActionParser();
 parsers[BSettingsAction.ACTION_TYPE.toUpperCase()] = new BSettingsActionParser();
+parsers[OpponentAction.ACTION_TYPE.toUpperCase()] = new OpponentActionParser();
 
 /**
  * lines:
- * B: <trainer> [:: <shared> [<shared> [..]]]
- *     [<title> ::] <summary>
- *     <description lines>
- * with <shared> = <trainerPartyId>:<playerPartyId>[,<playerPartyId>[..]]
+ * B: <trainer> [[:: <title>] :: <summary>]
+ *     <action>
+ *     [<action>
+ *     [..]]
  *
  * json:
  * {
@@ -45,7 +43,7 @@ parsers[BSettingsAction.ACTION_TYPE.toUpperCase()] = new BSettingsActionParser()
  *     location, // TODO
  *     properties: {
  *         trainer,
- *         shareExp
+ *         actions
  *     }
  * }
  */
@@ -57,71 +55,49 @@ export class RouteBattleParser extends ARouteActionsParser {
 
     public linesToJSON(scopedLine: ScopedLine, filename: string): EntryJSON {
         let entry = super.linesToJSON(scopedLine, filename);
-        let [trainer, shared] = scopedLine.untypedLine.split("::").map(s => s.trim());
+        let [trainer, title, ...summ] = scopedLine.untypedLine.split("::");
         if (!trainer) {
             throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Please provide a trainer id`, "Parser Error");
         }
         entry.properties.trainer = trainer;
-        // TODO: move this to OpponentAction
-        if (shared) {
-            // eg: "0:0,1  2:1"
-            let bs = shared.split(" ").filter(spl => !!spl); // filter out the empty strings (in case of multiple spaces)
-            let se: { [key: number]: number[]; } = {};
-            let seMax = 0;
-            bs.forEach(ops => {
-                let [_o, _ps] = ops.split(":");
-                if (_o && _ps) {
-                    let o = parseInt(_o);
-                    if (isNaN(o)) {
-                        throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Invalid share-parameter ${ops} (o${o})`, "Parser Error");
-                    }
-                    se[o] = _ps.split(",").map(function (_p) {
-                        let p = parseInt(_p);
-                        if (isNaN(p)) {
-                            throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Invalid share-parameter ${ops}`, "Parser Error");
-                        }
-                        return p;
-                    });
-                    seMax = Math.max(o, seMax);
-                }
-                else {
-                    throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Invalid share-parameter ${ops}`, "Parser Error");
-                }
-            });
-            entry.properties.shareExp = [];
-            for (let i = 0; i <= seMax; i++) {
-                entry.properties.shareExp.push(se[i] ? se[i] : [0]);
+        let summary = summ ? summ.join("::").trim() : title;
+        entry.info = { title: summ ? title : "", summary: summary, description: "" };
+
+        let actions: ActionJSON[] = [];
+        scopedLine.scope.forEach(sl => {
+            let parser = this.parsers[sl.type.toUpperCase()];
+            if (parser) {
+                actions.push(parser.linesToJSON(sl, filename));
+            } else {
+                // TODO: throw exception?
+                console.warn("Unknown action for type", sl.type);
             }
-        }
-        // TODO: move this to entry-line
-        if (scopedLine.scope && scopedLine.scope.length > 0) {
-            let titleLine = scopedLine.scope.shift();
-            let [tOrS, ...s] = titleLine.line.split("::");
-            let summ = s && s.length > 0 ? s.join("::").trim() : "";
-            entry.info = { title: summ ? tOrS.trim() : "", summary: summ || tOrS, description: "" };
-            entry.info.description = scopedLine.scope.map(l => l.line).join("\n");
-        }
+        });
+        entry.properties.actions = actions;
         return entry;
     }
+
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {
-        // eg: "0:0,1 1:0 2:1"
-        let scopedLine = new ScopedLine(RouteBattle.ENTRY_TYPE + ": " + jsonEntry.properties.trainer);
-        if (jsonEntry.properties.shareExp) {
-            scopedLine.line += " ::";
-            for (let i = 0; i < jsonEntry.properties.shareExp.length; i++) {
-                scopedLine.line += ` ${i}:${jsonEntry.properties.shareExp[i].join(",")}`;
-            }
+        let line = `${RouteBattle.ENTRY_TYPE}: ${jsonEntry.properties.trainer}`;
+        if (jsonEntry.info.title) {
+            line = `${line} :: ${jsonEntry.info.title}`;
         }
-        if (jsonEntry.info) {
-            if (jsonEntry.info.summary) {
-                scopedLine.scope.push(new ScopedLine((jsonEntry.info.title ? jsonEntry.info.title + " :: " : "") + jsonEntry.info.summary));
-                if (jsonEntry.info.description) {
-                    jsonEntry.info.description.split("\n").forEach(d => scopedLine.scope.push(new ScopedLine(d.trim())));
-                }
+        if (jsonEntry.info.summary) {
+            line = `${line} :: ${jsonEntry.info.summary}`;
+        }
+        let scopedLine = new ScopedLine(line);
+
+        let actions: ActionJSON[] = jsonEntry.properties.actions;
+        actions.forEach(action => {
+            let parser = RouteBattleParser.PARSERS[action.type.toUpperCase()];
+            if (parser) {
+                scopedLine.scope.push(parser.jsonToLines(action));
             } else {
-                // TODO
+                // TODO: throw exception?
+                console.warn("Unknown action for type", action.type);
             }
-        }
+        });
+
         return scopedLine;
     }
 }

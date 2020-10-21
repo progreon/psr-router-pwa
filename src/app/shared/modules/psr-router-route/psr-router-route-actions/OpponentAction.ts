@@ -11,7 +11,7 @@ import { SwapAction } from './SwapAction';
 import { SwapPokemonAction } from './SwapPokemonAction';
 import { UseAction } from './UseAction';
 
-// TODO: is this the way to go?
+// TODO: get these from RouteBattle
 const oppActions: { [key: string]: (obj: ActionJSON, game: Model.Game) => AAction } = {};
 oppActions[BSettingsAction.ACTION_TYPE.toUpperCase()] = BSettingsAction.newFromJSONObject;
 oppActions[DirectionAction.ACTION_TYPE.toUpperCase()] = DirectionAction.newFromJSONObject;

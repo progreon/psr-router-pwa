@@ -51,10 +51,11 @@ export class OpponentActionParser implements IActionParser {
         let actions: ActionJSON[] = [];
         scopedLine.scope.forEach(scopedLine => {
             let parser = RouteBattleParser.PARSERS[scopedLine.type.toUpperCase()];
-            if (parser) {
+            if (parser && parser != this) {
                 actions.push(parser.linesToJSON(scopedLine, filename));
             } else {
                 // TODO: throw exception?
+                console.warn("Unknown action for type", scopedLine.type);
             }
         });
         entry.actions = actions;
@@ -63,20 +64,25 @@ export class OpponentActionParser implements IActionParser {
     }
 
     public jsonToLines(jsonEntry: ActionJSON): ScopedLine {
-        let line = `${jsonEntry.type}: ${jsonEntry.properties.opponent}`;
+        let line = `${jsonEntry.type}: ${+jsonEntry.properties.opponent + 1}`;
         if (jsonEntry.properties.entrants) {
             line = `${line} ::`;
             let entrants: { partyIndex: number, faint?: boolean }[] = jsonEntry.properties.entrants;
             entrants.forEach(e => {
-                line = `${line} :: ${e.faint ? "*" : ""}${e.partyIndex}`;
+                line = `${line} :: ${e.faint ? "*" : ""}${e.partyIndex + 1}`;
             });
         }
-        
+
         let scopedLine = new ScopedLine(line);
         let actions: ActionJSON[] = jsonEntry.properties.actions;
         actions.forEach(action => {
             let parser = RouteBattleParser.PARSERS[action.type.toUpperCase()];
-            scopedLine.scope.push(parser.jsonToLines(action));
+            if (parser) {
+                scopedLine.scope.push(parser.jsonToLines(action));
+            } else {
+                // TODO: throw exception?
+                console.warn("Unknown action for type", action.type);
+            }
         });
 
         return scopedLine;
