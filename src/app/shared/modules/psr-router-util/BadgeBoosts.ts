@@ -1,5 +1,6 @@
 /**
  * Class holding badge boosts
+ * @todo make this cross-gen by making this a map: type => value?
  */
 class BadgeBoosts {
   public static readonly MIN: number = 0;

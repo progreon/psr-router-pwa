@@ -1,7 +1,7 @@
 'use strict';
 
 // imports
-import { RouterMessage, BadgeBoosts } from '../psr-router-util';
+import { RouterMessage, BadgeBoosts, Stages } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteEntry } from '.';
 import { Game } from '../psr-router-model/Game';
@@ -19,6 +19,7 @@ import { TmAction } from './psr-router-route-actions/TmAction';
 import { TossAction } from './psr-router-route-actions/TossAction';
 import { DirectionAction } from './psr-router-route-actions/DirectionAction';
 import { BSettingsAction } from './psr-router-route-actions/BSettingsAction';
+import { Battler } from '../psr-router-model/ModelAbstract';
 
 const possibleActions: { [key: string]: (obj: ActionJSON, game: Game) => AAction } = {};
 possibleActions[UseAction.ACTION_TYPE.toUpperCase()] = UseAction.newFromJSONObject;
@@ -41,7 +42,7 @@ export class RouteBattle extends ARouteActionsEntry {
 
   public readonly playersBefore: Player[];
 
-  private entrants: { [key: number]: { partyIndex: number, faint?: boolean }[] } = {};
+  private entrants: { [key: number]: ParticipatingBattler[] } = {};
 
   /**
    *
@@ -61,7 +62,7 @@ export class RouteBattle extends ARouteActionsEntry {
     return RouteBattle.ENTRY_TYPE;
   }
 
-  public setEntrants(opponentIndex: number, entrants: { partyIndex: number, faint?: boolean }[]) {
+  public setEntrants(opponentIndex: number, entrants: ParticipatingBattler[]) {
     this.entrants[opponentIndex] = entrants;
   }
 
@@ -71,11 +72,12 @@ export class RouteBattle extends ARouteActionsEntry {
     // prepare the entrants object with defaults
     this.entrants = {};
     for (let i = 0; i < this.trainer.party.length; i++) {
-      this.setEntrants(i, [{ partyIndex: 0 }]);
+      this.setEntrants(i, [new ParticipatingBattler()]);
     }
 
     // TODO
-
+    // 1. Initiate all BattleStates
+    // 2.
 
     // this.playersBefore.splice(0);
     // for (let p = 0; p < this.trainer.party.length; p++) {
@@ -149,5 +151,74 @@ export class RouteBattle extends ARouteActionsEntry {
     entry.setActionsFromJSONObject(obj, possibleActions, game);
     messages.forEach(m => entry.addMessage(m));
     return entry;
+  }
+}
+
+// TODO: to separate file? battle-utils or sth?
+export class ParticipatingBattler {
+  constructor(
+    public partyIndex: number = 0,
+    public faint: boolean = false
+  ) { }
+}
+
+export class BattleState {
+  public playerBefore: Player;
+
+  public participatingBattlers: ParticipatingBattler[];
+
+  public currentPlayer: Player;
+  private _currentBattlerIndex: number;
+  public get currentBattler(): Battler { return this.currentPlayer.team[this._currentBattlerIndex]; }
+  public currentBadgeBoosts: BadgeBoosts;
+  public currentStages: Stages;
+  // TODO: BadgeBoosts per battler? Might be overkill and not needed..
+
+  constructor(playerBefore: Player, participatingBattlers: ParticipatingBattler[] = []) {
+    this.playerBefore = playerBefore;
+    this.participatingBattlers = participatingBattlers;
+    if (participatingBattlers.length == 0) {
+      participatingBattlers.push(new ParticipatingBattler());
+    }
+
+    this.currentPlayer = this.playerBefore.clone();
+    this._currentBattlerIndex = 0;
+    this.currentBadgeBoosts = this.getDefaultBadgeBoosts();
+    this.currentStages = new Stages();
+  }
+
+  private getDefaultBadgeBoosts(): BadgeBoosts {
+    let bb = new BadgeBoosts();
+    if (this.playerBefore) {
+      let atk = this.playerBefore.hasBadge("attack") ? 1 : 0;
+      let def = this.playerBefore.hasBadge("defense") ? 1 : 0;
+      let spd = this.playerBefore.hasBadge("speed") ? 1 : 0;
+      let spc = this.playerBefore.hasBadge("special") ? 1 : 0;
+      bb.setValues(atk, def, spd, spc);
+    }
+    return bb;
+  }
+
+  public getBattlerBefore(partyIndex: number) {
+    return this.playerBefore.team[partyIndex];
+  }
+
+  public updateBoostsAndStages(previousState: BattleState) {
+    // TODO: cont
+    if (previousState.getBattlerBefore(this._currentBattlerIndex).level == this.currentBattler.level) {
+      // This is very gen-1 specific? Leaving it this way for now..
+      this.currentBadgeBoosts = previousState.currentBadgeBoosts.clone();
+    }
+    this.currentStages = previousState.currentStages.clone();
+  }
+
+  static newFromPreviousState(previousState: BattleState): BattleState {
+    let newState = new BattleState(previousState.currentPlayer);
+    newState._currentBattlerIndex = previousState._currentBattlerIndex;
+    newState.updateBoostsAndStages(previousState);
+
+    // TODO: cont
+
+    return newState;
   }
 }
