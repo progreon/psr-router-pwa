@@ -24,7 +24,7 @@ export class OpponentAction extends AAction {
     public static readonly oppActions: { [key: string]: (obj: ActionJSON, game: Model.Game) => AAction } = oppActions;
 
     constructor(
-        private oppIndex: number,
+        public oppIndex: number,
         private actions: AAction[] = [],
         description: string = ""
     ) {
@@ -62,6 +62,7 @@ export class OpponentAction extends AAction {
                 actions.push(OpponentAction.oppActions[action.type.toUpperCase()](action, game))
             }
         });
+        // TODO: entrants
         return new OpponentAction(oppIndex, actions, obj.description);
     }
 

@@ -12,6 +12,7 @@ export abstract class AAction {
     }
 
     public abstract get actionType(): string;
+    // TODO: change to (BattleStage) => ()
     public abstract applyAction(player: Model.Player, entry: RouteEntry): Model.Player;
     public abstract getJSONObject(): ActionJSON;
 

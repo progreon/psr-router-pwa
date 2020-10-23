@@ -3,7 +3,6 @@
 // imports
 import { RouterMessage, BadgeBoosts, Stages } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
-import { RouteEntry } from '.';
 import { Game } from '../psr-router-model/Game';
 import { Trainer, Location, Player } from '../psr-router-model/Model';
 import { EntryJSON } from './parse/EntryJSON';
@@ -20,6 +19,7 @@ import { TossAction } from './psr-router-route-actions/TossAction';
 import { DirectionAction } from './psr-router-route-actions/DirectionAction';
 import { BSettingsAction } from './psr-router-route-actions/BSettingsAction';
 import { Battler } from '../psr-router-model/ModelAbstract';
+import { OpponentAction } from './psr-router-route-actions/OpponentAction';
 
 const possibleActions: { [key: string]: (obj: ActionJSON, game: Game) => AAction } = {};
 possibleActions[UseAction.ACTION_TYPE.toUpperCase()] = UseAction.newFromJSONObject;
@@ -40,9 +40,10 @@ export class RouteBattle extends ARouteActionsEntry {
   public static readonly ENTRY_TYPE: string = "B";
   public readonly trainer: Trainer;
 
-  public readonly playersBefore: Player[];
+  // public readonly playersBefore: Player[];
+  public readonly battleStages: BattleStage[];
 
-  private entrants: { [key: number]: ParticipatingBattler[] } = {};
+  // private entrants: { [key: number]: BattleEntrant[] } = {};
 
   /**
    *
@@ -54,30 +55,83 @@ export class RouteBattle extends ARouteActionsEntry {
   constructor(game: Game, trainer: Trainer, info: RouteEntryInfo = null, location: Location = null) {
     super(game, info, location);
     this.trainer = trainer;
-    this.playersBefore = [];
-    trainer.party.forEach(b => this.playersBefore.push(undefined));
+    // this.playersBefore = [];
+    // trainer.party.forEach(b => this.playersBefore.push(undefined));
+    this.battleStages = [];
   }
 
   public get entryType(): string {
     return RouteBattle.ENTRY_TYPE;
   }
 
-  public setEntrants(opponentIndex: number, entrants: ParticipatingBattler[]) {
-    this.entrants[opponentIndex] = entrants;
-  }
+  // public setEntrants(opponentIndex: number, entrants: BattleEntrant[]) {
+  //   this.entrants[opponentIndex] = [];
+
+  //   // check for doubles
+  //   let partyIds: number[] = [];
+  //   entrants.forEach(e => {
+  //     if (!partyIds.includes(e.partyIndex)) {
+  //       this.entrants[opponentIndex].push(e);
+  //       partyIds.push(e.partyIndex);
+  //     }
+  //   });
+  //   if (!partyIds.includes(0)) {
+  //     this.entrants[opponentIndex].push(new BattleEntrant(0));
+  //   }
+  // }
 
   apply(player?: Player): Player {
     player = super.apply(player);
 
-    // prepare the entrants object with defaults
-    this.entrants = {};
-    for (let i = 0; i < this.trainer.party.length; i++) {
-      this.setEntrants(i, [new ParticipatingBattler()]);
+    // prepare the entrants object with defaults (not needed)
+    // for (let i = 0; i < this.trainer.party.length; i++) {
+    //   if (!this.entrants[i]) {
+    //     this.setEntrants(i, [new BattleEntrant()]);
+    //   }
+    // }
+
+    // TODO
+    // 1 Initiate all BattleStages
+    // 2 Collect all actions
+    // 2.1 If OpponentAction & oppIndex < previous oppIndex, ignore & give warning
+    // 3 Execute all actions
+
+    // 1 Initiate all BattleStages
+    this.battleStages.splice(0);
+    // this.battleStages.push(new BattleStages(this, player, this.entrants[0]));
+    this.battleStages.push(new BattleStage(this, player));
+    for (let ti = 1; ti < this.trainer.party.length; ti++) {
+      // this.battleStages.push(BattleStages.newFromPreviousState(this.battleStages[ti - 1], this.entrants[1]));
+      this.battleStages.push(BattleStage.newFromPreviousState(this.battleStages[ti - 1]));
     }
 
     // TODO
-    // 1. Initiate all BattleStates
-    // 2.
+    // 2 collect all actions for each opponent (put these in BattleStages!)
+    // let currentStage = this.battleStages[0];
+    let currentOppIndex = 0;
+    this.actions.forEach(action => {
+      // TODO
+      // 2.1 If OpponentAction & oppIndex < previous oppIndex, ignore & give warning
+      if (action instanceof OpponentAction) {
+        let oppAction = <OpponentAction>action;
+        if (oppAction.oppIndex < currentOppIndex) {
+          // TODO: ignore warning
+        } else if (oppAction.oppIndex >= this.trainer.party.length) {
+          // TODO: ignore warning
+        } else {
+          currentOppIndex = oppAction.oppIndex;
+        }
+      }
+      this.battleStages[currentOppIndex].addAction(action);
+    });
+
+    // TODO: check
+    // 3 Execute all actions
+    this.battleStages[0].apply(0);
+    for (let ti = 1; ti < this.trainer.party.length; ti++) {
+      this.battleStages[ti].reset(this.battleStages[ti - 1]);
+      this.battleStages[ti].apply(ti);
+    }
 
     // this.playersBefore.splice(0);
     // for (let p = 0; p < this.trainer.party.length; p++) {
@@ -154,71 +208,112 @@ export class RouteBattle extends ARouteActionsEntry {
   }
 }
 
-// TODO: to separate file? battle-utils or sth?
-export class ParticipatingBattler {
+// TODO: to separate file? battle-utils or sth? circular imports?
+export class BattleEntrant {
   constructor(
     public partyIndex: number = 0,
     public faint: boolean = false
   ) { }
 }
 
-export class BattleState {
-  public playerBefore: Player;
+export class BattleStage {
+  public battle: RouteBattle;
+  public player: Player;
+  public nextPlayer: Player;
 
-  public participatingBattlers: ParticipatingBattler[];
+  public entrants: BattleEntrant[];
+  private actions: AAction[];
 
-  public currentPlayer: Player;
-  private _currentBattlerIndex: number;
-  public get currentBattler(): Battler { return this.currentPlayer.team[this._currentBattlerIndex]; }
-  public currentBadgeBoosts: BadgeBoosts;
-  public currentStages: Stages;
+  public badgeBoosts: BadgeBoosts;
+  public stages: Stages;
   // TODO: BadgeBoosts per battler? Might be overkill and not needed..
 
-  constructor(playerBefore: Player, participatingBattlers: ParticipatingBattler[] = []) {
-    this.playerBefore = playerBefore;
-    this.participatingBattlers = participatingBattlers;
-    if (participatingBattlers.length == 0) {
-      participatingBattlers.push(new ParticipatingBattler());
-    }
+  private _currentPartyIndex: number;
 
-    this.currentPlayer = this.playerBefore.clone();
-    this._currentBattlerIndex = 0;
-    this.currentBadgeBoosts = this.getDefaultBadgeBoosts();
-    this.currentStages = new Stages();
+  constructor(battle: RouteBattle, player: Player) {
+    this.battle = battle;
+    this.player = player;
+    this.nextPlayer = this.player.clone();
+
+    this.reset();
+  }
+
+  public clearActions() {
+    this.actions = [];
+  }
+
+  public addAction(action: AAction) {
+    this.actions.push(action);
+  }
+
+  public apply(opponentIndex: number) {
+    // TODO
+    this.actions.forEach(action => {
+      action.applyAction(this.nextPlayer, this.battle); // TODO: pass "this"
+    });
   }
 
   private getDefaultBadgeBoosts(): BadgeBoosts {
     let bb = new BadgeBoosts();
-    if (this.playerBefore) {
-      let atk = this.playerBefore.hasBadge("attack") ? 1 : 0;
-      let def = this.playerBefore.hasBadge("defense") ? 1 : 0;
-      let spd = this.playerBefore.hasBadge("speed") ? 1 : 0;
-      let spc = this.playerBefore.hasBadge("special") ? 1 : 0;
+    if (this.player) {
+      let atk = this.player.hasBadge("attack") ? 1 : 0;
+      let def = this.player.hasBadge("defense") ? 1 : 0;
+      let spd = this.player.hasBadge("speed") ? 1 : 0;
+      let spc = this.player.hasBadge("special") ? 1 : 0;
       bb.setValues(atk, def, spd, spc);
     }
     return bb;
   }
 
-  public getBattlerBefore(partyIndex: number) {
-    return this.playerBefore.team[partyIndex];
+  public swapBattler(partyIndex: number) {
+    this._currentPartyIndex = partyIndex;
+    this.badgeBoosts = this.getDefaultBadgeBoosts();
+    this.stages = new Stages();
   }
 
-  public updateBoostsAndStages(previousState: BattleState) {
-    // TODO: cont
-    if (previousState.getBattlerBefore(this._currentBattlerIndex).level == this.currentBattler.level) {
-      // This is very gen-1 specific? Leaving it this way for now..
-      this.currentBadgeBoosts = previousState.currentBadgeBoosts.clone();
+  public getCompetingBattler(): Battler {
+    return this.nextPlayer.team[this._currentPartyIndex];
+  }
+
+  public getOriginalBattler(partyIndex: number) {
+    return this.player.team[partyIndex];
+  }
+
+  public setEntrants(entrants: BattleEntrant[] = []) {
+    this.entrants = entrants;
+    if (this.entrants.length == 0) {
+      this.entrants.push(new BattleEntrant());
+    } else {
+      // check for doubles
+      let partyIds: number[] = [];
+      entrants.forEach(e => {
+        if (!partyIds.includes(e.partyIndex)) {
+          this.entrants.push(e);
+          partyIds.push(e.partyIndex);
+        }
+      });
+      if (!partyIds.includes(0)) {
+        this.entrants.push(new BattleEntrant(0));
+      }
     }
-    this.currentStages = previousState.currentStages.clone();
   }
 
-  static newFromPreviousState(previousState: BattleState): BattleState {
-    let newState = new BattleState(previousState.currentPlayer);
-    newState._currentBattlerIndex = previousState._currentBattlerIndex;
-    newState.updateBoostsAndStages(previousState);
+  public reset(previousState?: BattleStage) {
+    if (previousState) {
+      this._currentPartyIndex = previousState._currentPartyIndex;
+      if (this.battle.game.info.gen == 1 &&
+        previousState.getOriginalBattler(this._currentPartyIndex).level == this.getOriginalBattler(this._currentPartyIndex).level) {
+        this.badgeBoosts = previousState.badgeBoosts.clone();
+      }
+      this.stages = previousState.stages.clone();
+    } else {
+      this.swapBattler(0);
+    }
+  }
 
-    // TODO: cont
-
+  static newFromPreviousState(previousState: BattleStage): BattleStage {
+    let newState = new BattleStage(previousState.battle, previousState.nextPlayer);
+    newState.reset(previousState);
     return newState;
   }
 }
