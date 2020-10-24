@@ -59,9 +59,10 @@ export class RouteBattleParser extends ARouteActionsParser {
         if (!trainer) {
             throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Please provide a trainer id`, "Parser Error");
         }
-        entry.properties.trainer = trainer;
-        let summary = summ ? summ.join("::").trim() : title;
-        entry.info = { title: summ ? title : "", summary: summary, description: "" };
+        title = title ? title.trim() : "";
+        entry.properties.trainer = trainer.trim();
+        let summary = summ.length > 0 ? summ.join("::").trim() : title;
+        entry.info = { title: summ.length > 0 ? title : "", summary: summary, description: "" };
 
         let actions: ActionJSON[] = [];
         scopedLine.scope.forEach(sl => {

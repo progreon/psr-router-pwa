@@ -99,10 +99,10 @@ export class RouteBattle extends ARouteActionsEntry {
     // 1 Initiate all BattleStages
     this.battleStages.splice(0);
     // this.battleStages.push(new BattleStages(this, player, this.entrants[0]));
-    this.battleStages.push(new BattleStage(this, player));
+    this.battleStages.push(new BattleStage(this, player, 0));
     for (let ti = 1; ti < this.trainer.party.length; ti++) {
       // this.battleStages.push(BattleStages.newFromPreviousState(this.battleStages[ti - 1], this.entrants[1]));
-      this.battleStages.push(BattleStage.newFromPreviousState(this.battleStages[ti - 1]));
+      this.battleStages.push(BattleStage.newFromPreviousState(this.battleStages[ti - 1], ti));
     }
 
     // TODO
@@ -127,10 +127,10 @@ export class RouteBattle extends ARouteActionsEntry {
 
     // TODO: check
     // 3 Execute all actions
-    this.battleStages[0].apply(0);
+    this.battleStages[0].apply();
     for (let ti = 1; ti < this.trainer.party.length; ti++) {
       this.battleStages[ti].reset(this.battleStages[ti - 1]);
-      this.battleStages[ti].apply(ti);
+      this.battleStages[ti].apply();
     }
 
     // this.playersBefore.splice(0);
@@ -152,6 +152,8 @@ export class RouteBattle extends ARouteActionsEntry {
     //     }
     //   });
     // }
+    
+    // TODO: generalise this
     switch (this.trainer.name.toUpperCase()) {
       case "BROCK":
         player.addBadge("attack");
@@ -170,18 +172,18 @@ export class RouteBattle extends ARouteActionsEntry {
     return player;
   }
 
-  public getActualBadgeBoosts(): BadgeBoosts {
-    if (this.playerBefore) {
-      // Only apply badge boosts when the player has the badge
-      let atk = this.playerBefore.hasBadge("attack") ? 1 : 0;
-      let def = this.playerBefore.hasBadge("defense") ? 1 : 0;
-      let spd = this.playerBefore.hasBadge("speed") ? 1 : 0;
-      let spc = this.playerBefore.hasBadge("special") ? 1 : 0;
-      return new BadgeBoosts().setValues(atk, def, spd, spc);
-    } else {
-      return new BadgeBoosts();
-    }
-  }
+  // public getActualBadgeBoosts(): BadgeBoosts {
+  //   if (this.playerBefore) {
+  //     // Only apply badge boosts when the player has the badge
+  //     let atk = this.playerBefore.hasBadge("attack") ? 1 : 0;
+  //     let def = this.playerBefore.hasBadge("defense") ? 1 : 0;
+  //     let spd = this.playerBefore.hasBadge("speed") ? 1 : 0;
+  //     let spc = this.playerBefore.hasBadge("special") ? 1 : 0;
+  //     return new BadgeBoosts().setValues(atk, def, spd, spc);
+  //   } else {
+  //     return new BadgeBoosts();
+  //   }
+  // }
 
   getJSONObject(): EntryJSON {
     let obj: EntryJSON = super.getJSONObject();
@@ -222,35 +224,43 @@ export class BattleStage {
   public nextPlayer: Player;
 
   public entrants: BattleEntrant[];
-  private actions: AAction[];
+  private actions: AAction[] = [];
 
   public badgeBoosts: BadgeBoosts;
   public stages: Stages;
   // TODO: BadgeBoosts per battler? Might be overkill and not needed..
 
   private _currentPartyIndex: number;
+  private readonly _opponentIndex: number;
 
-  constructor(battle: RouteBattle, player: Player) {
+  constructor(battle: RouteBattle, player: Player, opponentIndex: number) {
     this.battle = battle;
     this.player = player;
     this.nextPlayer = this.player.clone();
+    this._opponentIndex = opponentIndex;
+    this._pauseDamageCalc = true;
 
+    this.setEntrants();
     this.reset();
   }
 
   public clearActions() {
     this.actions = [];
+    this.updateDamages();
   }
 
   public addAction(action: AAction) {
     this.actions.push(action);
   }
 
-  public apply(opponentIndex: number) {
+  public apply() {
     // TODO
+    this._pauseDamageCalc = true;
     this.actions.forEach(action => {
       action.applyAction(this.nextPlayer, this.battle); // TODO: pass "this"
     });
+    this._pauseDamageCalc = false;
+    this.updateDamages();
   }
 
   private getDefaultBadgeBoosts(): BadgeBoosts {
@@ -296,6 +306,7 @@ export class BattleStage {
         this.entrants.push(new BattleEntrant(0));
       }
     }
+    this.updateDamages();
   }
 
   public reset(previousState?: BattleStage) {
@@ -309,11 +320,23 @@ export class BattleStage {
     } else {
       this.swapBattler(0);
     }
+    this.updateDamages();
   }
 
-  static newFromPreviousState(previousState: BattleStage): BattleStage {
-    let newState = new BattleStage(previousState.battle, previousState.nextPlayer);
+  static newFromPreviousState(previousState: BattleStage, opponentIndex: number): BattleStage {
+    let newState = new BattleStage(previousState.battle, previousState.nextPlayer, opponentIndex);
     newState.reset(previousState);
     return newState;
+  }
+
+  //// DAMAGE CALCULATIONS ////
+  private _pauseDamageCalc = true;
+  private _damageRanges; // TODO: cache the damage ranges here
+  public get damageRanges() { return this._damageRanges; }
+
+  public updateDamages() {
+    if (!this._pauseDamageCalc) {
+      // TODO
+    }
   }
 }

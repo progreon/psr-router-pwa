@@ -10,8 +10,7 @@ Route: Red Any% Glitchless (no IT)
 		Get the PC potion on a race
 		GetP: squirtle:5
 			Choose Squirtle, and give it a 1-character name
-		B: Rival 1 - Bulbasaur
-			Rival 1 :: Tail Whip once, then spam Tackle (use a second Tail Whip if you get Growled turn 1)
+		B: Rival 1 - Bulbasaur :: Rival 1 :: Tail Whip once, then spam Tackle (use a second Tail Whip if you get Growled turn 1)
 
 	S: Route 1
 		Kill a Lv. 2-3 Rattata or Lv. 2-3 Pidgey using Tackle. You need the experience to get Bubble for Brock
@@ -36,31 +35,32 @@ Route: Red Any% Glitchless (no IT)
 		GetI: ANTIDOTE
 		GetI: POTION
 		Heal to 10+ HP for Weedle Guy
-		B: Viridian Forest - BugCatcher 3
-			Weedle Guy :: Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion
+		B: Viridian Forest - BugCatcher 3 :: Weedle Guy :: Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion
+
 		Menu: After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary
 			SwapP: 1 2
 			This: is a description
 			Use: POTION, ?, 2 :: This is also a description
 			Use: ANTIDOTE ? 2
 
-	S: Pewter Gym
-		Save before Brock
-		B: Brock :: 0:0,1 1:0,1
-			Bubble x2-3, Bubble x2-3
-			Immediately switch to Squirtle
-			Geodude: Bubble x2-3
-			Switch to Nidoran after killing Geodude, then immediately switch to Squirtle
-			Onix: Bubble x2-3. If Onix uses Bide on the turn you switch to Squirtle, use Tail Whip twice, then Bubble
-			Onix does 6 damage with Tackle
-		GetI: TM_34
-			TEMP: You get this item from Brock
-
 	S: Pewter City
 		Go to the mart
-		Change the battle style option from SHIFT to SET
 		Shop: Buy 8 Potions
 			8 POTION
+		S: Pewter Gym
+			Save before Brock
+			B: Brock :: Bubble x2-3, Bubble x2-3
+				Opp: 1 :: 2 1
+					Immediately switch to Squirtle
+					Bubble x2-3
+				Switch to Nidoran after killing Geodude
+				Opp: 2 :: 2 1
+					Immediately switch to Squirtle
+					Bubble x2-3. If Onix uses Bide on the turn you switch to Squirtle, use Tail Whip twice, then Bubble
+					Onix does 6 damage with Tackle
+			GetI: TM_34
+				TEMP: You get this item from Brock
+		Change the battle style option from SHIFT to SET and go to route 3
 
 	S: Route 3
 		You need to use one fewer Horn Attack than what's listed below, so finish enemies with Tackle when it will kill
@@ -94,8 +94,7 @@ Route: Red Any% Glitchless (no IT)
 		GetI: MOON_STONE
 		GetP: Paras:10
 			TEMP: getting paras
-		B: Mt. Moon B2F - Rocket 1
-			Rocket :: HA x2 + PS, HA x2
+		B: Mt. Moon B2F - Rocket 1 :: Rocket :: HA x2 + PS, HA x2
 			Zubat does 6-8 with Leech Life (10-12 after 1 Tail Whip). Consider healing or switching if you're at low HP or confused
 		Menu: One tile before the Super Nerd: use the Rare Candy to reach L16 and evolve, teach Water Gun over Tackle, use the Moon Stone, teach Mega Punch over Leer
 			Toss: POKE_BALL 0
@@ -118,8 +117,7 @@ Route: Red Any% Glitchless (no IT)
 			Get the hidden Rare Candy behind the top-left house
 
 	S: Nugget Bridge
-		B: Bridge Rival - Bulbasaur
-			Bridge Rival :: HA x3, HA, MP, MP + HA
+		B: Bridge Rival - Bulbasaur :: Bridge Rival :: HA x3, HA, MP, MP + HA
 			If you get SA'd by Pidgeotto, switch to flier and let it die
 		B: Route 24 - BugCatcher
 			MP x2
@@ -134,20 +132,17 @@ Route: Red Any% Glitchless (no IT)
 			MP (+ PS), HA x2
 			Stay in if SA'd
 		Heal to 15+ HP
-		B: Route 24 - JrTrainerM 1
-			Mankey Guy :: MP + PS if < 8 HP, otherwise HA x2
+		B: Route 24 - JrTrainerM 1 :: Mankey Guy :: MP + PS if < 8 HP, otherwise HA x2
 		B: Route 24 - Rocket
 			MP x2 (HA the Zubat if you have <7 Mega Punch PP)
 		GetI: NUGGET
 			TEMP: this is given by the Rocket
 
 	S: Route 25
-		B: Route 25 - Hiker 3
-			Bottom Hiker :: WG
+		B: Route 25 - Hiker 3 :: Bottom Hiker 1 :: WG
 		B: Route 25 - Lass 1
 			MP, HA x2
-		B: Route 25 - Hiker 2
-			Bottom Hiker :: WG x2, MP (+ HA), WG
+		B: Route 25 - Hiker 2 :: Bottom Hiker 2 :: WG x2, MP (+ HA), WG
 		B: Route 25 - Lass 2
 			MP, HA, MP (HA Oddishes with 0-2 Mega Punch PP)
 			Teach: THRASH WATER_GUN //(TEMP)
@@ -195,8 +190,7 @@ Route: Red Any% Glitchless (no IT)
 		S: SS Anne
 			Heal to 17+ HP
 			Take the left stairs, then go down and right to meet your rival
-			B: Boat Rival - Bulbasaur
-				Boat Rival :: HA x2, MP, Thrash, if you get SA'd or confused, sacrifice your weakest slave
+			B: Boat Rival - Bulbasaur :: Boat Rival :: HA x2, MP, Thrash, if you get SA'd or confused, sacrifice your weakest slave
 			GetI: HM_01
 				Get HM01 from the captain, then leave and head to the gym
 		Go to the mart
@@ -301,8 +295,7 @@ Route: Red Any% Glitchless (no IT)
 		Fly to Lavender (3 down), and walk to the tower
 
 	S: Pokemon Tower
-		B: Tower Rival - Bulbasaur
-			Tower Rival :: TB x2, BB, Thrash
+		B: Tower Rival - Bulbasaur :: Tower Rival :: TB x2, BB, Thrash
 			Ivysaur does 10-12 with Vine Whip
 		B: Pokémon Tower 4F - Channeler 2
 			Rock Slide x2
@@ -354,8 +347,7 @@ Route: Red Any% Glitchless (no IT)
 		Take the teleporter to 3F
 		Walk right, then up, then open the door to your left, and take the teleporter to 7F
 		Once on 7F, walk one step up, then left to meet your rival
-		B: Silph Rival - Bulbasaur
-			Silph Rival :: X Acc, X Speed, Drill x5
+		B: Silph Rival - Bulbasaur :: Silph Rival :: X Acc, X Speed, Drill x5
 		Menu: TEMP: should be menu in fight
 			Use: X_ACCURACY
 			Use: X_SPEED
@@ -367,8 +359,7 @@ Route: Red Any% Glitchless (no IT)
 			X Acc, BB, Drill x2. Use Ether turn 1 if you need damage
 		Menu: TEMP: should be menu in fight
 			Use: X_ACCURACY
-		B: Silph Co. 11F - Giovanni
-			Silph Gio :: X Acc, Drill x2, BB, Drill
+		B: Silph Co. 11F - Giovanni :: Silph Gio :: X Acc, Drill x2, BB, Drill
 		Menu: TEMP: should be menu in fight
 			Use: X_ACCURACY
 		Backtrack to 3F, then take the elevator to 10F
@@ -417,10 +408,12 @@ Route: Red Any% Glitchless (no IT)
 			Hug the east wall, then the north wall, then walk down into the Juggler's vision
 			B: Fuchsia Gym - Juggler 2
 				EQ, EQ + TB
-			B: Koga :: 0:0 1:0 2:0
-				EQ x3, then use an Elixer on Weezing (to stall for selfdestruct)
-				If Koga uses an X Attack, stall with flute
-				The goal is to die to Selfdestruct, but it's OK if you don't
+			B: Koga :: EQ x3, then use an Elixer on Weezing (to stall for selfdestruct)
+				EQ x3
+				Opp: 4 :: *1
+					Use: Elixer :: to stall for selfdestruct
+					If Koga uses an X Attack, stall with flute
+					The goal is to die to Selfdestruct, but it's OK if you don't
 		Menu: TEMP: should be menu in fight
 			Use: ELIXER
 		Menu: Revive with candies and bike to the Warden's house
@@ -492,8 +485,7 @@ Route: Red Any% Glitchless (no IT)
 			Use: BICYCLE
 
 	S: Route 22
-		B: Viridian Rival - Bulbasaur
-			Viridian Rival :: X Acc, X Speed, Blizzard (+Blizzard), Blizzard, TB, EQ x2, Drill
+		B: Viridian Rival - Bulbasaur :: Viridian Rival :: X Acc, X Speed, Blizzard (+Blizzard), Blizzard, TB, EQ x2, Drill
 		Menu: TEMP: this is done in the battle
 			Use: X_ACCURACY
 			Use: X_SPEED 2
@@ -551,8 +543,7 @@ Route: Red Any% Glitchless (no IT)
 			Use: X_SPEED
 		Menu: Heal to 55+ HP
 			Use: POTION
-		B: Champion - Bulbasaur
-			Champion :: X Speed, X Acc, Drill x6
+		B: Champion - Bulbasaur :: Champion :: X Speed, X Acc, Drill x6
 			If Pidgeot charges Sky Attack on turn 1, use a Full Restore
 		Menu: TEMP: this is done in the battle
 			Use: X_SPEED

@@ -5,7 +5,6 @@ import { ScopedLine } from "../ScopedLine";
 import * as Util from '../../../psr-router-util';
 import { RouteBattleParser } from "../RouteBattleParser";
 
-// TODO replace "shared/shareExp" with "??" to indicate it means party members who join the battle
 /**
  * lines:
  * Opp: <opp index> [:: [*]<party index:1> [[*]<party index> [..]]]
