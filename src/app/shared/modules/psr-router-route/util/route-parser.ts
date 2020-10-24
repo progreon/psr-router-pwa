@@ -43,7 +43,10 @@ function _PARSE1_getFileLines(routeText: string): ParserLine[] {
       d++;
 
     let ss = line.indexOf('//');
-    line = ss < 0 ? line.trim() : line.substr(0, ss).trim(); // comments like these work now!
+    if (ss == 0 || line.charAt(ss - 1) == "\t" || line.charAt(ss - 1) == " ") {
+      line = line.substr(0, ss); // comments like these work now! (if it's at the beginning of a line, or after a space or tab)
+    }
+    line = line.trim();
     if (line !== "") {
       fileLines.push(new ParserLine(d, line, l));
     }
