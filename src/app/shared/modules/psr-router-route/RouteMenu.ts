@@ -54,7 +54,10 @@ export class RouteMenu extends ARouteActionsEntry {
   apply(player?: Model.Player): Model.Player {
     player = super.apply(player);
 
-    this.actions.forEach(action => player = action.applyAction(player, this));
+    this.actions.forEach(action => {
+      action.applyAction(player);
+      action.messages.forEach(m => this.addMessage(m));
+    });
 
     super._playerAfter = player;
     return player;

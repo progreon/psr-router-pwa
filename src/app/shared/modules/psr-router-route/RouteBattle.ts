@@ -128,9 +128,11 @@ export class RouteBattle extends ARouteActionsEntry {
     // TODO: check
     // 3 Execute all actions
     this.battleStages[0].apply();
+    this.battleStages[0].messages.forEach(this.addMessage);
     for (let ti = 1; ti < this.trainer.party.length; ti++) {
       this.battleStages[ti].reset(this.battleStages[ti - 1]);
       this.battleStages[ti].apply();
+      this.battleStages[ti].messages.forEach(m => this.addMessage(m));
     }
 
     // this.playersBefore.splice(0);
@@ -152,7 +154,7 @@ export class RouteBattle extends ARouteActionsEntry {
     //     }
     //   });
     // }
-    
+
     // TODO: generalise this
     switch (this.trainer.name.toUpperCase()) {
       case "BROCK":
@@ -244,6 +246,8 @@ export class BattleStage {
     this.reset();
   }
 
+  public get messages() { return this.actions.map(a => a.messages).reduce((prev, curr) => prev.concat(curr), []); }
+
   public clearActions() {
     this.actions = [];
     this.updateDamages();
@@ -257,7 +261,7 @@ export class BattleStage {
     // TODO
     this._pauseDamageCalc = true;
     this.actions.forEach(action => {
-      action.applyAction(this.nextPlayer, this.battle); // TODO: pass "this"
+      action.applyAction(this.nextPlayer, this);
     });
     this._pauseDamageCalc = false;
     this.updateDamages();

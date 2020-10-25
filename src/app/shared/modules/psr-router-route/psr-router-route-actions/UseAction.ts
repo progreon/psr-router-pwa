@@ -4,6 +4,7 @@ import { RouteEntry } from '..';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
+import { BattleStage } from '../RouteBattle';
 
 export class UseAction extends AAction {
     public static readonly ACTION_TYPE: string = "Use";
@@ -22,11 +23,12 @@ export class UseAction extends AAction {
         return UseAction.ACTION_TYPE;
     }
 
-    public applyAction(player: Model.Player, entry: RouteEntry): Model.Player {
+    public applyAction(player: Model.Player, battleStage?: BattleStage): void {
+        super.applyAction(player, battleStage);
         if (!this.item) {
-            entry.addMessage(new RouterMessage("No item defined", RouterMessage.Type.Error));
+            this.addMessage(new RouterMessage("No item defined", RouterMessage.Type.Error));
             this.actionString = "[Use error]";
-            return player;
+            return;
         }
         this.actionString = `Use ${this.count == '0' ? "all " : ""}${this.item.name}`;
         if (+this.count > 1) {
@@ -34,15 +36,15 @@ export class UseAction extends AAction {
         }
         if (this.item.isUsedOnPokemon()) {
             if (!player.team[this.partyIndex]) {
-                entry.addMessage(new RouterMessage("Party index out of range: " + this.partyIndex, RouterMessage.Type.Error));
-                return player;
+                this.addMessage(new RouterMessage("Party index out of range: " + this.partyIndex, RouterMessage.Type.Error));
+                return;
             }
             this.actionString = `${this.actionString} on ${player.team[this.partyIndex]}`;
             if (this.item.isUsedOnMove()) {
                 if (this.moveIndex >= 0 && this.moveIndex < player.team[this.partyIndex].moveset.length) {
                     this.actionString = `${this.actionString}, on ${player.team[this.partyIndex].moveset[this.moveIndex]}`;
                 } else {
-                    entry.addMessage(new RouterMessage("Move index out of range: " + this.moveIndex, RouterMessage.Type.Error));
+                    this.addMessage(new RouterMessage("Move index out of range: " + this.moveIndex, RouterMessage.Type.Error));
                 }
             }
         }
@@ -59,9 +61,8 @@ export class UseAction extends AAction {
             if (i == +count) result = true;
         }
         if (!result) {
-            entry.addMessage(new RouterMessage("Unable to use " + this.item.toString() + (+this.count > 1 ? this.count + " times" : "") + (!!this.item.type && " on " + player.team[this.partyIndex].toString() || " here") + ", do you have it?", RouterMessage.Type.Error));
+            this.addMessage(new RouterMessage("Unable to use " + this.item.toString() + (+this.count > 1 ? this.count + " times" : "") + (!!this.item.type && " on " + player.team[this.partyIndex].toString() || " here") + ", do you have it?", RouterMessage.Type.Error));
         }
-        return player;
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {

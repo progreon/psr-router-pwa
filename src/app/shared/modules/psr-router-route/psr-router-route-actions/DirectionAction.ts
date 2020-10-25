@@ -1,8 +1,8 @@
 // imports
-import { RouteEntry } from '..';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
+import { BattleStage } from '../RouteBattle';
 
 /**
  * @todo cover multiline description? (with indentations)
@@ -20,8 +20,8 @@ export class DirectionAction extends AAction {
         return DirectionAction.ACTION_TYPE;
     }
 
-    public applyAction(player: Model.Player, entry: RouteEntry): Model.Player {
-        return player;
+    public applyAction(player: Model.Player, battleStage?: BattleStage): void {
+        super.applyAction(player, battleStage);
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {

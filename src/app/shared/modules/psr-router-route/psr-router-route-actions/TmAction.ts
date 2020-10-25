@@ -1,9 +1,9 @@
 // imports
 import { RouterMessage } from '../../psr-router-util';
-import { RouteEntry } from '..';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
+import { BattleStage } from '../RouteBattle';
 
 export class TmAction extends AAction {
     public static readonly ACTION_TYPE: string = "Tm";
@@ -22,10 +22,10 @@ export class TmAction extends AAction {
         return TmAction.ACTION_TYPE;
     }
 
-    public applyAction(player: Model.Player, entry: RouteEntry): Model.Player {
+    public applyAction(player: Model.Player, battleStage?: BattleStage): void {
+        super.applyAction(player, battleStage);
         // TODO
-        entry.addMessage(new RouterMessage("The 'Teach' action is not implemented yet", RouterMessage.Type.Warning));
-        return player;
+        this.addMessage(new RouterMessage("The 'Teach' action is not implemented yet", RouterMessage.Type.Warning));
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {

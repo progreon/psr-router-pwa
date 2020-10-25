@@ -1,15 +1,16 @@
 // TODO: naming?
 // imports
 import { RouterMessage } from '../../psr-router-util';
-import { RouteEntry } from '..';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
+import { BattleStage } from '../RouteBattle';
 
 export class BSettingsAction extends AAction {
     public static readonly ACTION_TYPE: string = "BSettings";
 
     constructor(
+        private game: Model.Game,
         private settings: { key: string, value: string[] }[],
         private partyIndex: number = 0,
         description: string = ""
@@ -22,19 +23,20 @@ export class BSettingsAction extends AAction {
         return BSettingsAction.ACTION_TYPE;
     }
 
-    public applyAction(player: Model.Player, entry: RouteEntry): Model.Player {
+    public applyAction(player: Model.Player, battleStage?: BattleStage): void {
+        super.applyAction(player, battleStage);
         this.settings.forEach(setting => {
             switch (setting.key.toUpperCase()) {
                 case "TEACH":
                     if (setting.value.length != 2) {
-                        entry.addMessage(new RouterMessage(`The '${setting.key}' action requiers 2 values`, RouterMessage.Type.Error));
+                        this.addMessage(new RouterMessage(`The '${setting.key}' action requiers 2 values`, RouterMessage.Type.Error));
                     } else {
-                        let newMove = entry.game.findMoveByName(setting.value[0]);
-                        let oldMove = entry.game.findMoveByName(setting.value[1]);
+                        let newMove = this.game.findMoveByName(setting.value[0]);
+                        let oldMove = this.game.findMoveByName(setting.value[1]);
                         if (!newMove) {
-                            entry.addMessage(new RouterMessage(`Could not find move ${setting.value[0]}`, RouterMessage.Type.Error));
+                            this.addMessage(new RouterMessage(`Could not find move ${setting.value[0]}`, RouterMessage.Type.Error));
                         } else if (!oldMove) {
-                            entry.addMessage(new RouterMessage(`Could not find move ${setting.value[1]}`, RouterMessage.Type.Error));
+                            this.addMessage(new RouterMessage(`Could not find move ${setting.value[1]}`, RouterMessage.Type.Error));
                         } else {
                             this.actionString = ""; // TODO
                             player.team[this.partyIndex].settings.addLevelUpMove(newMove, oldMove);
@@ -42,14 +44,13 @@ export class BSettingsAction extends AAction {
                     }
                     break;
                 default:
-                    entry.addMessage(new RouterMessage(`The '${setting.key}' action is not implemented (yet)`, RouterMessage.Type.Warning));
+                    this.addMessage(new RouterMessage(`The '${setting.key}' action is not implemented (yet)`, RouterMessage.Type.Warning));
             }
         });
-        return player;
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {
-        return new BSettingsAction(obj.properties.settings, obj.properties.partyIndex, obj.description);
+        return new BSettingsAction(game, obj.properties.settings, obj.properties.partyIndex, obj.description);
     }
 
     public getJSONObject(): ActionJSON {

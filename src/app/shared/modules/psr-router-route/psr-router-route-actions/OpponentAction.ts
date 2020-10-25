@@ -1,7 +1,6 @@
 // TODO: naming?
 // imports
 import { RouterMessage } from '../../psr-router-util';
-import { RouteEntry } from '..';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
@@ -10,6 +9,7 @@ import { DirectionAction } from './DirectionAction';
 import { SwapAction } from './SwapAction';
 import { SwapPokemonAction } from './SwapPokemonAction';
 import { UseAction } from './UseAction';
+import { BattleStage } from '../RouteBattle';
 
 // TODO: get these from RouteBattle
 const oppActions: { [key: string]: (obj: ActionJSON, game: Model.Game) => AAction } = {};
@@ -42,15 +42,15 @@ export class OpponentAction extends AAction {
         }
     }
 
-    public applyAction(player: Model.Player, entry: RouteEntry): Model.Player {
+    public applyAction(player: Model.Player, battleStage?: BattleStage): void {
+        super.applyAction(player, battleStage);
         // TODO: before & after player?
         this.actions.forEach(action => {
             if (OpponentAction.oppActions[action.actionType]) {
-                player = action.applyAction(player, entry)
+                action.applyAction(player, battleStage);
             }
         });
-        entry.addMessage(new RouterMessage("The 'Opp' action is not fully implemented yet", RouterMessage.Type.Warning));
-        return player;
+        this.addMessage(new RouterMessage("The 'Opp' action is not fully implemented yet", RouterMessage.Type.Warning));
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {
