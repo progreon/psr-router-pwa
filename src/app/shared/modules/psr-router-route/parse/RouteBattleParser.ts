@@ -64,21 +64,12 @@ export class RouteBattleParser extends ARouteActionsParser {
         let summary = summ.length > 0 ? summ.join("::").trim() : title;
         entry.info = { title: summ.length > 0 ? title : "", summary: summary, description: "" };
 
-        let actions: ActionJSON[] = [];
-        scopedLine.scope.forEach(sl => {
-            let parser = this.parsers[sl.type.toUpperCase()];
-            if (parser) {
-                actions.push(parser.linesToJSON(sl, filename));
-            } else {
-                // TODO: throw exception?
-                console.warn("Unknown action for type", sl.type);
-            }
-        });
-        entry.properties.actions = actions;
         return entry;
     }
 
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {
+        // TODO: test
+        let scopedLine = super.jsonToLines(jsonEntry);
         let line = `${RouteBattle.ENTRY_TYPE}: ${jsonEntry.properties.trainer}`;
         if (jsonEntry.info.title) {
             line = `${line} :: ${jsonEntry.info.title}`;
@@ -86,19 +77,7 @@ export class RouteBattleParser extends ARouteActionsParser {
         if (jsonEntry.info.summary) {
             line = `${line} :: ${jsonEntry.info.summary}`;
         }
-        let scopedLine = new ScopedLine(line);
-
-        let actions: ActionJSON[] = jsonEntry.properties.actions;
-        actions.forEach(action => {
-            let parser = RouteBattleParser.PARSERS[action.type.toUpperCase()];
-            if (parser) {
-                scopedLine.scope.push(parser.jsonToLines(action));
-            } else {
-                // TODO: throw exception?
-                console.warn("Unknown action for type", action.type);
-            }
-        });
-
+        scopedLine.line = line;
         return scopedLine;
     }
 }

@@ -1,10 +1,11 @@
 'use strict';
 
 // imports
-import { RouterMessage, BadgeBoosts, Stages } from '../psr-router-util';
+import { RouterMessage, BadgeBoosts, Stages, Range } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { Game } from '../psr-router-model/Game';
 import { Trainer, Location, Player } from '../psr-router-model/Model';
+import { Battler, Move } from '../psr-router-model/ModelAbstract';
 import { EntryJSON } from './parse/EntryJSON';
 import { ActionJSON } from './parse/actions/ActionJSON';
 
@@ -18,7 +19,6 @@ import { TmAction } from './psr-router-route-actions/TmAction';
 import { TossAction } from './psr-router-route-actions/TossAction';
 import { DirectionAction } from './psr-router-route-actions/DirectionAction';
 import { BSettingsAction } from './psr-router-route-actions/BSettingsAction';
-import { Battler } from '../psr-router-model/ModelAbstract';
 import { OpponentAction } from './psr-router-route-actions/OpponentAction';
 
 const possibleActions: { [key: string]: (obj: ActionJSON, game: Game) => AAction } = {};
@@ -28,6 +28,7 @@ possibleActions[SwapPokemonAction.ACTION_TYPE.toUpperCase()] = SwapPokemonAction
 possibleActions[TmAction.ACTION_TYPE.toUpperCase()] = TmAction.newFromJSONObject;
 possibleActions[TossAction.ACTION_TYPE.toUpperCase()] = TossAction.newFromJSONObject;
 possibleActions[DirectionAction.ACTION_TYPE.toUpperCase()] = DirectionAction.newFromJSONObject;
+possibleActions[OpponentAction.ACTION_TYPE.toUpperCase()] = OpponentAction.newFromJSONObject;
 possibleActions[BSettingsAction.ACTION_TYPE.toUpperCase()] = BSettingsAction.newFromJSONObject;
 
 /**
@@ -128,7 +129,7 @@ export class RouteBattle extends ARouteActionsEntry {
     // TODO: check
     // 3 Execute all actions
     this.battleStages[0].apply();
-    this.battleStages[0].messages.forEach(this.addMessage);
+    this.battleStages[0].messages.forEach(m => this.addMessage(m));
     for (let ti = 1; ti < this.trainer.party.length; ti++) {
       this.battleStages[ti].reset(this.battleStages[ti - 1]);
       this.battleStages[ti].apply();
@@ -232,14 +233,14 @@ export class BattleStage {
   public stages: Stages;
   // TODO: BadgeBoosts per battler? Might be overkill and not needed..
 
+  public readonly opponentIndex: number;
   private _currentPartyIndex: number;
-  private readonly _opponentIndex: number;
 
   constructor(battle: RouteBattle, player: Player, opponentIndex: number) {
     this.battle = battle;
     this.player = player;
     this.nextPlayer = this.player.clone();
-    this._opponentIndex = opponentIndex;
+    this.opponentIndex = opponentIndex;
     this._pauseDamageCalc = true;
 
     this.setEntrants();
@@ -294,8 +295,8 @@ export class BattleStage {
   }
 
   public setEntrants(entrants: BattleEntrant[] = []) {
-    this.entrants = entrants;
-    if (this.entrants.length == 0) {
+    this.entrants = [];
+    if (entrants.length == 0) {
       this.entrants.push(new BattleEntrant());
     } else {
       // check for doubles
@@ -335,12 +336,36 @@ export class BattleStage {
 
   //// DAMAGE CALCULATIONS ////
   private _pauseDamageCalc = true;
-  private _damageRanges; // TODO: cache the damage ranges here
-  public get damageRanges() { return this._damageRanges; }
+  public readonly damageRanges: {
+    entrant: BattleEntrant,
+    playerDR: { move: Move, range: Range, critRange: Range }[],
+    trainerDR: { move: Move, range: Range, critRange: Range }[]
+  }[] = [];
 
   public updateDamages() {
     if (!this._pauseDamageCalc) {
-      // TODO
+      this.damageRanges.splice(0);
+      this.entrants.forEach(entrant => {
+        if (entrant.partyIndex < this.player.team.length) {
+          let b = this.player.team[entrant.partyIndex];
+          let ob = this.battle.trainer.party[this.opponentIndex];
+          let damageRange: {
+            entrant: BattleEntrant,
+            playerDR: { move: Move, range: Range, critRange: Range }[],
+            trainerDR: { move: Move, range: Range, critRange: Range }[]
+          } = { entrant, playerDR: [], trainerDR: [] };
+          this.player.team[entrant.partyIndex].moveset.forEach(move => {
+            let m = this.battle.game.findMoveByName(move);
+            let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, b, ob, this.stages, new Stages(), this.badgeBoosts, new BadgeBoosts());
+            damageRange.playerDR.push({ move: m, range: dr.range, critRange: dr.critRange });
+          });
+          this.battle.trainer.party[this.opponentIndex].moveset.forEach(move => {
+            let m = this.battle.game.findMoveByName(move);
+            let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, ob, b, new Stages(), this.stages, new BadgeBoosts(), this.badgeBoosts);
+            damageRange.trainerDR.push({ move: m, range: dr.range, critRange: dr.critRange });
+          });
+        }
+      });
     }
   }
 }

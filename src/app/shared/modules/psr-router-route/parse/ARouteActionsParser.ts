@@ -29,6 +29,7 @@ export abstract class ARouteActionsParser implements IRouteEntryParser {
                 actions.push(parser.linesToJSON(scopedLine, filename));
             } else {
                 // TODO: throw exception?
+                console.warn("Unknown action for type", scopedLine.type);
             }
         });
 
@@ -42,7 +43,12 @@ export abstract class ARouteActionsParser implements IRouteEntryParser {
         let actions: ActionJSON[] = jsonEntry.properties.actions;
         actions.forEach(action => {
             let parser = this.parsers[action.type.toUpperCase()];
-            scopedLine.scope.push(parser.jsonToLines(action));
+            if (parser) {
+                scopedLine.scope.push(parser.jsonToLines(action));
+            } else {
+                // TODO: throw exception?
+                console.warn("Unknown action for type", action.type);
+            }
         });
 
         return scopedLine;

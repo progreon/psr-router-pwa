@@ -19,7 +19,12 @@ export function SetCurrentRoute(route: Route.Route = null): Route.Route {
   window.app.route = route;
   window.app.game = route ? route.game : null;
   if (route && route.getAllMessages().length == 0) {
-    route.apply();
+    try {
+      route.apply();
+    } catch (e) {
+      console.error(e);
+      window.setTimeout(() => window.alert("Something went wrong while processing the route, please load a new route. Check the console for more details."), 100);
+    }
   }
   return route;
 }

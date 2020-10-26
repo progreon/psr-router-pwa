@@ -9,7 +9,7 @@ import { DirectionAction } from './DirectionAction';
 import { SwapAction } from './SwapAction';
 import { SwapPokemonAction } from './SwapPokemonAction';
 import { UseAction } from './UseAction';
-import { BattleStage } from '../RouteBattle';
+import { BattleEntrant, BattleStage } from '../RouteBattle';
 
 // TODO: get these from RouteBattle
 const oppActions: { [key: string]: (obj: ActionJSON, game: Model.Game) => AAction } = {};
@@ -24,11 +24,11 @@ export class OpponentAction extends AAction {
     public static readonly oppActions: { [key: string]: (obj: ActionJSON, game: Model.Game) => AAction } = oppActions;
 
     constructor(
-        public oppIndex: number,
+        public readonly oppIndex: number,
         private actions: AAction[] = [],
-        description: string = ""
+        public readonly entrants: BattleEntrant[] = []
     ) {
-        super(description);
+        super();
         this.actionString = "The 'Opp' action is not implemented yet";
     }
 
@@ -44,7 +44,9 @@ export class OpponentAction extends AAction {
 
     public applyAction(player: Model.Player, battleStage?: BattleStage): void {
         super.applyAction(player, battleStage);
-        // TODO: before & after player?
+        if (battleStage) {
+            battleStage.setEntrants(this.entrants);
+        }
         this.actions.forEach(action => {
             if (OpponentAction.oppActions[action.actionType]) {
                 action.applyAction(player, battleStage);
@@ -62,13 +64,21 @@ export class OpponentAction extends AAction {
                 actions.push(OpponentAction.oppActions[action.type.toUpperCase()](action, game))
             }
         });
-        // TODO: entrants
-        return new OpponentAction(oppIndex, actions, obj.description);
+        let entrants: { partyIndex: number, faint: boolean }[] = obj.properties.entrants;
+        let oppEntrants: BattleEntrant[] = [];
+        if (entrants && entrants.length > 0) {
+            entrants.forEach(e => oppEntrants.push(new BattleEntrant(e.partyIndex, e.faint)));
+        }
+        return new OpponentAction(oppIndex, actions, oppEntrants);
     }
 
     public getJSONObject(): ActionJSON {
         let obj = new ActionJSON(this.actionType, this.description);
         obj.properties.oppIndex = this.oppIndex;
+        obj.properties.entrants = [];
+        if (this.entrants && this.entrants.length > 0) {
+            this.entrants.forEach(e => obj.properties.entrants.push({ partyIndex: e.partyIndex, faint: e.faint }));
+        }
         this.actions.forEach(action => obj.actions.push(action.getJSONObject()));
         return obj;
     }

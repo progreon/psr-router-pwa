@@ -71,8 +71,9 @@ export class RouteMenuParser extends ARouteActionsParser {
     }
 
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {
-        // TODO
-        let scopedLine = new ScopedLine(RouteMenu.ENTRY_TYPE + ":");
+        // TODO: test
+        let scopedLine = super.jsonToLines(jsonEntry);
+        scopedLine.line = RouteMenu.ENTRY_TYPE + ":";
         return scopedLine;
     }
 }

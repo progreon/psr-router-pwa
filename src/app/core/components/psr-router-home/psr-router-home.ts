@@ -130,9 +130,8 @@ class PsrRouterHome extends PsrRouterPage {
           if (route.getAllMessages().length > 0) {
             let str = route.getAllMessages().map(m => m.toString()).join("\n");
             alert(str);
-          } else {
-            super._navigateTo("router");
           }
+          super._navigateTo("router");
         }).catch(e => {
           fileInput.value = "";
           this._loading = false;

@@ -17,7 +17,7 @@ import { RouteBattleParser } from "../RouteBattleParser";
  * {
  *     type,
  *     properties: {
- *         opponent,
+ *         oppIndex,
  *         entrants: { partyIndex, faint }[]
  *     }
  *     actions
@@ -31,7 +31,7 @@ export class OpponentActionParser implements IActionParser {
         if (isNaN(+oppIndex)) {
             throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Please provide an opponent index`, "Parser Error");
         }
-        entry.properties.opponent = +oppIndex - 1;
+        entry.properties.oppIndex = +oppIndex - 1;
         let entrants: { partyIndex: number, faint?: boolean }[] = [];
         if (battlers) {
             // eg: "0  *1"
@@ -63,7 +63,7 @@ export class OpponentActionParser implements IActionParser {
     }
 
     public jsonToLines(jsonEntry: ActionJSON): ScopedLine {
-        let line = `${jsonEntry.type}: ${+jsonEntry.properties.opponent + 1}`;
+        let line = `${jsonEntry.type}: ${+jsonEntry.properties.oppIndex + 1}`;
         if (jsonEntry.properties.entrants) {
             line = `${line} ::`;
             let entrants: { partyIndex: number, faint?: boolean }[] = jsonEntry.properties.entrants;
