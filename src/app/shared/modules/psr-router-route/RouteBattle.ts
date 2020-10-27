@@ -41,10 +41,7 @@ export class RouteBattle extends ARouteActionsEntry {
   public static readonly ENTRY_TYPE: string = "B";
   public readonly trainer: Trainer;
 
-  // public readonly playersBefore: Player[];
   public readonly battleStages: BattleStage[];
-
-  // private entrants: { [key: number]: BattleEntrant[] } = {};
 
   /**
    *
@@ -56,8 +53,6 @@ export class RouteBattle extends ARouteActionsEntry {
   constructor(game: Game, trainer: Trainer, info: RouteEntryInfo = null, location: Location = null) {
     super(game, info, location);
     this.trainer = trainer;
-    // this.playersBefore = [];
-    // trainer.party.forEach(b => this.playersBefore.push(undefined));
     this.battleStages = [];
   }
 
@@ -65,31 +60,8 @@ export class RouteBattle extends ARouteActionsEntry {
     return RouteBattle.ENTRY_TYPE;
   }
 
-  // public setEntrants(opponentIndex: number, entrants: BattleEntrant[]) {
-  //   this.entrants[opponentIndex] = [];
-
-  //   // check for doubles
-  //   let partyIds: number[] = [];
-  //   entrants.forEach(e => {
-  //     if (!partyIds.includes(e.partyIndex)) {
-  //       this.entrants[opponentIndex].push(e);
-  //       partyIds.push(e.partyIndex);
-  //     }
-  //   });
-  //   if (!partyIds.includes(0)) {
-  //     this.entrants[opponentIndex].push(new BattleEntrant(0));
-  //   }
-  // }
-
   apply(player?: Player): Player {
     player = super.apply(player);
-
-    // prepare the entrants object with defaults (not needed)
-    // for (let i = 0; i < this.trainer.party.length; i++) {
-    //   if (!this.entrants[i]) {
-    //     this.setEntrants(i, [new BattleEntrant()]);
-    //   }
-    // }
 
     // TODO
     // 1 Initiate all BattleStages
@@ -126,7 +98,6 @@ export class RouteBattle extends ARouteActionsEntry {
       this.battleStages[currentOppIndex].addAction(action);
     });
 
-    // TODO: check
     // 3 Execute all actions
     this.battleStages[0].apply();
     this.battleStages[0].messages.forEach(m => this.addMessage(m));
@@ -135,58 +106,25 @@ export class RouteBattle extends ARouteActionsEntry {
       this.battleStages[ti].apply();
       this.battleStages[ti].messages.forEach(m => this.addMessage(m));
     }
-
-    // this.playersBefore.splice(0);
-    // for (let p = 0; p < this.trainer.party.length; p++) {
-    //   this.playersBefore.push(player);
-    //   player = player.clone();
-
-    //   if (shareExp[p] == undefined) shareExp[p] = [];
-    //   let sharedCount = shareExp[p].length;
-    //   shareExp[p].forEach(sh => {
-    //     if (sh >= player.team.length) {
-    //       this.addMessage(new RouterMessage(`The player doesn't have ${sh + 1} pokemon to share experience with!`, RouterMessage.Type.Error));
-    //     } else {
-    //       // Only evolve at the end of the battle
-    //       let evoBattler = player.team[sh].defeatBattler(this.trainer.party[p], sharedCount);
-    //       if (p + 1 == this.trainer.party.length) {
-    //         player.team[sh] = evoBattler;
-    //       }
-    //     }
-    //   });
-    // }
+    this._playerAfter = this.battleStages[this.battleStages.length - 1].nextPlayer;
 
     // TODO: generalise this
     switch (this.trainer.name.toUpperCase()) {
       case "BROCK":
-        player.addBadge("attack");
+        this._playerAfter.addBadge("attack");
         break;
       case "LTSURGE":
-        player.addBadge("defense");
+        this._playerAfter.addBadge("defense");
         break;
       case "KOGA":
-        player.addBadge("speed");
+        this._playerAfter.addBadge("speed");
         break;
       case "BLAINE":
-        player.addBadge("special");
+        this._playerAfter.addBadge("special");
         break;
     }
-    this._playerAfter = player;
-    return player;
+    return this._playerAfter;
   }
-
-  // public getActualBadgeBoosts(): BadgeBoosts {
-  //   if (this.playerBefore) {
-  //     // Only apply badge boosts when the player has the badge
-  //     let atk = this.playerBefore.hasBadge("attack") ? 1 : 0;
-  //     let def = this.playerBefore.hasBadge("defense") ? 1 : 0;
-  //     let spd = this.playerBefore.hasBadge("speed") ? 1 : 0;
-  //     let spc = this.playerBefore.hasBadge("special") ? 1 : 0;
-  //     return new BadgeBoosts().setValues(atk, def, spd, spc);
-  //   } else {
-  //     return new BadgeBoosts();
-  //   }
-  // }
 
   getJSONObject(): EntryJSON {
     let obj: EntryJSON = super.getJSONObject();
@@ -239,7 +177,6 @@ export class BattleStage {
   constructor(battle: RouteBattle, player: Player, opponentIndex: number) {
     this.battle = battle;
     this.player = player;
-    this.nextPlayer = this.player.clone();
     this.opponentIndex = opponentIndex;
     this._pauseDamageCalc = true;
 
@@ -263,6 +200,20 @@ export class BattleStage {
     this._pauseDamageCalc = true;
     this.actions.forEach(action => {
       action.applyAction(this.nextPlayer, this);
+    });
+    // Get all the exp
+    this.entrants.forEach(entrant => {
+      if (!entrant.faint) {
+        if (entrant.partyIndex >= this.nextPlayer.team.length) {
+          this.battle.addMessage(new RouterMessage(`The player doesn't have ${entrant.partyIndex + 1} pokemon to share experience with!`, RouterMessage.Type.Error));
+        } else {
+          // Only evolve at the end of the battle
+          let evoBattler = this.nextPlayer.team[entrant.partyIndex].defeatBattler(this.battle.trainer.party[this.opponentIndex], this.entrants.filter(e => !e.faint).length);
+          if (this.opponentIndex + 1 == this.battle.trainer.party.length) {
+            this.nextPlayer.team[entrant.partyIndex] = evoBattler;
+          }
+        }
+      }
     });
     this._pauseDamageCalc = false;
     this.updateDamages();
@@ -303,6 +254,7 @@ export class BattleStage {
       let partyIds: number[] = [];
       entrants.forEach(e => {
         if (!partyIds.includes(e.partyIndex)) {
+          // TODO: do it like this or keep the latest?
           this.entrants.push(e);
           partyIds.push(e.partyIndex);
         }
@@ -316,6 +268,7 @@ export class BattleStage {
 
   public reset(previousState?: BattleStage) {
     if (previousState) {
+      this.player = previousState.nextPlayer;
       this._currentPartyIndex = previousState._currentPartyIndex;
       if (this.battle.game.info.gen == 1 &&
         previousState.getOriginalBattler(this._currentPartyIndex).level == this.getOriginalBattler(this._currentPartyIndex).level) {
@@ -325,6 +278,7 @@ export class BattleStage {
     } else {
       this.swapBattler(0);
     }
+    this.nextPlayer = this.player.clone();
     this.updateDamages();
   }
 
