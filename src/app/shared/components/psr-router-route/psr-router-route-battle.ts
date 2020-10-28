@@ -11,6 +11,7 @@ import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 import 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import 'SharedComponents/psr-router-model/psr-router-battler';
 import { PsrRouterTrainer } from 'SharedComponents/psr-router-trainer/psr-router-trainer';
+import { OpponentAction } from 'App/shared/modules/psr-router-route/psr-router-route-actions/OpponentAction';
 
 // TODO: show messages.
 class PsrRouterRouteBattle extends PsrRouterRouteEntry {
@@ -30,11 +31,28 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   }
 
   _renderExpandingContent() {
-    let dom = super._renderExpandingContent();
     let battleEntry: Route.RouteBattle = <Route.RouteBattle>super.routeEntry;
-    if (!dom) {
-      dom = [];
-    } else {
+    let dom = [];
+    if (battleEntry.actions.length > 0) {
+      battleEntry.actions.forEach(action => {
+        if (action instanceof OpponentAction) {
+          dom.push(html`${action.toString()}`);
+          let oppAction = <OpponentAction>action;
+          let oppDom = [];
+          if (oppAction.actions.length > 0) {
+            oppAction.actions.forEach(a => {
+              oppDom.push(html`<li>${a.toString()}</li>`);
+            });
+            dom.push(html`<ul style="margin: 0px;">${oppDom}</ul>`);
+          }
+          if (oppDom.length == 0 && dom.length < battleEntry.actions.length) dom.push(html`<br>`);
+        } else {
+          dom.push(html`${action.toString()}`);
+          if (dom.length < battleEntry.actions.length) dom.push(html`<br>`);
+        }
+      });
+    }
+    if (dom.length > 0) {
       dom.push(html`<hr>`);
     }
     dom.push(html`

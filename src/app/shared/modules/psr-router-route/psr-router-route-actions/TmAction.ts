@@ -15,7 +15,7 @@ export class TmAction extends AAction {
         description: string = ""
     ) {
         super(description);
-        this.actionString = "The 'Teach' action is not implemented yet";
+        this.actionString = "The 'Tm' action is not implemented yet";
     }
 
     public get actionType(): string {
@@ -25,7 +25,7 @@ export class TmAction extends AAction {
     public applyAction(player: Model.Player, battleStage?: BattleStage): void {
         super.applyAction(player, battleStage);
         // TODO
-        this.addMessage(new RouterMessage("The 'Teach' action is not implemented yet", RouterMessage.Type.Warning));
+        this.addMessage(new RouterMessage("The 'Tm' action is not implemented yet", RouterMessage.Type.Warning));
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {

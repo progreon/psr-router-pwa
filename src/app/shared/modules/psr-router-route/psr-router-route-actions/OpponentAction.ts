@@ -25,11 +25,11 @@ export class OpponentAction extends AAction {
 
     constructor(
         public readonly oppIndex: number,
-        private actions: AAction[] = [],
+        public readonly actions: AAction[] = [],
         public readonly entrants: BattleEntrant[] = []
     ) {
         super();
-        this.actionString = "The 'Opp' action is not implemented yet";
+        this.actionString = "The 'Opp' action is not fully implemented yet";
     }
 
     public get actionType(): string {
