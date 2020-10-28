@@ -41,8 +41,12 @@ export class Item {
   }
 
   isUsedOnMove(): boolean {
-    return this.type == "TM" // TM's
-          || this.type == "PP_RESTORE" && this.value == "SINGLE"; // ether & max ether
+    return this.isTmOrHm() // TM's
+      || this.type == "PP_RESTORE" && this.value == "SINGLE"; // ether & max ether
+  }
+
+  isTmOrHm() {
+    return this.type == "TM";
   }
 
   equals(item: Item): boolean {

@@ -51,12 +51,12 @@ Route: Red Any% Glitchless (no IT)
 		S: Pewter Gym
 			Save before Brock
 			B: Brock :: Bubble x2-3, Bubble x2-3
-				Opp: 1 :: 2 1
-					Immediately switch to Squirtle
+				Opp: 1
+					SwapP: 2 :: Immediately switch to Squirtle
 					Bubble x2-3
-				Switch to Nidoran after killing Geodude
-				Opp: 2 :: 2 1
-					Immediately switch to Squirtle
+				SwapP: 1 :: Switch to Nidoran after killing Geodude
+				Opp: 2
+					SwapP: 2 :: Immediately switch to Squirtle
 					Bubble x2-3. If Onix uses Bide on the turn you switch to Squirtle, use Tail Whip twice, then Bubble
 					Onix does 6 damage with Tackle
 			GetI: TM_34
@@ -260,7 +260,7 @@ Route: Red Any% Glitchless (no IT)
 		Menu: Upon exiting the house
 			Swap: 2 TM_07
 			Use: SUPER_REPEL
-			Tm: TM_48
+			Tm: TM_48 1 1
 			Swap: 4 X_ACCURACY
 			Tm: HM_02 3
 		Fly to Lavender (3 down), and walk to the tower
@@ -279,7 +279,7 @@ Route: Red Any% Glitchless (no IT)
 		GetI: RARE_CANDY
 			Get the Rare Candy that blocks the way
 		Menu: Teach TM07 (Horn Drill) over Rock Slide
-			Tm: TM_07
+			Tm: TM_07 1 1
 		Enter the Ghost battle and escape using the Poke Doll
 		Menu: During the Ghost battle (TEMP: should be menu in fight)
 			Swap: 4 SUPER_REPEL

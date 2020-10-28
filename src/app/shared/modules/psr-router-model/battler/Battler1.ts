@@ -143,6 +143,7 @@ export class Battler1 extends Battler {
         success = false;
       }
     }
+    this._updateCurrentStats();
     return success;
   }
 
@@ -155,6 +156,7 @@ export class Battler1 extends Battler {
         success = false;
       }
     }
+    this._updateCurrentStats();
     return success;
   }
 
@@ -167,6 +169,7 @@ export class Battler1 extends Battler {
         success = false;
       }
     }
+    this._updateCurrentStats();
     return success;
   }
 
@@ -179,6 +182,7 @@ export class Battler1 extends Battler {
         success = false;
       }
     }
+    this._updateCurrentStats();
     return success;
   }
 
@@ -191,6 +195,7 @@ export class Battler1 extends Battler {
         success = false;
       }
     }
+    this._updateCurrentStats();
     return success;
   }
 

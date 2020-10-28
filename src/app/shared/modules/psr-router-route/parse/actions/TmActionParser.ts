@@ -31,10 +31,10 @@ export class TmActionParser implements IActionParser {
         let tm: string, partyIndex: number, moveIndex: number;
         tm = values[0];
         if (values.length > 1) {
-            if (isNaN(+values[1]) || +values[1] < 1) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Index must be a number > 0`, "Parser Error");
+            if (isNaN(+values[1]) || +values[1] < 1) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Party index must be a number > 0`, "Parser Error");
             partyIndex = +values[1] - 1;
             if (values.length > 2) {
-                if (isNaN(+values[2]) || +values[2] < 1) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Index must be a number > 0`, "Parser Error");
+                if (isNaN(+values[2]) || +values[2] < 1) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Move index must be a number > 0`, "Parser Error");
                 moveIndex = +values[2] - 1;
             }
         }

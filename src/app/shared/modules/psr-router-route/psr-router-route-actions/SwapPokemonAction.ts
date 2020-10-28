@@ -22,10 +22,23 @@ export class SwapPokemonAction extends AAction {
 
     public applyAction(player: Model.Player, battleStage?: BattleStage): void {
         super.applyAction(player, battleStage);
-        // TODO: also handle in battle swapping
         if (this.partyIndex1 >= 0 && this.partyIndex1 < player.team.length && this.partyIndex2 >= 0 && this.partyIndex2 < player.team.length) {
-            this.actionString = `Swap ${player.team[this.partyIndex1]} with ${player.team[this.partyIndex2]}`;
-            player.swapBattlers(this.partyIndex1, this.partyIndex2);
+            if (battleStage) {
+                let currentBattlerIndex = battleStage.currentPartyIndex;
+                if (this.partyIndex2) {
+                    this.addMessage(new RouterMessage("Ignoring second party index...", RouterMessage.Type.Info));
+                }
+                if (this.partyIndex1 == currentBattlerIndex) {
+                    this.addMessage(new RouterMessage("Swapping to the pokemon that's already out does nothing (ignoring)", RouterMessage.Type.Info));
+                    return;
+                } else {
+                    this.actionString = `Swap to ${player.team[this.partyIndex1]}`;
+                    battleStage.swapBattler(this.partyIndex1);
+                }
+            } else {
+                this.actionString = `Swap ${player.team[this.partyIndex1]} with ${player.team[this.partyIndex2]}`;
+                player.swapBattlers(this.partyIndex1, this.partyIndex2);
+            }
         } else {
             this.actionString = "[Swap error]";
             this.addMessage(new RouterMessage("Invalid party indices (ignoring)", RouterMessage.Type.Error));

@@ -178,11 +178,13 @@ export class BattleStage {
 
   public readonly opponentIndex: number;
   private _currentPartyIndex: number;
+  public get currentPartyIndex() { return this._currentPartyIndex; }
 
   constructor(battle: RouteBattle, player: Player, opponentIndex: number) {
     this.battle = battle;
     this.player = player;
     this.opponentIndex = opponentIndex;
+    this._currentPartyIndex = 0;
     this._pauseDamageCalc = true;
 
     this.setEntrants();
@@ -236,10 +238,24 @@ export class BattleStage {
     return bb;
   }
 
-  public swapBattler(partyIndex: number) {
+  public swapBattler(partyIndex: number, letItDie: boolean = false) {
     this._currentPartyIndex = partyIndex;
     this.badgeBoosts = this.getDefaultBadgeBoosts();
     this.stages = new Stages();
+
+    // Check if it's in the entrants list
+    let isInEntrants = false;
+    this.entrants.forEach(e => {
+      if (e.partyIndex == partyIndex) {
+        isInEntrants = true;
+      }
+    });
+    if (!isInEntrants) {
+      // TODO: warning or adding it by itself?
+      // this.addMessage(new RouterMessage(`${player.team[this.partyIndex1]} is not in the entrants list`, RouterMessage.Type.Warning));
+      console.log(`${this.player.team[partyIndex]} is not in the entrants list, adding it...`);
+      this.entrants.push(new BattleEntrant(partyIndex, letItDie));
+    }
   }
 
   public getCompetingBattler(): Battler {
@@ -257,7 +273,7 @@ export class BattleStage {
   public setEntrants(entrants: BattleEntrant[] = []) {
     this.entrants = [];
     if (entrants.length == 0) {
-      this.entrants.push(new BattleEntrant());
+      this.entrants.push(new BattleEntrant(this._currentPartyIndex));
     } else {
       // check for doubles
       let partyIds: number[] = [];
@@ -321,6 +337,7 @@ export class BattleStage {
     if (previousState) {
       this.player = previousState.nextPlayer;
       this._currentPartyIndex = previousState._currentPartyIndex;
+      this.setEntrants();
       if (this.battle.game.info.gen == 1 &&
         previousState.getOriginalBattler(this._currentPartyIndex).level == this.getOriginalBattler(this._currentPartyIndex).level) {
         this.badgeBoosts = previousState.badgeBoosts.clone();

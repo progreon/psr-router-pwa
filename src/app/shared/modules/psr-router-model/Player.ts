@@ -267,7 +267,6 @@ export class Player {
         this.team[partyIndex] = newBattler;
         break;
       case "STAT":
-        // TODO: recalculate stats?
         switch (item.value) {
           case "LV":
             this.team[partyIndex] = this.team[partyIndex].useCandy();

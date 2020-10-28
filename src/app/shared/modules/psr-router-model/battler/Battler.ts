@@ -66,7 +66,6 @@ export abstract class Battler {
   /**
    * Try to learn a TM or HM move.
    * TODO: Move or string?
-   * TODO: (get via game): let canLearn = pokemon.getTMMoves().contains(newMove)
    * @param newMove The TM or HM move
    * @param oldMove
    * @returns Returns true if success.
