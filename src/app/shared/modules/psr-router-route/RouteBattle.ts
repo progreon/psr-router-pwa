@@ -275,6 +275,48 @@ export class BattleStage {
     this.updateDamages();
   }
 
+  public useBattleItem(value: string) {
+    let curS = this._stages;
+    switch (value) {
+      case "X_ATTACK":
+        this._stages.setStages(curS.atk + 1, curS.def, curS.spd, curS.spc);
+        if (this.battle.game.info.gen == 1) {
+          // Apply badge boosts again
+          let curBB = this._badgeBoosts;
+          let defBB = this.getDefaultBadgeBoosts();
+          this._badgeBoosts.setValues(defBB.atk, curBB.def + defBB.def, curBB.spd + defBB.spd, curBB.spc + defBB.spc);
+        }
+        break;
+      case "X_DEFEND":
+        this._stages.setStages(curS.atk, curS.def + 1, curS.spd, curS.spc);
+        if (this.battle.game.info.gen == 1) {
+          // Apply badge boosts again
+          let curBB = this._badgeBoosts;
+          let defBB = this.getDefaultBadgeBoosts();
+          this._badgeBoosts.setValues(curBB.atk + defBB.atk, defBB.def, curBB.spd + defBB.spd, curBB.spc + defBB.spc);
+        }
+        break;
+      case "X_SPEED":
+        this._stages.setStages(curS.atk, curS.def, curS.spd + 1, curS.spc);
+        if (this.battle.game.info.gen == 1) {
+          // Apply badge boosts again
+          let curBB = this._badgeBoosts;
+          let defBB = this.getDefaultBadgeBoosts();
+          this._badgeBoosts.setValues(curBB.atk + defBB.atk, curBB.def + defBB.def, defBB.spd, curBB.spc + defBB.spc);
+        }
+        break;
+      case "X_SPECIAL":
+        this._stages.setStages(curS.atk, curS.def, curS.spd, curS.spc + 1);
+        if (this.battle.game.info.gen == 1) {
+          // Apply badge boosts again
+          let curBB = this._badgeBoosts;
+          let defBB = this.getDefaultBadgeBoosts();
+          this._badgeBoosts.setValues(curBB.atk + defBB.atk, curBB.def + defBB.def, curBB.spd + defBB.spd, defBB.spc);
+        }
+        break;
+    }
+  }
+
   public reset(previousState?: BattleStage) {
     if (previousState) {
       this.player = previousState.nextPlayer;

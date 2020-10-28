@@ -51,11 +51,11 @@ export class UseAction extends AAction {
         if (this.count == "?") {
             this.actionString = `${this.actionString}?`;
         }
-        let result = player.useItem(this.item, this.partyIndex, this.moveIndex);
+        let result = player.useItem(this.item, this.partyIndex, this.moveIndex, battleStage);
         if (result) {
             let i = 1, count = this.count == "0" ? player.getItemCount(this.item) : this.count;
             while (result && i < +count) {
-                result = player.useItem(this.item, this.partyIndex, this.moveIndex);
+                result = player.useItem(this.item, this.partyIndex, this.moveIndex, battleStage);
                 i++;
             }
             if (i == +count) result = true;

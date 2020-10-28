@@ -1,7 +1,7 @@
 import { Item } from "./Item";
 import { Battler } from "./battler/Battler";
-import { Battle } from "./battle/Battle";
 import { EvolutionKey } from "./EvolutionKey";
+import { BattleStage } from "../psr-router-route/RouteBattle";
 
 const MAX_SLOTS = 20;
 const MAX_PC_SLOTS = 50; // TODO
@@ -251,14 +251,14 @@ export class Player {
    * @returns Returns true if success.
    * @todo Finish and test.
    */
-  useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battle: Battle = undefined): boolean {
+  useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battleStage?: BattleStage): boolean {
     // TODO: force usage option (which skips the availability check)
     // let index = this.getItemIndex(item, false); // TODO: temporarily disabled because no GetI implementation yet!
     // if (index < 0) {
     //   return false;
     // } else {
-    if (battle && !item.usableInsideBattle) return false;
-    if (!battle && !item.usableOutsideBattle) return false;
+    if (battleStage && !item.usableInsideBattle) return false;
+    if (!battleStage && !item.usableOutsideBattle) return false;
     switch (item.type) {
       case "STONE":
         // TODO: arg check
@@ -267,17 +267,37 @@ export class Player {
         this.team[partyIndex] = newBattler;
         break;
       case "STAT":
-        // TODO: others & arg check
-        if (item.value == "LV") {
-          this.team[partyIndex] = this.team[partyIndex].useCandy();
-        } else {
-          return false;
+        // TODO: recalculate stats?
+        switch (item.value) {
+          case "LV":
+            this.team[partyIndex] = this.team[partyIndex].useCandy();
+            break;
+          case "HP":
+            return this.team[partyIndex].useHPUp(1);
+          case "ATK":
+            return this.team[partyIndex].useProtein(1);
+          case "DEF":
+            return this.team[partyIndex].useIron(1);
+          case "SPD":
+            return this.team[partyIndex].useCarbos(1);
+          case "SPC":
+            return this.team[partyIndex].useCalcium(1);
+          case "PP":
+            // TODO
+            // return this.team[partyIndex].usePPUp(1);
+          default:
+            return false;
         }
         break;
       case "TM":
         // TODO: arg check
         let oldMove = this.team[partyIndex].moveset[moveIndex];
         if (!this.team[partyIndex].learnTmMove(item, oldMove)) return false;
+        break;
+      case "BATTLE":
+        if (battleStage) {
+          battleStage.useBattleItem(item.value);
+        }
         break;
     }
     // TODO: others?
