@@ -78,12 +78,10 @@ export class RouteBattle extends ARouteActionsEntry {
       this.battleStages.push(BattleStage.newFromPreviousState(this.battleStages[ti - 1], ti));
     }
 
-    // TODO
     // 2 collect all actions for each opponent (put these in BattleStages!)
     // let currentStage = this.battleStages[0];
     let currentOppIndex = 0;
     this.actions.forEach(action => {
-      // TODO
       // 2.1 If OpponentAction & oppIndex < previous oppIndex, ignore & give warning
       if (action instanceof OpponentAction) {
         let oppAction = <OpponentAction>action;
@@ -167,8 +165,15 @@ export class BattleStage {
   public entrants: BattleEntrant[];
   private actions: AAction[] = [];
 
-  public badgeBoosts: BadgeBoosts;
-  public stages: Stages;
+  private _badgeBoosts: BadgeBoosts;
+  public get badgeBoosts() { return this._badgeBoosts; }
+  public set badgeBoosts(value) { this._badgeBoosts = value; this.updateDamages(); }
+  private _stages: Stages;
+  public get stages() { return this._stages; }
+  public set stages(value) { this._stages = value; this.updateDamages(); }
+  private _stagesOpponent: Stages;
+  public get stagesOpponent() { return this._stagesOpponent; }
+  public set stagesOpponent(value) { this._stagesOpponent = value; this.updateDamages(); }
   // TODO: BadgeBoosts per battler? Might be overkill and not needed..
 
   public readonly opponentIndex: number;
@@ -254,7 +259,7 @@ export class BattleStage {
       let partyIds: number[] = [];
       entrants.forEach(e => {
         if (!partyIds.includes(e.partyIndex)) {
-          // TODO: do it like this or keep the latest?
+          // TODO: do it like this or keep the latest? Give warning?
           this.entrants.push(e);
           partyIds.push(e.partyIndex);
         }
@@ -279,6 +284,7 @@ export class BattleStage {
       this.swapBattler(0);
     }
     this.nextPlayer = this.player.clone();
+    this._stagesOpponent = new Stages();
     this.updateDamages();
   }
 
@@ -310,14 +316,15 @@ export class BattleStage {
           } = { entrant, playerDR: [], trainerDR: [] };
           this.player.team[entrant.partyIndex].moveset.forEach(move => {
             let m = this.battle.game.findMoveByName(move);
-            let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, b, ob, this.stages, new Stages(), this.badgeBoosts, new BadgeBoosts());
+            let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, b, ob, this.stages, this.stagesOpponent, this.badgeBoosts, new BadgeBoosts());
             damageRange.playerDR.push({ move: m, range: dr.range, critRange: dr.critRange });
           });
           this.battle.trainer.party[this.opponentIndex].moveset.forEach(move => {
             let m = this.battle.game.findMoveByName(move);
-            let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, ob, b, new Stages(), this.stages, new BadgeBoosts(), this.badgeBoosts);
+            let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, ob, b, this.stagesOpponent, this.stages, new BadgeBoosts(), this.badgeBoosts);
             damageRange.trainerDR.push({ move: m, range: dr.range, critRange: dr.critRange });
           });
+          this.damageRanges.push(damageRange);
         }
       });
     }

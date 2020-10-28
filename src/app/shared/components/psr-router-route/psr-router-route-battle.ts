@@ -87,22 +87,31 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     if (battleEntry.playerBefore) {
       if (battleEntry.playerBefore.team.length > 0) {
         let battle = [];
-        if (!this._battleStateCache) {
-          this._updateBattleStateCache();
-        }
-        for (let obi = 0; obi < this._battleStateCache.length; obi++) {
-          for (let bi = 0; bi < this._battleStateCache[obi].length; bi++) {
-            let b = this._battleStateCache[obi][bi].playerB;
-            let bdr = this._battleStateCache[obi][bi].playerDR;
-            let ob = this._battleStateCache[obi][bi].trainerB;
-            let obdr = this._battleStateCache[obi][bi].trainerDR;
+        battleEntry.battleStages.forEach((battleStage, bsi) => {
+          let ob = battleEntry.trainer.party[bsi];
+          battleStage.damageRanges.forEach(dr => {
+            let b = battleStage.player.team[dr.entrant.partyIndex];
+            let bdr = dr.playerDR;
+            let obdr = dr.trainerDR;
             let movesAttacker = b.moveset.map((strMove, i) => `${strMove}: ${bdr[i].range.toString()} (${bdr[i].critRange.toString()})`);
             let movesDefender = ob.moveset.map((strMove, i) => `${strMove}: ${obdr[i].range.toString()} (${obdr[i].critRange.toString()})`);
-            let battleStage = battleEntry.battleStages[obi];
-            let actualBB = battleStage.badgeBoosts; //battleEntry.getActualBadgeBoosts();
+            let actualBB = battleStage.badgeBoosts;
             let actualStages = battleStage.stages;
+            let opponentStages = battleStage.stagesOpponent;
+
+            // calculate who's the fastest
+            let bSpdRange = b.getBoostedSpd(actualBB.spd, actualStages.spd);
+            let oSpdRange = ob.getBoostedSpd(0, 0); // TODO: stages
+            let bf: string, of: string;
+            if (bSpdRange.containsOneOf(oSpdRange)) {
+              [bf, of] = ["[ST]", "[ST]"];
+            } else if (bSpdRange.max < oSpdRange.min) {
+              [bf, of] = ["", "[F]"];
+            } else {
+              [bf, of] = ["[F]", ""];
+            }
             let movesGrid = html`
-              <div class="table" ?odd="${obi % 2 == 1}">
+              <div class="table" ?odd="${bsi % 2 == 1}">
                 <div class="col">
                   <div>BB</div>
                   <div>atk [< ${actualBB.atk} >]</div>
@@ -112,21 +121,21 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 </div>
                 <div class="col">
                   <div>Stages</div>
-                  <div>atk [< 0 >]</div>
-                  <div>def [< 0 >]</div>
-                  <div>spd [< 0 >]</div>
-                  <div>spc [< 0 >]</div>
+                  <div>atk [< ${actualStages.atk} >]</div>
+                  <div>def [< ${actualStages.def} >]</div>
+                  <div>spd [< ${actualStages.spd} >]</div>
+                  <div>spc [< ${actualStages.spc} >]</div>
                 </div>
                 <div class="bcol">
                   <div class="col">
-                    <div class="click" @click="${this._showBattlerDialog.bind(this, b, actualStages, actualBB, true)}">${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.)</div>
+                    <div class="click" @click="${this._showBattlerDialog.bind(this, b, actualStages, actualBB, true)}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.) ${bf}</div>
                     <div>${movesAttacker[0] || "-"}</div>
                     <div>${movesAttacker[1] || "-"}</div>
                     <div>${movesAttacker[2] || "-"}</div>
                     <div>${movesAttacker[3] || "-"}</div>
                   </div>
                   <div class="col">
-                    <div class="click" @click="${this._showBattlerDialog.bind(this, ob, null, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</div>
+                    <div class="click" @click="${this._showBattlerDialog.bind(this, ob, null, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.) ${of}</div>
                     <div>${movesDefender[0] || "-"}</div>
                     <div>${movesDefender[1] || "-"}</div>
                     <div>${movesDefender[2] || "-"}</div>
@@ -135,16 +144,16 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 </div>
                 <div class="col">
                   <div>Stages</div>
-                  <div>atk [< 0 >]</div>
-                  <div>def [< 0 >]</div>
-                  <div>spd [< 0 >]</div>
-                  <div>spc [< 0 >]</div>
+                  <div>atk [< ${opponentStages.atk} >]</div>
+                  <div>def [< ${opponentStages.def} >]</div>
+                  <div>spd [< ${opponentStages.spd} >]</div>
+                  <div>spc [< ${opponentStages.spc} >]</div>
                 </div>
               </div>
             `;
             battle.push(movesGrid);
-          }
-        }
+          });
+        });
         dom.push(battle);
       } else {
         dom.push(html`<div>You don't have a team to battle with! (or maybe you blacked out? :Kappa:)</div>`);
@@ -159,47 +168,9 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     return true;
   }
 
-  private _battleStateCache: {
-    playerB: Battler,
-    playerDR: { range: Range, critRange: Range }[],
-    trainerB: Battler,
-    trainerDR: { range: Range, critRange: Range }[]
-  }[][];
-
   constructor(routeEntry = undefined) {
     super(routeEntry);
-    this._battleStateCache;
     // TODO
-  }
-
-  _updateBattleStateCache() {
-    // Update damage range cache
-    this._battleStateCache = [];
-    let battleEntry: Route.RouteBattle = <Route.RouteBattle>super.routeEntry;
-
-    if (battleEntry.playerBefore && battleEntry.playerBefore.team.length > 0) {
-      for (let obi = 0; obi < battleEntry.trainer.party.length; obi++) {
-        this._battleStateCache.push([]);
-        let ob = battleEntry.trainer.party[obi];
-        let battleStage = battleEntry.battleStages[obi];
-        let actualBB = battleStage.badgeBoosts;
-        let actualStages = battleStage.stages;
-        let player = battleStage.player;
-        let playerBattlers: Battler[] = [];
-        battleStage.entrants.forEach(be => playerBattlers.push(player.team[be.partyIndex]));
-        // if (battleEntry.shareExp) {
-        //   battleEntry.shareExp[obi].forEach(pli => player.team[pli] && playerBattlers.push(player.team[pli]));
-        // } else {
-        //   playerBattlers.push(player.team[0]);
-        // }
-        for (let bi = 0; bi < playerBattlers.length; bi++) {
-          let b = playerBattlers[bi];
-          this._battleStateCache[obi].push({ playerB: b, playerDR: [], trainerB: ob, trainerDR: [] });
-          b.moveset.forEach(strMove => this._battleStateCache[obi][bi].playerDR.push(battleEntry.game.engine.getDamageRange(battleEntry.game, strMove, b, ob, actualStages, new Stages(), actualBB, new BadgeBoosts())));
-          ob.moveset.forEach(strMove => this._battleStateCache[obi][bi].trainerDR.push(battleEntry.game.engine.getDamageRange(battleEntry.game, strMove, ob, b, new Stages(), actualStages, new BadgeBoosts(), actualBB)));
-        }
-      }
-    }
   }
 
   _getTitle(): string {
