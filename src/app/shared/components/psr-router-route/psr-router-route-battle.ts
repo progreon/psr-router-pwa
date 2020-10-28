@@ -34,7 +34,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     let battleEntry: Route.RouteBattle = <Route.RouteBattle>super.routeEntry;
     let dom = [];
     if (battleEntry.actions.length > 0) {
-      battleEntry.actions.forEach(action => {
+      battleEntry.actions.forEach((action, ai) => {
         if (action instanceof OpponentAction) {
           dom.push(html`${action.toString()}`);
           let oppAction = <OpponentAction>action;
@@ -45,10 +45,10 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
             });
             dom.push(html`<ul style="margin: 0px;">${oppDom}</ul>`);
           }
-          if (oppDom.length == 0 && dom.length < battleEntry.actions.length) dom.push(html`<br>`);
+          if (oppDom.length == 0 && ai < battleEntry.actions.length) dom.push(html`<br>`);
         } else {
           dom.push(html`${action.toString()}`);
-          if (dom.length < battleEntry.actions.length) dom.push(html`<br>`);
+          if (ai < battleEntry.actions.length) dom.push(html`<br>`);
         }
       });
     }

@@ -29,7 +29,6 @@ export class OpponentAction extends AAction {
         public readonly entrants: BattleEntrant[] = []
     ) {
         super();
-        this.actionString = "The 'Opp' action is not fully implemented yet";
     }
 
     public get actionType(): string {
@@ -47,12 +46,13 @@ export class OpponentAction extends AAction {
         if (battleStage) {
             battleStage.setEntrants(this.entrants);
         }
+        this.actionString = `On ${battleStage.getTrainerBattler().toString()} (${this.oppIndex + 1})`;
         this.actions.forEach(action => {
-            if (OpponentAction.oppActions[action.actionType]) {
+            if (OpponentAction.oppActions[action.actionType.toUpperCase()]) {
                 action.applyAction(player, battleStage);
+                action.messages.forEach(m => this.addMessage(m));
             }
         });
-        this.addMessage(new RouterMessage("The 'Opp' action is not fully implemented yet", RouterMessage.Type.Warning));
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {

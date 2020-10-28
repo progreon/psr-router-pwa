@@ -250,6 +250,10 @@ export class BattleStage {
     return this.player.team[partyIndex];
   }
 
+  public getTrainerBattler() {
+    return this.battle.trainer.party[this.opponentIndex];
+  }
+
   public setEntrants(entrants: BattleEntrant[] = []) {
     this.entrants = [];
     if (entrants.length == 0) {

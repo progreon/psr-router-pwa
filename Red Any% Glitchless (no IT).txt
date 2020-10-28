@@ -129,7 +129,7 @@ Route: Red Any% Glitchless (no IT)
 		B: Route 25 - Lass 1 :: MP, HA x2
 		B: Route 25 - Hiker 2 :: Bottom Hiker 2 :: WG x2, MP (+ HA), WG
 		B: Route 25 - Lass 2 :: MP, HA, MP (HA Oddishes with 0-2 Mega Punch PP)
-			BSettings: 1
+			BSettings: 1 :: Nidoking levels to Lv. 23 here, teach Thrash over Water Gun
 				Teach: THRASH WATER_GUN
 		GetI: ETHER
 			Get the hidden Ether
