@@ -28,7 +28,7 @@ export class TmAction extends AAction {
             this.actionString = "[TM error]";
             return;
         }
-        this.actionString = `Teach ${this.tm.name}`;
+        this.actionString = `Teach ${this.tm.name} (${this.tm.value})`;
         if (!player.team[this.partyIndex]) {
             this.addMessage(new RouterMessage("Party index out of range: " + this.partyIndex, RouterMessage.Type.Error));
             return;
@@ -38,6 +38,11 @@ export class TmAction extends AAction {
             this.actionString = `${this.actionString} over ${player.team[this.partyIndex].moveset[this.moveIndex]}`;
         } else if (this.moveIndex >= 0) {
             this.addMessage(new RouterMessage("Move index out of range: " + this.moveIndex, RouterMessage.Type.Error));
+            return;
+        }
+        let result = player.useItem(this.tm, this.partyIndex, this.moveIndex, battleStage);
+        if (!result) {
+            this.addMessage(new RouterMessage("Unable to teach " + this.tm.toString() + " to " + player.team[this.partyIndex].toString() + " here, do you have it?", RouterMessage.Type.Error));
         }
     }
 

@@ -98,9 +98,9 @@ Route: Red Any% Glitchless (no IT)
 			Toss: POKE_BALL 0
 			Toss: ANTIDOTE 0
 			Use: RARE_CANDY 1 1
-			Use: TM_12 1 1 2
+			Tm: TM_12 1 2
 			Use: MOON_STONE 1 1
-			Use: TM_01 1 1 1
+			Tm: TM_01 1 1
 		B: Mt. Moon B2F - SuperNerd :: HA x2, MP (+PS), MP + HA
 		GetI: HELIX_FOSSIL
 			Choose the Helix Fossil
@@ -180,9 +180,9 @@ Route: Red Any% Glitchless (no IT)
 			4 REPEL
 			4 PARLYZ_HEAL
 		Menu: On the tile before the Cut bush
-			Use: TM_11 1 1 4
-			Use: HM_01 1 4
-			Use: TM_28 1 4
+			Tm: TM_11 1 4
+			Tm: HM_01 4
+			Tm: TM_28 4
 		Cut the bush
 		RNG manipulate the trash cans puzzle by replicating the inputs in this video: https://www.youtube.com/watch?v=AqY-8Wa2q_4
 			The manip has a 3/60 chance to fail
@@ -198,7 +198,7 @@ Route: Red Any% Glitchless (no IT)
 			Get the Bicycle from the bike shop
 		Menu: After leaving the shop
 			Swap: 1 BICYCLE
-			Use: TM_24 1 1 3
+			Tm: TM_24 1 3
 			Use: BICYCLE
 		Get on the bike and head east to Route 9, cutting the two bushes in your way
 
@@ -340,7 +340,7 @@ Route: Red Any% Glitchless (no IT)
 		Menu: After exiting the Cycling Road building
 			Use: SUPER_REPEL
 			Swap: 6 X_SPECIAL
-			Use: TM_26 1 1 2
+			Tm: TM_26 1 2
 			Use: BICYCLE
 		Bike to the Safari Zone
 
@@ -380,7 +380,7 @@ Route: Red Any% Glitchless (no IT)
 	S: Pallet Town
 		Menu: Walk to the water, and menu
 			Use: SUPER_REPEL
-			Use: HM_03 1 2
+			Tm: HM_03 2
 		Surf to Cinnabar
 
 	S: Cinnabar Mansion
@@ -392,8 +392,8 @@ Route: Red Any% Glitchless (no IT)
 		After falling, go left and down to dodge the Scientist, then take the stairs to the right
 		GetI: TM_14
 		Menu: After picking up Blizzard
-			Tm: HM_04 1 2
-			Use: TM_14 1 1 4
+			Tm: HM_04 2 1
+			Tm: TM_14 1 4
 			Use: REPEL
 		Activate the switch to the left, then follow the path to the northeast corner to activate the second switch
 		GetI: SECRET_KEY
