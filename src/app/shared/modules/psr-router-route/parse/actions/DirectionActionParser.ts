@@ -21,7 +21,7 @@ export class DirectionActionParser implements IActionParser {
     public jsonToLines(jsonEntry: ActionJSON): ScopedLine {
         let line = jsonEntry.description;
         if (jsonEntry.type) {
-            line = jsonEntry.type + ": " + line;
+            line = `${jsonEntry.type}: ${line}`;
         }
         return new ScopedLine(line);
     }

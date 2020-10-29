@@ -29,7 +29,7 @@ export class BSettingsAction extends AAction {
             switch (setting.key.toUpperCase()) {
                 case "TEACH":
                     if (setting.value.length != 2) {
-                        this.addMessage(new RouterMessage(`The '${setting.key}' action requiers 2 values`, RouterMessage.Type.Error));
+                        this.addMessage(new RouterMessage(`The '${setting.key}' setting requiers 2 values`, RouterMessage.Type.Error));
                     } else {
                         let newMove = this.game.findMoveByName(setting.value[0]);
                         let oldMove = this.game.findMoveByName(setting.value[1]);
@@ -44,7 +44,7 @@ export class BSettingsAction extends AAction {
                     }
                     break;
                 default:
-                    this.addMessage(new RouterMessage(`The '${setting.key}' action is not implemented (yet)`, RouterMessage.Type.Warning));
+                    this.addMessage(new RouterMessage(`The '${setting.key}' setting is not implemented (yet)`, RouterMessage.Type.Warning));
             }
         });
     }

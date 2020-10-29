@@ -43,13 +43,15 @@ export abstract class ARouteActionsEntry extends RouteEntry {
     public setActionsFromJSONObject(
         obj: EntryJSON,
         possibleActions: { [key: string]: (obj: ActionJSON, game: Game) => AAction },
+        defaultAction: (obj: ActionJSON, game: Game) => AAction,
         game: Game
     ) {
         this._actions = [];
-        obj.properties.actions.forEach(action => {
-            if (possibleActions[action.type.toUpperCase()]) {
+        obj.properties.actions?.forEach(action => {
+            let aAction = possibleActions[action.type?.toUpperCase()] || defaultAction;
+            if (aAction) {
                 // Just a check for extra safety
-                this._actions.push(possibleActions[action.type.toUpperCase()](action, game))
+                this._actions.push(aAction(action, game))
             }
         });
     }

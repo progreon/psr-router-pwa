@@ -8,7 +8,6 @@ import { RouteDirectionsParser } from '../parse/RouteDirectionsParser';
 import { RouteEntryParser } from '../parse/RouteEntryParser';
 import { RouteManipParser } from '../parse/RouteManipParser';
 import { RouteGetPokemonParser } from '../parse/RouteGetPokemonParser';
-import { RouteSwapPokemonParser } from '../parse/RouteSwapPokemonParser';
 import { RouteMenuParser } from '../parse/RouteMenuParser';
 
 /**
@@ -80,5 +79,4 @@ RouteSectionParser.parsers[Route.RouteEntry.ENTRY_TYPE.toUpperCase()] = new Rout
 RouteSectionParser.parsers[Route.RouteManip.ENTRY_TYPE.toUpperCase()] = new RouteManipParser();
 RouteSectionParser.parsers[Route.RouteGetPokemon.ENTRY_TYPE.toUpperCase()] = new RouteGetPokemonParser();
 RouteSectionParser.parsers[Route.RouteSection.ENTRY_TYPE.toUpperCase()] = new RouteSectionParser();
-RouteSectionParser.parsers[Route.RouteSwapPokemon.ENTRY_TYPE.toUpperCase()] = new RouteSwapPokemonParser();
 RouteSectionParser.parsers[Route.RouteMenu.ENTRY_TYPE.toUpperCase()] = new RouteMenuParser();

@@ -5,7 +5,7 @@ import * as Util from '../../../psr-router-util';
 
 /**
  * lines:
- * Tm: <tm|hm> [<pokemon index:1> [<move index:1>]] :: <description>
+ * Tm: <tm|hm> [<party index:1> [<move index>]] [:: <description>]
  *
  * json:
  * {
@@ -44,10 +44,10 @@ export class TmActionParser implements IActionParser {
 
     public jsonToLines(jsonEntry: ActionJSON): ScopedLine {
         let line = `${jsonEntry.type}: ${jsonEntry.properties.tm}`;
-        if (jsonEntry.properties.partyIndex) {
-            line = `${line} ${+jsonEntry.properties.partyIndex - 1}`;
-            if (jsonEntry.properties.moveIndex) {
-                line = `${line} ${+jsonEntry.properties.moveIndex - 1}`;
+        if (!isNaN(jsonEntry.properties.partyIndex)) {
+            line = `${line} ${+jsonEntry.properties.partyIndex + 1}`;
+            if (!isNaN(jsonEntry.properties.moveIndex) && +jsonEntry.properties.moveIndex >= 0) {
+                line = `${line} ${+jsonEntry.properties.moveIndex + 1}`;
             }
         }
         if (jsonEntry.description) {

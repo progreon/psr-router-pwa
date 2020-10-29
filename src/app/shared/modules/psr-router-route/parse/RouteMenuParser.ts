@@ -58,6 +58,9 @@ export class RouteMenuParser extends ARouteActionsParser {
     public get parsers(): { [key: string]: IActionParser; } {
         return parsers;
     }
+    public get defaultParser() {
+        return parsers[DirectionAction.ACTION_TYPE.toUpperCase()];
+    }
 
     public linesToJSON(scopedLine: ScopedLine, filename: string): EntryJSON {
         let entry = super.linesToJSON(scopedLine, filename);
@@ -74,6 +77,9 @@ export class RouteMenuParser extends ARouteActionsParser {
         // TODO: test
         let scopedLine = super.jsonToLines(jsonEntry);
         scopedLine.line = RouteMenu.ENTRY_TYPE + ":";
+        if (jsonEntry.info.summary) {
+            scopedLine.line += ` ${jsonEntry.info.summary}`;
+        }
         return scopedLine;
     }
 }

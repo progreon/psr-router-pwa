@@ -26,6 +26,7 @@ possibleActions[TmAction.ACTION_TYPE.toUpperCase()] = TmAction.newFromJSONObject
 possibleActions[TossAction.ACTION_TYPE.toUpperCase()] = TossAction.newFromJSONObject;
 possibleActions[DirectionAction.ACTION_TYPE.toUpperCase()] = DirectionAction.newFromJSONObject;
 possibleActions[BSettingsAction.ACTION_TYPE.toUpperCase()] = BSettingsAction.newFromJSONObject;
+const defaultAction: (obj: ActionJSON, game: Model.Game) => AAction = possibleActions[DirectionAction.ACTION_TYPE.toUpperCase()];
 
 /**
  * A class representing a route-entry that does a menu sequence.
@@ -73,7 +74,7 @@ export class RouteMenu extends ARouteActionsEntry {
     let location = undefined; // TODO, parse from obj.location
 
     let entry = new RouteMenu(game, info, location);
-    entry.setActionsFromJSONObject(obj, possibleActions, game);
+    entry.setActionsFromJSONObject(obj, possibleActions, defaultAction, game);
     messages.forEach(m => entry.addMessage(m));
     return entry;
   }

@@ -117,37 +117,38 @@ class PsrRouterHome extends PsrRouterPage {
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-    let fileInput: HTMLInputElement = <HTMLInputElement>this.shadowRoot.getElementById("selFile");
-    fileInput.onchange = e => {
-      this._loading = true;
-      RouteManager.LoadRouteFile((<HTMLInputElement>e.target).files[0])
-        .then(route => {
-          fileInput.value = "";
-          this._loading = false;
-          if (route.game.info.unsupported) {
-            this._showUnsupportedToast(route.game.info.name);
-          }
-          if (route.getAllMessages().length > 0) {
-            let str = route.getAllMessages().map(m => m.toString()).join("\n");
-            alert(str);
-          }
-          super._navigateTo("router");
-        }).catch(e => {
-          fileInput.value = "";
-          this._loading = false;
-          console.warn(e);
-          this.showAppToast(e);
-          this.requestUpdate();
-        });
-    }
-    let comboBox: any = this.shadowRoot.getElementById("example-routes");
-    comboBox.items = RouteManager.GetExampleRoutesNames();
-    comboBox.value = comboBox.items[0];
   }
 
-  triggerDataRefresh() {
+  updated(_changedProperties) {
+    super.updated(_changedProperties);
+    let fileInput: HTMLInputElement = <HTMLInputElement>this.shadowRoot.getElementById("selFile");
+    if (fileInput && !fileInput.onchange) {
+      fileInput.onchange = e => {
+        this._loading = true;
+        RouteManager.LoadRouteFile((<HTMLInputElement>e.target).files[0])
+          .then(route => {
+            fileInput.value = "";
+            this._loading = false;
+            if (route.game.info.unsupported) {
+              this._showUnsupportedToast(route.game.info.name);
+            }
+            if (route.getAllMessages().length > 0) {
+              let str = route.getAllMessages().map(m => m.toString()).join("\n");
+              alert(str);
+            }
+            super._navigateTo("router");
+          }).catch(e => {
+            fileInput.value = "";
+            this._loading = false;
+            console.warn(e);
+            this.showAppToast(e);
+            this.requestUpdate();
+          });
+      }
+    }
     let comboBox: any = this.shadowRoot.getElementById("example-routes");
-    if (comboBox && comboBox.items && comboBox.items.length) {
+    if (comboBox && !comboBox.items) {
+      comboBox.items = RouteManager.GetExampleRoutesNames();
       comboBox.value = comboBox.items[0];
     }
   }

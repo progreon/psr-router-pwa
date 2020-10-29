@@ -1,27 +1,12 @@
 // TODO: naming?
 // imports
-import { RouterMessage } from '../../psr-router-util';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
-import { BSettingsAction } from './BSettingsAction';
-import { DirectionAction } from './DirectionAction';
-import { SwapAction } from './SwapAction';
-import { SwapPokemonAction } from './SwapPokemonAction';
-import { UseAction } from './UseAction';
-import { BattleEntrant, BattleStage } from '../RouteBattle';
-
-// TODO: get these from RouteBattle
-const oppActions: { [key: string]: (obj: ActionJSON, game: Model.Game) => AAction } = {};
-oppActions[BSettingsAction.ACTION_TYPE.toUpperCase()] = BSettingsAction.newFromJSONObject;
-oppActions[DirectionAction.ACTION_TYPE.toUpperCase()] = DirectionAction.newFromJSONObject;
-oppActions[SwapAction.ACTION_TYPE.toUpperCase()] = SwapAction.newFromJSONObject;
-oppActions[SwapPokemonAction.ACTION_TYPE.toUpperCase()] = SwapPokemonAction.newFromJSONObject;
-oppActions[UseAction.ACTION_TYPE.toUpperCase()] = UseAction.newFromJSONObject;
+import { BattleEntrant, BattleStage, RouteBattle } from '../RouteBattle';
 
 export class OpponentAction extends AAction {
     public static readonly ACTION_TYPE: string = "Opp";
-    public static readonly oppActions: { [key: string]: (obj: ActionJSON, game: Model.Game) => AAction } = oppActions;
 
     constructor(
         public readonly oppIndex: number,
@@ -36,9 +21,7 @@ export class OpponentAction extends AAction {
     }
 
     public addAction(action: AAction) {
-        if (OpponentAction.oppActions[action.actionType]) {
-            this.actions.push(action);
-        }
+        this.actions.push(action);
     }
 
     public applyAction(player: Model.Player, battleStage?: BattleStage): void {
@@ -48,10 +31,8 @@ export class OpponentAction extends AAction {
         }
         this.actionString = `On ${battleStage.getTrainerBattler().toString()} (${this.oppIndex + 1})`;
         this.actions.forEach(action => {
-            if (OpponentAction.oppActions[action.actionType.toUpperCase()]) {
-                action.applyAction(player, battleStage);
-                action.messages.forEach(m => this.addMessage(m));
-            }
+            action.applyAction(player, battleStage);
+            action.messages.forEach(m => this.addMessage(m));
         });
     }
 
@@ -59,9 +40,10 @@ export class OpponentAction extends AAction {
         let oppIndex = obj.properties.oppIndex;
         let actions = [];
         obj.actions.forEach(action => {
-            if (OpponentAction.oppActions[action.type.toUpperCase()]) {
+            let newAction = RouteBattle.POSSIBLE_ACTIONS[action.type?.toUpperCase()] || RouteBattle.DEFAULT_ACTION;
+            if (newAction) {
                 // Just a check for extra safety
-                actions.push(OpponentAction.oppActions[action.type.toUpperCase()](action, game))
+                actions.push(newAction(action, game))
             }
         });
         let entrants: { partyIndex: number, faint: boolean }[] = obj.properties.entrants;

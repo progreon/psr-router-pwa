@@ -95,8 +95,8 @@ Route: Red Any% Glitchless (no IT)
 			Zubat does 6-8 with Leech Life (10-12 after 1 Tail Whip).
 			Consider healing or switching if you're at low HP or confused
 		Menu: One tile before the Super Nerd: use the Rare Candy to reach L16 and evolve, teach Water Gun over Tackle, use the Moon Stone, teach Mega Punch over Leer
-			Toss: POKE_BALL 0
-			Toss: ANTIDOTE 0
+			Toss: POKE_BALL *
+			Toss: ANTIDOTE *
 			Use: RARE_CANDY 1 1
 			Tm: TM_12 1 2
 			Use: MOON_STONE 1 1
@@ -372,7 +372,7 @@ Route: Red Any% Glitchless (no IT)
 					If Koga uses an X Attack, stall with flute
 					The goal is to die to Selfdestruct, but it's OK if you don't
 		Menu: Revive with candies and bike to the Warden's house
-			Use: RARE_CANDY 3 :: Use all of your rare candies
+			Use: RARE_CANDY * :: Use all of your rare candies
 			Use: BICYCLE
 		GetI: HM_04 :: GOLD_TEETH
 			Get HM04 from the warden, then Fly to Pallet Town

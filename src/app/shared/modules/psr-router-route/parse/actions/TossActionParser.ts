@@ -24,13 +24,13 @@ export class TossActionParser implements IActionParser {
             [valuesText, description] = [valuesText.substr(0, valuesText.indexOf('::')).trim(), valuesText.substr(valuesText.indexOf('::') + 2).trim()];
         }
         let values = valuesText.split(/[, ]/).filter(v => !!v);
-        if (values.length != 2) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} 'Toss' takes 2 parameters`, "Parser Error");
+        if (values.length == 0 || values.length > 2) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} 'Toss' takes 1 or 2 parameters`, "Parser Error");
 
         let item: string, count: string;
         item = values[0];
         if (values.length > 1) {
             count = values[1];
-            if (isNaN(+count) && (count !== "?" || +count < 0)) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Count must be a positive number or '?'`, "Parser Error");
+            if (count !== "?" && count !== "*" && (isNaN(+count) || +count < 1)) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Count must be a positive number, '*' or '?'`, "Parser Error");
         }
 
         return new ActionJSON(scopedLine.type, description, { item, count });

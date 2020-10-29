@@ -18,17 +18,17 @@ import { IActionParser } from "./actions/IActionParser";
  */
 export abstract class ARouteActionsParser implements IRouteEntryParser {
     public abstract get parsers(): { [key: string]: IActionParser };
+    public abstract get defaultParser(): IActionParser;
 
     public linesToJSON(scopedLine: ScopedLine, filename: string): EntryJSON {
         let entry = new EntryJSON(scopedLine.type);
         let actions: ActionJSON[] = [];
 
         scopedLine.scope.forEach(scopedLine => {
-            let parser = this.parsers[scopedLine.type.toUpperCase()];
+            let parser = this.parsers[scopedLine.type.toUpperCase()] || this.defaultParser;
             if (parser) {
                 actions.push(parser.linesToJSON(scopedLine, filename));
             } else {
-                // TODO: throw exception?
                 console.warn("Unknown action for type", scopedLine.type);
             }
         });
@@ -40,13 +40,12 @@ export abstract class ARouteActionsParser implements IRouteEntryParser {
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {
         let scopedLine = new ScopedLine();
 
-        let actions: ActionJSON[] = jsonEntry.properties.actions;
+        let actions: ActionJSON[] = jsonEntry.properties.actions || [];
         actions.forEach(action => {
-            let parser = this.parsers[action.type.toUpperCase()];
+            let parser = this.parsers[action.type.toUpperCase()] || this.defaultParser;
             if (parser) {
                 scopedLine.scope.push(parser.jsonToLines(action));
             } else {
-                // TODO: throw exception?
                 console.warn("Unknown action for type", action.type);
             }
         });

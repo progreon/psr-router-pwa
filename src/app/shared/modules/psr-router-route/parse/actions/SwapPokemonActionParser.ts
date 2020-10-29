@@ -5,7 +5,7 @@ import * as Util from '../../../psr-router-util';
 
 /**
  * lines:
- * SwapP: <index> [<index>] :: <description>
+ * SwapP: <index> [<index>] [:: <description>]
  *
  * json:
  * {
@@ -29,16 +29,19 @@ export class SwapPokemonActionParser implements IActionParser {
 
         let partyIndex1 = +values[0] - 1;
         let partyIndex2 = values[1] ? +values[1] - 1 : undefined;
-        if (!isNaN(partyIndex1) && partyIndex1 < 0) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Index must be a number > 0`, "Parser Error");
-        if (!isNaN(partyIndex2) && partyIndex2 < 0) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Index must be a number > 0`, "Parser Error");
+        if (isNaN(partyIndex1) || partyIndex1 < 0) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Index must be a positive number`, "Parser Error");
+        if (!isNaN(partyIndex2) && partyIndex2 < 0) throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Index must be a positive number`, "Parser Error");
 
         return new ActionJSON(scopedLine.type, description, { partyIndex1, partyIndex2 });
     }
 
     public jsonToLines(jsonEntry: ActionJSON): ScopedLine {
         let val1 = +jsonEntry.properties.partyIndex1 + 1;
-        let val2 = +jsonEntry.properties.partyIndex2 + 1;
-        let line = `${jsonEntry.type}: ${val1} ${val2}`;
+        let line = `${jsonEntry.type}: ${val1}`;
+        if (jsonEntry.properties.partyIndex2) {
+            let val2 = +jsonEntry.properties.partyIndex2 + 1;
+            line = `${line} ${val2}`;
+        }
         if (jsonEntry.description) {
             line = `${line} :: ${jsonEntry.description}`;
         }

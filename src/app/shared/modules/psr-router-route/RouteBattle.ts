@@ -30,6 +30,7 @@ possibleActions[TossAction.ACTION_TYPE.toUpperCase()] = TossAction.newFromJSONOb
 possibleActions[DirectionAction.ACTION_TYPE.toUpperCase()] = DirectionAction.newFromJSONObject;
 possibleActions[OpponentAction.ACTION_TYPE.toUpperCase()] = OpponentAction.newFromJSONObject;
 possibleActions[BSettingsAction.ACTION_TYPE.toUpperCase()] = BSettingsAction.newFromJSONObject;
+const defaultAction: (obj: ActionJSON, game: Game) => AAction = possibleActions[DirectionAction.ACTION_TYPE.toUpperCase()];
 
 /**
  * A class representing a route-entry that handles battles.
@@ -38,6 +39,9 @@ possibleActions[BSettingsAction.ACTION_TYPE.toUpperCase()] = BSettingsAction.new
  * @todo writeToString
  */
 export class RouteBattle extends ARouteActionsEntry {
+  public static readonly POSSIBLE_ACTIONS = possibleActions;
+  public static readonly DEFAULT_ACTION = defaultAction;
+
   public static readonly ENTRY_TYPE: string = "B";
   public readonly trainer: Trainer;
 
@@ -143,7 +147,7 @@ export class RouteBattle extends ARouteActionsEntry {
     let location = undefined; // TODO, parse from obj.location
 
     let entry = new RouteBattle(game, trainer, info, location);
-    entry.setActionsFromJSONObject(obj, possibleActions, game);
+    entry.setActionsFromJSONObject(obj, possibleActions, defaultAction, game);
     messages.forEach(m => entry.addMessage(m));
     return entry;
   }

@@ -2,7 +2,7 @@
 
 // imports
 import { RouterMessage } from '../psr-router-util';
-import { RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon, RouteSwapPokemon, RouteMenu, RouteManip } from '.';
+import { RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon, RouteMenu, RouteManip } from '.';
 import { RouteEntryInfo } from './util';
 import { Game } from '../psr-router-model/Game';
 import { Location, Player, Trainer } from '../psr-router-model/Model';
@@ -197,6 +197,7 @@ export class RouteSection extends RouteEntry {
   }
 
   static newFromJSONObject(obj: EntryJSON, game: Game): RouteSection {
+    // TODO: cleanup, like OpponentAction
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     let children: RouteEntry[] = [];
     obj.entries.forEach(e => {
@@ -213,9 +214,6 @@ export class RouteSection extends RouteEntry {
           break;
         case RouteManip.ENTRY_TYPE.toUpperCase():
           children.push(RouteManip.newFromJSONObject(e, game));
-          break;
-        case RouteSwapPokemon.ENTRY_TYPE.toUpperCase():
-          children.push(RouteSwapPokemon.newFromJSONObject(e, game));
           break;
         case RouteMenu.ENTRY_TYPE.toUpperCase():
           children.push(RouteMenu.newFromJSONObject(e, game));

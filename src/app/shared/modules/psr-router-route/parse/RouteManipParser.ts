@@ -57,7 +57,7 @@ export class RouteManipParser implements IRouteEntryParser {
 
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {
         let scopedLine = new ScopedLine(RouteManip.ENTRY_TYPE + ":");
-        scopedLine.line += `${jsonEntry.properties.pokemon}:${jsonEntry.properties.level} ${jsonEntry.properties.dvs.join(' ')}`;
+        scopedLine.line += ` ${jsonEntry.properties.pokemon}:${jsonEntry.properties.level} ${jsonEntry.properties.dvs.join(' ')}`;
 
         if (jsonEntry.info) {
             if (jsonEntry.info.summary) {

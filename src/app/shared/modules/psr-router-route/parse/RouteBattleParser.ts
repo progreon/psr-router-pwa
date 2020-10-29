@@ -49,8 +49,12 @@ parsers[OpponentAction.ACTION_TYPE.toUpperCase()] = new OpponentActionParser();
  */
 export class RouteBattleParser extends ARouteActionsParser {
     public static readonly PARSERS = parsers;
+    public static readonly DEFAULT_PARSER = parsers[DirectionAction.ACTION_TYPE.toUpperCase()];
     public get parsers(): { [key: string]: IActionParser; } {
         return parsers;
+    }
+    public get defaultParser() {
+        return parsers[DirectionAction.ACTION_TYPE.toUpperCase()];
     }
 
     public linesToJSON(scopedLine: ScopedLine, filename: string): EntryJSON {

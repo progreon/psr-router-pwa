@@ -30,7 +30,7 @@ export class UseAction extends AAction {
             this.actionString = "[Use error]";
             return;
         }
-        this.actionString = `Use ${this.count == '0' ? "all " : ""}${this.item.name}`;
+        this.actionString = `Use ${this.count == '*' ? "all " : ""}${this.item.name}`;
         if (+this.count > 1) {
             this.actionString = `${this.actionString} ${this.count} times`;
         }
@@ -53,7 +53,7 @@ export class UseAction extends AAction {
         }
         let result = player.useItem(this.item, this.partyIndex, this.moveIndex, battleStage);
         if (result) {
-            let i = 1, count = this.count == "0" ? player.getItemCount(this.item) : this.count;
+            let i = 1, count = this.count == "*" ? player.getItemCount(this.item) : this.count;
             while (result && i < +count) {
                 result = player.useItem(this.item, this.partyIndex, this.moveIndex, battleStage);
                 i++;

@@ -23,7 +23,7 @@ export class TossAction extends AAction {
     public applyAction(player: Model.Player, battleStage?: BattleStage): void {
         super.applyAction(player, battleStage);
         // TODO: implement GetI-entry first
-        this.actionString = `Toss ${this.count == "0" ? "all" : this.count} ${this.item.name}`;
+        this.actionString = `Toss ${this.count == "*" ? "all" : this.count} ${this.item.name}`;
         this.addMessage(new RouterMessage("The 'Toss' action is not implemented yet", RouterMessage.Type.Warning));
     }
 
