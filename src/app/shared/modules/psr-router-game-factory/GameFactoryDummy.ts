@@ -44,4 +44,8 @@ export class GameFactoryDummy extends GameFactory {
   protected getTrainers(gameInfo: Model.GameInfo): { [key: string]: ModelAbstract.Trainer; } {
     return {};
   }
+
+  protected getLocations(gameInfo: Model.GameInfo): { root: { [key: string]: Model.Location; }, all: { [key: string]: Model.Location; } } {
+    return { root: {}, all: {} };
+  }
 }

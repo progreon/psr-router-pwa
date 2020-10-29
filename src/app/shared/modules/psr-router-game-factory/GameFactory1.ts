@@ -5,6 +5,7 @@ import { Engine1 } from 'SharedModules/psr-router-engine/Engine1';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import * as ModelAbstract from 'SharedModules/psr-router-model/ModelAbstract';
 import * as Model1 from 'SharedModules/psr-router-model/Model1';
+import * as Util from 'SharedModules/psr-router-util';
 
 import * as _types from 'SharedData/types.json';
 import * as _items from 'SharedData/items-1.json';
@@ -15,6 +16,7 @@ import * as _pokemon from 'SharedData/pokemon-1.json';
 import * as _evolutions from 'SharedData/evolutions-1.json';
 import * as _trainersRB from 'SharedData/trainers-rb.json';
 import * as _trainersY from 'SharedData/trainers-y.json';
+import * as _locations from 'SharedData/locations/locations-1.json';
 import * as _encountersR from 'SharedData/encounters/encounters-r.json';
 import * as _encountersB from 'SharedData/encounters/encounters-b.json';
 import * as _encountersY from 'SharedData/encounters/encounters-y.json';
@@ -27,6 +29,7 @@ export class GameFactory1 extends GameFactory {
   private static _moves: { [key: string]: ModelAbstract.Move; };
   private static _pokemonPerGame: { [key: string]: { [key: string]: ModelAbstract.Pokemon; } };
   private static _trainersPerGame: { [key: string]: { [key: string]: ModelAbstract.Trainer; } };
+  private static _locationsPerGame: { [key: string]: { root: { [key: string]: Model.Location; }, all: { [key: string]: Model.Location; } } };
 
   constructor() {
     super();
@@ -131,7 +134,7 @@ export class GameFactory1 extends GameFactory {
             let pokemon = pokemonMap[p.toUpperCase()];
             for (let e in _evolutions[p]) {
               let evolution = pokemonMap[e.toUpperCase()];
-              let keyType = Model.EvolutionKey.Type[<string> _evolutions[p][e].type];
+              let keyType = Model.EvolutionKey.Type[<string>_evolutions[p][e].type];
               pokemon.addEvolution(new Model.EvolutionKey(keyType, _evolutions[p][e].value), evolution);
             }
           }
@@ -161,7 +164,7 @@ export class GameFactory1 extends GameFactory {
             let pokemon = pokemonMap[p.toUpperCase()];
             for (let e in _evolutions[p]) {
               let evolution = pokemonMap[e.toUpperCase()];
-              let keyType = Model.EvolutionKey.Type[<string> _evolutions[p][e].type];
+              let keyType = Model.EvolutionKey.Type[<string>_evolutions[p][e].type];
               pokemon.addEvolution(new Model.EvolutionKey(keyType, _evolutions[p][e].value), evolution);
             }
           }
@@ -186,11 +189,11 @@ export class GameFactory1 extends GameFactory {
         trainerFile = _trainersRB;
         key = "rb";
         break;
-        // return GameFactory1._trainersPerGame["rb"];
+      // return GameFactory1._trainersPerGame["rb"];
       case "y":
         trainerFile = _trainersY;
         key = "y";
-        break;;
+        break;
     }
     if (trainerFile && key) {
       if (!GameFactory1._trainersPerGame[key]) {
@@ -224,5 +227,80 @@ export class GameFactory1 extends GameFactory {
     } else {
       return {};
     }
+  }
+
+  protected getLocations(gameInfo: Model.GameInfo): { root: { [key: string]: Model.Location; }, all: { [key: string]: Model.Location; } } {
+    // TODO: move this implementation to super class, only to inherit getEncounterAreaFile() or getEncounterAreas()?
+    if (!GameFactory1._locationsPerGame) {
+      GameFactory1._locationsPerGame = {};
+    }
+    let encounterFile: { location: string, type?: string, method?: string, rate: number, slots: string[] }[];
+    switch (gameInfo.key) {
+      case "r":
+        encounterFile = _encountersR;
+        break;
+      case "b":
+        encounterFile = _encountersB;
+        break;
+      case "y":
+        encounterFile = _encountersY;
+        break;
+    }
+    if (encounterFile) {
+      if (!GameFactory1._locationsPerGame[gameInfo.key]) {
+        // Parse the locations
+        GameFactory1._locationsPerGame[gameInfo.key] = { root: {}, all: {} };
+        let allLocations: { [key: string]: Model.Location } = {};
+        _locations.forEach(loc => {
+          let location = this.getLocationFromJSON(allLocations, loc);
+          GameFactory1._locationsPerGame[gameInfo.key].root[location.name.toUpperCase()] = location;
+        });
+        GameFactory1._locationsPerGame[gameInfo.key].all = allLocations;
+        // Parse the encounter areas
+        let pokemon = this.getPokemon(gameInfo);
+        encounterFile.forEach(ea => {
+          let slots: Model.EncounterArea.Slot[] = [];
+          ea.slots.forEach(slot => {
+            let [p, l] = slot.split("#").map(s => s.trim());
+            let poke = pokemon[p.toUpperCase()];
+            if (!poke) {
+              console.error(`Error while parsing encounter slots: pokemon "${p}" was not found`);
+            } else {
+              let levelRange = Util.Range.parse(l);
+              if (levelRange.count == 0) {
+                console.error(`Error while parsing encounter slots: range "${l}" could not be parsed`);
+              } else {
+                slots.push(new Model.EncounterArea.Slot(poke, levelRange));
+              }
+            }
+          });
+          let encounterArea = new Model.EncounterArea(ea.location, ea.rate, slots, ea.type, ea.method);
+          let location = allLocations[encounterArea.location.toUpperCase()];
+          if (!location) {
+            console.error(`Error while parsing encounter slots: location "${encounterArea.location}" could not be found`);
+          } else {
+            location.addEncounterArea(encounterArea);
+          }
+        });
+      }
+      return GameFactory1._locationsPerGame[gameInfo.key];
+    } else {
+      return { root: {}, all: {} };
+    }
+  }
+
+  private getLocationFromJSON(allLocations: { [key: string]: Model.Location }, locationJSON: { location: string, subLocations?: any[] }): Model.Location {
+    let subLocations: Model.Location[];
+    if (locationJSON.subLocations) {
+      subLocations = [];
+      locationJSON.subLocations.forEach(subLoc => subLocations.push(this.getLocationFromJSON(allLocations, subLoc)));
+    }
+    let location = new Model.Location(locationJSON.location, subLocations);
+    if (allLocations[location.name.toUpperCase()]) {
+      console.warn(`Location "${location.name}" was already added, skipping...`);
+    } else {
+      allLocations[location.name.toUpperCase()] = location;
+    }
+    return location;
   }
 }

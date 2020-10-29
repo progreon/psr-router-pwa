@@ -7,6 +7,7 @@ export { Player } from './Player';
 export { Stone } from './Stone';
 export { Type } from './Type';
 export { Trainer } from './Trainer';
+export { EncounterArea } from './EncounterArea';
 
 // to util? even needed??
 export { PokemonLevelPair } from './PokemonLevelPair';

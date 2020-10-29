@@ -188,6 +188,31 @@ class Range {
     return newRange;
   }
 
+  static parse(s: string): Range {
+    let r = new Range();
+
+    // TODO: possibilities?
+    // example: 1-3,6,9-13
+    let subValues = s.split(",").map(v => v.trim()).filter(v => v != "");
+    subValues.forEach(subValue => {
+      // example: 1-3 / 6 / 9-13
+      let values = subValue.split("-").map(v => v.trim()).filter(v => v != "");
+      if (values.length > 2) {
+        values = [values[0], values[values.length - 1]];
+      }
+      if (isNaN(+values[0]) || isNaN(+values[values.length - 1])) {
+        // ignore (or exception?)
+      } else {
+        let numberValues = [+values[0], +values[values.length - 1]];
+        for (let v = numberValues[0]; v <= numberValues[1]; v++) {
+          r.addValue(v);
+        }
+      }
+    });
+
+    return r;
+  }
+
   toString(): string {
     if (this._min === this._max)
       return this._min + '';

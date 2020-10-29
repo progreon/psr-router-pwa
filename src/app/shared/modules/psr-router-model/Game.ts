@@ -1,5 +1,5 @@
 import * as DummyModel from './ModelDummy';
-import { GameInfo, Item, Type, Trainer } from './Model';
+import { GameInfo, Item, Type, Trainer, Location } from './Model';
 import { Move, Pokemon, Engine } from './ModelAbstract';
 
 /**
@@ -17,6 +17,7 @@ export class Game {
   private moves: { [key: string]: Move; };
   private pokemon: { [key: string]: Pokemon; };
   private trainers: { [key: string]: Trainer; };
+  private locations: { root: { [key: string]: Location; }, all: { [key: string]: Location; } };
 
   public readonly dummyModel: any;
   private aliasedTrainers: { [key: string]: Trainer; };
@@ -35,6 +36,7 @@ export class Game {
     this.moves = builder.moves;
     this.pokemon = builder.pokemon;
     this.trainers = builder.trainers;
+    this.locations = builder.locations;
 
     this.dummyModel = DummyModel;
     this.aliasedTrainers = {};
@@ -142,6 +144,15 @@ export class Game {
    * @param name  The name of the type.
    * @returns The type.
    */
+  findLocationByName(name: string): Location {
+    return name ? this.locations.all[name.toUpperCase()] : undefined;
+  }
+
+  /**
+   * Find a type by name.
+   * @param name  The name of the type.
+   * @returns The type.
+   */
   findTypeByName(name: string): Type {
     return name ? this.types[name.toUpperCase()] : undefined;
   }
@@ -240,6 +251,13 @@ export namespace Game {
     public get trainers() { return this._trainers; }
     public setTrainers(trainers: { [key: string]: Trainer; }): Builder {
       this._trainers = trainers;
+      return this;
+    }
+
+    private _locations: { root: { [key: string]: Location; }, all: { [key: string]: Location; } };
+    public get locations() { return this._locations; }
+    public setLocations(locations: { root: { [key: string]: Location; }, all: { [key: string]: Location; } }): Builder {
+      this._locations = locations;
       return this;
     }
 
