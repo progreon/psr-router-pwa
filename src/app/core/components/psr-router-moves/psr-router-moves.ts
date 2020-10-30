@@ -27,7 +27,7 @@ class PsrRouterMoves extends PsrRouterPage {
           border-radius: 5px;
         }
         psr-router-move:hover {
-          background-color: #bbbbbb;
+          background-color: rgba(0, 0, 0, 0.15);
         }
       </style>
       <h2>Moves</h2>

@@ -24,9 +24,10 @@ class PsrRouterMove extends LitElement {
       ${AppStyles}
       <vaadin-item ?hidden="${!this.detailed}">
         <div><strong>${this.move.name} (${this.move.type.name}, ${this.move.category})</strong></div>
+        <div><i>${this.move.description}</i></div>
         <div>power: ${this.move.power}, accuracy: ${this.move.accuracy}%, ${this.move.pp}pp</div>
         <div>effect: ${this.move.effect}</div>
-        <div><i>${this.move.description}</i></div>
+        <div class="key" style="opacity: 0.5"><i>[key: ${this.move.key}]</i></div>
       </vaadin-item>
       <vaadin-item ?hidden="${this.detailed}">
         <div><strong>${this.move.name} (${this.move.type})</strong></div>

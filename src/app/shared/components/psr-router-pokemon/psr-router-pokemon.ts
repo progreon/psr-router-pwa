@@ -25,6 +25,7 @@ class PsrRouterPokemon extends LitElement {
       <vaadin-item @click=${this._onClick}>
         <div><strong>${this.pokemon.id} - ${this.pokemon.name}</strong></div>
         <div>${typeString}</div>
+        <div class="key" style="opacity: 0.5"><i>[key: ${this.pokemon.key}]</i></div>
       </vaadin-item>
     `;
   }
