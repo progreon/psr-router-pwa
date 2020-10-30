@@ -33,7 +33,7 @@ export class Engine1 implements Engine {
    * @param bbD
    * @param isCrit
    * @todo confusion & night shade damage
-   * @see http://upcarchive.playker.info/0/upokecenter/content/pokemon-red-version-blue-version-and-yellow-version-damage-calculation-process.html
+   * @see https://web.archive.org/web/20171112181444/http://upcarchive.playker.info/0/upokecenter/content/pokemon-red-version-blue-version-and-yellow-version-damage-calculation-process.html
    */
   private _getDamageRange(game: Game, move: string, attacker: Battler, defender: Battler, stagesA: Stages, stagesD: Stages, bbA: BadgeBoosts, bbD: BadgeBoosts, isCrit: Boolean): Range {
     let m: Move1 = <Move1> game.findMoveByName(move);
@@ -47,22 +47,21 @@ export class Engine1 implements Engine {
     let range: Range = new Range();
 
     // (1), (2), (4)
-    // console.log("_getDamageRange", m.key);
     let atkRange = isPhysical ? a.getBoostedAtk(isCrit ? 0 : bbA.atk, isCrit ? 0 : stagesA.atk) : a.getBoostedSpc(isCrit ? 0 : bbA.spc, isCrit ? 0 : stagesA.spc);
     let defRange = isPhysical ? d.getBoostedDef(isCrit ? 0 : bbD.def, isCrit ? 0 : stagesD.def) : d.getBoostedSpc(isCrit ? 0 : bbD.spc, isCrit ? 0 : stagesD.spc);
-    // console.log("_getDamageRange", "---", atkRange.toString(), defRange.toString());
     atkRange.getValuesArray().forEach(atk => {
       // TODO: (3) attacker is burned
       defRange.getValuesArray().forEach(def => {
-        // TODO: (5) Selfdestruct & Explosion
-        // (6) ??
         let attack = atk;
         let defense = def;
-        if (attack > 255) {
-          attack = (Math.floor((Math.floor(attack / 2) % 25) / 2) % 255);
+        // (5) Selfdestruct & Explosion
+        if (m.effect == "EXPLODE_EFFECT") {
+          defense = Math.floor(defense / 2);
         }
-        if (defense > 255) {
-            defense = (Math.floor((Math.floor(defense / 2) % 255) / 2) % 255);
+        // (6) If the Attack or Defense stat exceeds 255, both stats are equal to ((((X/2)%255)/2)%255)
+        if (attack > 255 || defense > 255) {
+          attack = (Math.floor((Math.floor(attack / 2) % 255) / 2) % 255);
+          defense = (Math.floor((Math.floor(defense / 2) % 255) / 2) % 255);
         }
         // TODO: (7) Reflect in effect
         // TODO: (8) Light Screen in effect
@@ -92,54 +91,4 @@ export class Engine1 implements Engine {
 
     return range;
   }
-
 }
-
-//   private Range getDamageRange(Battler attacker, Battler defender, Stages stagesA, Stages stagesB, BadgeBoosts bbA, BadgeBoosts bbB, boolean isCrit) {
-//       if (power == 0) {
-//           return new Range(); // TODO: special cases?
-//       }
-//       Range damageRange = new Range();
-//       // (1), (2), (4)
-//       Range atkRange = Types.isPhysical(type) ? attacker.getAtk(isCrit ? 0 : bbA.getAtk(), isCrit ? 0 : stagesA.getAtk()) : attacker.getSpc(isCrit ? 0 : bbA.getSpc(), isCrit ? 0 : stagesA.getSpc());
-//       Range defRange = Types.isPhysical(type) ? defender.getDef(isCrit ? 0 : bbB.getDef(), isCrit ? 0 : stagesB.getDef()) : defender.getSpc(isCrit ? 0 : bbB.getSpc(), isCrit ? 0 : stagesB.getSpc());
-//       for (int atk : atkRange.getValues()) {
-//           // TODO: (3) attacker is burned
-//           for (int def : defRange.getValues()) {
-//               // TODO: (5) Selfdestruct & Explosion
-//               // (6) ??
-//               int attack = atk;
-//               int defense = def;
-//               if (attack > 255) {
-//                   attack = ((((attack / 2) % 25) / 2) % 255);
-//               }
-//               if (defense > 255) {
-//                   defense = ((((defense / 2) % 255) / 2) % 255);
-//               }
-//               // TODO: (7) Reflect in effect
-//               // TODO: (8) Light Screen in effect
-//               // (9)
-//               attack = Math.max(1, attack);
-//               defense = Math.max(1, defense);
-//               // (10)
-//               int damage = (attacker.getLevel() * (isCrit ? 2 : 1)) % 256;
-//               damage = (damage * 2 / 5 + 2);
-//               damage = damage * attack * power / defense;
-//               damage /= 50;
-//               // (11), (12)
-//               damage = Math.min(damage, 997) + 2;
-//               // (13)
-//               damage = attacker.isType(type) ? damage * 3 / 2 : damage; // STAB
-//               // (14)
-//               damage *= Types.getTypeChart().getFactor(type, defender.pokemon.type1, defender.pokemon.type2);
-//               // (15)
-//               if (damage != 0) {
-//                   for (int i = 217; i < 256; i++) { // Add all possible damages
-//                       damageRange.addValue(Math.max(damage * i / 255, 1));
-//                   }
-//               }
-//           }
-//       }
-
-//       return damageRange;
-//   }

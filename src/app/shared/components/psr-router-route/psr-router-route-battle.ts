@@ -7,11 +7,11 @@ import { Stages, BadgeBoosts, Range } from 'App/shared/modules/psr-router-util';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
-// import '@vaadin/vaadin-text-field/theme/material/vaadin-number-field';
 import 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import 'SharedComponents/psr-router-model/psr-router-battler';
 import { PsrRouterTrainer } from 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import { OpponentAction } from 'App/shared/modules/psr-router-route/psr-router-route-actions/OpponentAction';
+import { BattleStage } from 'App/shared/modules/psr-router-route/RouteBattle';
 
 // TODO: show messages.
 class PsrRouterRouteBattle extends PsrRouterRouteEntry {
@@ -53,7 +53,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
       });
     }
     if (dom.length > 0) {
-      dom.push(html`<hr>`);
+      dom.push(html`<hr style="height: 1px; border: 0; background-color: rgba(0, 0, 0, .25); margin: 4px 0px 4px 0px;">`);
     }
     dom.push(html`
       <style>
@@ -63,7 +63,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
           flex-direction: row;
         }
         .table[odd] {
-          background-color: lightgray;
+          background-color: rgba(0, 0, 0, .1);
         }
         .col {
           display: flex;
@@ -84,10 +84,13 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
           font-weight: bold;
           /* text-align: center; */
         }
-        /* .col > * vaadin-number-field {
-          width: 75px;
+        .col > div > input {
+          width: 40px;
           margin-left: 5px;
-        } */
+          background: transparent;
+          border: 0px;
+          border-left: 1px solid black;
+        }
         .bcol {
           flex-grow: 1;
           display: flex;
@@ -107,7 +110,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
         let battle = [];
         battleEntry.battleStages.forEach((battleStage, bsi) => {
           let ob = battleEntry.trainer.party[bsi];
-          battleStage.damageRanges.forEach(dr => {
+          battleStage.damageRanges.forEach((dr, dri) => {
             let b = battleStage.player.team[dr.entrant.partyIndex];
             let bdr = dr.playerDR;
             let obdr = dr.trainerDR;
@@ -122,7 +125,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
             let oSpdRange = ob.getBoostedSpd(0, 0); // TODO: stages
             let bf: string, of: string;
             if (bSpdRange.containsOneOf(oSpdRange)) {
-              [bf, of] = ["[ST]", "[ST]"];
+              [bf, of] = ["[T]", "[T]"];
             } else if (bSpdRange.max < oSpdRange.min) {
               [bf, of] = ["", "[F]"];
             } else {
@@ -132,17 +135,17 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
               <div class="table" ?odd="${bsi % 2 == 1}">
                 <div class="col">
                   <div>BB</div>
-                  <div>atk [< ${actualBB.atk} >]</div>
-                  <div>def [< ${actualBB.def} >]</div>
-                  <div>spd [< ${actualBB.spd} >]</div>
-                  <div>spc [< ${actualBB.spc} >]</div>
+                  <div>atk <input id="bbAtk${bsi}:${dri}" type="number" value="${actualBB.atk}" min="0" max="99" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
+                  <div>def <input id="bbDef${bsi}:${dri}" type="number" value="${actualBB.def}" min="0" max="99" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
+                  <div>spd <input id="bbSpd${bsi}:${dri}" type="number" value="${actualBB.spd}" min="0" max="99" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
+                  <div>spc <input id="bbSpc${bsi}:${dri}" type="number" value="${actualBB.spc}" min="0" max="99" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
                 </div>
                 <div class="col">
                   <div>Stages</div>
-                  <div>atk [< ${actualStages.atk} >]</div>
-                  <div>def [< ${actualStages.def} >]</div>
-                  <div>spd [< ${actualStages.spd} >]</div>
-                  <div>spc [< ${actualStages.spc} >]</div>
+                  <div>atk <input id="spAtk${bsi}:${dri}" type="number" value="${actualStages.atk}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
+                  <div>def <input id="spDef${bsi}:${dri}" type="number" value="${actualStages.def}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
+                  <div>spd <input id="spSpd${bsi}:${dri}" type="number" value="${actualStages.spd}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
+                  <div>spc <input id="spSpc${bsi}:${dri}" type="number" value="${actualStages.spc}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
                 </div>
                 <div class="bcol">
                   <div class="col">
@@ -153,7 +156,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                     <div>${movesAttacker[3] || "-"}</div>
                   </div>
                   <div class="col">
-                    <div class="click" @click="${this._showBattlerDialog.bind(this, ob, null, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.) ${of}</div>
+                    <div class="click" @click="${this._showBattlerDialog.bind(this, ob, opponentStages, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.) ${of}</div>
                     <div>${movesDefender[0] || "-"}</div>
                     <div>${movesDefender[1] || "-"}</div>
                     <div>${movesDefender[2] || "-"}</div>
@@ -162,10 +165,10 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 </div>
                 <div class="col">
                   <div>Stages</div>
-                  <div>atk [< ${opponentStages.atk} >]</div>
-                  <div>def [< ${opponentStages.def} >]</div>
-                  <div>spd [< ${opponentStages.spd} >]</div>
-                  <div>spc [< ${opponentStages.spc} >]</div>
+                  <div>atk <input id="soAtk${bsi}:${dri}" type="number" value="${opponentStages.atk}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
+                  <div>def <input id="soDef${bsi}:${dri}" type="number" value="${opponentStages.def}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
+                  <div>spd <input id="soSpd${bsi}:${dri}" type="number" value="${opponentStages.spd}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
+                  <div>spc <input id="soSpc${bsi}:${dri}" type="number" value="${opponentStages.spc}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
                 </div>
               </div>
             `;
@@ -193,6 +196,43 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
 
   _getTitle(): string {
     return super._getTitle() || (<Route.RouteBattle>super.routeEntry).trainer.toString();
+  }
+
+  _triggerDamageCalc(battleStage: BattleStage, bsi: number, dri: number): void {
+    battleStage.badgeBoosts = this._getBadgeBoosts(bsi, dri);
+    battleStage.stages = this._getStagesPlayer(bsi, dri);
+    battleStage.stagesOpponent = this._getStagesOpponent(bsi, dri);
+    this.requestUpdate();
+  }
+
+  _getBadgeBoosts(bsi: number, dri: number): BadgeBoosts {
+    let bbAtk: any = this.shadowRoot.getElementById(`bbAtk${bsi}:${dri}`);
+    let bbDef: any = this.shadowRoot.getElementById(`bbDef${bsi}:${dri}`);
+    let bbSpd: any = this.shadowRoot.getElementById(`bbSpd${bsi}:${dri}`);
+    let bbSpc: any = this.shadowRoot.getElementById(`bbSpc${bsi}:${dri}`);
+    let bb = new BadgeBoosts();
+    bb.setValues(+bbAtk.value, +bbDef.value, +bbSpd.value, +bbSpc.value);
+    return bb;
+  }
+
+  _getStagesPlayer(bsi: number, dri: number): Stages {
+    let spAtk: any = this.shadowRoot.getElementById(`spAtk${bsi}:${dri}`);
+    let spDef: any = this.shadowRoot.getElementById(`spDef${bsi}:${dri}`);
+    let spSpd: any = this.shadowRoot.getElementById(`spSpd${bsi}:${dri}`);
+    let spSpc: any = this.shadowRoot.getElementById(`spSpc${bsi}:${dri}`);
+    let sp = new Stages();
+    sp.setStages(+spAtk.value, +spDef.value, +spSpd.value, +spSpc.value);
+    return sp;
+  }
+
+  _getStagesOpponent(bsi: number, dri: number): Stages {
+    let soAtk: any = this.shadowRoot.getElementById(`soAtk${bsi}:${dri}`);
+    let soDef: any = this.shadowRoot.getElementById(`soDef${bsi}:${dri}`);
+    let soSpd: any = this.shadowRoot.getElementById(`soSpd${bsi}:${dri}`);
+    let soSpc: any = this.shadowRoot.getElementById(`soSpc${bsi}:${dri}`);
+    let so = new Stages();
+    so.setStages(+soAtk.value, +soDef.value, +soSpd.value, +soSpc.value);
+    return so;
   }
 
   _showBattlerDialog(battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean): void {
