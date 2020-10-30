@@ -47,6 +47,7 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
               height: 1px;
               border: 0;
               border-top: 1px solid var(--app-color-black);
+              margin: 4px 0px 4px 0px;
             }
           </style>
           ${childElements}

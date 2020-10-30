@@ -74,10 +74,6 @@ export class PsrRouterRouteEntry extends LitElement {
       * {
         box-sizing: border-box;
       }
-      .buttons {
-        display: flex;
-        align-items: center;
-      }
       .header {
         display: flex;
         justify-content: space-between;
@@ -88,6 +84,7 @@ export class PsrRouterRouteEntry extends LitElement {
       }
       /* .header:hover {
         background-color: #bbbbbb;
+        box-shadow: 5px 0px #bbbbbb, -5px 0px #bbbbbb;
       } */
       .header[hidden] {
         display: none;
@@ -99,18 +96,18 @@ export class PsrRouterRouteEntry extends LitElement {
         display: none;
       }
       .icon {
-        padding-right: 5px;
+        padding-left: 5px;
         align-self: center;
       }
       .icon > svg {
         width: 12px;
         height: 12px;
       }
-      .icon.expand {
-        padding: 0px 0px 0px 5px;
-      }
       .icon.info {
         cursor: pointer;
+      }
+      .icon.hidden {
+        visibility: hidden;
       }
       .messages > .info {
         color: var(--app-color-ocean);
@@ -142,7 +139,7 @@ export class PsrRouterRouteEntry extends LitElement {
         padding-left: 10px;
         height: auto;
         flex-direction: column;
-        overflow: hidden;
+        /* overflow: hidden; */
         -webkit-transition: height 0.3s ease-out;
         -moz-transition: height 0.3s ease-out;
         -o-transition: height 0.3s ease-out;
@@ -201,9 +198,6 @@ export class PsrRouterRouteEntry extends LitElement {
     let icon = this.hideContent ? angleDownIcon : angleUpIcon;
 
     return html`
-      <div class="buttons">
-        <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupAvailable}">${infoCircle}</div>
-      </div>
       <div class="messages">
         ${messages}
       </div>
@@ -223,7 +217,9 @@ export class PsrRouterRouteEntry extends LitElement {
           <div>${this._getSummary()}</div>
         </div>
         <!-- </vaadin-context-menu> -->
+        <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupAvailable}">${infoCircle}</div>
         <div class="icon expand" @click="${this._onClick}" ?hidden="${!hasExpandingDOM}">${icon}</div>
+        <div class="icon hidden" ?hidden="${hasExpandingDOM}">${icon}</div>
       </div>
       <div class="route-header" ?hidden="${!this.routeHeader}">
         <h4><strong>${this.routeEntry?this.routeEntry.info.title:"No route loaded"}</strong></h4>
