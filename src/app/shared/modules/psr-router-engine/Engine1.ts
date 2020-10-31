@@ -33,6 +33,7 @@ export class Engine1 implements Engine {
    * @param bbD
    * @param isCrit
    * @todo confusion & night shade damage
+   * @todo check with https://github.com/pokemon-speedrunning/RouteOne/blob/master/src/DamageCalculator.java
    * @see https://web.archive.org/web/20171112181444/http://upcarchive.playker.info/0/upokecenter/content/pokemon-red-version-blue-version-and-yellow-version-damage-calculation-process.html
    */
   private _getDamageRange(game: Game, move: string, attacker: Battler, defender: Battler, stagesA: Stages, stagesD: Stages, bbA: BadgeBoosts, bbD: BadgeBoosts, isCrit: Boolean): Range {
@@ -41,10 +42,11 @@ export class Engine1 implements Engine {
     let a: Battler1 = <Battler1> attacker;
     let d: Battler1 = <Battler1> defender;
 
-    if (m.power == 0) {
-      return new Range(); // TODO: special cases?
-    }
     let range: Range = new Range();
+    if (m.power == 0) {
+      // TODO: special cases?
+      return range;
+    }
 
     // (1), (2), (4)
     let atkRange = isPhysical ? a.getBoostedAtk(isCrit ? 0 : bbA.atk, isCrit ? 0 : stagesA.atk) : a.getBoostedSpc(isCrit ? 0 : bbA.spc, isCrit ? 0 : stagesA.spc);

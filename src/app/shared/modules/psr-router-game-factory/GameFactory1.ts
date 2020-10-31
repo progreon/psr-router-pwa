@@ -97,7 +97,7 @@ export class GameFactory1 extends GameFactory {
           let move = _moves[key];
           let type = types[move[3]];
           let physical = type.isPhysical;
-          GameFactory1._moves[key] = new Model1.Move1(key, move[0], move[1], move[2], type, move[4], move[5], physical, move[6]);
+          GameFactory1._moves[key] = new Model1.Move1(key, move[0], move[1], move[2], type, move[4], move[5], physical, !!move[6], move[7]);
         }
       }
     }

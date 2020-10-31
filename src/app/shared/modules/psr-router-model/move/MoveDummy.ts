@@ -10,6 +10,6 @@ export class MoveDummy extends Move {
    * @param name     Name of the dummy move
    */
   constructor(name: string) {
-    super(name.toUpperCase(), name, "", 0, null, 0, 0, `Dummy move ${name}`);
+    super(name.toUpperCase(), name, "", 0, null, 0, 0, false, `Dummy move ${name}`);
   }
 }

@@ -16,7 +16,7 @@
   },
   "HYPNO": {
     "default": [ "POUND", "HYPNOSIS", "DISABLE", "CONFUSION" ],
-    "level": [ "12#DISABLE", "17#CONFUSION", "24#HEADBUTT", "33#POISON_GAS", "37#PSYCHIC_M", "43#MEDITATE" ],
+    "level": [ "12#DISABLE", "17#CONFUSION", "24#HEADBUTT", "33#POISON_GAS", "37#PSYCHIC", "43#MEDITATE" ],
     "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_42", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_05" ]
   },
   "VULPIX": {
@@ -76,7 +76,7 @@
   },
   "VENONAT": {
     "default": [ "TACKLE", "DISABLE" ],
-    "level": [ "24#POISONPOWDER", "27#LEECH_LIFE", "30#STUN_SPORE", "35#PSYBEAM", "38#SLEEP_POWDER", "43#PSYCHIC_M" ],
+    "level": [ "24#POISONPOWDER", "27#LEECH_LIFE", "30#STUN_SPORE", "35#PSYBEAM", "38#SLEEP_POWDER", "43#PSYCHIC" ],
     "tm": [ "TM_06", "TM_09", "TM_10", "TM_20", "TM_21", "TM_22", "TM_29", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_46", "TM_50" ]
   },
   "PARAS": {
@@ -161,7 +161,7 @@
   },
   "SLOWPOKE": {
     "default": [ "CONFUSION" ],
-    "level": [ "18#DISABLE", "22#HEADBUTT", "27#GROWL", "33#WATER_GUN", "40#AMNESIA", "48#PSYCHIC_M" ],
+    "level": [ "18#DISABLE", "22#HEADBUTT", "27#GROWL", "33#WATER_GUN", "40#AMNESIA", "48#PSYCHIC" ],
     "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_16", "TM_20", "TM_26", "TM_27", "TM_28", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_03", "HM_04", "HM_05" ]
   },
   "PRIMEAPE": {
@@ -291,7 +291,7 @@
   },
   "MEW": {
     "default": [ "POUND" ],
-    "level": [ "10#TRANSFORM", "20#MEGA_PUNCH", "30#METRONOME", "40#PSYCHIC_M" ],
+    "level": [ "10#TRANSFORM", "20#MEGA_PUNCH", "30#METRONOME", "40#PSYCHIC" ],
     "tm": [ "TM_01", "TM_02", "TM_03", "TM_04", "TM_05", "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_21", "TM_22", "TM_23", "TM_24", "TM_25", "TM_26", "TM_27", "TM_28", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_36", "TM_37", "TM_38", "TM_39", "TM_40", "TM_41", "TM_42", "TM_43", "TM_44", "TM_45", "TM_46", "TM_47", "TM_48", "TM_49", "TM_50", "HM_01", "HM_02", "HM_03", "HM_04", "HM_05" ]
   },
   "CHARMANDER": {
@@ -376,7 +376,7 @@
   },
   "KADABRA": {
     "default": [ "TELEPORT", "CONFUSION", "DISABLE" ],
-    "level": [ "16#CONFUSION", "20#DISABLE", "27#PSYBEAM", "31#RECOVER", "38#PSYCHIC_M", "42#REFLECT" ],
+    "level": [ "16#CONFUSION", "20#DISABLE", "27#PSYBEAM", "31#RECOVER", "38#PSYCHIC", "42#REFLECT" ],
     "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_28", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_05" ]
   },
   "RAICHU": {
@@ -431,7 +431,7 @@
   },
   "VENOMOTH": {
     "default": [ "TACKLE", "DISABLE", "POISONPOWDER", "LEECH_LIFE" ],
-    "level": [ "24#POISONPOWDER", "27#LEECH_LIFE", "30#STUN_SPORE", "38#PSYBEAM", "43#SLEEP_POWDER", "50#PSYCHIC_M" ],
+    "level": [ "24#POISONPOWDER", "27#LEECH_LIFE", "30#STUN_SPORE", "38#PSYBEAM", "43#SLEEP_POWDER", "50#PSYCHIC" ],
     "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_22", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_44", "TM_46", "TM_50" ]
   },
   "EXEGGUTOR": {
@@ -591,7 +591,7 @@
   },
   "ALAKAZAM": {
     "default": [ "TELEPORT", "CONFUSION", "DISABLE" ],
-    "level": [ "16#CONFUSION", "20#DISABLE", "27#PSYBEAM", "31#RECOVER", "38#PSYCHIC_M", "42#REFLECT" ],
+    "level": [ "16#CONFUSION", "20#DISABLE", "27#PSYBEAM", "31#RECOVER", "38#PSYCHIC", "42#REFLECT" ],
     "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_28", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_05" ]
   },
   "SEAKING": {
@@ -606,7 +606,7 @@
   },
   "SLOWBRO": {
     "default": [ "CONFUSION", "DISABLE", "HEADBUTT" ],
-    "level": [ "18#DISABLE", "22#HEADBUTT", "27#GROWL", "33#WATER_GUN", "37#WITHDRAW", "44#AMNESIA", "55#PSYCHIC_M" ],
+    "level": [ "18#DISABLE", "22#HEADBUTT", "27#GROWL", "33#WATER_GUN", "37#WITHDRAW", "44#AMNESIA", "55#PSYCHIC" ],
     "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_03", "HM_04", "HM_05" ]
   },
   "VAPOREON": {
@@ -671,7 +671,7 @@
   },
   "DROWZEE": {
     "default": [ "POUND", "HYPNOSIS" ],
-    "level": [ "12#DISABLE", "17#CONFUSION", "24#HEADBUTT", "29#POISON_GAS", "32#PSYCHIC_M", "37#MEDITATE" ],
+    "level": [ "12#DISABLE", "17#CONFUSION", "24#HEADBUTT", "29#POISON_GAS", "32#PSYCHIC", "37#MEDITATE" ],
     "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_42", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_05" ]
   },
   "TANGELA": {
@@ -745,8 +745,8 @@
     "tm": [ "TM_06", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_36", "TM_39", "TM_44", "TM_47", "TM_49", "TM_50", "HM_03" ]
   },
   "MEWTWO": {
-    "default": [ "CONFUSION", "DISABLE", "SWIFT", "PSYCHIC_M" ],
-    "level": [ "63#BARRIER", "66#PSYCHIC_M", "70#RECOVER", "75#MIST", "81#AMNESIA" ],
+    "default": [ "CONFUSION", "DISABLE", "SWIFT", "PSYCHIC" ],
+    "level": [ "63#BARRIER", "66#PSYCHIC", "70#RECOVER", "75#MIST", "81#AMNESIA" ],
     "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_22", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_36", "TM_38", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_04", "HM_05" ]
   },
   "NIDORANM": {

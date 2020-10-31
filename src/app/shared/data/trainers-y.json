@@ -1540,7 +1540,7 @@
     "Koga": [
       {
         "key": "Fuchsia Gym - Koga",
-        "moves": [ "0#0#TOXIC", "0#1#TACKLE", "1#0#TOXIC", "1#2#SUPERSONIC", "2#0#TOXIC", "2#1#DOUBLE_EDGE", "3#0#LEECH_LIFE", "3#1#DOUBLE_TEAM", "3#2#PSYCHIC_M", "3#3#TOXIC" ],
+        "moves": [ "0#0#TOXIC", "0#1#TACKLE", "1#0#TOXIC", "1#2#SUPERSONIC", "2#0#TOXIC", "2#1#DOUBLE_EDGE", "3#0#LEECH_LIFE", "3#1#DOUBLE_TEAM", "3#2#PSYCHIC", "3#3#TOXIC" ],
         "name": "Koga",
         "party": [ "VENONAT#44", "VENONAT#46", "VENONAT#48", "VENOMOTH#50" ]
       }
@@ -2116,7 +2116,7 @@
     "Lorelei": [
       {
         "key": "Lorelei",
-        "moves": [ "0#0#BUBBLEBEAM", "1#2#ICE_BEAM", "2#0#PSYCHIC_M", "2#1#SURF", "3#2#LOVELY_KISS", "4#2#BLIZZARD" ],
+        "moves": [ "0#0#BUBBLEBEAM", "1#2#ICE_BEAM", "2#0#PSYCHIC", "2#1#SURF", "3#2#LOVELY_KISS", "4#2#BLIZZARD" ],
         "name": "Lorelei",
         "party": [ "DEWGONG#54", "CLOYSTER#53", "SLOWBRO#54", "JYNX#56", "LAPRAS#56" ]
       }
@@ -2207,7 +2207,7 @@
     "Agatha": [
       {
         "key": "Agatha",
-        "moves": [ "0#1#SUBSTITUTE", "0#2#LICK", "0#3#MEGA_DRAIN", "1#1#TOXIC", "1#3#LEECH_LIFE", "2#1#LICK", "3#0#WRAP", "4#1#PSYCHIC_M" ],
+        "moves": [ "0#1#SUBSTITUTE", "0#2#LICK", "0#3#MEGA_DRAIN", "1#1#TOXIC", "1#3#LEECH_LIFE", "2#1#LICK", "3#0#WRAP", "4#1#PSYCHIC" ],
         "name": "Agatha",
         "party": [ "GENGAR#56", "GOLBAT#56", "HAUNTER#55", "ARBOK#58", "GENGAR#60" ]
       }

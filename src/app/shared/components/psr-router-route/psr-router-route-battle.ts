@@ -114,8 +114,20 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
             let b = battleStage.player.team[dr.entrant.partyIndex];
             let bdr = dr.playerDR;
             let obdr = dr.trainerDR;
-            let movesAttacker = b.moveset.map((strMove, i) => `${strMove}: ${bdr[i].range.toString()} (${bdr[i].critRange.toString()})`);
-            let movesDefender = ob.moveset.map((strMove, i) => `${strMove}: ${obdr[i].range.toString()} (${obdr[i].critRange.toString()})`);
+            let movesAttacker = b.moveset.map((strMove, i) => {
+              if (bdr[i].range.count == 0 && bdr[i].critRange.count == 0) {
+                return `${strMove}`;
+              } else {
+                return `${strMove}: ${bdr[i].range.toString()} (${bdr[i].critRange.toString()})`;
+              }
+            });
+            let movesDefender = ob.moveset.map((strMove, i) => {
+              if (obdr[i].range.count == 0 && obdr[i].critRange.count == 0) {
+                return `${strMove}`;
+              } else {
+                return `${strMove}: ${obdr[i].range.toString()} (${obdr[i].critRange.toString()})`;
+              }
+            });
             let actualBB = battleStage.badgeBoosts;
             let actualStages = battleStage.stages;
             let opponentStages = battleStage.stagesOpponent;
