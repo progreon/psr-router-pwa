@@ -12,38 +12,30 @@ import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterTrainers extends PsrRouterPage {
 
-  @property({type: Array})
+  @property({ type: Array })
   public trainers: { [key: string]: Trainer };
   private filteredTrainers: { [key: string]: Trainer };
 
   _render() {
     let trainerElements = [];
     this._filter();
-    // TODO: sort by alias, name, location
-    // TODO: show name, location instead of key
-    Object.keys(this.filteredTrainers).sort((ta, tb) => ta.toString().localeCompare(tb.toString())).forEach(t => {
-      let trainer: Trainer = this.filteredTrainers[t];
-      trainerElements.push(html`
+    Object.keys(this.filteredTrainers)
+      .map(t => this.filteredTrainers[t])
+      .sort((ta, tb) => ta.toString().localeCompare(tb.toString()))
+      .forEach(trainer => {
+        trainerElements.push(html`
         <div class="item">
-          <vaadin-item id="${t}" @click="${this._onClick.bind(this, trainer)}">
-            <div><strong>${trainer.key}</strong></div>
+          <vaadin-item id="${trainer.key}" @click="${this._onClick.bind(this, trainer)}">
+            <div><strong>${trainer.toString()}</strong></div>
             <div>Exp. Points: ${trainer.getTotalExp()}</div>
+            <div>Name: ${trainer.name}</div>
+            <div>Location: ${trainer.location}</div>
             <div ?hidden="${!trainer.alias}">Alias: ${trainer.alias || "-"}</div>
             <div class="key" style="opacity: 0.5"><i>[key: ${trainer.key}]</i></div>
           </vaadin-item>
         </div>
       `);
-    });
-    // for (let t in this.trainers) {
-    //   let trainer = this.trainers[t];
-    //   trainerElements.push(html`
-    //     <vaadin-item id="${t}" @click="${this._onClick.bind(this, trainer)}">
-    //       <div><strong>${trainer.key}</strong></div>
-    //       <div>Exp. Points: ${trainer.getTotalExp()}</div>
-    //       <div ?hidden="${!trainer.alias}">Alias: ${trainer.alias || "-"}</div>
-    //     </vaadin-item>
-    //   `);
-    // }
+      });
     return html`
       ${AppStyles}
       <style>
