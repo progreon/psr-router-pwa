@@ -4,10 +4,10 @@ import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { RouteManager } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
-import '@vaadin/vaadin-text-field';
+import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
 import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
-import '@vaadin/vaadin-combo-box';
+import '@vaadin/vaadin-combo-box/theme/material/vaadin-combo-box';
 
 // These are the shared styles needed by this element.
 import { AppStyles } from 'Shared/app-styles';

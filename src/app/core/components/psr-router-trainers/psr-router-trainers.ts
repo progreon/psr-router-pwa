@@ -5,6 +5,7 @@ import { Trainer } from 'SharedModules/psr-router-model/Model';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-item/theme/material/vaadin-item';
+import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
 
 // These are the shared styles needed by this element.
 import { AppStyles } from 'Shared/app-styles';
@@ -12,12 +13,16 @@ import { AppStyles } from 'Shared/app-styles';
 class PsrRouterTrainers extends PsrRouterPage {
 
   @property({type: Array})
-  public trainers: Trainer[];
+  public trainers: { [key: string]: Trainer };
+  private filteredTrainers: { [key: string]: Trainer };
 
   _render() {
     let trainerElements = [];
-    Object.keys(this.trainers).sort((ta, tb) => ta.toString().localeCompare(tb.toString())).forEach(t => {
-      let trainer: Trainer = this.trainers[t];
+    this._filter();
+    // TODO: sort by alias, name, location
+    // TODO: show name, location instead of key
+    Object.keys(this.filteredTrainers).sort((ta, tb) => ta.toString().localeCompare(tb.toString())).forEach(t => {
+      let trainer: Trainer = this.filteredTrainers[t];
       trainerElements.push(html`
         <div class="item">
           <vaadin-item id="${t}" @click="${this._onClick.bind(this, trainer)}">
@@ -50,8 +55,12 @@ class PsrRouterTrainers extends PsrRouterPage {
         .item:hover {
           background-color: rgba(0, 0, 0, 0.15);
         }
+        #search {
+          width: 100%;
+        }
       </style>
       <h2>Trainers</h2>
+      <vaadin-text-field id="search" label="Search" clear-button-visible @input="${() => this.requestUpdate()}"></vaadin-text-field>
       ${trainerElements}
     `;
   }
@@ -61,8 +70,33 @@ class PsrRouterTrainers extends PsrRouterPage {
     this.triggerDataRefresh();
   }
 
+  updated(_changedProperties) {
+    super.updated(_changedProperties);
+    this.shadowRoot.getElementById("search")?.focus();
+  }
+
   triggerDataRefresh() {
     this.trainers = window.app && window.app.game && window.app.game.trainers ? window.app.game.trainers : {};
+  }
+
+  _filter() {
+    let filterNode: any = this.shadowRoot.getElementById("search");
+    let filters: string[] = (filterNode?.value?.toUpperCase() || "").split(" ");
+    this.filteredTrainers = {};
+    for (let i in this.trainers) {
+      this.filteredTrainers[i] = this.trainers[i];
+    }
+    filters.forEach(filter => {
+      for (let i in this.filteredTrainers) {
+        let trainers: Trainer = this.filteredTrainers[i];
+        if (!!filter && !trainers.key.toUpperCase().includes(filter)
+          && !trainers.name.toUpperCase().includes(filter)
+          && !trainers.alias?.toUpperCase()?.includes(filter)
+          && !trainers.location.toUpperCase().includes(filter)) {
+          delete this.filteredTrainers[i];
+        }
+      }
+    });
   }
 
   _onClick(trainer: Trainer) {

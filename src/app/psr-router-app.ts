@@ -162,6 +162,11 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           --app-footer-height: var(--app-grid-3x);
         }
 
+        * {
+          --material-primary-color: var(--app-header-background-color);
+          --material-primary-text-color: var(--app-header-background-color);
+        }
+
         .header-layout {
           background-color: var(--app-background-color);
           height: 100vh;
