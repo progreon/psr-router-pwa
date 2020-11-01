@@ -69,7 +69,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
           display: flex;
           flex-direction: column;
         }
-        .table, .col > * {
+        .table, .col > div {
           border: 1px solid black;
           border-collapse: collapse;
           white-space: nowrap;
@@ -114,18 +114,20 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
             let b = battleStage.player.team[dr.entrant.partyIndex];
             let bdr = dr.playerDR;
             let obdr = dr.trainerDR;
-            let movesAttacker = b.moveset.map((strMove, i) => {
+            let movesAttacker = b.moveset.map((ms, i) => {
+              let move = ms.move;
               if (bdr[i].range.count == 0 && bdr[i].critRange.count == 0) {
-                return `${strMove}`;
+                return { html: `${move}`, move };
               } else {
-                return `${strMove}: ${bdr[i].range.toString()} (${bdr[i].critRange.toString()})`;
+                return { html: `${move}: ${bdr[i].range.toString()} (${bdr[i].critRange.toString()})`, move };
               }
             });
-            let movesDefender = ob.moveset.map((strMove, i) => {
+            let movesDefender = ob.moveset.map((ms, i) => {
+              let move = ms.move;
               if (obdr[i].range.count == 0 && obdr[i].critRange.count == 0) {
-                return `${strMove}`;
+                return { html: `${move}`, move };
               } else {
-                return `${strMove}: ${obdr[i].range.toString()} (${obdr[i].critRange.toString()})`;
+                return { html: `${move}: ${obdr[i].range.toString()} (${obdr[i].critRange.toString()})`, move };
               }
             });
             let actualBB = battleStage.badgeBoosts;
@@ -162,17 +164,17 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 <div class="bcol">
                   <div class="col">
                     <div class="click" @click="${this._showBattlerDialog.bind(this, b, actualStages, actualBB, true)}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.) ${bf}</div>
-                    <div>${movesAttacker[0] || "-"}</div>
-                    <div>${movesAttacker[1] || "-"}</div>
-                    <div>${movesAttacker[2] || "-"}</div>
-                    <div>${movesAttacker[3] || "-"}</div>
+                    <div>${movesAttacker[0]?.html || "-"}</div>
+                    <div>${movesAttacker[1]?.html || "-"}</div>
+                    <div>${movesAttacker[2]?.html || "-"}</div>
+                    <div>${movesAttacker[3]?.html || "-"}</div>
                   </div>
                   <div class="col">
                     <div class="click" @click="${this._showBattlerDialog.bind(this, ob, opponentStages, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.) ${of}</div>
-                    <div>${movesDefender[0] || "-"}</div>
-                    <div>${movesDefender[1] || "-"}</div>
-                    <div>${movesDefender[2] || "-"}</div>
-                    <div>${movesDefender[3] || "-"}</div>
+                    <div>${movesDefender[0]?.html || "-"}</div>
+                    <div>${movesDefender[1]?.html || "-"}</div>
+                    <div>${movesDefender[2]?.html || "-"}</div>
+                    <div>${movesDefender[3]?.html || "-"}</div>
                   </div>
                 </div>
                 <div class="col">

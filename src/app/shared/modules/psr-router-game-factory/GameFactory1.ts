@@ -94,6 +94,7 @@ export class GameFactory1 extends GameFactory {
       GameFactory1._moves = {};
       for (let key in _moves) {
         if (key !== "info") {
+          key = key.toUpperCase();
           let move = _moves[key];
           let type = types[move[3]];
           let physical = type.isPhysical;
@@ -109,6 +110,8 @@ export class GameFactory1 extends GameFactory {
       GameFactory1._pokemonPerGame = {};
     }
     let types = this.getTypes(gameInfo);
+    let moves = this.getMoves(gameInfo);
+    let items = this.getItems(gameInfo);
     switch (gameInfo.key) {
       case "r":
       case "b":
@@ -122,12 +125,24 @@ export class GameFactory1 extends GameFactory {
           for (let p in _movesLearnedRB) {
             let pokemon = pokemonMap[p.toUpperCase()];
             if (pokemon) {
-              _movesLearnedRB[p].default.forEach((m: string) => pokemon.addLevelupMove(0, m));
+              _movesLearnedRB[p].default.forEach((m: string) => {
+                let move = moves[m.toUpperCase()];
+                if (!move) {
+                  console.error(`Error while parsing pokemon: could not find learned move ${m}`);
+                } else {
+                  pokemon.addLevelupMove(0, move);
+                }
+              });
               _movesLearnedRB[p].level.forEach((lm: string) => {
                 let [l, m] = lm.split("#");
-                pokemon.addLevelupMove(parseInt(l), m);
+                let move = moves[m.toUpperCase()];
+                if (!move) {
+                  console.error(`Error while parsing pokemon: could not find learned move ${m}`);
+                } else {
+                  pokemon.addLevelupMove(parseInt(l), move);
+                }
               });
-              _movesLearnedRB[p].tm.forEach((m: string) => pokemon.addTmMove(m));
+              _movesLearnedRB[p].tm.forEach((m: string) => pokemon.addTm(items[m.toUpperCase()]));
             }
           }
           for (let p in _evolutions) {
@@ -152,12 +167,24 @@ export class GameFactory1 extends GameFactory {
           for (let p in _movesLearnedY) {
             let pokemon = pokemonMap[p.toUpperCase()];
             if (pokemon) {
-              _movesLearnedY[p].default.forEach((m: string) => pokemon.addLevelupMove(0, m));
+              _movesLearnedY[p].default.forEach((m: string) => {
+                let move = moves[m.toUpperCase()];
+                if (!move) {
+                  console.error(`Error while parsing pokemon: could not find learned move ${m}`);
+                } else {
+                  pokemon.addLevelupMove(0, move);
+                }
+              });
               _movesLearnedY[p].level.forEach((lm: string) => {
                 let [l, m] = lm.split("#");
-                pokemon.addLevelupMove(parseInt(l), m);
+                let move = moves[m.toUpperCase()];
+                if (!move) {
+                  console.error(`Error while parsing pokemon: could not find learned move ${m}`);
+                } else {
+                  pokemon.addLevelupMove(parseInt(l), move);
+                }
               });
-              _movesLearnedY[p].tm.forEach((m: string) => pokemon.addTmMove(m));
+              _movesLearnedY[p].tm.forEach((m: string) => pokemon.addTm(items[m.toUpperCase()]));
             }
           }
           for (let p in _evolutions) {
@@ -180,6 +207,7 @@ export class GameFactory1 extends GameFactory {
     if (!GameFactory1._trainersPerGame) {
       GameFactory1._trainersPerGame = {};
     }
+    let moves = this.getMoves(gameInfo);
     let pokemon = this.getPokemon(gameInfo);
     let trainerFile;
     let key;
@@ -189,7 +217,6 @@ export class GameFactory1 extends GameFactory {
         trainerFile = _trainersRB;
         key = "rb";
         break;
-      // return GameFactory1._trainersPerGame["rb"];
       case "y":
         trainerFile = _trainersY;
         key = "y";
@@ -201,19 +228,19 @@ export class GameFactory1 extends GameFactory {
         for (let loc in trainerFile) {
           for (let tClass in trainerFile[loc]) {
             trainerFile[loc][tClass].forEach(t => {
-              let party = [];
+              let party: Model1.Battler1[] = [];
               t.party.forEach((pl: string) => {
                 let [p, l] = pl.split("#");
                 let poke = pokemon[p.toUpperCase()];
                 if (!poke) {
-                  console.log(p + " not found");
+                  console.error(p + " not found");
                 }
                 party.push(new Model1.Battler1(null, poke, null, true, parseInt(l)));
               });
               if (t.moves) {
                 t.moves.forEach((pimim: string) => {
                   let [pi, mi, m] = pimim.split("#");
-                  party[pi].moveset[mi] = m;
+                  party[pi].moveset[mi] = new ModelAbstract.Battler.MoveSlot(moves[m.toUpperCase()]);
                 });
               }
               let trainer = new Model.Trainer(t.key, t.name, tClass, party, loc, t.alias, t.boost);

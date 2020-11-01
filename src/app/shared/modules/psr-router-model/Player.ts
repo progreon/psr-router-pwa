@@ -290,7 +290,7 @@ export class Player {
         break;
       case "TM":
         // TODO: arg check
-        let oldMove = this.team[partyIndex].moveset[moveIndex];
+        let oldMove = this.team[partyIndex]?.moveset[moveIndex]?.move;
         if (!this.team[partyIndex].learnTmMove(item, oldMove)) return false;
         break;
       case "BATTLE":

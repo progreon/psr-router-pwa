@@ -1,8 +1,5 @@
 import { Game } from "../Game";
-import { Item } from "../ModelAbstract";
-import { Move } from "../ModelAbstract";
-import { Pokemon } from "../ModelAbstract";
-import { Type } from "../ModelAbstract";
+import { Item, Move, Pokemon, Type } from "../ModelAbstract";
 
 import { DVRange, RouterError } from "SharedModules/psr-router-util";
 import { Range } from 'SharedModules/psr-router-util';
@@ -14,11 +11,11 @@ import { EvolutionKey } from "../EvolutionKey";
  */
 export abstract class Battler {
   protected _level: number;
-  protected _moveset: string[];
+  protected _moveset: Battler.MoveSlot[];
   protected _levelExp: number;
   protected _settings = new Battler.Settings();
   public get level(): number { return this._level; }
-  public get moveset(): string[] { return this._moveset; }
+  public get moveset(): Battler.MoveSlot[] { return this._moveset; }
   public get levelExp(): number { return this._levelExp; }
   public get settings(): Battler.Settings { return this._settings; }
 
@@ -37,7 +34,7 @@ export abstract class Battler {
     public readonly isTrainerMon: boolean,
     level: number) {
     this._level = level;
-    this._moveset = pokemon.getDefaultMoveset(level); // TODO: hold Move's or strings of keys for Move?
+    this._moveset = pokemon.getDefaultMoveset(level).map(m => new Battler.MoveSlot(m)); // TODO: hold Move's or strings of keys for Move?
     this._levelExp = 0;
   }
 
@@ -65,25 +62,23 @@ export abstract class Battler {
 
   /**
    * Try to learn a TM or HM move.
-   * TODO: Move or string?
-   * @param newMove The TM or HM move
-   * @param oldMove
+   * @param tm      The TM or HM move
+   * @param oldMove The move to replace
    * @returns Returns true if success.
    */
-  learnTmMove(tm: Item, oldMove?: string): boolean {
+  learnTmMove(tm: Item, oldMove?: Move): boolean {
     let success = false;
-    let newMoveTM = tm.key;
-    let canLearn = this.pokemon.tmMoves.includes(newMoveTM);
-    let newMove = this.game.findMoveByName(tm.value)?.key;
-    let moves = this._moveset;
+    let canLearn = this.pokemon.tms.includes(tm);
+    let newMove = this.game.findMoveByName(tm.value);
+    let moves = this._moveset.map(ms => ms.move);
     if (canLearn && !moves.includes(newMove)) {
       if (!oldMove || moves.includes(oldMove)) {
         let i = 0;
-        while (i < 4 && oldMove != this._moveset[i] && this._moveset[i] != null)
+        while (i < 4 && oldMove != moves[i] && this._moveset[i] != null)
           i++;
         // only remove the move if no more room!
         if (i < 4) {
-          this._moveset[i] = newMove;
+          this._moveset[i] = new Battler.MoveSlot(newMove);
           success = true;
         }
       }
@@ -277,6 +272,25 @@ export abstract class Battler {
 }
 
 export namespace Battler {
+  export class MoveSlot {
+    private _pp: number;
+    public get pp() { return this._pp; }
+
+    constructor(public readonly move: Move) {
+      this._pp = move.pp;
+    }
+
+    public usePPUp() {
+      // TODO
+    }
+
+    public clone(): MoveSlot {
+      let ms = new MoveSlot(this.move);
+      ms._pp = this._pp;
+      return ms;
+    }
+  }
+
   export class Settings {
     levelUpMoves: { [key: string]: Move } = {}; // teach => over
     addLevelUpMove(newMove: Move, oldMove: Move) {

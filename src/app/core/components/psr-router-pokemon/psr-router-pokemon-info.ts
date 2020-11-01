@@ -20,9 +20,10 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
         moveLevels.push(html`<div>${lm.level}</div>`);
         moveNames.push(html`<div>${lm.move}</div>`);
       });
-      pokemon.tmMoves.forEach(move => {
-        moveLevels.push(html`<div>${move}</div>`);
-        moveNames.push(html`<div>${game.findItemByName(move).value}</div>`);
+      pokemon.tms.forEach(tm => {
+        moveLevels.push(html`<div>${tm}</div>`);
+        let move = game.findMoveByName(tm.value);
+        moveNames.push(html`<div>${move}</div>`);
       });
     }
     return html`

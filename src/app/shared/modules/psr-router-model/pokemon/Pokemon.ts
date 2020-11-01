@@ -1,7 +1,5 @@
-import { EvolutionKey, Type } from "../Model";
-import { Move } from "../move/Move";
-import { Game } from "../Game";
-import { ExperienceGroup } from "../ModelAbstract";
+import { EvolutionKey, Type, Item } from "../Model";
+import { ExperienceGroup, Move } from "../ModelAbstract";
 /**
  * Class representing an abstract pokemon
  * @todo
@@ -10,8 +8,8 @@ import { ExperienceGroup } from "../ModelAbstract";
 export abstract class Pokemon {
   public readonly key: string;
   public evolutions: { [key: string]: Pokemon; };
-  private _luMoves: { level: number, move: string }[];
-  private _tmMoves: string[];
+  private _luMoves: { level: number, move: Move }[];
+  private _tms: Item[]; // TODO: { tm: Item, move: Move } or { [key: string]: Move } ?
   constructor(
     public readonly name: string,
     public readonly id: number,
@@ -28,7 +26,7 @@ export abstract class Pokemon {
     this.key = name.toUpperCase();
     this.evolutions = {};
     this._luMoves = [];
-    this._tmMoves = [];
+    this._tms = [];
   }
   /**
    * @param evolutionKey
@@ -41,20 +39,20 @@ export abstract class Pokemon {
   getEvolution(evolutionKey: EvolutionKey): Pokemon {
     return this.evolutions[evolutionKey.toString().toUpperCase()];
   }
-  addLevelupMove(level: number, move: string) {
+  addLevelupMove(level: number, move: Move) {
     this._luMoves.push({ level, move });
   }
-  addTmMove(tm: string) {
-    this._tmMoves.push(tm);
+  addTm(tm: Item) {
+    this._tms.push(tm);
   }
 
   get levelupMoves() { return this._luMoves; }
-  get tmMoves() { return this._tmMoves; }
+  get tms() { return this._tms; }
 
-  getLearnedMoves(level: number): string[] {
+  getLearnedMoves(level: number): Move[] {
     return this._luMoves.filter(lm => lm.level == level).map(lm => lm.move);
   }
-  getDefaultMoveset(level: number): string[] {
+  getDefaultMoveset(level: number): Move[] {
     let moveset = [];
     this._luMoves.forEach(lm => {
       if (lm.level <= level && !moveset.includes(lm.move)) {

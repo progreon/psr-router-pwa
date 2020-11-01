@@ -381,15 +381,13 @@ export class BattleStage {
             playerDR: { move: Move, range: Range, critRange: Range }[],
             trainerDR: { move: Move, range: Range, critRange: Range }[]
           } = { entrant, playerDR: [], trainerDR: [] };
-          this.player.team[entrant.partyIndex].moveset.forEach(move => {
-            let m = this.battle.game.findMoveByName(move);
+          this.player.team[entrant.partyIndex].moveset.map(ms => ms.move).forEach(move => {
             let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, b, ob, this.stages, this.stagesOpponent, this.badgeBoosts, new BadgeBoosts());
-            damageRange.playerDR.push({ move: m, range: dr.range, critRange: dr.critRange });
+            damageRange.playerDR.push({ move, range: dr.range, critRange: dr.critRange });
           });
-          this.battle.trainer.party[this.opponentIndex].moveset.forEach(move => {
-            let m = this.battle.game.findMoveByName(move);
+          this.battle.trainer.party[this.opponentIndex].moveset.map(ms => ms.move).forEach(move => {
             let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, ob, b, this.stagesOpponent, this.stages, new BadgeBoosts(), this.badgeBoosts);
-            damageRange.trainerDR.push({ move: m, range: dr.range, critRange: dr.critRange });
+            damageRange.trainerDR.push({ move, range: dr.range, critRange: dr.critRange });
           });
           this.damageRanges.push(damageRange);
         }

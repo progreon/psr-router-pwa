@@ -1,6 +1,6 @@
 import { Engine } from './Engine';
 import { Range, Stages, BadgeBoosts } from "../psr-router-util";
-import { Battler, Game } from "../psr-router-model/ModelAbstract";
+import { Battler, Game, Move } from "../psr-router-model/ModelAbstract";
 import { Battler1, Move1 } from '../psr-router-model/Model1';
 
 export class Engine1 implements Engine {
@@ -17,7 +17,7 @@ export class Engine1 implements Engine {
     return [100, 100, 100, 100, 100, 100, 1, 10, 1, 10, 1, 10, 1][stage + 6];
   }
 
-  public getDamageRange(game: Game, move: string, attacker: Battler, defender: Battler, stagesA: Stages, stagesD: Stages, bbA: BadgeBoosts, bbD: BadgeBoosts): { range: Range, critRange: Range } {
+  public getDamageRange(game: Game, move: Move, attacker: Battler, defender: Battler, stagesA: Stages, stagesD: Stages, bbA: BadgeBoosts, bbD: BadgeBoosts): { range: Range, critRange: Range } {
     let range: Range = this._getDamageRange(game, move, attacker, defender, stagesA, stagesD, bbA, bbD, false);
     let critRange: Range = this._getDamageRange(game, move, attacker, defender, stagesA, stagesD, bbA, bbD, true);
     return {range, critRange};
@@ -36,8 +36,8 @@ export class Engine1 implements Engine {
    * @todo check with https://github.com/pokemon-speedrunning/RouteOne/blob/master/src/DamageCalculator.java
    * @see https://web.archive.org/web/20171112181444/http://upcarchive.playker.info/0/upokecenter/content/pokemon-red-version-blue-version-and-yellow-version-damage-calculation-process.html
    */
-  private _getDamageRange(game: Game, move: string, attacker: Battler, defender: Battler, stagesA: Stages, stagesD: Stages, bbA: BadgeBoosts, bbD: BadgeBoosts, isCrit: Boolean): Range {
-    let m: Move1 = <Move1> game.findMoveByName(move);
+  private _getDamageRange(game: Game, move: Move, attacker: Battler, defender: Battler, stagesA: Stages, stagesD: Stages, bbA: BadgeBoosts, bbD: BadgeBoosts, isCrit: Boolean): Range {
+    let m: Move1 = <Move1> move;
     let isPhysical = m.type.isPhysical;
     let a: Battler1 = <Battler1> attacker;
     let d: Battler1 = <Battler1> defender;

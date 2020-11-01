@@ -81,6 +81,15 @@ export class Game {
   }
 
   /**
+   * Find a move by tm.
+   * @param tm  The tm.
+   * @returns The move.
+   */
+  findMoveByTm(tm: Item): Move {
+    return tm && tm.isTmOrHm() ? this.findMoveByName(tm.value) : undefined;
+  }
+
+  /**
    * Get a dummy move.
    * @param name  The name of the move.
    * @returns The move.

@@ -109,21 +109,21 @@ export class Battler1 extends Battler {
       this._levelExp -= this.pokemon.expGroup.getDeltaExp(this.level, newLevel);
       this._level = newLevel;
       this._updateCurrentStats(); // Handle it the RBY way
-      // List<Move> newMoves = pokemon.getLearnedMoves(level); // Handle it the RBY way
       let newMoves = this.pokemon.getLearnedMoves(this.level); // Handle it the RBY way
       newMoves.forEach(nm => {
-        // TODO: check what move to override -> make Battler settings?
         if (this._moveset.length < 4) {
-          this._moveset.push(nm);
+          this._moveset.push(new Battler.MoveSlot(nm));
         } else {
-          let i = this._moveset.indexOf(this.settings.levelUpMoves[nm]?.key);
-          if (i > 0) {
-            this._moveset[i] = nm;
+          let i = -1;
+          this._moveset.forEach((ms, msi) => {
+            if (ms.move == this.settings.levelUpMoves[nm.key]) {
+              i = msi;
+            }
+          });
+          if (i >= 0) {
+            this._moveset[i] = new Battler.MoveSlot(nm);
           }
         }
-        // if (this._moveset.length > 4) {
-        //   this._moveset = this._moveset.slice(-4);
-        // }
       });
     }
 
@@ -369,91 +369,4 @@ export class Battler1 extends Battler {
 
     return newB;
   }
-
 }
-
-// public class BattlerImpl extends Battler {
-//     /**
-//      * Use this constructor if it's a trainer pokemon.
-//      *
-//      * @param rd
-//      * @param pokemon
-//      * @param level
-//      * @param moveset
-//      */
-//     public BattlerImpl(RouterData rd, Pokemon pokemon, int level, Move[] moveset) {
-//         super(rd, pokemon, null, true, level);
-//         this.moveset = moveset;
-//         if (this.moveset == null) {
-//             initDefaultMoveSet(pokemon, level);
-//         }
-//         initPossibleDVs();
-//         updateCurrentStats();
-//     }
-//
-//     /**
-//      * Use this constructor if it's a caught pokemon, or a given one.
-//      *
-//      * @param rd
-//      * @param pokemon
-//      * @param catchLocation null if pokemon was a given one
-//      * @param level
-//      */
-//     public BattlerImpl(RouterData rd, Pokemon pokemon, EncounterArea catchLocation, int level) {
-//         super(rd, pokemon, catchLocation, false, level);
-//         initDefaultMoveSet(pokemon, level);
-//         initPossibleDVs();
-//         updateCurrentStats();
-//     }
-//
-//     /**
-//      * Use this constructor if it's a caught pokemon.
-//      *
-//      * @param rd
-//      * @param catchLocation
-//      * @param slot
-//      */
-//     public BattlerImpl(RouterData rd, EncounterArea catchLocation, int slot) {
-//         super(rd, catchLocation.slots[slot].pkmn, catchLocation, false, catchLocation.slots[slot].level);
-//         initDefaultMoveSet(pokemon, level);
-//         initPossibleDVs();
-//         updateCurrentStats();
-//     }
-//
-//     /**
-//      * Use this constructor if it's a RNG manip'd pokemon
-//      *
-//      * @param rd
-//      * @param catchLocation
-//      * @param pokemon
-//      * @param level
-//      * @param atkDV
-//      * @param defDV
-//      * @param spdDV
-//      * @param spcDV
-//      */
-//     public BattlerImpl(RouterData rd, EncounterArea catchLocation, Pokemon pokemon, int level, int atkDV, int defDV, int spdDV, int spcDV) {
-//         super(rd, pokemon, catchLocation, false, level);
-//         initDefaultMoveSet(pokemon, level);
-//         initPossibleDVs(atkDV, defDV, spdDV, spcDV);
-//         updateCurrentStats();
-//     }
-//
-//     @Override
-//     public int hashCode() {
-//         int hash = 7;
-//         hash = 89 * hash + Objects.hashCode(this.pokemon);
-//         hash = 89 * hash + Arrays.deepHashCode(this.moveset);
-//         hash = 89 * hash + Objects.hashCode(this.catchLocation);
-//         hash = 89 * hash + this.level;
-//         hash = 89 * hash + this.levelExp;
-//         hash = 89 * hash + this.hpXP;
-//         hash = 89 * hash + this.atkXP;
-//         hash = 89 * hash + this.defXP;
-//         hash = 89 * hash + this.spdXP;
-//         hash = 89 * hash + this.spcXP;
-//         hash = 89 * hash + Arrays.deepHashCode(this.possibleDVs);
-//         return hash;
-//     }
-//
-// }
