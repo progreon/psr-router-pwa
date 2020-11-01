@@ -11,7 +11,6 @@ import 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import 'SharedComponents/psr-router-model/psr-router-battler';
 import { PsrRouterTrainer } from 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import { OpponentAction } from 'App/shared/modules/psr-router-route/psr-router-route-actions/OpponentAction';
-import { BattleStage } from 'App/shared/modules/psr-router-route/RouteBattle';
 
 class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   _getPopupContentRenderer() {
@@ -104,8 +103,8 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
       </style>
       <vaadin-dialog id="battler-dialog"></vaadin-dialog>
     `);
-    if (battleEntry.playerBefore) {
-      if (battleEntry.playerBefore.team.length > 0) {
+    if (battleEntry.player) {
+      if (battleEntry.player.team.length > 0) {
         let battle = [];
         battleEntry.battleStages.forEach((battleStage, bsi) => {
           let ob = battleEntry.trainer.party[bsi];
@@ -211,7 +210,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     return super._getTitle() || (<Route.RouteBattle>super.routeEntry).trainer.toString();
   }
 
-  _triggerDamageCalc(battleStage: BattleStage, bsi: number, dri: number): void {
+  _triggerDamageCalc(battleStage: Route.RouteBattle.Stage, bsi: number, dri: number): void {
     battleStage.badgeBoosts = this._getBadgeBoosts(bsi, dri);
     battleStage.stages = this._getStagesPlayer(bsi, dri);
     battleStage.stagesOpponent = this._getStagesOpponent(bsi, dri);

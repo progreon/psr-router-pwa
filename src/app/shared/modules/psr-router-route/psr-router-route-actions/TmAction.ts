@@ -3,7 +3,7 @@ import { RouterError, RouterMessage } from '../../psr-router-util';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
-import { BattleStage } from '../RouteBattle';
+import { RouteBattle } from '../RouteBattle';
 
 export class TmAction extends AAction {
     public static readonly ACTION_TYPE: string = "Tm";
@@ -21,7 +21,7 @@ export class TmAction extends AAction {
         return TmAction.ACTION_TYPE;
     }
 
-    public applyAction(player: Model.Player, battleStage?: BattleStage): void {
+    public applyAction(player: Model.Player, battleStage?: RouteBattle.Stage): void {
         super.applyAction(player, battleStage);
         if (!this.tm || !this.tm.isTmOrHm()) {
             this.addMessage(new RouterMessage("No tm defined", RouterMessage.Type.Error));

@@ -45,7 +45,7 @@ export class RouteGetPokemon extends RouteEntry {
 
   apply(player?: Model.Player, fireApplied = true): void {
     super.apply(player, false);
-    let nextPlayer = super.playerAfter;
+    let nextPlayer = super.nextPlayer;
 
     let choice: ModelAbstract.Battler;
     if (this.choices.length > 0) {

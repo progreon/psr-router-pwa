@@ -1,7 +1,6 @@
 'use strict';
 
 // imports
-import { RouterMessage } from '../psr-router-util';
 import { RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon, RouteMenu, RouteManip } from '.';
 import { RouteEntryInfo } from './util';
 import { Game } from '../psr-router-model/Game';
@@ -56,23 +55,23 @@ export class RouteSection extends RouteEntry {
   apply(player?: Player, fireApplied = true): void {
     super.apply(player, false);
     this._applyNextChild();
-    super.updateNextPlayer(this.playerAfter, fireApplied);
+    super.updateNextPlayer(this.nextPlayer, fireApplied);
   }
 
   private _applyNextChild(previousChild?: RouteEntry) {
     let prevChildIdx = 0;
-    let nextPlayer = super.playerAfter;
+    let player = super.nextPlayer;
     
     let nextChildIdx = 0;
     if (previousChild) {
-      nextPlayer = previousChild.playerAfter;
+      player = previousChild.nextPlayer;
       while (prevChildIdx < this.children.length && this.children[prevChildIdx] !== previousChild) {
         prevChildIdx++;
       }
       nextChildIdx = prevChildIdx + 1;
     }
     if (nextChildIdx < this.children.length) {
-      this.children[nextChildIdx].apply(nextPlayer);
+      this.children[nextChildIdx].apply(player);
     }
   }
 
@@ -97,11 +96,11 @@ export class RouteSection extends RouteEntry {
     return entryList;
   }
 
-  public get playerAfter() {
+  public get nextPlayer() {
     if (this._children.length > 0) {
-      return this._children[this._children.length - 1].playerAfter;
+      return this._children[this._children.length - 1].nextPlayer;
     } else {
-      return super.playerAfter;
+      return super.nextPlayer;
     }
   }
 

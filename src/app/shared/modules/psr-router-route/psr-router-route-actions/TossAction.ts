@@ -3,7 +3,7 @@ import { RouterMessage } from '../../psr-router-util';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
-import { BattleStage } from '../RouteBattle';
+import { RouteBattle } from '../RouteBattle';
 
 export class TossAction extends AAction {
     public static readonly ACTION_TYPE: string = "Toss";
@@ -20,7 +20,7 @@ export class TossAction extends AAction {
         return TossAction.ACTION_TYPE;
     }
 
-    public applyAction(player: Model.Player, battleStage?: BattleStage): void {
+    public applyAction(player: Model.Player, battleStage?: RouteBattle.Stage): void {
         super.applyAction(player, battleStage);
         // TODO: implement GetI-entry first
         this.actionString = `Toss ${this.count == "*" ? "all" : this.count} ${this.item.name}`;

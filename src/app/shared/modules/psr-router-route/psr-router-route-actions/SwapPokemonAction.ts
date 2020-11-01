@@ -3,7 +3,7 @@ import { RouterMessage } from '../../psr-router-util';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
-import { BattleStage } from '../RouteBattle';
+import { RouteBattle } from '../RouteBattle';
 
 export class SwapPokemonAction extends AAction {
     public static readonly ACTION_TYPE: string = "SwapP";
@@ -20,7 +20,7 @@ export class SwapPokemonAction extends AAction {
         return SwapPokemonAction.ACTION_TYPE;
     }
 
-    public applyAction(player: Model.Player, battleStage?: BattleStage): void {
+    public applyAction(player: Model.Player, battleStage?: RouteBattle.Stage): void {
         super.applyAction(player, battleStage);
         if (this.partyIndex1 >= 0 && this.partyIndex1 < player.team.length && this.partyIndex2 >= 0 && this.partyIndex2 < player.team.length) {
             if (battleStage) {

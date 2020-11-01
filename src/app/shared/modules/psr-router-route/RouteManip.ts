@@ -36,7 +36,7 @@ export class RouteManip extends RouteEntry {
 
   apply(player?: Model.Player, fireApplied = true): void {
     super.apply(player, false);
-    let nextPlayer = super.playerAfter;
+    let nextPlayer = super.nextPlayer;
     nextPlayer.addBattler(this.battler.clone());
     super.updateNextPlayer(nextPlayer, fireApplied);
   }

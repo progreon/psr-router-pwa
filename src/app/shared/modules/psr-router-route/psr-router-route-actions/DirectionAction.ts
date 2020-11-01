@@ -2,7 +2,7 @@
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
-import { BattleStage } from '../RouteBattle';
+import { RouteBattle } from '../RouteBattle';
 
 /**
  * @todo cover multiline description? (with indentations)
@@ -20,7 +20,7 @@ export class DirectionAction extends AAction {
         return DirectionAction.ACTION_TYPE;
     }
 
-    public applyAction(player: Model.Player, battleStage?: BattleStage): void {
+    public applyAction(player: Model.Player, battleStage?: RouteBattle.Stage): void {
         super.applyAction(player, battleStage);
     }
 

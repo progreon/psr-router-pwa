@@ -1,7 +1,7 @@
 import { Item } from "./Item";
 import { Battler } from "./battler/Battler";
 import { EvolutionKey } from "./EvolutionKey";
-import { BattleStage } from "../psr-router-route/RouteBattle";
+import { RouteBattle } from "../psr-router-route/RouteBattle";
 
 const MAX_SLOTS = 20;
 const MAX_PC_SLOTS = 50; // TODO
@@ -251,7 +251,7 @@ export class Player {
    * @returns Returns true if success.
    * @todo Finish and test.
    */
-  useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battleStage?: BattleStage): boolean {
+  useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battleStage?: RouteBattle.Stage): boolean {
     // TODO: force usage option (which skips the availability check)
     // let index = this.getItemIndex(item, false); // TODO: temporarily disabled because no GetI implementation yet!
     // if (index < 0) {

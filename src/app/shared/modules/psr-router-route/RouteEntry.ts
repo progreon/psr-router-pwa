@@ -18,8 +18,8 @@ export class RouteEntry {
   protected _eventsEnabled: boolean;
   protected _location: Location;
   protected _observers: ((entry: RouteEntry, type: RouteEntry.ObservableType) => (void))[];
-  protected _playerBefore: Player;
-  private _playerAfter: Player;
+  protected _player: Player;
+  private _nextPlayer: Player;
   public readonly messages: RouterMessage[];
 
   /**
@@ -38,8 +38,8 @@ export class RouteEntry {
     this.messages = [];
     this._eventsEnabled = true;
     this._observers = [];
-    this._playerBefore = undefined;
-    this._playerAfter = undefined;
+    this._player = undefined;
+    this._nextPlayer = undefined;
   }
 
   public get entryType(): string {
@@ -61,23 +61,23 @@ export class RouteEntry {
   /**
    * Gets the player when entering this entry. Be aware this might still be undefined.
    */
-  public get playerBefore(): Player {
-    return this._playerBefore;
+  public get player(): Player {
+    return this._player;
   }
 
   /**
    * Gets the player when exiting this entry. Be aware this might still be undefined.
    */
-  public get playerAfter(): Player {
-    return this._playerAfter;
+  public get nextPlayer(): Player {
+    return this._nextPlayer;
   }
 
   /**
    * This sets the next player, and also fires the "APPLIED" observable event if said so
-   * @param playerAfter 
+   * @param nextPlayer 
    */
   protected updateNextPlayer(nextPlayer: Player, fireApplied: boolean) {
-    this._playerAfter = nextPlayer;
+    this._nextPlayer = nextPlayer;
     if (fireApplied) {
       this._fireApplied();
     }
@@ -91,11 +91,11 @@ export class RouteEntry {
     let nextPlayer: Player;
     this.messages.splice(0); // Clear the messages
     if (player) {
-      this._playerBefore = player;
+      this._player = player;
     }
 
-    if (this._playerBefore) {
-      nextPlayer = this._playerBefore.clone();
+    if (this._player) {
+      nextPlayer = this._player.clone();
       // TODO: this.wildEncounters.apply(nextPlayer); // Defeat wild encounters
     } else {
       this.messages.push(new RouterMessage("There is no player set!", RouterMessage.Type.Error));

@@ -3,7 +3,7 @@
 import * as Model from 'SharedModules/psr-router-model/Model';
 import { AAction } from './AAction';
 import { ActionJSON } from '../parse/actions/ActionJSON';
-import { BattleEntrant, BattleStage, RouteBattle } from '../RouteBattle';
+import { RouteBattle } from '../RouteBattle';
 
 export class OpponentAction extends AAction {
     public static readonly ACTION_TYPE: string = "Opp";
@@ -11,7 +11,7 @@ export class OpponentAction extends AAction {
     constructor(
         public readonly oppIndex: number,
         public readonly actions: AAction[] = [],
-        public readonly entrants: BattleEntrant[] = []
+        public readonly entrants: RouteBattle.Entrant[] = []
     ) {
         super();
     }
@@ -24,7 +24,7 @@ export class OpponentAction extends AAction {
         this.actions.push(action);
     }
 
-    public applyAction(player: Model.Player, battleStage?: BattleStage): void {
+    public applyAction(player: Model.Player, battleStage?: RouteBattle.Stage): void {
         super.applyAction(player, battleStage);
         if (battleStage) {
             battleStage.setEntrants(this.entrants);
@@ -47,9 +47,9 @@ export class OpponentAction extends AAction {
             }
         });
         let entrants: { partyIndex: number, faint: boolean }[] = obj.properties.entrants;
-        let oppEntrants: BattleEntrant[] = [];
+        let oppEntrants: RouteBattle.Entrant[] = [];
         if (entrants && entrants.length > 0) {
-            entrants.forEach(e => oppEntrants.push(new BattleEntrant(e.partyIndex, e.faint)));
+            entrants.forEach(e => oppEntrants.push(new RouteBattle.Entrant(e.partyIndex, e.faint)));
         }
         return new OpponentAction(oppIndex, actions, oppEntrants);
     }
