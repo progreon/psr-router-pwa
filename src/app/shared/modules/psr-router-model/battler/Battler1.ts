@@ -356,7 +356,7 @@ export class Battler1 extends Battler {
   clone(): Battler {
     let newB = new Battler1(this.game, this.pokemon, this.catchLocation, this.isTrainerMon, this.level, true);
 
-    newB._moveset = this._moveset.slice(0);
+    newB._moveset = this._moveset.map(ms => ms.clone());
     newB._levelExp = this._levelExp;
     newB._statExp = this._statExp.slice(0); // TODO: deep copy if using ranges!
 
