@@ -25,7 +25,9 @@ Route: Red Any% Glitchless (no IT)
 
 	S: Route 22
 		Manip: NidoranM:4 13 15 15 14 15
-			Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name (https://pastebin.com/027sfdrS)
+			Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name
+			See pastebin: https://pastebin.com/027sfdrS
+			A press map: [[https://i.imgur.com/ZRTQZUC.png]]
 		GetI: POTION
 			Get the hidden tree Potion (optional)
 

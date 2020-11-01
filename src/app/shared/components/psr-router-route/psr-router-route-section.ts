@@ -9,6 +9,7 @@ import '@vaadin/vaadin-item/theme/material/vaadin-item';
 import './psr-router-route-battle';
 import './psr-router-route-directions';
 import './psr-router-route-get-pokemon';
+import './psr-router-route-manip';
 import './psr-router-route-menu';
 
 export class PsrRouterRouteSection extends PsrRouterRouteEntry {
@@ -28,6 +29,9 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
           break;
         case Route.RouteGetPokemon.ENTRY_TYPE:
           childElements.push(html`<psr-router-route-get-pokemon id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-get-pokemon>`);
+          break;
+        case Route.RouteManip.ENTRY_TYPE:
+          childElements.push(html`<psr-router-route-manip id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-manip>`);
           break;
         case Route.RouteMenu.ENTRY_TYPE:
           childElements.push(html`<psr-router-route-menu id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-menu>`);

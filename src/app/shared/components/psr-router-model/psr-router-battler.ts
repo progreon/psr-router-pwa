@@ -27,6 +27,9 @@ class PsrRouterBattler extends LitElement {
   @property({type: Boolean})
   public isPlayerBattler: Boolean;
 
+  @property({type: Boolean})
+  public hideBattleInfo: Boolean;
+
   render() {
     if (this.battler) {
       let b = this.battler;
@@ -53,11 +56,17 @@ class PsrRouterBattler extends LitElement {
             white-space: nowrap;
             text-align: center;
           }
+          .stats-grid > div[hidden] {
+            display: none;
+          }
           .table {
             display: flex;
             width: 100%;
             flex-direction: column;
             align-items: center;
+          }
+          .table[hidden] {
+            display: none;
           }
           .table > div {
             display: flex;
@@ -81,7 +90,7 @@ class PsrRouterBattler extends LitElement {
           }
         </style>
         <b>${b.toString()}</b>
-        <div class="table">
+        <div class="table" ?hidden="${this.hideBattleInfo}">
           <div ?hidden="${!this.isPlayerBattler}"><div>Exp. to next lv:</div><div>${b.getCurrentExpToNextLevel()}</div></div>
           <div ?hidden="${this.isPlayerBattler}"><div>Given exp.:</div><div>${b.getExp()}</div></div>
           <div><div>Crit ratio:</div><div>${(b.pokemon.getCritRatio() * 100).toFixed(3)} %</div></div>
@@ -109,13 +118,13 @@ class PsrRouterBattler extends LitElement {
             <div>${b.spd}</div>
             <div>${b.spc}</div>
           </div>
-          <b>With boosts</b>
-          <div>
+          <b ?hidden="${!bb && !st}">With boosts</b>
+          <div ?hidden="${!bb && !st}">
             <div>${b.hp}</div>
-            <div>${b.getBoostedAtk(bb.atk || 0, st.atk || 0)}</div>
-            <div>${b.getBoostedDef(bb.def || 0, st.def || 0)}</div>
-            <div>${b.getBoostedSpd(bb.spd || 0, st.spd || 0)}</div>
-            <div>${b.getBoostedSpc(bb.spc || 0, st.spc || 0)}</div>
+            <div>${b.getBoostedAtk(bb?.atk || 0, st?.atk || 0)}</div>
+            <div>${b.getBoostedDef(bb?.def || 0, st?.def || 0)}</div>
+            <div>${b.getBoostedSpd(bb?.spd || 0, st?.spd || 0)}</div>
+            <div>${b.getBoostedSpc(bb?.spc || 0, st?.spc || 0)}</div>
           </div>
         </div>
       `;
