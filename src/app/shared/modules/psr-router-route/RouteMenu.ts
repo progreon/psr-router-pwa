@@ -52,16 +52,16 @@ export class RouteMenu extends ARouteActionsEntry {
     return RouteMenu.ENTRY_TYPE;
   }
 
-  apply(player?: Model.Player): Model.Player {
-    player = super.apply(player);
+  apply(player?: Model.Player, fireApplied = true): void {
+    super.apply(player, false);
+    let nextPlayer = super.playerAfter;
 
     this.actions.forEach(action => {
-      action.applyAction(player);
+      action.applyAction(nextPlayer);
       action.messages.forEach(m => this.addMessage(m));
     });
 
-    super._playerAfter = player;
-    return player;
+    super.updateNextPlayer(nextPlayer, fireApplied);
   }
 
   getJSONObject(): EntryJSON {

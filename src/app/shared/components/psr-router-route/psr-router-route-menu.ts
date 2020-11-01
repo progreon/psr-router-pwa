@@ -3,7 +3,6 @@ import { html } from 'lit-element';
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 
-// TODO: show messages.
 class PsrRouterRouteMenu extends PsrRouterRouteEntry {
   _renderExpandingContent() {
     let dom = super._renderExpandingContent();
@@ -19,6 +18,17 @@ class PsrRouterRouteMenu extends PsrRouterRouteEntry {
 
   protected _hasExpandingContent(): boolean {
     return true;
+  }
+
+  protected _getSummary() {
+    let summary = super._getSummary();
+    if (!summary?.trim() && !super._getTitle()?.trim()) {
+      summary = super.routeEntry ? (<Route.RouteMenu>super.routeEntry).toString() : "";
+      if (!summary?.trim()) {
+        summary = super.routeEntry.entryType;
+      }
+    }
+    return summary;
   }
 
   constructor(routeMenu?: Route.RouteMenu) {

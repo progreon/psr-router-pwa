@@ -2,7 +2,6 @@
 import { PsrRouterRouteSection } from './psr-router-route-section';
 import * as Route from 'SharedModules/psr-router-route';
 
-// TODO: show messages.
 class PsrRouterRoute extends PsrRouterRouteSection {
   _renderContent() {
     return super._renderExpandingContent();
@@ -16,8 +15,8 @@ class PsrRouterRoute extends PsrRouterRouteSection {
     return false;
   }
 
-  constructor(route?: Route.Route) {
-    super(route);
+  constructor(rootSection?: Route.RouteSection) {
+    super(rootSection);
     this.routeHeader = true;
     // TODO
   }

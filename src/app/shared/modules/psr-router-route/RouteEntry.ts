@@ -17,9 +17,9 @@ export class RouteEntry {
   public static readonly ENTRY_TYPE: string = "ENTRY";
   protected _eventsEnabled: boolean;
   protected _location: Location;
-  protected _observers: Function[];
+  protected _observers: ((entry: RouteEntry, type: RouteEntry.ObservableType) => (void))[];
   protected _playerBefore: Player;
-  protected _playerAfter: Player;
+  private _playerAfter: Player;
   public readonly messages: RouterMessage[];
 
   /**
@@ -36,7 +36,7 @@ export class RouteEntry {
     this._location = location;
     //// OTHERS ////
     this.messages = [];
-    this._eventsEnabled = false;
+    this._eventsEnabled = true;
     this._observers = [];
     this._playerBefore = undefined;
     this._playerAfter = undefined;
@@ -54,7 +54,7 @@ export class RouteEntry {
     if (this._location != location) {
       this._location = location;
       //TODO: this.wildEncounters.reset();
-      this._fireDataUpdated();
+      this._firePropertiesChanged();
     }
   }
 
@@ -73,25 +73,35 @@ export class RouteEntry {
   }
 
   /**
+   * This sets the next player, and also fires the "APPLIED" observable event if said so
+   * @param playerAfter 
+   */
+  protected updateNextPlayer(nextPlayer: Player, fireApplied: boolean) {
+    this._playerAfter = nextPlayer;
+    if (fireApplied) {
+      this._fireApplied();
+    }
+  }
+
+  /**
    * Apply this entry to the player (which holds the state of the game).
    * @param player The player before this entry. If undefined, just recalculate.
-   * @return Returns the player after this entry (if you edit this instance, getPlayerAfter() will be edited too).
    */
-  apply(player: Player = null): Player {
-    let newPlayer: Player;
-    this.messages.splice(0, this.messages.length); // Clear the messages
-    if (player)
+  apply(player?: Player, fireApplied = true) {
+    let nextPlayer: Player;
+    this.messages.splice(0); // Clear the messages
+    if (player) {
       this._playerBefore = player;
+    }
 
     if (this._playerBefore) {
-      newPlayer = this._playerBefore.clone();
-      // TODO: this.wildEncounters.apply(newPlayer); // Defeat wild encounters
+      nextPlayer = this._playerBefore.clone();
+      // TODO: this.wildEncounters.apply(nextPlayer); // Defeat wild encounters
     } else {
       this.messages.push(new RouterMessage("There is no player set!", RouterMessage.Type.Error));
     }
 
-    this._playerAfter = newPlayer;
-    return newPlayer;
+    this.updateNextPlayer(nextPlayer, fireApplied);
   }
 
   /**
@@ -121,7 +131,6 @@ export class RouteEntry {
   // for testing?
   triggerRefresh() {
     this.apply();
-    this._firePlayerUpdated();
   }
 
   /**
@@ -130,24 +139,28 @@ export class RouteEntry {
    *
    * @param callback
    */
-  addObserver(callback: Function) {
+  addObserver(callback: (entry: RouteEntry, type: RouteEntry.ObservableType) => (void)) {
     this._observers.push(callback);
   }
 
-  /**
-  * Notify listeners that the data is updated, to tell them to refresh the displayed data.
-  * @todo Test!!!
-  */
-  protected _fireDataUpdated() {
-    this._triggerObservers("data");
+  hasObserver(callback: (entry: RouteEntry, type: RouteEntry.ObservableType) => (void)): boolean {
+    return this._observers.includes(callback);
   }
 
   /**
-   * Notify listeners that the player is updated, to retrigger the apply call.
+   * Notify listeners that apply was done, to tell them to refresh the displayed data.
    * @todo Test!!!
    */
-  protected _firePlayerUpdated() {
-    this._triggerObservers("player");
+  protected _fireApplied() {
+    this._triggerObservers(RouteEntry.ObservableType.APPLIED);
+  }
+
+  /**
+   * Notify listeners that the properties have been updated, to retrigger the apply calls.
+   * @todo Test!!!
+   */
+  protected _firePropertiesChanged() {
+    this._triggerObservers(RouteEntry.ObservableType.PROPERTIES_CHANGED);
   }
 
   /**
@@ -155,9 +168,11 @@ export class RouteEntry {
    * @param type
    * @todo Test!!!
    */
-  protected _triggerObservers(type: string) {
+  protected _triggerObservers(type: RouteEntry.ObservableType) {
     if (this._eventsEnabled) {
-      this._observers.forEach(f => f(this, type));
+      this._observers.forEach(f => {
+        f(this, type);
+      });
     }
   }
 
@@ -187,5 +202,11 @@ export class RouteEntry {
     let info = new RouteEntryInfo(obj.info.title, obj.info.summary, obj.info.description);
     let location = undefined; // TODO, parse from obj.location
     return new RouteEntry(game, info, location);
+  }
+}
+
+export namespace RouteEntry {
+  export enum ObservableType {
+    APPLIED, PROPERTIES_CHANGED
   }
 }

@@ -64,10 +64,11 @@ export class RouteBattle extends ARouteActionsEntry {
     return RouteBattle.ENTRY_TYPE;
   }
 
-  apply(player?: Player): Player {
-    player = super.apply(player);
+  apply(player?: Player, fireApplied = true): void {
+    super.apply(player, false);
+    let nextPlayer = super.playerAfter;
 
-    // TODO
+    // Steps:
     // 1 Initiate all BattleStages
     // 2 Collect all actions
     // 2.1 If OpponentAction & oppIndex < previous oppIndex, ignore & give warning
@@ -76,7 +77,7 @@ export class RouteBattle extends ARouteActionsEntry {
     // 1 Initiate all BattleStages
     this.battleStages.splice(0);
     // this.battleStages.push(new BattleStages(this, player, this.entrants[0]));
-    this.battleStages.push(new BattleStage(this, player, 0));
+    this.battleStages.push(new BattleStage(this, nextPlayer, 0));
     for (let ti = 1; ti < this.trainer.party.length; ti++) {
       // this.battleStages.push(BattleStages.newFromPreviousState(this.battleStages[ti - 1], this.entrants[1]));
       this.battleStages.push(BattleStage.newFromPreviousState(this.battleStages[ti - 1], ti));
@@ -108,24 +109,25 @@ export class RouteBattle extends ARouteActionsEntry {
       this.battleStages[ti].apply();
       this.battleStages[ti].messages.forEach(m => this.addMessage(m));
     }
-    this._playerAfter = this.battleStages[this.battleStages.length - 1].nextPlayer;
+    nextPlayer = this.battleStages[this.battleStages.length - 1].nextPlayer;
 
     // TODO: generalise this
     switch (this.trainer.name.toUpperCase()) {
       case "BROCK":
-        this._playerAfter.addBadge("attack");
+        nextPlayer.addBadge("attack");
         break;
       case "LTSURGE":
-        this._playerAfter.addBadge("defense");
+        nextPlayer.addBadge("defense");
         break;
       case "KOGA":
-        this._playerAfter.addBadge("speed");
+        nextPlayer.addBadge("speed");
         break;
       case "BLAINE":
-        this._playerAfter.addBadge("special");
+        nextPlayer.addBadge("special");
         break;
     }
-    return this._playerAfter;
+
+    super.updateNextPlayer(nextPlayer, fireApplied);
   }
 
   getJSONObject(): EntryJSON {

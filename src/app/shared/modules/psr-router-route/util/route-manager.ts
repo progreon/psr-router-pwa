@@ -80,7 +80,7 @@ export function LoadSavedRoute(): Route.Route {
     }
     try {
       route = Route.Route.newFromJSONObject(routeObj);
-      route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+      route.getAllMessages().forEach(m => console.warn(m.toString()));
     } catch (e) {
       console.error(e);
       window.setTimeout(() => window.alert("Something went wrong while loading the last opened route, please load a new route. Check the console for more details."), 100);
@@ -132,7 +132,7 @@ export function LoadExampleRoute(routeName: string): Route.Route {
       localStorage.setItem(lsKeySavedRoute, JSON.stringify(routeJSON));
     }
     let route = Route.Route.newFromJSONObject(routeJSON);
-    route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+    route.getAllMessages().forEach(m => console.warn(m.toString()));
     return SaveRoute(route);
   } else {
     return null;
@@ -148,11 +148,9 @@ export function LoadRouteFile(file: File): Promise<Route.Route> {
       let fileReader = new FileReader();
       fileReader.onload = function (e) {
         try {
-          console.log(e);
           let route = RouteIO.ImportFromFile(<string>((<FileReader>(e.target)).result), filename.search(/\.json$/) > 0, filename);
-          route.entryList.forEach(e => e.messages.forEach(m => console.warn(m.toString())));
+          route.getAllMessages().forEach(m => console.warn(m.toString()));
           resolve(SaveRoute(route));
-          // reject(e);
         } catch (e) {
           reject(e);
         }

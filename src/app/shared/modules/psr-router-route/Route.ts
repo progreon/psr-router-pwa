@@ -7,7 +7,6 @@ import { RouteEntryInfo } from './util';
 import { RouteSection } from '.';
 import { Game } from '../psr-router-model/Game';
 import { Location, Player } from '../psr-router-model/Model';
-import { RouteEntry } from './RouteEntry';
 import { EntryJSON } from './parse/EntryJSON';
 import { RouteJSON } from './parse/RouteJSON';
 // import { saveAs } from 'file-saver/FileSaver';
@@ -19,9 +18,12 @@ import { RouteJSON } from './parse/RouteJSON';
  * @todo writeToString
  * @augments RouteSection
  */
-export class Route extends RouteSection {
+export class Route {
   public static readonly ENTRY_TYPE: string = "Route";
+
+  public readonly game: Game;
   public shortname: string;
+  public readonly rootSection: RouteSection;
   /**
    *
    * @param {Game}            game              The Game object this route entry uses.
@@ -29,26 +31,35 @@ export class Route extends RouteSection {
    * @param {String}          [shortname]       A shortname for this route, also the file name.
    * @param {Location}        [location]        The location in the game where this entry occurs.
    * @param {RouteEntry[]}    [children=[]]     The child entries of this entry.
-   * @todo -extends, +rootSection, +game, +otherSettings
+   * @todo +otherSettings
    */
-  constructor(game: Game, info: RouteEntryInfo, shortname?: string, location?: Location, children: RouteEntry[] = []) {
-    super(game, info, location, children);
-    this.shortname = shortname ? shortname : info.title;
+  constructor(game: Game, rootSection: RouteSection, shortname?: string) {
+    this.game = game;
+    this.rootSection = rootSection;
+    this.shortname = shortname ? shortname : rootSection.info.title;
   }
 
   public get entryType(): string {
     return Route.ENTRY_TYPE;
   }
 
+  public get info(): RouteEntryInfo {
+    return this.rootSection.info;
+  }
+
   getAllMessages(): RouterMessage[] {
     let messages = [];
-    this.entryList.forEach(e => e.messages.forEach(m => messages.push(m)));
+    this.rootSection.entryList.forEach(e => e.messages.forEach(m => messages.push(m)));
     return messages;
   }
 
+  apply(): void {
+    this.rootSection.apply(new Player(this.game.info.name));
+  }
+
   getJSONObject(): EntryJSON {
-    let routeSectionJSON = super.getJSONObject();
-    return new RouteJSON(this.game.info.key, this.shortname, routeSectionJSON.info, routeSectionJSON.entries);
+    let routeSectionJSON = this.rootSection.getJSONObject();
+    return new RouteJSON(this.rootSection.game.info.key, this.shortname, routeSectionJSON.info, routeSectionJSON.entries);
   }
 
   static newFromJSONObject(obj: RouteJSON): Route {
@@ -62,9 +73,7 @@ export class Route extends RouteSection {
       // TODO: throw exception?
     }
     let rs = RouteSection.newFromJSONObject(obj, game);
-    let player = new Player(game.info.name);
-    let route = new Route(rs.game, new RouteEntryInfo(rs.info.title, rs.info.summary), obj.shortname, rs.location, rs.children); // TODO: rs.info
-    route._playerBefore = player;
+    let route = new Route(game, rs, obj.shortname); // TODO: rs.info
     return route;
   }
 }

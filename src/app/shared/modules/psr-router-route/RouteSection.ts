@@ -17,7 +17,7 @@ import { EntryJSON } from './parse/EntryJSON';
  */
 export class RouteSection extends RouteEntry {
   public static readonly ENTRY_TYPE: string = "S";
-  protected _children: RouteEntry[];
+  protected _children: RouteEntry[] = [];
   /**
    *
    * @param game      The Game object this route entry uses.
@@ -28,32 +28,11 @@ export class RouteSection extends RouteEntry {
    */
   constructor(game: Game, info: RouteEntryInfo, location?: Location, children: RouteEntry[] = []) {
     super(game, info, location);
-    this._children = children;
+    children.forEach(c => this._addEntry(c));
   }
 
   public get entryType(): string {
     return RouteSection.ENTRY_TYPE;
-  }
-
-  /**
-   * @param child
-   * @todo TESTING!!
-   */
-  _applyAfterChild(child?: RouteEntry) {
-    let currChildIdx = 0;
-    if (child) {
-      while (currChildIdx < this._children.length && this._children[currChildIdx] !== child) {
-        currChildIdx++;
-      }
-    } else if (this._children.length > 0) {
-      this._children[0].apply(super.playerAfter);
-    }
-    while (currChildIdx + 1 < this._children.length) {
-      this._children[currChildIdx + 1].apply(this._children[currChildIdx].playerAfter);
-      currChildIdx++;
-    }
-    this._fireDataUpdated();
-    return this.playerAfter;
   }
 
   /**
@@ -63,16 +42,38 @@ export class RouteSection extends RouteEntry {
    * @param type  data, player, ...
    * @private
    */
-  _childChanged(child: RouteEntry, type: string) {
-    if (type === "player") {
-      this._applyAfterChild(child);
-      this._firePlayerUpdated();
+  private _childObserver(child: RouteEntry, type: RouteEntry.ObservableType) {
+    switch (type) {
+      case RouteEntry.ObservableType.PROPERTIES_CHANGED:
+        this.apply();
+        break;
+      case RouteEntry.ObservableType.APPLIED:
+        this._applyNextChild(child);
+        break;
     }
   }
 
-  apply(player?: Player): Player {
-    super.apply(player);
-    return this._applyAfterChild();
+  apply(player?: Player, fireApplied = true): void {
+    super.apply(player, false);
+    this._applyNextChild();
+    super.updateNextPlayer(this.playerAfter, fireApplied);
+  }
+
+  private _applyNextChild(previousChild?: RouteEntry) {
+    let prevChildIdx = 0;
+    let nextPlayer = super.playerAfter;
+    
+    let nextChildIdx = 0;
+    if (previousChild) {
+      nextPlayer = previousChild.playerAfter;
+      while (prevChildIdx < this.children.length && this.children[prevChildIdx] !== previousChild) {
+        prevChildIdx++;
+      }
+      nextChildIdx = prevChildIdx + 1;
+    }
+    if (nextChildIdx < this.children.length) {
+      this.children[nextChildIdx].apply(nextPlayer);
+    }
   }
 
   /**
@@ -96,22 +97,6 @@ export class RouteSection extends RouteEntry {
     return entryList;
   }
 
-  // /**
-  //  * Add a child entry.
-  //  * @param {RouteEntry}  entry
-  //  * @param {Function}    [observer]
-  //  * @returns {RouteEntry} The added entry.
-  //  * @protected
-  //  * @todo refresh?
-  //  */
-  // _addEntry(entry: RouteEntry, observer: Function): RouteEntry {
-  //   this._children.push(entry);
-  //   if (observer)
-  //     entry.addObserver(observer);
-  //   this._fireDataUpdated();
-  //   return entry;
-  // }
-
   public get playerAfter() {
     if (this._children.length > 0) {
       return this._children[this._children.length - 1].playerAfter;
@@ -120,8 +105,8 @@ export class RouteSection extends RouteEntry {
     }
   }
 
-  _addEntry<T extends RouteEntry>(entry: T): RouteEntry {
-    entry.addObserver(this._childChanged.bind(this));
+  private _addEntry<T extends RouteEntry>(entry: T): T {
+    entry.addObserver(this._childObserver.bind(this));
     this._children.push(entry);
     return entry;
   }
@@ -137,7 +122,7 @@ export class RouteSection extends RouteEntry {
    * @todo
    */
   addNewBattle(trainer: Trainer, title: string = "", summary: string = "", description: string = "", location?: Location): RouteBattle {
-    return <RouteBattle>this._addEntry(new RouteBattle(this.game, trainer, new RouteEntryInfo(title, summary, description), location ? location : super._location));
+    return this._addEntry(new RouteBattle(this.game, trainer, new RouteEntryInfo(title, summary, description), location ? location : super._location));
   }
 
   /**
@@ -148,8 +133,8 @@ export class RouteSection extends RouteEntry {
    * @param location    The location in the game where this entry occurs.
    * @returns The added entry.
    */
-  addNewDirections(summary: string, description: string = "", location?: Location): RouteSection {
-    return <RouteSection>this._addEntry(new RouteDirections(this.game, new RouteEntryInfo("", summary, description), location ? location : super._location));
+  addNewDirections(summary: string, description: string = "", location?: Location): RouteDirections {
+    return this._addEntry(new RouteDirections(this.game, new RouteEntryInfo("", summary, description), location ? location : super._location));
   }
 
   /**
@@ -174,7 +159,7 @@ export class RouteSection extends RouteEntry {
    * @todo
    */
   addNewGetPokemon(choices: any, preference: number, title: string = "", summary: string = "", location?: Location): RouteGetPokemon {
-    return <RouteGetPokemon>this._addEntry(new RouteGetPokemon(this.game, choices, preference, new RouteEntryInfo(title, summary), location ? location : super._location));
+    return this._addEntry(new RouteGetPokemon(this.game, choices, preference, new RouteEntryInfo(title, summary), location ? location : super._location));
   }
 
   /**
@@ -186,7 +171,7 @@ export class RouteSection extends RouteEntry {
    * @returns The added entry.
    */
   addNewSection(title: string, description: string = "", location?: Location, children: RouteEntry[] = []): RouteSection {
-    return <RouteSection>this._addEntry(new RouteSection(this.game, new RouteEntryInfo(title, description), location ? location : super._location, children));
+    return this._addEntry(new RouteSection(this.game, new RouteEntryInfo(title, description), location ? location : super._location, children));
   }
 
   getJSONObject(): EntryJSON {

@@ -2,7 +2,6 @@
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 
-// TODO: show messages.
 export class PsrRouterRouteDirections extends PsrRouterRouteEntry {
   _getPopupContentRenderer() {
     if (this.routeEntry.info.description) {

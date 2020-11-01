@@ -34,11 +34,11 @@ export class RouteManip extends RouteEntry {
     return RouteManip.ENTRY_TYPE;
   }
 
-  apply(player?: Model.Player): Model.Player {
-    player = super.apply(player);
-    player.addBattler(this.battler.clone());
-    super._playerAfter = player;
-    return player;
+  apply(player?: Model.Player, fireApplied = true): void {
+    super.apply(player, false);
+    let nextPlayer = super.playerAfter;
+    nextPlayer.addBattler(this.battler.clone());
+    super.updateNextPlayer(nextPlayer, fireApplied);
   }
 
   getJSONObject(): EntryJSON {

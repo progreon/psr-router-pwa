@@ -7,7 +7,6 @@ import { RouteEntry } from '.';
 import * as Model from 'SharedModules/psr-router-model/Model';
 import * as ModelAbstract from 'SharedModules/psr-router-model/ModelAbstract';
 import { EntryJSON } from './parse/EntryJSON';
-// import * as Model1 from 'SharedModules/psr-router-model/Model1';
 
 /**
  * A class representing a route-entry that gets you a pokemon out of a list of possible pokemon.
@@ -18,8 +17,13 @@ import { EntryJSON } from './parse/EntryJSON';
 export class RouteGetPokemon extends RouteEntry {
   public static readonly ENTRY_TYPE: string = "GetP";
   private _choices: ModelAbstract.Battler[];
-  private _preference: number;
   public get choices() { return this._choices; }
+  private _preference: number;
+  public get preference() { return this._preference; }
+  private _currentChoice: number;
+  public get currentChoice() { return this._currentChoice; }
+  public set currentChoice(value: number) { this._currentChoice = value; super._firePropertiesChanged(); }
+
   /**
    *
    * @param game        The Game object this route entry uses.
@@ -32,19 +36,21 @@ export class RouteGetPokemon extends RouteEntry {
     super(game, info, location);
     this._choices = choices;
     this._preference = preference;
+    this._currentChoice = this._preference;
   }
 
   public get entryType(): string {
     return RouteGetPokemon.ENTRY_TYPE;
   }
 
-  apply(player?: Model.Player): Model.Player {
-    player = super.apply(player);
+  apply(player?: Model.Player, fireApplied = true): void {
+    super.apply(player, false);
+    let nextPlayer = super.playerAfter;
 
     let choice: ModelAbstract.Battler;
     if (this.choices.length > 0) {
-      if (this.choices.length > this._preference) {
-        choice = this.choices[this._preference];
+      if (this.choices.length > this._currentChoice) {
+        choice = this.choices[this._currentChoice];
       } else {
         this.addMessage(new RouterMessage("Preferred option not available (out of bounds): ignoring", RouterMessage.Type.Warning));
       }
@@ -52,11 +58,24 @@ export class RouteGetPokemon extends RouteEntry {
       this.addMessage(new RouterMessage("You didn't specify any options: ignoring", RouterMessage.Type.Warning));
     }
     if (choice) {
-      player.addBattler(choice);
+      nextPlayer.addBattler(choice);
     }
 
-    super._playerAfter = player;
-    return player;
+    super.updateNextPlayer(nextPlayer, fireApplied);
+  }
+
+  toString(): string {
+    let str = this.info.toString();
+    if (!str?.trim()) {
+      if (this.choices.length > 1) {
+        str = `Get one of: ${this.choices.map(pl => pl.toString()).join(", ")}`;
+      } else if (this.choices.length == 1) {
+        str = `Get ${this.choices[0]}`;
+      } else {
+        str = `Get a pokemon, but which one?`;
+      }
+    }
+    return str;
   }
 
   getJSONObject(): EntryJSON {

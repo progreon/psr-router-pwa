@@ -26,8 +26,8 @@ class PsrRouterTrainer extends LitElement {
           <div class="column">
             <h2 class="pokemon" @click="${this._onPokemonClicked.bind(this, b.pokemon.name)}">${b.pokemon.name} L${b.level}</h2>
             <div class="center">${b.getExp()} exp. points</div>
-            <div><div>${ms[0].move}</div><div>${ms[1].move}</div></div>
-            <div><div>${ms[2].move}</div><div>${ms[3].move}</div></div>
+            <div><div>${ms[0]?.move}</div><div>${ms[1]?.move}</div></div>
+            <div><div>${ms[2]?.move}</div><div>${ms[3]?.move}</div></div>
           </div>`);
       });
     }

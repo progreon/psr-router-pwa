@@ -15,8 +15,9 @@ import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterRouter extends PsrRouterPage {
 
-  @property({type: Object})
   public route: Route.Route;
+  @property({type: Object})
+  public rootSection: Route.RouteSection;
 
   _render() {
     return html`
@@ -27,19 +28,24 @@ class PsrRouterRouter extends PsrRouterPage {
           padding-bottom: var(--app-grid-3x);
         } */
       </style>
-      <psr-router-route id="the-route" class="noselect" .routeEntry="${this.route}"></psr-router-route>
+      <psr-router-route id="the-route" class="noselect" .routeEntry="${this.rootSection}"></psr-router-route>
       <!-- <div class="padding"></div> -->
     `;
   }
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
-    this.route = RouteManager.GetCurrentRoute();
-    console.debug(this.route);
+    this._loadRoute();
+  }
+  
+  triggerDataRefresh() {
+    this._loadRoute();
   }
 
-  triggerDataRefresh() {
+  private _loadRoute() {
     this.route = RouteManager.GetCurrentRoute();
+    this.rootSection = this.route?.rootSection;
+    console.debug(this.route);
   }
 }
 

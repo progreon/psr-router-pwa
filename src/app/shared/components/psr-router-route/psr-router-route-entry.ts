@@ -24,6 +24,7 @@ export class PsrRouterRouteEntry extends LitElement {
   public hideContent: boolean = true;
   protected routeHeader: boolean;
   private _isPendingExpandAnimation: boolean = false;
+  private _boundChangeObserver: (entry: Route.RouteEntry, type: Route.RouteEntry.ObservableType) => (void);
 
   protected _getPopupContentRenderer(): (root: HTMLElement, dialog: HTMLElement) => void {
     return undefined;
@@ -238,16 +239,18 @@ export class PsrRouterRouteEntry extends LitElement {
     this.routeHeader = false;
     this.hideContent = true;
     this.routeEntry = routeEntry;
-    this.addEventListener('data-updated', e => console.log('data updated!', e));
+    this._boundChangeObserver = this._changeObserver.bind(this);
   }
 
   firstUpdated() {
     let content = this.shadowRoot.getElementById('expand');
-    if (this._hasExpandingContent() && this.hideContent)
+    if (this._hasExpandingContent() && this.hideContent) {
       this._collapseContent(content);
+    }
   }
 
-  updated() {
+  updated(_changedProperties) {
+    super.updated(_changedProperties);
     if (this._isPendingExpandAnimation && this._hasExpandingContent()) {
       let content = this.shadowRoot.getElementById('expand');
       if (this.hideContent) {
@@ -257,6 +260,13 @@ export class PsrRouterRouteEntry extends LitElement {
       }
       this._isPendingExpandAnimation = false;
     }
+    if (this.routeEntry && !this.routeEntry.hasObserver(this._boundChangeObserver)) {
+      this.routeEntry.addObserver(this._boundChangeObserver);
+    }
+  }
+
+  protected _changeObserver(entry: Route.RouteEntry, type: Route.RouteEntry.ObservableType) {
+    this.requestUpdate();
   }
 
   private _collapseContent(content: any, animate?: any): void {

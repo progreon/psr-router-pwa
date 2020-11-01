@@ -13,7 +13,6 @@ import { PsrRouterTrainer } from 'SharedComponents/psr-router-trainer/psr-router
 import { OpponentAction } from 'App/shared/modules/psr-router-route/psr-router-route-actions/OpponentAction';
 import { BattleStage } from 'App/shared/modules/psr-router-route/RouteBattle';
 
-// TODO: show messages.
 class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   _getPopupContentRenderer() {
     if (this.routeEntry && (<Route.RouteBattle>super.routeEntry).trainer && !(<Route.RouteBattle>super.routeEntry).trainer.dummy) {
