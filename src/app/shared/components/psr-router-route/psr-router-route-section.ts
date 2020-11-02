@@ -48,10 +48,11 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
       return html`
           <style>
             hr {
+              box-sizing: border-box;
               height: 1px;
               border: 0;
               border-top: 1px solid var(--app-color-black);
-              margin: 4px 0px 4px 0px;
+              margin: 4px 0px 4px 17px;
             }
           </style>
           ${childElements}

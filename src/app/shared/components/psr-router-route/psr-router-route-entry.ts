@@ -104,6 +104,9 @@ export class PsrRouterRouteEntry extends LitElement {
         width: 12px;
         height: 12px;
       }
+      .icon.expand {
+        padding: 0px 5px 0px 0px;
+      }
       .icon.info {
         cursor: pointer;
       }
@@ -132,12 +135,13 @@ export class PsrRouterRouteEntry extends LitElement {
         width: 100%;
         display: flex;
         flex-direction: column;
+        overflow: hidden;
       }
       .content > * {
         width: 100%;
       }
       .content > #expand {
-        padding-left: 10px;
+        padding-left: 27px;
         height: auto;
         flex-direction: column;
         /* overflow: hidden; */
@@ -145,6 +149,9 @@ export class PsrRouterRouteEntry extends LitElement {
         -moz-transition: height 0.3s ease-out;
         -o-transition: height 0.3s ease-out;
         transition: height 0.3s ease-out;
+      }
+      .content > #expand[section] {
+        padding-left: 17px;
       }
       .content > #expand > * {
         width: 100%;
@@ -203,6 +210,8 @@ export class PsrRouterRouteEntry extends LitElement {
         ${messages}
       </div>
       <div class="header" ?hidden="${this.routeHeader}" ?pointer="${!this.routeHeader && hasExpandingDOM}">
+        <div class="icon expand" @click="${this._onClick}" ?hidden="${!hasExpandingDOM}">${icon}</div>
+        <div class="icon expand hidden" ?hidden="${hasExpandingDOM}">${icon}</div>
         <!-- <vaadin-context-menu>
           <template>
             <ul class="menu-options">
@@ -219,15 +228,13 @@ export class PsrRouterRouteEntry extends LitElement {
         </div>
         <!-- </vaadin-context-menu> -->
         <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupAvailable}">${infoCircle}</div>
-        <div class="icon expand" @click="${this._onClick}" ?hidden="${!hasExpandingDOM}">${icon}</div>
-        <div class="icon hidden" ?hidden="${hasExpandingDOM}">${icon}</div>
       </div>
       <div class="route-header" ?hidden="${!this.routeHeader}">
         <h4><strong>${this.routeEntry?this.routeEntry.info.title:"No route loaded"}</strong></h4>
       </div>
       <div class="content">
         ${contentDOM}
-        <div id="expand">
+        <div id="expand" ?section="${this.routeEntry && this.routeEntry instanceof Route.RouteSection}">
           ${expandingDOM}
         </div>
       </div>
