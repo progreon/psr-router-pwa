@@ -1,6 +1,9 @@
 import * as DummyModel from './ModelDummy';
 import { GameInfo, Item, Type, Trainer, Location } from './Model';
 import { Move, Pokemon, Engine } from './ModelAbstract';
+import { Battler } from './battler/Battler';
+import { Battler1 } from './battler/Battler1';
+import { BattlerDummy } from './battler/BattlerDummy';
 
 /**
  * Class representing a game.
@@ -116,12 +119,26 @@ export class Game {
    * @param name  The name of the pokemon.
    * @returns The pokemon.
    */
-  getDummyPokemon(name: string): Pokemon {
+  getDummyPokemon(name: string): DummyModel.PokemonDummy {
     if (!name) {
       return undefined;
     } else {
       return new DummyModel.PokemonDummy(this, name);
     }
+  }
+
+  createBattler(pokemon: Pokemon, level: number, catchLocation: any = null, isTrainerMon: boolean = false): Battler {
+    let b: Battler;
+    switch (this.info.gen) {
+      case 1:
+        b = new Battler1(this, pokemon, catchLocation, isTrainerMon, level);
+        break;
+      default:
+        let dummyP = this.getDummyPokemon(pokemon.name);
+        b = new BattlerDummy(this, dummyP, catchLocation, isTrainerMon, level);
+        break;
+    }
+    return b;
   }
 
   /**

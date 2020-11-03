@@ -5,6 +5,7 @@ import * as Route from '..';
 import { IRouteEntryParser } from "./IRouteEntryParser";
 import { RouteBattleParser } from '../parse/RouteBattleParser';
 import { RouteDirectionsParser } from '../parse/RouteDirectionsParser';
+import { RouteEncounterParser } from '../parse/RouteEncounterParser';
 import { RouteEntryParser } from '../parse/RouteEntryParser';
 import { RouteManipParser } from '../parse/RouteManipParser';
 import { RouteGetPokemonParser } from '../parse/RouteGetPokemonParser';
@@ -75,6 +76,7 @@ export class RouteSectionParser implements IRouteEntryParser {
 
 RouteSectionParser.parsers[Route.RouteBattle.ENTRY_TYPE.toUpperCase()] = new RouteBattleParser();
 RouteSectionParser.parsers[Route.RouteDirections.ENTRY_TYPE.toUpperCase()] = new RouteDirectionsParser();
+RouteSectionParser.parsers[Route.RouteEncounter.ENTRY_TYPE.toUpperCase()] = new RouteEncounterParser();
 RouteSectionParser.parsers[Route.RouteEntry.ENTRY_TYPE.toUpperCase()] = new RouteEntryParser();
 RouteSectionParser.parsers[Route.RouteManip.ENTRY_TYPE.toUpperCase()] = new RouteManipParser();
 RouteSectionParser.parsers[Route.RouteGetPokemon.ENTRY_TYPE.toUpperCase()] = new RouteGetPokemonParser();

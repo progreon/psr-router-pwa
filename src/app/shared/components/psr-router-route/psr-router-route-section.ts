@@ -8,6 +8,7 @@ import * as Route from 'SharedModules/psr-router-route';
 import '@vaadin/vaadin-item/theme/material/vaadin-item';
 import './psr-router-route-battle';
 import './psr-router-route-directions';
+import './psr-router-route-encounter';
 import './psr-router-route-get-pokemon';
 import './psr-router-route-manip';
 import './psr-router-route-menu';
@@ -21,6 +22,9 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
         childElements.push(html`<hr />`);
 
       switch (children[i].entryType) {
+        case Route.RouteEncounter.ENTRY_TYPE:
+          childElements.push(html`<psr-router-route-encounter id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-encounter>`);
+          break;
         case Route.RouteBattle.ENTRY_TYPE:
           childElements.push(html`<psr-router-route-battle id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-battle>`);
           break;

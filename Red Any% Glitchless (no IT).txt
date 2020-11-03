@@ -13,7 +13,7 @@ Route: Red Any% Glitchless (no IT)
 		B: Rival 1 - Bulbasaur :: Rival 1 :: Tail Whip once, then spam Tackle (use a second Tail Whip if you get Growled turn 1)
 
 	S: Route 1
-		Kill a Lv. 2-3 Rattata or Lv. 2-3 Pidgey using Tackle. You need the experience to get Bubble for Brock
+		E: Rattata:2 :: Kill a Lv. 2-3 Rattata or Lv. 2-3 Pidgey using Tackle. You need the experience to get Bubble for Brock
 		When walking down to deliver Oak's Parcel, cut through the second-to-last patch of grass if you haven't yet fought an encounter
 
 	S: Pallet Town

@@ -4,6 +4,7 @@ import { ScopedLine } from "./ScopedLine";
 import * as Util from '../../psr-router-util';
 import { RouteManip } from "../RouteManip";
 
+// TODO: Manip: <pokemon>:<level> <dvs> [:: <ball>]
 /**
  * lines:
  * Manip: <pokemon>:<level> <dvs>

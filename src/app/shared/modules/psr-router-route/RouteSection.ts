@@ -1,7 +1,7 @@
 'use strict';
 
 // imports
-import { RouteBattle, RouteDirections, RouteEntry, RouteGetPokemon, RouteMenu, RouteManip } from '.';
+import { RouteBattle, RouteDirections, RouteEncounter, RouteEntry, RouteGetPokemon, RouteMenu, RouteManip } from '.';
 import { RouteEntryInfo } from './util';
 import { Game } from '../psr-router-model/Game';
 import { Location, Player, Trainer } from '../psr-router-model/Model';
@@ -61,7 +61,7 @@ export class RouteSection extends RouteEntry {
   private _applyNextChild(previousChild?: RouteEntry) {
     let prevChildIdx = 0;
     let player = super.nextPlayer;
-    
+
     let nextChildIdx = 0;
     if (previousChild) {
       player = previousChild.nextPlayer;
@@ -189,6 +189,9 @@ export class RouteSection extends RouteEntry {
       switch (type) {
         case RouteBattle.ENTRY_TYPE.toUpperCase():
           children.push(RouteBattle.newFromJSONObject(e, game));
+          break;
+        case RouteEncounter.ENTRY_TYPE.toUpperCase():
+          children.push(RouteEncounter.newFromJSONObject(e, game));
           break;
         case RouteEntry.ENTRY_TYPE.toUpperCase():
           children.push(RouteEntry.newFromJSONObject(e, game));

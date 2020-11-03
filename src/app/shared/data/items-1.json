@@ -13,10 +13,10 @@
       "type": "if type is filled in, the item can be used on one of your pokemon"
     }
   },
-  "MASTER_BALL": [ "Master Ball", "TI", 0, "", "", "" ],
-  "ULTRA_BALL": [ "Ultra Ball", "TI", 1200, "", "", "" ],
-  "GREAT_BALL": [ "Great Ball", "TI", 600, "", "", "" ],
-  "POKE_BALL": [ "Poke Ball", "TI", 200, "", "", "" ],
+  "MASTER_BALL": [ "Master Ball", "TI", 0, "BALL", "", "" ],
+  "ULTRA_BALL": [ "Ultra Ball", "TI", 1200, "BALL", "", "" ],
+  "GREAT_BALL": [ "Great Ball", "TI", 600, "BALL", "", "" ],
+  "POKE_BALL": [ "Poke Ball", "TI", 200, "BALL", "", "" ],
   "TOWN_MAP": [ "Town Map", "O", 0, "", "", "" ],
   "BICYCLE": [ "Bicycle", "O", 0, "", "", "" ],
   "SURFBOARD": [ "Surfboard", "O", 0, "", "", "" ],

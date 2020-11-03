@@ -168,6 +168,7 @@ class PsrRouterHome extends PsrRouterPage {
   }
 
   _onExportClicked(e) {
+    console.log(e);
     let route = RouteManager.GetCurrentRoute();
     if (route) {
       (<any>this.shadowRoot.getElementById("menu")).opened = true;

@@ -1,14 +1,14 @@
 import { EntryJSON } from "./EntryJSON";
+import { ActionJSON } from "./actions/ActionJSON";
 import { ScopedLine } from "./ScopedLine";
 import * as Util from '../../psr-router-util';
-import { RouteBattle } from "../RouteBattle";
+import { RouteEncounter } from "../RouteEncounter";
 
 import { UseAction } from "../psr-router-route-actions/UseAction";
 import { SwapAction } from "../psr-router-route-actions/SwapAction";
 import { SwapPokemonAction } from "../psr-router-route-actions/SwapPokemonAction";
 import { DirectionAction } from "../psr-router-route-actions/DirectionAction";
 import { BSettingsAction } from "../psr-router-route-actions/BSettingsAction";
-import { OpponentAction } from "../psr-router-route-actions/OpponentAction";
 
 import { ARouteActionsParser } from "./ARouteActionsParser";
 
@@ -18,7 +18,7 @@ import { SwapActionParser } from "./actions/SwapActionParser";
 import { SwapPokemonActionParser } from "./actions/SwapPokemonActionParser";
 import { DirectionActionParser } from "./actions/DirectionActionParser";
 import { BSettingsActionParser } from "./actions/BSettingsActionParser";
-import { OpponentActionParser } from "./actions/OpponentActionParser";
+import { PokemonLevelPair } from "../../psr-router-model/Model";
 
 const parsers: { [key: string]: IActionParser } = {};
 parsers[UseAction.ACTION_TYPE.toUpperCase()] = new UseActionParser();
@@ -26,7 +26,6 @@ parsers[SwapAction.ACTION_TYPE.toUpperCase()] = new SwapActionParser();
 parsers[SwapPokemonAction.ACTION_TYPE.toUpperCase()] = new SwapPokemonActionParser();
 parsers[DirectionAction.ACTION_TYPE.toUpperCase()] = new DirectionActionParser();
 parsers[BSettingsAction.ACTION_TYPE.toUpperCase()] = new BSettingsActionParser();
-parsers[OpponentAction.ACTION_TYPE.toUpperCase()] = new OpponentActionParser();
 
 /**
  * lines:
@@ -46,7 +45,7 @@ parsers[OpponentAction.ACTION_TYPE.toUpperCase()] = new OpponentActionParser();
  *     }
  * }
  */
-export class RouteBattleParser extends ARouteActionsParser {
+export class RouteEncounterParser extends ARouteActionsParser {
     public static readonly PARSERS = parsers;
     public static readonly DEFAULT_PARSER = parsers[DirectionAction.ACTION_TYPE.toUpperCase()];
     public get parsers(): { [key: string]: IActionParser; } {
@@ -58,12 +57,17 @@ export class RouteBattleParser extends ARouteActionsParser {
 
     public linesToJSON(scopedLine: ScopedLine, filename: string): EntryJSON {
         let entry = super.linesToJSON(scopedLine, filename);
-        let [trainer, title, ...summ] = scopedLine.untypedLine.split("::");
-        if (!trainer) {
+        let [encounter, title, ...summ] = scopedLine.untypedLine.split("::");
+        if (!encounter) {
             throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Please provide a trainer id`, "Parser Error");
         }
         title = title ? title.trim() : "";
-        entry.properties.trainer = trainer.trim();
+        let [pokemon, l] = encounter.split(":");
+        let level = parseInt(l);
+        if (!pokemon || isNaN(level)) {
+            throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Invalid pokemon-level pair "${encounter}"`, "Parser Error");
+        }
+        entry.properties.encounter = { pokemon, level };
         let summary = summ.length > 0 ? summ.join("::").trim() : title;
         entry.info = { title: summ.length > 0 ? title : "", summary: summary, description: "" };
 
@@ -73,7 +77,7 @@ export class RouteBattleParser extends ARouteActionsParser {
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {
         // TODO: test
         let scopedLine = super.jsonToLines(jsonEntry);
-        let line = `${RouteBattle.ENTRY_TYPE}: ${jsonEntry.properties.trainer}`;
+        let line = `${RouteEncounter.ENTRY_TYPE}: ${jsonEntry.properties.encounter.pokemon}:${jsonEntry.properties.encounter.level}`;
         if (jsonEntry.info.title) {
             line = `${line} :: ${jsonEntry.info.title}`;
         }

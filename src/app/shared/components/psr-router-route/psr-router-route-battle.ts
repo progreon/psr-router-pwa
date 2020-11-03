@@ -12,7 +12,7 @@ import 'SharedComponents/psr-router-model/psr-router-battler';
 import { PsrRouterTrainer } from 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import { OpponentAction } from 'App/shared/modules/psr-router-route/psr-router-route-actions/OpponentAction';
 
-class PsrRouterRouteBattle extends PsrRouterRouteEntry {
+export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   _getPopupContentRenderer() {
     if (this.routeEntry && (<Route.RouteBattle>super.routeEntry).trainer && !(<Route.RouteBattle>super.routeEntry).trainer.dummy) {
       return (root: HTMLElement, dialog: HTMLElement) => {
@@ -107,7 +107,7 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
       if (battleEntry.player.team.length > 0) {
         let battle = [];
         battleEntry.battleStages.forEach((battleStage, bsi) => {
-          let ob = battleEntry.trainer.party[bsi];
+          let ob = battleEntry.opponentParty[bsi];
           battleStage.damageRanges.forEach((dr, dri) => {
             let b = battleStage.player.team[dr.entrant.partyIndex];
             let bdr = dr.playerDR;
@@ -207,7 +207,8 @@ class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   }
 
   _getTitle(): string {
-    return super._getTitle() || (<Route.RouteBattle>super.routeEntry).trainer.toString();
+    let battle = (<Route.RouteBattle>super.routeEntry);
+    return super._getTitle() || (battle.trainer && battle.trainer.toString() || "");
   }
 
   _triggerDamageCalc(battleStage: Route.RouteBattle.Stage, bsi: number, dri: number): void {

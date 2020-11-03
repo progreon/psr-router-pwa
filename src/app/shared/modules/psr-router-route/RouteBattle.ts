@@ -15,8 +15,6 @@ import { AAction } from './psr-router-route-actions/AAction';
 import { UseAction } from './psr-router-route-actions/UseAction';
 import { SwapAction } from './psr-router-route-actions/SwapAction';
 import { SwapPokemonAction } from './psr-router-route-actions/SwapPokemonAction';
-import { TmAction } from './psr-router-route-actions/TmAction';
-import { TossAction } from './psr-router-route-actions/TossAction';
 import { DirectionAction } from './psr-router-route-actions/DirectionAction';
 import { BSettingsAction } from './psr-router-route-actions/BSettingsAction';
 import { OpponentAction } from './psr-router-route-actions/OpponentAction';
@@ -25,8 +23,6 @@ const possibleActions: { [key: string]: (obj: ActionJSON, game: Game) => AAction
 possibleActions[UseAction.ACTION_TYPE.toUpperCase()] = UseAction.newFromJSONObject;
 possibleActions[SwapAction.ACTION_TYPE.toUpperCase()] = SwapAction.newFromJSONObject;
 possibleActions[SwapPokemonAction.ACTION_TYPE.toUpperCase()] = SwapPokemonAction.newFromJSONObject;
-possibleActions[TmAction.ACTION_TYPE.toUpperCase()] = TmAction.newFromJSONObject;
-possibleActions[TossAction.ACTION_TYPE.toUpperCase()] = TossAction.newFromJSONObject;
 possibleActions[DirectionAction.ACTION_TYPE.toUpperCase()] = DirectionAction.newFromJSONObject;
 possibleActions[OpponentAction.ACTION_TYPE.toUpperCase()] = OpponentAction.newFromJSONObject;
 possibleActions[BSettingsAction.ACTION_TYPE.toUpperCase()] = BSettingsAction.newFromJSONObject;
@@ -64,6 +60,10 @@ export class RouteBattle extends ARouteActionsEntry {
     return RouteBattle.ENTRY_TYPE;
   }
 
+  public get opponentParty(): Battler[] {
+    return this.trainer.party;
+  }
+
   apply(player?: Player, fireApplied = true): void {
     super.apply(player, false);
     let nextPlayer = super.nextPlayer;
@@ -78,7 +78,7 @@ export class RouteBattle extends ARouteActionsEntry {
     this.battleStages.splice(0);
     // this.battleStages.push(new BattleStages(this, player, this.entrants[0]));
     this.battleStages.push(new RouteBattle.Stage(this, nextPlayer, 0));
-    for (let ti = 1; ti < this.trainer.party.length; ti++) {
+    for (let ti = 1; ti < this.opponentParty.length; ti++) {
       // this.battleStages.push(BattleStages.newFromPreviousState(this.battleStages[ti - 1], this.entrants[1]));
       this.battleStages.push(RouteBattle.Stage.newFromPreviousState(this.battleStages[ti - 1], ti));
     }
@@ -92,7 +92,7 @@ export class RouteBattle extends ARouteActionsEntry {
         let oppAction = <OpponentAction>action;
         if (oppAction.oppIndex < currentOppIndex) {
           // TODO: ignore warning
-        } else if (oppAction.oppIndex >= this.trainer.party.length) {
+        } else if (oppAction.oppIndex >= this.opponentParty.length) {
           // TODO: ignore warning
         } else {
           currentOppIndex = oppAction.oppIndex;
@@ -104,7 +104,7 @@ export class RouteBattle extends ARouteActionsEntry {
     // 3 Execute all actions
     this.battleStages[0].apply();
     this.battleStages[0].messages.forEach(m => this.addMessage(m));
-    for (let ti = 1; ti < this.trainer.party.length; ti++) {
+    for (let ti = 1; ti < this.opponentParty.length; ti++) {
       this.battleStages[ti].reset(this.battleStages[ti - 1]);
       this.battleStages[ti].apply();
       this.battleStages[ti].messages.forEach(m => this.addMessage(m));
@@ -112,19 +112,21 @@ export class RouteBattle extends ARouteActionsEntry {
     nextPlayer = this.battleStages[this.battleStages.length - 1].nextPlayer;
 
     // TODO: generalise this
-    switch (this.trainer.name.toUpperCase()) {
-      case "BROCK":
-        nextPlayer.addBadge("attack");
-        break;
-      case "LTSURGE":
-        nextPlayer.addBadge("defense");
-        break;
-      case "KOGA":
-        nextPlayer.addBadge("speed");
-        break;
-      case "BLAINE":
-        nextPlayer.addBadge("special");
-        break;
+    if (this.trainer) {
+      switch (this.trainer.name.toUpperCase()) {
+        case "BROCK":
+          nextPlayer.addBadge("attack");
+          break;
+        case "LTSURGE":
+          nextPlayer.addBadge("defense");
+          break;
+        case "KOGA":
+          nextPlayer.addBadge("speed");
+          break;
+        case "BLAINE":
+          nextPlayer.addBadge("special");
+          break;
+      }
     }
 
     super.updateNextPlayer(nextPlayer, fireApplied);
@@ -132,7 +134,9 @@ export class RouteBattle extends ARouteActionsEntry {
 
   getJSONObject(): EntryJSON {
     let obj: EntryJSON = super.getJSONObject();
-    obj.properties.trainer = this.trainer.alias || this.trainer.key;
+    if (this.trainer) {
+      obj.properties.trainer = this.trainer.alias || this.trainer.key;
+    }
     return obj;
   }
 
@@ -222,8 +226,8 @@ export namespace RouteBattle {
             this.battle.addMessage(new RouterMessage(`The player doesn't have ${entrant.partyIndex + 1} pokemon to share experience with!`, RouterMessage.Type.Error));
           } else {
             // Only evolve at the end of the battle
-            let evoBattler = this.nextPlayer.team[entrant.partyIndex].defeatBattler(this.battle.trainer.party[this.opponentIndex], this.entrants.filter(e => !e.faint).length);
-            if (this.opponentIndex + 1 == this.battle.trainer.party.length) {
+            let evoBattler = this.nextPlayer.team[entrant.partyIndex].defeatBattler(this.battle.opponentParty[this.opponentIndex], this.entrants.filter(e => !e.faint).length);
+            if (this.opponentIndex + 1 == this.battle.opponentParty.length) {
               this.nextPlayer.team[entrant.partyIndex] = evoBattler;
             }
           }
@@ -274,7 +278,7 @@ export namespace RouteBattle {
     }
 
     public getTrainerBattler() {
-      return this.battle.trainer.party[this.opponentIndex];
+      return this.battle.opponentParty[this.opponentIndex];
     }
 
     public setEntrants(entrants: Entrant[] = []) {
@@ -378,7 +382,7 @@ export namespace RouteBattle {
         this.entrants.forEach(entrant => {
           if (entrant.partyIndex < this.player.team.length) {
             let b = this.player.team[entrant.partyIndex];
-            let ob = this.battle.trainer.party[this.opponentIndex];
+            let ob = this.battle.opponentParty[this.opponentIndex];
             let damageRange: {
               entrant: Entrant,
               playerDR: { move: Move, range: Range, critRange: Range }[],
@@ -388,7 +392,7 @@ export namespace RouteBattle {
               let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, b, ob, this.stages, this.stagesOpponent, this.badgeBoosts, new BadgeBoosts());
               damageRange.playerDR.push({ move, range: dr.range, critRange: dr.critRange });
             });
-            this.battle.trainer.party[this.opponentIndex].moveset.map(ms => ms.move).forEach(move => {
+            this.battle.opponentParty[this.opponentIndex].moveset.map(ms => ms.move).forEach(move => {
               let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, ob, b, this.stagesOpponent, this.stages, new BadgeBoosts(), this.badgeBoosts);
               damageRange.trainerDR.push({ move, range: dr.range, critRange: dr.critRange });
             });
