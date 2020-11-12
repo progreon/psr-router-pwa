@@ -14,8 +14,8 @@ import * as _movesLearnedRB from 'SharedData/moves-learned-rb.json';
 import * as _movesLearnedY from 'SharedData/moves-learned-y.json';
 import * as _pokemon from 'SharedData/pokemon-1.json';
 import * as _evolutions from 'SharedData/evolutions-1.json';
-import * as _trainersRB from 'SharedData/trainers-rb.json';
-import * as _trainersY from 'SharedData/trainers-y.json';
+import * as _trainersRB from 'SharedData/trainers/trainers-rb.json';
+import * as _trainersY from 'SharedData/trainers/trainers-y.json';
 import * as _locations from 'SharedData/locations/locations-1.json';
 import * as _encountersR from 'SharedData/encounters/encounters-r.json';
 import * as _encountersB from 'SharedData/encounters/encounters-b.json';
@@ -209,6 +209,7 @@ export class GameFactory1 extends GameFactory {
     }
     let moves = this.getMoves(gameInfo);
     let pokemon = this.getPokemon(gameInfo);
+    let items = this.getItems(gameInfo);
     let trainerFile;
     let key;
     switch (gameInfo.key) {
@@ -233,9 +234,10 @@ export class GameFactory1 extends GameFactory {
                 let [p, l] = pl.split("#");
                 let poke = pokemon[p.toUpperCase()];
                 if (!poke) {
-                  console.error(p + " not found");
+                  console.error(`pokemon ${p} not found`);
+                } else {
+                  party.push(new Model1.Battler1(null, poke, null, true, parseInt(l)));
                 }
-                party.push(new Model1.Battler1(null, poke, null, true, parseInt(l)));
               });
               if (t.moves) {
                 t.moves.forEach((pimim: string) => {
@@ -243,7 +245,18 @@ export class GameFactory1 extends GameFactory {
                   party[pi].moveset[mi] = new ModelAbstract.Battler.MoveSlot(moves[m.toUpperCase()]);
                 });
               }
-              let trainer = new Model.Trainer(t.key, t.name, tClass, party, loc, t.alias, t.boost);
+              let tItems: ModelAbstract.Item[] = [];
+              if (t.items && t.items.length > 0) {
+                t.items.forEach(i => {
+                  let item = items[i.toUpperCase()];
+                  if (!item) {
+                    console.error(`item ${i} not found`);
+                  } else {
+                    tItems.push(item);
+                  }
+                });
+              }
+              let trainer = new Model.Trainer(t.key, t.name, tClass, party, loc, t.alias, tItems, t.badgeboost);
               trainers[trainer.key.toUpperCase()] = trainer;
             });
           }

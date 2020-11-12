@@ -47,7 +47,7 @@ class PsrRouterTrainer extends LitElement {
         margin: 0px;
         display: flex;
       }
-      h1, h2, h3 {
+      h1, h2, h3, h4 {
         align-self: center;
       }
       .pokemon {
@@ -82,12 +82,17 @@ class PsrRouterTrainer extends LitElement {
         flex: 1;
         text-align: center;
       }
+      [hidden] {
+        display: none;
+      }
     </style>
 
     <div class="flex-container">
       <h1>${this.trainer ? this.trainer.name : ""}</h1>
       <h3 ?hidden="${!this.trainer || !this.trainer.alias}"><i>${this.trainer ? this.trainer.alias : ""}</i></h3>
       <h3>${this.trainer ? this.trainer.location : ""}</h3>
+      <h4 ?hidden="${!this.trainer || !this.trainer.items || this.trainer.items.length == 0}">Gives item: ${this.trainer.items.join(", ")}</h4>
+      <h4 ?hidden="${!this.trainer || !this.trainer.badgeboost}">Gives badgeboost: ${this.trainer.badgeboost}</h4>
       <hr ?hidden="${!this.trainer || this.trainer.party.length == 0}">
       <div class="section">
         ${party}

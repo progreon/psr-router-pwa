@@ -47,6 +47,7 @@
     "Erika": [
       {
         "alias": "Erika",
+        "items": [ "TM_21" ],
         "key": "Celadon Gym - Erika",
         "moves": [ "2#2#MEGA_DRAIN" ],
         "name": "Erika",
@@ -96,6 +97,7 @@
     ],
     "Rocket": [
       {
+        "items": [ "TM_28" ],
         "key": "Cerulean City - Rocket",
         "name": "Rocket",
         "party": [ "MACHOP#17", "DROWZEE#17" ]
@@ -113,6 +115,7 @@
     "Misty": [
       {
         "alias": "Misty",
+        "items": [ "TM_11" ],
         "key": "Cerulean Gym - Misty",
         "moves": [ "1#2#BUBBLEBEAM" ],
         "name": "Misty",
@@ -131,7 +134,8 @@
     "Blaine": [
       {
         "alias": "Blaine",
-        "boost": "spc",
+        "badgeboost": "spc",
+        "items": [ "TM_38" ],
         "key": "Cinnabar Gym - Blaine",
         "moves": [ "3#2#FIRE_BLAST" ],
         "name": "Blaine",
@@ -233,7 +237,8 @@
     "Koga": [
       {
         "alias": "Koga",
-        "boost": "spd",
+        "badgeboost": "spd",
+        "items": [ "TM_06" ],
         "key": "Fuchsia Gym - Koga",
         "moves": [ "3#2#TOXIC" ],
         "name": "Koga",
@@ -461,7 +466,8 @@
     "Brock": [
       {
         "alias": "Brock",
-        "boost": "atk",
+        "badgeboost": "atk",
+        "items": [ "TM_34" ],
         "key": "Pewter Gym - Brock",
         "moves": [ "1#2#BIDE" ],
         "name": "Brock",
@@ -1438,6 +1444,7 @@
     ],
     "Rocket": [
       {
+        "items": [ "NUGGET" ],
         "key": "Route 24 - Rocket",
         "name": "Rocket",
         "party": [ "EKANS#15", "ZUBAT#15" ]
@@ -1881,6 +1888,7 @@
     "Sabrina": [
       {
         "alias": "Sabrina",
+        "items": [ "TM_46" ],
         "key": "Saffron Gym - Sabrina",
         "moves": [ "3#2#PSYWAVE" ],
         "name": "Sabrina",
@@ -2136,7 +2144,8 @@
     "LtSurge": [
       {
         "alias": "Surge",
-        "boost": "def",
+        "badgeboost": "def",
+        "items": [ "TM_24" ],
         "key": "Vermilion Gym - LtSurge",
         "moves": [ "2#2#THUNDERBOLT" ],
         "name": "LtSurge",
@@ -2292,6 +2301,7 @@
     "Giovanni": [
       {
         "alias": "Giovanni",
+        "items": [ "TM_27" ],
         "key": "Viridian Gym - Giovanni",
         "moves": [ "4#2#FISSURE" ],
         "name": "Giovanni",

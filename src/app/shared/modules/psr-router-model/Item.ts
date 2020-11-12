@@ -54,6 +54,6 @@ export class Item {
   }
 
   toString(): string {
-    return this.name;
+    return this.name + (this.isTmOrHm() ? ` (${this.value})` : "");
   }
 }

@@ -1,4 +1,5 @@
 import { Battler } from "./battler/Battler";
+import { Item } from "./Item";
 
 /**
  * Class representing a trainer
@@ -14,14 +15,15 @@ export class Trainer {
    * @param location      The name of the location the trainer is at // TODO: Location instead of string?
    * @param alias         An alias given to the trainer
    */
-  constructor( //
-    public readonly key: string, //
-    public readonly name: string, //
-    public readonly trainerClass: string, //
-    public readonly party: Battler[], //
-    public readonly location: string, //
-    public readonly alias?: string, //
-    public readonly boost?: string //
+  constructor(
+    public readonly key: string,
+    public readonly name: string,
+    public readonly trainerClass: string,
+    public readonly party: Battler[],
+    public readonly location: string,
+    public readonly alias?: string,
+    public readonly items?: Item[],
+    public readonly badgeboost?: string
   ) { }
 
   getTotalExp(): number {

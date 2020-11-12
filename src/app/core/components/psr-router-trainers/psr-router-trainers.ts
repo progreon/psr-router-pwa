@@ -23,18 +23,21 @@ class PsrRouterTrainers extends PsrRouterPage {
       .map(t => this.filteredTrainers[t])
       .sort((ta, tb) => ta.toString().localeCompare(tb.toString()))
       .forEach(trainer => {
+        let divAlias = trainer.alias ? html`<div>Alias: ${trainer.alias}</div>` : [];
+        let divItems = trainer.items && trainer.items.length > 0 ? html`<div>Gives item: ${trainer.items.join(", ")}</div>` : [];
         trainerElements.push(html`
-        <div class="item">
-          <vaadin-item id="${trainer.key}" @click="${this._onClick.bind(this, trainer)}">
-            <div><strong>${trainer.toString()}</strong></div>
-            <div>Exp. Points: ${trainer.getTotalExp()}</div>
-            <div>Name: ${trainer.name}</div>
-            <div>Location: ${trainer.location}</div>
-            <div ?hidden="${!trainer.alias}">Alias: ${trainer.alias || "-"}</div>
-            <div class="key" style="opacity: 0.5"><i>[key: ${trainer.key}]</i></div>
-          </vaadin-item>
-        </div>
-      `);
+          <div class="item">
+            <vaadin-item id="${trainer.key}" @click="${this._onClick.bind(this, trainer)}">
+              <div><strong>${trainer.toString()}</strong></div>
+              <div>Exp. Points: ${trainer.getTotalExp()}</div>
+              <div>Name: ${trainer.name}</div>
+              <div>Location: ${trainer.location}</div>
+              ${divAlias}
+              ${divItems}
+              <div class="key" style="opacity: 0.5"><i>[key: ${trainer.key}]</i></div>
+            </vaadin-item>
+          </div>
+        `);
       });
     return html`
       ${AppStyles}
