@@ -46,6 +46,9 @@ module.exports = (production) => ({
 
     // The current version of the app.
     version: env.APP_VERSION || '0.0.2-SNAPSHOT',
+
+    // Set the dev boolean
+    dev: !production,
   },
 
   settings: {

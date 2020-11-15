@@ -14,7 +14,7 @@ import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterHome extends PsrRouterPage {
 
-  @property({type: Boolean})
+  @property({ type: Boolean })
   private _loading = false;
 
   private jsonClicked: any;
@@ -110,7 +110,7 @@ class PsrRouterHome extends PsrRouterPage {
   constructor() {
     super();
     // menu listeners
-    this.jsonClicked = this.doExport.bind(this, {toJSON: true});
+    this.jsonClicked = this.doExport.bind(this, { toJSON: true });
     this.txtClicked = this.doExport.bind(this, {});
     this.cancelClicked = this.doCancel.bind(this);
   }
@@ -148,7 +148,7 @@ class PsrRouterHome extends PsrRouterPage {
     }
     let comboBox: any = this.shadowRoot.getElementById("example-routes");
     if (comboBox && !comboBox.items) {
-      comboBox.items = RouteManager.GetExampleRoutesNames();
+      comboBox.items = RouteManager.GetExampleRoutesNames(this._isDevMode());
       comboBox.value = comboBox.items[0];
     }
   }
@@ -175,10 +175,10 @@ class PsrRouterHome extends PsrRouterPage {
       // bind menu listeners
       (<any>document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('filename')).value = route.shortname ? route.shortname : route.info.title;
       let menuJson = document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-json');
-      menuJson.hidden = !this.searchParams.dev;
+      menuJson.hidden = !this._isDevMode();
       menuJson.addEventListener('click', this.jsonClicked);
       let menuTxt = document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-txt');
-      menuTxt.innerHTML = this.searchParams.dev ? "TXT" : "EXPORT";
+      menuTxt.innerHTML = this._isDevMode() ? "TXT" : "EXPORT";
       menuTxt.addEventListener('click', this.txtClicked);
       document.getElementById('overlay').shadowRoot.getElementById('content').shadowRoot.getElementById('menu-cancel').addEventListener('click', this.cancelClicked);
     }
@@ -187,15 +187,19 @@ class PsrRouterHome extends PsrRouterPage {
   _onLoadRouteClicked(e) {
     let comboBox: any = this.shadowRoot.getElementById("example-routes");
     if (comboBox.value) {
-      let route = RouteManager.LoadExampleRoute(comboBox.value);
-      if (route.game.info.unsupported) {
-        this._showUnsupportedToast(route.game.info.name);
-      }
-      if (route.getAllMessages().length > 0) {
-        let str = route.getAllMessages().map(m => m.toString()).join("\n");
-        alert(str);
-      } else {
+      try {
+        let route = RouteManager.LoadExampleRoute(comboBox.value);
+        if (route.game.info.unsupported) {
+          this._showUnsupportedToast(route.game.info.name);
+        }
+        if (route.getAllMessages().length > 0) {
+          let str = route.getAllMessages().map(m => m.toString()).join("\n");
+          alert(str);
+        }
         super._navigateTo("router");
+      } catch (e) {
+        console.error(e);
+        this.showAppToast("Something went wrong while loading an example route, please contact the dev.");
       }
     }
   }

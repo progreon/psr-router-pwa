@@ -27,7 +27,7 @@ export class UseAction extends AAction {
         super.applyAction(player, battleStage);
         if (!this.item) {
             this.addMessage(new RouterMessage("No item defined", RouterMessage.Type.Error));
-            this.actionString = "[Use error]";
+            this.actionString = "[Use error: no item defined]";
             return;
         }
         this.actionString = `Use ${this.count == '*' ? "all " : ""}${this.item.name}`;

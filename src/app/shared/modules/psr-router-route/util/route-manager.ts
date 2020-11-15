@@ -1,6 +1,7 @@
 // JS imports
 import * as Route from 'SharedModules/psr-router-route';
 import * as RouteIO from './route-io';
+import { RouteParser } from '.';
 import { Game } from '../../psr-router-model/Game';
 
 if (!window.app) {
@@ -104,6 +105,7 @@ export function SaveRoute(route: Route.Route = null): Route.Route {
 // TODO: new route
 
 //// EXAMPLE ROUTES ////
+import redRaceNoItTxt from 'SharedData/routes/Red Any% Glitchless (no IT).txt';
 import * as redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
 import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
 // import * as exampleRoute from 'SharedData/routes/example_route.json';
@@ -112,21 +114,26 @@ import * as blueDummy from 'SharedData/routes/blue_dummy.json';
 import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
 // import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
 
-let exampleRoutes: { [key: string]: any; } = {};
-exampleRoutes[redAnyGlitchlessBasic.shortname] = redAnyGlitchlessBasic;
-exampleRoutes[redAnyGlitchlessClassic.shortname] = redAnyGlitchlessClassic;
-// exampleRoutes[exampleRoute.shortname] = exampleRoute;
-exampleRoutes[redGodNidoBasic.shortname] = redGodNidoBasic;
-exampleRoutes[blueDummy.shortname] = blueDummy;
-exampleRoutes[yellowDummy.shortname] = yellowDummy;
-// exampleRoutes[crystalDummy.shortname] = crystalDummy;
+let exampleRoutes: { [key: string]: { json?: any, txt?: string }; } = {};
+exampleRoutes["Red Any% Glitchless (no IT) [txt]"] = { txt: redRaceNoItTxt };
+exampleRoutes[redAnyGlitchlessBasic.shortname] = { json: redAnyGlitchlessBasic };
+exampleRoutes[redAnyGlitchlessClassic.shortname] = { json: redAnyGlitchlessClassic };
+// exampleRoutes[exampleRoute.shortname] = { json: exampleRoute };
+exampleRoutes[redGodNidoBasic.shortname] = { json: redGodNidoBasic };
+exampleRoutes[blueDummy.shortname] = { json: blueDummy };
+exampleRoutes[yellowDummy.shortname] = { json: yellowDummy };
+// exampleRoutes[crystalDummy.shortname] = { json: crystalDummy };
 
-export function GetExampleRoutesNames(): string[] {
-  return Object.keys(exampleRoutes);
+export function GetExampleRoutesNames(includeTxts: boolean = false): string[] {
+  return Object.keys(exampleRoutes).filter(er => exampleRoutes[er].json || includeTxts);
 }
 
 export function LoadExampleRoute(routeName: string): Route.Route {
-  let routeJSON = exampleRoutes[routeName];
+  let exampleRoute = exampleRoutes[routeName];
+  let [routeJSON, routeTxt] = [exampleRoute.json, exampleRoute.txt];
+  if (!routeJSON) {
+    routeJSON = RouteParser.ParseRouteText(routeTxt, routeName);
+  }
   if (routeJSON) {
     if (v1(routeJSON)) {
       localStorage.setItem(lsKeySavedRoute, JSON.stringify(routeJSON));

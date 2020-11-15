@@ -29,6 +29,10 @@ export abstract class PsrRouterPage extends LitElement {
     // Implement this!
   }
 
+  protected _isDevMode() {
+    return this.app.isDevMode;
+  }
+
   protected _navigateTo(href: string, isExternalLink: boolean = false): void {
     const navigateEvent = new CustomEvent('navigate', { detail: {href: href, external: isExternalLink}});
     document.body.dispatchEvent(navigateEvent);

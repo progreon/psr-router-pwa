@@ -433,6 +433,10 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     return this._searchParams;
   }
 
+  get isDevMode(): boolean {
+    return !!sessionStorage.getItem('dev');
+  }
+
   constructor() {
     super();
     // To force all event listeners for gestures to be passive.
@@ -519,6 +523,13 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     this._page = state.app.page;
     this._offline = state.app.offline;
     this._searchParams = state.app.searchParams;
+    if (state.app.searchParams?.dev) {
+      if (state.app.searchParams.dev == "0") {
+        sessionStorage.removeItem('dev');
+      } else {
+        sessionStorage.setItem('dev', 'true');
+      }
+    }
     this._snackbarOpened = state.app.snackbarOpened;
     this._wideLayout = state.app.wideLayout;
     this._drawerOpened = state.app.drawerOpened;
