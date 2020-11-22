@@ -6,10 +6,9 @@ import { RouterMessage } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteSection } from '.';
 import { Game } from '../psr-router-model/Game';
-import { Location, Player } from '../psr-router-model/Model';
+import { Player } from '../psr-router-model/Model';
 import { EntryJSON } from './parse/EntryJSON';
 import { RouteJSON } from './parse/RouteJSON';
-// import { saveAs } from 'file-saver/FileSaver';
 
 /**
  * A class representing the root route-entry.
@@ -29,7 +28,6 @@ export class Route {
    * @param {Game}            game              The Game object this route entry uses.
    * @param {RouteEntryInfo}  info              The info for this entry.
    * @param {String}          [shortname]       A shortname for this route, also the file name.
-   * @param {Location}        [location]        The location in the game where this entry occurs.
    * @param {RouteEntry[]}    [children=[]]     The child entries of this entry.
    * @todo +otherSettings
    */

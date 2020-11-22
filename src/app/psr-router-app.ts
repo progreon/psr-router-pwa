@@ -54,6 +54,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
   public appTitle: string;
   @property({type: Object})
   private _currentGame: Game;
+  @property({type: Object})
+  private _currentRoute;
   @property({type: Boolean})
   private _drawerOpened: boolean;
   @property({type: Boolean})
@@ -73,11 +75,11 @@ export class PsrRouterApp extends connect(store)(LitElement) {
 
   render() {
     let linkList = [];
-    let pageList: { [key: string]: {title: string, element: string, showInMenu: boolean, is404: boolean}} = window.appConfig.pageList;
+    let pageList: { [key: string]: {title: string, element: string, showInMenu: (route) => boolean, is404: boolean}} = window.appConfig.pageList;
     let menuIcon = pageList[this._page] && (pageList[this._page].showInMenu || pageList[this._page].is404) ? barsIcon : angleLeftIcon; // Default to back-arrow
     for (let [page, info] of Object.entries(pageList)) {
       if (info.showInMenu) {
-        const a = html`<a ?selected="${this._page === page}" href="/${page}">${info.title}</a>`;
+        const a = html`<a ?selected="${this._page === page}" href="/${page}" ?hidden="${!info.showInMenu(this._currentRoute)}">${info.title}</a>`;
         linkList.push(a);
       }
     }
@@ -272,6 +274,10 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           padding: 8px 24px;
         }
 
+        .toolbar-list > a[hidden] {
+          display: none;
+        }
+
         .toolbar-list > a[selected] {
           color: var(--app-header-menu-selected-color);
           box-shadow: inset 0px -4px var(--app-header-menu-selected-color);
@@ -442,26 +448,25 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     // To force all event listeners for gestures to be passive.
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
-    // Setting the list of pages
-    window.appConfig.pageList = {
-      'home': {title: "Home", element: 'psr-router-home', showInMenu: true},
-      'router': {title: "Route", element: 'psr-router-router', showInMenu: true},
-      'pokemon-list': {title: "Pokémon", element: 'psr-router-pokemon-list', showInMenu: true},
-      'pokemon-info': {title: "Pokémon Info", element: 'psr-router-pokemon-info'},
-      'trainers': {title: "Trainers", element: 'psr-router-trainers', showInMenu: true},
-      'trainer-info': {title: "Trainer Info", element: 'psr-router-trainer-info'},
-      'moves': {title: "Moves", element: 'psr-router-moves', showInMenu: true},
-      'items': {title: "Items", element: 'psr-router-items', showInMenu: true},
-      'help': {title: "Help", element: 'psr-router-manual', showInMenu: true},
-      'about': {title: "About", element: 'psr-router-about', showInMenu: true},
-      '404': {title: "404", element: 'psr-router-404', is404: true}
-    }
 
     // Load the last saved (json) route from the local storage if there is one
     RouteUtil.RouteManager.LoadSavedRoute();
 
-    let game = RouteUtil.RouteManager.GetCurrentGame();
-    console.debug("Current game:", game);
+    // Setting the list of pages
+    window.appConfig.pageList = {
+      'home': {title: "Home", element: 'psr-router-home', showInMenu: () => true},
+      'router': {title: "Route", element: 'psr-router-router', showInMenu: (route) => !!route},
+      'pokemon-list': {title: "Pokémon", element: 'psr-router-pokemon-list', showInMenu: (route) => !!route},
+      'pokemon-info': {title: "Pokémon Info", element: 'psr-router-pokemon-info'},
+      'trainers': {title: "Trainers", element: 'psr-router-trainers', showInMenu: (route) => !!route},
+      'trainer-info': {title: "Trainer Info", element: 'psr-router-trainer-info'},
+      'moves': {title: "Moves", element: 'psr-router-moves', showInMenu: (route) => !!route},
+      'items': {title: "Items", element: 'psr-router-items', showInMenu: (route) => !!route},
+      'help': {title: "Help", element: 'psr-router-manual', showInMenu: () => true},
+      'about': {title: "About", element: 'psr-router-about', showInMenu: () => true},
+      '404': {title: "404", element: 'psr-router-404', is404: true}
+    }
+
     this._appTheme = window.localStorage.getItem("app-theme");
     if (!this._appTheme) {
       window.localStorage.setItem("app-theme", this._appTheme = "light");
@@ -491,6 +496,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       description: pageTitle
       // This object also takes an image property, that points to an img src.
     });
+    this._currentRoute = RouteUtil.RouteManager.GetCurrentRoute();
+    console.debug("Current route:", this._currentRoute);
   }
 
   _getScroll() {

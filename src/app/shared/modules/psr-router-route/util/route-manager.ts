@@ -8,6 +8,12 @@ if (!window.app) {
   window.app = {};
 }
 
+//// CONSTANTS ////
+const lsKeySavedRoute = "saved-route";
+const lsSavedRoutes = "saved-routes";
+const lsLastOpenedRoute = "last-opened-route";
+const ssCurrentRoute = "current-route";
+
 export function GetCurrentRoute(): Route.Route {
   return window.app.route;
 }
@@ -31,8 +37,6 @@ export function SetCurrentRoute(route: Route.Route = null): Route.Route {
 }
 
 //// LOAD & SAVE LOCALLY ////
-
-const lsKeySavedRoute = "saved-route";
 
 function entryV1(entryV0: any) {
   entryV0.properties = {};
@@ -105,7 +109,7 @@ export function SaveRoute(route: Route.Route = null): Route.Route {
 // TODO: new route
 
 //// EXAMPLE ROUTES ////
-import redRaceNoItTxt from 'SharedData/routes/Red Any% Glitchless (no IT).txt';
+// import redRaceNoItTxt from 'SharedData/routes/Red Any% Glitchless (no IT).txt';
 import * as redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
 import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
 // import * as exampleRoute from 'SharedData/routes/example_route.json';
@@ -115,7 +119,7 @@ import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
 // import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
 
 let exampleRoutes: { [key: string]: { json?: any, txt?: string }; } = {};
-exampleRoutes["Red Any% Glitchless (no IT) [txt]"] = { txt: redRaceNoItTxt };
+// exampleRoutes["Red Any% Glitchless (no IT) [txt]"] = { txt: redRaceNoItTxt };
 exampleRoutes[redAnyGlitchlessBasic.shortname] = { json: redAnyGlitchlessBasic };
 exampleRoutes[redAnyGlitchlessClassic.shortname] = { json: redAnyGlitchlessClassic };
 // exampleRoutes[exampleRoute.shortname] = { json: exampleRoute };

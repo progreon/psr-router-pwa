@@ -16,7 +16,7 @@ import { AppStyles } from 'Shared/app-styles';
 class PsrRouterRouter extends PsrRouterPage {
 
   public route: Route.Route;
-  @property({type: Object})
+  @property({ type: Object })
   public rootSection: Route.RouteSection;
 
   _render() {
@@ -37,15 +37,17 @@ class PsrRouterRouter extends PsrRouterPage {
     super.firstUpdated(changedProperties);
     this._loadRoute();
   }
-  
+
   triggerDataRefresh() {
     this._loadRoute();
   }
 
   private _loadRoute() {
     this.route = RouteManager.GetCurrentRoute();
-    this.rootSection = this.route?.rootSection;
-    console.debug(this.route);
+    if (this.rootSection != this.route?.rootSection) {
+      this.rootSection = this.route?.rootSection;
+      console.debug(this.route);
+    }
   }
 }
 
