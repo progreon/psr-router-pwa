@@ -29,7 +29,7 @@ import '@vaadin/vaadin-button/theme/material/vaadin-button';
 
 // Image imports for this element
 import { barsIcon, angleLeftIcon } from 'Shared/my-icons';
-import * as PSRRIcon from 'Images/icon.png';
+import PSRRIcon from 'Images/icon.png';
 
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
