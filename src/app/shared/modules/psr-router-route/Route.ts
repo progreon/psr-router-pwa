@@ -19,6 +19,7 @@ import { RouteJSON } from './parse/RouteJSON';
  */
 export class Route {
   public static readonly ENTRY_TYPE: string = "Route";
+  public static instance: Route;
 
   public readonly game: Game;
   public shortname: string;

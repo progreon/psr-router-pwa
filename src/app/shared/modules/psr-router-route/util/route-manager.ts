@@ -4,23 +4,103 @@ import * as RouteIO from './route-io';
 import { RouteParser } from '.';
 import { Game } from '../../psr-router-model/Game';
 
-if (!window.app) {
-  window.app = {};
-}
+//// PARSING STUFF ////
 
 //// CONSTANTS ////
 const lsKeySavedRoute = "saved-route";
 const lsSavedRoutes = "saved-routes";
-const lsLastOpenedRoute = "last-opened-route";
+const lsLastRoute = "last-route";
 const ssCurrentRoute = "current-route";
 
+//// STORAGE ////
+if (!window.app) {
+  window.app = {};
+}
+
+function getLsSavedRoutes(): { [key: number]: { id: number, title: string, route: string } } {
+  let str = window.localStorage.getItem(lsSavedRoutes);
+  if (str) {
+    return JSON.parse(str);
+  } else {
+    return {};
+  }
+}
+
+function setLsSavedRoutes(value: { [key: number]: { id: number, title: string, route: string } }) {
+  window.localStorage.setItem(lsSavedRoutes, JSON.stringify(value));
+}
+
+function getLsLastRoute(): { id?: number, route?: string, ts: number } {
+  let str = window.localStorage.getItem(lsLastRoute);
+  if (str) {
+    return JSON.parse(str);
+  } else {
+    return null;
+  }
+}
+
+function setLsLastRoute(value: { id?: number, route?: string, ts: number }) {
+  window.localStorage.setItem(lsLastRoute, JSON.stringify(value));
+}
+
+function setSsCurrentRoute(value: { id?: number, route?: string, ts: number }) {
+  window.localStorage.setItem(ssCurrentRoute, JSON.stringify(value));
+}
+
+function getSsCurrentRoute(): { id?: number, route?: string, ts: number } {
+  let str = window.localStorage.getItem(ssCurrentRoute);
+  if (str) {
+    return JSON.parse(str);
+  } else {
+    return null;
+  }
+}
+
+function getRouteStringFromStorageObj(storageObj: { id?: number, route?: string, ts: number }): string {
+  if (storageObj.id) {
+    let sr = getLsSavedRoutes();
+    if (sr) {
+      return sr[storageObj.id]?.route;
+    }
+  }
+  return undefined;
+}
+
+//// ROUTE MANAGING ////
+export function GetSavedRoutesTitles(): { id: number, title: string }[] {
+  return Object.values(getLsSavedRoutes()).map(r => { return { id: r.id, title: r.title } }).sort((a, b) => a.id - b.id);
+}
+
 export function GetCurrentRoute(): Route.Route {
-  return window.app.route;
+  if (!Route.Route.instance) {
+    let ssCR = getSsCurrentRoute();
+    if (!ssCR) {
+      let lsLR = getLsLastRoute();
+      if (!lsLR) {
+        return undefined;
+      }
+      ssCR = lsLR;
+      setSsCurrentRoute(ssCR);
+    }
+    // TODO: parse route from getRouteStringFromStorageObj(ssCR)
+  }
+  return Route.Route.instance;
 }
 
 export function GetCurrentGame(): Game {
-  return window.app.game;
+  return GetCurrentRoute()?.game;
 }
+
+
+
+
+// export function GetCurrentRoute(): Route.Route {
+//   return window.app.route;
+// }
+
+// export function GetCurrentGame(): Game {
+//   return window.app.game;
+// }
 
 export function SetCurrentRoute(route: Route.Route = null): Route.Route {
   window.app.route = route;
@@ -109,7 +189,7 @@ export function SaveRoute(route: Route.Route = null): Route.Route {
 // TODO: new route
 
 //// EXAMPLE ROUTES ////
-// import redRaceNoItTxt from 'SharedData/routes/Red Any% Glitchless (no IT).txt';
+import redRaceNoItTxt from 'SharedData/routes/Red Any% Glitchless (no IT).txt';
 import * as redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
 import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
 // import * as exampleRoute from 'SharedData/routes/example_route.json';
@@ -119,7 +199,7 @@ import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
 // import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
 
 let exampleRoutes: { [key: string]: { json?: any, txt?: string }; } = {};
-// exampleRoutes["Red Any% Glitchless (no IT) [txt]"] = { txt: redRaceNoItTxt };
+exampleRoutes["Red Any% Glitchless (no IT) [txt]"] = { txt: redRaceNoItTxt };
 exampleRoutes[redAnyGlitchlessBasic.shortname] = { json: redAnyGlitchlessBasic };
 exampleRoutes[redAnyGlitchlessClassic.shortname] = { json: redAnyGlitchlessClassic };
 // exampleRoutes[exampleRoute.shortname] = { json: exampleRoute };
