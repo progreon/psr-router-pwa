@@ -2,6 +2,7 @@
 import { html, property } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { Pokemon } from 'SharedModules/psr-router-model/ModelAbstract';
+import { RouteManager } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
 import 'SharedComponents/psr-router-pokemon/psr-router-pokemon';
@@ -9,6 +10,7 @@ import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
 
 // These are the shared styles needed by this element.
 import { AppStyles } from 'Shared/app-styles';
+import { RouterMessage } from 'App/shared/modules/psr-router-util';
 
 class PsrRouterPokemonList extends PsrRouterPage {
 
@@ -54,7 +56,8 @@ class PsrRouterPokemonList extends PsrRouterPage {
   }
 
   triggerDataRefresh() {
-    this.pokemon = window.app && window.app.game && window.app.game.pokemon ? window.app.game.pokemon : {};
+    let game = RouteManager.GetCurrentGame();
+    this.pokemon = game?.pokemon || {};
   }
 
   _filter() {

@@ -2,6 +2,8 @@
 import { html, property } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { RouteManager } from 'SharedModules/psr-router-route/util';
+import { Game } from 'SharedModules/psr-router-model/Game';
+import { Route } from 'SharedModules/psr-router-route/Route';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
@@ -22,7 +24,7 @@ class PsrRouterHome extends PsrRouterPage {
   private cancelClicked: any;
 
   _render() {
-    let route, game;
+    let route: Route, game: Game;
     try {
       route = RouteManager.GetCurrentRoute();
       game = RouteManager.GetCurrentGame();
@@ -30,6 +32,16 @@ class PsrRouterHome extends PsrRouterPage {
       console.error(e);
       window.alert("Unable to get the current route, see console for more details.");
     }
+    let savedRoutes = RouteManager.GetSavedRoutesTitles();
+    let savedRoutesList = [];
+    savedRoutes.forEach(sr => {
+      savedRoutesList.push(html`<li>${sr.id}: ${sr.title}</li>`);
+    });
+    let savedRoutesDOM = html`
+      <ul>
+        ${savedRoutesList}
+      </ul>
+    `;
     return html`
       ${AppStyles}
       <style>
@@ -70,21 +82,26 @@ class PsrRouterHome extends PsrRouterPage {
         .options > * {
           flex-grow: 1;
         }
+        h4 {
+          margin: 15px 0px 15px 0px;
+        }
         hr {
-          width: 100%;
-          border-width: 1px 0px 0px 0px;
+          box-sizing: border-box;
+          height: 1px;
+          border: 0;
+          border-top: 1px solid var(--app-color-black);
         }
       </style>
       <vaadin-button @click="${this._switchTheme.bind(this)}">Switch theme</vaadin-button>
-      <h2>Current Route</h2>
-      <h3>${route ? route.info.title : "No route loaded"}</h3>
-      <p>${route && route.shortname}</p>
+      <h3>Current Route:</h3>
+      <h4>${route ? route.info.title : "No route loaded"}</h4>
       <p ?hidden="${!game || !game.info.unsupported}">[GAME NOT (fully) SUPPORTED (yet)!]</p>
       <b ?hidden="${!game}">Game: Pokémon ${game && game.info.name}</b>
       <div ?hidden="${!game}">Generation ${game && game.info.gen || "?"}</div>
       <div ?hidden="${!game}">${game && game.info.year || "????"}, ${game && game.info.platform}</div>
-      <hr>
-      <!-- <h2>Manage route</h2> -->
+      <h3>Saved Routes</h3>
+      ${savedRoutesDOM}
+      <h3>Manage Routes</h3>
       <div class="buttons">
         <div class="button-group">
           <vaadin-button id="export" @click="${this._onExportClicked.bind(this)}" ?disabled="${!route}">Export file</vaadin-button>

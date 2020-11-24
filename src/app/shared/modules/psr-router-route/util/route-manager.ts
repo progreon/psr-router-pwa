@@ -32,16 +32,23 @@ if (!window.app) {
 }
 
 //// CONSTANTS ////
-const lsKeySavedRoute = "saved-route";
-const lsSavedRoutes = "saved-routes";
-const lsLastRoute = "last-route";
-const ssCurrentRoute = "current-route";
+const lsSavedRoutes = "rm-saved-routes";
+const lsLastRoute = "rm-last-route";
+const ssCurrentRoute = "rm-current-route";
 
 //// STORAGE ////
 
-function clearStorage() {
-  window.localStorage.clear();
-  window.sessionStorage.clear();
+function clearRmStorage() {
+  Object.keys(window.localStorage).forEach(key => {
+    if (key.startsWith("rm-")) {
+      window.localStorage.removeItem(key);
+    }
+  });
+  Object.keys(window.sessionStorage).forEach(key => {
+    if (key.startsWith("rm-")) {
+      window.sessionStorage.removeItem(key);
+    }
+  });
 }
 
 function getLsSavedRoutes(): { [key: number]: { id: number, title: string, route: any } } {
@@ -100,7 +107,10 @@ function getRouteJsonFromStorageObj(storageObj: { id?: number, route?: any, ts: 
 }
 
 export function SetCurrentRouteAsLastRoute() {
-  setLsLastRoute(getSsCurrentRoute());
+  let currRoute = getSsCurrentRoute();
+  if (currRoute) {
+    setLsLastRoute(currRoute);
+  }
 }
 
 //// GETTERS ////

@@ -125,7 +125,7 @@ ${AppColors}
 
     h1 { font-size: 60px; }
     h2 { font-size: 48px; }
-    h3 { font-size: 24px; }
+    h3 { font-size: 32px; }
     h4 { font-size: 22px; }
     h5 { font-size: 16px; }
     h6 { font-size: 16px; }

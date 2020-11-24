@@ -2,6 +2,7 @@
 import { html, property } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { Trainer } from 'SharedModules/psr-router-model/Model';
+import { RouteManager } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-item/theme/material/vaadin-item';
@@ -71,7 +72,8 @@ class PsrRouterTrainers extends PsrRouterPage {
   }
 
   triggerDataRefresh() {
-    this.trainers = window.app && window.app.game && window.app.game.trainers ? window.app.game.trainers : {};
+    let game = RouteManager.GetCurrentGame();
+    this.trainers = game?.trainers || {};
   }
 
   _filter() {

@@ -17,9 +17,12 @@ export class Game {
   private items: { [key: string]: Item; };
   private types: { [key: string]: Type; };
   private typeChart: any;
-  private moves: { [key: string]: Move; };
-  private pokemon: { [key: string]: Pokemon; };
-  private trainers: { [key: string]: Trainer; };
+  private _moves: { [key: string]: Move; };
+  public get moves() { return this._moves; }
+  private _pokemon: { [key: string]: Pokemon; };
+  public get pokemon() { return this._pokemon; }
+  private _trainers: { [key: string]: Trainer; };
+  public get trainers() { return this._trainers; }
   private locations: { root: { [key: string]: Location; }, all: { [key: string]: Location; } };
 
   public readonly dummyModel: any;
@@ -36,16 +39,16 @@ export class Game {
     this.items = builder.items;
     this.types = builder.types;
     this.typeChart = builder.typeChart;
-    this.moves = builder.moves;
-    this.pokemon = builder.pokemon;
-    this.trainers = builder.trainers;
+    this._moves = builder.moves;
+    this._pokemon = builder.pokemon;
+    this._trainers = builder.trainers;
     this.locations = builder.locations;
 
     this.dummyModel = DummyModel;
     this.aliasedTrainers = {};
-    for (let key in this.trainers) {
-      if (this.trainers[key].alias) {
-        this.aliasedTrainers[this.trainers[key].alias.toUpperCase()] = this.trainers[key];
+    for (let key in this._trainers) {
+      if (this._trainers[key].alias) {
+        this.aliasedTrainers[this._trainers[key].alias.toUpperCase()] = this._trainers[key];
       }
     }
   }
@@ -80,7 +83,7 @@ export class Game {
    * @returns The move.
    */
   findMoveByName(name: string): Move {
-    return name ? this.moves[name.toUpperCase()] : undefined;
+    return name ? this._moves[name.toUpperCase()] : undefined;
   }
 
   /**
@@ -111,7 +114,7 @@ export class Game {
    * @returns The pokemon.
    */
   findPokemonByName(name: string): Pokemon {
-    return name ? this.pokemon[name.toUpperCase()] : undefined;
+    return name ? this._pokemon[name.toUpperCase()] : undefined;
   }
 
   /**
@@ -147,7 +150,7 @@ export class Game {
    * @returns The trainer.
    */
   findTrainerByKeyOrAlias(key: string): Trainer {
-    return key ? (this.aliasedTrainers[key.toUpperCase()] || this.trainers[key.toUpperCase()]) : undefined;
+    return key ? (this.aliasedTrainers[key.toUpperCase()] || this._trainers[key.toUpperCase()]) : undefined;
   }
 
   /**

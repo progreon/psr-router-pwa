@@ -495,7 +495,6 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     });
     try {
       this._currentRoute = RouteUtil.RouteManager.GetCurrentRoute();
-      console.debug("Current route:", this._currentRoute);
     } catch (e) {
       console.error(e);
       window.alert("Unable to get the current route, see console for more details.");
