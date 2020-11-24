@@ -43,7 +43,12 @@ class PsrRouterRouter extends PsrRouterPage {
   }
 
   private _loadRoute() {
-    this.route = RouteManager.GetCurrentRoute();
+    try {
+      this.route = RouteManager.GetCurrentRoute();
+    } catch (e) {
+      console.error(e);
+      window.alert("Unable to get the current route, see console for more details.");
+    }
     if (this.rootSection != this.route?.rootSection) {
       this.rootSection = this.route?.rootSection;
       console.debug(this.route);

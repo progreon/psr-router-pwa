@@ -22,8 +22,14 @@ class PsrRouterHome extends PsrRouterPage {
   private cancelClicked: any;
 
   _render() {
-    let route = RouteManager.GetCurrentRoute();
-    let game = RouteManager.GetCurrentGame();
+    let route, game;
+    try {
+      route = RouteManager.GetCurrentRoute();
+      game = RouteManager.GetCurrentGame();
+    } catch (e) {
+      console.error(e);
+      window.alert("Unable to get the current route, see console for more details.");
+    }
     return html`
       ${AppStyles}
       <style>
@@ -125,7 +131,7 @@ class PsrRouterHome extends PsrRouterPage {
     if (fileInput && !fileInput.onchange) {
       fileInput.onchange = e => {
         this._loading = true;
-        RouteManager.LoadRouteFile((<HTMLInputElement>e.target).files[0])
+        RouteManager.OpenRouteFile((<HTMLInputElement>e.target).files[0])
           .then(route => {
             fileInput.value = "";
             this._loading = false;
@@ -148,8 +154,10 @@ class PsrRouterHome extends PsrRouterPage {
     }
     let comboBox: any = this.shadowRoot.getElementById("example-routes");
     if (comboBox && !comboBox.items) {
-      comboBox.items = RouteManager.GetExampleRoutesNames(this._isDevMode());
-      comboBox.value = comboBox.items[0];
+      comboBox.items = RouteManager.GetExampleRoutesInfo(this._isDevMode());
+      comboBox.itemLabelPath = "title";
+      comboBox.itemValuePath = "key";
+      comboBox.value = comboBox.items[0].key;
     }
   }
 
@@ -188,7 +196,7 @@ class PsrRouterHome extends PsrRouterPage {
     let comboBox: any = this.shadowRoot.getElementById("example-routes");
     if (comboBox.value) {
       try {
-        let route = RouteManager.LoadExampleRoute(comboBox.value);
+        let route = RouteManager.OpenExampleRoute(comboBox.value);
         if (route.game.info.unsupported) {
           this._showUnsupportedToast(route.game.info.name);
         }

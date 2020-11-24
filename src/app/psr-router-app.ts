@@ -449,9 +449,6 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
 
-    // Load the last saved (json) route from the local storage if there is one
-    RouteUtil.RouteManager.LoadSavedRoute();
-
     // Setting the list of pages
     window.appConfig.pageList = {
       'home': {title: "Home", element: 'psr-router-home', showInMenu: () => true},
@@ -481,7 +478,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
         this.showToast(html`<div style="display: flex; justify-content: space-between; align-items: center;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}" style="cursor: pointer;">Reload</vaadin-button></div>`);
       }
     });
-    // window.onunload = e => RouteUtil.RouteManager.SaveRoute();
+    window.addEventListener('beforeunload', RouteUtil.RouteManager.SetCurrentRouteAsLastRoute);
     installRouter((location, e) => {store.dispatch(navigate(location, e))}, this._getScroll.bind(this), this._setScroll.bind(this));
     installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     installMediaQueryWatcher(`(min-width: ${window.MyAppGlobals.wideWidth})`,
@@ -496,8 +493,13 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       description: pageTitle
       // This object also takes an image property, that points to an img src.
     });
-    this._currentRoute = RouteUtil.RouteManager.GetCurrentRoute();
-    console.debug("Current route:", this._currentRoute);
+    try {
+      this._currentRoute = RouteUtil.RouteManager.GetCurrentRoute();
+      console.debug("Current route:", this._currentRoute);
+    } catch (e) {
+      console.error(e);
+      window.alert("Unable to get the current route, see console for more details.");
+    }
   }
 
   _getScroll() {

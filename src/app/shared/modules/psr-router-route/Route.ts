@@ -2,7 +2,7 @@
 
 // imports
 import { GetGame } from '../psr-router-game-factory';
-import { RouterMessage } from '../psr-router-util';
+import { RouterError, RouterMessage } from '../psr-router-util';
 import { RouteEntryInfo } from './util';
 import { RouteSection } from '.';
 import { Game } from '../psr-router-model/Game';
@@ -65,11 +65,11 @@ export class Route {
     if (!obj) {
       // TODO: throw exception?
     } else if (!obj.game) {
-      // TODO: throw exception?
+      throw new RouterError("Unable to find game from json", "Route.newFromJSONObject Error");
     }
     let game = GetGame(obj.game);
     if (!game) {
-      // TODO: throw exception?
+      throw new RouterError(`Unable to find game '${obj.game}'`, "Route.newFromJSONObject Error");
     }
     let rs = RouteSection.newFromJSONObject(obj, game);
     let route = new Route(game, rs, obj.shortname); // TODO: rs.info
