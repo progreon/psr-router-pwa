@@ -45,6 +45,7 @@ class PsrRouterRouter extends PsrRouterPage {
   private _loadRoute() {
     try {
       this.route = RouteManager.GetCurrentRoute();
+      this.route.apply();
     } catch (e) {
       console.error(e);
       window.alert("Unable to get the current route, see console for more details.");

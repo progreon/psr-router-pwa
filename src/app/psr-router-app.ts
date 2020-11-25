@@ -17,6 +17,7 @@ import { installRouter } from './custom-router';
 import { updateMetadata } from 'pwa-helpers/metadata';
 
 // Imports for this element
+import '@material/mwc-switch';
 import '@polymer/app-layout/app-drawer/app-drawer';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
 import '@polymer/app-layout/app-header/app-header';
@@ -71,6 +72,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
   private _toastHtml: any;
   @property({type: Boolean})
   private _wideLayout: boolean;
+  @property({type: String})
   private _appTheme: string;
 
   render() {
@@ -226,6 +228,17 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           align-items: center;
           width: 100%;
           height: 100%;
+        }
+
+        .toolbar-top-content > .space {
+          flex-grow: 1;
+        }
+
+        mwc-switch {
+          margin-right: 10px;
+          --mdc-theme-surface: var(--app-color-yellow);
+          --mdc-theme-on-surface: var(--app-color-yellow);
+          --mdc-theme-secondary: var(--app-color-blue);
         }
 
         .menu-btn {
@@ -395,9 +408,11 @@ export class PsrRouterApp extends connect(store)(LitElement) {
         <app-header slot="header" class="toolbar" fixed effects="waterfall">
           <app-toolbar class="toolbar-top" sticky>
             <div class="toolbar-top-content">
-              <button class="menu-btn" title="Menu" @click="${_ => this._onMenuButtonClicked(menuIcon === angleLeftIcon)}">${menuIcon}</button>
+              <button class="menu-btn" title="Menu" @click="${() => this._onMenuButtonClicked(menuIcon === angleLeftIcon)}">${menuIcon}</button>
               <img class="logo-icon" src="${PSRRIcon}">
               <div class="title">${this.appTitle}</div>
+              <div class="space"></div>
+              <mwc-switch id="sw-theme" @change="${this._switchTheme}" ?checked="${this._appTheme == "dark"}"></mwc-switch>
             </div>
           </app-toolbar>
 
@@ -499,6 +514,18 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       console.error(e);
       window.alert("Unable to get the current route, see console for more details.");
     }
+  }
+
+  _switchTheme(e) {
+    let swTheme: any = this.shadowRoot.getElementById("sw-theme");
+    let theme;
+    if (swTheme.checked) {
+      theme = "dark";
+    } else {
+      theme = "light";
+    }
+    window.localStorage.setItem("app-theme", theme);
+    this._appTheme = theme;
   }
 
   _getScroll() {

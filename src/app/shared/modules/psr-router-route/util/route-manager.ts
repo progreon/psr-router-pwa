@@ -37,7 +37,6 @@ const lsLastRoute = "rm-last-route";
 const ssCurrentRoute = "rm-current-route";
 
 //// STORAGE ////
-
 function clearRmStorage() {
   Object.keys(window.localStorage).forEach(key => {
     if (key.startsWith("rm-")) {
@@ -233,7 +232,7 @@ export function CreateAndOpenNewRoute(gameKey: string, title: string, template?:
   let game = GetGame(gameKey);
   let rootSection = new Route.RouteSection(game, new RouteEntryInfo(title));
   let routeSection = rootSection.addNewSection("First Section");
-  routeSection.addNewDirections(null, "This is an example of what to do");
+  routeSection.addNewDirections("This is an example of what to do");
   let route = new Route.Route(game, rootSection);
   let routeId = new Date().getTime();
   saveToLocalStorage(routeId, route.getJSONObject());

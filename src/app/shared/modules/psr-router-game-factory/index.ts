@@ -11,6 +11,13 @@ let factories: { [key: number]: GameFactory; } = {
   1: new GameFactory1()
 };
 
+export function GetGameInfos(): Model.GameInfo[] {
+  return Object.keys(_games).filter(k => k != "platforms").map(gameKey => {
+    let info = _games[gameKey];
+    return new Model.GameInfo(gameKey, info.name, info.gen, info.year, _games.platforms[info.platform], !!info.unsupported);
+  });
+}
+
 /**
  * Get a game instance
  * @param gameKey The key string of a game

@@ -80,6 +80,12 @@
   },
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@material/mwc-button": "^0.19.1",
+    "@material/mwc-dialog": "^0.19.1",
+    "@material/mwc-formfield": "^0.19.1",
+    "@material/mwc-select": "^0.19.1",
+    "@material/mwc-switch": "^0.19.1",
+    "@material/mwc-textfield": "^0.19.1",
     "@polymer/app-layout": "^3.0.1",
     "@polymer/paper-toast": "^3.0.1",
     "@polymer/polymer": "^3.0.2",

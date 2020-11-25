@@ -4,8 +4,15 @@ import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { RouteManager } from 'SharedModules/psr-router-route/util';
 import { Game } from 'SharedModules/psr-router-model/Game';
 import { Route } from 'SharedModules/psr-router-route/Route';
+import { GetGameInfos } from 'SharedModules/psr-router-game-factory';
 
 // These are the elements needed by this element.
+import '@material/mwc-button';
+import '@material/mwc-dialog';
+import '@material/mwc-formfield';
+import '@material/mwc-list/mwc-list-item';
+import '@material/mwc-select';
+import '@material/mwc-textfield';
 import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
 import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
@@ -18,6 +25,7 @@ class PsrRouterHome extends PsrRouterPage {
 
   @property({ type: Boolean })
   private _loading = false;
+  private _newRouteDialog: any;
 
   private jsonClicked: any;
   private txtClicked: any;
@@ -32,24 +40,19 @@ class PsrRouterHome extends PsrRouterPage {
       console.error(e);
       window.alert("Unable to get the current route, see console for more details.");
     }
-    let savedRoutes = RouteManager.GetSavedRoutesTitles();
-    let savedRoutesList = [];
-    savedRoutes.forEach(sr => {
-      savedRoutesList.push(html`<li>${sr.id}: ${sr.title}</li>`);
-    });
-    let savedRoutesDOM = html`
-      <ul>
-        ${savedRoutesList}
-      </ul>
-    `;
+    let savedRoutes = RouteManager.GetSavedRoutesTitles().map(sr => html`<div class="saved-route">${sr.id}: ${sr.title}</div>`);
+    let games = GetGameInfos().map(gi => html`<mwc-list-item value="${gi.key}">${gi.name}</mwc-list-item>`);
     return html`
       ${AppStyles}
       <style>
         /* hacking the input button... */
-        .buttons {
+        .content {
           display: flex;
           flex-direction: column;
           align-items: stretch;
+        }
+        .right {
+          align-self: flex-end;
         }
         .button-group {
           display: flex;
@@ -82,36 +85,51 @@ class PsrRouterHome extends PsrRouterPage {
         .options > * {
           flex-grow: 1;
         }
+        .dialog {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+        }
+        h3 {
+          margin: 20px 0px 10px 0px;
+        }
         h4 {
-          margin: 15px 0px 15px 0px;
+          margin: 10px 0px 5px 0px;
         }
         hr {
           box-sizing: border-box;
           height: 1px;
+          margin: 8px 0px 8px 0px;
           border: 0;
           border-top: 1px solid var(--app-color-black);
         }
       </style>
-      <vaadin-button @click="${this._switchTheme.bind(this)}">Switch theme</vaadin-button>
-      <h3>Current Route:</h3>
-      <h4>${route ? route.info.title : "No route loaded"}</h4>
-      <p ?hidden="${!game || !game.info.unsupported}">[GAME NOT (fully) SUPPORTED (yet)!]</p>
-      <b ?hidden="${!game}">Game: Pokémon ${game && game.info.name}</b>
-      <div ?hidden="${!game}">Generation ${game && game.info.gen || "?"}</div>
-      <div ?hidden="${!game}">${game && game.info.year || "????"}, ${game && game.info.platform}</div>
-      <h3>Saved Routes</h3>
-      ${savedRoutesDOM}
-      <h3>Manage Routes</h3>
-      <div class="buttons">
+      <div class="content">
+        <h3>Current Active Route</h3>
+        <h4>${route ? route.info.title : "No route loaded"}</h4>
+        <p ?hidden="${!game || !game.info.unsupported}">[GAME NOT (fully) SUPPORTED (yet)!]</p>
+        <b ?hidden="${!game}">Game: Pokémon ${game && game.info.name}</b>
+        <div ?hidden="${!game}">Generation ${game && game.info.gen || "?"}</div>
+        <div ?hidden="${!game}">${game && game.info.year || "????"}, ${game && game.info.platform}</div>
+        <h3>Your Saved Routes</h3>
+          <vaadin-button class="right" id="new-route" @click="${this._onNewRouteClicked}">Create a New Route</vaadin-button>
+          <div ?hidden="${savedRoutes.length > 0}">You currently don't have any routes saved</div>
+          <div class="route-list">
+            ${savedRoutes}
+          </div>
+        <h3>Manage Your Routes</h3>
         <div class="button-group">
-          <vaadin-button id="export" @click="${this._onExportClicked.bind(this)}" ?disabled="${!route}">Export file</vaadin-button>
+          <vaadin-button id="export" @click="${this._onExportClicked}" ?disabled="${!route}">Export file</vaadin-button>
           <div class="input-wrapper">
             <vaadin-button id="import">Import file</vaadin-button>
             <input type="file" id="selFile" name="route" accept=".txt,.json">
           </div>
         </div>
-        <vaadin-combo-box id="example-routes"></vaadin-combo-box>
-        <vaadin-button id="load-route" @click="${this._onLoadRouteClicked.bind(this)}">Load example route</vaadin-button>
+        <hr>
+        <div class="button-group">
+          <vaadin-combo-box id="example-routes"></vaadin-combo-box>
+          <vaadin-button id="load-route" @click="${this._onLoadRouteClicked}">Load example route</vaadin-button>
+        </div>
       </div>
 
       <vaadin-dialog id="menu" style="padding: 0px;">
@@ -127,6 +145,18 @@ class PsrRouterHome extends PsrRouterPage {
           </div>
         </template>
       </vaadin-dialog>
+
+      <!-- TODO: switch to vaadin for now... -->
+      <mwc-dialog id="dialog-new" @closed="${(e) => this._resetNewRouteDialog(e)}">
+        <div class="dialog">
+          <mwc-select id="s-game" label="Game" required validateOnInitialRender naturalMenuWidth>
+            ${games}
+          </mwc-select>
+          <mwc-textfield id="t-title" label="Title" required validateOnInitialRender></mwc-textfield>
+        </div>
+        <mwc-button slot="primaryAction" @click="${this._onNewRouteOkClicked}">ok</mwc-button>
+        <mwc-button dialogAction="cancel" slot="secondaryAction">cancel</mwc-button>
+      </mwc-dialog>
     `;
   }
 
@@ -224,7 +254,7 @@ class PsrRouterHome extends PsrRouterPage {
         super._navigateTo("router");
       } catch (e) {
         console.error(e);
-        this.showAppToast("Something went wrong while loading an example route, please contact the dev.");
+        this.showAppToast("Something went wrong while loading an example route, see console for more details.");
       }
     }
   }
@@ -241,15 +271,45 @@ class PsrRouterHome extends PsrRouterPage {
     super.showAppToast(`Game "Pokémon ${gameTitle}" is not (fully) supported. (YET!)`);
   }
 
-  _switchTheme() {
-    let theme = window.localStorage.getItem("app-theme") || "light";
-    if (theme === "light") {
-      theme = "dark";
-    } else {
-      theme = "light";
+  _resetNewRouteDialog(e) {
+    e.cancelbubble = true;
+    let dialog:any = this.shadowRoot.getElementById("dialog-new");
+    if (e.target == dialog) {
+      let sGame: any = this.shadowRoot.getElementById("s-game");
+      sGame.value = "";
+      let tTitle: any = this.shadowRoot.getElementById("t-title");
+      tTitle.value = "";
     }
-    window.localStorage.setItem("app-theme", theme);
-    window.location.reload();
+  }
+
+  _onNewRouteClicked() {
+    // TODO: popup for choosing game, title
+    let dialog:any = this.shadowRoot.getElementById("dialog-new");
+    dialog.show();
+    // Hack to make the dropdown show properly
+    let sGame: any = this.shadowRoot.getElementById("s-game");
+    let innerMenu: any = sGame.shadowRoot.querySelector(".mdc-menu");
+    innerMenu.fixed = true;
+  }
+
+  _onNewRouteOkClicked() {
+    let dialog: any = this.shadowRoot.getElementById("dialog-new");
+    let sGame: any = this.shadowRoot.getElementById("s-game");
+    let tTitle: any = this.shadowRoot.getElementById("t-title");
+    if (sGame.checkValidity() && tTitle.checkValidity()) {
+      dialog.close();
+      try {
+        console.debug("Creating game...", sGame.value, tTitle.value);
+        let route = RouteManager.CreateAndOpenNewRoute(sGame.value, tTitle.value);
+        if (route.game.info.unsupported) {
+          this._showUnsupportedToast(route.game.info.name);
+        }
+        super._navigateTo("router");
+      } catch (e) {
+        console.error(e);
+        window.alert("Something went wrong while a new route, see console for more details.");
+      }
+    }
   }
 }
 
