@@ -18,7 +18,7 @@ import { RouterMessage } from 'App/shared/modules/psr-router-util';
 
 export class PsrRouterRouteEntry extends LitElement {
 
-  @property({type: Route.RouteEntry})
+  @property({type: Object})
   public routeEntry: Route.RouteEntry;
   @property({type: Boolean, reflect: true})
   public hideContent: boolean = true;

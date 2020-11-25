@@ -27,7 +27,7 @@ export const navigate = (location: Location, isSubPage: boolean) => (dispatch) =
   // Extract the page name from path.
   const page = path === '/' ? 'home' : path.slice(1);
 
-  if (window.appConfig.pageList[page] && window.appConfig.pageList[page].showInMenu)
+  if (window.appConfig.siteMap[page] && window.appConfig.siteMap[page].showInMenu)
     localStorage.setItem('app-last-page', page);
 
   // Any other info you might want to extract from the path (like page type),
@@ -38,47 +38,33 @@ export const navigate = (location: Location, isSubPage: boolean) => (dispatch) =
   dispatch(updateDrawerState(false));
 };
 
+// The site map
+// NOTE: don't build the import string, otherwise webpack won't build the modules
+import { PwaPage } from 'CoreComponents/pwa/PWaPage';
+window.appConfig.siteMap = [];
+window.appConfig.siteMap.push(new PwaPage('home', 'Home', 'psr-router-home', () => import('CoreComponents/psr-router-home/psr-router-home')));
+window.appConfig.siteMap.push(new PwaPage('router', 'Route', 'psr-router-router', () => import('CoreComponents/psr-router-router/psr-router-router'), true));
+window.appConfig.siteMap.push(new PwaPage('data', 'Data').setSubPages([
+  new PwaPage('pokemon-list', 'Pokémon', 'psr-router-pokemon-list', () => import('CoreComponents/psr-router-pokemon/psr-router-pokemon-list'), true),
+  new PwaPage('pokemon-info', 'Pokémon Info', 'psr-router-pokemon-info', () => import('CoreComponents/psr-router-pokemon/psr-router-pokemon-info'), true, false, false),
+  new PwaPage('trainers', 'Trainers', 'psr-router-trainers', () => import('CoreComponents/psr-router-trainers/psr-router-trainers'), true),
+  new PwaPage('trainer-info', 'trainer Info', 'psr-router-trainer-info', () => import('CoreComponents/psr-router-trainers/psr-router-trainer-info'), true, false, false),
+  new PwaPage('moves', 'Moves', 'psr-router-moves', () => import('CoreComponents/psr-router-moves/psr-router-moves'), true),
+  new PwaPage('items', 'Items', 'psr-router-items', () => import('CoreComponents/psr-router-items/psr-router-items'), true)
+]));
+window.appConfig.siteMap.push(new PwaPage('help', 'Help', 'psr-router-manual', () => import('CoreComponents/psr-router-manual/psr-router-manual')));
+window.appConfig.siteMap.push(new PwaPage('about', 'About', 'psr-router-about', () => import('CoreComponents/psr-router-about/psr-router-about')));
+window.appConfig.siteMap.push(new PwaPage('404', '404', 'psr-router-404', () => import('CoreComponents/psr-router-404/psr-router-404'), false, false, false, true));
+
+window.appConfig.pageList = {};
+window.appConfig.siteMap.forEach(p => p.getAllSubPagesIncludingThis().forEach(sp => {if (sp.element) window.appConfig.pageList[sp.key] = sp; }));
+
 const loadPage = (page: string, searchParams: { [key: string]: string; }) => (dispatch) => {
-  switch(page) {
-    case 'home':
-      import('CoreComponents/psr-router-home/psr-router-home').then((module) => {
-        // Put code in here that you want to run every time when
-        // navigating to home after psr-router-home.js is loaded.
-      });
-      break;
-    case 'router':
-      import('CoreComponents/psr-router-router/psr-router-router');
-      break;
-    case 'items':
-      import('CoreComponents/psr-router-items/psr-router-items');
-      break;
-    case 'moves':
-      import('CoreComponents/psr-router-moves/psr-router-moves');
-      break;
-    case 'pokemon-list':
-      import('CoreComponents/psr-router-pokemon/psr-router-pokemon-list');
-      break;
-    case 'pokemon-info':
-      import('CoreComponents/psr-router-pokemon/psr-router-pokemon-info');
-      break;
-    case 'trainers':
-      import('CoreComponents/psr-router-trainers/psr-router-trainers');
-      break;
-    case 'trainer-info':
-      import('CoreComponents/psr-router-trainers/psr-router-trainer-info');
-      break;
-    case 'trainers':
-      import('CoreComponents/psr-router-trainers/psr-router-trainers');
-      break;
-    case 'help':
-      import('CoreComponents/psr-router-manual/psr-router-manual');
-      break;
-    case 'about':
-      import('CoreComponents/psr-router-about/psr-router-about');
-      break;
-    default:
-      page = '404';
-      import('CoreComponents/psr-router-404/psr-router-404');
+  if (window.appConfig.pageList[page]) {
+    window.appConfig.pageList[page].doLazyLoad();
+  } else {
+    window.appConfig.pageList['404'].doLazyLoad();
+    page = '404';
   }
 
   dispatch(updatePage(page, searchParams));

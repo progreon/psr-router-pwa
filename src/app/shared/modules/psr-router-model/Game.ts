@@ -14,7 +14,8 @@ export class Game {
   public readonly engine: Engine;
   public readonly info: GameInfo;
   public readonly experienceGroups: any;
-  private items: { [key: string]: Item; };
+  private _items: { [key: string]: Item; };
+  public get items() { return this._items; }
   private types: { [key: string]: Type; };
   private typeChart: any;
   private _moves: { [key: string]: Move; };
@@ -36,7 +37,7 @@ export class Game {
     this.engine = builder.engine;
     this.info = builder.info
     this.experienceGroups = builder.experienceGroups;
-    this.items = builder.items;
+    this._items = builder.items;
     this.types = builder.types;
     this.typeChart = builder.typeChart;
     this._moves = builder.moves;
@@ -59,7 +60,7 @@ export class Game {
    * @returns The item.
    */
   findItemByName(name: string): Item {
-    return name ? this.items[name.toUpperCase()] : undefined;
+    return name ? this._items[name.toUpperCase()] : undefined;
   }
 
   /**

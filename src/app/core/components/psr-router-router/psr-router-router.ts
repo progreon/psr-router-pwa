@@ -5,7 +5,7 @@ import { RouteManager } from 'SharedModules/psr-router-route/util';
 import * as Route from 'SharedModules/psr-router-route';
 
 // These are the elements needed by this element.
-import '@vaadin/vaadin-text-field';
+import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
 import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 import 'SharedComponents/psr-router-route/psr-router-route';
@@ -15,6 +15,7 @@ import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterRouter extends PsrRouterPage {
 
+  @property({ type: Object })
   public route: Route.Route;
   @property({ type: Object })
   public rootSection: Route.RouteSection;
@@ -45,14 +46,14 @@ class PsrRouterRouter extends PsrRouterPage {
   private _loadRoute() {
     try {
       this.route = RouteManager.GetCurrentRoute();
-      this.route.apply();
+      this.route?.apply();
     } catch (e) {
       console.error(e);
       window.alert("Unable to get the current route, see console for more details.");
     }
     if (this.rootSection != this.route?.rootSection) {
       this.rootSection = this.route?.rootSection;
-      console.debug(this.route);
+      console.debug("Loaded new route", this.route);
     }
   }
 }

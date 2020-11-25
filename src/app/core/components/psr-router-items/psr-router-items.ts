@@ -2,6 +2,7 @@
 import { html, property } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { Item } from 'SharedModules/psr-router-model/Item';
+import { RouteManager } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
 import 'SharedComponents/psr-router-item/psr-router-item';
@@ -53,7 +54,8 @@ class PsrRouterItems extends PsrRouterPage {
   }
 
   triggerDataRefresh() {
-    this.items = window.app && window.app.game && window.app.game.items ? window.app.game.items : {};
+    let game = RouteManager.GetCurrentGame();
+    this.items = game?.items || {};
   }
 
   _filter() {
