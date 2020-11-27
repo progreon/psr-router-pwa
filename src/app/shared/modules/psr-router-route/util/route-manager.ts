@@ -79,11 +79,19 @@ function getLsLastRoute(): { id?: number, route?: any, ts: number } {
 }
 
 function setLsLastRoute(value: { id?: number, route?: any, ts: number }) {
-  window.localStorage.setItem(lsLastRoute, JSON.stringify(value));
+  if (value) {
+    window.localStorage.setItem(lsLastRoute, JSON.stringify(value));
+  } else {
+    window.localStorage.removeItem(lsLastRoute);
+  }
 }
 
 function setSsCurrentRoute(value: { id?: number, route?: any, ts: number }) {
-  window.sessionStorage.setItem(ssCurrentRoute, JSON.stringify(value));
+  if (value) {
+    window.sessionStorage.setItem(ssCurrentRoute, JSON.stringify(value));
+  } else {
+    window.sessionStorage.removeItem(ssCurrentRoute);
+  }
 }
 
 function getSsCurrentRoute(): { id?: number, route?: any, ts: number } {
@@ -167,7 +175,7 @@ function setCurrentRoute(route: Route.Route, storageObj: { id?: number, route?: 
 }
 
 export function OpenSavedRoute(routeId: number): Route.Route {
-  let strRoute: string;
+  let strRoute: any;
   if (routeId) {
     let sr = getLsSavedRoutes();
     if (sr) {
@@ -175,7 +183,7 @@ export function OpenSavedRoute(routeId: number): Route.Route {
     }
   }
   if (strRoute) {
-    let routeObj = JSON.parse(strRoute);
+    let routeObj = strRoute;
     // TODO: check routeObj for version etc?
     let route = Route.Route.newFromJSONObject(routeObj);
     let storageObj = { id: routeId, ts: new Date().getTime() };
@@ -264,8 +272,29 @@ export function CreateAndOpenNewRoute(gameKey: string, title: string, template?:
 //// CLOSE ROUTES ////
 export function CloseCurrentRoute() {
   Route.Route.instance = null;
-  window.localStorage.removeItem(lsLastRoute);
-  window.sessionStorage.removeItem(ssCurrentRoute);
+  let currRoute = getSsCurrentRoute();
+  let lastRoute = getLsLastRoute();
+  if (currRoute.ts == lastRoute.ts) {
+    setLsLastRoute(null);
+  }
+  setSsCurrentRoute(null);
+}
+
+//// DELETE ROUTES ////
+export function DeleteRoute(id: number) {
+  let currRoute = getSsCurrentRoute();
+  let lastRoute = getLsLastRoute();
+  if (currRoute.id == id) {
+    CloseCurrentRoute();
+  }
+  if (lastRoute.id == id) {
+    setLsLastRoute(null);
+  }
+  let savedRoutes = getLsSavedRoutes();
+  if (savedRoutes[id]) {
+    delete savedRoutes[id];
+  }
+  setLsSavedRoutes(savedRoutes);
 }
 
 //// EXPORT ROUTES ////

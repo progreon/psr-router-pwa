@@ -50,8 +50,13 @@ class PwaMenuBarItem extends LitElement {
         }
 
         .icon {
+          fill: var(--app-header-menu-text-color);
           padding-left: 6px;
           align-self: center;
+        }
+
+        .dropdown:hover > .icon {
+          fill: var(--app-header-menu-selected-color);
         }
 
         .icon > svg {

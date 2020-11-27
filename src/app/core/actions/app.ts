@@ -40,7 +40,7 @@ export const navigate = (location: Location, isSubPage: boolean) => (dispatch) =
 
 // The site map
 // NOTE: don't build the import string, otherwise webpack won't build the modules
-import { PwaPage } from 'CoreComponents/pwa/PWaPage';
+import { PwaPage } from 'CoreComponents/pwa/PwaPage';
 window.appConfig.siteMap = [];
 window.appConfig.siteMap.push(new PwaPage('home', 'Home', 'psr-router-home', () => import('CoreComponents/psr-router-home/psr-router-home')));
 window.appConfig.siteMap.push(new PwaPage('router', 'Route', 'psr-router-router', () => import('CoreComponents/psr-router-router/psr-router-router'), true));
