@@ -13,7 +13,7 @@ import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 // import '@vaadin/vaadin-list-box';
 
 // CSS imports for this element
-// import { AppStyles } from 'Shared/app-styles';
+import { AppStyles } from 'Shared/app-styles';
 import { RouterMessage } from 'App/shared/modules/psr-router-util';
 
 export class PsrRouterRouteEntry extends LitElement {
@@ -206,6 +206,7 @@ export class PsrRouterRouteEntry extends LitElement {
     let icon = this.hideContent ? angleDownIcon : angleUpIcon;
 
     return html`
+      ${AppStyles}
       <div class="messages">
         ${messages}
       </div>
@@ -230,7 +231,7 @@ export class PsrRouterRouteEntry extends LitElement {
         <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupAvailable}">${infoCircle}</div>
       </div>
       <div class="route-header" ?hidden="${!this.routeHeader}">
-        <h4><strong>${this.routeEntry?this.routeEntry.info.title:"No route loaded"}</strong></h4>
+        <h2>${this.routeEntry?this.routeEntry.info.title:"No route loaded"}</h2>
       </div>
       <div class="content">
         ${contentDOM}

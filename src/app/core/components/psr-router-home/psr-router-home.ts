@@ -48,7 +48,6 @@ class PsrRouterHome extends PsrRouterPage {
       return html`
         <div class="saved-route">
           <div class="title" @click="${this._onSavedRouteOpenClicked.bind(this, sr.id)}">${sr.title}</div>
-          <div class="space"></div>
           <div class="delete" @click="${this._onSavedRouteDeleteClicked.bind(this, sr.id)}">${trashIcon}</div>
         </div>
       `;
@@ -57,7 +56,6 @@ class PsrRouterHome extends PsrRouterPage {
     return html`
       ${AppStyles}
       <style>
-        /* hacking the input button... */
         .content {
           display: flex;
           flex-direction: column;
@@ -68,6 +66,7 @@ class PsrRouterHome extends PsrRouterPage {
           background-color: rgba(0, 0, 0, 0.05);
           padding: 5px 10px;
           border-radius: 5px;
+          margin: 5px 0px;
         }
 
         .right {
@@ -86,36 +85,37 @@ class PsrRouterHome extends PsrRouterPage {
           background-color: rgba(0, 0, 0, 0.05);
           padding: 5px 10px;
           border-radius: 5px;
-          flex-grow: 2;
-          width: 75%;
+          flex-grow: 1;
         }
 
         .saved-route > .title:hover {
           background-color: rgba(165, 165, 165, .25);
         }
 
-        .saved-route > .space {
-          display: none;
-          width: 25%;
-        }
-
         .saved-route > .delete {
-          background: none;
+          background-color: rgba(255, 0, 0, .66);
           border: none;
+          border-radius: 5px;
           cursor: pointer;
           padding: 0px;
-          fill: var(--app-color-error-red);
-          height: var(--app-grid-2hx);
-          width: var(--app-grid-2hx);
+          height: var(--app-grid-4x);
+          width: var(--app-grid-4x);
           margin-left: 5px;
         }
 
+        .saved-route > .delete:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+
         .saved-route > .delete > svg {
-          height: var(--app-grid-2hx);
-          width: var(--app-grid-2hx);
+          height: var(--app-grid-2x);
+          width: var(--app-grid-2x);
+          margin: var(--app-grid-x);
         }
 
         .manage-routes {
+          display: flex;
+          flex-direction: column;
           background-color: rgba(0, 0, 0, 0.05);
           padding: 5px 10px;
           border-radius: 5px;
@@ -124,12 +124,28 @@ class PsrRouterHome extends PsrRouterPage {
         .button-group {
           display: flex;
           flex-direction: row;
+          align-items: center;
+          margin: 2px 0px;
         }
 
-        .button-group > * {
-          flex-grow: 1;
+        .button-group > .left {
+          width: 50%;
         }
 
+        .button-group > .button {
+          width: 50%;
+        }
+
+        .button-group > .button.delete {
+          color: var(--app-color-error-red);
+        }
+
+        .examples {
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* hacking the input button... */
         .input-wrapper {
           position: relative;
           overflow: hidden;
@@ -137,9 +153,13 @@ class PsrRouterHome extends PsrRouterPage {
           text-align: center;
         }
 
+        .input-wrapper > vaadin-button {
+          width: 100%;
+        }
+
         .input-wrapper input[type=file] {
           position: absolute;
-          font-size: 100px;
+          font-size: 30px;
           opacity: 0;
           left: 0;
           top: 0;
@@ -181,18 +201,46 @@ class PsrRouterHome extends PsrRouterPage {
           border-top: 1px solid var(--app-color-black);
         }
 
+        .padding {
+          padding-bottom: var(--app-grid-2x);
+        }
+
         @media (min-width: ${window.MyAppGlobals.wideWidth}) {
-          .saved-route > .space {
-            display: block;
+          .button-group {
+            justify-content: space-between;
+          }
+
+          .button-group > .left {
+            width: 75%;
+          }
+
+          .button-group > .button {
+            width: 25%;
+          }
+
+          .examples {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+
+          .examples > .left {
+            width: 75%;
+          }
+
+          .examples > .button {
+            width: 25%;
           }
         }
       </style>
       <div class="content">
-        <h3>Current Active Route</h3>
-        <div class="current-route" ?hidden="${game}">
+        <h2>Welcome to PSR Router</h2>
+        <h3>Current Loaded Route</h3>
+        <div class="current-route" ?hidden="${route}">
           <h4>No route loaded</h4>
         </div>
-        <div class="current-route" ?hidden="${!game}">
+        <vaadin-button class="right" id="close-route" @click="${this._onCloseRouteClicked}" ?hidden="${!route}">Close Route</vaadin-button>
+        <div class="current-route" ?hidden="${!route}">
           <h4>${route?.info.title}</h4>
           <div ?hidden="${!game?.info.unsupported}">[GAME NOT (fully) SUPPORTED (yet)!]</div>
           <b>Game: Pokémon ${game && game.info.name}</b>
@@ -205,21 +253,40 @@ class PsrRouterHome extends PsrRouterPage {
           <div class="route-list">
             ${savedRoutes}
           </div>
+        <h3>Load an Example Route</h3>
+        <div class="manage-routes">
+          <div class="examples">
+            <vaadin-combo-box id="example-routes" class="left"></vaadin-combo-box>
+            <vaadin-button id="load-route" class="button" @click="${this._onLoadRouteClicked}">Load Example</vaadin-button>
+          </div>
+        </div>
         <h3>Manage Your Routes</h3>
         <div class="manage-routes">
           <div class="button-group">
-            <vaadin-button id="export" @click="${this._onExportClicked}" ?disabled="${!route}">Export file</vaadin-button>
-            <div class="input-wrapper">
-              <vaadin-button id="import">Import file</vaadin-button>
+            <div class="left">Export loaded route</div>
+            <vaadin-button id="export" class="button" @click="${this._onExportClicked}" ?disabled="${!route}">Export Route</vaadin-button>
+          </div>
+          <div class="button-group">
+            <div class="left">Import a route file</div>
+            <div class="input-wrapper button" @mouseenter="${this._onImportButtonHover.bind(this, true)}" @mouseleave="${this._onImportButtonHover.bind(this, false)}">
+              <vaadin-button id="import">Import route</vaadin-button>
               <input type="file" id="selFile" name="route" accept=".txt,.json">
             </div>
           </div>
-          <hr>
           <div class="button-group">
-            <vaadin-combo-box id="example-routes"></vaadin-combo-box>
-            <vaadin-button id="load-route" @click="${this._onLoadRouteClicked}">Load example route</vaadin-button>
+            <div class="left">Download a full backup</div>
+            <vaadin-button id="export" class="button" @click="${this._onBackupClicked}">Backup</vaadin-button>
+          </div>
+          <div class="button-group">
+            <div class="left">Restore a full backup</div>
+            <vaadin-button id="export" class="button" @click="${this._onRestoreClicked}">Restore</vaadin-button>
+          </div>
+          <div class="button-group">
+            <div class="left">Delete all locally</div>
+            <vaadin-button id="export" class="button delete" @click="${this._onDeleteAllClicked}">Delete All</vaadin-button>
           </div>
         </div>
+        <div class="padding"></div>
       </div>
 
       <vaadin-dialog id="menu" style="padding: 0px;">
@@ -294,10 +361,16 @@ class PsrRouterHome extends PsrRouterPage {
     }
   }
 
+  //// OPEN ROUTE STUFF ////
+
+  _onCloseRouteClicked() {
+    RouteManager.CloseCurrentRoute();
+    this.requestUpdate();
+  }
+
   //// SAVED ROUTES STUFF ////
 
   _onSavedRouteOpenClicked(id) {
-    console.log("_onSavedRouteOpenClicked", id);
     try {
       let route = RouteManager.OpenSavedRoute(id);
       if (route.game.info.unsupported) {
@@ -315,7 +388,6 @@ class PsrRouterHome extends PsrRouterPage {
   }
 
   _onSavedRouteDeleteClicked(id) {
-    console.log("_onSavedRouteDeleteClicked", id);
     RouteManager.DeleteRoute(id);
     this.requestUpdate();
   }
@@ -373,8 +445,13 @@ class PsrRouterHome extends PsrRouterPage {
     (<any>this.shadowRoot.getElementById('dialog')).opened = true;
   }
 
-  _onImportClicked(e) {
-    console.log("Importing route file...");
+  _onImportButtonHover(setHover: boolean) {
+    let importButton: any = this.shadowRoot.getElementById("import");
+    if (setHover) {
+      importButton.setAttribute("focus-ring", "focus-ring");
+    } else {
+      importButton.removeAttribute("focus-ring");
+    }
   }
 
   _showUnsupportedToast(gameTitle) {
@@ -420,6 +497,21 @@ class PsrRouterHome extends PsrRouterPage {
         window.alert("Something went wrong while a new route, see console for more details.");
       }
     }
+  }
+
+  _onBackupClicked() {
+    console.log("_onBackupClicked");
+    window.alert("TODO: _onBackupClicked");
+  }
+
+  _onRestoreClicked() {
+    console.log("_onRestoreClicked");
+    window.alert("TODO: _onRestoreClicked");
+  }
+
+  _onDeleteAllClicked() {
+    console.log("_onDeleteAllClicked");
+    window.alert("TODO: _onDeleteAllClicked");
   }
 }
 

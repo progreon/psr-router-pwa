@@ -25,12 +25,12 @@ class PsrRouterRouter extends PsrRouterPage {
       ${AppStyles}
       <style>
         /* ugly solution, I know... */
-        /* .padding {
-          padding-bottom: var(--app-grid-3x);
-        } */
+        .padding {
+          padding-bottom: var(--app-grid-x);
+        }
       </style>
       <psr-router-route id="the-route" class="noselect" .routeEntry="${this.rootSection}"></psr-router-route>
-      <!-- <div class="padding"></div> -->
+      <div class="padding"></div>
     `;
   }
 
@@ -45,8 +45,10 @@ class PsrRouterRouter extends PsrRouterPage {
 
   private _loadRoute() {
     try {
-      this.route = RouteManager.GetCurrentRoute();
-      this.route?.apply();
+      if (this.route != RouteManager.GetCurrentRoute()) {
+        this.route = RouteManager.GetCurrentRoute();
+        this.route?.apply();
+      }
     } catch (e) {
       console.error(e);
       window.alert("Unable to get the current route, see console for more details.");

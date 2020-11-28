@@ -319,7 +319,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           display: block;
         }
 
-        .footer {
+        /* .footer {
           display: block;
           padding: 0px;
           margin: 0px;
@@ -328,7 +328,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           background: var(--app-footer-background-color);
           color: var(--app-footer-text-color);
           text-align: center;
-        }
+        } */
 
         paper-toast {
           width: 100%;
@@ -427,10 +427,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           ${this._pageDOMs}
         </main>
 
-        <footer class="footer">
-          ${this.appTitle} v${window.MyAppGlobals.version}
-          <!-- [TODO: shortcuts] -->
-        </footer>
+        <!-- <footer class="footer">
+        </footer> -->
       </div>
 
       <paper-toast id="toast" duration="10000">${this._toastHtml}</paper-toast>
