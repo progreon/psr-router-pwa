@@ -128,7 +128,11 @@ module.exports = (config) => ({
         collapseWhitespace: true,
         preserveLineBreaks: true
       },
-      chunksSortMode: "none"
+      chunksSortMode: "none",
+      meta: {
+        'theme-color': '#1865a9',
+        'apple-mobile-web-app-status-bar-style': 'black'
+      }
     }),
     new ManifestPlugin(),
     // TODO: switch to InjectManifest Plugin? (for fonts and webcomponents-loader.js)

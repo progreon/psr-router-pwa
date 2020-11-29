@@ -27,7 +27,7 @@ export const navigate = (location: Location, isSubPage: boolean) => (dispatch) =
   // Extract the page name from path.
   const page = path === '/' ? 'home' : path.slice(1);
 
-  if (window.appConfig.siteMap[page] && window.appConfig.siteMap[page].showInMenu)
+  if (window.appConfig.pageList[page] && window.appConfig.pageList[page].showInMenu)
     localStorage.setItem('app-last-page', page);
 
   // Any other info you might want to extract from the path (like page type),
