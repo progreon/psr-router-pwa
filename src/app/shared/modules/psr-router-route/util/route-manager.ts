@@ -211,30 +211,6 @@ export function OpenExampleRoute(exampleKey: string): Route.Route {
   }
 }
 
-export function OpenRouteFile(file: File): Promise<Route.Route> {
-  return new Promise((resolve, reject) => {
-    if (file) {
-      let filename = file.name;
-      let fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        try {
-          // TODO: check routeObj for version etc?
-          let route = RouteIO.ImportFromFile(<string>((<FileReader>(e.target)).result), filename.search(/\.json$/) > 0, filename);
-          let routeJSON = route.getJSONObject();
-          let storageObj = { route: routeJSON, ts: new Date().getTime() };
-          setCurrentRoute(route, storageObj);
-          resolve(route);
-        } catch (e) {
-          reject(e);
-        }
-      }
-      fileReader.readAsText(file);
-    } else {
-      reject();
-    }
-  });
-}
-
 export function CreateAndOpenNewRoute(gameKey: string, title: string, template?: string): Route.Route {
   // TODO: support creating a new route from a template (e.g. basic red run)
   let game = GetGame(gameKey);
@@ -274,7 +250,7 @@ export function CloseCurrentRoute() {
   Route.Route.instance = null;
   let currRoute = getSsCurrentRoute();
   let lastRoute = getLsLastRoute();
-  if (currRoute.ts == lastRoute.ts) {
+  if (currRoute?.ts == lastRoute?.ts) {
     setLsLastRoute(null);
   }
   setSsCurrentRoute(null);
@@ -284,10 +260,10 @@ export function CloseCurrentRoute() {
 export function DeleteRoute(id: number) {
   let currRoute = getSsCurrentRoute();
   let lastRoute = getLsLastRoute();
-  if (currRoute.id == id) {
+  if (currRoute?.id == id) {
     CloseCurrentRoute();
   }
-  if (lastRoute.id == id) {
+  if (lastRoute?.id == id) {
     setLsLastRoute(null);
   }
   let savedRoutes = getLsSavedRoutes();
@@ -297,15 +273,76 @@ export function DeleteRoute(id: number) {
   setLsSavedRoutes(savedRoutes);
 }
 
-//// EXPORT ROUTES ////
+//// IMPORT/EXPORT ROUTES ////
+
+export function OpenRouteFile(file: File): Promise<Route.Route> {
+  return new Promise((resolve, reject) => {
+    if (file) {
+      let filename = file.name;
+      let fileReader = new FileReader();
+      fileReader.onload = function (e) {
+        try {
+          // TODO: check routeObj for version etc?
+          let route = RouteIO.ImportFromFile(<string>((<FileReader>(e.target)).result), filename.search(/\.json$/) > 0, filename);
+          let routeJSON = route.getJSONObject();
+          let storageObj = { route: routeJSON, ts: new Date().getTime() };
+          setCurrentRoute(route, storageObj);
+          resolve(route);
+        } catch (e) {
+          reject(e);
+        }
+      }
+      fileReader.readAsText(file);
+    } else {
+      reject();
+    }
+  });
+}
+
 export function ExportRouteFile(filename: string, printerSettings: any, route?: Route.Route): Route.Route {
   console.debug("Exporting to route file...", filename, printerSettings);
   if (!route) {
     route = GetCurrentRoute();
   }
-  return RouteIO.ExportToFile(route, filename, printerSettings);
+  return RouteIO.ExportRouteToFile(route, filename, printerSettings);
 }
 
+//// BACKUP STUFF ////
+
+export function ExportBackup() {
+  let backup = getLsSavedRoutes();
+  let backupText = JSON.stringify(backup);
+  let d = new Date();
+  let filename = `psr-router-${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}-${d.getHours()}-${d.getMinutes()}-${d.getSeconds()}.psrrdata`;
+  RouteIO.ExportTextToFile(backupText, filename);
+}
+
+export function OpenBackupFile(file: File): Promise<any> {
+  return new Promise((resolve, reject) => {
+    if (file) {
+      let fileReader = new FileReader();
+      fileReader.onload = function (e) {
+        try {
+          // TODO: safety checks?
+          setLsSavedRoutes(JSON.parse(<string>((<FileReader>(e.target)).result)));
+          CloseCurrentRoute();
+          resolve(null);
+        } catch (e) {
+          reject(e);
+        }
+      }
+      fileReader.readAsText(file);
+    } else {
+      reject();
+    }
+  });
+}
+
+//// CLEANUP STUFF ////
+
+export function ClearAllData() {
+  clearRmStorage();
+}
 
 
 

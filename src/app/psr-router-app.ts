@@ -13,15 +13,19 @@ import { PwaMenuItem } from './core/components/pwa/PwaMenuItem';
 import { PwaPage } from './core/components/pwa/PwaPage';
 
 // Imports for polymer/pwa
-import { LitElement, html, property } from 'lit-element';
+import { LitElement, html, css, property, TemplateResult, CSSResult, unsafeCSS } from 'lit-element';
+import { render } from 'lit-html';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings';
 import { connect } from 'pwa-helpers/connect-mixin';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query';
 import { installOfflineWatcher } from 'pwa-helpers/network';
 import { installRouter } from './custom-router';
 import { updateMetadata } from 'pwa-helpers/metadata';
+import { DialogElement } from '@vaadin/vaadin-dialog';
+import { Dialog } from '@material/mwc-dialog';
 
 // Imports for this element
+import '@material/mwc-dialog';
 import '@material/mwc-switch';
 import '@polymer/app-layout/app-drawer/app-drawer';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
@@ -31,6 +35,7 @@ import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/paper-toast';
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
+import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 import 'CoreComponents/pwa/pwa-menu-bar';
 import 'CoreComponents/pwa/pwa-menu-drawer';
 
@@ -39,7 +44,7 @@ import { barsIcon, angleLeftIcon } from 'Shared/my-icons';
 import PSRRIcon from 'Images/icon.png';
 
 // CSS imports for this element
-import { AppStyles } from 'Shared/app-styles';
+import { AppStylesCss } from 'Shared/app-styles';
 
 // This element is connected to the Redux store.
 import { store } from 'Core/store';
@@ -76,8 +81,238 @@ export class PsrRouterApp extends connect(store)(LitElement) {
   private _toastHtml: any;
   @property({type: Boolean})
   private _wideLayout: boolean;
-  @property({type: String})
-  private _appTheme: string;
+  @property({type: String, reflect: true})
+  private theme: string;
+
+  static get styles() {
+    return [
+      AppStylesCss,
+      css`
+      :host {
+        color: var(--app-dark-text-color);
+
+        /* SIZES */
+        --app-drawer-width: 256px;
+        --app-wide-content-width: 1000px;
+        --app-header-height: var(--app-grid-7x);
+        --app-header-height-wide: var(--app-grid-7x);
+        /* --app-header-margin-wide: 24px 15px 32px 15px; */
+        --app-header-margin-wide: 0px 15px;
+        --app-footer-height: var(--app-grid-3x);
+      }
+
+      .header-layout {
+        background-color: var(--app-background-color);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .drawer {
+        color: var(--app-drawer-text-color);
+        z-index: 1;
+      }
+
+      .drawer-top {
+        color: var(--app-drawer-header-text-color);
+        background-color: var(--app-drawer-header-background-color);
+        height: var(--app-header-height);
+      }
+
+      .drawer-list {
+        box-sizing: border-box;
+        background-color: var(--app-drawer-background-color);
+        width: 100%;
+        height: 100%;
+        padding: 24px;
+        position: relative;
+      }
+
+      .drawer-list > a {
+        display: block;
+        color: var(--app-drawer-text-color);
+        text-decoration: none;
+        line-height: 40px;
+        padding: 0 24px;
+      }
+
+      .drawer-list > a[selected] {
+        color: var(--app-drawer-selected-color);
+        /* border-bottom: 1px solid var(--app-drawer-selected-color); */
+        font-weight: bold;
+      }
+
+      .toolbar {
+        color: var(--app-header-text-color);
+        background-color: var(--app-header-background-color);
+        z-index: 0;
+      }
+
+      .toolbar-top {
+        /* Need to set to 20px to avoid the swipe-open-area */
+        padding: 0px 20px;
+        height: var(--app-header-height);
+      }
+
+      .toolbar-top-content {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .toolbar-top-content > .space {
+        flex-grow: 1;
+      }
+
+      mwc-switch {
+        margin-right: 10px;
+        --mdc-theme-surface: var(--app-color-yellow);
+        --mdc-theme-on-surface: var(--app-color-yellow);
+        --mdc-theme-secondary: var(--app-color-blue);
+      }
+
+      .menu-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0px;
+        fill: var(--app-header-text-color);
+        height: var(--app-grid-2hx);
+        width: var(--app-grid-2hx);
+      }
+
+      .menu-btn > svg {
+        height: var(--app-grid-2hx);
+        width: var(--app-grid-2hx);
+      }
+
+      .logo-icon {
+        margin: 0px 0px 0px var(--app-grid-2hx);
+        width: var(--app-grid-5x);
+        height: var(--app-grid-5x);
+      }
+
+      .title {
+        padding: 0px 0px 0px var(--app-grid-2hx);
+      }
+
+      .toolbar-navbar {
+        display: none;
+        background-color: var(--app-header-menu-background-color);
+        overflow-x: hidden;
+      }
+
+      .toolbar-list {
+        display: flex;
+        width: var(--app-wide-content-width);
+        /* padding: 0px var(--app-grid-3x); */
+        background-color: var(--app-header-menu-background-color);
+      }
+
+      /* Workaround for IE11 displaying <main> as inline */
+      main {
+        display: block;
+        background-color: var(--app-main-background-color);
+        flex-grow: 1;
+      }
+
+      .main-content {
+        height: 100%;
+        overflow: auto;
+        overflow-y: scroll;
+      }
+
+      .page {
+        overflow: auto;
+        display: none;
+        padding: 0px var(--app-grid-3x);
+        width: 100%;
+        height: 100%;
+      }
+
+      .page.full-size {
+        padding: 0px;
+      }
+
+      .page[active] {
+        display: block;
+      }
+
+      /* .footer {
+        display: block;
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+        height: var(--app-footer-height);
+        background: var(--app-footer-background-color);
+        color: var(--app-footer-text-color);
+        text-align: center;
+      } */
+
+      paper-toast {
+        width: 100%;
+      }
+
+      /* Wide layout: when the viewport width is bigger than 640px, layout
+      changes to a wide layout. */
+      @media (min-width: ${unsafeCSS(window.MyAppGlobals.wideWidth)}) {
+        .toolbar {
+          z-index: 1;
+        }
+
+        .toolbar-top {
+          height: auto;
+          padding: 0px;
+          justify-content: center;
+        }
+
+        .toolbar-top-content {
+          height: var(--app-header-height-wide);
+          width: var(--app-wide-content-width);
+          margin: var(--app-header-margin-wide);
+          /* padding: 0px var(--app-grid-3x); */
+        }
+
+        /* Uncomment this if you want the toolbar links to be visible when in wide view */
+        .toolbar-navbar {
+          display: flex;
+          justify-content: center;
+        }
+
+        .menu-btn {
+          display: none;
+        }
+
+        .main-content {
+          padding: 0px;
+          display: flex;
+          justify-content: center;
+        }
+
+        .page {
+          overflow: visible;
+          width: var(--app-wide-content-width);
+          padding: 0px var(--app-grid-2x);
+        }
+
+        .page.full-size {
+          width: 100%;
+        }
+
+        .footer {
+          display: none;
+        }
+
+        paper-toast {
+          width: auto;
+          /* width: 375px;
+          max-width: 100%; */
+        }
+      }
+    `
+    ];
+  }
 
   render() {
     let menuIcon = (window.appConfig.pageList[this._page]?.showInMenu || window.appConfig.pageList[this._page]?.is404) ? barsIcon : angleLeftIcon; // Default to back-arrow
@@ -91,307 +326,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
         page.app = this;
       }
     });
-    let baseColors = html`
-      <style>
-        :host {
-          --app-profile-color: var(--app-color-grass);
-          --app-profile-color-light: var(--app-color-grass-light);
-
-          --app-primary-color: var(--app-color-white);
-          --app-secondary-color: var(--app-color-black);
-          --app-dark-text-color: var(--app-secondary-color);
-          --app-light-text-color: var(--app-color-white);
-        }
-      </style>
-    `;
-    let lightTheme = html`
-      <style>
-        :host {
-          --app-header-background-color: var(--app-color-blue);
-          --app-header-text-color: var(--app-light-text-color);
-
-          --app-header-menu-text-color: var(--app-dark-text-color);
-          --app-header-menu-background-color: var(--app-color-yellow);
-          --app-header-menu-background-selected-color: var(--app-background-color);
-          --app-header-menu-selected-color: var(--app-dark-text-color);
-          --app-header-menu-active-color: var(--app-color-blue);
-
-          --app-drawer-background-color: var(--app-color-yellow);
-          --app-drawer-text-color: var(--app-dark-text-color);
-          --app-drawer-selected-color: var(--app-dark-text-color);
-
-          --app-drawer-header-background-color: var(--app-color-blue);
-          --app-drawer-header-text-color: var(--app-light-text-color);
-
-          --app-footer-text-color: var(--app-color-white);
-          --app-footer-background-color: var(--app-color-blue);
-
-          --app-background-color: var(--app-color-white);
-          --app-main-background-color: var(--app-color-white);
-        }
-      </style>
-    `;
-    let darkTheme = html`
-      <style>
-        :host {
-          --app-header-background-color: var(--app-color-black);
-          --app-header-text-color: var(--app-color-yellow);
-
-          --app-header-menu-text-color: var(--app-color-blue);
-          --app-header-menu-background-color: var(--app-color-black);
-          --app-header-menu-background-selected-color: var(--app-background-color);
-          --app-header-menu-selected-color: var(--app-color-black);
-          --app-header-menu-active-color: var(--app-color-yellow);
-
-          --app-drawer-background-color: var(--app-color-black);
-          --app-drawer-text-color: var(--app-color-blue);
-          --app-drawer-selected-color: var(--app-color-blue);
-
-          --app-drawer-header-background-color: var(--app-color-black);
-          --app-drawer-header-text-color: var(--app-color-yellow);
-
-          --app-footer-text-color: var(--app-color-yellow);
-          --app-footer-background-color: var(--app-color-black);
-
-          --app-background-color: var(--app-color-blue);
-          --app-main-background-color: var(--app-color-blue);
-        }
-      </style>
-    `;
     const template = html`
-      ${AppStyles}
-      ${baseColors}
-      ${this._appTheme == "light" ? lightTheme : darkTheme}
-      <style>
-        :host {
-          color: var(--app-dark-text-color);
-
-          /* SIZES */
-          --app-drawer-width: 256px;
-          --app-wide-content-width: 1000px;
-          --app-header-height: var(--app-grid-7x);
-          --app-header-height-wide: var(--app-grid-7x);
-          /* --app-header-margin-wide: 24px 15px 32px 15px; */
-          --app-header-margin-wide: 0px 15px;
-          --app-footer-height: var(--app-grid-3x);
-        }
-
-        * {
-          --material-primary-color: var(--app-header-background-color);
-          --material-primary-text-color: var(--app-header-background-color);
-        }
-
-        .header-layout {
-          background-color: var(--app-background-color);
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .drawer {
-          color: var(--app-drawer-text-color);
-          z-index: 1;
-        }
-
-        .drawer-top {
-          color: var(--app-drawer-header-text-color);
-          background-color: var(--app-drawer-header-background-color);
-          height: var(--app-header-height);
-        }
-
-        .drawer-list {
-          box-sizing: border-box;
-          background-color: var(--app-drawer-background-color);
-          width: 100%;
-          height: 100%;
-          padding: 24px;
-          position: relative;
-        }
-
-        .drawer-list > a {
-          display: block;
-          color: var(--app-drawer-text-color);
-          text-decoration: none;
-          line-height: 40px;
-          padding: 0 24px;
-        }
-
-        .drawer-list > a[selected] {
-          color: var(--app-drawer-selected-color);
-          /* border-bottom: 1px solid var(--app-drawer-selected-color); */
-          font-weight: bold;
-        }
-
-        .toolbar {
-          color: var(--app-header-text-color);
-          background-color: var(--app-header-background-color);
-          z-index: 0;
-        }
-
-        .toolbar-top {
-          /* Need to set to 20px to avoid the swipe-open-area */
-          padding: 0px 20px;
-          height: var(--app-header-height);
-        }
-
-        .toolbar-top-content {
-          display: flex;
-          align-items: center;
-          width: 100%;
-          height: 100%;
-        }
-
-        .toolbar-top-content > .space {
-          flex-grow: 1;
-        }
-
-        mwc-switch {
-          margin-right: 10px;
-          --mdc-theme-surface: var(--app-color-yellow);
-          --mdc-theme-on-surface: var(--app-color-yellow);
-          --mdc-theme-secondary: var(--app-color-blue);
-        }
-
-        .menu-btn {
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 0px;
-          fill: var(--app-header-text-color);
-          height: var(--app-grid-2hx);
-          width: var(--app-grid-2hx);
-        }
-
-        .menu-btn > svg {
-          height: var(--app-grid-2hx);
-          width: var(--app-grid-2hx);
-        }
-
-        .logo-icon {
-          margin: 0px 0px 0px var(--app-grid-2hx);
-          width: var(--app-grid-5x);
-          height: var(--app-grid-5x);
-        }
-
-        .title {
-          padding: 0px 0px 0px var(--app-grid-2hx);
-        }
-
-        .toolbar-navbar {
-          display: none;
-          background-color: var(--app-header-menu-background-color);
-          overflow-x: hidden;
-        }
-
-        .toolbar-list {
-          display: flex;
-          width: var(--app-wide-content-width);
-          /* padding: 0px var(--app-grid-3x); */
-          background-color: var(--app-header-menu-background-color);
-        }
-
-        /* Workaround for IE11 displaying <main> as inline */
-        main {
-          display: block;
-          background-color: var(--app-main-background-color);
-          flex-grow: 1;
-        }
-
-        .main-content {
-          height: 100%;
-          overflow: auto;
-          overflow-y: scroll;
-        }
-
-        .page {
-          overflow: auto;
-          display: none;
-          padding: 0px var(--app-grid-3x);
-          width: 100%;
-          height: 100%;
-        }
-
-        .page.full-size {
-          padding: 0px;
-        }
-
-        .page[active] {
-          display: block;
-        }
-
-        /* .footer {
-          display: block;
-          padding: 0px;
-          margin: 0px;
-          width: 100%;
-          height: var(--app-footer-height);
-          background: var(--app-footer-background-color);
-          color: var(--app-footer-text-color);
-          text-align: center;
-        } */
-
-        paper-toast {
-          width: 100%;
-        }
-
-        /* Wide layout: when the viewport width is bigger than 640px, layout
-        changes to a wide layout. */
-        @media (min-width: ${window.MyAppGlobals.wideWidth}) {
-          .toolbar {
-            z-index: 1;
-          }
-
-          .toolbar-top {
-            height: auto;
-            padding: 0px;
-            justify-content: center;
-          }
-
-          .toolbar-top-content {
-            height: var(--app-header-height-wide);
-            width: var(--app-wide-content-width);
-            margin: var(--app-header-margin-wide);
-            /* padding: 0px var(--app-grid-3x); */
-          }
-
-          /* Uncomment this if you want the toolbar links to be visible when in wide view */
-          .toolbar-navbar {
-            display: flex;
-            justify-content: center;
-          }
-
-          .menu-btn {
-            display: none;
-          }
-
-          .main-content {
-            padding: 0px;
-            display: flex;
-            justify-content: center;
-          }
-
-          .page {
-            overflow: visible;
-            width: var(--app-wide-content-width);
-            padding: 0px var(--app-grid-2x);
-          }
-
-          .page.full-size {
-            width: 100%;
-          }
-
-          .footer {
-            display: none;
-          }
-
-          paper-toast {
-            width: auto;
-            /* width: 375px;
-            max-width: 100%; */
-          }
-        }
-      </style>
-
       <!-- Drawer content -->
       <!-- Add swipe-open if you want the ability to swipe open the drawer -->
       <app-drawer slot="drawer" class="drawer" ?swipe-open="${!this._wideLayout}" ?opened="${this._drawerOpened}" @opened-changed="${e => store.dispatch(updateDrawerState(e.target.opened))}">
@@ -410,7 +345,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
               <img class="logo-icon" src="${PSRRIcon}">
               <div class="title">${this.appTitle}</div>
               <div class="space"></div>
-              <mwc-switch id="sw-theme" @change="${this._switchTheme}" ?checked="${this._appTheme == "dark"}"></mwc-switch>
+              <mwc-switch id="sw-theme" @change="${this._switchTheme}" ?checked="${this.theme == "dark"}"></mwc-switch>
             </div>
           </app-toolbar>
 
@@ -432,6 +367,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       </div>
 
       <paper-toast id="toast" duration="10000">${this._toastHtml}</paper-toast>
+      <mwc-dialog id="mwc-dialog" @closed="${this._mwcDialogClosed.bind(this)}"></mwc-dialog>
     `;
     return template;
   }
@@ -465,14 +401,17 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     // See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
     setPassiveTouchGestures(true);
 
-    this._appTheme = window.localStorage.getItem("app-theme");
-    if (!this._appTheme) {
-      window.localStorage.setItem("app-theme", this._appTheme = "light");
+    this.theme = window.localStorage.getItem("app-theme");
+    if (!this.theme) {
+      window.localStorage.setItem("app-theme", this.theme = "light");
     }
-  }
 
-  ping() {
-    return "pong";
+    if (!window.openVaadinDialog) {
+      window.openVaadinDialog = this._openVaadinDialog.bind(this);
+    }
+    if (!window.openMwcDialog) {
+      window.openMwcDialog = this._openMwcDialog.bind(this);
+    }
   }
 
   firstUpdated(changedProperties) {
@@ -488,11 +427,6 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     installMediaQueryWatcher(`(min-width: ${window.MyAppGlobals.wideWidth})`,
         (matches) => store.dispatch(updateLayout(matches)));
-  }
-
-  navigateTo(href: string, isExternalLink: boolean = false): void {
-    const navigateEvent = new CustomEvent('navigate', { detail: {href: href, external: isExternalLink}});
-    document.body.dispatchEvent(navigateEvent);
   }
 
   updated(changedProperties) {
@@ -516,6 +450,11 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     });
   }
 
+  navigateTo(href: string, isExternalLink: boolean = false): void {
+    const navigateEvent = new CustomEvent('navigate', { detail: {href: href, external: isExternalLink}});
+    document.body.dispatchEvent(navigateEvent);
+  }
+
   _getMenuItems(pages) {
     return pages ? pages.filter(page => this._showInMenu(page)).map(page => new PwaMenuItem(page.key, page.title, !!page.element, this._getMenuItems(page.subPages))) : [];
   }
@@ -534,7 +473,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     let swTheme: any = this.shadowRoot.getElementById("sw-theme");
     let theme = swTheme.checked ? "dark" : "light";
     window.localStorage.setItem("app-theme", theme);
-    this._appTheme = theme;
+    this.theme = theme;
+    this.requestUpdate();
   }
 
   _getScroll() {
@@ -585,6 +525,47 @@ export class PsrRouterApp extends connect(store)(LitElement) {
         (<any>document.getElementById("overlay")).close();
       }
       window.setTimeout(this._setScroll.bind(this, window.history.state && window.history.state.scroll), 20);
+    }
+  }
+
+  _openVaadinDialog(dialogRenderer: any): DialogElement {
+    // add a dialog to the html (it is checked, but it shouldn't exist), and remove it when it closes
+    // this is waaay more performant than if we add it to the html beforehand, because of some warnings it's throwing
+    let dialog: any = this.shadowRoot.getElementById("dialog");
+    if (!dialog) {
+      dialog = document.createElement('vaadin-dialog');
+      dialog.id = "dialog";
+      dialog.renderer = dialogRenderer;
+      this.shadowRoot.appendChild(dialog);
+      dialog.addEventListener('opened-changed', this._dialogClosed.bind(this))
+    }
+    dialog.opened = true;
+  }
+
+  _dialogClosed(e: any) {
+    if (!e.detail.value) {
+      let dialog: any = this.shadowRoot.getElementById("dialog");
+      this.shadowRoot.removeChild(dialog);
+    }
+  }
+
+  _renderMwcDialog(template: TemplateResult): Dialog {
+    let dialog: Dialog = <Dialog>this.shadowRoot.getElementById("mwc-dialog");
+    render(template, dialog);
+    return dialog;
+  }
+
+  _openMwcDialog(template: TemplateResult): Dialog {
+    let dialog: Dialog = this._renderMwcDialog(template);
+    dialog.show();
+    return dialog;
+  }
+
+  _mwcDialogClosed(e: any) {
+    e.cancelbubble = true;
+    let dialog: Dialog = <Dialog>this.shadowRoot.getElementById("mwc-dialog");
+    if (e.target == dialog) {
+      this._renderMwcDialog(null);
     }
   }
 }

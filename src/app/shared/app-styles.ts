@@ -1,7 +1,6 @@
-import { html } from 'lit-element';
+import { html, css, unsafeCSS } from 'lit-element';
 
-export const AppColors = html`
-<style>
+const AppColors = css`
   :host {
     /* CORPORATE COLORS */
     --app-color-blue: #1865a9;
@@ -31,13 +30,96 @@ export const AppColors = html`
     /* CALL TO ACTION */
     --app-color-cta-blue: #0f70b8;
   }
-</style>
 `;
 
-export const AppStyles = html`
-${AppColors}
+const BaseColors = css`
+  :host {
+    --app-profile-color: var(--app-color-grass);
+    --app-profile-color-light: var(--app-color-grass-light);
 
-<style>
+    --app-primary-color: var(--app-color-white);
+    --app-secondary-color: var(--app-color-black);
+    --app-dark-text-color: var(--app-secondary-color);
+    --app-light-text-color: var(--app-color-white);
+  }
+`;
+
+const LightTheme = css`
+  :host([theme=light]) {
+    --app-header-background-color: var(--app-color-blue);
+    --app-header-text-color: var(--app-light-text-color);
+
+    --app-header-menu-text-color: var(--app-dark-text-color);
+    --app-header-menu-background-color: var(--app-color-yellow);
+    --app-header-menu-background-selected-color: var(--app-background-color);
+    --app-header-menu-selected-color: var(--app-dark-text-color);
+    --app-header-menu-active-color: var(--app-color-blue);
+
+    --app-drawer-background-color: var(--app-color-yellow);
+    --app-drawer-text-color: var(--app-dark-text-color);
+    --app-drawer-selected-color: var(--app-dark-text-color);
+
+    --app-drawer-header-background-color: var(--app-color-blue);
+    --app-drawer-header-text-color: var(--app-light-text-color);
+
+    --app-footer-text-color: var(--app-color-white);
+    --app-footer-background-color: var(--app-color-blue);
+
+    --app-background-color: var(--app-color-white);
+    --app-main-background-color: var(--app-color-white);
+  }
+`;
+
+const DarkTheme = css`
+  :host([theme=dark]) {
+    --app-header-background-color: var(--app-color-black);
+    --app-header-text-color: var(--app-color-yellow);
+
+    --app-header-menu-text-color: var(--app-color-blue);
+    --app-header-menu-background-color: var(--app-color-black);
+    --app-header-menu-background-selected-color: var(--app-background-color);
+    --app-header-menu-selected-color: var(--app-color-black);
+    --app-header-menu-active-color: var(--app-color-yellow);
+
+    --app-drawer-background-color: var(--app-color-black);
+    --app-drawer-text-color: var(--app-color-blue);
+    --app-drawer-selected-color: var(--app-color-blue);
+
+    --app-drawer-header-background-color: var(--app-color-black);
+    --app-drawer-header-text-color: var(--app-color-yellow);
+
+    --app-footer-text-color: var(--app-color-yellow);
+    --app-footer-background-color: var(--app-color-black);
+
+    --app-background-color: var(--app-color-blue);
+    --app-main-background-color: var(--app-color-blue);
+  }
+`;
+
+const CssProperties = css`
+  :host {
+    /* vaadin styles */
+    --material-primary-color: var(--app-header-background-color);
+    --material-primary-text-color: var(--app-header-background-color);
+    --material-background-color: var(--app-background-color);
+
+    /* mwc styles */
+    --mdc-select-fill-color: var(--app-background-color);
+    --mdc-select-error-color: var(--app-color-error-red);
+    --mdc-text-field-fill-color: var(--app-background-color);
+    --mdc-theme-surface: var(--app-background-color);
+    --mdc-theme-primary: var(--app-header-background-color);
+    --mdc-theme-error: var(--app-color-error-red);
+  }
+`;
+
+export const AppStylesCss = [
+  AppColors,
+  BaseColors,
+  LightTheme,
+  DarkTheme,
+  CssProperties,
+  css`
   :host {
     /* VARIABLES */
     --app-grid-x: 8px;
@@ -80,7 +162,7 @@ ${AppColors}
   }
 
   h2 {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 400;
   }
 
@@ -118,17 +200,23 @@ ${AppColors}
                                     supported by Chrome and Opera */
   }
 
-  @media (min-width: ${window.MyAppGlobals.wideWidth}) {
+  @media (min-width: ${unsafeCSS(window.MyAppGlobals.wideWidth)}) {
     :host {
       font-size: 16px;
     }
 
     h1 { font-size: 60px; }
-    h2 { font-size: 48px; }
+    h2 { font-size: 46px; }
     h3 { font-size: 32px; }
     h4 { font-size: 22px; }
     h5 { font-size: 16px; }
     h6 { font-size: 16px; }
   }
-</style>
+`
+];
+
+export const AppStyles = html`
+  <style>
+    ${AppStylesCss}
+  </style>
 `;

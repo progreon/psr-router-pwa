@@ -326,25 +326,26 @@ export class PsrRouterRouteEntry extends LitElement {
   }
 
   private _openDialog() {
-    // add a dialog to the html (it is checked, but it shouldn't exist), and remove it when it closes
-    // this is waaay more performant than if we add it to the html beforehand, because of some warnings it's throwing
-    let dialog: any = this.shadowRoot.getElementById("dialog");
-    if (!dialog) {
-      dialog = document.createElement('vaadin-dialog');
-      dialog.id = "dialog";
-      dialog.renderer = this._getPopupContentRenderer().bind(this);
-      this.shadowRoot.appendChild(dialog);
-      dialog.addEventListener('opened-changed', this._dialogClosed.bind(this))
-    }
-    dialog.opened = true;
+    // // add a dialog to the html (it is checked, but it shouldn't exist), and remove it when it closes
+    // // this is waaay more performant than if we add it to the html beforehand, because of some warnings it's throwing
+    // let dialog: any = this.shadowRoot.getElementById("dialog");
+    // if (!dialog) {
+    //   dialog = document.createElement('vaadin-dialog');
+    //   dialog.id = "dialog";
+    //   dialog.renderer = this._getPopupContentRenderer().bind(this);
+    //   this.shadowRoot.appendChild(dialog);
+    //   dialog.addEventListener('opened-changed', this._dialogClosed.bind(this))
+    // }
+    // dialog.opened = true;
+    window.openVaadinDialog(this._getPopupContentRenderer().bind(this));
   }
 
-  private _dialogClosed(e: any) {
-    if (!e.detail.value) {
-      let dialog: any = this.shadowRoot.getElementById("dialog");
-      this.shadowRoot.removeChild(dialog);
-    }
-  }
+  // private _dialogClosed(e: any) {
+  //   if (!e.detail.value) {
+  //     let dialog: any = this.shadowRoot.getElementById("dialog");
+  //     this.shadowRoot.removeChild(dialog);
+  //   }
+  // }
 
   protected _fireEvent(eventName: string, detail: any): void {
     const event = new CustomEvent(eventName, { detail });

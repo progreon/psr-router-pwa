@@ -7,7 +7,17 @@ import { saveAs } from 'file-saver';
 import { RouteJSON } from '../parse/RouteJSON';
 // TODO: Checkout https://www.npmjs.com/package/bson
 
-export function ExportToFile(route: Route.Route, filename: string, printerSettings: any): Route.Route {
+export function ExportTextToFile(text: string, filename: string) {
+  let isFileSaverSupported = !!new Blob;
+  if (isFileSaverSupported) {
+    let blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    saveAs(blob, filename);
+  } else {
+    throw new Error("Exporting to a file is not supported for this browser");
+  }
+}
+
+export function ExportRouteToFile(route: Route.Route, filename: string, printerSettings: any): Route.Route {
   let ext = printerSettings && printerSettings.toJSON ? ".json" : ".txt";
   filename = (filename ? filename : route.shortname) + ext;
   if (!route.shortname) {
@@ -15,31 +25,19 @@ export function ExportToFile(route: Route.Route, filename: string, printerSettin
   }
   console.debug("Exporting...", filename, printerSettings);
   // https://www.npmjs.com/package/file-saver
-  try {
-    let isFileSaverSupported = !!new Blob;
-    if (isFileSaverSupported) {
-      let routeJSON = <RouteJSON>route.getJSONObject();
-      let text: string;
-      if (printerSettings && printerSettings.toJSON) {
-        if (printerSettings.printEmptyProperties) {
-          text = JSON.stringify(routeJSON, null, "  ");
-        } else {
-          text = JSON.stringify(routeJSON, (key, val) => (val && JSON.stringify(val) !== "[]" && JSON.stringify(val) !== "{}") || val === 0 || val === false ? val : undefined, "  ");
-        }
-      } else{
-        // parse to txt
-        text = RouteUtil.RouteParser.ExportRouteText(routeJSON);
-      }
-      let blob = new Blob([text], {type: "text/plain;charset=utf-8"});
-      saveAs(blob, filename);
+  let routeJSON = <RouteJSON>route.getJSONObject();
+  let text: string;
+  if (printerSettings && printerSettings.toJSON) {
+    if (printerSettings.printEmptyProperties) {
+      text = JSON.stringify(routeJSON, null, "  ");
     } else {
-      window.alert("Exporting to a file is not supported for this browser");
+      text = JSON.stringify(routeJSON, (key, val) => (val && JSON.stringify(val) !== "[]" && JSON.stringify(val) !== "{}") || val === 0 || val === false ? val : undefined, "  ");
     }
-  } catch (e) {
-    window.alert("Something went wrong while exporting, check the console for more information");
-    console.error(e);
+  } else {
+    // parse to txt
+    text = RouteUtil.RouteParser.ExportRouteText(routeJSON);
   }
-
+  ExportTextToFile(text, filename);
   return route;
 }
 
