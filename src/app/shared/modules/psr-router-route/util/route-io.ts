@@ -17,7 +17,7 @@ export function ExportTextToFile(text: string, filename: string) {
   }
 }
 
-export function ExportRouteToFile(route: Route.Route, filename: string, printerSettings: any): Route.Route {
+export function ExportRouteToFile(route: Route.Route, filename: string, printerSettings?: any): Route.Route {
   let ext = printerSettings && printerSettings.toJSON ? ".json" : ".txt";
   filename = (filename ? filename : route.shortname) + ext;
   if (!route.shortname) {
@@ -25,7 +25,7 @@ export function ExportRouteToFile(route: Route.Route, filename: string, printerS
   }
   console.debug("Exporting...", filename, printerSettings);
   // https://www.npmjs.com/package/file-saver
-  let routeJSON = <RouteJSON>route.getJSONObject();
+  let routeJSON = route.getJSONObject();
   let text: string;
   if (printerSettings && printerSettings.toJSON) {
     if (printerSettings.printEmptyProperties) {

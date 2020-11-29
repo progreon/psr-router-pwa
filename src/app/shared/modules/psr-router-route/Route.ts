@@ -7,7 +7,6 @@ import { RouteEntryInfo } from './util';
 import { RouteSection } from '.';
 import { Game } from '../psr-router-model/Game';
 import { Player } from '../psr-router-model/Model';
-import { EntryJSON } from './parse/EntryJSON';
 import { RouteJSON } from './parse/RouteJSON';
 
 /**
@@ -56,7 +55,7 @@ export class Route {
     this.rootSection.apply(new Player(this.game.info.name));
   }
 
-  getJSONObject(): EntryJSON {
+  getJSONObject(): RouteJSON {
     let routeSectionJSON = this.rootSection.getJSONObject();
     return new RouteJSON(this.rootSection.game.info.key, this.shortname, routeSectionJSON.info, routeSectionJSON.entries);
   }

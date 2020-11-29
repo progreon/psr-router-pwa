@@ -39,7 +39,8 @@ const BaseColors = css`
 
     --app-primary-color: var(--app-color-white);
     --app-secondary-color: var(--app-color-black);
-    --app-dark-text-color: var(--app-secondary-color);
+    /* --app-dark-text-color: var(--app-secondary-color); */
+    --app-dark-text-color: rgba(0, 0, 0, .8);
     --app-light-text-color: var(--app-color-white);
   }
 `;
@@ -104,6 +105,7 @@ const CssProperties = css`
     --material-background-color: var(--app-background-color);
 
     /* mwc styles */
+    --mdc-dialog-content-ink-color: var(--app-dark-text-color);
     --mdc-select-fill-color: var(--app-background-color);
     --mdc-select-error-color: var(--app-color-error-red);
     --mdc-text-field-fill-color: var(--app-background-color);

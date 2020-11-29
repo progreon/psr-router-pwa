@@ -13,6 +13,6 @@ declare global {
     MyAppGlobals: any;
     isUpdateAvailable: any;
     openVaadinDialog: (dialogRenderer: any) => DialogElement;
-    openMwcDialog: (template: TemplateResult) => Dialog;
+    openMwcDialog: (template: TemplateResult, dialogAtt?: { [key: string]: boolean|string }) => Dialog;
   }
 }

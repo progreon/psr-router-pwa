@@ -5,6 +5,7 @@ import { GetGame } from '../../psr-router-game-factory';
 import { RouteParser } from '.';
 import { Game } from '../../psr-router-model/Game';
 import { RouteEntryInfo } from './RouteEntryInfo';
+import { RouteJSON } from 'SharedModules/psr-router-route/parse/RouteJSON';
 
 //// EXAMPLE ROUTES ////
 import redRaceNoItTxt from 'SharedData/routes/Red Any% Glitchless (no IT).txt';
@@ -15,6 +16,21 @@ import * as redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
 import * as blueDummy from 'SharedData/routes/blue_dummy.json';
 import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
 // import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
+
+//// STORAGE TYPES ////
+interface StorageSavedRoute {
+  id: number;
+  title: string;
+  route: RouteJSON;
+  lastUsed: number;
+  fav: boolean;
+}
+
+interface StorageTempRoute {
+  id?: number;
+  route?: RouteJSON;
+  ts: number;
+}
 
 let exampleRoutes: { [key: string]: { json?: any, txt?: string, title: string }; } = {};
 exampleRoutes["red.no.it.txt"] = { txt: redRaceNoItTxt, title: "Red Any% Glitchless (no IT) [txt]" };
@@ -50,7 +66,7 @@ function clearRmStorage() {
   });
 }
 
-function getLsSavedRoutes(): { [key: number]: { id: number, title: string, route: any } } {
+function getLsSavedRoutes(): { [key: number]: StorageSavedRoute } {
   let str = window.localStorage.getItem(lsSavedRoutes);
   if (str) {
     return JSON.parse(str);
@@ -59,17 +75,43 @@ function getLsSavedRoutes(): { [key: number]: { id: number, title: string, route
   }
 }
 
-function setLsSavedRoutes(value: { [key: number]: { id: number, title: string, route: any } }) {
+function getLsSavedRoute(id: number): StorageSavedRoute {
+  let savedRoutes = getLsSavedRoutes();
+  return savedRoutes[id];
+}
+
+function setLsSavedRoutes(value: { [key: number]: StorageSavedRoute }) {
   window.localStorage.setItem(lsSavedRoutes, JSON.stringify(value));
 }
 
-function saveToLocalStorage(id: number, route: any) {
+function lsUpdateLastUsed(id: number) {
   let savedRoutes = getLsSavedRoutes();
-  savedRoutes[id] = { id, title: route.info.title, route };
+  if (savedRoutes[id]) {
+    savedRoutes[id].lastUsed = new Date().getTime();
+  }
   setLsSavedRoutes(savedRoutes);
 }
 
-function getLsLastRoute(): { id?: number, route?: any, ts: number } {
+function lsSetFavoriteRoute(id: number, isFavorite: boolean) {
+  let savedRoutes = getLsSavedRoutes();
+  if (savedRoutes[id]) {
+    savedRoutes[id].fav = isFavorite;
+  }
+  setLsSavedRoutes(savedRoutes);
+}
+
+function saveToLocalStorage(route: RouteJSON, id?: number): StorageSavedRoute {
+  let savedRoutes = getLsSavedRoutes();
+  if (id == null) {
+    id = new Date().getTime();
+  }
+  let old = savedRoutes[id];
+  savedRoutes[id] = { id, title: route.info.title, route, lastUsed: new Date().getTime(), fav: !!old?.fav };
+  setLsSavedRoutes(savedRoutes);
+  return savedRoutes[id];
+}
+
+function getLsLastRoute(): StorageTempRoute {
   let str = window.localStorage.getItem(lsLastRoute);
   if (str) {
     return JSON.parse(str);
@@ -78,7 +120,7 @@ function getLsLastRoute(): { id?: number, route?: any, ts: number } {
   }
 }
 
-function setLsLastRoute(value: { id?: number, route?: any, ts: number }) {
+function setLsLastRoute(value: StorageTempRoute) {
   if (value) {
     window.localStorage.setItem(lsLastRoute, JSON.stringify(value));
   } else {
@@ -86,15 +128,16 @@ function setLsLastRoute(value: { id?: number, route?: any, ts: number }) {
   }
 }
 
-function setSsCurrentRoute(value: { id?: number, route?: any, ts: number }) {
+function setSsCurrentRoute(value: StorageTempRoute) {
   if (value) {
     window.sessionStorage.setItem(ssCurrentRoute, JSON.stringify(value));
+    lsUpdateLastUsed(value.id);
   } else {
     window.sessionStorage.removeItem(ssCurrentRoute);
   }
 }
 
-function getSsCurrentRoute(): { id?: number, route?: any, ts: number } {
+function getSsCurrentRoute(): StorageTempRoute {
   let str = window.sessionStorage.getItem(ssCurrentRoute);
   if (str) {
     return JSON.parse(str);
@@ -103,12 +146,10 @@ function getSsCurrentRoute(): { id?: number, route?: any, ts: number } {
   }
 }
 
-function getRouteJsonFromStorageObj(storageObj: { id?: number, route?: any, ts: number }): any {
+function getRouteJsonFromStorageObj(storageObj: StorageTempRoute): RouteJSON {
   if (storageObj.id) {
-    let sr = getLsSavedRoutes();
-    if (sr) {
-      return sr[storageObj.id]?.route;
-    }
+    let sr = getLsSavedRoute(storageObj.id);
+    return sr?.route;
   }
   return storageObj.route;
 }
@@ -117,18 +158,39 @@ export function SetCurrentRouteAsLastRoute() {
   let currRoute = getSsCurrentRoute();
   if (currRoute) {
     setLsLastRoute(currRoute);
+    lsUpdateLastUsed(currRoute?.id);
   }
 }
 
 //// GETTERS ////
-export function GetSavedRoutesTitles(): { id: number, title: string }[] {
-  return Object.values(getLsSavedRoutes()).map(r => { return { id: r.id, title: r.title } }).sort((a, b) => a.id - b.id);
+export function GetSavedRoutesTitles(): { id: number, title: string, isFav: boolean }[] {
+  return Object.values(getLsSavedRoutes())
+  .map(r => { return { id: r.id, title: r.title, lastOpened: r.lastUsed, isFav: !!r.fav } })
+  .sort((a, b) => {
+    let result = 0;
+    if ((a.isFav && b.isFav) || (!a.isFav && !b.isFav)) {
+      result = (b.lastOpened || b.id) - (a.lastOpened || a.id);
+    } else {
+      result = a.isFav ? -1 : 1;
+    }
+    return result;
+  });
 }
 
 export function GetExampleRoutesInfo(includeTxts: boolean = false): { key: string, title: string }[] {
   return Object.keys(exampleRoutes)
     .filter(er => exampleRoutes[er].json || includeTxts)
     .map(er => { return { key: er, title: exampleRoutes[er].title }; });
+}
+
+export function GetSavedRoute(id: number): Route.Route {
+  let lsRoute = getLsSavedRoute(id);
+  if (lsRoute) {
+    // TODO: check for lsRoute.route version etc?
+    return Route.Route.newFromJSONObject(lsRoute.route);
+  } else {
+    return null;
+  }
 }
 
 export function GetCurrentRoute(): Route.Route {
@@ -146,6 +208,9 @@ export function GetCurrentRoute(): Route.Route {
       let routeObj = getRouteJsonFromStorageObj(ssCR);
       if (routeObj) {
         Route.Route.instance = Route.Route.newFromJSONObject(routeObj);
+        lsUpdateLastUsed(ssCR.id);
+      } else {
+        throw new Error(`No route found from storage ${ssCR}`);
       }
     } catch (e) {
       // TODO: best way to handle this?
@@ -167,25 +232,17 @@ export function GetCurrentGame(): Game {
 }
 
 /// OPEN ROUTES ///
-function setCurrentRoute(route: Route.Route, storageObj: { id?: number, route?: any, ts: number }) {
+function setCurrentRoute(route: Route.Route, storageObj: StorageTempRoute) {
   route.getAllMessages().forEach(m => console.warn(m.toString()));
   Route.Route.instance = route;
   setSsCurrentRoute(storageObj);
   setLsLastRoute(storageObj);
+  lsUpdateLastUsed(storageObj.id);
 }
 
 export function OpenSavedRoute(routeId: number): Route.Route {
-  let strRoute: any;
-  if (routeId) {
-    let sr = getLsSavedRoutes();
-    if (sr) {
-      strRoute = sr[routeId]?.route;
-    }
-  }
-  if (strRoute) {
-    let routeObj = strRoute;
-    // TODO: check routeObj for version etc?
-    let route = Route.Route.newFromJSONObject(routeObj);
+  let route = GetSavedRoute(routeId);
+  if (route) {
     let storageObj = { id: routeId, ts: new Date().getTime() };
     setCurrentRoute(route, storageObj);
     return GetCurrentRoute();
@@ -211,26 +268,28 @@ export function OpenExampleRoute(exampleKey: string): Route.Route {
   }
 }
 
+//// SAVED ROUTES STUFF ////
 export function CreateAndOpenNewRoute(gameKey: string, title: string, template?: string): Route.Route {
   // TODO: support creating a new route from a template (e.g. basic red run)
+  console.debug("Creating game...", gameKey, title);
   let game = GetGame(gameKey);
   let rootSection = new Route.RouteSection(game, new RouteEntryInfo(title));
   let routeSection = rootSection.addNewSection("First Section");
   routeSection.addNewDirections("This is an example of what to do");
   let route = new Route.Route(game, rootSection);
-  let routeId = new Date().getTime();
-  saveToLocalStorage(routeId, route.getJSONObject());
-  let storageObj = { id: routeId, ts: new Date().getTime() };
-  setCurrentRoute(route, storageObj);
-  return GetCurrentRoute();
+  let savedRoute = saveToLocalStorage(route.getJSONObject());
+  return OpenSavedRoute(savedRoute.id);
 }
 
-//// SAVE ROUTES ////
+export function SetFavoriteRoute(id: number, isFavorite: boolean) {
+  lsSetFavoriteRoute(id, isFavorite);
+}
+
 // TODO
-// function saveRoute(route: Route.Route, storageObj: { id?: number, route?: any, ts: number }) {
+// function saveRoute(route: Route.Route, storageObj: StorageTempRoute) {
 
 //   let routeJSON = route.getJSONObject();
-//   storageObj = { route: routeJSON, ts: new Date().getTime() };
+//   storageObj: StorageTempRoute = { route: routeJSON, ts: new Date().getTime() };
 //   setCurrentRoute(route, storageObj);
 // }
 
@@ -254,6 +313,7 @@ export function CloseCurrentRoute() {
     setLsLastRoute(null);
   }
   setSsCurrentRoute(null);
+  lsUpdateLastUsed(currRoute?.id);
 }
 
 //// DELETE ROUTES ////
@@ -285,7 +345,7 @@ export function OpenRouteFile(file: File): Promise<Route.Route> {
           // TODO: check routeObj for version etc?
           let route = RouteIO.ImportFromFile(<string>((<FileReader>(e.target)).result), filename.search(/\.json$/) > 0, filename);
           let routeJSON = route.getJSONObject();
-          let storageObj = { route: routeJSON, ts: new Date().getTime() };
+          let storageObj: StorageTempRoute = { route: routeJSON, ts: new Date().getTime() };
           setCurrentRoute(route, storageObj);
           resolve(route);
         } catch (e) {
@@ -299,12 +359,19 @@ export function OpenRouteFile(file: File): Promise<Route.Route> {
   });
 }
 
-export function ExportRouteFile(filename: string, printerSettings: any, route?: Route.Route): Route.Route {
+export function ExportRouteFile(filename: string, printerSettings?: any, id?: number): Route.Route {
   console.debug("Exporting to route file...", filename, printerSettings);
-  if (!route) {
+  let route: Route.Route;
+  if (id == null) {
     route = GetCurrentRoute();
+  } else {
+    route = GetSavedRoute(id);
   }
-  return RouteIO.ExportRouteToFile(route, filename, printerSettings);
+  if (route != null) {
+    return RouteIO.ExportRouteToFile(route, filename, printerSettings);
+  } else {
+    throw new Error("No route found to export!");
+  }
 }
 
 //// BACKUP STUFF ////
@@ -313,7 +380,7 @@ export function ExportBackup() {
   let backup = getLsSavedRoutes();
   let backupText = JSON.stringify(backup);
   let d = new Date();
-  let filename = `psr-router-${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}-${d.getHours()}-${d.getMinutes()}-${d.getSeconds()}.psrrdata`;
+  let filename = `psr-router-${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}-${d.getHours()}-${d.getMinutes()}-${d.getSeconds()}.psrrdata`;
   RouteIO.ExportTextToFile(backupText, filename);
 }
 
@@ -323,9 +390,9 @@ export function OpenBackupFile(file: File): Promise<any> {
       let fileReader = new FileReader();
       fileReader.onload = function (e) {
         try {
-          // TODO: safety checks?
-          setLsSavedRoutes(JSON.parse(<string>((<FileReader>(e.target)).result)));
+          // TODO: safety checks before closing current route?
           CloseCurrentRoute();
+          setLsSavedRoutes(JSON.parse(<string>((<FileReader>(e.target)).result)));
           resolve(null);
         } catch (e) {
           reject(e);
@@ -341,6 +408,7 @@ export function OpenBackupFile(file: File): Promise<any> {
 //// CLEANUP STUFF ////
 
 export function ClearAllData() {
+  CloseCurrentRoute();
   clearRmStorage();
 }
 
@@ -385,20 +453,6 @@ export function ClearAllData() {
 //     routeV0.v = 1;
 //     return false;
 //   }
-// }
-
-// export function SetCurrentRoute(route: Route.Route = null): Route.Route {
-//   window.app.route = route;
-//   window.app.game = route ? route.game : null;
-//   if (route && route.getAllMessages().length == 0) {
-//     try {
-//       route.apply();
-//     } catch (e) {
-//       console.error(e);
-//       window.setTimeout(() => window.alert("Something went wrong while processing the route, please load a new route. Check the console for more details."), 100);
-//     }
-//   }
-//   return route;
 // }
 
 // export function LoadSavedRoute(): Route.Route {

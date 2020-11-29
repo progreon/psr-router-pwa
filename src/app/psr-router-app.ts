@@ -555,8 +555,14 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     return dialog;
   }
 
-  _openMwcDialog(template: TemplateResult): Dialog {
+  _openMwcDialog(template: TemplateResult, dialogAtt?: { [key: string]: boolean|string }): Dialog {
     let dialog: Dialog = this._renderMwcDialog(template);
+    if (dialogAtt) {
+      Object.keys(dialogAtt).forEach(k => {
+        let v = dialogAtt[k];
+        dialog[k] = v;
+      });
+    }
     dialog.show();
     return dialog;
   }
