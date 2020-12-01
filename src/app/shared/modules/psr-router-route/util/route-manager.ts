@@ -285,6 +285,16 @@ export function SetFavoriteRoute(id: number, isFavorite: boolean) {
   lsSetFavoriteRoute(id, isFavorite);
 }
 
+export function SaveRoute(route: Route.Route, overwriteCurrentRoute: boolean = false): Route.Route {
+  let id;
+  if (overwriteCurrentRoute) {
+    let ssCurr = getSsCurrentRoute();
+    id = ssCurr?.id;
+  }
+  let savedRoute = saveToLocalStorage(route.getJSONObject(), id);
+  return OpenSavedRoute(savedRoute.id);
+}
+
 // TODO
 // function saveRoute(route: Route.Route, storageObj: StorageTempRoute) {
 

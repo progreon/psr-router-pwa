@@ -540,6 +540,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       dialog.addEventListener('opened-changed', this._dialogClosed.bind(this))
     }
     dialog.opened = true;
+    return dialog;
   }
 
   _dialogClosed(e: any) {

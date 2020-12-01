@@ -43,7 +43,9 @@ export const navigate = (location: Location, isSubPage: boolean) => (dispatch) =
 import { PwaPage } from 'CoreComponents/pwa/PwaPage';
 window.appConfig.siteMap = [];
 window.appConfig.siteMap.push(new PwaPage('home', 'Home', 'psr-router-home', () => import('CoreComponents/psr-router-home/psr-router-home')));
-window.appConfig.siteMap.push(new PwaPage('router', 'Route', 'psr-router-router', () => import('CoreComponents/psr-router-router/psr-router-router'), true));
+window.appConfig.siteMap.push(new PwaPage('router', 'Route', 'psr-router-router', () => import('CoreComponents/psr-router-router/psr-router-router'), true).setSubPages([
+  new PwaPage('router-text', 'Edit Route Text', 'psr-router-router-text', () => import('CoreComponents/psr-router-router/psr-router-router-text'), true)
+]));
 window.appConfig.siteMap.push(new PwaPage('data', 'Data').setSubPages([
   new PwaPage('pokemon-list', 'Pokémon', 'psr-router-pokemon-list', () => import('CoreComponents/psr-router-pokemon/psr-router-pokemon-list'), true),
   new PwaPage('pokemon-info', 'Pokémon Info', 'psr-router-pokemon-info', () => import('CoreComponents/psr-router-pokemon/psr-router-pokemon-info'), true, false, false),

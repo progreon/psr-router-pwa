@@ -22,10 +22,10 @@ export function ParseRouteText(routeText: string, filename: string): RouteJSON {
 /**
  * // TODO: docu
  */
-export function ExportRouteText(routeJSON: RouteJSON): string {
+export function ExportRouteText(routeJSON: RouteJSON, printerSettings?: any): string {
   let scopedLinesArrayR = _PARSE3R_getScopedLinesArray(routeJSON);
   let linesToParseR = _PARSE2R_getFileLines(scopedLinesArrayR);
-  let routeTextR = _PARSE1R_getRouteText(linesToParseR);
+  let routeTextR = _PARSE1R_getRouteText(linesToParseR, printerSettings);
   return routeTextR;
 }
 
