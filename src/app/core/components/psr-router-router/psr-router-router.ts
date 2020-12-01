@@ -1,17 +1,12 @@
 // JS imports
-import { html, property } from 'lit-element';
+import { html, css, property } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { RouteManager } from 'SharedModules/psr-router-route/util';
 import * as Route from 'SharedModules/psr-router-route';
 
 // These are the elements needed by this element.
-import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
-import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 import 'SharedComponents/psr-router-route/psr-router-route';
-
-// These are the shared styles needed by this element.
-import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterRouter extends PsrRouterPage {
 
@@ -20,17 +15,38 @@ class PsrRouterRouter extends PsrRouterPage {
   @property({ type: Object })
   public rootSection: Route.RouteSection;
 
-  _render() {
-    return html`
-      ${AppStyles}
-      <style>
+  static get styles() {
+    return [
+      ...super.styles,
+      css`
+        .content {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .right {
+          display: flex;
+          flex-flow: row wrap;
+          max-width: 100%;
+          align-self: flex-end;
+        }
         /* ugly solution, I know... */
         .padding {
           padding-bottom: var(--app-grid-x);
         }
-      </style>
-      <psr-router-route id="the-route" class="noselect" .routeEntry="${this.rootSection}"></psr-router-route>
-      <div class="padding"></div>
+      `
+    ];
+  }
+
+  _render() {
+    return html`
+      <div class="content">
+        <div class="right">
+          <vaadin-button @click="${this._onEditRouteTextClicked}">Edit Route Text</vaadin-button>
+        </div>
+        <psr-router-route id="the-route" class="noselect" .routeEntry="${this.rootSection}"></psr-router-route>
+        <div class="padding"></div>
+      </div>
     `;
   }
 
@@ -57,6 +73,10 @@ class PsrRouterRouter extends PsrRouterPage {
       this.rootSection = this.route?.rootSection;
       console.debug("Loaded new route", this.route);
     }
+  }
+
+  private _onEditRouteTextClicked(e) {
+    super._navigateTo("router-text");
   }
 }
 

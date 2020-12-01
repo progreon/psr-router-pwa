@@ -524,6 +524,9 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       if (document.getElementById("overlay")) {
         (<any>document.getElementById("overlay")).close();
       }
+      if (document.getElementById("dialog")) {
+        (<any>document.getElementById("dialog")).close();
+      }
       window.setTimeout(this._setScroll.bind(this, window.history.state && window.history.state.scroll), 20);
     }
   }

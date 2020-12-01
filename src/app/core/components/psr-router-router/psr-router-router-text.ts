@@ -1,5 +1,5 @@
 // JS imports
-import { customElement, html, property } from 'lit-element';
+import { customElement, html, css, property } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { RouteManager, RouteParser } from 'SharedModules/psr-router-route/util';
 import * as Route from 'SharedModules/psr-router-route';
@@ -7,9 +7,6 @@ import * as Route from 'SharedModules/psr-router-route';
 // These are the elements needed by this element.
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
 import '@vaadin/vaadin-text-field/theme/material/vaadin-text-area';
-
-// These are the shared styles needed by this element.
-import { AppStyles } from 'Shared/app-styles';
 
 @customElement('psr-router-router-text')
 class PsrRouterRouterText extends PsrRouterPage {
@@ -20,24 +17,20 @@ class PsrRouterRouterText extends PsrRouterPage {
   private _changed: boolean;
 
   static get styles() {
-    return super.styles;
-  }
-
-  _render() {
-    return html`
-      <style>
+    return [
+      ...super.styles,
+      css`
         .content {
           display: flex;
           flex-direction: column;
           align-items: stretch;
-          /* height: 100%;
-          width: 100%; */
         }
         .text {
           background-color: rgba(255, 255, 255, 0.2);
           border-radius: 10px;
           border: 1px solid rgba(0, 0, 0, .2);
           padding: 10px;
+          margin: 0px 10px 10px 10px;
         }
         .right {
           display: flex;
@@ -45,13 +38,19 @@ class PsrRouterRouterText extends PsrRouterPage {
           max-width: 100%;
           align-self: flex-end;
         }
-      </style>
+      `
+    ];
+  }
+
+  _render() {
+    return html`
       <div class="content">
         <div class="right">
           <vaadin-button id="cancel" @click="${this._cancelClicked}">Cancel</vaadin-button>
           <vaadin-button id="save" ?disabled="${!this._changed}" @click="${this._saveClicked}">Save</vaadin-button>
         </div>
-        <vaadin-text-area id="route-text" class="text" .value="${this._routeText}" @keydown="${this._onKeyDown}" @input="${this._onInput}"></vaadin-text-area>
+        <vaadin-text-area id="route-text" class="text" .value="${this._routeText}" @keydown="${this._onKeyDown}"
+          @input="${this._onInput}"></vaadin-text-area>
       </div>
     `;
   }
