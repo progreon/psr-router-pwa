@@ -413,10 +413,6 @@ class PsrRouterHome extends PsrRouterPage {
     };
 
     window.openMwcDialog(html`
-      <h3>Clear all data?</h3>
-      This will remove all the routes from this browser!
-    `);
-    window.openMwcDialog(html`
       <h3>Delete this saved route?</h3>
       This cannot be undone!
       <vaadin-button dialogAction="ok" slot="primaryAction" id="btn-ok" @click="${okListener.bind(this)}">Ok</vaadin-button>

@@ -3,18 +3,19 @@
 // Imports for this element
 import { LitElement, html, property, css } from 'lit-element';
 import * as Route from 'SharedModules/psr-router-route';
+import { RouterMessage } from 'App/shared/modules/psr-router-util';
 
 // Image imports for this element
-import { angleDownIcon, angleUpIcon, infoCircle } from 'Shared/my-icons';
+import { angleDownIcon, angleUpIcon, infoCircle, userIcon, idCardIcon } from 'Shared/my-icons';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 // import '@vaadin/vaadin-context-menu';
 // import '@vaadin/vaadin-list-box';
+import '../psr-router-player/psr-router-player';
 
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
-import { RouterMessage } from 'App/shared/modules/psr-router-util';
 
 export class PsrRouterRouteEntry extends LitElement {
 
@@ -80,9 +81,6 @@ export class PsrRouterRouteEntry extends LitElement {
         justify-content: space-between;
         border-radius: 5px;
       }
-      .header[pointer] {
-        cursor: pointer;
-      }
       /* .header:hover {
         background-color: #bbbbbb;
         box-shadow: 5px 0px #bbbbbb, -5px 0px #bbbbbb;
@@ -97,17 +95,22 @@ export class PsrRouterRouteEntry extends LitElement {
         display: none;
       }
       .icon {
-        padding-left: 5px;
+        margin-left: 7px;
+        padding-top: 7px;
         align-self: center;
       }
       .icon > svg {
-        width: 12px;
-        height: 12px;
+        width: 16px;
+        height: 16px;
       }
       .icon.expand {
-        padding: 0px 5px 0px 0px;
+        margin-left: 0px;
+        margin-right: 7px;
       }
-      .icon.info {
+      .icon.expand[pointer] {
+        cursor: pointer;
+      }
+      .icon.info, .icon.player {
         cursor: pointer;
       }
       .icon.hidden {
@@ -130,6 +133,9 @@ export class PsrRouterRouteEntry extends LitElement {
         align-self: center;
         flex-grow: 1;
         padding: 4px 0px;
+      }
+      .entry[pointer] {
+        cursor: pointer;
       }
       .content {
         width: 100%;
@@ -210,8 +216,8 @@ export class PsrRouterRouteEntry extends LitElement {
       <div class="messages">
         ${messages}
       </div>
-      <div class="header" ?hidden="${this.routeHeader}" ?pointer="${!this.routeHeader && hasExpandingDOM}">
-        <div class="icon expand" @click="${this._onClick}" ?hidden="${!hasExpandingDOM}">${icon}</div>
+      <div class="header" ?hidden="${this.routeHeader}">
+        <div class="icon expand" @click="${this._onClick}" ?hidden="${!hasExpandingDOM}" ?pointer="${!this.routeHeader && hasExpandingDOM}">${icon}</div>
         <div class="icon expand hidden" ?hidden="${hasExpandingDOM}">${icon}</div>
         <!-- <vaadin-context-menu>
           <template>
@@ -223,12 +229,13 @@ export class PsrRouterRouteEntry extends LitElement {
               <li class="menu-option">Delete [TODO]</li>
             </ul>
           </template> -->
-        <div class="entry" @click="${this._onClick}">
+        <div class="entry" @click="${this._onClick}" ?pointer="${!this.routeHeader && hasExpandingDOM}">
           <div><strong>${this._getTitle()}</strong></div>
           <div>${this._getSummary()}</div>
         </div>
         <!-- </vaadin-context-menu> -->
         <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupAvailable}">${infoCircle}</div>
+        <div class="icon player" @click="${this._openPlayerDialog}">${idCardIcon}</div>
       </div>
       <div class="route-header" ?hidden="${!this.routeHeader}">
         <h2>${this.routeEntry?this.routeEntry.info.title:"No route loaded"}</h2>
@@ -338,6 +345,14 @@ export class PsrRouterRouteEntry extends LitElement {
     // }
     // dialog.opened = true;
     window.openVaadinDialog(this._getPopupContentRenderer().bind(this));
+  }
+
+  private _openPlayerDialog() {
+    if (this.routeEntry && this.routeEntry.player) {
+      window.openMwcDialog(html`
+        <psr-router-player .player="${this.routeEntry.player}"></psr-router-player>
+      `, { "hideActions": true });
+    }
   }
 
   // private _dialogClosed(e: any) {
