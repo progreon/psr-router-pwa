@@ -42,6 +42,8 @@ export class Player {
   private _pcItems: ItemSlot[];
   private _badges: any[];
   get money(): number { return this._money; }
+  get bag(): ItemSlot[] { return this._bagItems.slice(); }
+  get badges(): any[] { return this._badges.slice(); }
   /**
    *
    * @param name
