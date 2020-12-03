@@ -1,8 +1,9 @@
 // JS imports
 import { customElement, html, css, property } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
-import { RouteManager, RouteParser } from 'SharedModules/psr-router-route/util';
 import * as Route from 'SharedModules/psr-router-route';
+import { RouteManager, RouteParser } from 'SharedModules/psr-router-route/util';
+import { RouteJSON } from 'SharedModules/psr-router-route/parse/RouteJSON';
 
 // These are the elements needed by this element.
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
@@ -104,7 +105,13 @@ class PsrRouterRouterText extends PsrRouterPage {
   private _saveClicked() {
     if (this._changed) {
       try {
-        let json = RouteParser.ParseRouteText(this._routeText, "line");
+        let json: RouteJSON;
+        try {
+          json = RouteParser.ParseRouteText(this._routeText, "line");
+        } catch (e) {
+          super.showAppToast(e.message);
+          return;
+        }
         let newRoute = Route.Route.newFromJSONObject(json);
         let messages = newRoute.getAllMessages();
         if (messages.length > 0) {
@@ -117,7 +124,7 @@ class PsrRouterRouterText extends PsrRouterPage {
         }
       } catch (e) {
         console.error(e);
-        super.showAppToast("error");
+        super.showAppToast("Error, please see the console");
       }
     }
   }

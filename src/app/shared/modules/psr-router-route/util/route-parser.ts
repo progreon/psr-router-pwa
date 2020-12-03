@@ -14,7 +14,6 @@ import { ParserLine } from '../parse/ParserLine';
 export function ParseRouteText(routeText: string, filename: string): RouteJSON {
   const linesToParse = _PARSE1_getFileLines(routeText);
   const scopedLinesArray = _PARSE2_toScopedLinesArray(linesToParse);
-  console.log(scopedLinesArray);
   const routeJSON = _PARSE3_getRouteJSON(scopedLinesArray, filename);
   return routeJSON;
 }
