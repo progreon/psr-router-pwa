@@ -140,7 +140,7 @@ export class Player {
   addItem(item: Item, quantity: number = 1, toPc: boolean = false): boolean {
     let items = toPc ? this._pcItems : this._bagItems;
     let index = this.getItemIndex(item, toPc);
-    if (index > 0) {
+    if (index >= 0) {
       items[index].count += quantity;
       return true;
     } else if (index < 0 && items.length < MAX_SLOTS) {

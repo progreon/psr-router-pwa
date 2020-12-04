@@ -12,12 +12,10 @@ import '@material/mwc-button';
 import '@material/mwc-dialog';
 import '@material/mwc-formfield';
 import '@material/mwc-list/mwc-list-item';
-import '@material/mwc-select';
 import '@material/mwc-textfield';
 import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
-import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
-import '@vaadin/vaadin-combo-box/theme/material/vaadin-combo-box';
+import 'SharedComponents/psr-router-mwc/psr-router-select';
 
 // Image imports for this element
 import { trashIcon } from 'Shared/my-icons';
@@ -242,6 +240,9 @@ class PsrRouterHome extends PsrRouterPage {
         </div>
       `;
     });
+    let examples = RouteManager.GetExampleRoutesInfo(this._isDevMode());
+    let examplesDOM = [];
+    examples.forEach(e => examplesDOM.push(html`<mwc-list-item .value="${e.key}">${e.title}</mwc-list-item>`));
     return html`
       <div class="content">
         <div class="page-title">
@@ -269,7 +270,7 @@ class PsrRouterHome extends PsrRouterPage {
         <h3>Example Routes</h3>
         <div class="manage-routes">
           <div class="examples">
-            <vaadin-combo-box id="example-routes" class="left"></vaadin-combo-box>
+            <psr-router-select id="example-routes" class="left">${examplesDOM}</psr-router-select>
             <vaadin-button id="load-route" class="button" @click="${this._onLoadRouteClicked}">Open</vaadin-button>
           </div>
         </div>
@@ -347,6 +348,8 @@ class PsrRouterHome extends PsrRouterPage {
   private _newRouteDialog: Dialog;
   _onNewRouteClicked() {
     let games = GetGameInfos();
+    let gamesDOM = [];
+    games.forEach(g => gamesDOM.push(html`<mwc-list-item .value="${g.key}">${g.name}</mwc-list-item>`));
     this._newRouteDialog = window.openMwcDialog(html`
       <style>
         .dialog {
@@ -356,7 +359,7 @@ class PsrRouterHome extends PsrRouterPage {
         }
       </style>
       <div class="dialog">
-        <vaadin-combo-box id="s-game" label="Game" .items="${games}" item-value-path="key" item-label-path="name" .value="${games[0].key}" required></vaadin-combo-box>
+        <psr-router-select id="s-game" label="Game" withDialogFix required>${gamesDOM}</psr-router-select>
         <vaadin-text-field id="t-title" label="Title" required></vaadin-text-field>
       </div>
       <vaadin-button slot="primaryAction" @click="${this._onNewRouteOkClicked.bind(this)}">Ok</vaadin-button>
@@ -368,7 +371,9 @@ class PsrRouterHome extends PsrRouterPage {
     let dialog = this._newRouteDialog;
     let sGame: any = dialog.querySelector("#s-game");
     let tTitle: any = dialog.querySelector("#t-title");
-    if (sGame.validate() && tTitle.validate()) {
+    sGame.reportValidity();
+    tTitle.validate();
+    if (sGame.reportValidity() && tTitle.validate()) {
       dialog.close();
       try {
         let route = RouteManager.CreateAndOpenNewRoute(sGame.value, tTitle.value);
