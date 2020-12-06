@@ -21,7 +21,6 @@ import { installMediaQueryWatcher } from 'pwa-helpers/media-query';
 import { installOfflineWatcher } from 'pwa-helpers/network';
 import { installRouter } from './custom-router';
 import { updateMetadata } from 'pwa-helpers/metadata';
-import { DialogElement } from '@vaadin/vaadin-dialog';
 import { Dialog } from '@material/mwc-dialog';
 
 // Imports for this element
@@ -35,7 +34,6 @@ import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/paper-toast';
 import '@vaadin/vaadin-button/theme/material/vaadin-button';
-import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 import 'CoreComponents/pwa/pwa-menu-bar';
 import 'CoreComponents/pwa/pwa-menu-drawer';
 
@@ -406,9 +404,6 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       window.localStorage.setItem("app-theme", this.theme = "light");
     }
 
-    if (!window.openVaadinDialog) {
-      window.openVaadinDialog = this._openVaadinDialog.bind(this);
-    }
     if (!window.openMwcDialog) {
       window.openMwcDialog = this._openMwcDialog.bind(this);
     }
@@ -529,21 +524,6 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       }
       window.setTimeout(this._setScroll.bind(this, window.history.state && window.history.state.scroll), 20);
     }
-  }
-
-  _openVaadinDialog(dialogRenderer: any): DialogElement {
-    // add a dialog to the html (it is checked, but it shouldn't exist), and remove it when it closes
-    // this is waaay more performant than if we add it to the html beforehand, because of some warnings it's throwing
-    let dialog: any = this.shadowRoot.getElementById("dialog");
-    if (!dialog) {
-      dialog = document.createElement('vaadin-dialog');
-      dialog.id = "dialog";
-      dialog.renderer = dialogRenderer;
-      this.shadowRoot.appendChild(dialog);
-      dialog.addEventListener('opened-changed', this._dialogClosed.bind(this))
-    }
-    dialog.opened = true;
-    return dialog;
   }
 
   _dialogClosed(e: any) {

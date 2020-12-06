@@ -31,7 +31,7 @@ class PsrRouterRouteGetPokemon extends PsrRouterRouteEntry {
       dom.push(html`<hr style="height: 1px; border: 0; background-color: rgba(0, 0, 0, .25); margin: 4px 0px 4px 0px;">`);
       dom.push(html`<div>${getP.info.description}</div>`);
     }
-    return dom;
+    return html`${dom}`;
   }
 
   protected _hasExpandingContent(): boolean {

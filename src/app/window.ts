@@ -1,6 +1,5 @@
 import { TemplateResult } from 'lit-element';
 import { PwaPage } from "./core/components/pwa/PwaPage";
-import { DialogElement } from "@vaadin/vaadin-dialog";
 import { Dialog } from '@material/mwc-dialog';
 
 export { }
@@ -12,7 +11,6 @@ declare global {
     appConfig: { app: string, siteMap: PwaPage[], pageList: { [key: string]: PwaPage } };
     MyAppGlobals: any;
     isUpdateAvailable: any;
-    openVaadinDialog: (dialogRenderer: any) => DialogElement;
     openMwcDialog: (template: TemplateResult, dialogAtt?: { [key: string]: boolean|string }) => Dialog;
   }
 }

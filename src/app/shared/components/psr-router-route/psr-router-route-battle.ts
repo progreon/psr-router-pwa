@@ -1,28 +1,19 @@
 // Imports for this element
-import { html } from 'lit-element';
+import { html, TemplateResult } from 'lit-element';
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 import { Battler } from 'App/shared/modules/psr-router-model/ModelAbstract';
 import { Stages, BadgeBoosts, Range } from 'App/shared/modules/psr-router-util';
 
 // These are the elements needed by this element.
-import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 import 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import 'SharedComponents/psr-router-model/psr-router-battler';
-import { PsrRouterTrainer } from 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import { OpponentAction } from 'App/shared/modules/psr-router-route/psr-router-route-actions/OpponentAction';
 
 export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
-  _getPopupContentRenderer() {
+  protected _getPopupContent(): TemplateResult {
     if (this.routeEntry && (<Route.RouteBattle>super.routeEntry).trainer && !(<Route.RouteBattle>super.routeEntry).trainer.dummy) {
-      return (root: HTMLElement, dialog: HTMLElement) => {
-        while (root.firstChild) {
-          root.removeChild(root.firstChild);
-        }
-        const trainerElement: PsrRouterTrainer = <PsrRouterTrainer>document.createElement("psr-router-trainer");
-        trainerElement.trainer = this.routeEntry ? (<Route.RouteBattle>super.routeEntry).trainer : null;
-        root.appendChild(trainerElement);
-      };
+      return html`<psr-router-trainer .trainer="${(<Route.RouteBattle>super.routeEntry).trainer}"></psr-router-trainer>`;
     } else {
       return undefined;
     }
@@ -101,7 +92,6 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
           cursor: pointer;
         }
       </style>
-      <vaadin-dialog id="battler-dialog"></vaadin-dialog>
     `);
     if (battleEntry.player) {
       if (battleEntry.player.team.length > 0) {
@@ -194,7 +184,7 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     } else {
       dom.push(html`<div>No player set!</div>`);
     }
-    return dom;
+    return html`${dom}`;
   }
 
   protected _hasExpandingContent(): boolean {
@@ -249,16 +239,14 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   }
 
   _showBattlerDialog(battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean): void {
-    const dialog: any = this.shadowRoot.getElementById("battler-dialog");
-    dialog.renderer = (root: HTMLElement, dialog: any) => {
-      let battlerElement: any = document.createElement('psr-router-battler');
-      battlerElement.battler = battler;
-      battlerElement.stages = stages || new Stages();
-      battlerElement.badgeBoosts = badgeBoosts || new BadgeBoosts();
-      battlerElement.isPlayerBattler = !!isPlayerBattler;
-      root.appendChild(battlerElement);
-    };
-    dialog.opened = true;
+    window.openMwcDialog(html`
+        <psr-router-battler
+          .battler="${battler}"
+          .stages="${stages || new Stages()}"
+          .badgeBoosts="${badgeBoosts || new BadgeBoosts()}"
+          ?isPlayerBattler="${!!isPlayerBattler}"
+        ></psr-router-battler>
+      `, { "hideActions": true });
   }
 }
 

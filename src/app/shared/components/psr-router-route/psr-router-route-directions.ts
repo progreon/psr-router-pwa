@@ -1,39 +1,29 @@
 // Imports for this element
+import { html, TemplateResult } from 'lit-element';
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 
 export class PsrRouterRouteDirections extends PsrRouterRouteEntry {
-  _getPopupContentRenderer() {
+  protected _getPopupContent(): TemplateResult {
     if (this.routeEntry.info.description) {
-      return (root: HTMLElement, dialog: HTMLElement) => {
-        while (root.firstChild) {
-          root.removeChild(root.firstChild);
+      let dom = [];
+      let description = this.routeEntry.info.description;
+      let is = 0; // istart
+      while (is < description.length) {
+        let i1 = description.indexOf("[[", is);
+        let i2 = i1 >= 0 ? description.indexOf("]]", i1) : -1;
+        if (i2 < 0) {
+          dom.push(html`<div>${description.substring(is).trim()}</div>`);
+          is = description.length;
+        } else {
+          dom.push(html`<div>${description.substring(is, i1).trim()}</div>`);
+          dom.push(html`<img .src="${description.substring(i1 + 2, i2).trim()}" style="width:100%;"></img>`);
+          is = i2 + 2;
         }
-        let description = this.routeEntry.info.description;
-        let is = 0; // istart
-        while (is < description.length) {
-          let i1 = description.indexOf("[[", is);
-          let i2 = i1 >= 0 ? description.indexOf("]]", i1) : -1;
-          if (i2 < 0) {
-            const div = document.createElement("div");
-            div.innerText = description.substring(is).trim();
-            root.appendChild(div);
-            is = description.length;
-          } else {
-            const div = document.createElement("div");
-            div.innerText = description.substring(is, i1).trim();
-            root.appendChild(div);
-            const img = document.createElement("img");
-            img.src = description.substring(i1 + 2, i2).trim();
-            img.style.width = "100%";
-            root.appendChild(img);
-            is = i2 + 2;
-          }
-        }
-      };
-    } else {
-      return undefined;
+      }
+      return html`${dom}`;
     }
+    return undefined;
   }
 
   _renderExpandingContent() {

@@ -1,7 +1,7 @@
 'use strict';
 
 // Imports for this element
-import { LitElement, html, property, css } from 'lit-element';
+import { LitElement, html, property, css, TemplateResult } from 'lit-element';
 import * as Route from 'SharedModules/psr-router-route';
 import { RouterMessage } from 'App/shared/modules/psr-router-util';
 
@@ -9,7 +9,6 @@ import { RouterMessage } from 'App/shared/modules/psr-router-util';
 import { angleDownIcon, angleUpIcon, infoCircle, userIcon, idCardIcon } from 'Shared/my-icons';
 
 // These are the elements needed by this element.
-import '@vaadin/vaadin-dialog/theme/material/vaadin-dialog';
 // import '@vaadin/vaadin-context-menu';
 // import '@vaadin/vaadin-list-box';
 import '../psr-router-player/psr-router-player';
@@ -27,15 +26,15 @@ export class PsrRouterRouteEntry extends LitElement {
   private _isPendingExpandAnimation: boolean = false;
   private _boundChangeObserver: (entry: Route.RouteEntry, type: Route.RouteEntry.ObservableType) => (void);
 
-  protected _getPopupContentRenderer(): (root: HTMLElement, dialog: HTMLElement) => void {
+  protected _getPopupContent(): TemplateResult {
     return undefined;
   }
 
-  protected _renderContent(): any {
+  protected _renderContent(): TemplateResult {
     return undefined;
   }
 
-  protected _renderExpandingContent(): any {
+  protected _renderExpandingContent(): TemplateResult {
     if (this.routeEntry.info.description) {
       let dom = [];
       let description = this.routeEntry.info.description;
@@ -53,7 +52,7 @@ export class PsrRouterRouteEntry extends LitElement {
           is = i2 + 2;
         }
       }
-      return dom;
+      return html`${dom}`;
     } else {
       return undefined;
     }
@@ -186,7 +185,7 @@ export class PsrRouterRouteEntry extends LitElement {
     const contentDOM = this._renderContent();
     const hasExpandingDOM = this._hasExpandingContent();
     const expandingDOM = hasExpandingDOM && !this.hideContent ? this._renderExpandingContent() : undefined;
-    const popupAvailable = !!this._getPopupContentRenderer();
+    const popupAvailable = this._getPopupContent();
 
     let messages = [];
     if (this.routeEntry) {
@@ -333,18 +332,7 @@ export class PsrRouterRouteEntry extends LitElement {
   }
 
   private _openDialog() {
-    // // add a dialog to the html (it is checked, but it shouldn't exist), and remove it when it closes
-    // // this is waaay more performant than if we add it to the html beforehand, because of some warnings it's throwing
-    // let dialog: any = this.shadowRoot.getElementById("dialog");
-    // if (!dialog) {
-    //   dialog = document.createElement('vaadin-dialog');
-    //   dialog.id = "dialog";
-    //   dialog.renderer = this._getPopupContentRenderer().bind(this);
-    //   this.shadowRoot.appendChild(dialog);
-    //   dialog.addEventListener('opened-changed', this._dialogClosed.bind(this))
-    // }
-    // dialog.opened = true;
-    window.openVaadinDialog(this._getPopupContentRenderer().bind(this));
+    window.openMwcDialog(this._getPopupContent(), { "hideActions": true });
   }
 
   private _openPlayerDialog() {
@@ -354,13 +342,6 @@ export class PsrRouterRouteEntry extends LitElement {
       `, { "hideActions": true });
     }
   }
-
-  // private _dialogClosed(e: any) {
-  //   if (!e.detail.value) {
-  //     let dialog: any = this.shadowRoot.getElementById("dialog");
-  //     this.shadowRoot.removeChild(dialog);
-  //   }
-  // }
 
   protected _fireEvent(eventName: string, detail: any): void {
     const event = new CustomEvent(eventName, { detail });
