@@ -6,7 +6,7 @@ import { RouteManager, RouteParser } from 'SharedModules/psr-router-route/util';
 import { RouteJSON } from 'SharedModules/psr-router-route/parse/RouteJSON';
 
 // These are the elements needed by this element.
-import '@vaadin/vaadin-button/theme/material/vaadin-button';
+import '@material/mwc-button';
 import '@vaadin/vaadin-text-field/theme/material/vaadin-text-area';
 
 @customElement('psr-router-router-text')
@@ -25,13 +25,13 @@ class PsrRouterRouterText extends PsrRouterPage {
           display: flex;
           flex-direction: column;
           align-items: stretch;
+          margin: 0px 10px 10px 10px;
         }
         .text {
           background-color: rgba(255, 255, 255, 0.2);
           border-radius: 10px;
           border: 1px solid rgba(0, 0, 0, .2);
           padding: 10px;
-          margin: 0px 10px 10px 10px;
         }
         .right {
           display: flex;
@@ -47,9 +47,10 @@ class PsrRouterRouterText extends PsrRouterPage {
     return html`
       <div class="content">
         <div class="right">
-          <vaadin-button id="cancel" @click="${this._cancelClicked}">Cancel</vaadin-button>
-          <vaadin-button id="save" ?disabled="${!this._changed}" @click="${this._saveClicked}">Save</vaadin-button>
+          <mwc-button id="cancel" @click="${this._cancelClicked}">Cancel</mwc-button>
+          <mwc-button id="save" ?disabled="${!this._changed}" @click="${this._saveClicked}">Save</mwc-button>
         </div>
+        <i>NOTE: this is a temporary edit page with some bugs (e.g. 'tab' will clear undo stack)</i>
         <vaadin-text-area id="route-text" class="text" .value="${this._routeText}" @keydown="${this._onKeyDown}"
           @input="${this._onInput}"></vaadin-text-area>
       </div>

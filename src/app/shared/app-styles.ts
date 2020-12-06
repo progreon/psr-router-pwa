@@ -111,6 +111,7 @@ const CssProperties = css`
     --mdc-text-field-fill-color: var(--app-background-color);
     --mdc-theme-surface: var(--app-background-color);
     --mdc-theme-primary: var(--app-header-background-color);
+    --mdc-ripple-color: var(--mdc-theme-primary);
     --mdc-theme-error: var(--app-color-error-red);
   }
 `;
@@ -145,6 +146,10 @@ export const AppStylesCss = [
 
   * {
     box-sizing: border-box;
+  }
+
+  *[hidden] {
+    display: none;
   }
 
   div[hidden] {

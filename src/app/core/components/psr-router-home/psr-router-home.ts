@@ -14,7 +14,6 @@ import '@material/mwc-formfield';
 import '@material/mwc-list/mwc-list-item';
 import '@material/mwc-textfield';
 import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
-import '@vaadin/vaadin-button/theme/material/vaadin-button';
 import 'SharedComponents/psr-router-mwc/psr-router-select';
 
 // Image imports for this element
@@ -137,7 +136,8 @@ class PsrRouterHome extends PsrRouterPage {
         }
 
         .button-group > .button.delete {
-          color: var(--app-color-error-red);
+          --mdc-theme-primary: var(--app-color-error-red);
+          --mdc-ripple-color: var(--app-color-error-red);
         }
 
         .examples {
@@ -147,22 +147,29 @@ class PsrRouterHome extends PsrRouterPage {
 
         /* hacking the input button... */
         .input-wrapper {
+          cursor: pointer;
           position: relative;
           overflow: hidden;
           display: inline-block;
           text-align: center;
         }
 
-        .input-wrapper > vaadin-button {
+        .input-wrapper mwc-button {
+          cursor: pointer;
           width: 100%;
         }
 
         .input-wrapper input[type=file] {
+          cursor: pointer;
           position: absolute;
           font-size: 30px;
           opacity: 0;
           left: 0;
           top: 0;
+        }
+
+        .input-wrapper input::-webkit-file-upload-button {
+          cursor: pointer;
         }
 
         h3 {
@@ -251,11 +258,11 @@ class PsrRouterHome extends PsrRouterPage {
         </div>
         <h3>Open Route</h3>
         <div class="right">
-          <div class="input-wrapper button" @mouseenter="${this._onImportFileButtonHover.bind(this, true)}" @mouseleave="${this._onImportFileButtonHover.bind(this, false)}">
-            <vaadin-button id="importFile">Import</vaadin-button>
+          <div class="input-wrapper button" @mouseenter="${this._onInputButtonHover.bind(this, true, "importFile")}" @mouseleave="${this._onInputButtonHover.bind(this, false, "importFile")}">
+            <mwc-button id="importFile">Import</mwc-button>
             <input type="file" id="selFileRoute" name="route" accept=".txt,.json">
           </div>
-          <vaadin-button id="close-route" @click="${this._onCloseRouteClicked}" ?disabled="${!route}">Close</vaadin-button>
+          <mwc-button id="close-route" @click="${this._onCloseRouteClicked}" ?disabled="${!route}">Close</mwc-button>
         </div>
         <div class="current-route" ?hidden="${!!route}">
           <h4>No open route</h4>
@@ -271,12 +278,12 @@ class PsrRouterHome extends PsrRouterPage {
         <div class="manage-routes">
           <div class="examples">
             <psr-router-select id="example-routes" class="left">${examplesDOM}</psr-router-select>
-            <vaadin-button id="load-route" class="button" @click="${this._onLoadRouteClicked}">Open</vaadin-button>
+            <mwc-button id="load-route" class="button" @click="${this._onLoadRouteClicked}">Open</mwc-button>
           </div>
         </div>
         <h3>Saved Routes</h3>
         <div class="right">
-          <vaadin-button id="new-route" @click="${this._onNewRouteClicked}">Create a New Route</vaadin-button>
+          <mwc-button id="new-route" @click="${this._onNewRouteClicked}">Create a New Route</mwc-button>
         </div>
         <div ?hidden="${savedRoutes.length > 0}">You currently don't have any routes saved</div>
         <div class="route-list">
@@ -290,18 +297,18 @@ class PsrRouterHome extends PsrRouterPage {
           To help you with this, here are some buttons for you:</i>
           <div class="button-group">
             <div class="left">Download a full backup</div>
-            <vaadin-button id="export" class="button" @click="${this._onBackupClicked}">Backup</vaadin-button>
+            <mwc-button id="export" class="button" @click="${this._onBackupClicked}">Backup</mwc-button>
           </div>
           <div class="button-group">
             <div class="left">Restore a full backup</div>
-            <div class="input-wrapper button" @mouseenter="${this._onRestoreButtonHover.bind(this, true)}" @mouseleave="${this._onRestoreButtonHover.bind(this, false)}">
-              <vaadin-button id="importBackup">Restore</vaadin-button>
+            <div class="input-wrapper button" @mouseenter="${this._onInputButtonHover.bind(this, true, "importBackup")}" @mouseleave="${this._onInputButtonHover.bind(this, false, "importBackup")}">
+              <mwc-button id="importBackup">Restore</mwc-button>
               <input type="file" id="selFileBackup" name="route" accept=".psrrdata">
             </div>
           </div>
           <div class="button-group">
             <div class="left">Clear browser data</div>
-            <vaadin-button id="export" class="button delete" @click="${this._onDeleteAllClicked}">Clear All</vaadin-button>
+            <mwc-button id="clear" class="button delete" @click="${this._onDeleteAllClicked}">Clear All</mwc-button>
           </div>
         </div>
         <div class="padding"></div>
@@ -362,8 +369,8 @@ class PsrRouterHome extends PsrRouterPage {
         <psr-router-select id="s-game" label="Game" withDialogFix required>${gamesDOM}</psr-router-select>
         <vaadin-text-field id="t-title" label="Title" required></vaadin-text-field>
       </div>
-      <vaadin-button slot="primaryAction" @click="${this._onNewRouteOkClicked.bind(this)}">Ok</vaadin-button>
-      <vaadin-button slot="secondaryAction" dialogAction="cancel">Cancel</vaadin-button>
+      <mwc-button slot="primaryAction" @click="${this._onNewRouteOkClicked.bind(this)}">Ok</mwc-button>
+      <mwc-button slot="secondaryAction" dialogAction="cancel">Cancel</mwc-button>
     `);
   }
 
@@ -420,8 +427,8 @@ class PsrRouterHome extends PsrRouterPage {
     window.openMwcDialog(html`
       <h3>Delete this saved route?</h3>
       This cannot be undone!
-      <vaadin-button dialogAction="ok" slot="primaryAction" id="btn-ok" @click="${okListener.bind(this)}">Ok</vaadin-button>
-      <vaadin-button dialogAction="cancel" slot="secondaryAction">Cancel</vaadin-button>
+      <mwc-button dialogAction="ok" slot="primaryAction" id="btn-ok" @click="${okListener.bind(this)}">Ok</mwc-button>
+      <mwc-button dialogAction="cancel" slot="secondaryAction">Cancel</mwc-button>
     `);
   }
 
@@ -483,11 +490,11 @@ class PsrRouterHome extends PsrRouterPage {
         <div class="export-options">
           <vaadin-text-field id="filename" label="Filename" .value="${route.info.title}"></vaadin-text-field>
           <div class="options">
-            <vaadin-button @click="${this.doExport.bind(this, { toJSON: true }, id)}" ?hidden="${!this._isDevMode()}">JSON</vaadin-button>
-            <vaadin-button @click="${this.doExport.bind(this, null, id)}">${this._isDevMode() ? "TXT" : "EXPORT"}</vaadin-button>
+            <mwc-button @click="${this.doExport.bind(this, { toJSON: true }, id)}" ?hidden="${!this._isDevMode()}">JSON</mwc-button>
+            <mwc-button @click="${this.doExport.bind(this, null, id)}">${this._isDevMode() ? "TXT" : "EXPORT"}</mwc-button>
           </div>
           <hr>
-          <vaadin-button dialogAction="cancel" slot="secondaryAction">Cancel</vaadin-button>
+          <mwc-button dialogAction="cancel" slot="secondaryAction">Cancel</mwc-button>
         </div>
       `, {
         "hideActions": true
@@ -539,15 +546,6 @@ class PsrRouterHome extends PsrRouterPage {
     }
   }
 
-  _onImportFileButtonHover(setHover: boolean) {
-    let importFileButton: any = this.shadowRoot.getElementById("importFile");
-    if (setHover) {
-      importFileButton.setAttribute("focus-ring", "focus-ring");
-    } else {
-      importFileButton.removeAttribute("focus-ring");
-    }
-  }
-
   // BACKUP //
   _onBackupClicked() {
     console.log("_onBackupClicked");
@@ -584,15 +582,6 @@ class PsrRouterHome extends PsrRouterPage {
     }
   }
 
-  _onRestoreButtonHover(setHover: boolean) {
-    let importBackupButton: any = this.shadowRoot.getElementById("importBackup");
-    if (setHover) {
-      importBackupButton.setAttribute("focus-ring", "focus-ring");
-    } else {
-      importBackupButton.removeAttribute("focus-ring");
-    }
-  }
-
   // CLEAR ALL //
   _onDeleteAllClicked() {
     let okListener = () => {
@@ -604,9 +593,30 @@ class PsrRouterHome extends PsrRouterPage {
     window.openMwcDialog(html`
       <h3>Clear all data?</h3>
       This will remove all the routes from this browser!
-      <vaadin-button dialogAction="ok" slot="primaryAction" id="btn-ok" @click="${okListener.bind(this)}">Ok</vaadin-button>
-      <vaadin-button dialogAction="cancel" slot="secondaryAction">Cancel</vaadin-button>
+      <mwc-button dialogAction="ok" slot="primaryAction" id="btn-ok" @click="${okListener.bind(this)}">Ok</mwc-button>
+      <mwc-button dialogAction="cancel" slot="secondaryAction">Cancel</mwc-button>
     `);
+  }
+
+  // OTHER //
+  async _onInputButtonHover(setHover: boolean, element: string) {
+    let button: any = this.shadowRoot.getElementById(element);
+    let iButton = button.shadowRoot.querySelector("#button");
+    let ripple = button.shadowRoot.querySelector(".ripple");
+    if (!ripple) {
+      ripple = document.createElement('mwc-ripple');
+      ripple.className = "ripple";
+      iButton.appendChild(ripple);
+    }
+    await null;
+
+    let surface = ripple.shadowRoot.querySelector(".mdc-ripple-surface");
+
+    if (setHover) {
+      surface.classList.add("mdc-ripple-surface--hover")
+    } else {
+      surface.classList.remove("mdc-ripple-surface--hover")
+    }
   }
 }
 

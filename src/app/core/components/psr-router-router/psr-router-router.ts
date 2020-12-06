@@ -5,7 +5,7 @@ import { RouteManager } from 'SharedModules/psr-router-route/util';
 import * as Route from 'SharedModules/psr-router-route';
 
 // These are the elements needed by this element.
-import '@vaadin/vaadin-button/theme/material/vaadin-button';
+import '@material/mwc-button';
 import 'SharedComponents/psr-router-route/psr-router-route';
 
 class PsrRouterRouter extends PsrRouterPage {
@@ -42,7 +42,7 @@ class PsrRouterRouter extends PsrRouterPage {
     return html`
       <div class="content">
         <div class="right">
-          <vaadin-button @click="${this._onEditRouteTextClicked}">Edit Route Text</vaadin-button>
+          <mwc-button @click="${this._onEditRouteTextClicked}">Edit Route Text</mwc-button>
         </div>
         <psr-router-route id="the-route" class="noselect" .routeEntry="${this.rootSection}"></psr-router-route>
         <div class="padding"></div>

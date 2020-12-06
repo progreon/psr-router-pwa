@@ -24,6 +24,7 @@ import { updateMetadata } from 'pwa-helpers/metadata';
 import { Dialog } from '@material/mwc-dialog';
 
 // Imports for this element
+import '@material/mwc-button';
 import '@material/mwc-dialog';
 import '@material/mwc-switch';
 import '@polymer/app-layout/app-drawer/app-drawer';
@@ -33,7 +34,6 @@ import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/paper-toast';
-import '@vaadin/vaadin-button/theme/material/vaadin-button';
 import 'CoreComponents/pwa/pwa-menu-bar';
 import 'CoreComponents/pwa/pwa-menu-drawer';
 
@@ -414,7 +414,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     window['isUpdateAvailable'].then(isAvailable => {
       if (isAvailable) {
         console.log("New Update Available! Reload the web app to get the latest juicy changes. (Oh Yeah!)");
-        this.showToast(html`<div style="display: flex; justify-content: space-between; align-items: center;">New Update Available!<vaadin-button @click="${_ => window.location.reload(false)}" style="cursor: pointer;">Reload</vaadin-button></div>`);
+        this.showToast(html`<div style="display: flex; justify-content: space-between; align-items: center;">New Update Available!<mwc-button @click="${() => window.location.reload()}">Reload</mwc-button></div>`);
       }
     });
     window.addEventListener('beforeunload', RouteUtil.RouteManager.SetCurrentRouteAsLastRoute);

@@ -87,6 +87,7 @@
     "@material/mwc-formfield": "^0.20.0",
     "@material/mwc-select": "^0.20.0",
     "@material/mwc-switch": "^0.20.0",
+    "@material/mwc-textarea": "^0.20.0",
     "@material/mwc-textfield": "^0.20.0",
     "@polymer/app-layout": "^3.0.1",
     "@polymer/paper-toast": "^3.0.1",
