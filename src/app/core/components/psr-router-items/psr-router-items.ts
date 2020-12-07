@@ -1,15 +1,13 @@
 // JS imports
-import { html, property } from 'lit-element';
+import { html, property, css } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { Item } from 'SharedModules/psr-router-model/Item';
 import { RouteManager } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
+// import '@material/mwc-icon';
+import '@material/mwc-textfield';
 import 'SharedComponents/psr-router-item/psr-router-item';
-import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
-
-// These are the shared styles needed by this element.
-import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterItems extends PsrRouterPage {
 
@@ -17,15 +15,10 @@ class PsrRouterItems extends PsrRouterPage {
   public items: { [key: string]: Item };
   private filteredItems: { [key: string]: Item };
 
-  _render() {
-    let itemElements = [];
-    this._filter();
-    for (let i in this.filteredItems) {
-      itemElements.push(html`<psr-router-item id="${i}" .item=${this.filteredItems[i]} detailed></psr-router-item>`);
-    }
-    return html`
-      ${AppStyles}
-      <style>
+  static get styles() {
+    return [
+      ...super.styles,
+      css`
         psr-router-item {
           padding: 0px 5px;
           border-radius: 5px;
@@ -36,9 +29,20 @@ class PsrRouterItems extends PsrRouterPage {
         #search {
           width: 100%;
         }
-      </style>
+      `
+    ];
+  }
+
+  _render() {
+    let itemElements = [];
+    this._filter();
+    for (let i in this.filteredItems) {
+      itemElements.push(html`<psr-router-item id="${i}" .item=${this.filteredItems[i]} detailed></psr-router-item>`);
+    }
+    return html`
       <h2>Items</h2>
-      <vaadin-text-field id="search" label="Search" clear-button-visible @input="${() => this.requestUpdate()}"></vaadin-text-field>
+      <!-- <mwc-icon>shopping_cart</mwc-icon> -->
+      <mwc-textfield id="search" label="Search" @input="${() => this.requestUpdate()}"></mwc-textfield>
       ${itemElements}
     `;
   }
@@ -46,11 +50,6 @@ class PsrRouterItems extends PsrRouterPage {
   constructor() {
     super();
     this.triggerDataRefresh();
-  }
-
-  updated(_changedProperties) {
-    super.updated(_changedProperties);
-    this.shadowRoot.getElementById("search")?.focus();
   }
 
   triggerDataRefresh() {

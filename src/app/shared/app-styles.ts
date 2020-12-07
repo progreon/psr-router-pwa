@@ -1,4 +1,12 @@
 import { html, css, unsafeCSS } from 'lit-element';
+// import * as MatIcW2 from 'material-design-icons/iconfont/MaterialIcons-Regular.woff2';
+
+// const fonts = css`
+//   @font-face {
+//     font-family: 'Material Icons';
+//     src: url();
+//   }
+// `;
 
 const AppColors = css`
   :host {

@@ -1,15 +1,12 @@
 // JS imports
-import { html, property } from 'lit-element';
+import { html, property, css } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { Move } from 'SharedModules/psr-router-model/move/Move';
 import { RouteManager } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
+import '@material/mwc-textfield';
 import 'SharedComponents/psr-router-move/psr-router-move';
-import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
-
-// These are the shared styles needed by this element.
-import { AppStyles } from 'Shared/app-styles';
 
 class PsrRouterMoves extends PsrRouterPage {
 
@@ -17,15 +14,10 @@ class PsrRouterMoves extends PsrRouterPage {
   public moves: { [key: string]: Move };
   private filteredMoves: { [key: string]: Move };
 
-  _render() {
-    let moveElements = [];
-    this._filter();
-    Object.keys(this.filteredMoves).sort((a, b) => (a < b ? -1 : (a > b ? 1 : 0))).forEach(m => {
-      moveElements.push(html`<psr-router-move id="${m}" .move=${this.filteredMoves[m]} detailed></psr-router-move>`);
-    });
-    return html`
-      ${AppStyles}
-      <style>
+  static get styles() {
+    return [
+      ...super.styles,
+      css`
         psr-router-move {
           padding: 0px 5px;
           border-radius: 5px;
@@ -36,9 +28,19 @@ class PsrRouterMoves extends PsrRouterPage {
         #search {
           width: 100%;
         }
-      </style>
+      `
+    ];
+  }
+
+  _render() {
+    let moveElements = [];
+    this._filter();
+    Object.keys(this.filteredMoves).sort((a, b) => (a < b ? -1 : (a > b ? 1 : 0))).forEach(m => {
+      moveElements.push(html`<psr-router-move id="${m}" .move=${this.filteredMoves[m]} detailed></psr-router-move>`);
+    });
+    return html`
       <h2>Moves</h2>
-      <vaadin-text-field id="search" label="Search" clear-button-visible @input="${() => this.requestUpdate()}"></vaadin-text-field>
+      <mwc-textfield id="search" label="Search" @input="${() => this.requestUpdate()}"></mwc-textfield>
       ${moveElements}
     `;
   }
@@ -46,11 +48,6 @@ class PsrRouterMoves extends PsrRouterPage {
   constructor() {
     super();
     this.triggerDataRefresh();
-  }
-
-  updated(_changedProperties) {
-    super.updated(_changedProperties);
-    this.shadowRoot.getElementById("search")?.focus();
   }
 
   triggerDataRefresh() {

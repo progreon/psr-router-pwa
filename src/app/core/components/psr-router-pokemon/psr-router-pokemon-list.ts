@@ -1,16 +1,12 @@
 // JS imports
-import { html, property } from 'lit-element';
+import { html, property, css } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { Pokemon } from 'SharedModules/psr-router-model/ModelAbstract';
 import { RouteManager } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
+import '@material/mwc-textfield';
 import 'SharedComponents/psr-router-pokemon/psr-router-pokemon';
-import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
-
-// These are the shared styles needed by this element.
-import { AppStyles } from 'Shared/app-styles';
-import { RouterMessage } from 'App/shared/modules/psr-router-util';
 
 class PsrRouterPokemonList extends PsrRouterPage {
 
@@ -18,15 +14,10 @@ class PsrRouterPokemonList extends PsrRouterPage {
   public pokemon: { [key: string]: Pokemon };
   private filteredPokemon: { [key: string]: Pokemon };
 
-  _render() {
-    let pokemonElements = [];
-    this._filter();
-    for (let p in this.filteredPokemon) {
-      pokemonElements.push(html`<psr-router-pokemon id="${p}" .pokemon=${this.filteredPokemon[p]} @click="${e => this._onClick(e.detail.pokemon)}"></psr-router-pokemon>`);
-    }
-    return html`
-      ${AppStyles}
-      <style>
+  static get styles() {
+    return [
+      ...super.styles,
+      css`
         psr-router-pokemon {
           cursor: pointer;
           padding: 0px 5px;
@@ -38,9 +29,19 @@ class PsrRouterPokemonList extends PsrRouterPage {
         #search {
           width: 100%;
         }
-      </style>
+      `
+    ];
+  }
+
+  _render() {
+    let pokemonElements = [];
+    this._filter();
+    for (let p in this.filteredPokemon) {
+      pokemonElements.push(html`<psr-router-pokemon id="${p}" .pokemon=${this.filteredPokemon[p]} @click="${e => this._onClick(e.detail.pokemon)}"></psr-router-pokemon>`);
+    }
+    return html`
       <h2>Pokémon</h2>
-      <vaadin-text-field id="search" label="Search" clear-button-visible @input="${() => this.requestUpdate()}"></vaadin-text-field>
+      <mwc-textfield id="search" label="Search" @input="${() => this.requestUpdate()}"></mwc-textfield>
       ${pokemonElements}
     `;
   }
@@ -48,11 +49,6 @@ class PsrRouterPokemonList extends PsrRouterPage {
   constructor() {
     super();
     this.triggerDataRefresh();
-  }
-
-  updated(_changedProperties) {
-    super.updated(_changedProperties);
-    this.shadowRoot.getElementById("search")?.focus();
   }
 
   triggerDataRefresh() {

@@ -83,10 +83,8 @@ class PwaMenuDrawerItem extends LitElement {
           width: 100%;
         }
       </style>
-      <div class="header" ?pointer="${menuItem.clickable}" ?selected="${this.menuItem.key === this.selectedItem}" @click="${e => this._onClick(e, menuItem, true)}" >
-        <vaadin-item class="link" @click="${e => this._onClick(e, menuItem, true)}">
-          <div>${menuItem.title}</div>
-        </vaadin-item>
+      <div class="header" ?pointer="${menuItem.clickable}" ?selected="${this.menuItem.key === this.selectedItem}">
+        <div class="link" @click="${e => this._onClick(e, menuItem, true)}">${menuItem.title}</div>
         <div class="icon expand" @click="${e => this._onClick(e, menuItem, false)}" ?hidden="${!expandable}">${icon}</div>
       </div>
       <div class="content">

@@ -13,7 +13,6 @@ import '@material/mwc-dialog';
 import '@material/mwc-formfield';
 import '@material/mwc-list/mwc-list-item';
 import '@material/mwc-textfield';
-import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field';
 import 'SharedComponents/psr-router-mwc/psr-router-select';
 
 // Image imports for this element
@@ -367,7 +366,7 @@ class PsrRouterHome extends PsrRouterPage {
       </style>
       <div class="dialog">
         <psr-router-select id="s-game" label="Game" withDialogFix required>${gamesDOM}</psr-router-select>
-        <vaadin-text-field id="t-title" label="Title" required></vaadin-text-field>
+        <mwc-textfield id="t-title" label="Title" required></mwc-textfield>
       </div>
       <mwc-button slot="primaryAction" @click="${this._onNewRouteOkClicked.bind(this)}">Ok</mwc-button>
       <mwc-button slot="secondaryAction" dialogAction="cancel">Cancel</mwc-button>
@@ -379,8 +378,8 @@ class PsrRouterHome extends PsrRouterPage {
     let sGame: any = dialog.querySelector("#s-game");
     let tTitle: any = dialog.querySelector("#t-title");
     sGame.reportValidity();
-    tTitle.validate();
-    if (sGame.reportValidity() && tTitle.validate()) {
+    tTitle.reportValidity();
+    if (sGame.reportValidity() && tTitle.reportValidity()) {
       dialog.close();
       try {
         let route = RouteManager.CreateAndOpenNewRoute(sGame.value, tTitle.value);
@@ -488,7 +487,7 @@ class PsrRouterHome extends PsrRouterPage {
           }
         </style>
         <div class="export-options">
-          <vaadin-text-field id="filename" label="Filename" .value="${route.info.title}"></vaadin-text-field>
+          <mwc-textfield id="filename" label="Filename" .value="${route.info.title}"></mwc-textfield>
           <div class="options">
             <mwc-button @click="${this.doExport.bind(this, { toJSON: true }, id)}" ?hidden="${!this._isDevMode()}">JSON</mwc-button>
             <mwc-button @click="${this.doExport.bind(this, null, id)}">${this._isDevMode() ? "TXT" : "EXPORT"}</mwc-button>

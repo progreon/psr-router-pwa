@@ -2,10 +2,6 @@
 import { LitElement, html, property } from 'lit-element';
 import { Item } from 'SharedModules/psr-router-model/Item';
 
-// These are the elements needed by this element.
-// import '@vaadin/vaadin-item/vaadin-item';
-import '@vaadin/vaadin-item/theme/material/vaadin-item';
-
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
 
@@ -22,17 +18,22 @@ class PsrRouterItem extends LitElement {
   render() {
     return html`
       ${AppStyles}
-      <vaadin-item ?hidden="${!this.detailed}">
+      <style>
+        .item {
+          padding: 5px 0px;
+        }
+      </style>
+      <div class="item" ?hidden="${!this.detailed}">
         <div><strong>${this.item.name}</strong></div>
         <div><i>${this.item.description}</i></div>
         <div>₽${this.item.price}</div>
         <div>[${this.item.usage}] ${this.item.type} (${this.item.value})</div>
         <div class="key" style="opacity: 0.5"><i>[key: ${this.item.key}]</i></div>
-      </vaadin-item>
-      <vaadin-item ?hidden="${this.detailed}">
+      </div>
+      <div class="item" ?hidden="${this.detailed}">
         <div><strong>${this.item.name}</strong></div>
         <div>₽${this.item.price}</div>
-      </vaadin-item>
+      </div>
     `;
   }
 

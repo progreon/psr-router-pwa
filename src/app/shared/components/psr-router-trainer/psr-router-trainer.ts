@@ -1,13 +1,9 @@
 // Imports for this element
 import { LitElement, html, property } from 'lit-element';
-
-// These are the elements needed by this element.
-// import '@vaadin/vaadin-item/vaadin-item';
-import '@vaadin/vaadin-item/theme/material/vaadin-item';
+import { Trainer } from 'App/shared/modules/psr-router-model/Model';
 
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
-import { Trainer } from 'App/shared/modules/psr-router-model/Model';
 
 // This is a reusable element. It is not connected to the store. You can
 // imagine that it could just as well be a third-party element that you
