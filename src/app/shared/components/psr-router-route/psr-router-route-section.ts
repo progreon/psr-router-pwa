@@ -4,8 +4,6 @@ import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 
 // These are the elements needed by this element.
-// import '@vaadin/vaadin-item/vaadin-item';
-import '@vaadin/vaadin-item/theme/material/vaadin-item';
 import './psr-router-route-battle';
 import './psr-router-route-directions';
 import './psr-router-route-encounter';
