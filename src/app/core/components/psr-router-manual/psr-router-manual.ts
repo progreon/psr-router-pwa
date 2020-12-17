@@ -4,13 +4,9 @@ import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 
 // These are the elements needed by this element.
 
-// These are the shared styles needed by this element.
-import { AppStyles } from 'Shared/app-styles';
-
 class PsrRouterManual extends PsrRouterPage {
   _render() {
     return html`
-      ${AppStyles}
       <style>
         ul {
           margin: var(--app-grid-x) 0px;

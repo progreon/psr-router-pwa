@@ -16,26 +16,24 @@ class PsrRouterRouter extends PsrRouterPage {
   public rootSection: Route.RouteSection;
 
   static get styles() {
-    return [
-      ...super.styles,
-      css`
-        .content {
-          display: flex;
-          flex-direction: column;
-          align-items: stretch;
-        }
-        .right {
-          display: flex;
-          flex-flow: row wrap;
-          max-width: 100%;
-          align-self: flex-end;
-        }
-        /* ugly solution, I know... */
-        .padding {
-          padding-bottom: var(--app-grid-x);
-        }
-      `
-    ];
+    return css`
+      ${super.styles}
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .right {
+        display: flex;
+        flex-flow: row wrap;
+        max-width: 100%;
+        align-self: flex-end;
+      }
+      /* ugly solution, I know... */
+      .padding {
+        padding-bottom: var(--app-grid-x);
+      }
+    `;
   }
 
   _render() {

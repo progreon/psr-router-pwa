@@ -2,15 +2,9 @@
 import { html } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 
-// These are the elements needed by this element.
-
-// These are the shared styles needed by this element.
-import { AppStyles } from 'Shared/app-styles';
-
 class PsrRouterAbout extends PsrRouterPage {
   _render() {
     return html`
-      ${AppStyles}
       <h2>About</h2>
       <p>Current version: ${window.MyAppGlobals.version}</p>
       <section>

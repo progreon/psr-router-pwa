@@ -42,7 +42,7 @@ import { barsIcon, angleLeftIcon } from 'Shared/my-icons';
 import PSRRIcon from 'Images/icon.png';
 
 // CSS imports for this element
-import { AppStylesCss } from 'Shared/app-styles';
+import { AppStyles } from 'Shared/app-styles';
 
 // This element is connected to the Redux store.
 import { store } from 'Core/store';
@@ -84,7 +84,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
 
   static get styles() {
     return [
-      AppStylesCss,
+      AppStyles,
       css`
       :host {
         color: var(--app-dark-text-color);

@@ -1,15 +1,74 @@
 // JS imports
-import { html } from 'lit-element';
+import { html, css } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { RouteManager } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
 import 'SharedComponents/psr-router-pokemon/psr-router-pokemon';
 
-// These are the shared styles needed by this element.
-import { AppStyles } from 'Shared/app-styles';
-
 class PsrRouterPokemonInfo extends PsrRouterPage {
+  static get styles() {
+    return css`
+      ${super.styles}
+      :host {
+        display: block;
+      }
+      .flex-container {
+        display: flex;
+        flex-direction: column;
+        margin: 5px;
+      }
+      .flex-container > * {
+        margin: 0px;
+        display: flex;
+      }
+      h1, h2, .type {
+        align-self: center;
+      }
+      .flex-container > .section {
+        flex-direction: column;
+        border-top: 1px solid gray;
+      }
+      .flex-container > .section > * {
+        margin: 0px;
+        display: flex;
+      }
+      .v-table {
+        display: flex;
+        flex-direction: column;
+      }
+      .v-table > .row {
+        display: flex;
+      }
+      .v-table > .header {
+        font-weight: bold;
+      }
+      .v-table > .row > * {
+        flex: 1;
+        text-align: center;
+      }
+      .h-table {
+        display: flex;
+      }
+      .h-table > .column {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .h-table > .header {
+        font-weight: bold;
+      }
+      .h-table > .column > * {
+        text-align: left;
+        margin-left: 5px;
+      }
+      .h-table > .header > * {
+        text-align: right;
+        margin-right: 5px;
+      }
+    `;
+  }
+
   _render() {
     let game = RouteManager.GetCurrentGame();
     let pokemon = game && game.findPokemonByName(this.searchParams.p);
@@ -27,66 +86,6 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
       });
     }
     return html`
-      ${AppStyles}
-      <style>
-        :host {
-          display: block;
-        }
-        .flex-container {
-          display: flex;
-          flex-direction: column;
-          margin: 5px;
-        }
-        .flex-container > * {
-          margin: 0px;
-          display: flex;
-        }
-        h1, h2, .type {
-          align-self: center;
-        }
-        .flex-container > .section {
-          flex-direction: column;
-          border-top: 1px solid gray;
-        }
-        .flex-container > .section > * {
-          margin: 0px;
-          display: flex;
-        }
-        .v-table {
-          display: flex;
-          flex-direction: column;
-        }
-        .v-table > .row {
-          display: flex;
-        }
-        .v-table > .header {
-          font-weight: bold;
-        }
-        .v-table > .row > * {
-          flex: 1;
-          text-align: center;
-        }
-        .h-table {
-          display: flex;
-        }
-        .h-table > .column {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-        }
-        .h-table > .header {
-          font-weight: bold;
-        }
-        .h-table > .column > * {
-          text-align: left;
-          margin-left: 5px;
-        }
-        .h-table > .header > * {
-          text-align: right;
-          margin-right: 5px;
-        }
-      </style>
-
       <div class="flex-container">
         <!-- <h1>[img]</h1> -->
         <h1>#${this._parseIdString(pokemon.id)} ${pokemon.name}</h1>

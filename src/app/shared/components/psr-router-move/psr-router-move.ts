@@ -1,5 +1,5 @@
 // Imports for this element
-import { LitElement, html, property } from 'lit-element';
+import { LitElement, html, css, property } from 'lit-element';
 import { Move } from 'App/shared/modules/psr-router-model/move/Move';
 
 // CSS imports for this element
@@ -15,14 +15,15 @@ class PsrRouterMove extends LitElement {
   @property({type: Boolean, reflect: true})
   public detailed: boolean = true;
 
+  static styles = css`
+    ${AppStyles}
+    .move {
+      padding: 5px 0px;
+    }
+  `;
+
   render() {
     return html`
-      ${AppStyles}
-      <style>
-        .move {
-          padding: 5px 0px;
-        }
-      </style>
       <div class="move" ?hidden="${!this.detailed}">
         <div><strong>${this.move.name} (${this.move.type.name}, ${this.move.category})</strong></div>
         <div><i>${this.move.description}</i></div>

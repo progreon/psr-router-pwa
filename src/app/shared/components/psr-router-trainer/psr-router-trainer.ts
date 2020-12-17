@@ -1,5 +1,5 @@
 // Imports for this element
-import { LitElement, html, property } from 'lit-element';
+import { LitElement, html, css, property } from 'lit-element';
 import { Trainer } from 'App/shared/modules/psr-router-model/Model';
 
 // CSS imports for this element
@@ -12,6 +12,60 @@ class PsrRouterTrainer extends LitElement {
 
   @property({type: Trainer})
   public trainer: Trainer;
+
+  static styles = css`
+    ${AppStyles}
+    :host {
+      display: block;
+    }
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+      margin: 5px;
+    }
+    .flex-container > * {
+      margin: 0px;
+      display: flex;
+    }
+    h1, h2, h3, h4 {
+      align-self: center;
+    }
+    .pokemon {
+      cursor: pointer;
+    }
+    .flex-container > .section {
+      flex-direction: column;
+      width: 100%;
+      align-items: stretch;
+    }
+    hr {
+      border-width: 1px 0px 0px 0px;
+    }
+    hr[hidden] {
+      border: none;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .column > * {
+      display: flex;
+      flex-direction: row;
+      margin: 0px;
+    }
+    .column > .center {
+      display: block;
+      text-align: center;
+    }
+    .column > * > * {
+      flex: 1;
+      text-align: center;
+    }
+    [hidden] {
+      display: none;
+    }
+  `;
 
   render() {
     let party = [];
@@ -29,71 +83,17 @@ class PsrRouterTrainer extends LitElement {
     }
 
     return html`
-    ${AppStyles}
-    <style>
-      :host {
-        display: block;
-      }
-      .flex-container {
-        display: flex;
-        flex-direction: column;
-        margin: 5px;
-      }
-      .flex-container > * {
-        margin: 0px;
-        display: flex;
-      }
-      h1, h2, h3, h4 {
-        align-self: center;
-      }
-      .pokemon {
-        cursor: pointer;
-      }
-      .flex-container > .section {
-        flex-direction: column;
-        width: 100%;
-        align-items: stretch;
-      }
-      hr {
-        border-width: 1px 0px 0px 0px;
-      }
-      hr[hidden] {
-        border: none;
-      }
-      .column {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
-      .column > * {
-        display: flex;
-        flex-direction: row;
-        margin: 0px;
-      }
-      .column > .center {
-        display: block;
-        text-align: center;
-      }
-      .column > * > * {
-        flex: 1;
-        text-align: center;
-      }
-      [hidden] {
-        display: none;
-      }
-    </style>
-
-    <div class="flex-container">
-      <h1>${this.trainer ? this.trainer.name : ""}</h1>
-      <h3 ?hidden="${!this.trainer || !this.trainer.alias}"><i>${this.trainer ? this.trainer.alias : ""}</i></h3>
-      <h3>${this.trainer ? this.trainer.location : ""}</h3>
-      <h4 ?hidden="${!this.trainer || !this.trainer.items || this.trainer.items.length == 0}">Gives item: ${this.trainer.items.join(", ")}</h4>
-      <h4 ?hidden="${!this.trainer || !this.trainer.badgeboost}">Gives badgeboost: ${this.trainer.badgeboost}</h4>
-      <hr ?hidden="${!this.trainer || this.trainer.party.length == 0}">
-      <div class="section">
-        ${party}
+      <div class="flex-container">
+        <h1>${this.trainer ? this.trainer.name : ""}</h1>
+        <h3 ?hidden="${!this.trainer || !this.trainer.alias}"><i>${this.trainer ? this.trainer.alias : ""}</i></h3>
+        <h3>${this.trainer ? this.trainer.location : ""}</h3>
+        <h4 ?hidden="${!this.trainer || !this.trainer.items || this.trainer.items.length == 0}">Gives item: ${this.trainer.items.join(", ")}</h4>
+        <h4 ?hidden="${!this.trainer || !this.trainer.badgeboost}">Gives badgeboost: ${this.trainer.badgeboost}</h4>
+        <hr ?hidden="${!this.trainer || this.trainer.party.length == 0}">
+        <div class="section">
+          ${party}
+        </div>
       </div>
-    </div>
     `;
   }
 

@@ -3,7 +3,7 @@ import { LitElement, html, property, TemplateResult, CSSResult } from 'lit-eleme
 import { PsrRouterApp } from 'App/psr-router-app';
 
 // These are the shared styles needed by this element.
-import { AppStylesCss } from 'Shared/app-styles';
+import { AppStyles } from 'Shared/app-styles';
 
 export abstract class PsrRouterPage extends LitElement {
   @property({type: Boolean, reflect: true})
@@ -15,8 +15,8 @@ export abstract class PsrRouterPage extends LitElement {
     return this.app.searchParams;
   }
 
-  static get styles(): CSSResult[] {
-    return AppStylesCss;
+  static get styles(): CSSResult {
+    return AppStyles;
   }
 
   // Only render this page if it's actually visible.

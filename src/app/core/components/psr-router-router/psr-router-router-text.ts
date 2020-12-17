@@ -18,29 +18,27 @@ class PsrRouterRouterText extends PsrRouterPage {
   private _changed: boolean;
 
   static get styles() {
-    return [
-      ...super.styles,
-      css`
-        .content {
-          display: flex;
-          flex-direction: column;
-          align-items: stretch;
-          margin: 0px 10px 10px 10px;
-        }
-        .text {
-          background-color: rgba(255, 255, 255, 0.2);
-          border-radius: 10px;
-          border: 1px solid rgba(0, 0, 0, .2);
-          padding: 10px;
-        }
-        .right {
-          display: flex;
-          flex-flow: row wrap;
-          max-width: 100%;
-          align-self: flex-end;
-        }
-      `
-    ];
+    return css`
+      ${super.styles}
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin: 0px 10px 10px 10px;
+      }
+      .text {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, .2);
+        padding: 10px;
+      }
+      .right {
+        display: flex;
+        flex-flow: row wrap;
+        max-width: 100%;
+        align-self: flex-end;
+      }
+    `;
   }
 
   _render() {

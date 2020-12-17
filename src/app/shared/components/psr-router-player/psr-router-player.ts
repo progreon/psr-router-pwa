@@ -1,6 +1,5 @@
 // Imports for this element
 import { html, css, LitElement, property, customElement } from 'lit-element';
-import 'SharedComponents/psr-router-model/psr-router-battler';
 import { Player } from 'SharedModules/psr-router-model/Model';
 
 @customElement('psr-router-player')

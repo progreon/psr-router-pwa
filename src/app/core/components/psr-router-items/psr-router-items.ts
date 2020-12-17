@@ -16,21 +16,19 @@ class PsrRouterItems extends PsrRouterPage {
   private filteredItems: { [key: string]: Item };
 
   static get styles() {
-    return [
-      ...super.styles,
-      css`
-        psr-router-item {
-          padding: 0px 5px;
-          border-radius: 5px;
-        }
-        psr-router-item:hover {
-          background-color: rgba(0, 0, 0, 0.15);
-        }
-        #search {
-          width: 100%;
-        }
-      `
-    ];
+    return css`
+      ${super.styles}
+      psr-router-item {
+        padding: 0px 5px;
+        border-radius: 5px;
+      }
+      psr-router-item:hover {
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+      #search {
+        width: 100%;
+      }
+    `;
   }
 
   _render() {

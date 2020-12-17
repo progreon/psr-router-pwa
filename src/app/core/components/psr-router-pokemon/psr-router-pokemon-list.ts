@@ -15,22 +15,20 @@ class PsrRouterPokemonList extends PsrRouterPage {
   private filteredPokemon: { [key: string]: Pokemon };
 
   static get styles() {
-    return [
-      ...super.styles,
-      css`
-        psr-router-pokemon {
-          cursor: pointer;
-          padding: 0px 5px;
-          border-radius: 5px;
-        }
-        psr-router-pokemon:hover {
-          background-color: rgba(0, 0, 0, 0.15);
-        }
-        #search {
-          width: 100%;
-        }
-      `
-    ];
+    return css`
+      ${super.styles}
+      psr-router-pokemon {
+        cursor: pointer;
+        padding: 0px 5px;
+        border-radius: 5px;
+      }
+      psr-router-pokemon:hover {
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+      #search {
+        width: 100%;
+      }
+    `;
   }
 
   _render() {

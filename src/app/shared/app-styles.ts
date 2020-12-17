@@ -124,13 +124,13 @@ const CssProperties = css`
   }
 `;
 
-export const AppStylesCss = [
-  AppColors,
-  BaseColors,
-  LightTheme,
-  DarkTheme,
-  CssProperties,
-  css`
+export const AppStyles = css`
+  ${AppColors}
+  ${BaseColors}
+  ${LightTheme}
+  ${DarkTheme}
+  ${CssProperties}
+
   :host {
     /* VARIABLES */
     --app-grid-x: 8px;
@@ -227,11 +227,4 @@ export const AppStylesCss = [
     h5 { font-size: 16px; }
     h6 { font-size: 16px; }
   }
-`
-];
-
-export const AppStyles = html`
-  <style>
-    ${AppStylesCss}
-  </style>
 `;

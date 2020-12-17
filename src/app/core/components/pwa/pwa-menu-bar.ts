@@ -1,4 +1,4 @@
-import { LitElement, property, html } from 'lit-element';
+import { LitElement, property, html, css } from 'lit-element';
 import { PwaMenuItem } from './PwaMenuItem';
 
 // Component imports for this element
@@ -14,6 +14,13 @@ class PwaMenuBar extends LitElement {
   @property({type: String})
   public selectedItem: String;
 
+  static styles = css`
+    ${AppStyles}
+    .menu-bar {
+      display: flex;
+    }
+  `;
+
   render() {
     let linkList = [];
     if (this.menuItems) {
@@ -23,12 +30,6 @@ class PwaMenuBar extends LitElement {
       });
     }
     return html`
-      ${AppStyles}
-      <style>
-        .menu-bar {
-          display: flex;
-        }
-      </style>
       <div class="menu-bar">
         ${linkList}
       </div>

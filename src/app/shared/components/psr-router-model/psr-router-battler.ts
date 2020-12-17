@@ -1,5 +1,5 @@
 // Imports for this element
-import { LitElement, html, property } from 'lit-element';
+import { LitElement, html, property, css } from 'lit-element';
 import { Battler } from 'App/shared/modules/psr-router-model/ModelAbstract';
 import { BadgeBoosts, Stages } from 'App/shared/modules/psr-router-util';
 
@@ -13,18 +13,18 @@ class PsrRouterBattler extends LitElement {
 
   @property({type: Battler})
   public battler: Battler;
-
   @property({type: Boolean})
   public stages: Stages;
-
   @property({type: Boolean})
   public badgeBoosts: BadgeBoosts;
-
   @property({type: Boolean})
   public isPlayerBattler: Boolean;
-
   @property({type: Boolean})
   public hideBattleInfo: Boolean;
+
+  static styles = css`
+    ${AppStyles}
+  `;
 
   render() {
     if (this.battler) {
@@ -33,7 +33,6 @@ class PsrRouterBattler extends LitElement {
       let st = this.stages;
       let dvs = b.getDVRanges();
       return html`
-        ${AppStyles}
         <style>
           .stats-grid {
             width: 100%;

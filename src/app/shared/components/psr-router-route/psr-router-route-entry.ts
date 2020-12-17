@@ -72,6 +72,7 @@ export class PsrRouterRouteEntry extends LitElement {
 
   static get styles() {
     return css`
+      ${AppStyles}
       * {
         box-sizing: border-box;
       }
@@ -211,7 +212,6 @@ export class PsrRouterRouteEntry extends LitElement {
     let icon = this.hideContent ? angleDownIcon : angleUpIcon;
 
     return html`
-      ${AppStyles}
       <div class="messages">
         ${messages}
       </div>

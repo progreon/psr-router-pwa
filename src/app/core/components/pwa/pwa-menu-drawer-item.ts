@@ -1,4 +1,4 @@
-import { LitElement, property, html } from 'lit-element';
+import { LitElement, property, html, css } from 'lit-element';
 import { PwaMenuItem } from './PwaMenuItem';
 
 // These are the shared styles needed by this element.
@@ -16,6 +16,68 @@ class PwaMenuDrawerItem extends LitElement {
   @property({type: Boolean})
   private _hideContent: Boolean
 
+  static styles = css`
+    ${AppStyles}
+    .header {
+      display: flex;
+      justify-content: space-between;
+    }
+    .header[pointer] {
+      cursor: pointer;
+    }
+    .header[selected] {
+      /* border-bottom: 1px solid var(--app-header-menu-active-color); */
+      box-shadow: inset 0px -2px var(--app-header-menu-active-color);
+    }
+    .icon {
+      padding-right: 5px;
+      align-self: center;
+    }
+    .icon > svg {
+      width: 12px;
+      height: 12px;
+      fill: var(--app-header-menu-text-color);
+    }
+    .icon.expand {
+      padding: 0px 0px 0px 5px;
+    }
+    .icon.info {
+      cursor: pointer;
+    }
+    .link {
+      align-self: center;
+      text-decoration: none;
+      color: inherit;
+      flex-grow: 1;
+      padding: 4px 0px;
+    }
+    .content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .content > * {
+      width: 100%;
+    }
+    .content > #expand {
+      display: none;
+    }
+    .content > #expand[expandable] {
+      display: flex;
+      padding-left: 10px;
+      height: auto;
+      flex-direction: column;
+      overflow: hidden;
+      -webkit-transition: height 0.3s ease-out;
+      -moz-transition: height 0.3s ease-out;
+      -o-transition: height 0.3s ease-out;
+      transition: height 0.3s ease-out;
+    }
+    .content > #expand > * {
+      width: 100%;
+    }
+  `;
+
   render() {
     const menuItem = this.menuItem;
     const expandable = menuItem.subMenuItems && menuItem.subMenuItems.length > 0;
@@ -25,70 +87,12 @@ class PwaMenuDrawerItem extends LitElement {
     }
     let icon = this._hideContent ? angleDownIcon : angleUpIcon;
     return html`
-      ${AppStyles}
-      <style>
-        .header {
-          display: flex;
-          justify-content: space-between;
-        }
-        .header[pointer] {
-          cursor: pointer;
-        }
-        .header[selected] {
-          /* border-bottom: 1px solid var(--app-header-menu-active-color); */
-          box-shadow: inset 0px -2px var(--app-header-menu-active-color);
-        }
-        .icon {
-          padding-right: 5px;
-          align-self: center;
-        }
-        .icon > svg {
-          width: 12px;
-          height: 12px;
-          fill: var(--app-header-menu-text-color);
-        }
-        .icon.expand {
-          padding: 0px 0px 0px 5px;
-        }
-        .icon.info {
-          cursor: pointer;
-        }
-        .link {
-          align-self: center;
-          text-decoration: none;
-          color: inherit;
-          flex-grow: 1;
-          padding: 4px 0px;
-        }
-        .content {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-        }
-        .content > * {
-          width: 100%;
-        }
-        .content > #expand {
-          display: ${expandable ? "flex" : "none"};
-          padding-left: 10px;
-          height: auto;
-          flex-direction: column;
-          overflow: hidden;
-          -webkit-transition: height 0.3s ease-out;
-          -moz-transition: height 0.3s ease-out;
-          -o-transition: height 0.3s ease-out;
-          transition: height 0.3s ease-out;
-        }
-        .content > #expand > * {
-          width: 100%;
-        }
-      </style>
       <div class="header" ?pointer="${menuItem.clickable}" ?selected="${this.menuItem.key === this.selectedItem}">
         <div class="link" @click="${e => this._onClick(e, menuItem, true)}">${menuItem.title}</div>
         <div class="icon expand" @click="${e => this._onClick(e, menuItem, false)}" ?hidden="${!expandable}">${icon}</div>
       </div>
       <div class="content">
-        <div id="expand">
+        <div id="expand" ?expandable="${expandable}">
           ${expandingDOM}
         </div>
       </div>

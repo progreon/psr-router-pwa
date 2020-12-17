@@ -1,5 +1,5 @@
 // Imports for this element
-import { LitElement, html, property } from 'lit-element';
+import { LitElement, html, css, property } from 'lit-element';
 import { Pokemon } from 'App/shared/modules/psr-router-model/ModelAbstract';
 
 // CSS imports for this element
@@ -13,16 +13,17 @@ class PsrRouterPokemon extends LitElement {
   @property({type: Pokemon})
   public pokemon: Pokemon;
 
+  static styles = css`
+    ${AppStyles}
+    .pokemon {
+      padding: 5px 0px;
+    }
+  `;
+
   render() {
     let typeString = this.pokemon.type1 + (this.pokemon.type2 ? ", " + this.pokemon.type2 : "");
 
     return html`
-      ${AppStyles}
-      <style>
-        .pokemon {
-          padding: 5px 0px;
-        }
-      </style>
       <div class="pokemon" @click=${this._onClick}>
         <div><strong>${this.pokemon.id} - ${this.pokemon.name}</strong></div>
         <div>${typeString}</div>

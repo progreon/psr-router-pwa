@@ -27,203 +27,201 @@ class PsrRouterHome extends PsrRouterPage {
   private _loading = false;
 
   static get styles() {
-    return [
-      ...super.styles,
-      css`
-        .content {
-          display: flex;
-          flex-direction: column;
-          align-items: stretch;
-        }
+    return css`
+      ${super.styles}
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
 
-        .page-title {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
+      .page-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        .current-route {
-          background-color: rgba(0, 0, 0, 0.05);
-          padding: 5px 10px;
-          border-radius: 5px;
-          margin: 5px 0px;
-        }
+      .current-route {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin: 5px 0px;
+      }
 
-        .current-route.clickable {
-          cursor: pointer;
-        }
+      .current-route.clickable {
+        cursor: pointer;
+      }
 
-        .current-route.clickable:hover {
-          background-color: rgba(165, 165, 165, .25);
-        }
+      .current-route.clickable:hover {
+        background-color: rgba(165, 165, 165, .25);
+      }
 
-        .right {
-          display: flex;
-          flex-flow: row wrap;
-          max-width: 100%;
-          align-self: flex-end;
-        }
+      .right {
+        display: flex;
+        flex-flow: row wrap;
+        max-width: 100%;
+        align-self: flex-end;
+      }
 
-        .saved-route {
-          display: flex;
-          flex: row nowrap;
-          margin: 5px 0px;
-          align-items: center;
-        }
+      .saved-route {
+        display: flex;
+        flex: row nowrap;
+        margin: 5px 0px;
+        align-items: center;
+      }
 
-        .saved-route > .title {
-          cursor: pointer;
-          background-color: rgba(0, 0, 0, 0.05);
-          padding: 10px;
-          border-radius: 5px;
-          flex-grow: 1;
-        }
+      .saved-route > .title {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 10px;
+        border-radius: 5px;
+        flex-grow: 1;
+      }
 
-        .saved-route > .title:hover {
-          background-color: rgba(165, 165, 165, .25);
-        }
+      .saved-route > .title:hover {
+        background-color: rgba(165, 165, 165, .25);
+      }
 
+      .saved-route > .icon {
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        padding: 0px;
+        height: var(--app-grid-4x);
+        width: var(--app-grid-4x);
+        fill: var(--app-dark-text-color);
+      }
+
+      .saved-route > .icon > svg {
+        height: var(--app-grid-2x);
+        width: var(--app-grid-2x);
+        margin: var(--app-grid-x);
+      }
+
+      .saved-route > .icon:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      .saved-route > .fav {
+        fill: var(--app-color-yellow);
+      }
+
+      .saved-route > .delete {
+        background-color: rgba(255, 0, 0, .66);
+      }
+
+      .manage-routes {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+
+      .button-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 4px;
+      }
+
+      .button-group > .left {
+        width: 50%;
+      }
+
+      .button-group > .button {
+        width: 50%;
+      }
+
+      .button-group > .button.delete {
+        --mdc-theme-primary: var(--app-color-error-red);
+        --mdc-ripple-color: var(--app-color-error-red);
+      }
+
+      .examples {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* hacking the input button... */
+      .input-wrapper {
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .input-wrapper mwc-button {
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .input-wrapper input[type=file] {
+        cursor: pointer;
+        position: absolute;
+        font-size: 30px;
+        opacity: 0;
+        left: 0;
+        top: 0;
+      }
+
+      .input-wrapper input::-webkit-file-upload-button {
+        cursor: pointer;
+      }
+
+      h3 {
+        margin: 20px 0px 10px 0px;
+      }
+
+      h4 {
+        margin: 5px 0px;
+      }
+
+      hr {
+        box-sizing: border-box;
+        height: 1px;
+        margin: 8px 0px 8px 0px;
+        border: 0;
+        border-top: 1px solid var(--app-color-black);
+      }
+
+      .padding {
+        padding-bottom: var(--app-grid-2x);
+      }
+
+      @media (min-width: ${unsafeCSS(window.MyAppGlobals.wideWidth)}) {
         .saved-route > .icon {
-          cursor: pointer;
-          border: none;
-          border-radius: 5px;
-          padding: 0px;
-          height: var(--app-grid-4x);
-          width: var(--app-grid-4x);
-          fill: var(--app-dark-text-color);
-        }
-
-        .saved-route > .icon > svg {
-          height: var(--app-grid-2x);
-          width: var(--app-grid-2x);
-          margin: var(--app-grid-x);
-        }
-
-        .saved-route > .icon:hover {
-          background-color: rgba(0, 0, 0, 0.05);
-        }
-
-        .saved-route > .fav {
-          fill: var(--app-color-yellow);
-        }
-
-        .saved-route > .delete {
-          background-color: rgba(255, 0, 0, .66);
-        }
-
-        .manage-routes {
-          display: flex;
-          flex-direction: column;
-          background-color: rgba(0, 0, 0, 0.05);
-          padding: 5px 10px;
-          border-radius: 5px;
+          margin-left: 5px;
         }
 
         .button-group {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          margin-top: 4px;
+          justify-content: space-between;
         }
 
         .button-group > .left {
-          width: 50%;
+          width: 75%;
         }
 
         .button-group > .button {
-          width: 50%;
-        }
-
-        .button-group > .button.delete {
-          --mdc-theme-primary: var(--app-color-error-red);
-          --mdc-ripple-color: var(--app-color-error-red);
+          width: 25%;
         }
 
         .examples {
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
+          align-items: center;
         }
 
-        /* hacking the input button... */
-        .input-wrapper {
-          cursor: pointer;
-          position: relative;
-          overflow: hidden;
-          display: inline-block;
-          text-align: center;
+        .examples > .left {
+          flex-grow: 1;
         }
 
-        .input-wrapper mwc-button {
-          cursor: pointer;
-          width: 100%;
+        .examples > .button {
+          margin: 0px 20px;
         }
-
-        .input-wrapper input[type=file] {
-          cursor: pointer;
-          position: absolute;
-          font-size: 30px;
-          opacity: 0;
-          left: 0;
-          top: 0;
-        }
-
-        .input-wrapper input::-webkit-file-upload-button {
-          cursor: pointer;
-        }
-
-        h3 {
-          margin: 20px 0px 10px 0px;
-        }
-
-        h4 {
-          margin: 5px 0px;
-        }
-
-        hr {
-          box-sizing: border-box;
-          height: 1px;
-          margin: 8px 0px 8px 0px;
-          border: 0;
-          border-top: 1px solid var(--app-color-black);
-        }
-
-        .padding {
-          padding-bottom: var(--app-grid-2x);
-        }
-
-        @media (min-width: ${unsafeCSS(window.MyAppGlobals.wideWidth)}) {
-          .saved-route > .icon {
-            margin-left: 5px;
-          }
-
-          .button-group {
-            justify-content: space-between;
-          }
-
-          .button-group > .left {
-            width: 75%;
-          }
-
-          .button-group > .button {
-            width: 25%;
-          }
-
-          .examples {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-          }
-
-          .examples > .left {
-            flex-grow: 1;
-          }
-
-          .examples > .button {
-            margin: 0px 20px;
-          }
-        }
-      `
-    ];
+      }
+    `;
   }
 
   _render() {

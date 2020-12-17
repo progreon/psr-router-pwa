@@ -14,22 +14,20 @@ class PsrRouterTrainers extends PsrRouterPage {
   private filteredTrainers: { [key: string]: Trainer };
 
   static get styles() {
-    return [
-      ...super.styles,
-      css`
-        .item {
-          cursor: pointer;
-          padding: 5px;
-          border-radius: 5px;
-        }
-        .item:hover {
-          background-color: rgba(0, 0, 0, 0.15);
-        }
-        #search {
-          width: 100%;
-        }
-      `
-    ];
+    return css`
+      ${super.styles}
+      .item {
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      .item:hover {
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+      #search {
+        width: 100%;
+      }
+    `;
   }
 
   _render() {

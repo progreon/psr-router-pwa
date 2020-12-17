@@ -1,5 +1,5 @@
 // Imports for this element
-import { LitElement, html, property } from 'lit-element';
+import { LitElement, html, property, css } from 'lit-element';
 import { Item } from 'SharedModules/psr-router-model/Item';
 
 // CSS imports for this element
@@ -15,14 +15,15 @@ class PsrRouterItem extends LitElement {
   @property({type: Boolean, reflect: true})
   public detailed: boolean = true;
 
+  static styles = css`
+    ${AppStyles}
+    .item {
+      padding: 5px 0px;
+    }
+  `;
+
   render() {
     return html`
-      ${AppStyles}
-      <style>
-        .item {
-          padding: 5px 0px;
-        }
-      </style>
       <div class="item" ?hidden="${!this.detailed}">
         <div><strong>${this.item.name}</strong></div>
         <div><i>${this.item.description}</i></div>
