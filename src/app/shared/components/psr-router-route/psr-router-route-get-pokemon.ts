@@ -4,19 +4,24 @@ import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 
 // These are the elements needed by this element.
-import '@vaadin/vaadin-combo-box/theme/material/vaadin-combo-box';
+import 'SharedComponents/psr-router-mwc/psr-router-select';
 
 class PsrRouterRouteGetPokemon extends PsrRouterRouteEntry {
   _renderExpandingContent() {
-    // TODO
     let getP = (<Route.RouteGetPokemon>super.routeEntry);
     let dom = [];
+    let choices = getP.choices;
+    let choicesDOM = [];
+    choices.forEach((e, i) => choicesDOM.push(html`<mwc-list-item .value="${i}">${e.toString()}</mwc-list-item>`));
+    let selected = getP.currentChoice;
     if (getP && getP.choices.length >= 1) {
       if (getP.choices.length > 1) {
         dom.push(html`
-          <div>
-            Choose one:
-            <vaadin-combo-box id="selected-pokemon" @selected-item-changed="${this._selectedChanged}"></vaadin-combo-box>
+          <div style="display: flex; align-items: center;">
+            Choose one:&nbsp;
+            <psr-router-select id="selected-pokemon" @action="${this._selectedChanged}" .value="${selected}" withDialogFix>
+              ${choicesDOM}
+            </psr-router-select>
           </div>
         `);
       } else {
@@ -38,16 +43,6 @@ class PsrRouterRouteGetPokemon extends PsrRouterRouteEntry {
     return true;
   }
 
-  _renderStyle() {
-    // TODO
-    return undefined;
-  }
-
-  constructor(routeEntry=undefined) {
-    super(routeEntry);
-    // TODO
-  }
-
   protected _getSummary() {
     let summary = super._getSummary();
     if (!summary?.trim() && !super._getTitle()?.trim()) {
@@ -56,27 +51,9 @@ class PsrRouterRouteGetPokemon extends PsrRouterRouteEntry {
     return summary;
   }
 
-  updated(_changedProperties) {
-    super.updated(_changedProperties);
-    let getP = (<Route.RouteGetPokemon>super.routeEntry);
-
-    let comboBox: any = this.shadowRoot.getElementById("selected-pokemon");
-    if (comboBox && !comboBox.items) {
-      let indexedChoices = getP.choices.map((c, i) => { return { index: i, value: c.toString() }; });
-      comboBox.items = indexedChoices;
-      comboBox.itemLabelPath = "value";
-      comboBox.value = comboBox.items[getP.currentChoice].value;
-    }
-  }
-
-  _selectedChanged(e) {
-    let comboBox: any = this.shadowRoot.getElementById("selected-pokemon");
-    let getP = (<Route.RouteGetPokemon>super.routeEntry);
-    if (!e.detail.value) {
-      comboBox.value = comboBox.items[getP.currentChoice].value;
-    } else if (e.detail.value.index != getP.currentChoice) {
-      getP.currentChoice = e.detail.value.index;
-    }
+  _selectedChanged() {
+    let select: any = this.shadowRoot.getElementById("selected-pokemon");
+    (<Route.RouteGetPokemon>super.routeEntry).currentChoice = select.value;
   }
 }
 

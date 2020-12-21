@@ -277,7 +277,7 @@ export namespace RouteBattle {
       if (!isInEntrants) {
         // TODO: warning or adding it by itself?
         // this.addMessage(new RouterMessage(`${player.team[this.partyIndex1]} is not in the entrants list`, RouterMessage.Type.Warning));
-        console.log(`${this.player.team[partyIndex]} is not in the entrants list, adding it...`);
+        console.debug(`${this.player.team[partyIndex]} is not in the entrants list, adding it...`);
         this.entrants.push(new Entrant(partyIndex, letItDie));
       }
     }

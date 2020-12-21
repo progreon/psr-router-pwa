@@ -247,6 +247,7 @@ class PsrRouterHome extends PsrRouterPage {
     let examples = RouteManager.GetExampleRoutesInfo(this._isDevMode());
     let examplesDOM = [];
     examples.forEach(e => examplesDOM.push(html`<mwc-list-item .value="${e.key}">${e.title}</mwc-list-item>`));
+    let first = examples[0]?.key;
     return html`
       <div class="content">
         <div class="page-title">
@@ -274,7 +275,7 @@ class PsrRouterHome extends PsrRouterPage {
         <h3>Example Routes</h3>
         <div class="manage-routes">
           <div class="examples">
-            <psr-router-select id="example-routes" class="left">${examplesDOM}</psr-router-select>
+            <psr-router-select id="example-routes" class="left" .value="${first}">${examplesDOM}</psr-router-select>
             <mwc-button id="load-route" class="button" @click="${this._onLoadRouteClicked}">Open</mwc-button>
           </div>
         </div>
