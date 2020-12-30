@@ -1,92 +1,92 @@
 /**
  * Class holding badge boosts
- * @todo make this cross-gen by making this a map: type => value?
  */
 class BadgeBoosts {
   public static readonly MIN: number = 0;
   public static readonly MAX: number = 99;
-  private _values: number[];
-  get values(): number[] {
-    return this._values;
-  }
-  /**
-   *
-   */
+  private _values: { [key: string]: number };
+  get values() { return this._values; }
+
   constructor() {
-    this._values = [0, 0, 0, 0];
+    this._values = {};
   }
 
-  /**
-   * Set the badge boost values.
-   * @param atk The attack badge boost.
-   * @param def The defense badge boost.
-   * @param spd The speed badge boost.
-   * @param spc The special badge boost.
-   * @returns This object
-   */
-  setValues(atk: number, def: number, spd: number, spc: number): BadgeBoosts {
-    // atk = parseInt(atk);
-    // def = parseInt(def);
-    // spd = parseInt(spd);
-    // spc = parseInt(spc);
-    this._values = [atk, def, spd, spc];
-
-    for (let i = 0; i < this._values.length; i++)
-      if (this._values[i] < BadgeBoosts.MIN)
-        this._values[i] = BadgeBoosts.MIN;
-      else if (this._values[i] > BadgeBoosts.MAX)
-        this._values[i] = BadgeBoosts.MAX;
-
-    return this;
-  }
-
-  /**
-   * Get the attack badge boost.
-   * @returns The attack badge boost.
-   */
-  public get atk(): number {
-    return this._values[0];
-  }
-
-  /**
-   * Get the defense badge boost.
-   * @returns The defense badge boost.
-   */
-  public get def(): number {
-    return this._values[1];
-  }
-
-  /**
-   * Get the speed badge boost.
-   * @returns The speed badge boost.
-   */
-  public get spd(): number {
-    return this._values[2];
-  }
-
-  /**
-   * Get the special badge boost.
-   * @returns The special badge boost.
-   */
-  public get spc(): number {
-    return this._values[3];
+  public setBoosts(boosts: string[] = []) {
+    this._values = {};
+    boosts.forEach(b => this._values[b.toUpperCase()] = 1);
   }
 
   /**
    * Get a badge boost.
-   * @param index 0:atk, 1:def, 2:spd, 3:spc
+   * @param boost e.g. atk, def, spd, spc
    * @returns The badge boost
    */
-  getValue(index: number): number {
-    return this._values[index];
+  public getBoost(boost: string): number {
+    return boost ? this._values[boost.toUpperCase()] || 0 : 0;
   }
 
-  toString(): string {
-    return '[' + this.atk + ', ' + this.def + ', ' + this.spd + ', ' + this.spc + ']';
+  //// SOME GEN 1 STUFF ////
+  
+  public gen1ApplyAllAndReset(boost: string) {
+    Object.keys(this._values).forEach(b => {
+      if (b !== boost?.toUpperCase()) {
+        if (this._values[b] > 0) {
+          this._values[b]++;
+        }
+      } else if (this._values[b] > 0) {
+        this._values[b] = 1;
+      }
+    });
   }
 
-  clone(): BadgeBoosts {
-    return new BadgeBoosts().setValues(this.atk, this.def, this.spd, this.spc);
+  public get atk(): number {
+    return this._values["ATK"] || 0;
+  }
+  public set atk(value: number) {
+    if (!this._values["ATK"]) {
+      this._values["ATK"] = 0;
+    }
+    this._values["ATK"] = value;
+  }
+
+  public get def(): number {
+    return this._values["DEF"] || 0;
+  }
+  public set def(value: number) {
+    if (!this._values["DEF"]) {
+      this._values["DEF"] = 0;
+    }
+    this._values["DEF"] = value;
+  }
+
+  public get spd(): number {
+    return this._values["SPD"] || 0;
+  }
+  public set spd(value: number) {
+    if (!this._values["SPD"]) {
+      this._values["SPD"] = 0;
+    }
+    this._values["SPD"] = value;
+  }
+
+  public get spc(): number {
+    return this._values["SPC"] || 0;
+  }
+  public set spc(value: number) {
+    if (!this._values["SPC"]) {
+      this._values["SPC"] = 0;
+    }
+    this._values["SPC"] = value;
+  }
+
+  public toString(): string {
+    return '[' + Object.keys(this._values).map(k => `${k}:${this._values[k]}`).join(", ") + ']';
+  }
+
+  public clone(): BadgeBoosts {
+    let newBB = new BadgeBoosts();
+    Object.keys(this._values).forEach(k => newBB._values[k] = this._values[k]);
+    return newBB;
   }
 }
 

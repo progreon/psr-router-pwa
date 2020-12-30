@@ -122,22 +122,8 @@ export class RouteBattle extends ARouteActionsEntry {
       });
     }
 
-    // TODO: generalise this
-    if (this.trainer) {
-      switch (this.trainer.name.toUpperCase()) {
-        case "BROCK":
-          nextPlayer.addBadge("attack");
-          break;
-        case "LTSURGE":
-          nextPlayer.addBadge("defense");
-          break;
-        case "KOGA":
-          nextPlayer.addBadge("speed");
-          break;
-        case "BLAINE":
-          nextPlayer.addBadge("special");
-          break;
-      }
+    if (this.trainer && this.trainer.badgeboost) {
+      nextPlayer.addBadge(this.trainer.badgeboost);
     }
 
     super.updateNextPlayer(nextPlayer, fireApplied);
@@ -251,11 +237,7 @@ export namespace RouteBattle {
     private getDefaultBadgeBoosts(): BadgeBoosts {
       let bb = new BadgeBoosts();
       if (this.player) {
-        let atk = this.player.hasBadge("attack") ? 1 : 0;
-        let def = this.player.hasBadge("defense") ? 1 : 0;
-        let spd = this.player.hasBadge("speed") ? 1 : 0;
-        let spc = this.player.hasBadge("special") ? 1 : 0;
-        bb.setValues(atk, def, spd, spc);
+        bb.setBoosts(this.player.badges);
       }
       return bb;
     }
@@ -320,36 +302,28 @@ export namespace RouteBattle {
           this._stages.setStages(curS.atk + 1, curS.def, curS.spd, curS.spc);
           if (this.battle.game.info.gen == 1) {
             // Apply badge boosts again
-            let curBB = this._badgeBoosts;
-            let defBB = this.getDefaultBadgeBoosts();
-            this._badgeBoosts.setValues(defBB.atk, curBB.def + defBB.def, curBB.spd + defBB.spd, curBB.spc + defBB.spc);
+            this._badgeBoosts.gen1ApplyAllAndReset("atk");
           }
           break;
         case "X_DEFEND":
           this._stages.setStages(curS.atk, curS.def + 1, curS.spd, curS.spc);
           if (this.battle.game.info.gen == 1) {
             // Apply badge boosts again
-            let curBB = this._badgeBoosts;
-            let defBB = this.getDefaultBadgeBoosts();
-            this._badgeBoosts.setValues(curBB.atk + defBB.atk, defBB.def, curBB.spd + defBB.spd, curBB.spc + defBB.spc);
+            this._badgeBoosts.gen1ApplyAllAndReset("def");
           }
           break;
         case "X_SPEED":
           this._stages.setStages(curS.atk, curS.def, curS.spd + 1, curS.spc);
           if (this.battle.game.info.gen == 1) {
             // Apply badge boosts again
-            let curBB = this._badgeBoosts;
-            let defBB = this.getDefaultBadgeBoosts();
-            this._badgeBoosts.setValues(curBB.atk + defBB.atk, curBB.def + defBB.def, defBB.spd, curBB.spc + defBB.spc);
+            this._badgeBoosts.gen1ApplyAllAndReset("spd");
           }
           break;
         case "X_SPECIAL":
           this._stages.setStages(curS.atk, curS.def, curS.spd, curS.spc + 1);
           if (this.battle.game.info.gen == 1) {
             // Apply badge boosts again
-            let curBB = this._badgeBoosts;
-            let defBB = this.getDefaultBadgeBoosts();
-            this._badgeBoosts.setValues(curBB.atk + defBB.atk, curBB.def + defBB.def, curBB.spd + defBB.spd, defBB.spc);
+            this._badgeBoosts.gen1ApplyAllAndReset("spc");
           }
           break;
       }

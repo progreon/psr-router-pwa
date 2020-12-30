@@ -214,7 +214,10 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     let bbSpd: any = this.shadowRoot.getElementById(`bbSpd${bsi}:${dri}`);
     let bbSpc: any = this.shadowRoot.getElementById(`bbSpc${bsi}:${dri}`);
     let bb = new BadgeBoosts();
-    bb.setValues(+bbAtk.value, +bbDef.value, +bbSpd.value, +bbSpc.value);
+    bb.atk = +bbAtk.value;
+    bb.def = +bbDef.value;
+    bb.spd = +bbSpd.value;
+    bb.spc = +bbSpc.value;
     return bb;
   }
 

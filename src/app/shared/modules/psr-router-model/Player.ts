@@ -40,10 +40,10 @@ export class Player {
   private _money: number;
   private _bagItems: ItemSlot[];
   private _pcItems: ItemSlot[];
-  private _badges: any[];
+  private _badges: string[];
   get money(): number { return this._money; }
   get bag(): ItemSlot[] { return this._bagItems.slice(); }
-  get badges(): any[] { return this._badges.slice(); }
+  get badges(): string[] { return this._badges.slice(); }
   /**
    *
    * @param name
