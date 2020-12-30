@@ -115,8 +115,6 @@ export class RouteBattle extends ARouteActionsEntry {
     }
     if (this.trainer?.items) {
       this.trainer.items.forEach(i => {
-        nextPlayer.addItem(i);
-        nextPlayer.addItem(i);
         let added = nextPlayer.addItem(i);
         if (!added) {
           this.addMessage(new RouterMessage(`You don't have room for this item! (${i.toString()})`, RouterMessage.Type.Info));

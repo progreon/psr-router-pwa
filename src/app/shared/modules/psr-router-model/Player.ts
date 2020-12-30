@@ -255,12 +255,12 @@ export class Player {
    */
   useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battleStage?: RouteBattle.Stage): boolean {
     // TODO: force usage option (which skips the availability check)
-    // let index = this.getItemIndex(item, false); // TODO: temporarily disabled because no GetI implementation yet!
-    // if (index < 0) {
-    //   return false;
-    // } else {
+    let index = this.getItemIndex(item, false); // TODO: temporarily disabled because no GetI implementation yet!
+    
     if (battleStage && !item.usableInsideBattle) return false;
     if (!battleStage && !item.usableOutsideBattle) return false;
+
+    // Item management isn't mandatory, so always try to use it even if the player doesn't have the item
     switch (item.type) {
       case "STONE":
         // TODO: arg check
@@ -302,9 +302,7 @@ export class Player {
         break;
     }
     // TODO: others?
-    // return this.tossItemByIndex(index, 1); // TODO: don't toss if forced?
-    return true; // TODO: temporarily 'true' because no GetI implementation yet!
-    // }
+    return index >= 0 && this.tossItemByIndex(index, 1); // TODO: don't toss if forced?
   }
 
   /**
