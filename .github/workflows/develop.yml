@@ -10,8 +10,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout
+    - name: Checkout
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Set isFirstCommit
+      run: echo "isFirstCommit=$(git merge-base --is-ancestor HEAD origin/main; echo $?)" >> $GITHUB_ENV
+    - name: Cancel if first commit
+      if: ${{ env.isFirstCommit == 0 }}
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{ github.token }}
+        script: |
+          github.actions.cancelWorkflowRun({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            run_id: context.runId
+          });
     - name: Setup Node
       uses: actions/setup-node@v1
       with:

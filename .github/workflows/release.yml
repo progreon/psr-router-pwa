@@ -100,7 +100,7 @@ jobs:
         password: ${{ secrets.FTP_PASS }}
         local-dir: ./
         server-dir: ./
-  merge-to-main:
+  merge-and-release:
     runs-on: ubuntu-latest
     needs: deploy-prod
     steps:
@@ -125,3 +125,29 @@ jobs:
       run: |
         git merge --no-ff -m "Merge branch $GITHUB_REF into main" "$GITHUB_REF"
         git push --all
+    - name: Download build
+      uses: actions/download-artifact@v2
+      with:
+        name: package
+        path: dist
+    - name: Get zip path
+      run: echo "ZIP=$(echo dist/dist_*)" >> $GITHUB_ENV
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        tag_name: ${{ env.VERSION }}
+        release_name: Release ${{ env.VERSION }}
+        prerelease: true
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ env.ZIP }}
+        asset_name: dist.zip
+        asset_content_type: application/zip
