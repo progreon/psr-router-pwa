@@ -1,0 +1,42 @@
+# This workflow will create a new release branch
+
+name: Prepare Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      newVersion:
+        description: 'New "major", "minor" or "patch" version?'
+        required: true
+        default: 'minor'
+
+jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        ref: 'main'
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - name: Bump major version
+      if: ${{ github.event.inputs.newVersion == 'major' }}
+      run: yarn version --major --no-git-tag-version
+    - name: Bump minor version
+      if: ${{ github.event.inputs.newVersion != 'major' && github.event.inputs.newVersion != 'patch' }}
+      run: yarn version --minor --no-git-tag-version
+    - name: Bump patch version
+      if: ${{ github.event.inputs.newVersion == 'patch' }}
+      run: yarn version --patch --no-git-tag-version
+    - name: Setup git
+      uses: ./.github/actions/prepare-git
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create & push release branch
+      run: |
+        git checkout -b release/$(yarn -s ver)
+        git commit -m "Prepare release" -a
+        git push --force --all
