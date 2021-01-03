@@ -1,0 +1,30 @@
+# This workflow will create a new hotfix branch
+
+name: Prepare Hotfix
+
+on:
+  workflow_dispatch
+
+jobs:
+  prepare-hotfix:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        ref: 'main'
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - name: Bump patch version
+      run: yarn version --patch --no-git-tag-version
+    - name: Setup git
+      uses: ./.github/actions/prepare-git
+      with:
+        token: ${{ github.token }}
+    - name: Create & push hotfix branch
+      run: |
+        git checkout -b hotfix/$(yarn -s ver)
+        git commit -m "Prepare hotfix" -a
+        git push --force --all

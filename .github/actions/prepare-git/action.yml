@@ -1,0 +1,16 @@
+name: 'Setup git'
+description: 'Setup git'
+inputs:
+  token:
+    description: GitHub Auth Token
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Setup git
+      run: |
+        git config --local user.email "github-actions@github.com"
+        git config --local user.name "github-actions"
+        git config --global credential.helper store
+        echo "https://${{ inputs.token }}:x-oauth-basic@github.com\n" > ~/.git-credentials
+      shell: bash
