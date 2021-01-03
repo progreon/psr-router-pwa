@@ -19,7 +19,7 @@ class PsrRouterAbout extends PsrRouterPage {
         <ul>
           <li>Chrome: The best, recommended</li>
           <li>Firefox: Tiny bit slower</li>
-          <li>Edge: Really slow, no offline support, not recommended</li>
+          <li>Edge: Please use the chromium base version, do yourself a favor</li>
           <li>Internet Explorer: Unsupported</li>
           <li>Others: Unknown</li>
         </ul>
@@ -45,12 +45,42 @@ class PsrRouterAbout extends PsrRouterPage {
       </section>
       <h2>Release Notes</h2>
       <section>
-        <h3>0.0.2 - ...</h3>
+        <h3>0.1.0 - Too much for one release</h3>
         <ul>
-          <li>More data!</li>
+          <li>Damage calculations!</li>
+          <li>Added more data</li>
           <ul>
-            <li>Added pokémon, trainer and move info for Pokémon Yellow</li>
-            <li>[TEMP] Added dummy route for Pokémon Yellow</li>
+            <li>Encounters</li>
+            <li>Locations</li>
+            <li>Added Pokémon Yellow data</li> 
+          </ul>
+          <li>Big loading performance increase</li>
+          <li>Added more route entry types</li>
+          <ul>
+            <li>Battle</li>
+            <li>Manip</li>
+            <li>Menu</li>
+            <li>Encounter</li>
+          </ul>
+          <li>Added actions that can be used in entries</li>
+          <ul>
+            <li>Swap pokemon</li>
+            <li>Swap items</li>
+            <li>Use items</li>
+            <li>Teach</li>
+            <li>Battler settings</li>
+            <li>...</li>
+          </ul>
+          <li>Lots of refactoring</li>
+          <li>Better app menu</li>
+          <li>Added filter box to data pages</li>
+          <li>Started item management</li>
+          <li>Better route management (new home page)</li>
+          <li>Simple page to edit a route in-app</li>
+          <li>Added a player butten per entry which shows basic info</li>
+          <li>New example routes (not necessarily up to date with current routes)</li>
+          <ul>
+            <li>Red Any% Glitchless (no IT), for races</li>
           </ul>
         </ul>
       </section>
