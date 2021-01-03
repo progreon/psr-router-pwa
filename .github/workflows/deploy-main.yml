@@ -1,6 +1,6 @@
 # This workflow will do a clean install of node dependencies, build the source code, run tests and deploy to the prod environment
 
-name: (Re)deploy main
+name: Deploy main branch to prod
 
 on:
   workflow_dispatch

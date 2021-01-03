@@ -34,7 +34,7 @@ jobs:
     - name: Setup git
       uses: ./.github/actions/prepare-git
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ github.token }}
     - name: Create & push release branch
       run: |
         git checkout -b release/$(yarn -s ver)
