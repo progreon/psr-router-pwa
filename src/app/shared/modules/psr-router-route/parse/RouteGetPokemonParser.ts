@@ -8,7 +8,7 @@ import { RouteGetPokemon } from "../RouteGetPokemon";
  * lines:
  * GetP: [#]<option> [[#]<option> [..]]
  *     [<title> ::] <summary>
- *     <description lines>
+ *     [<description lines>]
  * with <option> = <pokemon>:<level>
  * only one preferred option (with '#') allowed
  *

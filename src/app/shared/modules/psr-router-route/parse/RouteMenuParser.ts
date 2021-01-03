@@ -33,8 +33,7 @@ parsers[BSettingsAction.ACTION_TYPE.toUpperCase()] = new BSettingsActionParser()
 /**
  * lines:
  * Menu: [<title> ::] <summary>
- *     <option> [:: <description>]
- *     [<option> [:: <description>]
+ *     [<action>
  *      ..]
  * with <option> being one of the following:
  *     Use: <item> [<count:1> [<pokemon index:1> [<move index:1>]]]

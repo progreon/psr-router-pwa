@@ -6,6 +6,7 @@ import * as Util from '../../../psr-router-util';
 /**
  * lines:
  * Toss: <item> [<count:1>] :: <description>
+ *      with count a number, ? or *
  *
  * json:
  * {

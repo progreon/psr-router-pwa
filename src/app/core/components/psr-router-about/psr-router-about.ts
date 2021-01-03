@@ -45,7 +45,7 @@ class PsrRouterAbout extends PsrRouterPage {
       </section>
       <h2>Release Notes</h2>
       <section>
-        <h3>0.1.0 - Too much for one release</h3>
+        <h3>0.1.0 - Let's make this usable</h3>
         <ul>
           <li>Damage calculations!</li>
           <li>Added more data</li>

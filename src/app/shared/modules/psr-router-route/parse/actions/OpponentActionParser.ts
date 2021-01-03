@@ -10,7 +10,7 @@ import { RouteBattleParser } from "../RouteBattleParser";
  * Opp: <opp index> [:: [*]<party index:1> [[*]<party index> [..]]]
  *     <action>
  *     [<action>
- *     ...]
+ *      ..]
  * with '*' indicating that it dies here and doesn't get experience
  *
  * json:

@@ -8,8 +8,8 @@ import { RouterError } from "SharedModules/psr-router-util";
  * lines:
  * BSettings: <party index:1> [:: <description>]
  *     <key>: <value>
- *    [<key>: <value>
- *     [..]]
+ *     [<key>: <value>
+ *      ..]
  *
  * json:
  * {

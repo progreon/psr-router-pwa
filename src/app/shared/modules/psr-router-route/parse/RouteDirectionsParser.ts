@@ -5,7 +5,8 @@ import { ScopedLine } from "./ScopedLine";
 /**
  * lines:
  * <summary>
- *     <description lines>
+ *     [<description lines>
+ *      ..]
  *
  * json:
  * {

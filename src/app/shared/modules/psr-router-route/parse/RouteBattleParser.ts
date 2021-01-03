@@ -31,9 +31,8 @@ parsers[OpponentAction.ACTION_TYPE.toUpperCase()] = new OpponentActionParser();
 /**
  * lines:
  * B: <trainer> [[:: <title>] :: <summary>]
- *     <action>
  *     [<action>
- *     [..]]
+ *      ..]
  *
  * json:
  * {

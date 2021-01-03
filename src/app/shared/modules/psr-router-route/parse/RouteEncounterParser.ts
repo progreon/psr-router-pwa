@@ -29,10 +29,9 @@ parsers[BSettingsAction.ACTION_TYPE.toUpperCase()] = new BSettingsActionParser()
 
 /**
  * lines:
- * B: <trainer> [[:: <title>] :: <summary>]
- *     <action>
+ * E: <pokemon>:<level> [[:: <title>] :: <summary>]
  *     [<action>
- *     [..]]
+ *      ..]
  *
  * json:
  * {
@@ -40,7 +39,7 @@ parsers[BSettingsAction.ACTION_TYPE.toUpperCase()] = new BSettingsActionParser()
  *     info: { title, summary, description },
  *     location, // TODO
  *     properties: {
- *         trainer,
+ *         encounter: { pokemon, level },
  *         actions
  *     }
  * }
@@ -59,7 +58,7 @@ export class RouteEncounterParser extends ARouteActionsParser {
         let entry = super.linesToJSON(scopedLine, filename);
         let [encounter, title, ...summ] = scopedLine.untypedLine.split("::");
         if (!encounter) {
-            throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Please provide a trainer id`, "Parser Error");
+            throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Please provide a pokemon-level pair`, "Parser Error");
         }
         title = title ? title.trim() : "";
         let [pokemon, l] = encounter.split(":");
