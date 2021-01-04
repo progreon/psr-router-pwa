@@ -244,7 +244,7 @@ class PsrRouterHome extends PsrRouterPage {
         </div>
       `;
     });
-    let examples = RouteManager.GetExampleRoutesInfo(this._isDevMode());
+    let examples = RouteManager.GetExampleRoutesInfo(true);
     let examplesDOM = [];
     examples.forEach(e => examplesDOM.push(html`<mwc-list-item .value="${e.key}">${e.title}</mwc-list-item>`));
     let first = examples[0]?.key;
@@ -322,14 +322,6 @@ class PsrRouterHome extends PsrRouterPage {
 
     // Import backup button listener
     this._initRestoreButtonListener();
-
-    let comboBox: any = this.shadowRoot.getElementById("example-routes");
-    if (comboBox && !comboBox.items) {
-      comboBox.items = RouteManager.GetExampleRoutesInfo(this._isDevMode());
-      comboBox.itemLabelPath = "title";
-      comboBox.itemValuePath = "key";
-      comboBox.value = comboBox.items[0].key;
-    }
   }
 
   _showUnsupportedToast(gameTitle) {

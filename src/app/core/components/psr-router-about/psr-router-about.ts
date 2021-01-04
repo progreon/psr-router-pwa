@@ -78,9 +78,10 @@ class PsrRouterAbout extends PsrRouterPage {
           <li>Better route management (new home page)</li>
           <li>Simple page to edit a route in-app</li>
           <li>Added a player butten per entry which shows basic info</li>
-          <li>New example routes (not necessarily up to date with current routes)</li>
+          <li>New example routes</li>
           <ul>
-            <li>Red Any% Glitchless (no IT), for races</li>
+            <li>Red Any% Glitchless [Beginner Guide]</li>
+            <li>Red Any% Glitchless [race, no IT] (not fully up-to-date)</li>
           </ul>
         </ul>
       </section>

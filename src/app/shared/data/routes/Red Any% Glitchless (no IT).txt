@@ -1,6 +1,6 @@
 Game: r
 
-Route: Red Any% Glitchless (no IT)
+Route: Red Any% Glitchless [race, no IT]
 	S: Before starting
 		Clear any existing save file by pressing Up+B+Select on the title screen
 		Set text speed to FAST, battle animation to OFF and battle style to SHIFT
@@ -42,8 +42,7 @@ Route: Red Any% Glitchless (no IT)
 
 		Menu: After the fight, swap Nidoran to the front, heal Squirtle to 17+ HP and heal poison if necessary
 			SwapP: 1 2
-			This: is a description
-			Use: POTION, ?, 2 :: This is also a description
+			Use: POTION, ?, 2
 			Use: ANTIDOTE ? 2
 
 	S: Pewter City
@@ -123,8 +122,6 @@ Route: Red Any% Glitchless (no IT)
 		Heal to 15+ HP
 		B: Route 24 - JrTrainerM 1 :: Mankey Guy :: MP + PS if < 8 HP, otherwise HA x2
 		B: Route 24 - Rocket :: MP x2 (HA the Zubat if you have <7 Mega Punch PP)
-		GetI: NUGGET
-			TEMP: this is given by the Rocket
 
 	S: Route 25
 		B: Route 25 - Hiker 3 :: Bottom Hiker 1 :: WG
@@ -144,15 +141,11 @@ Route: Red Any% Glitchless (no IT)
 	S: Cerulean City
 		Walk through the Dig house to fight the Rocket
 		B: Cerulean City - Rocket :: Thrash x2-4
-		GetI: TM_28
-			Temp: you get this from the rocket
 		Hop the ledge and enter the gym
 		S: Cerulean Gym
 			B: Cerulean Gym - JrTrainerF :: Thrash
 			B: Misty :: Thrash and pray
 				If you get confused, sacrifice your flier (if flier is dead, sacrifice Paras)
-			GetI: TM_11
-				Temp: you get this from Misty
 		From this point on, if you need to heal, teach Bubblebeam
 		If you have <16 HP: potion once
 		Walk through the Dig house again, and continue south toward Vermilion
@@ -232,7 +225,7 @@ Route: Red Any% Glitchless (no IT)
 		B: Route 8 - Gambler 2 :: BB (+Thrash), Thrash
 			Vulpix does 4 with Quick Attack
 		Take the underground path to Celadon City
-		Pick up the hidden Elixer & Nugget in the underground
+	S: Underground :: Pick up the hidden Elixer & Nugget in the underground
 		GetI: ELIXER
 		GetI: NUGGET
 
@@ -271,15 +264,12 @@ Route: Red Any% Glitchless (no IT)
 		B: Tower Rival - Bulbasaur :: Tower Rival :: TB x2, BB, Thrash
 			Ivysaur does 10-12 with Vine Whip
 		B: Pokémon Tower 4F - Channeler 2 :: Rock Slide x2
-		GetI: ELIXER
-			Get the Elixer item ball
-		GetI: ELIXER
-			Get the hidden Elixer
+		GetI: ELIXER :: Get the Elixer item ball
+		GetI: ELIXER :: Get the hidden Elixer
 		Take the free heal on 5F
 		B: Pokémon Tower 6F - Channeler 2 :: Rock Slide
 		B: Pokémon Tower 6F - Channeler 3 :: Rock Slide
-		GetI: RARE_CANDY
-			Get the Rare Candy that blocks the way
+		GetI: RARE_CANDY :: Get the Rare Candy that blocks the way
 		Menu: Teach TM07 (Horn Drill) over Rock Slide
 			Tm: TM_07 1 1
 		Enter the Ghost battle and escape using the Poke Doll
@@ -301,13 +291,11 @@ Route: Red Any% Glitchless (no IT)
 
 	S: Silph Co.
 		Take the stairs to 5F
-		GetI: ELIXER
-			Get the Elixer in the tree
+		GetI: ELIXER :: Get the Elixer in the tree
 		Walk down and talk to the Rocket
 		B: Silph Co. 5F - Rocket 1 :: Thrash (x2-3)
 		Take the teleporter to 9F, then take it back to 5F
-		GetI: CARD_KEY
-			Get the Card Key
+		GetI: CARD_KEY :: Get the Card Key
 		Take the teleporter to 9F, then take it back to 5F, then open the door to your left
 		Take the teleporter to 3F
 		Walk right, then up, then open the door to your left, and take the teleporter to 7F
@@ -337,8 +325,7 @@ Route: Red Any% Glitchless (no IT)
 		Run from the Snorlax
 
 	S: Cycling Road
-		GetI: RARE_CANDY
-			Get the hidden Rare Candy
+		GetI: RARE_CANDY :: Get the hidden Rare Candy
 		Menu: After exiting the Cycling Road building
 			Use: SUPER_REPEL
 			Swap: 6 X_SPECIAL
@@ -352,10 +339,8 @@ Route: Red Any% Glitchless (no IT)
 		Upon entering, get on the bike
 		Menu: Use a super repel above the last hill in the second area
 			Use: SUPER_REPEL
-		GetI: GOLD_TEETH
-			Get the Gold Teeth in the fourth area
-		GetI: HM_03
-			Get HM03 from the guy in the house, then walk outside and Dig back to Celadon
+		GetI: GOLD_TEETH :: Get the Gold Teeth in the fourth area
+		GetI: HM_03 :: Get HM03 from the guy in the house, then walk outside and Dig back to Celadon
 
 	S: Celadon City
 		Fly to Fuchsia, then walk to the gym
@@ -376,8 +361,7 @@ Route: Red Any% Glitchless (no IT)
 		Menu: Revive with candies and bike to the Warden's house
 			Use: RARE_CANDY * :: Use all of your rare candies
 			Use: BICYCLE
-		GetI: HM_04 :: GOLD_TEETH
-			Get HM04 from the warden, then Fly to Pallet Town
+		GetI: HM_04 GOLD_TEETH :: Get HM04 from the warden, then Fly to Pallet Town
 
 	S: Pallet Town
 		Menu: Walk to the water, and menu
@@ -443,15 +427,15 @@ Route: Red Any% Glitchless (no IT)
 
 	S: Route 23
 		Bike to the water
-		UseI: SUPER_REPEL
-			After exiting the water, use another Super Repel and bike to Victory Road
+		Menu: After exiting the water, use another Super Repel and bike to Victory Road
+			Use: SUPER_REPEL
 
 	S: Victory Road
 		Use these maps to help you get through Victory Road
 			1F: [[https://cdn.bulbagarden.net/upload/5/56/Victory_Road_1F_RBY.png]]
 			2F: [[https://cdn.bulbagarden.net/upload/1/11/Victory_Road_2F_RBY.png]]
 			3F: [[https://cdn.bulbagarden.net/upload/e/e5/Victory_Road_3F_RBY.png]]
-		Menu:
+		Menu: Super Repel twice during Victory Road
 			Use: SUPER_REPEL 2
 		Use Strength upon entering and push the first boulder onto the switch on the right, then bike to the ladder in the top-left corner
 		Use Strength again, push the boulder below onto the switch, bike up the steps hugging the north edge and use a Super Repel. Bike to the right, down the stairs, then right and up to the ladder

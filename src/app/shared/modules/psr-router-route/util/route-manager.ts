@@ -9,6 +9,7 @@ import { RouteJSON } from 'SharedModules/psr-router-route/parse/RouteJSON';
 
 //// EXAMPLE ROUTES ////
 import redRaceNoItTxt from 'SharedData/routes/Red Any% Glitchless (no IT).txt';
+import redBeginnerTxt from 'SharedData/routes/Red Any% Glitchless [Beginner Guide].txt';
 import * as redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
 import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
 // import * as exampleRoute from 'SharedData/routes/example_route.json';
@@ -33,14 +34,15 @@ interface StorageTempRoute {
 }
 
 let exampleRoutes: { [key: string]: { json?: any, txt?: string, title: string }; } = {};
-exampleRoutes["red.no.it.txt"] = { txt: redRaceNoItTxt, title: "Red Any% Glitchless (no IT) [txt]" };
-exampleRoutes["red.any.glitchless.basic"] = { json: redAnyGlitchlessBasic, title: redAnyGlitchlessBasic.info.title };
-exampleRoutes["red.any.glitchless.classic"] = { json: redAnyGlitchlessClassic, title: redAnyGlitchlessClassic.info.title };
-// exampleRoutes["red.example"] = { json: exampleRoute, title: exampleRoute.info.title };
-exampleRoutes["red.god.nido.basic"] = { json: redGodNidoBasic, title: redGodNidoBasic.info.title };
-exampleRoutes["blue.dummy"] = { json: blueDummy, title: blueDummy.info.title };
-exampleRoutes["yellow.dummy.test"] = { json: yellowDummy, title: yellowDummy.info.title };
-// exampleRoutes["crystal.dummy"] = { json: crystalDummy, title: crystalDummy.info.title };
+exampleRoutes["red.beginner.txt"] = { txt: redBeginnerTxt, title: "Red Any% Glitchless [Beginner Guide]" };
+exampleRoutes["red.no.it.txt"] = { txt: redRaceNoItTxt, title: "Red Any% Glitchless [race, no IT]" };
+// exampleRoutes["red.any.glitchless.basic"] = { json: redAnyGlitchlessBasic, title: redAnyGlitchlessBasic.info.title };
+// exampleRoutes["red.any.glitchless.classic"] = { json: redAnyGlitchlessClassic, title: redAnyGlitchlessClassic.info.title };
+// // exampleRoutes["red.example"] = { json: exampleRoute, title: exampleRoute.info.title };
+// exampleRoutes["red.god.nido.basic"] = { json: redGodNidoBasic, title: redGodNidoBasic.info.title };
+// exampleRoutes["blue.dummy"] = { json: blueDummy, title: blueDummy.info.title };
+// exampleRoutes["yellow.dummy.test"] = { json: yellowDummy, title: yellowDummy.info.title };
+// // exampleRoutes["crystal.dummy"] = { json: crystalDummy, title: crystalDummy.info.title };
 
 //// INIT ////
 if (!window.app) {

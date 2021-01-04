@@ -85,7 +85,7 @@ class PsrRouterManual extends PsrRouterPage {
 
         <h4>Battle</h4>
         <ul class="code-lines">
-          <li><code>B: &lt;trainer&gt; [[:: &lt;title&gt;] &lt;summary&gt;]</code></li>
+          <li><code>B: &lt;trainer&gt; [[:: &lt;title&gt;] :: &lt;summary&gt;]</code></li>
           <ul class="code-lines sub">
             <li><code>[&lt;action&gt;</code></li>
             <li><code>&nbsp;..]</code></li>
@@ -130,7 +130,7 @@ class PsrRouterManual extends PsrRouterPage {
 
         <h4>Encounter (temporary version)</h4>
         <ul class="code-lines">
-          <li><code>E: &lt;pokemon&gt;:&lt;level&gt; [[:: &lt;title&gt;] &lt;summary&gt;]</code></li>
+          <li><code>E: &lt;pokemon&gt;:&lt;level&gt; [[:: &lt;title&gt;] :: &lt;summary&gt;]</code></li>
           <ul class="code-lines sub">
             <li><code>[&lt;action&gt;</code></li>
             <li><code>&nbsp;..]</code></li>
@@ -191,7 +191,7 @@ class PsrRouterManual extends PsrRouterPage {
 
         <h4>Menu</h4>
         <ul class="code-lines">
-          <li><code>Menu: [:: &lt;title&gt;] &lt;summary&gt;</code></li>
+          <li><code>Menu: [&lt;title&gt; ::] &lt;summary&gt;</code></li>
           <ul class="code-lines sub">
             <li><code>[&lt;action&gt;</code></li>
             <li><code>&nbsp;..]</code></li>
