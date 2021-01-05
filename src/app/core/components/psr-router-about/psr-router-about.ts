@@ -64,8 +64,9 @@ class PsrRouterAbout extends PsrRouterPage {
           </ul>
           <li>Added actions that can be used in entries</li>
           <ul>
-            <li>Swap pokemon</li>
             <li>Swap items</li>
+            <li>Swap moves</li>
+            <li>Swap pokemon</li>
             <li>Use items</li>
             <li>Teach</li>
             <li>Battler settings</li>

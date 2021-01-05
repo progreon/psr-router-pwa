@@ -42,6 +42,7 @@ class PsrRouterManual extends PsrRouterPage {
             <li>Description</li>
             <li>Opponent actions</li>
             <li>Swap items</li>
+            <li>Swap moves</li>
             <li>Swap Pokémon</li>
             <li>Use TM or HM</li>
             <li>Toss item (not implemented yet)</li>
@@ -104,8 +105,9 @@ class PsrRouterManual extends PsrRouterPage {
             <li>BSettings</li>
             <li>Direction</li>
             <li>Opponent</li>
-            <li>Swap</li>
-            <li>SwapPokemon</li>
+            <li>Swap items</li>
+            <li>Swap moves</li>
+            <li>Swap Pokémon</li>
             <li>Use</li>
           </ul>
         </ul>
@@ -144,8 +146,9 @@ class PsrRouterManual extends PsrRouterPage {
           <ul class="sub">
             <li>BSettings</li>
             <li>Direction</li>
-            <li>Swap</li>
-            <li>SwapPokemon</li>
+            <li>Swap items</li>
+            <li>Swap moves</li>
+            <li>Swap Pokémon</li>
             <li>Use</li>
           </ul>
         </ul>
@@ -204,8 +207,8 @@ class PsrRouterManual extends PsrRouterPage {
           <ul class="sub">
             <li>BSettings</li>
             <li>Direction</li>
-            <li>Swap</li>
-            <li>SwapPokemon</li>
+            <li>Swap items</li>
+            <li>Swap Pokémon</li>
             <li>Tm</li>
             <li>Toss</li>
             <li>Use</li>
@@ -275,6 +278,14 @@ class PsrRouterManual extends PsrRouterPage {
         </ul>
         <ul>
           <li><code>&lt;index|item&gt;</code> Item or bag item index to swap</li>
+        </ul>
+
+        <h4>Swap moves</h4>
+        <ul class="code-lines">
+          <li><code>SwapM: &lt;index|move&gt; &lt;index|move&gt; [:: &lt;description&gt;]</code></li>
+        </ul>
+        <ul>
+          <li><code>&lt;index|move&gt;</code> Move or move index to swap</li>
         </ul>
 
         <h4>Swap Pokémon</h4>

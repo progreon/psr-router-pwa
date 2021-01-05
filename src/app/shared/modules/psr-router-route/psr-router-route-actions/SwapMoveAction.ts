@@ -37,6 +37,8 @@ export class SwapMoveAction extends AAction {
         } else if (moveIndex2 < 0) {
             this.addMessage(new RouterMessage(`Can't swap ${this.move2.name}, we don't have it`, RouterMessage.Type.Error));
             return;
+        } else if (moveset[moveIndex1] == null || moveset[moveIndex2] == null) {
+            this.addMessage(new RouterMessage(`Can't swap to an empty move slot`, RouterMessage.Type.Error));
         }
         let moveSlot1 = moveset[moveIndex1];
         moveset[moveIndex1] = moveset[moveIndex2];
