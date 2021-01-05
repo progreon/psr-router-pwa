@@ -10,13 +10,14 @@ import { RouteJSON } from 'SharedModules/psr-router-route/parse/RouteJSON';
 //// EXAMPLE ROUTES ////
 import redRaceNoItTxt from 'SharedData/routes/Red Any% Glitchless (no IT).txt';
 import redBeginnerTxt from 'SharedData/routes/Red Any% Glitchless [Beginner Guide].txt';
-import * as redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
-import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
-// import * as exampleRoute from 'SharedData/routes/example_route.json';
-import * as redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
-import * as blueDummy from 'SharedData/routes/blue_dummy.json';
-import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
-// import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
+import yellowTxt from 'SharedData/routes/Yellow Any% Glitchless.txt';
+// import * as redAnyGlitchlessBasic from 'SharedData/routes/Red Any% Glitchless (Basic).json';
+// import * as redAnyGlitchlessClassic from 'SharedData/routes/Red Any% Glitchless Classic.json';
+// // import * as exampleRoute from 'SharedData/routes/example_route.json';
+// import * as redGodNidoBasic from 'SharedData/routes/red_god_nido_basic.json';
+// import * as blueDummy from 'SharedData/routes/blue_dummy.json';
+// import * as yellowDummy from 'SharedData/routes/yellow_dummy.json';
+// // import * as crystalDummy from 'SharedData/routes/crystal_dummy.json';
 
 //// STORAGE TYPES ////
 interface StorageSavedRoute {
@@ -34,6 +35,7 @@ interface StorageTempRoute {
 }
 
 let exampleRoutes: { [key: string]: { json?: any, txt?: string, title: string }; } = {};
+exampleRoutes["yellow.txt"] = { txt: yellowTxt, title: "Yellow Any% Glitchless" };
 exampleRoutes["red.beginner.txt"] = { txt: redBeginnerTxt, title: "Red Any% Glitchless [Beginner Guide]" };
 exampleRoutes["red.no.it.txt"] = { txt: redRaceNoItTxt, title: "Red Any% Glitchless [race, no IT]" };
 // exampleRoutes["red.any.glitchless.basic"] = { json: redAnyGlitchlessBasic, title: redAnyGlitchlessBasic.info.title };
