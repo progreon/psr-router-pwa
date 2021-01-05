@@ -14,14 +14,17 @@ import { ARouteActionsEntry } from './ARouteActionsEntry';
 import { AAction } from './psr-router-route-actions/AAction';
 import { UseAction } from './psr-router-route-actions/UseAction';
 import { SwapAction } from './psr-router-route-actions/SwapAction';
+import { SwapMoveAction } from './psr-router-route-actions/SwapMoveAction';
 import { SwapPokemonAction } from './psr-router-route-actions/SwapPokemonAction';
 import { DirectionAction } from './psr-router-route-actions/DirectionAction';
 import { BSettingsAction } from './psr-router-route-actions/BSettingsAction';
 import { OpponentAction } from './psr-router-route-actions/OpponentAction';
+import { Route } from './Route';
 
 const possibleActions: { [key: string]: (obj: ActionJSON, game: Game) => AAction } = {};
 possibleActions[UseAction.ACTION_TYPE.toUpperCase()] = UseAction.newFromJSONObject;
 possibleActions[SwapAction.ACTION_TYPE.toUpperCase()] = SwapAction.newFromJSONObject;
+possibleActions[SwapMoveAction.ACTION_TYPE.toUpperCase()] = SwapMoveAction.newFromJSONObject;
 possibleActions[SwapPokemonAction.ACTION_TYPE.toUpperCase()] = SwapPokemonAction.newFromJSONObject;
 possibleActions[DirectionAction.ACTION_TYPE.toUpperCase()] = DirectionAction.newFromJSONObject;
 possibleActions[OpponentAction.ACTION_TYPE.toUpperCase()] = OpponentAction.newFromJSONObject;
@@ -68,6 +71,10 @@ export class RouteBattle extends ARouteActionsEntry {
     super.apply(player, false);
     let nextPlayer = super.nextPlayer;
 
+    if (this.trainer?.dummy) {
+      this.addMessage(new RouterMessage(`Trainer "${this.trainer.key}" not found`, RouterMessage.Type.Error));
+    }
+
     // Steps:
     // 1 Initiate all BattleStages
     // 2 Collect all actions
@@ -102,10 +109,10 @@ export class RouteBattle extends ARouteActionsEntry {
     });
 
     // 3 Execute all actions
-    this.battleStages[0].apply();
-    this.battleStages[0].messages.forEach(m => this.addMessage(m));
-    for (let ti = 1; ti < this.opponentParty.length; ti++) {
-      this.battleStages[ti].reset(this.battleStages[ti - 1]);
+    for (let ti = 0; ti < this.opponentParty.length; ti++) {
+      if (ti > 0) {
+        this.battleStages[ti].reset(this.battleStages[ti - 1]);
+      }
       this.battleStages[ti].apply();
       this.battleStages[ti].messages.forEach(m => this.addMessage(m));
     }
