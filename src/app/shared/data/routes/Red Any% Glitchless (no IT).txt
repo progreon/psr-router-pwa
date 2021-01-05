@@ -60,8 +60,6 @@ Route: Red Any% Glitchless [race, no IT]
 					SwapP: 2 :: Immediately switch to Squirtle
 					Bubble x2-3. If Onix uses Bide on the turn you switch to Squirtle, use Tail Whip twice, then Bubble
 					Onix does 6 damage with Tackle
-			GetI: TM_34
-				TEMP: You get this item from Brock
 		Change the battle style option from SHIFT to SET and go to route 3
 
 	S: Route 3

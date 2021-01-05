@@ -123,7 +123,7 @@ class PsrRouterRouterText extends PsrRouterPage {
         }
       } catch (e) {
         console.error(e);
-        super.showAppToast("Error, please see the console");
+        this.showAppToast(e);
       }
     }
   }

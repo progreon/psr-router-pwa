@@ -13,11 +13,11 @@ export class PsrRouterRouteDirections extends PsrRouterRouteEntry {
         let i1 = description.indexOf("[[", is);
         let i2 = i1 >= 0 ? description.indexOf("]]", i1) : -1;
         if (i2 < 0) {
-          dom.push(html`<div>${description.substring(is).trim()}</div>`);
+          dom.push(html`<div style="white-space: pre-wrap;">${description.substring(is).trim()}</div>`);
           is = description.length;
         } else {
-          dom.push(html`<div>${description.substring(is, i1).trim()}</div>`);
-          dom.push(html`<img .src="${description.substring(i1 + 2, i2).trim()}" style="width:100%;"></img>`);
+          dom.push(html`<div style="white-space: pre-wrap;">${description.substring(is, i1).trim()}</div>`);
+          dom.push(html`<img .src="${description.substring(i1 + 2, i2).trim()}" style="width:100%;" />`);
           is = i2 + 2;
         }
       }

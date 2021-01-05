@@ -22,7 +22,6 @@
     "name": "Yellow",
     "gen": 1,
     "year": 1998,
-    "platform": "gbc",
-    "unsupported": 1
+    "platform": "gbc"
   }
 }

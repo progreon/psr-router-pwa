@@ -48,48 +48,48 @@
       }
     ]
   },
-  "Mt Moon 1F": {
+  "Mt. Moon 1F": {
     "Youngster": [
       {
-        "key": "Mt Moon 1F - Youngster",
+        "key": "Mt. Moon 1F - Youngster",
         "name": "Youngster",
         "party": [ "RATTATA#10", "RATTATA#10", "ZUBAT#10" ]
       }
     ],
     "BugCatcher": [
       {
-        "key": "Mt Moon 1F - BugCatcher 1",
+        "key": "Mt. Moon 1F - BugCatcher 1",
         "name": "BugCatcher 1",
         "party": [ "WEEDLE#11", "KAKUNA#11" ]
       },
       {
-        "key": "Mt Moon 1F - BugCatcher 2",
+        "key": "Mt. Moon 1F - BugCatcher 2",
         "name": "BugCatcher 2",
         "party": [ "CATERPIE#10", "METAPOD#10", "CATERPIE#10" ]
       }
     ],
     "Lass": [
       {
-        "key": "Mt Moon 1F - Lass 1",
+        "key": "Mt. Moon 1F - Lass 1",
         "name": "Lass 1",
         "party": [ "ODDISH#11", "BELLSPROUT#11" ]
       },
       {
-        "key": "Mt Moon 1F - Lass 2",
+        "key": "Mt. Moon 1F - Lass 2",
         "name": "Lass 2",
         "party": [ "CLEFAIRY#14" ]
       }
     ],
     "SuperNerd": [
       {
-        "key": "Mt Moon 1F - SuperNerd",
+        "key": "Mt. Moon 1F - SuperNerd",
         "name": "SuperNerd",
         "party": [ "MAGNEMITE#11", "VOLTORB#11" ]
       }
     ],
     "Hiker": [
       {
-        "key": "Mt Moon 1F - Hiker",
+        "key": "Mt. Moon 1F - Hiker",
         "name": "Hiker",
         "party": [ "GEODUDE#10", "GEODUDE#10", "ONIX#10" ]
       }
@@ -124,9 +124,14 @@
     ],
     "JrTrainerM": [
       {
-        "key": "Route 24 - JrTrainerM",
-        "name": "JrTrainerM",
+        "key": "Route 24 - JrTrainerM 1",
+        "name": "JrTrainerM 1",
         "party": [ "MANKEY#18" ]
+      },
+      {
+        "key": "Route 24 - JrTrainerM 2",
+        "name": "JrTrainerM 2",
+        "party": [ "RATTATA#14", "EKANS#14" ]
       }
     ],
     "Rocket": [
@@ -182,6 +187,13 @@
         "key": "Route 25 - Hiker 3",
         "name": "Hiker 3",
         "party": [ "ONIX#17" ]
+      }
+    ],
+    "JrTrainerM": [
+      {
+        "key": "Route 25 - JrTrainerM",
+        "name": "JrTrainerM",
+        "party": [ "RATTATA#14", "EKANS#14" ]
       }
     ]
   },
@@ -631,15 +643,6 @@
       }
     ]
   },
-  "Route 24,Route 25": {
-    "JrTrainerM": [
-      {
-        "key": "Route 24,Route 25 - JrTrainerM",
-        "name": "JrTrainerM",
-        "party": [ "RATTATA#14", "EKANS#14" ]
-      }
-    ]
-  },
   "Route 12": {
     "JrTrainerM": [
       {
@@ -1048,32 +1051,32 @@
       }
     ]
   },
-  "Mt Moon B2F": {
+  "Mt. Moon B2F": {
     "SuperNerd": [
       {
-        "key": "Mt Moon B2F - SuperNerd",
+        "key": "Mt. Moon B2F - SuperNerd",
         "name": "SuperNerd",
         "party": [ "GRIMER#12", "VOLTORB#12", "KOFFING#12" ]
       }
     ],
     "Rocket": [
       {
-        "key": "Mt Moon B2F - Rocket 1",
+        "key": "Mt. Moon B2F - Rocket 1",
         "name": "Rocket 1",
         "party": [ "RATTATA#13", "ZUBAT#13" ]
       },
       {
-        "key": "Mt Moon B2F - Rocket 2",
+        "key": "Mt. Moon B2F - Rocket 2",
         "name": "Rocket 2",
         "party": [ "SANDSHREW#11", "RATTATA#11", "ZUBAT#11" ]
       },
       {
-        "key": "Mt Moon B2F - Rocket 3",
+        "key": "Mt. Moon B2F - Rocket 3",
         "name": "Rocket 3",
         "party": [ "ZUBAT#12", "EKANS#12" ]
       },
       {
-        "key": "Mt Moon B2F - Rocket 4",
+        "key": "Mt. Moon B2F - Rocket 4",
         "name": "Rocket 4",
         "party": [ "EKANS#14", "MEOWTH#14", "KOFFING#14" ]
       }

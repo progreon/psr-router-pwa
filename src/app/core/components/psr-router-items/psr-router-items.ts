@@ -65,7 +65,7 @@ class PsrRouterItems extends PsrRouterPage {
     filters.forEach(filter => {
       for (let i in this.filteredItems) {
         let item: Item = this.filteredItems[i];
-        if (!!filter && !item.key.toUpperCase().includes(filter) && !item.name.toUpperCase().includes(filter)) {
+        if (!!filter && !item.key.toUpperCase().includes(filter) && !item.name.toUpperCase().includes(filter) && !item.value.toUpperCase().includes(filter)) {
           delete this.filteredItems[i];
         }
       }

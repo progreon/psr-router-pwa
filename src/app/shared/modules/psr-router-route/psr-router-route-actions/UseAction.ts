@@ -48,18 +48,17 @@ export class UseAction extends AAction {
                 }
             }
         }
+        let result = false;
         if (this.count == "?") {
             this.actionString = `${this.actionString}?`;
-        }
-        let result = player.useItem(this.item, this.partyIndex, this.moveIndex, battleStage);
-        if (result) {
-            let i = 1, count = this.count == "*" ? player.getItemCount(this.item) : this.count;
-            while (result && i < +count) {
+            result = player.getItemCount(this.item) > 0;
+        } else {
+            let count = this.count == "*" ? player.getItemCount(this.item) : this.count;
+            for (let i = 0; i < +count; i++) {
                 result = player.useItem(this.item, this.partyIndex, this.moveIndex, battleStage);
-                i++;
             }
-            if (i == +count) result = true;
         }
+
         if (!result) {
             this.addMessage(new RouterMessage("Unable to use " + this.item.toString() + (+this.count > 1 ? this.count + " times" : "") + (!!this.item.type && " on " + player.team[this.partyIndex].toString() || " here") + ", do you have it?", RouterMessage.Type.Error));
         }
