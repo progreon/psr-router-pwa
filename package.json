@@ -1,6 +1,6 @@
 {
   "name": "pwa-p3-webpack-starter-kit",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A web application for routing Pokemon SpeedRuns",
   "private": true,
   "scripts": {
