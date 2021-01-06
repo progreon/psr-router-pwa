@@ -4,6 +4,7 @@
   "info": {
     "title": "Red Any% Glitchless Classic"
   },
+  "v": 1,
   "entries": [
     {
       "type": "S",
@@ -40,13 +41,15 @@
           "info": {
             "summary": "Choose Squirtle, and give it a 1-character name"
           },
-          "choices": [
-            {
-              "pokemon": "Squirtle",
-              "level": 5
-            }
-          ],
-          "preference": 0
+          "properties": {
+            "choices": [
+              {
+                "pokemon": "Squirtle",
+                "level": 5
+              }
+            ],
+            "preference": 0
+          }
         },
         {
           "type": "B",
@@ -55,7 +58,9 @@
             "summary": "Tail Whip once, then spam Tackle (use a second Tail Whip if you get Growled turn 1)",
             "description": "Reset if you lose the fight\nIf the fight goes poorly (Bulbasaur faints at 2:50 or later), you might consider checking Squirtle's Lv. 6 stats and resetting if you see 11 Special"
           },
-          "trainer": "Rival 1 - Bulbasaur"
+          "properties": {
+            "trainer": "Rival 1 - Bulbasaur"
+          }
         }
       ]
     },
@@ -122,6 +127,21 @@
           }
         },
         {
+          "type": "GetP",
+          "info": {
+            "summary": "TEMP: getting nidoran"
+          },
+          "properties": {
+            "choices": [
+              {
+                "pokemon": "NidoranM",
+                "level": 4
+              }
+            ],
+            "preference": 0
+          }
+        },
+        {
           "info": {
             "summary": "If you encounter a Lv. 5 Spearow, try to catch it. If you catch it on the first ball, DSum off it by walking 5 out, 6 in, 12 out, then the standard DSum (4 in, 2 out, 6 in, 11 out).",
             "description": "If you waste at least half your Poke Balls against Spearow, Tackle Lv. 4 Nidorans once or twice to avoid running out."
@@ -168,7 +188,9 @@
             "summary": "Tail Whip x2, spam tackle. If you get poisoned, wait until after the fight to use the Antidote. If you fall below 7 HP, use a Potion.",
             "description": "If Squirtle is at 4 HP and Weedle likely won't die on the next turn, use your Potion immediately. If Squirtle is at 3 HP, use your Potion immediately."
           },
-          "trainer": "Viridian Forest - BugCatcher 3"
+          "properties": {
+            "trainer": "Viridian Forest - BugCatcher 3"
+          }
         },
         {
           "info": {
@@ -199,17 +221,19 @@
             "summary": "Bubble x2-3, Bubble x2-3",
             "description": "Immediately switch to Squirtle\nGeodude: Bubble x2-3\nSwitch to Nidoran after killing Geodude, then immediately switch to Squirtle\nOnix: Bubble x2-3. If Onix uses Bide on the turn you switch to Squirtle, use Tail Whip twice, then Bubble\nOnix does 6 damage with Tackle\nIf Squirtle is at <8 HP (<9 HP with bad defense) and Geodude won't die on the next turn, use a Potion if you have one. With Onix, the threshold is <7 HP (<8 HP with bad defense), unless he landed a Screech, in which case the threshold is about <12 HP (<14 HP with bad defense).\nIf Nidoran has 21+ HP when it's out against Onix, heal Squirtle immediately if it's at <12 HP.\nIf Onix uses Bide on the turn you switch back to Squirtle, use Tail Whip twice, then Bubble\nIf you can't 2-shot Onix and it uses Bide on the turn Squirtle uses its first Bubble, switch to Spearow after the second hit if you have it. Spearow will die to the Bide, and Squirtle can return to the fight safely. If you don't have Spearow, the run ends if you get a 2-turn Bide."
           },
-          "trainer": "Brock",
-          "shareExp": [
-            [
-              0,
-              1
-            ],
-            [
-              0,
-              1
+          "properties": {
+            "trainer": "Brock",
+            "shareExp": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                1
+              ]
             ]
-          ]
+          }
         },
         {
           "info": {
@@ -268,7 +292,9 @@
             "summary": "Leer + Horn Attack x2 on all three",
             "description": "The Weedle and the second Caterpie are good candidates to use Tackle on turn 3, saving one Horn Attack. If the first Caterpie doesn't die to two Horn Attacks, finish it with Tackle.\nIf you caught a Lv. 4 Nidoran, it will be Lv. 10 for the second Caterpie. In this case, if you have 19 Attack at Lv. 10 and had 14 Speed at Lv. 8, you should Horn Attack right away instead of using Leer. You'll likely 2-shot the Caterpie if one of the Horn Attacks criticals."
           },
-          "trainer": "Route 3 - BugCatcher 1"
+          "properties": {
+            "trainer": "Route 3 - BugCatcher 1"
+          }
         },
         {
           "info": {
@@ -286,7 +312,9 @@
             "summary": "Leer + HA x2 on both",
             "description": "After using Leer on Ekans, switch Leer with Horn Attack so that HA is in slot 1.\nIf you saw 13 Defense at Lv. 10 and get Tail Whip turn 1, Rattata will easily 2-shot you with Quick Attack (and likely with QA + Tackle), so you'll have to heal after getting hit until he uses Tail Whip again. If you saw 14-15 Defense and get Tail Whip turn 1, you're more likely to survive Tackle x2 or Tackle + Quick Attack. Use your judgment about the status of your run, how good your Nidoran is, and your number of Potions to determine how risky to play this situation. You normally heal twice on the first two fights of Route 3, and healing more than four times will likely cause problems later in the run. Also, if you have a bad combination of HP and defense, it's advisable to risk dying to a crit Tackle/Quick Attack, because you can't really avoid this situation.\nIf you saw 19 Attack at Lv. 10, use Horn Attack on Rattata right away instead of using Leer. You might 2-shot it with a critical. Do this even if you're concerned about Horn Attack PP, because you should be more concerned about dying or losing time on this fight. You rarely need to Horn Attack three times anyway; a Tackle on turn 3 will usually kill. When using Leer strats, you can sometimes use Tackle on turn 3.\nYou'll be faster than Ekans if you saw 15 Speed at Lv. 8, and you'll be slower if you saw 13 Speed. If you saw 14 Speed, you'll be speedtied with 8-11 DV and slower with 6-7 DV. If you get Wrap, heal if you would die to a two- or three-turn Wrap. If you would die to a four- or five-turn Wrap, heal after the third turn if you get it. You'll always take 2 damage from Poison Sting and 3 from Wrap when your Defense hasn't been lowered. When your defense has been lowered once, you'll take 2 from PS and 4 from Wrap on the top half of defense DVs and 3/5 on the bottom half."
           },
-          "trainer": "Shorts Guy"
+          "properties": {
+            "trainer": "Shorts Guy"
+          }
         },
         {
           "info": {
@@ -299,7 +327,9 @@
             "summary": "HA x2, HA x3, HA x2, HA x3 (or HA x2 + Tackle)",
             "description": "Caterpie does 3 damage with Tackle, so heal as necessary.\nIf you get hit by String Shot(s), be careful not to waste Horn Attacks. You'll need at least five, probably more, for the next fight.\nTwo String Shots make you slower than the Kakuna and speedtied with the Metapod at best. One String Shot makes you slower than the Caterpie, which also has String Shot. Your Speed DV determines whether you'll be slower than, speedtied with or faster than the Kakuna after one String Shot.\nIf you caught a Lv. 4 Nidoran, you'll be Lv. 12 to start this fight. That means any String Shots will boost your Attack until you're Lv. 13 for the Metapod. This will sometimes allow you to save a Horn Attack on the Caterpie. If you caught a Lv. 3 Nidoran, you'll be Lv. 11 and will lose any badge boosts upon leveling up on the Weedle."
           },
-          "trainer": "Route 3 - BugCatcher 2"
+          "properties": {
+            "trainer": "Route 3 - BugCatcher 2"
+          }
         },
         {
           "info": {
@@ -312,7 +342,9 @@
             "summary": "HA x2, HA x4",
             "description": "This fight is similar to the last one in that it greatly depends on your Attack and Speed DVs and whether you get String Shot from Caterpie. If you have <4 Horn Attack PP entering this fight, you should save a Horn Attack on the Caterpie even if it takes an extra turn."
           },
-          "trainer": "Route 3 - BugCatcher 3"
+          "properties": {
+            "trainer": "Route 3 - BugCatcher 3"
+          }
         },
         {
           "info": {
@@ -355,7 +387,9 @@
             "summary": "Horn Attack x2, Poison Sting for both.",
             "description": "Horn Attack a third time if Magnemite has 6+ HP after the first two"
           },
-          "trainer": "Mt. Moon 1F - SuperNerd"
+          "properties": {
+            "trainer": "Mt. Moon 1F - SuperNerd"
+          }
         },
         {
           "info": {
@@ -368,7 +402,9 @@
           "info": {
             "summary": "Horn Attack x2-3, Horn Attack x2"
           },
-          "trainer": "Mt. Moon 1F - Lass 1"
+          "properties": {
+            "trainer": "Mt. Moon 1F - Lass 1"
+          }
         },
         {
           "info": {
@@ -381,7 +417,9 @@
             "title": "Hiker (optional)",
             "summary": "Water Gun all 3"
           },
-          "trainer": "Mt. Moon 1F - Hiker"
+          "properties": {
+            "trainer": "Mt. Moon 1F - Hiker"
+          }
         },
         {
           "info": {
@@ -401,7 +439,9 @@
             "summary": "HA x2 + PS, HA x2",
             "description": "If the Zubat confuses you and you're at risk of dying if you hurt yourself, switch out to Squirtle, then switch back to Nidoking."
           },
-          "trainer": "Mt. Moon B2F - Rocket 1"
+          "properties": {
+            "trainer": "Mt. Moon B2F - Rocket 1"
+          }
         },
         {
           "info": {
@@ -414,7 +454,9 @@
             "summary": "HA x2, HA + PS, HA x2 + PS",
             "description": "Horn Attack Voltorb a second time if you have bad Attack or get a low roll.\nThis fight is straightforward unless Grimer disables Horn Attack. In that case, the strategies vary based on how long HA is disabled, but it's generally best to spam your next-strongest move (Tackle or Water Gun)."
           },
-          "trainer": "Mt. Moon B2F - SuperNerd"
+          "properties": {
+            "trainer": "Mt. Moon B2F - SuperNerd"
+          }
         },
         {
           "info": {
@@ -455,7 +497,9 @@
             "summary": "HA x3 + PS, HA, HA + PS, HA x2 + PS",
             "description": "Pidgeotto always dies in three hits unless you have really bad Attack or didn't get experience in Mt. Moon.\nIf you get hit by Sand-Attack, sacrifice your flier once Pidgeotto is in range to die to one Horn Attack. This is because you want to avoid getting hit by Sand-Attack again once you've switched in.\nExceptions: The badge boost from Sand-Attack is necessary to 1-shot the Pidgeotto; the badge boost could allow you to 1-shot the Rattata (only true with high Attack); you want to keep your slaves alive for risky Surge strats; or you have a really bad time."
           },
-          "trainer": "Bridge Rival - Bulbasaur"
+          "properties": {
+            "trainer": "Bridge Rival - Bulbasaur"
+          }
         },
         {
           "type": "B",
@@ -463,7 +507,9 @@
             "summary": "HA + PS both",
             "description": "If you used a few extra Horn Attack PP against Cerulean Rival, you have good Attack and you're not on Hiker strats, Poison Sting the Caterpie on turn 1. A critical might not kill, but it's likely to."
           },
-          "trainer": "Route 24 - BugCatcher"
+          "properties": {
+            "trainer": "Route 24 - BugCatcher"
+          }
         },
         {
           "type": "B",
@@ -471,7 +517,9 @@
             "summary": "HA + PS, HA x2",
             "description": "Don't switch out if Pidgey Sand-Attacks you; it can't kill your slaves as easily as Pidgeotto, and you only need to land three attacks to finish the fight.\nException: You get hit by multiple Sand-Attacks and/or Growls from Nidoran-F, and your HP or Horn Attack PP is low."
           },
-          "trainer": "Route 24 - Lass 2"
+          "properties": {
+            "trainer": "Route 24 - Lass 2"
+          }
         },
         {
           "info": {
@@ -484,7 +532,9 @@
             "summary": "HA + PS, HA x2, HA + PS",
             "description": "If you didn't fight encounters in Mt. Moon, you'll be Lv. 19 for Rattata.\nHorn Attack is a damage range at Lv. 19 and a guaranteed 1-shot at Lv. 20.\nRattata usually does 6 damage with Quick Attack and 11 with Hyper Fang.\nIf necessary, heal on turn 1 rather than before the fight.\nRattata might use the extra turn to Tail Whip you, in which case you'll get a useful Attack boost."
           },
-          "trainer": "Route 24 - Youngster"
+          "properties": {
+            "trainer": "Route 24 - Youngster"
+          }
         },
         {
           "info": {
@@ -502,7 +552,9 @@
             "summary": "Thrash (or Horn Attack, Poison Sting), Thrash (or Horn Attack x2)",
             "description": "Treat this fight like the second trainer (stay in if SA'd, ...)"
           },
-          "trainer": "Route 24 - Lass 1"
+          "properties": {
+            "trainer": "Route 24 - Lass 1"
+          }
         },
         {
           "info": {
@@ -516,7 +568,9 @@
             "summary": "Thrash (or Horn Attack, Poison Sting)",
             "description": "Mankey's Karate Chop always criticals, and it does up to 18 damage if you're Lv. 20.\nGenerally, it's best to heal before the fight if you're at risk of dying, but if your HP is high enough and you have enough Potions, you can heal during the fight to keep red bar for Nidoking's cry. This saves about one second.\nIf you have a decent time, avoid the temptation to stall for red bar in this fight. Mankey can troll you with Leer, and you'll need to heal off any damage you take before Misty anyway. Exception: You're on Hiker strats and have 16-20 HP."
           },
-          "trainer": "Route 24 - JrTrainerM 1"
+          "properties": {
+            "trainer": "Route 24 - JrTrainerM 1"
+          }
         },
         {
           "info": {
@@ -528,7 +582,9 @@
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 24 - Rocket"
+          "properties": {
+            "trainer": "Route 24 - Rocket"
+          }
         }
       ]
     },
@@ -550,7 +606,9 @@
             "summary": "Thrash, Thrash x3",
             "description": "If you have bad Attack and a critical Karate Chop from Machop will put you at 9+ HP (11+ HP with 0-2 DV Defense), use Horn Attack + Poison Sting on the Machop. This will decrease the chance that you get confused on Geodude, and it could help you get red bar.\nGeodude can go very quickly (Thrash + crit Thrash) or very slowly (no criticals + several Defense Curls).\nIf you get confused and are at risk of dying, switch to Squirtle and finish Geodude with Bubble. Squirtle is usually faster, and it takes little damage from Tackle.\nIf you got enough experience in Mt. Moon to get early Thrash, switching to Squirtle will undo a few benefits of that experience, such as being Lv. 25 for Staryu and Lv. 30 for Oddish in Rock Tunnel.\nIf you try to fight through confusion, use Horn Attack if it will kill, as it is faster than restarting Thrash."
           },
-          "trainer": "Route 25 - Hiker 1"
+          "properties": {
+            "trainer": "Route 25 - Hiker 1"
+          }
         },
         {
           "info": {
@@ -563,28 +621,36 @@
             "title": "Bottom Hiker (or Top Hiker)",
             "summary": "Water Gun"
           },
-          "trainer": "Route 25 - Hiker 3"
+          "properties": {
+            "trainer": "Route 25 - Hiker 3"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 25 - Lass 1"
+          "properties": {
+            "trainer": "Route 25 - Lass 1"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 25 - JrTrainerM"
+          "properties": {
+            "trainer": "Route 25 - JrTrainerM"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 25 - Lass 2"
+          "properties": {
+            "trainer": "Route 25 - Lass 2"
+          }
         },
         {
           "info": {
@@ -626,7 +692,9 @@
               "info": {
                 "summary": "Thrash"
               },
-              "trainer": "Cerulean Gym - JrTrainerF"
+              "properties": {
+                "trainer": "Cerulean Gym - JrTrainerF"
+              }
             },
             {
               "info": {
@@ -639,7 +707,9 @@
                 "summary": "Thrash and pray",
                 "description": "Staryu is a range at Lv. 24 unless you have 14-15 DV Attack.\nIf you miss the range and/or don't 2-shot Starmie, you might get confused from Thrash. In this case, you should almost always switch out.\nSwitch to Squirtle if you need a turn to heal Nidoking, and switch to your flier if you don't need a turn.\nIf Squirtle is out, Nidoking is slower than/speedtied with Starmie, and you don't need to (or can't) heal Nidoking, use Bubble in hopes of lowering Starmie's speed.\nStarmie BB damage:\n> 35-42 on 12-15 Special\n> 37-44 on 4-11 Special\n> 40-48 on 0-3 Special\nA critical Bubblebeam does up to 84 damage, and a critical Water Gun does up to 54."
               },
-              "trainer": "Misty"
+              "properties": {
+                "trainer": "Misty"
+              }
             }
           ]
         },
@@ -654,7 +724,9 @@
             "summary": "Thrash",
             "description": "Machop is a safe 1-shot with 12-15 DV Attack.\nIt does 9-12 damage with critical Karate Chop, and it criticals about 55 percent of the time.\nSimilar to the Mankey fight, you can heal before the fight to be safe, or you can heal on turn 1 of the fight to skip Nidoking's cry and possibly get back into red bar.\nIf you heal before the fight, teach Bubblebeam over Tackle or Water Gun (or Poison Sting if you have it)."
           },
-          "trainer": "Cerulean City - Rocket"
+          "properties": {
+            "trainer": "Cerulean City - Rocket"
+          }
         }
       ]
     },
@@ -728,14 +800,18 @@
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 6 - JrTrainerF 2"
+          "properties": {
+            "trainer": "Route 6 - JrTrainerF 2"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "Thrash"
           },
-          "trainer": "Route 6 - JrTrainerM 2"
+          "properties": {
+            "trainer": "Route 6 - JrTrainerM 2"
+          }
         }
       ]
     },
@@ -791,7 +867,9 @@
                 "summary": "HA + BB, Thrash (or BB x2), Thrash",
                 "description": "If Pidgeotto lands Sand-Attack, switch out to your flier (or Paras if your flier is dead, or your Cut slave if both are dead).\nQuick Attack does 8 damage (6 if you have 15 DV Defense), so heal if it can kill you with that.\nUse Horn Attack on turn 2 if you haven't taught Bubblebeam yet.\nIf you use Thrash and get confused against Ivysaur, sacrifice Squirtle to Vine Whip or your flier to Tackle."
               },
-              "trainer": "Boat Rival - Bulbasaur"
+              "properties": {
+                "trainer": "Boat Rival - Bulbasaur"
+              }
             },
             {
               "info": {
@@ -834,7 +912,9 @@
                 "summary": "Thrash (or Horn Attack + Bubblebeam, or Bubblebeam x2), Thrash, Thrash x2",
                 "description": "> Lead with Thrash if you're Lv. 28 or your Attack DV is 9-15 and your HP is <25 (<22 HP if you'll level up after Pikachu)\n> Lead with Horn Attack if you're Lv. 27 and your Attack DV is 0-8 and your HP is <25 (<22 if you'll level up after Pikachu)\n> Lead with Bubblebeam if you want to manipulate red bar off Voltorb's Sonicboom, which is usually a good idea when you can survive Sonicboom + Quick Attack\nIf you lead with Thrash, your only decision is what to do on Raichu if you get confused. If you can't survive a hit in confusion (13-17 damage; less if you get Growled), sacrifice Squirtle or your flier. If you can, try to fight through with Horn Attack (or Thrash if you get Growled after a low roll).\nIf you lead with Horn Attack, simply use Bubblebeam to finish Voltorb and Thrash the rest of the fight.\nIf you lead with Bubblebeam in hopes of manipulating red bar, pay attention to whether you get the speed fall. If you don't get it and Surge uses X Speed on Voltorb, it will be faster than Nidoking, so you'll need to kill it the next turn (and not get red bar unless it uses Sonicboom that turn). Otherwise, you can use Leer if you have it until you get Sonicboom (or until he has used enough Screeches and/or Tackles to put you at risk of dying). When finishing Voltorb, use Horn Attack if the first Bubblebeam did less than half damage."
               },
-              "trainer": "Surge"
+              "properties": {
+                "trainer": "Surge"
+              }
             }
           ]
         },
@@ -888,7 +968,9 @@
             "summary": "Thrash, Thrash, Thrash, Thrash (Horn Attack)",
             "description": "If you don't get a 4-turn Thrash and can't survive a hit in confusion (12-15 damage) and the first turn of Wrap (2 damage), swap out to a slave, then swap back to Nidoking and finish Bellsprout with horn Attack.\nIf possible, swap to a slave that has a short cry or won't gain a level after 162 experience (243 if it's Dux).\nOddish is preferred if you have it, because Poisonpowder doesn't affect it."
           },
-          "trainer": "Route 9 - JrTrainerF 1"
+          "properties": {
+            "trainer": "Route 9 - JrTrainerF 1"
+          }
         },
         {
           "type": "B",
@@ -896,7 +978,9 @@
             "summary": "Thrash (or Thunderbolt), Thrash, Thrash",
             "description": "Thunderbolt the Caterpie if your Attack DV is 0-12, because Thrash might not kill Venonat, which could leave you confused while in red bar."
           },
-          "trainer": "Route 9 - BugCatcher 2"
+          "properties": {
+            "trainer": "Route 9 - BugCatcher 2"
+          }
         }
       ]
     },
@@ -933,7 +1017,9 @@
             "summary": "BB, TB",
             "description": "If you're not in red bar, you can try to manipulate it off either Pokemon, because they will always use their super-effective attacking move on turn 1\nCubone does 22-26 damage with Bone Club (20-24 on 10-15 DV Defense)\nSlowpoke does 17-20 with Confusion (15-18 on 13-15 DV Special)\nCubone uses Growl half the time on turn 2\nIf manipulating red bar off Cubone, use Thunderbolt; for Slowpoke, use Bubblebeam\nBe careful not to put yourself at <6 HP if you skipped Mt. Moon experience, because you'll be Lv. 29 for the upcoming Oddish, which does 5 damage with Absorb\nAlso avoid manipulating red bar if your Special DV is 0-5, because the upcoming Lv. 25 Slowpoke will have a 14-33 percent chance of surviving Thunderbolt and killing you with Confusion"
           },
-          "trainer": "Rock Tunnel 1F - Pokemaniac"
+          "properties": {
+            "trainer": "Rock Tunnel 1F - Pokemaniac"
+          }
         },
         {
           "type": "B",
@@ -941,7 +1027,9 @@
             "summary": "TB",
             "description": "With 0-5 DV Special, this Slowpoke can be a good option for manipulating red bar\nIt will always die after a Bubblebeam and Thunderbolt, and it does 20-24 damage (17-20 on 12-15 DV Special)"
           },
-          "trainer": "Rock Tunnel B1F - Pokemaniac 3"
+          "properties": {
+            "trainer": "Rock Tunnel B1F - Pokemaniac 3"
+          }
         },
         {
           "type": "B",
@@ -949,7 +1037,9 @@
             "summary": "Thrash (& pray if L29)",
             "description": "If you're Lv. 29 for this fight, Oddish has at least a 45 percent chance to live\nIf you're Lv. 30, Oddish will likely die unless you have terrible Attack\nBulbasaur is a favorable range at Lv. 29\nTwo of its moves -- Absorb and Poisonpowder -- are generally harmless, but Stun Spore can waste a lot of time, and Sleep Powder will likely end your run if you're in red bar\nIf you get paralyzed, use your Full Restore as soon as you can after killing Oddish (if you use it on Oddish, it can paralyze you again or put you to sleep)\nIf you get put to sleep, you won't be able to do anything until you wake up, because you'll be locked into Thrash\nWhen you have a status condition, Oddish will always use Absorb (5 damage on 5-15 DV Special, 6 on 0-4)\nYou'll be Lv. 30 for Bulbasaur unless you skipped Mt. Moon experience and split experience on both the top Hiker fight on Route 25 and the 4-turn Thrash fight on Route 9"
           },
-          "trainer": "Rock Tunnel B1F - JrTrainerF 2"
+          "properties": {
+            "trainer": "Rock Tunnel B1F - JrTrainerF 2"
+          }
         },
         {
           "info": {
@@ -966,7 +1056,9 @@
           "info": {
             "summary": "BB x3"
           },
-          "trainer": "Rock Tunnel B1F - Hiker 1"
+          "properties": {
+            "trainer": "Rock Tunnel B1F - Hiker 1"
+          }
         },
         {
           "type": "B",
@@ -974,7 +1066,9 @@
             "summary": "Thrash",
             "description": "Pidgey does 6 damage with Quick Attack (5 with 10-15 DV Defense), heal before the fight if necessary"
           },
-          "trainer": "Rock Tunnel 1F - JrTrainerF 2"
+          "properties": {
+            "trainer": "Rock Tunnel 1F - JrTrainerF 2"
+          }
         },
         {
           "info": {
@@ -995,7 +1089,9 @@
             "summary": "BB (or Thrash), Thrash",
             "description": "Vulpix does 4 with Quick Attack\nIn general, it's better lead with Bubblebeam unless your Attack DV is at least 5 higher than your Special DV\nWith 15 DV Attack, Growlithe has a 15 percent chance to live; with 15 DV Special, it always dies\nIf necessary, heal on turn 1, rather than before the fight. Growlithe can use the extra turn to boost your Attack with Leer or put you back into red bar with Ember or Bite, which do less than 10 damage."
           },
-          "trainer": "Route 8 - Gambler 2"
+          "properties": {
+            "trainer": "Route 8 - Gambler 2"
+          }
         },
         {
           "info": {
@@ -1070,7 +1166,9 @@
                 "title": "Poster Grunt",
                 "summary": "Thrash"
               },
-              "trainer": "Game Corner - Rocket"
+              "properties": {
+                "trainer": "Game Corner - Rocket"
+              }
             },
             {
               "info": {
@@ -1103,7 +1201,9 @@
                 "title": "Lift Key Grunt",
                 "summary": "Thrash"
               },
-              "trainer": "Rocket Hideout B4F - Rocket 3"
+              "properties": {
+                "trainer": "Rocket Hideout B4F - Rocket 3"
+              }
             },
             {
               "info": {
@@ -1153,7 +1253,9 @@
                 "summary": "(X Acc +) TB, (X Acc +) HD, HD",
                 "description": "Teach TM07 Horn Drill over Horn Attack (Slot 2)"
               },
-              "trainer": "Rocket Hideout B4F - Rocket 2"
+              "properties": {
+                "trainer": "Rocket Hideout B4F - Rocket 2"
+              }
             },
             {
               "info": {
@@ -1166,7 +1268,9 @@
                 "title": "Left Grunt",
                 "summary": "BB, X Acc + TB, HD"
               },
-              "trainer": "Rocket Hideout B4F - Rocket 1"
+              "properties": {
+                "trainer": "Rocket Hideout B4F - Rocket 1"
+              }
             },
             {
               "info": {
@@ -1180,7 +1284,9 @@
                 "title": "Giovanni",
                 "summary": "(X Acc +) BB, (X Acc +) BB, HD"
               },
-              "trainer": "Rocket Hideout B4F - Giovanni"
+              "properties": {
+                "trainer": "Rocket Hideout B4F - Giovanni"
+              }
             },
             {
               "info": {
@@ -1219,7 +1325,9 @@
                 "title": "Tower Rival",
                 "summary": "TB, TB, BB, Thrash.."
               },
-              "trainer": "Tower Rival - Bulbasaur"
+              "properties": {
+                "trainer": "Tower Rival - Bulbasaur"
+              }
             },
             {
               "info": {
@@ -1232,7 +1340,9 @@
                 "summary": "Rock Slide x2",
                 "description": "If you're in red bar for this fight, you'll die to a Night Shade\nGastly's other two moves, Lick and Confuse Ray, can end the run as well\nIf you get confused, switch out to your weakest Pokemon, let it die, then bring Nidoking back in\nIf you get paralyzed, use your Full Restore\nUsing a Potion before the fight generally isn't worth it, because you're 81 percent likely to hit both Rock Slides\nIf Nidoking dies here, you can continue your run if your Dig slave is lucky enough to defeat the Gastlies with Dig"
               },
-              "trainer": "Pokémon Tower 4F - Channeler 2"
+              "properties": {
+                "trainer": "Pokémon Tower 4F - Channeler 2"
+              }
             },
             {
               "info": {
@@ -1254,7 +1364,9 @@
               "info": {
                 "summary": "Rock Slide"
               },
-              "trainer": "Pokémon Tower 6F - Channeler 2"
+              "properties": {
+                "trainer": "Pokémon Tower 6F - Channeler 2"
+              }
             },
             {
               "info": {
@@ -1266,7 +1378,9 @@
               "info": {
                 "summary": "Rock Slide"
               },
-              "trainer": "Pokémon Tower 6F - Channeler 3"
+              "properties": {
+                "trainer": "Pokémon Tower 6F - Channeler 3"
+              }
             },
             {
               "info": {
@@ -1293,7 +1407,9 @@
               "info": {
                 "summary": "IB x3"
               },
-              "trainer": "Pokémon Tower 7F - Rocket 1"
+              "properties": {
+                "trainer": "Pokémon Tower 7F - Rocket 1"
+              }
             },
             {
               "type": "B",
@@ -1301,14 +1417,18 @@
                 "summary": "Thrash",
                 "description": "Drowzee can be a range with less than 6DV Attack if you had level 30 for Oddish or less than 9DV if you didn't"
               },
-              "trainer": "Pokémon Tower 7F - Rocket 2"
+              "properties": {
+                "trainer": "Pokémon Tower 7F - Rocket 2"
+              }
             },
             {
               "type": "B",
               "info": {
                 "summary": "IB, Thrash"
               },
-              "trainer": "Pokémon Tower 7F - Rocket 3"
+              "properties": {
+                "trainer": "Pokémon Tower 7F - Rocket 3"
+              }
             },
             {
               "info": {
@@ -1368,7 +1488,9 @@
           "info": {
             "summary": "Thrash (x2-3)"
           },
-          "trainer": "Silph Co. 5F - Rocket 1"
+          "properties": {
+            "trainer": "Silph Co. 5F - Rocket 1"
+          }
         },
         {
           "info": {
@@ -1411,7 +1533,9 @@
             "title": "Silph Rival",
             "summary": "X Acc, X Speed, Drill x5"
           },
-          "trainer": "Silph Rival - Bulbasaur"
+          "properties": {
+            "trainer": "Silph Rival - Bulbasaur"
+          }
         },
         {
           "info": {
@@ -1438,7 +1562,9 @@
           "info": {
             "summary": "X Acc + IB, Drill x2"
           },
-          "trainer": "Silph Co. 11F - Rocket 2"
+          "properties": {
+            "trainer": "Silph Co. 11F - Rocket 2"
+          }
         },
         {
           "info": {
@@ -1451,7 +1577,9 @@
             "title": "Silph Gio",
             "summary": "X Acc, Drill x2, IB, Drill"
           },
-          "trainer": "Silph Co. 11F - Giovanni"
+          "properties": {
+            "trainer": "Silph Co. 11F - Giovanni"
+          }
         },
         {
           "info": {
@@ -1619,7 +1747,9 @@
               "info": {
                 "summary": "EQ x4"
               },
-              "trainer": "Fuchsia Gym - Juggler 1"
+              "properties": {
+                "trainer": "Fuchsia Gym - Juggler 1"
+              }
             },
             {
               "info": {
@@ -1631,7 +1761,9 @@
               "info": {
                 "summary": "EQ, EQ (+ TB)"
               },
-              "trainer": "Fuchsia Gym - Juggler 2"
+              "properties": {
+                "trainer": "Fuchsia Gym - Juggler 2"
+              }
             },
             {
               "type": "B",
@@ -1639,7 +1771,9 @@
                 "summary": "EQ x3, then use an Elixer on Weezing, stall with Thunderbolt or Poke Flute",
                 "description": "The goal is to die to Selfdestruct, but it's OK if you don't"
               },
-              "trainer": "Koga"
+              "properties": {
+                "trainer": "Koga"
+              }
             }
           ]
         },
@@ -1740,14 +1874,18 @@
           "info": {
             "summary": "IB"
           },
-          "trainer": "Celadon Gym - Beauty 3"
+          "properties": {
+            "trainer": "Celadon Gym - Beauty 3"
+          }
         },
         {
           "type": "B",
           "info": {
             "summary": "IB x3"
           },
-          "trainer": "Erika"
+          "properties": {
+            "trainer": "Erika"
+          }
         }
       ]
     },
@@ -1767,7 +1905,9 @@
           "info": {
             "summary": "X Acc + EQ, Drill x3 (Drill Growlithe if Blaine uses a Super Potion)"
           },
-          "trainer": "Blaine"
+          "properties": {
+            "trainer": "Blaine"
+          }
         }
       ]
     },
@@ -1788,7 +1928,9 @@
             "summary": "EQ, (X Speed +) EQ, EQ, EQ",
             "description": "X Speed on Mr. Mime if you have 0-4 DV Speed\nIf you have to X Speed on Mr. Mime, it can kill you with Confusion or buy itself an extra turn with Barrier\nIf it uses Barrier and you don't critical through it, finish it with Thunderbolt"
           },
-          "trainer": "Sabrina"
+          "properties": {
+            "trainer": "Sabrina"
+          }
         }
       ]
     },
@@ -1819,7 +1961,9 @@
               "info": {
                 "summary": "IB"
               },
-              "trainer": "Viridian Gym - CooltrainerM 3"
+              "properties": {
+                "trainer": "Viridian Gym - CooltrainerM 3"
+              }
             },
             {
               "type": "B",
@@ -1827,7 +1971,9 @@
                 "summary": "EQ, EQ (or Thunderbolt if Leer badge boost with 5+ DV Spc), EQ",
                 "description": "This fight will generally be simple and fast, but because you're in red bar, the Machokes can end your run with a critical Karate Chop\nThe Machokes range from a 57% range to a 92% range depending on your Attack DV"
               },
-              "trainer": "Viridian Gym - Blackbelt 3"
+              "properties": {
+                "trainer": "Viridian Gym - Blackbelt 3"
+              }
             },
             {
               "info": {
@@ -1844,7 +1990,9 @@
               "info": {
                 "summary": "IB, IB, EQ, EQ, IB x2"
               },
-              "trainer": "Giovanni"
+              "properties": {
+                "trainer": "Giovanni"
+              }
             }
           ]
         },
@@ -1867,7 +2015,9 @@
             "title": "Viridian Rival",
             "summary": "X Acc, X Speed, IB x2, IB, TB, EQ, EQ, Drill"
           },
-          "trainer": "Viridian Rival - Bulbasaur"
+          "properties": {
+            "trainer": "Viridian Rival - Bulbasaur"
+          }
         },
         {
           "info": {
@@ -1970,7 +2120,9 @@
             "summary": "Switch to your flier, let it die, then X Acc, Drill x5 (Earthquake Jynx if 14+ DV Attack)",
             "description": "You'll win using the shift strat unless Dewgong Gen 1 misses Aurora Beam\nIf you need to make up time, you can just use an X Accuracy without switching\nDewgong will either kill you with Aurora Beam (50%) or use Rest (50%)"
           },
-          "trainer": "Lorelei"
+          "properties": {
+            "trainer": "Lorelei"
+          }
         },
         {
           "info": {
@@ -1983,7 +2135,9 @@
             "summary": "X Acc + IB, HD, HD, IB, HD",
             "description": "Onix does up to 22 damage with Slam (up to 20 with good defense), but Slam can miss, and its other moves do only <11 damage, so healing is never worth it unless you took damage from Blackbelt"
           },
-          "trainer": "Bruno"
+          "properties": {
+            "trainer": "Bruno"
+          }
         },
         {
           "info": {
@@ -1996,7 +2150,9 @@
             "summary": "(X Speed +) EQ, IB x2, EQ, EQ, EQ",
             "description": "You normally want to be at 57+ HP for Agatha, which usually means using a Super Potion or your Full Restore\nFrom there, use an X Speed on turn 1 (unless you have 11+ DV Speed and got Carbos)\nHowever, if you have taken no damage since reviving you will have enough HP to survive a Wing Attack from Golbat\nIf you outspeed the first Gengar carrying red bar through this fight can save a significant amount of time but this risks dying to a Golbat critical or Night Shade from the last Gengar"
           },
-          "trainer": "Agatha"
+          "properties": {
+            "trainer": "Agatha"
+          }
         },
         {
           "info": {
@@ -2010,7 +2166,9 @@
             "summary": "X Spec + TB, IB, X Speed + IB, IB, IB",
             "description": "This Gyarados behaves the same as Silph Rival's Gyarados\nIt does 122-144 damage with Hydro Pump on 0 DV Special and 107-126 damage on 14-15 DV\nNone of Lance's other Pokemon is a threat, so you want to heal before the fight so that Hydro Pump puts you in red bar\nDo not heal to full unless you lack the Potions/Super Potions to heal to a good number for red bar\nIf Gyarados misses Hydro Pump, you can stall with Earthquake to get red bar, but only do this if you need the red bar to meet your goal time\nAlso note that Aerodactyl is a 95% range on 0 Special"
           },
-          "trainer": "Lance"
+          "properties": {
+            "trainer": "Lance"
+          }
         },
         {
           "info": {
@@ -2024,7 +2182,9 @@
             "summary": "X Speed + X Acc + Drill x6 (EQ Alakazam if 14+ DV Attack)",
             "description": "You generally don't need to heal for this fight unless you're deep in red bar, as Pidgeot's only threats are critical Wing Attack (4.4% chance), double Wing Attack (6.3%) and turn 1 Sky Attack (25%)\nIf you can afford a slight time loss, heal from deep red bar into high red bar (~26 HP). If you can afford a significant time loss, heal to at least 50 HP\nPidgeot does up to 28 damage with Wing Attack before you use the X Speed/Special, and 25 damage after\nIf you enter the fight with your HP in the mid-20s, consider using the X Speed/Special first so that you have a better chance of surviving a non-crit Wing Attack\nAlso use the X Speed first if your HP is 35-60 and you have a Super Potion, because it will help you survive a turn 1 Sky Attack if you use the Super Potion on turn 2\nIf you can't survive a Sky Attack after using a Super Potion, you can use a Full Restore, but you'll still die to a critical Sky Attack unless you have great stats and get a low roll, and a non-crit won't put you close to red bar\nIf you're so far ahead that you can afford to heal to full for this fight, it's usually best to give Alakazam a turn if Pidgeot uses Sky Attack on turn 1\nJust use your X Accuracy on turn 1, use Horn Drill on Pidgeot, then use your X Speed on Alakazam\nYou'll survive a non-crit Psychic from Alakazam unless your combination of HP and Special is below average"
           },
-          "trainer": "Champion - Bulbasaur"
+          "properties": {
+            "trainer": "Champion - Bulbasaur"
+          }
         }
       ]
     },

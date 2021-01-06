@@ -20,6 +20,11 @@
         app: "<%= htmlWebpackPlugin.options.config.app.name %>"
       };
     </script>
+    <% if (htmlWebpackPlugin.options.config.app.dev) { %>
+    <script>
+      window.appConfig.dev = true;
+    </script>
+    <% } %>
 
     <!-- polyfills -->
     <!-- load the webcomponents loader, which injects the necessary polyfill bundle -->

@@ -55,6 +55,7 @@ module.exports = merge(common(config), {
       // short_name: config.app.name,
       description: config.app.description,
       background_color: '#ffffff',
+      theme_color: '#1865a9',
       start_url: '/',
       ios: true,
       icons: [

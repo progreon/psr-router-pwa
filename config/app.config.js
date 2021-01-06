@@ -45,7 +45,10 @@ module.exports = (production) => ({
     autoprefix: env.APP_AUTOPREFIX || production,
 
     // The current version of the app.
-    version: env.APP_VERSION || '0.0.1',
+    version: env.APP_VERSION || '0.0.0',
+
+    // Set the dev boolean
+    dev: !production,
   },
 
   settings: {
