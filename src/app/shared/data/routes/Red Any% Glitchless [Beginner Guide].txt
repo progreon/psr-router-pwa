@@ -1,0 +1,453 @@
+Game: r
+Route: Red Any% Glitchless [Beginner Guide]
+	S: Before starting
+		Clear any existing save file by pressing Up+B+Select on the title screen
+		Set text speed to FAST, battle animation to OFF and battle style to SHIFT
+		Give your character and your rival a 1-character name
+	S: Pallet Town :: Let's begin!
+		Get the PC potion on a race
+		GetP: #Squirtle:5
+			Choose Squirtle, and give it a 1-character name
+		B: Rival 1 - Bulbasaur :: Rival 1 :: Tail Whip once, then spam Tackle (use a second Tail Whip if you get Growled turn 1)
+	S: Route 1
+		E: RATTATA:2 :: Kill a Lv. 2-3 Rattata or Lv. 2-3 Pidgey using Tackle. You need the experience to get Bubble for Brock
+		When walking down to deliver Oak's Parcel, cut through the second-to-last patch of grass if you haven't yet fought an encounter
+	S: Pallet Town
+		When delivering the Parcel, walk behind or next to Prof. Oak so that your (slow walking) rival takes fewer steps in the cutscene
+	S: Viridian City
+		Shop: Buy 4 Poke Balls
+			4 POKE_BALL
+	S: Route 22
+		Manip: NIDORANM:4 13 15 15 14 15
+			Use a manip of your choice to get a Lv. 4 Nidoran with perfect stats, and give it a one-character name
+			See pastebin: https://pastebin.com/027sfdrS
+			A press map: [[https://i.imgur.com/ZRTQZUC.png]]
+		GetI: POTION :: Get the hidden tree Potion
+	S: Viridian Forest
+		Follow this path (only red tiles can produce encounters)
+			[[https://i.imgur.com/3o7klcA.png]]
+		GetI: ANTIDOTE :: Get the antidote along the way
+		Heal to 10+ HP for Weedle Guy
+		B: Viridian Forest - BugCatcher 3 :: Weedle Guy :: Tail Whip x2, Tackle Spam [Heal if HP < 7]
+			If you get poisoned, wait until after the fight to use the Antidote.
+			Check your leveled up stats after this fight, if you have 13 Special you have bad Special, if you have 14 or 15 you have good special
+		Menu: If you are poisoned do the following menu:
+			SwapP: 1 2 :: nidoran should be the lead pokemon
+			Use: POTION ? 2 :: Potion if HP is bellow 16
+			Use: ANTIDOTE ? 2
+	S: Pewter City
+		Go to the mart
+		Shop: Buy 8 Potions
+			8 POTION
+		S: Pewter Gym
+			If you weren't poisoned, do the swap menu now.
+			[OPTIONAL SAVE IF YOU HAVE BAD SPECIAL]
+			B: Brock :: Bubble x2-3 [Heal if HP < 8], Bubble x2-3 [Heal if HP < 7]
+				Opp: 1
+					SwapP: 2 :: Immediately switch to Squirtle
+					Bubble x2-3
+				SwapP: 1 :: Switch to Nidoran after killing Geodude
+				Opp: 2
+					SwapP: 2 :: Immediately switch to Squirtle
+					Bubble x2-3. If Onix uses Bide on the turn you switch to Squirtle, use Tail Whip twice, then Bubble
+					Onix does 6 damage with Tackle
+		Change the battle style option from SHIFT to SET and go to route 3
+	S: Route 3
+		You need to use one fewer Horn Attack than what's listed below, so finish enemies with Tackle when it will kill
+		B: Route 3 - BugCatcher 1 :: Leer + HA x2, Leer + HA x2, HA x2 + Tackle
+			On Weedle: Leer + HA + Tackle if you got stringshot hit OR tackle will always kill
+		Menu: Potion if HP < 25
+			Use: POTION ?
+		B: Shorts Guy :: Leer + HA x2 [Heal if HP < 17 on Rat or < 6 on Ekans]
+			On Ekans: Potion if you were bind and HP < 12 (20 if rat used tailwhip)
+		Fight the Bug Catcher below, not the Lass above
+		B: Route 3 - BugCatcher 2 :: HA Spam all pokes finish pokemon with tackle when possible
+		Menu: Use a potion if HP < 21
+			Use: POTION ?
+		B: Route 3 - Lass 2 :: HA x4 (This route also fights the optional lass)
+		B: Route 3 - BugCatcher 3 :: PS x2, HA PS HA PS
+			Opp: 1
+				PS x2 (HA turn 2 if PS won't kill and didn't get turn 1 string shot hit)
+			Opp: 2
+				HA, PS, HA, PS (You really want at least 1 HA after this fight, if you are at 1 HA just PS)
+		GetP: #Pidgey:7
+			Catch a Flyer
+			Tackle then toss a ball at any flyer expect level 8s where you HA then toss a ball
+		E: Pidgey:6 :: Kill any encounter in the grass with HA EXCEPT level 3 or level 7 jigglypuffs
+	S: Mt. Moon
+		As soon as you enter Mt. Moon, save and hard reset
+		RNG manipulate a Paras encounter by replicating the inputs in this video: https://www.youtube.com/watch?v=zITeWzAheto
+			This manip has a 4/60 chance to produce a bad early encounter (meaning you won't get the Paras)
+			The manip has a 1/60 chance to produce an early Paras (you should weaken this one, since you won't get the normal one)
+			The manip has a 1/60 chance to produce a Paras on the desired tile that does not get in the ball with perfectly executed inputs
+			If the Paras breaks out, or you're not confident in throwing the ball perfectly, Poison Sting it once before throwing a ball
+			This manip requires a lot of practice. You can do runs without it while learning, but you'll eventually want to attempt it
+			If the manip fails, it might have been due to RNG. You can either continue as normal and perform a backup Paras manip at the end of Mt. Moon, or re-save to get a new chance
+		GetI: TM_12
+		GetI: RARE_CANDY
+		GetI: ESCAPE_ROPE
+		GetI: TM_01
+		GetI: MOON_STONE
+		GetP: #Paras:10
+			TEMP: getting paras during the manip
+		Menu: MENU after Paras and Before Rocket:
+			Toss: POKE_BALL *
+			Toss: ANTIDOTE *
+			Use: RARE_CANDY
+			Tm: TM_12 1 2
+			Use: MOON_STONE
+			Tm: TM_01 1 1
+		B: Mt. Moon B2F - Rocket 1 :: Rocket :: MP, MP + PS (HA if zubat uses leech life and use MP if leech life also crits)
+		B: Mt. Moon B2F - SuperNerd :: MP + HA, MP + (PS), MP + HA
+			(HA when possible but if you are out just MP again)
+			Opp: 1
+				Note: Water Gun can kill if you get a good MP roll, if so use WG over MP or HA
+		GetI: HELIX_FOSSIL :: Choose the Helix Fossil
+		If you don't have a Paras, use this backup manip: https://www.youtube.com/watch?v=29TwUgeeGME (This Paras does not get in the ball with perfect inputs, so you should Horn Attack it first)
+	S: Cerulean City
+		Use the Center
+		Get IT (Instant Text)
+			You talk to the bike salesman and mash B through his text, this will set all text to instant. Things that kill instant text are Yes/No textboxes, opening the menu in and out of fights.
+		GetI: RARE_CANDY :: Get the hidden Rare Candy behind the top-left house
+	S: Nugget Bridge
+		B: Bridge Rival - Bulbasaur :: Bridge Rival :: HA x3, HA, MP, MP + HA
+			If you get hit by 2 sand attacks swap to Squirtle and let it die
+			Try to put Pidgeotto in HA range before doing this: doing so avoids getting a chance to get sand-attack again after swapping back
+			If you get growled or miss a bunch into leech seed healing, you want to kill Bulbasaur with MP
+		B: Route 24 - BugCatcher :: MP (+ PS), MP. If you missed MP got a String Shot Hit use HA
+		B: Route 24 - Lass 2 :: MP (+ PS), HA x2. Stay in if SA'd
+		B: Route 24 - Youngster :: MP, MP, HA
+		B: Route 24 - Lass 1 :: MP (+ PS), HA x2. Stay in if SA'd
+		B: Route 24 - JrTrainerM 1 :: Mankey Guy :: HA x2 if 7 < HP < 28, otherwise MP + (PS)
+			Note: Mankey is 1/3 to Karate Chop and does 12-15, healing is an option but is slow cause you lose IT
+			HP < 8: MP + (PS) [Note: MP is a range to kill, so healing is an option but is slow cause you lose IT]
+			HP > 7: HA x2 [Note: Poison Sting can kill if you get a good HA roll, if so use PS over the second HA]
+			HP > 27: MP + (PS)
+		B: Route 24 - Rocket :: MP, HA
+	S: Route 25
+		B: Route 25 - Hiker 3 :: Bottom Hiker 1 :: WG
+		B: Route 25 - Lass 1 :: MP, HA x2
+		B: Route 25 - Hiker 2 :: Bottom Hiker 2 :: WG, WG, MP (+ PS), WG
+		B: Route 25 - Lass 2 :: MP, teach Thrash over WG, Thrash
+			BSettings: 1 :: You will learn Thrash here, teach it over Water Gun
+				TEACH: THRASH WATER_GUN
+		GetI: ETHER :: Get the hidden Ether
+		Say yes to Bill (you'll lose instant text here)
+		Menu: After the Bill cutscene: opt. heal to 55+, candy to L24, Escape Rope back to Cerulean
+			Use: POTION ? :: ONLY if you have at least 2 MP's and wealthy on potions
+			Use: RARE_CANDY
+			Use: ESCAPE_ROPE
+	S: Cerulean City
+		Center unless you have 55+ HP and at least 2 Mega Punches
+		Get IT again
+		Walk through the Dig house to fight the Rocket
+		B: Cerulean City - Rocket :: Thrash x2-4
+		Hop the ledge and enter the gym
+		S: Cerulean Gym
+			B: Cerulean Gym - JrTrainerF :: Thrash
+			B: Misty :: Thrash and pray
+				If you are ever alive and confused swap to another poke (bird) and let it die
+		From this point on, if you need to heal, teach Bubblebeam
+		If you have less than 15 HP: Potion, teach BB and get IT again
+		Walk through the Dig house again, and continue south toward Vermilion
+	S: Route 5
+		Enter the building in the southeast corner, and take the stairs to the underground path
+	S: Route 6
+		Walk through the left grass to avoid the Bug Catcher on the right
+		B: Route 6 - JrTrainerF 2 :: Thrash
+		Heal to 3+ HP
+		B: Route 6 - JrTrainerM 2 :: Thrash
+		Potion if < 13 HP
+			Potion -13+ HP lives QA x2, Wine Whip + QA non crits, and Wine Whip Crit
+	S: Vermilion City
+		Go to the S.S. Anne
+		S: SS Anne
+			Take the left stairs, then go down and right to meet your rival
+			B: Boat Rival - Bulbasaur :: Boat Rival :: HA x2, MP, Thrash.
+				If you get sand attacked swap to another pokemon and let it die
+			GetI: HM_01 :: Get HM01 from the captain
+			If you have less than 9 HP and IT, Fight the Gentleman before you leave the boat with thrash then pickup the rare candy
+		Shop: Buy:
+			4 REPEL
+			4 PARLYZ_HEAL
+		Menu: MENU Before cut brush:
+			Tm: TM_11 1 4 :: if you haven't done this yet
+			[Rare Candy if you fought the gentleman]
+			Tm: HM_01 4
+			Tm: TM_28 4
+		Cut the bush
+		Surge Cans Manip
+			Optimal: https://www.youtube.com/watch?v=8Pa2f2WxCe4
+			Pallete Cans: https://youtu.be/_tWhfBITf_g (aka 'Cheater' Palette, allows you to see through Rock Tunnel)
+			If the manip fails, use this guide to solve the puzzle normally [[https://i.imgur.com/mCgVe4w.png]]
+		S: Vermilion Gym
+			B: Surge :: if < 21 HP just Thrash, otherwise BB + HA, then Thrash
+				If you are ever confused swap to the bird and let it die
+		GetI: BIKE_VOUCHER :: Get the Bike Voucher and use Dig on Paras
+	S: Cerulean City
+		GetI: BICYCLE BIKE_VOUCHER :: Get the Bicycle from the bike shop
+		Menu: After leaving the shop
+			Swap: 1 BICYCLE
+			Tm: TM_24 1 3
+			Use: BICYCLE
+		Get on the bike and head east to Route 9, cutting the two bushes in your way
+	S: Route 9
+		B: Route 9 - JrTrainerF 1 :: MP, Thrash x3
+			If you run out of mega punches without killing the first poke just Thrash you will be 25% to hit yourself on the last poke
+			If you get paralyzed, use your Full Restore after the fight (not during)
+		B: Route 9 - BugCatcher 2 :: BB, Thrash x2-3
+	S: Rock Tunnel
+		Map to get through Rock Tunnel
+			1F[[https://i.imgur.com/oPBnthL.png]]2F[[https://i.imgur.com/SMZikOB.png]]
+		Menu: After taking 1 step down: Scroll down and use a Repel
+			Use: REPEL
+		B: Rock Tunnel 1F - Pokemaniac :: BB, TB
+		B: Rock Tunnel B1F - Pokemaniac 3 :: TB
+		[Optional Save if you are bellow 18 HP]
+		B: Rock Tunnel B1F - JrTrainerF 2 :: Thrash
+			If you have 18 - 22 HP use TB, then Thrash.
+			If you get para'd use a heal on it, and if you get put to sleep heal if absorb kills
+		Menu: Use your second Repel somewhere near the yellow tile on the map above
+			Use: REPEL
+		Menu: Use your third Repel on the blue/yellow tile immediately before the Hiker
+			Use: REPEL
+		[You can delay these 2 repels up to ~10 tiles]
+		B: Rock Tunnel B1F - Hiker 1 :: BB x3
+		B: Rock Tunnel 1F - JrTrainerF 2 :: Thrash
+			Pidgey does 5 with Quick Attack
+		After exiting, head south to Lavender Town and west to Route 8
+	S: Route 8
+		B: Route 8 - Gambler 2 :: BB (+Thrash), Thrash
+			Opp: 1
+				Use: POTION ? :: If you have less than 5 HP Potion
+			Vulpix does 4 with Quick Attack
+		Take the underground path to Celadon City
+	S: Underground :: Pick up the hidden Elixer & Nugget in the underground
+		GetI: ELIXER
+		GetI: NUGGET
+	S: Celadon City
+		S: Shopping :: Bike to the mart and do the shopping
+			Shop: 2F
+				-1 TM_34
+				-2 NUGGET
+				1 TM_07
+				9 SUPER_REPEL
+				4 SUPER_POTION
+				2 REVIVE
+			Shop: 4F
+				1 POKE_DOLL
+			Shop: Roof: Buy a Soda Pop
+				1 SODA_POP
+			GetI: TM_48 SODA_POP :: Trade the Soda Pop with the girl
+			Shop: Come back and buy a Fresh Water
+				1 FRESH_WATER
+			Shop: 5F
+				12 X_ACCURACY
+				7 X_SPECIAL
+				2 X_SPEED
+		GetI: HM_02 :: Take the Elevator and get HM 02 (Fly)
+		Menu: Upon exiting the house
+			Swap: 2 TM_07
+			Use: SUPER_REPEL
+			Tm: TM_48 1 1
+			Swap: 4 X_ACCURACY
+			Tm: HM_02 3
+		Fly to Lavender (3 down), and walk to the tower
+	S: Pokémon Tower
+		NOTE: From this point on you have 2 revives which means deaths aren't as scary, so if you die remember to swap to a pokemon, revive, let the swapped pokemon die and ANY AND ALL X ITEMS ARE GONE. This route has extras so you shouldn't run out of x items, and there will still be some saving since some deaths with revives are still really slow to come back from if at all
+		B: Tower Rival - Bulbasaur :: Tower Rival :: TB x2, BB, Thrash
+		B: Pokémon Tower 4F - Channeler 2 :: Rock Slide x2
+		GetI: ELIXER :: Get the Elixer item ball
+		GetI: ELIXER :: Get the hidden Elixer
+		Take the free heal on 5F
+		B: Pokémon Tower 6F - Channeler 2 :: Rock Slide
+		B: Pokémon Tower 6F - Channeler 3 :: Rock Slide
+		GetI: RARE_CANDY :: Pickup the rare candy in your way
+		Menu: Teach TM07 (Horn Drill) over Rock Slide
+			Tm: TM_07 1 1
+		Enter the Ghost battle and escape using the Poke Doll
+		Menu: During the Ghost battle (TEMP: should be menu in fight)
+			Swap: 4 SUPER_REPEL
+			Use: POKE_DOLL
+		B: Pokémon Tower 7F - Rocket 1 :: TB x3 + (BB)
+		B: Pokémon Tower 7F - Rocket 2 :: X ACC, HD x2
+			Use: X_ACCURACY
+		B: Pokémon Tower 7F - Rocket 3 :: TB x2, Thrash
+		GetI: POKE_FLUTE :: Get the Pokeflute and Fly to Celadon City
+	S: Celadon City
+		Use the Center
+		Bike to Saffaron City
+	S: Silph Co.
+		Enter Silph Co and take the stairs to floor 5
+		GetI: ELIXER :: Get the Elixer in the tree
+		B: Silph Co. 5F - Rocket 1 :: Thrash
+		Menu: If you get paralized use a heal
+			Use: PARLYZ_HEAL ?
+		GetI: CARD_KEY :: Get the Card Key
+		B: Silph Rival - Bulbasaur :: Silph Rival :: X Acc, X Speed, HD x5
+			Use: X_ACCURACY
+			Use: X_SPEED
+		NOTE: In this split we want to take a bit of damage to do a strat on Koga called Boom strats
+		Menu: If you have less than 78 HP use ether on HD before the next fight
+			Use: ETHER
+		B: Silph Co. 11F - Rocket 2 :: X Acc, BB, HD x2
+			Opp: 1
+				Use: X_ACCURACY :: Turn 1
+				Turn 2: If Cubone damages you and you need to ether still use ether now
+				BB
+			Opp: 2
+				If you haven't used ether do so now
+				HD
+			Opp: 3
+				HD
+		B: Silph Co. 11F - Giovanni :: Silph Gio :: X Acc, HD x2, BB, HD
+			Use: X_ACCURACY
+		Backtrack to 3F, then take the elevator to 10F
+		GetI: TM_26
+		GetI: RARE_CANDY
+		Dig out
+	S: Celadon City
+		Bike west
+		Menu: MENU before Snorlax:
+			Use: SUPER_REPEL
+			Swap: 5 RARE_CANDY
+			Use: POKE_FLUTE
+		Run from the Snorlax
+	S: Cycling Road
+		NOTE: You can hold B to stop automatically moving down on Cycling Road
+		GetI: RARE_CANDY :: Get the hidden Rare Candy
+	S: Fuchsia City
+		Menu: After exiting the Cycling Road building
+			Use: SUPER_REPEL
+			Swap: 6 X_SPECIAL
+			Tm: TM_26 1 2
+			Use: BICYCLE
+		Bike to the Safari Zone
+		S: Safari Zone
+			Map of the Safari Zone
+				[[https://i.imgur.com/oBebL5z.jpg]]
+			Upon entering, get on the bike
+			If you have 0 potions get the full restore
+			Menu: Use a super repel above the last hill in the second area
+				Use: SUPER_REPEL
+			GetI: GOLD_TEETH :: Get the Gold Teeth in the fourth area
+			GetI: HM_03 :: Get HM03 from the guy in the house
+			After getting Surf, dig out of the safari and fly back to Fuschia city
+		S: Fuchsia Gym
+			B: Fuchsia Gym - Juggler 1 :: EQ x4
+			(Heal to 47+ HP, but ideally no higher than 80)
+			B: Fuchsia Gym - Juggler 2 :: EQ, EQ + TB
+				If TB gets disabled, finish with BB if it's in range, finish with EQ if not or you don't know the range
+			B: Koga :: EQ x3, then use an Elixer on Weezing (to stall for selfdestruct)
+				Opp: 4 :: *1
+					Use: ELIXER :: to stall for selfdestruct
+					If Koga uses an X Attack, use Bubblebeam till you die
+					The goal is to die to Selfdestruct, but it's OK if you don't
+					If you didn’t die from koga you can still try to get red bar by following the HP strats for the backups (https://pastebin.com/2DBBnkmf). Note that this can be risky.
+		Menu: Revive with candies and bike to the Warden's house
+			Use: RARE_CANDY *
+			Use: BICYCLE
+		GetI: HM_04 GOLD_TEETH :: Get HM04 from the warden, then Fly to Pallet Town
+	S: Pallet Town
+		Menu: Walk to the water, and menu
+			Use: SUPER_REPEL
+			Tm: HM_03 2
+		Surf to Cinnabar
+	S: Cinnabar Mansion
+		Use this map to get through Cinnabar Mansion, doing the following actions along the way
+			[[https://i.imgur.com/UktHB4j.jpg]]
+		GetI: TM_14
+		Menu: MENU after picking up Blizzard
+			Tm: HM_04 2 1
+			Tm: TM_14 1 4
+			Use: REPEL :: NOTE THIS IS THE REPEL NOT I REPEAT NOT SUPER REPEL
+		GetI: RARE_CANDY :: Get the Rare Candy on top
+		GetI: SECRET_KEY
+		Dig out, then bike to the Celadon Gym
+	S: Celadon Gym
+		Hug the left wall and Cut the bush in the top-left corner
+		B: Celadon Gym - Beauty 3 :: Bliz (use Poke Flute if put to sleep)
+		B: Erika :: EQ, Bliz, EQ
+		Walk out, then Fly to Cinnabar (2 down) and bike to the gym
+	S: Cinnabar Gym
+		Quiz Answers: A B B B A B
+		B: Blaine :: X Acc, EQ, HD x3 (Drill Growlithe if Blaine uses a Super Potion)
+			Use: X_ACCURACY
+		Dig out, then bike to the Saffron Gym
+	S: Saffron Gym
+		Teleporter Puzzle: Top Left, Bottom Left, Bottom Left
+		B: Sabrina :: EQ x4
+		Walk back to the Teleporter and dig out and fly to Viridian (1 up) and bike to the gym
+	S: Viridian Gym
+		B: Viridian Gym - CooltrainerM 3 :: EQ
+		[OPTIONAL SAVE: This next fight has a decent chance to die, and reviving will lose red bar so saving is advised]
+		B: Viridian Gym - Blackbelt 3 :: X ACC, HD, Bliz, HD
+			Use: X_ACCURACY
+		Leave the Gym to reset the trainer
+		Menu: Elixer after entering the gym again
+			Use: ELIXER
+		B: Giovanni :: EQ x4, Bliz + (Bliz)
+			Note: Don't go bellow 2 Blizzards in this fight, if you need to use EQs to finish Rhydon
+		Menu: When outside of the gym, use a Super Repel, then bike west to Route 22
+			Use: SUPER_REPEL
+			Use: BICYCLE
+	S: Route 22
+		B: Viridian Rival - Bulbasaur :: Viridian Rival :: X ACC, X Spec, Bliz, Bliz, TB, X Spec, TB, EQ, Bliz
+			Note: If you only have 2 Blizzards, use TB on Pidgeot instead of Bliz
+			Opp: 1
+				Use: X_ACCURACY
+				Use: X_SPEED
+			Opp: 4
+				Use: X_SPEED
+	S: Route 23
+		Menu: After exiting the water, use another Super Repel and bike to Victory Road
+			Use: SUPER_REPEL
+	S: Victory Road
+		Use these maps to help you get through Victory Road
+			1F: [[https://cdn.bulbagarden.net/upload/5/56/Victory_Road_1F_RBY.png]]
+			2F: [[https://cdn.bulbagarden.net/upload/1/11/Victory_Road_2F_RBY.png]]
+			3F: [[https://cdn.bulbagarden.net/upload/e/e5/Victory_Road_3F_RBY.png]]
+		Menu: Super Repel twice during Victory Road
+			Use: SUPER_REPEL 2
+		Use Strength upon entering and push the first boulder onto the switch on the right, then bike to the ladder in the top-left corner
+		Use Strength again, push the boulder below onto the switch, bike up the steps hugging the north edge and use a Super Repel. Bike to the right, down the stairs, then right and up to the ladder
+		Use strength again and push the boulder onto the switch to the left, then bike to the bottom-right corner and push the boulder down the hole and go down the hole
+		Use Strength one last time, use your last Super Repel, then get on your bike and push the boulder onto the switch in the bottom-left, bike back to where you fell down and follow the ladders to the exit
+	S: Elite Four
+		Don't deposit extra pokes unless you have no more revives
+		B: Lorelei :: Switch to your flier, let it die and swap back to Nido, X Acc, Drill x5 (Dewgong will always use Rest turn 2)
+			Use: X_ACCURACY
+		Menu: Elixer before Bruno
+			Use: ELIXER
+		B: Bruno :: X Acc, Bliz, HD x2, Bliz, HD
+			Use: X_ACCURACY
+		Menu: Menu before Agatha:
+			Use: SUPER_POTION
+			Use: POTION ? :: with 18 or less HP
+			Use: RARE_CANDY
+		B: Agatha :: X Spec, EQ, Bliz, EQ x3
+			Use: X_SPECIAL
+			If you get put to sleep use the pokeflute, and if you get confused risk it since you would need to X Spec again if you swapped)
+			If you miss Bliz, and Golbat uses Haze, use 2x TB on Golbat, X Speed on Arbok with 25-60 HP
+			Skip X Speed (you will be slower than last Gengar) with less than 25 or more than 60HP
+		Menu: At least 2 steps before Lance, heal to 129+ HP
+			Feel free to use your Full Restore if you picked it up and you want to play really safe
+			Use: SUPER_POTION
+			Use: ELIXER
+		[OPTIONAL SAVE: Lance is pretty likely to go bad, so saving is recommend]
+		B: Lance :: X Spec, TB, Bliz, X Speed, Bliz, TB, Bliz
+			Opp: 1
+				Use: X_SPECIAL
+			Opp: 3
+				Use: X_SPEED
+				If you are out of X Speeds use an X Spec
+			If you run out of Blizzards, TB the Dragonite
+		[OPTIONAL SAVE: Saving for Champ can be good if you don't have a spare X Accuracy+ spare X Special + Revive]
+		Menu: Heal at 22HP or below
+			Can also heal below at 44HP or below if you want to play safer
+			Use: POTION
+		B: Champion - Bulbasaur :: Champion :: X Spec, X Acc, HD x3, TB, HD x2
+			If Pidgeot uses Sky Attack turn 1 do the following: Bliz, EQ, X Acc, HD x4
+			Use: X_SPECIAL
+			Use: X_ACCURACY
+		END

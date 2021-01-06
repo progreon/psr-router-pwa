@@ -22,6 +22,7 @@ module.exports = (config) => ({
     path: path.resolve(__dirname, '../..', config.outputDir)
   },
   resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
     alias: {
       App: path.resolve(__dirname, '../../src/app/'),
       Core: path.resolve(__dirname, '../../src/app/core/'),
@@ -62,17 +63,17 @@ module.exports = (config) => ({
       if (chunk.name) {
         return chunk.name;
       } else {
-        var a = [];
+        let a = [];
         chunk._modules.forEach(m => {
-          var id = m.id.replace(/.*\/(.*?)\..*?$/, '$1');
+          let id = m.id.replace(/.*\/(.*?)\..*?$/, '$1');
           if (!a.includes(id))
             a.push(id)
         });
         if (a.length > 10) {
-          var s = a.join("_");
+          let s = a.join("_");
           a = a.slice(0, 10);
           // Add hash
-          var h = 0, l = s.length, i = 0;
+          let h = 0, l = s.length, i = 0;
           if ( l > 0 )
             while (i < l)
               h = (h << 5) - h + s.charCodeAt(i++) | 0;
@@ -127,7 +128,11 @@ module.exports = (config) => ({
         collapseWhitespace: true,
         preserveLineBreaks: true
       },
-      chunksSortMode: "none"
+      chunksSortMode: "none",
+      meta: {
+        'theme-color': '#1865a9',
+        'apple-mobile-web-app-status-bar-style': 'black'
+      }
     }),
     new ManifestPlugin(),
     // TODO: switch to InjectManifest Plugin? (for fonts and webcomponents-loader.js)
@@ -171,6 +176,15 @@ module.exports = (config) => ({
         use: [
           'xml-loader'
         ]
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.txt$/,
+        use: 'raw-loader'
       }
     ]
   }

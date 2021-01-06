@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "target": "es2017",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": false,
+    "noImplicitReturns": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    // "typeRoots": ["node_modules/@types", "src/app"],
+    "paths": {
+      "App/*": ["src/app/*"],
+      "Core/*": ["src/app/core/*"],
+      "CoreActions/*": ["src/app/core/actions/*"],
+      "CoreComponents/*": ["src/app/core/components/*"],
+      "CoreReducers/*": ["src/app/core/reducers/*"],
+      "Images/*": ["src/app/images/*"],
+      "SharedComponents/*": ["src/app/shared/components/*"],
+      "SharedData/*": ["src/app/shared/data/*"],
+      "SharedModules/*": ["src/app/shared/modules/*"],
+      "Shared/*": ["src/app/shared/*"]
+    }
+  },
+  "include": ["src/app/**/*"]
+}

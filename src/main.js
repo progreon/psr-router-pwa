@@ -1,4 +1,4 @@
-import './app/psr-router-app.js';
+import './app/psr-router-app';
 
 // Load and register pre-caching Service Worker
 window.isUpdateAvailable = new Promise(function(resolve, reject) {
@@ -7,7 +7,7 @@ window.isUpdateAvailable = new Promise(function(resolve, reject) {
       navigator.serviceWorker.register('/service-worker.js', {
         scope: MyAppGlobals.rootPath
       }).then(registration => {
-        console.log('SW registered: ', registration);
+        console.debug('SW registered: ', registration);
         registration.onupdatefound = function() {
           const installingWorker = registration.installing;
           installingWorker.onstatechange = function () {
@@ -25,7 +25,7 @@ window.isUpdateAvailable = new Promise(function(resolve, reject) {
           }
         };
       }).catch(registrationError => {
-        console.log('SW registration failed: ', registrationError);
+        console.error('SW registration failed: ', registrationError);
       });
     });
   }

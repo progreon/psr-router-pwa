@@ -1,0 +1,443 @@
+[
+  {
+    "location": "ROUTE 1",
+    "type": "",
+    "method": "",
+    "rate": 25,
+    "slots": [ "PIDGEY#3", "PIDGEY#4", "RATTATA#2", "RATTATA#3", "PIDGEY#2", "PIDGEY#3", "PIDGEY#5", "RATTATA#4", "PIDGEY#6", "PIDGEY#7" ]
+  },
+  {
+    "location": "ROUTE 2",
+    "type": "",
+    "method": "",
+    "rate": 25,
+    "slots": [ "RATTATA#3", "PIDGEY#3", "RATTATA#4", "NIDORANm#4", "NIDORANf#4", "PIDGEY#5", "NIDORANm#6", "NIDORANf#6", "PIDGEY#7", "PIDGEY#7" ]
+  },
+  {
+    "location": "ROUTE 3",
+    "type": "",
+    "method": "",
+    "rate": 20,
+    "slots": [ "SPEAROW#8", "SPEAROW#9", "MANKEY#9", "SPEAROW#10", "SANDSHREW#8", "RATTATA#10", "SANDSHREW#10", "RATTATA#12", "SPEAROW#11", "SPEAROW#12" ]
+  },
+  {
+    "location": "ROUTE 4",
+    "type": "",
+    "method": "",
+    "rate": 20,
+    "slots": [ "SPEAROW#8", "SPEAROW#9", "MANKEY#9", "SPEAROW#10", "SANDSHREW#8", "RATTATA#10", "SANDSHREW#10", "RATTATA#12", "SPEAROW#11", "SPEAROW#12" ]
+  },
+  {
+    "location": "ROUTE 5",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "PIDGEY#15", "RATTATA#14", "ABRA#7", "PIDGEY#16", "RATTATA#16", "PIDGEY#17", "PIDGEOTTO#17", "JIGGLYPUFF#3", "JIGGLYPUFF#5", "JIGGLYPUFF#7" ]
+  },
+  {
+    "location": "ROUTE 6",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "PIDGEY#15", "RATTATA#14", "ABRA#7", "PIDGEY#16", "RATTATA#16", "PIDGEY#17", "PIDGEOTTO#17", "JIGGLYPUFF#3", "JIGGLYPUFF#5", "JIGGLYPUFF#7" ]
+  },
+  {
+    "location": "ROUTE 6",
+    "type": "water",
+    "method": "",
+    "rate": 3,
+    "slots": [ "PSYDUCK#15", "PSYDUCK#15", "PSYDUCK#15", "PSYDUCK#15", "PSYDUCK#15", "PSYDUCK#15", "PSYDUCK#15", "PSYDUCK#15", "GOLDUCK#15", "GOLDUCK#20" ]
+  },
+  {
+    "location": "ROUTE 7",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "PIDGEY#20", "PIDGEY#22", "RATTATA#20", "ABRA#15", "ABRA#19", "PIDGEOTTO#24", "ABRA#26", "JIGGLYPUFF#19", "JIGGLYPUFF#24", "JIGGLYPUFF#24" ]
+  },
+  {
+    "location": "ROUTE 8",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "PIDGEY#20", "PIDGEY#22", "RATTATA#20", "ABRA#15", "ABRA#19", "PIDGEOTTO#24", "JIGGLYPUFF#19", "JIGGLYPUFF#24", "KADABRA#20", "KADABRA#27" ]
+  },
+  {
+    "location": "ROUTE 9",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "NIDORANm#16", "NIDORANf#16", "RATTATA#18", "NIDORANm#18", "NIDORANf#18", "SPEAROW#17", "NIDORINO#18", "NIDORINA#18", "RATICATE#20", "FEAROW#19" ]
+  },
+  {
+    "location": "ROUTE 10",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "MAGNEMITE#16", "RATTATA#18", "MAGNEMITE#18", "MAGNEMITE#20", "NIDORANm#17", "NIDORANf#17", "MAGNEMITE#22", "RATICATE#20", "MACHOP#16", "MACHOP#18" ]
+  },
+  {
+    "location": "ROUTE 11",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "PIDGEY#16", "RATTATA#15", "PIDGEY#18", "DROWZEE#15", "RATTATA#17", "DROWZEE#17", "PIDGEOTTO#18", "PIDGEOTTO#20", "DROWZEE#19", "RATICATE#17" ]
+  },
+  {
+    "location": "ROUTE 12",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "ODDISH#25", "BELLSPROUT#25", "PIDGEY#28", "PIDGEOTTO#28", "ODDISH#27", "BELLSPROUT#27", "GLOOM#29", "WEEPINBELL#29", "FARFETCH'D#26", "FARFETCH'D#31" ]
+  },
+  {
+    "location": "ROUTE 12",
+    "type": "water",
+    "method": "",
+    "rate": 3,
+    "slots": [ "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWBRO#15", "SLOWBRO#20" ]
+  },
+  {
+    "location": "ROUTE 13",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "ODDISH#25", "BELLSPROUT#25", "PIDGEOTTO#28", "PIDGEY#28", "ODDISH#27", "BELLSPROUT#27", "GLOOM#29", "WEEPINBELL#29", "FARFETCH'D#26", "FARFETCH'D#31" ]
+  },
+  {
+    "location": "ROUTE 13",
+    "type": "water",
+    "method": "",
+    "rate": 3,
+    "slots": [ "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWPOKE#15", "SLOWBRO#15", "SLOWBRO#20" ]
+  },
+  {
+    "location": "ROUTE 14",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "ODDISH#26", "BELLSPROUT#26", "VENONAT#24", "PIDGEOTTO#30", "ODDISH#28", "BELLSPROUT#28", "GLOOM#30", "WEEPINBELL#30", "VENONAT#27", "VENOMOTH#30" ]
+  },
+  {
+    "location": "ROUTE 15",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "ODDISH#26", "BELLSPROUT#26", "VENONAT#24", "PIDGEOTTO#32", "ODDISH#28", "BELLSPROUT#28", "GLOOM#30", "WEEPINBELL#30", "VENONAT#27", "VENOMOTH#30" ]
+  },
+  {
+    "location": "ROUTE 16",
+    "type": "",
+    "method": "",
+    "rate": 25,
+    "slots": [ "SPEAROW#22", "DODUO#22", "RATTATA#23", "DODUO#24", "RATTATA#24", "DODUO#26", "SPEAROW#23", "FEAROW#24", "RATICATE#25", "RATICATE#26" ]
+  },
+  {
+    "location": "ROUTE 17",
+    "type": "",
+    "method": "",
+    "rate": 25,
+    "slots": [ "DODUO#26", "FEAROW#27", "DODUO#27", "DODUO#28", "PONYTA#28", "PONYTA#30", "FEAROW#29", "DODUO#28", "PONYTA#32", "DODRIO#29" ]
+  },
+  {
+    "location": "ROUTE 18",
+    "type": "",
+    "method": "",
+    "rate": 25,
+    "slots": [ "SPEAROW#22", "DODUO#22", "RATTATA#23", "DODUO#24", "RATTATA#24", "DODUO#26", "SPEAROW#23", "FEAROW#24", "RATICATE#25", "RATICATE#26" ]
+  },
+  {
+    "location": "ROUTE 19",
+    "type": "water",
+    "method": "",
+    "rate": 5,
+    "slots": [ "TENTACOOL#5", "TENTACOOL#10", "TENTACOOL#15", "TENTACOOL#5", "TENTACOOL#10", "TENTACOOL#15", "TENTACOOL#20", "TENTACOOL#30", "TENTACOOL#35", "TENTACOOL#40" ]
+  },
+  {
+    "location": "ROUTE 20",
+    "type": "water",
+    "method": "",
+    "rate": 5,
+    "slots": [ "TENTACOOL#5", "TENTACOOL#10", "TENTACOOL#15", "TENTACOOL#5", "TENTACOOL#10", "TENTACOOL#15", "TENTACOOL#20", "TENTACOOL#30", "TENTACOOL#35", "TENTACOOL#40" ]
+  },
+  {
+    "location": "ROUTE 21",
+    "type": "",
+    "method": "",
+    "rate": 25,
+    "slots": [ "PIDGEY#15", "RATTATA#13", "PIDGEY#13", "PIDGEY#11", "PIDGEY#17", "RATTATA#15", "RATICATE#15", "PIDGEOTTO#17", "PIDGEOTTO#19", "PIDGEOTTO#15" ]
+  },
+  {
+    "location": "ROUTE 21",
+    "type": "water",
+    "method": "",
+    "rate": 5,
+    "slots": [ "TENTACOOL#5", "TENTACOOL#10", "TENTACOOL#15", "TENTACOOL#5", "TENTACOOL#10", "TENTACOOL#15", "TENTACOOL#20", "TENTACOOL#30", "TENTACOOL#35", "TENTACOOL#40" ]
+  },
+  {
+    "location": "ROUTE 22",
+    "type": "",
+    "method": "",
+    "rate": 25,
+    "slots": [ "NIDORANm#2", "NIDORANf#2", "MANKEY#3", "RATTATA#3", "NIDORANm#4", "NIDORANf#4", "MANKEY#5", "SPEAROW#2", "SPEAROW#4", "SPEAROW#6" ]
+  },
+  {
+    "location": "ROUTE 23",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "NIDORINO#41", "NIDORINA#41", "MANKEY#36", "NIDORINO#44", "NIDORINA#44", "FEAROW#40", "MANKEY#41", "FEAROW#45", "PRIMEAPE#41", "PRIMEAPE#46" ]
+  },
+  {
+    "location": "ROUTE 24",
+    "type": "",
+    "method": "",
+    "rate": 25,
+    "slots": [ "ODDISH#12", "BELLSPROUT#12", "PIDGEY#13", "ODDISH#14", "BELLSPROUT#14", "PIDGEY#15", "VENONAT#13", "VENONAT#16", "PIDGEY#17", "PIDGEOTTO#17" ]
+  },
+  {
+    "location": "ROUTE 25",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "ODDISH#12", "BELLSPROUT#12", "PIDGEY#13", "ODDISH#14", "BELLSPROUT#14", "PIDGEY#15", "VENONAT#13", "VENONAT#16", "PIDGEY#17", "PIDGEOTTO#17" ]
+  },
+  {
+    "location": "VIRIDIAN FOREST",
+    "type": "",
+    "method": "",
+    "rate": 25,
+    "slots": [ "CATERPIE#3", "METAPOD#4", "CATERPIE#4", "CATERPIE#5", "PIDGEY#4", "PIDGEY#6", "CATERPIE#6", "METAPOD#6", "PIDGEY#8", "PIDGEOTTO#9" ]
+  },
+  {
+    "location": "MT. MOON 1F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "ZUBAT#8", "ZUBAT#9", "GEODUDE#10", "ZUBAT#6", "ZUBAT#7", "ZUBAT#10", "GEODUDE#10", "ZUBAT#11", "SANDSHREW#12", "CLEFAIRY#11" ]
+  },
+  {
+    "location": "MT. MOON B1F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "ZUBAT#8", "ZUBAT#9", "ZUBAT#10", "GEODUDE#10", "GEODUDE#11", "ZUBAT#11", "PARAS#9", "PARAS#11", "CLEFAIRY#10", "CLEFAIRY#12" ]
+  },
+  {
+    "location": "MT. MOON B2F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "ZUBAT#10", "GEODUDE#11", "PARAS#13", "ZUBAT#11", "ZUBAT#11", "ZUBAT#12", "ZUBAT#13", "CLEFAIRY#9", "CLEFAIRY#11", "CLEFAIRY#13" ]
+  },
+  {
+    "location": "ROCK TUNNEL 1F",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "ZUBAT#15", "GEODUDE#16", "ZUBAT#17", "ZUBAT#19", "GEODUDE#18", "GEODUDE#20", "ZUBAT#21", "MACHOP#17", "MACHOP#19", "MACHOP#21" ]
+  },
+  {
+    "location": "ROCK TUNNEL B1F",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "ZUBAT#20", "GEODUDE#17", "MACHOP#18", "ZUBAT#21", "ZUBAT#22", "GEODUDE#21", "MACHOP#20", "ONIX#14", "ONIX#18", "ONIX#22" ]
+  },
+  {
+    "location": "POWER PLANT",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "MAGNEMITE#30", "MAGNEMITE#35", "MAGNETON#33", "VOLTORB#33", "VOLTORB#37", "GRIMER#33", "GRIMER#37", "MAGNETON#38", "MUK#33", "MUK#37" ]
+  },
+  {
+    "location": "POKEMON TOWER 3F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "GASTLY#20", "GASTLY#21", "GASTLY#22", "GASTLY#23", "GASTLY#24", "GASTLY#19", "GASTLY#18", "GASTLY#25", "HAUNTER#20", "HAUNTER#25" ]
+  },
+  {
+    "location": "POKEMON TOWER 4F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "GASTLY#20", "GASTLY#21", "GASTLY#22", "GASTLY#23", "GASTLY#24", "GASTLY#19", "GASTLY#18", "GASTLY#25", "HAUNTER#20", "HAUNTER#25" ]
+  },
+  {
+    "location": "POKEMON TOWER 5F",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "GASTLY#22", "GASTLY#23", "GASTLY#24", "GASTLY#25", "GASTLY#26", "GASTLY#21", "CUBONE#20", "GASTLY#27", "HAUNTER#22", "HAUNTER#27" ]
+  },
+  {
+    "location": "POKEMON TOWER 6F",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "GASTLY#22", "GASTLY#23", "GASTLY#24", "GASTLY#25", "GASTLY#26", "GASTLY#21", "CUBONE#22", "GASTLY#27", "HAUNTER#22", "HAUNTER#27" ]
+  },
+  {
+    "location": "POKEMON TOWER 7F",
+    "type": "",
+    "method": "",
+    "rate": 20,
+    "slots": [ "GASTLY#24", "GASTLY#25", "GASTLY#26", "GASTLY#27", "GASTLY#28", "GASTLY#23", "CUBONE#24", "GASTLY#29", "HAUNTER#24", "HAUNTER#29" ]
+  },
+  {
+    "location": "DIGLETT's CAVE",
+    "type": "",
+    "method": "",
+    "rate": 20,
+    "slots": [ "DIGLETT#18", "DIGLETT#19", "DIGLETT#17", "DIGLETT#20", "DIGLETT#16", "DIGLETT#15", "DIGLETT#21", "DIGLETT#22", "DUGTRIO#29", "DUGTRIO#31" ]
+  },
+  {
+    "location": "SAFARI ZONE CENTER",
+    "type": "",
+    "method": "",
+    "rate": 30,
+    "slots": [ "NIDORANm#14", "NIDORANf#36", "EXEGGCUTE#24", "RHYHORN#20", "NIDORINO#23", "PARASECT#27", "PARAS#27", "PARASECT#32", "TANGELA#22", "CHANSEY#7" ]
+  },
+  {
+    "location": "SAFARI ZONE EAST",
+    "type": "",
+    "method": "",
+    "rate": 30,
+    "slots": [ "NIDORANm#21", "NIDORANf#29", "EXEGGCUTE#22", "TAUROS#21", "NIDORINA#32", "CUBONE#19", "EXEGGCUTE#26", "MAROWAK#24", "CHANSEY#21", "SCYTHER#15" ]
+  },
+  {
+    "location": "SAFARI ZONE NORTH",
+    "type": "",
+    "method": "",
+    "rate": 30,
+    "slots": [ "NIDORANm#36", "NIDORANf#14", "EXEGGCUTE#20", "RHYHORN#25", "NIDORINA#23", "KANGASKHAN#28", "CUBONE#16", "KANGASKHAN#33", "SCYTHER#25", "PINSIR#15" ]
+  },
+  {
+    "location": "SAFARI ZONE WEST",
+    "type": "",
+    "method": "",
+    "rate": 30,
+    "slots": [ "NIDORANm#29", "NIDORANf#21", "EXEGGCUTE#22", "TAUROS#21", "NIDORINO#32", "CUBONE#19", "EXEGGCUTE#26", "MAROWAK#24", "PINSIR#25", "TANGELA#27" ]
+  },
+  {
+    "location": "SEAFOAM ISLANDS 1F",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "ZUBAT#18", "KRABBY#25", "KRABBY#27", "ZUBAT#27", "ZUBAT#36", "SLOWPOKE#28", "SLOWPOKE#30", "ZUBAT#9", "GOLBAT#27", "GOLBAT#36" ]
+  },
+  {
+    "location": "SEAFOAM ISLANDS B1F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "ZUBAT#27", "KRABBY#26", "ZUBAT#36", "KRABBY#28", "GOLBAT#27", "SLOWPOKE#29", "ZUBAT#18", "KINGLER#28", "SEEL#22", "SEEL#26" ]
+  },
+  {
+    "location": "SEAFOAM ISLANDS B2F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "ZUBAT#27", "KRABBY#27", "ZUBAT#36", "GOLBAT#27", "KINGLER#28", "SEEL#24", "KRABBY#29", "GOLBAT#36", "SLOWPOKE#31", "SLOWBRO#31" ]
+  },
+  {
+    "location": "SEAFOAM ISLANDS B3F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "GOLBAT#27", "ZUBAT#36", "KRABBY#29", "ZUBAT#27", "KINGLER#30", "SEEL#26", "KRABBY#31", "SEEL#30", "DEWGONG#28", "DEWGONG#32" ]
+  },
+  {
+    "location": "SEAFOAM ISLANDS B3F",
+    "type": "water",
+    "method": "",
+    "rate": 5,
+    "slots": [ "TENTACOOL#25", "TENTACOOL#30", "TENTACOOL#20", "STARYU#30", "TENTACOOL#35", "STARYU#30", "TENTACOOL#40", "STARYU#30", "STARYU#30", "STARYU#30" ]
+  },
+  {
+    "location": "SEAFOAM ISLANDS B4F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "GOLBAT#36", "ZUBAT#36", "KRABBY#30", "KINGLER#32", "SEEL#28", "SEEL#32", "GOLBAT#27", "ZUBAT#45", "DEWGONG#30", "DEWGONG#34" ]
+  },
+  {
+    "location": "SEAFOAM ISLANDS B4F",
+    "type": "water",
+    "method": "",
+    "rate": 5,
+    "slots": [ "TENTACOOL#25", "TENTACOOL#30", "TENTACOOL#20", "STARYU#30", "TENTACOOL#35", "STARYU#30", "TENTACOOL#40", "STARYU#30", "STARYU#30", "STARYU#30" ]
+  },
+  {
+    "location": "CINNABAR MANSION 1F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "RATTATA#34", "RATICATE#34", "GRIMER#23", "GROWLITHE#26", "RATTATA#37", "RATICATE#37", "GROWLITHE#30", "GRIMER#26", "GROWLITHE#34", "GROWLITHE#38" ]
+  },
+  {
+    "location": "CINNABAR MANSION 2F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "RATTATA#37", "RATICATE#37", "GRIMER#26", "GRIMER#29", "RATTATA#40", "RATICATE#40", "GRIMER#32", "GRIMER#35", "MUK#35", "MUK#38" ]
+  },
+  {
+    "location": "CINNABAR MANSION 3F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "RATTATA#40", "RATICATE#40", "GRIMER#32", "GRIMER#35", "RATTATA#43", "RATICATE#43", "GRIMER#38", "GRIMER#38", "MUK#38", "MUK#41" ]
+  },
+  {
+    "location": "CINNABAR MANSION B1F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "GRIMER#35", "GRIMER#38", "RATICATE#37", "RATICATE#40", "MUK#41", "RATICATE#43", "DITTO#24", "RATICATE#46", "DITTO#18", "DITTO#12" ]
+  },
+  {
+    "location": "VICTORY ROAD 1F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "GEODUDE#31", "GEODUDE#36", "GEODUDE#41", "ZUBAT#44", "GOLBAT#39", "GRAVELER#44", "ONIX#45", "ONIX#47", "MACHOKE#39", "MACHOKE#42" ]
+  },
+  {
+    "location": "VICTORY ROAD 2F",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "GEODUDE#36", "GOLBAT#44", "GEODUDE#41", "ONIX#49", "GEODUDE#46", "GRAVELER#41", "MACHOKE#42", "MACHOKE#45", "GRAVELER#47", "GRAVELER#47" ]
+  },
+  {
+    "location": "VICTORY ROAD 3F",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "GEODUDE#26", "GEODUDE#31", "GEODUDE#36", "ZUBAT#39", "ZUBAT#44", "GEODUDE#41", "ONIX#43", "ONIX#45", "GRAVELER#41", "GRAVELER#47" ]
+  },
+  {
+    "location": "UNKNOWN DUNGEON 1F",
+    "type": "",
+    "method": "",
+    "rate": 10,
+    "slots": [ "GOLBAT#50", "GOLBAT#55", "GRAVELER#45", "GLOOM#55", "WEEPINBELL#55", "SANDSLASH#52", "VENOMOTH#54", "PARASECT#54", "DITTO#55", "DITTO#60" ]
+  },
+  {
+    "location": "UNKNOWN DUNGEON 2F",
+    "type": "",
+    "method": "",
+    "rate": 15,
+    "slots": [ "GOLBAT#52", "GOLBAT#57", "GRAVELER#50", "SANDSLASH#56", "RHYHORN#50", "DITTO#60", "GLOOM#58", "WEEPINBELL#58", "RHYDON#60", "RHYDON#58" ]
+  },
+  {
+    "location": "UNKNOWN DUNGEON B1F",
+    "type": "",
+    "method": "",
+    "rate": 25,
+    "slots": [ "GOLBAT#54", "GOLBAT#59", "GRAVELER#55", "RHYHORN#52", "RHYDON#62", "DITTO#60", "CHANSEY#56", "DITTO#65", "LICKITUNG#55", "LICKITUNG#50" ]
+  }
+]

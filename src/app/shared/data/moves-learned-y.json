@@ -1,0 +1,757 @@
+{
+  "ABRA": {
+    "default": [ "TELEPORT" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_05" ],
+    "level": []
+  },
+  "AERODACTYL": {
+    "default": [ "WING_ATTACK", "AGILITY" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_23", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_43", "TM_44", "TM_50", "HM_02" ],
+    "level": [ "33#SUPERSONIC", "38#BITE", "45#TAKE_DOWN", "54#HYPER_BEAM" ]
+  },
+  "ALAKAZAM": {
+    "default": [ "TELEPORT", "KINESIS" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_28", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_05" ],
+    "level": [ "16#CONFUSION", "20#DISABLE", "27#PSYBEAM", "31#RECOVER", "38#PSYCHIC", "42#REFLECT" ]
+  },
+  "ARBOK": {
+    "default": [ "WRAP", "LEER", "POISON_STING" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_40", "TM_44", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "10#POISON_STING", "17#BITE", "27#GLARE", "36#SCREECH", "47#ACID" ]
+  },
+  "ARCANINE": {
+    "default": [ "ROAR", "EMBER", "LEER", "TAKE_DOWN" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_23", "TM_28", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": []
+  },
+  "ARTICUNO": {
+    "default": [ "PECK", "ICE_BEAM" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_43", "TM_44", "TM_50", "HM_02" ],
+    "level": [ "51#BLIZZARD", "55#AGILITY", "60#MIST" ]
+  },
+  "BEEDRILL": {
+    "default": [ "FURY_ATTACK" ],
+    "tm": [ "TM_03", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "12#FURY_ATTACK", "16#FOCUS_ENERGY", "20#TWINEEDLE", "25#RAGE", "30#PIN_MISSILE", "35#AGILITY" ]
+  },
+  "BELLSPROUT": {
+    "default": [ "VINE_WHIP", "GROWTH" ],
+    "tm": [ "TM_03", "TM_06", "TM_09", "TM_10", "TM_20", "TM_21", "TM_22", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "13#WRAP", "15#POISONPOWDER", "18#SLEEP_POWDER", "21#STUN_SPORE", "26#ACID", "33#RAZOR_LEAF", "42#SLAM" ]
+  },
+  "BLASTOISE": {
+    "default": [ "TACKLE", "TAIL_WHIP", "BUBBLE", "WATER_GUN" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "8#BUBBLE", "15#WATER_GUN", "24#BITE", "31#WITHDRAW", "42#SKULL_BASH", "52#HYDRO_PUMP" ]
+  },
+  "BULBASAUR": {
+    "default": [ "TACKLE", "GROWL" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_21", "TM_22", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "7#LEECH_SEED", "13#VINE_WHIP", "20#POISONPOWDER", "27#RAZOR_LEAF", "34#GROWTH", "41#SLEEP_POWDER", "48#SOLARBEAM" ]
+  },
+  "BUTTERFREE": {
+    "default": [ "CONFUSION" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_22", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_44", "TM_46", "TM_50", "HM_05" ],
+    "level": [ "10#CONFUSION", "13#POISONPOWDER", "14#STUN_SPORE", "15#SLEEP_POWDER", "18#SUPERSONIC", "23#WHIRLWIND", "28#GUST", "34#PSYBEAM" ]
+  },
+  "CATERPIE": {
+    "default": [ "TACKLE", "STRING_SHOT" ],
+    "tm": [],
+    "level": []
+  },
+  "CHANSEY": {
+    "default": [ "POUND", "TAIL_WHIP" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_22", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_37", "TM_38", "TM_40", "TM_41", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_04", "HM_05" ],
+    "level": [ "12#DOUBLESLAP", "24#SING", "30#GROWL", "38#MINIMIZE", "44#DEFENSE_CURL", "48#LIGHT_SCREEN", "54#DOUBLE_EDGE" ]
+  },
+  "CHARIZARD": {
+    "default": [ "SCRATCH", "GROWL", "EMBER", "LEER" ],
+    "tm": [ "TM_01", "TM_03", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_23", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_50", "HM_01", "HM_02", "HM_04" ],
+    "level": [ "9#EMBER", "15#LEER", "24#RAGE", "36#SLASH", "46#FLAMETHROWER", "55#FIRE_SPIN" ]
+  },
+  "CHARMANDER": {
+    "default": [ "SCRATCH", "GROWL" ],
+    "tm": [ "TM_01", "TM_03", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_23", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_50", "HM_01", "HM_04" ],
+    "level": [ "9#EMBER", "15#LEER", "22#RAGE", "30#SLASH", "38#FLAMETHROWER", "46#FIRE_SPIN" ]
+  },
+  "CHARMELEON": {
+    "default": [ "SCRATCH", "GROWL", "EMBER" ],
+    "tm": [ "TM_01", "TM_03", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_23", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_50", "HM_01", "HM_04" ],
+    "level": [ "9#EMBER", "15#LEER", "24#RAGE", "33#SLASH", "42#FLAMETHROWER", "56#FIRE_SPIN" ]
+  },
+  "CLEFABLE": {
+    "default": [ "SING", "DOUBLESLAP", "MINIMIZE", "METRONOME" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_22", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_38", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_04", "HM_05" ],
+    "level": []
+  },
+  "CLEFAIRY": {
+    "default": [ "POUND", "GROWL" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_17", "TM_18", "TM_19", "TM_20", "TM_22", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_38", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_04", "HM_05" ],
+    "level": [ "13#SING", "18#DOUBLESLAP", "24#MINIMIZE", "31#METRONOME", "39#DEFENSE_CURL", "48#LIGHT_SCREEN" ]
+  },
+  "CLOYSTER": {
+    "default": [ "WITHDRAW", "SUPERSONIC", "CLAMP", "AURORA_BEAM" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_36", "TM_39", "TM_44", "TM_47", "TM_49", "TM_50", "HM_03" ],
+    "level": [ "50#SPIKE_CANNON" ]
+  },
+  "CUBONE": {
+    "default": [ "GROWL" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_38", "TM_40", "TM_44", "TM_50", "HM_04" ],
+    "level": [ "10#BONE_CLUB", "13#TAIL_WHIP", "18#HEADBUTT", "25#LEER", "31#FOCUS_ENERGY", "38#THRASH", "43#BONEMERANG", "46#RAGE" ]
+  },
+  "DEWGONG": {
+    "default": [ "HEADBUTT", "GROWL", "AURORA_BEAM" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_20", "TM_31", "TM_32", "TM_34", "TM_40", "TM_44", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "30#GROWL", "35#AURORA_BEAM", "44#REST", "50#TAKE_DOWN", "56#ICE_BEAM" ]
+  },
+  "DIGLETT": {
+    "default": [ "SCRATCH" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_44", "TM_48", "TM_50", "HM_01" ],
+    "level": [ "15#GROWL", "19#DIG", "24#SAND_ATTACK", "31#SLASH", "40#EARTHQUAKE" ]
+  },
+  "DITTO": {
+    "default": [ "TRANSFORM" ],
+    "tm": [],
+    "level": []
+  },
+  "DODRIO": {
+    "default": [ "PECK", "GROWL", "FURY_ATTACK" ],
+    "tm": [ "TM_04", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_43", "TM_44", "TM_49", "TM_50", "HM_02" ],
+    "level": [ "20#GROWL", "24#FURY_ATTACK", "30#DRILL_PECK", "39#RAGE", "45#TRI_ATTACK", "51#AGILITY" ]
+  },
+  "DODUO": {
+    "default": [ "PECK" ],
+    "tm": [ "TM_04", "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_43", "TM_44", "TM_49", "TM_50", "HM_02" ],
+    "level": [ "20#GROWL", "24#FURY_ATTACK", "30#DRILL_PECK", "36#RAGE", "40#TRI_ATTACK", "44#AGILITY" ]
+  },
+  "DRAGONAIR": {
+    "default": [ "WRAP", "LEER", "THUNDER_WAVE" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_23", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_45", "TM_50", "HM_03" ],
+    "level": [ "10#THUNDER_WAVE", "20#AGILITY", "35#SLAM", "45#DRAGON_RAGE", "55#HYPER_BEAM" ]
+  },
+  "DRAGONITE": {
+    "default": [ "WRAP", "LEER", "THUNDER_WAVE", "AGILITY" ],
+    "tm": [ "TM_02", "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_23", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_45", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "10#THUNDER_WAVE", "20#AGILITY", "35#SLAM", "45#DRAGON_RAGE", "60#HYPER_BEAM" ]
+  },
+  "DRATINI": {
+    "default": [ "WRAP", "LEER" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_23", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_45", "TM_50", "HM_03" ],
+    "level": [ "10#THUNDER_WAVE", "20#AGILITY", "30#SLAM", "40#DRAGON_RAGE", "50#HYPER_BEAM" ]
+  },
+  "DROWZEE": {
+    "default": [ "POUND", "HYPNOSIS" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_42", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_05" ],
+    "level": [ "12#DISABLE", "17#CONFUSION", "24#HEADBUTT", "29#POISON_GAS", "32#PSYCHIC", "37#MEDITATE" ]
+  },
+  "DUGTRIO": {
+    "default": [ "SCRATCH", "GROWL", "DIG" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_44", "TM_48", "TM_50", "HM_01" ],
+    "level": [ "15#GROWL", "19#DIG", "24#SAND_ATTACK", "35#SLASH", "47#EARTHQUAKE" ]
+  },
+  "EEVEE": {
+    "default": [ "TACKLE", "TAIL_WHIP" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "8#SAND_ATTACK", "16#GROWL", "23#QUICK_ATTACK", "30#BITE", "36#FOCUS_ENERGY", "42#TAKE_DOWN" ]
+  },
+  "EKANS": {
+    "default": [ "WRAP", "LEER" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_21", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_40", "TM_44", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "10#POISON_STING", "17#BITE", "24#GLARE", "31#SCREECH", "38#ACID" ]
+  },
+  "ELECTABUZZ": {
+    "default": [ "QUICK_ATTACK", "LEER" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_39", "TM_40", "TM_44", "TM_45", "TM_46", "TM_50", "HM_04", "HM_05" ],
+    "level": [ "34#THUNDERSHOCK", "37#SCREECH", "42#THUNDERPUNCH", "49#LIGHT_SCREEN", "54#THUNDER" ]
+  },
+  "ELECTRODE": {
+    "default": [ "TACKLE", "SCREECH", "SONICBOOM" ],
+    "tm": [ "TM_06", "TM_09", "TM_15", "TM_20", "TM_24", "TM_25", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_36", "TM_39", "TM_40", "TM_44", "TM_45", "TM_47", "TM_50", "HM_05" ],
+    "level": [ "17#SONICBOOM", "22#SELFDESTRUCT", "29#LIGHT_SCREEN", "40#SWIFT", "50#EXPLOSION" ]
+  },
+  "EXEGGCUTE": {
+    "default": [ "BARRAGE", "HYPNOSIS" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_20", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_36", "TM_37", "TM_44", "TM_46", "TM_47", "TM_50" ],
+    "level": [ "25#REFLECT", "28#LEECH_SEED", "32#STUN_SPORE", "37#POISONPOWDER", "42#SOLARBEAM", "48#SLEEP_POWDER" ]
+  },
+  "EXEGGUTOR": {
+    "default": [ "BARRAGE", "HYPNOSIS" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_22", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_36", "TM_37", "TM_44", "TM_46", "TM_47", "TM_50", "HM_04" ],
+    "level": [ "28#STOMP" ]
+  },
+  "FARFETCH'D": {
+    "default": [ "PECK", "SAND_ATTACK" ],
+    "tm": [ "TM_02", "TM_03", "TM_04", "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50", "HM_01", "HM_02" ],
+    "level": [ "7#LEER", "15#FURY_ATTACK", "23#SWORDS_DANCE", "31#AGILITY", "39#SLASH" ]
+  },
+  "FEAROW": {
+    "default": [ "PECK", "GROWL", "LEER" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_31", "TM_32", "TM_34", "TM_39", "TM_43", "TM_44", "TM_50", "HM_02" ],
+    "level": [ "9#LEER", "15#FURY_ATTACK", "25#MIRROR_MOVE", "34#DRILL_PECK", "43#AGILITY" ]
+  },
+  "FLAREON": {
+    "default": [ "TACKLE", "TAIL_WHIP", "QUICK_ATTACK", "EMBER" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "8#SAND_ATTACK", "16#EMBER", "23#QUICK_ATTACK", "30#BITE", "36#FIRE_SPIN", "42#SMOG", "47#LEER", "52#FLAMETHROWER" ]
+  },
+  "GASTLY": {
+    "default": [ "LICK", "CONFUSE_RAY", "NIGHT_SHADE" ],
+    "tm": [ "TM_06", "TM_20", "TM_21", "TM_24", "TM_25", "TM_29", "TM_31", "TM_32", "TM_34", "TM_36", "TM_42", "TM_44", "TM_46", "TM_47", "TM_50" ],
+    "level": [ "27#HYPNOSIS", "35#DREAM_EATER" ]
+  },
+  "GENGAR": {
+    "default": [ "LICK", "CONFUSE_RAY", "NIGHT_SHADE" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_21", "TM_24", "TM_25", "TM_29", "TM_31", "TM_32", "TM_34", "TM_35", "TM_36", "TM_40", "TM_42", "TM_44", "TM_46", "TM_47", "TM_50", "HM_04" ],
+    "level": [ "29#HYPNOSIS", "38#DREAM_EATER" ]
+  },
+  "GEODUDE": {
+    "default": [ "TACKLE" ],
+    "tm": [ "TM_01", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_35", "TM_36", "TM_38", "TM_44", "TM_47", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "11#DEFENSE_CURL", "16#ROCK_THROW", "21#SELFDESTRUCT", "26#HARDEN", "31#EARTHQUAKE", "36#EXPLOSION" ]
+  },
+  "GLOOM": {
+    "default": [ "ABSORB", "POISONPOWDER", "STUN_SPORE" ],
+    "tm": [ "TM_03", "TM_06", "TM_09", "TM_10", "TM_20", "TM_21", "TM_22", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "15#POISONPOWDER", "17#STUN_SPORE", "19#SLEEP_POWDER", "28#ACID", "38#PETAL_DANCE", "52#SOLARBEAM" ]
+  },
+  "GOLBAT": {
+    "default": [ "LEECH_LIFE", "SCREECH", "BITE" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_31", "TM_32", "TM_34", "TM_39", "TM_44", "TM_50" ],
+    "level": [ "10#SUPERSONIC", "15#BITE", "21#CONFUSE_RAY", "32#WING_ATTACK", "43#HAZE" ]
+  },
+  "GOLDEEN": {
+    "default": [ "PECK", "TAIL_WHIP" ],
+    "tm": [ "TM_06", "TM_07", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50", "HM_03" ],
+    "level": [ "19#SUPERSONIC", "24#HORN_ATTACK", "30#FURY_ATTACK", "37#WATERFALL", "45#HORN_DRILL", "54#AGILITY" ]
+  },
+  "GOLDUCK": {
+    "default": [ "SCRATCH", "TAIL_WHIP", "DISABLE" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_28", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "28#TAIL_WHIP", "31#DISABLE", "39#CONFUSION", "48#FURY_SWIPES", "59#HYDRO_PUMP" ]
+  },
+  "GOLEM": {
+    "default": [ "TACKLE", "DEFENSE_CURL" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_35", "TM_36", "TM_38", "TM_44", "TM_47", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "11#DEFENSE_CURL", "16#ROCK_THROW", "21#SELFDESTRUCT", "29#HARDEN", "36#EARTHQUAKE", "43#EXPLOSION" ]
+  },
+  "GRAVELER": {
+    "default": [ "TACKLE", "DEFENSE_CURL" ],
+    "tm": [ "TM_01", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_35", "TM_36", "TM_38", "TM_44", "TM_47", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "11#DEFENSE_CURL", "16#ROCK_THROW", "21#SELFDESTRUCT", "29#HARDEN", "36#EARTHQUAKE", "43#EXPLOSION" ]
+  },
+  "GRIMER": {
+    "default": [ "POUND", "DISABLE" ],
+    "tm": [ "TM_06", "TM_08", "TM_20", "TM_21", "TM_24", "TM_25", "TM_31", "TM_32", "TM_34", "TM_36", "TM_38", "TM_44", "TM_47", "TM_50" ],
+    "level": [ "30#POISON_GAS", "33#MINIMIZE", "37#SLUDGE", "42#HARDEN", "48#SCREECH", "55#ACID_ARMOR" ]
+  },
+  "GROWLITHE": {
+    "default": [ "BITE", "ROAR" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_23", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "18#EMBER", "23#LEER", "30#TAKE_DOWN", "39#AGILITY", "50#FLAMETHROWER" ]
+  },
+  "GYARADOS": {
+    "default": [ "TACKLE" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_23", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_40", "TM_44", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "20#BITE", "25#DRAGON_RAGE", "32#LEER", "41#HYDRO_PUMP", "52#HYPER_BEAM" ]
+  },
+  "HAUNTER": {
+    "default": [ "LICK", "CONFUSE_RAY", "NIGHT_SHADE" ],
+    "tm": [ "TM_06", "TM_20", "TM_21", "TM_24", "TM_25", "TM_29", "TM_31", "TM_32", "TM_34", "TM_36", "TM_42", "TM_44", "TM_46", "TM_47", "TM_50" ],
+    "level": [ "29#HYPNOSIS", "38#DREAM_EATER" ]
+  },
+  "HITMONCHAN": {
+    "default": [ "COMET_PUNCH", "AGILITY" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_31", "TM_32", "TM_34", "TM_35", "TM_39", "TM_40", "TM_44", "TM_50", "HM_04" ],
+    "level": [ "33#FIRE_PUNCH", "38#ICE_PUNCH", "43#THUNDERPUNCH", "48#MEGA_PUNCH", "53#COUNTER" ]
+  },
+  "HITMONLEE": {
+    "default": [ "DOUBLE_KICK", "MEDITATE" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_31", "TM_32", "TM_34", "TM_35", "TM_39", "TM_40", "TM_44", "TM_50", "HM_04" ],
+    "level": [ "33#ROLLING_KICK", "38#JUMP_KICK", "43#FOCUS_ENERGY", "48#HI_JUMP_KICK", "53#MEGA_KICK" ]
+  },
+  "HORSEA": {
+    "default": [ "BUBBLE" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50", "HM_03" ],
+    "level": [ "19#SMOKESCREEN", "24#LEER", "30#WATER_GUN", "37#AGILITY", "45#HYDRO_PUMP" ]
+  },
+  "HYPNO": {
+    "default": [ "POUND", "HYPNOSIS", "DISABLE", "CONFUSION" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_42", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_05" ],
+    "level": [ "12#DISABLE", "17#CONFUSION", "24#HEADBUTT", "33#POISON_GAS", "37#PSYCHIC", "43#MEDITATE" ]
+  },
+  "IVYSAUR": {
+    "default": [ "TACKLE", "GROWL", "LEECH_SEED" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_21", "TM_22", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "7#LEECH_SEED", "13#VINE_WHIP", "22#POISONPOWDER", "30#RAZOR_LEAF", "38#GROWTH", "46#SLEEP_POWDER", "54#SOLARBEAM" ]
+  },
+  "JIGGLYPUFF": {
+    "default": [ "SING" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_17", "TM_18", "TM_19", "TM_20", "TM_22", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_04", "HM_05" ],
+    "level": [ "9#POUND", "14#DISABLE", "19#DEFENSE_CURL", "24#DOUBLESLAP", "29#REST", "34#BODY_SLAM", "39#DOUBLE_EDGE" ]
+  },
+  "JOLTEON": {
+    "default": [ "TACKLE", "TAIL_WHIP", "QUICK_ATTACK", "THUNDERSHOCK" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_40", "TM_44", "TM_45", "TM_50", "HM_05" ],
+    "level": [ "8#SAND_ATTACK", "16#THUNDERSHOCK", "23#QUICK_ATTACK", "30#DOUBLE_KICK", "36#PIN_MISSILE", "42#THUNDER_WAVE", "47#AGILITY", "52#THUNDER" ]
+  },
+  "JYNX": {
+    "default": [ "POUND", "LOVELY_KISS" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_44", "TM_46", "TM_50" ],
+    "level": [ "18#LICK", "23#DOUBLESLAP", "31#ICE_PUNCH", "39#BODY_SLAM", "47#THRASH", "58#BLIZZARD" ]
+  },
+  "KABUTO": {
+    "default": [ "SCRATCH", "HARDEN" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_03" ],
+    "level": [ "34#ABSORB", "39#SLASH", "44#LEER", "49#HYDRO_PUMP" ]
+  },
+  "KABUTOPS": {
+    "default": [ "SCRATCH", "HARDEN", "ABSORB" ],
+    "tm": [ "TM_02", "TM_03", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_19", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50", "HM_01", "HM_03" ],
+    "level": [ "34#ABSORB", "39#SLASH", "46#LEER", "53#HYDRO_PUMP" ]
+  },
+  "KADABRA": {
+    "default": [ "TELEPORT", "KINESIS" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_28", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_05" ],
+    "level": [ "16#CONFUSION", "20#DISABLE", "27#PSYBEAM", "31#RECOVER", "38#PSYCHIC", "42#REFLECT" ]
+  },
+  "KAKUNA": {
+    "default": [ "HARDEN" ],
+    "tm": [],
+    "level": []
+  },
+  "KANGASKHAN": {
+    "default": [ "COMET_PUNCH", "RAGE" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_24", "TM_25", "TM_26", "TM_27", "TM_31", "TM_32", "TM_34", "TM_38", "TM_40", "TM_44", "TM_48", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "26#BITE", "31#TAIL_WHIP", "36#MEGA_PUNCH", "41#LEER", "46#DIZZY_PUNCH" ]
+  },
+  "KINGLER": {
+    "default": [ "BUBBLE", "LEER", "VICEGRIP" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_31", "TM_32", "TM_34", "TM_44", "TM_50", "HM_01", "HM_03", "HM_04" ],
+    "level": [ "20#VICEGRIP", "25#GUILLOTINE", "34#STOMP", "42#CRABHAMMER", "49#HARDEN" ]
+  },
+  "KOFFING": {
+    "default": [ "TACKLE", "SMOG" ],
+    "tm": [ "TM_06", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_34", "TM_36", "TM_38", "TM_44", "TM_47", "TM_50" ],
+    "level": [ "32#SLUDGE", "37#SMOKESCREEN", "40#SELFDESTRUCT", "45#HAZE", "48#EXPLOSION" ]
+  },
+  "KRABBY": {
+    "default": [ "BUBBLE", "LEER" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_31", "TM_32", "TM_34", "TM_44", "TM_50", "HM_01", "HM_03", "HM_04" ],
+    "level": [ "20#VICEGRIP", "25#GUILLOTINE", "30#STOMP", "35#CRABHAMMER", "40#HARDEN" ]
+  },
+  "LAPRAS": {
+    "default": [ "WATER_GUN", "GROWL" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_22", "TM_23", "TM_24", "TM_25", "TM_29", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_46", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "16#SING", "20#MIST", "25#BODY_SLAM", "31#CONFUSE_RAY", "38#ICE_BEAM", "46#HYDRO_PUMP" ]
+  },
+  "LICKITUNG": {
+    "default": [ "WRAP", "SUPERSONIC" ],
+    "tm": [ "TM_01", "TM_03", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_24", "TM_25", "TM_26", "TM_27", "TM_31", "TM_32", "TM_34", "TM_38", "TM_40", "TM_44", "TM_50", "HM_01", "HM_03", "HM_04" ],
+    "level": [ "7#STOMP", "15#DISABLE", "23#DEFENSE_CURL", "31#SLAM", "39#SCREECH" ]
+  },
+  "MACHAMP": {
+    "default": [ "KARATE_CHOP", "LOW_KICK", "LEER" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_35", "TM_38", "TM_40", "TM_44", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "20#LOW_KICK", "25#LEER", "36#FOCUS_ENERGY", "44#SEISMIC_TOSS", "52#SUBMISSION" ]
+  },
+  "MACHOKE": {
+    "default": [ "KARATE_CHOP", "LOW_KICK", "LEER" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_35", "TM_38", "TM_40", "TM_44", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "20#LOW_KICK", "25#LEER", "36#FOCUS_ENERGY", "44#SEISMIC_TOSS", "52#SUBMISSION" ]
+  },
+  "MACHOP": {
+    "default": [ "KARATE_CHOP" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_35", "TM_38", "TM_40", "TM_44", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "20#LOW_KICK", "25#LEER", "32#FOCUS_ENERGY", "39#SEISMIC_TOSS", "46#SUBMISSION" ]
+  },
+  "MAGIKARP": {
+    "default": [ "SPLASH" ],
+    "tm": [],
+    "level": [ "15#TACKLE" ]
+  },
+  "MAGMAR": {
+    "default": [ "EMBER" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_29", "TM_30", "TM_31", "TM_32", "TM_34", "TM_35", "TM_38", "TM_40", "TM_44", "TM_46", "TM_50", "HM_04" ],
+    "level": [ "36#LEER", "39#CONFUSE_RAY", "43#FIRE_PUNCH", "48#SMOKESCREEN", "52#SMOG", "55#FLAMETHROWER" ]
+  },
+  "MAGNEMITE": {
+    "default": [ "TACKLE" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_20", "TM_24", "TM_25", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_44", "TM_45", "TM_50", "HM_05" ],
+    "level": [ "21#SONICBOOM", "25#THUNDERSHOCK", "29#SUPERSONIC", "35#THUNDER_WAVE", "41#SWIFT", "47#SCREECH" ]
+  },
+  "MAGNETON": {
+    "default": [ "TACKLE", "SONICBOOM", "THUNDERSHOCK" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_24", "TM_25", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_44", "TM_45", "TM_50", "HM_05" ],
+    "level": [ "21#SONICBOOM", "25#THUNDERSHOCK", "29#SUPERSONIC", "38#THUNDER_WAVE", "46#SWIFT", "54#SCREECH" ]
+  },
+  "MANKEY": {
+    "default": [ "SCRATCH", "LEER" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_24", "TM_25", "TM_28", "TM_31", "TM_32", "TM_34", "TM_35", "TM_39", "TM_40", "TM_44", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "9#LOW_KICK", "15#KARATE_CHOP", "21#FURY_SWIPES", "27#FOCUS_ENERGY", "33#SEISMIC_TOSS", "39#THRASH", "45#SCREECH" ]
+  },
+  "MAROWAK": {
+    "default": [ "BONE_CLUB", "TAIL_WHIP" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_38", "TM_40", "TM_44", "TM_50", "HM_04" ],
+    "level": [ "10#BONE_CLUB", "13#TAIL_WHIP", "18#HEADBUTT", "25#LEER", "33#FOCUS_ENERGY", "41#THRASH", "48#BONEMERANG", "55#RAGE" ]
+  },
+  "MEOWTH": {
+    "default": [ "SCRATCH", "GROWL" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_16", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "12#BITE", "17#PAY_DAY", "24#SCREECH", "33#FURY_SWIPES", "44#SLASH" ]
+  },
+  "METAPOD": {
+    "default": [ "HARDEN" ],
+    "tm": [],
+    "level": [ "7#HARDEN" ]
+  },
+  "MEW": {
+    "default": [ "POUND" ],
+    "tm": [ "TM_01", "TM_02", "TM_03", "TM_04", "TM_05", "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_21", "TM_22", "TM_23", "TM_24", "TM_25", "TM_26", "TM_27", "TM_28", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_36", "TM_37", "TM_38", "TM_39", "TM_40", "TM_41", "TM_42", "TM_43", "TM_44", "TM_45", "TM_46", "TM_47", "TM_48", "TM_49", "TM_50", "HM_01", "HM_02", "HM_03", "HM_04", "HM_05" ],
+    "level": [ "10#TRANSFORM", "20#MEGA_PUNCH", "30#METRONOME", "40#PSYCHIC" ]
+  },
+  "MEWTWO": {
+    "default": [ "CONFUSION", "DISABLE", "SWIFT", "PSYCHIC" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_22", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_36", "TM_38", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_04", "HM_05" ],
+    "level": [ "63#BARRIER", "66#PSYCHIC", "70#RECOVER", "75#MIST", "81#AMNESIA" ]
+  },
+  "MOLTRES": {
+    "default": [ "PECK", "FIRE_SPIN" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_43", "TM_44", "TM_50", "HM_02" ],
+    "level": [ "51#LEER", "55#AGILITY", "60#SKY_ATTACK" ]
+  },
+  "MRMIME": {
+    "default": [ "CONFUSION", "BARRIER" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_22", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_40", "TM_44", "TM_45", "TM_46", "TM_50", "HM_05" ],
+    "level": [ "15#CONFUSION", "23#LIGHT_SCREEN", "31#DOUBLESLAP", "39#MEDITATE", "47#SUBSTITUTE" ]
+  },
+  "MUK": {
+    "default": [ "POUND", "DISABLE", "POISON_GAS" ],
+    "tm": [ "TM_06", "TM_08", "TM_15", "TM_20", "TM_21", "TM_24", "TM_25", "TM_31", "TM_32", "TM_34", "TM_36", "TM_38", "TM_44", "TM_47", "TM_50" ],
+    "level": [ "30#POISON_GAS", "33#MINIMIZE", "37#SLUDGE", "45#HARDEN", "53#SCREECH", "60#ACID_ARMOR" ]
+  },
+  "NIDOKING": {
+    "default": [ "TACKLE", "HORN_ATTACK", "POISON_STING", "THRASH" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_24", "TM_25", "TM_26", "TM_27", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_40", "TM_44", "TM_48", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "8#HORN_ATTACK", "12#DOUBLE_KICK", "23#THRASH" ]
+  },
+  "NIDOQUEEN": {
+    "default": [ "TACKLE", "SCRATCH", "TAIL_WHIP", "BODY_SLAM" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_24", "TM_25", "TM_26", "TM_27", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_40", "TM_44", "TM_48", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "8#SCRATCH", "12#DOUBLE_KICK", "23#BODY_SLAM" ]
+  },
+  "NIDORANF": {
+    "default": [ "GROWL", "TACKLE" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_14", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "8#SCRATCH", "12#DOUBLE_KICK", "17#POISON_STING", "23#TAIL_WHIP", "30#BITE", "38#FURY_SWIPES" ]
+  },
+  "NIDORANM": {
+    "default": [ "LEER", "TACKLE" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_14", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "8#HORN_ATTACK", "12#DOUBLE_KICK", "17#POISON_STING", "23#FOCUS_ENERGY", "30#FURY_ATTACK", "38#HORN_DRILL" ]
+  },
+  "NIDORINA": {
+    "default": [ "GROWL", "TACKLE", "SCRATCH" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "8#SCRATCH", "12#DOUBLE_KICK", "19#POISON_STING", "27#TAIL_WHIP", "36#BITE", "46#FURY_SWIPES" ]
+  },
+  "NIDORINO": {
+    "default": [ "LEER", "TACKLE", "HORN_ATTACK" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "8#HORN_ATTACK", "12#DOUBLE_KICK", "19#POISON_STING", "27#FOCUS_ENERGY", "36#FURY_ATTACK", "46#HORN_DRILL" ]
+  },
+  "NINETALES": {
+    "default": [ "EMBER", "TAIL_WHIP", "QUICK_ATTACK", "ROAR" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": []
+  },
+  "ODDISH": {
+    "default": [ "ABSORB" ],
+    "tm": [ "TM_03", "TM_06", "TM_09", "TM_10", "TM_20", "TM_21", "TM_22", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "15#POISONPOWDER", "17#STUN_SPORE", "19#SLEEP_POWDER", "24#ACID", "33#PETAL_DANCE", "46#SOLARBEAM" ]
+  },
+  "OMANYTE": {
+    "default": [ "WATER_GUN", "WITHDRAW" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_03" ],
+    "level": [ "34#HORN_ATTACK", "39#LEER", "46#SPIKE_CANNON", "53#HYDRO_PUMP" ]
+  },
+  "OMASTAR": {
+    "default": [ "WATER_GUN", "WITHDRAW", "HORN_ATTACK" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_19", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50", "HM_03" ],
+    "level": [ "34#HORN_ATTACK", "39#LEER", "44#SPIKE_CANNON", "49#HYDRO_PUMP" ]
+  },
+  "ONIX": {
+    "default": [ "TACKLE", "SCREECH" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_36", "TM_40", "TM_44", "TM_47", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "15#BIND", "19#ROCK_THROW", "25#RAGE", "33#SLAM", "43#HARDEN" ]
+  },
+  "PARAS": {
+    "default": [ "SCRATCH" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_21", "TM_22", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "13#STUN_SPORE", "20#LEECH_LIFE", "27#SPORE", "34#SLASH", "41#GROWTH" ]
+  },
+  "PARASECT": {
+    "default": [ "SCRATCH", "STUN_SPORE", "LEECH_LIFE" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_22", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "13#STUN_SPORE", "20#LEECH_LIFE", "30#SPORE", "39#SLASH", "48#GROWTH" ]
+  },
+  "PERSIAN": {
+    "default": [ "SCRATCH", "GROWL", "BITE", "SCREECH" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_15", "TM_16", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "12#BITE", "17#PAY_DAY", "24#SCREECH", "37#FURY_SWIPES", "51#SLASH" ]
+  },
+  "PIDGEOT": {
+    "default": [ "GUST", "SAND_ATTACK", "QUICK_ATTACK" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_43", "TM_44", "TM_50", "HM_02" ],
+    "level": [ "5#SAND_ATTACK", "12#QUICK_ATTACK", "21#WHIRLWIND", "31#WING_ATTACK", "44#AGILITY", "54#MIRROR_MOVE" ]
+  },
+  "PIDGEOTTO": {
+    "default": [ "GUST", "SAND_ATTACK" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_43", "TM_44", "TM_50", "HM_02" ],
+    "level": [ "5#SAND_ATTACK", "12#QUICK_ATTACK", "21#WHIRLWIND", "31#WING_ATTACK", "40#AGILITY", "49#MIRROR_MOVE" ]
+  },
+  "PIDGEY": {
+    "default": [ "GUST" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_43", "TM_44", "TM_50", "HM_02" ],
+    "level": [ "5#SAND_ATTACK", "12#QUICK_ATTACK", "19#WHIRLWIND", "28#WING_ATTACK", "36#AGILITY", "44#MIRROR_MOVE" ]
+  },
+  "PIKACHU": {
+    "default": [ "THUNDERSHOCK", "GROWL" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_16", "TM_17", "TM_19", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_40", "TM_44", "TM_45", "TM_50", "HM_05" ],
+    "level": [ "6#TAIL_WHIP", "8#THUNDER_WAVE", "11#QUICK_ATTACK", "15#DOUBLE_TEAM", "20#SLAM", "26#THUNDERBOLT", "33#AGILITY", "41#THUNDER", "50#LIGHT_SCREEN" ]
+  },
+  "PINSIR": {
+    "default": [ "VICEGRIP" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_19", "TM_20", "TM_31", "TM_32", "TM_34", "TM_44", "TM_50", "HM_01", "HM_04" ],
+    "level": [ "21#BIND", "25#SEISMIC_TOSS", "30#GUILLOTINE", "36#FOCUS_ENERGY", "43#HARDEN", "49#SLASH", "54#SWORDS_DANCE" ]
+  },
+  "POLIWAG": {
+    "default": [ "BUBBLE" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_29", "TM_31", "TM_32", "TM_34", "TM_40", "TM_44", "TM_46", "TM_50", "HM_03" ],
+    "level": [ "16#HYPNOSIS", "19#WATER_GUN", "25#DOUBLESLAP", "31#BODY_SLAM", "38#AMNESIA", "45#HYDRO_PUMP" ]
+  },
+  "POLIWHIRL": {
+    "default": [ "BUBBLE", "HYPNOSIS", "WATER_GUN" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_29", "TM_31", "TM_32", "TM_34", "TM_35", "TM_40", "TM_44", "TM_46", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "16#HYPNOSIS", "19#WATER_GUN", "26#DOUBLESLAP", "33#BODY_SLAM", "41#AMNESIA", "49#HYDRO_PUMP" ]
+  },
+  "POLIWRATH": {
+    "default": [ "HYPNOSIS", "WATER_GUN", "DOUBLESLAP", "BODY_SLAM" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_29", "TM_31", "TM_32", "TM_34", "TM_35", "TM_40", "TM_44", "TM_46", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "16#HYPNOSIS", "19#WATER_GUN" ]
+  },
+  "PONYTA": {
+    "default": [ "EMBER" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "30#TAIL_WHIP", "32#STOMP", "35#GROWL", "39#FIRE_SPIN", "43#TAKE_DOWN", "48#AGILITY" ]
+  },
+  "PORYGON": {
+    "default": [ "TACKLE", "SHARPEN", "CONVERSION" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_13", "TM_14", "TM_15", "TM_20", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_05" ],
+    "level": [ "23#PSYBEAM", "28#RECOVER", "35#AGILITY", "42#TRI_ATTACK" ]
+  },
+  "PRIMEAPE": {
+    "default": [ "SCRATCH", "LEER", "LOW_KICK", "KARATE_CHOP" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_24", "TM_25", "TM_28", "TM_31", "TM_32", "TM_34", "TM_35", "TM_39", "TM_40", "TM_44", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "9#LOW_KICK", "15#KARATE_CHOP", "21#FURY_SWIPES", "27#FOCUS_ENERGY", "28#RAGE", "37#SEISMIC_TOSS", "46#THRASH", "45#SCREECH" ]
+  },
+  "PSYDUCK": {
+    "default": [ "SCRATCH" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_28", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "28#TAIL_WHIP", "31#DISABLE", "36#CONFUSION", "43#FURY_SWIPES", "52#HYDRO_PUMP" ]
+  },
+  "RAICHU": {
+    "default": [ "THUNDERSHOCK", "GROWL", "THUNDER_WAVE" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_16", "TM_17", "TM_19", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_40", "TM_44", "TM_45", "TM_50", "HM_05" ],
+    "level": []
+  },
+  "RAPIDASH": {
+    "default": [ "EMBER", "TAIL_WHIP", "STOMP", "GROWL" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "30#TAIL_WHIP", "32#STOMP", "35#GROWL", "39#FIRE_SPIN", "47#TAKE_DOWN", "55#AGILITY" ]
+  },
+  "RATICATE": {
+    "default": [ "TACKLE", "TAIL_WHIP", "QUICK_ATTACK" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_24", "TM_25", "TM_28", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "7#QUICK_ATTACK", "14#HYPER_FANG", "27#FOCUS_ENERGY", "41#SUPER_FANG" ]
+  },
+  "RATTATA": {
+    "default": [ "TACKLE", "TAIL_WHIP" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_14", "TM_20", "TM_24", "TM_25", "TM_28", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "7#QUICK_ATTACK", "14#HYPER_FANG", "23#FOCUS_ENERGY", "34#SUPER_FANG" ]
+  },
+  "RHYDON": {
+    "default": [ "HORN_ATTACK", "STOMP", "TAIL_WHIP", "FURY_ATTACK" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_24", "TM_25", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_38", "TM_40", "TM_44", "TM_48", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "30#STOMP", "35#TAIL_WHIP", "40#FURY_ATTACK", "48#HORN_DRILL", "55#LEER", "64#TAKE_DOWN" ]
+  },
+  "RHYHORN": {
+    "default": [ "HORN_ATTACK" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_20", "TM_24", "TM_25", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_38", "TM_40", "TM_44", "TM_48", "TM_50", "HM_04" ],
+    "level": [ "30#STOMP", "35#TAIL_WHIP", "40#FURY_ATTACK", "45#HORN_DRILL", "50#LEER", "55#TAKE_DOWN" ]
+  },
+  "SANDSHREW": {
+    "default": [ "SCRATCH" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_17", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_48", "TM_50", "HM_01", "HM_04" ],
+    "level": [ "10#SAND_ATTACK", "17#SLASH", "24#POISON_STING", "31#SWIFT", "38#FURY_SWIPES" ]
+  },
+  "SANDSLASH": {
+    "default": [ "SCRATCH", "SAND_ATTACK" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_17", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_48", "TM_50", "HM_01", "HM_04" ],
+    "level": [ "10#SAND_ATTACK", "17#SLASH", "27#POISON_STING", "36#SWIFT", "47#FURY_SWIPES" ]
+  },
+  "SCYTHER": {
+    "default": [ "QUICK_ATTACK" ],
+    "tm": [ "TM_03", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "17#LEER", "20#FOCUS_ENERGY", "24#DOUBLE_TEAM", "29#SLASH", "35#SWORDS_DANCE", "42#AGILITY", "50#WING_ATTACK" ]
+  },
+  "SEADRA": {
+    "default": [ "BUBBLE", "SMOKESCREEN" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50", "HM_03" ],
+    "level": [ "19#SMOKESCREEN", "24#LEER", "30#WATER_GUN", "41#AGILITY", "52#HYDRO_PUMP" ]
+  },
+  "SEAKING": {
+    "default": [ "PECK", "TAIL_WHIP", "SUPERSONIC" ],
+    "tm": [ "TM_06", "TM_07", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_31", "TM_32", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50", "HM_03" ],
+    "level": [ "19#SUPERSONIC", "24#HORN_ATTACK", "30#FURY_ATTACK", "39#WATERFALL", "48#HORN_DRILL", "54#AGILITY" ]
+  },
+  "SEEL": {
+    "default": [ "HEADBUTT" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_16", "TM_20", "TM_31", "TM_32", "TM_34", "TM_40", "TM_44", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "30#GROWL", "35#AURORA_BEAM", "40#REST", "45#TAKE_DOWN", "50#ICE_BEAM" ]
+  },
+  "SHELLDER": {
+    "default": [ "TACKLE", "WITHDRAW" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_36", "TM_39", "TM_44", "TM_47", "TM_49", "TM_50", "HM_03" ],
+    "level": [ "18#SUPERSONIC", "23#CLAMP", "30#AURORA_BEAM", "39#LEER", "50#ICE_BEAM" ]
+  },
+  "SLOWBRO": {
+    "default": [ "CONFUSION", "DISABLE", "HEADBUTT" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_26", "TM_27", "TM_28", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_03", "HM_04", "HM_05" ],
+    "level": [ "18#DISABLE", "22#HEADBUTT", "27#GROWL", "33#WATER_GUN", "37#WITHDRAW", "44#AMNESIA", "55#PSYCHIC" ]
+  },
+  "SLOWPOKE": {
+    "default": [ "CONFUSION" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_16", "TM_20", "TM_26", "TM_27", "TM_28", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_03", "HM_04", "HM_05" ],
+    "level": [ "18#DISABLE", "22#HEADBUTT", "27#GROWL", "33#WATER_GUN", "40#AMNESIA", "48#PSYCHIC" ]
+  },
+  "SNORLAX": {
+    "default": [ "HEADBUTT", "AMNESIA", "REST" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_16", "TM_17", "TM_18", "TM_19", "TM_20", "TM_22", "TM_24", "TM_25", "TM_26", "TM_27", "TM_29", "TM_31", "TM_32", "TM_33", "TM_34", "TM_35", "TM_36", "TM_38", "TM_40", "TM_44", "TM_46", "TM_48", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "35#BODY_SLAM", "41#HARDEN", "48#DOUBLE_EDGE", "56#HYPER_BEAM" ]
+  },
+  "SPEAROW": {
+    "default": [ "PECK", "GROWL" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_20", "TM_31", "TM_32", "TM_34", "TM_39", "TM_43", "TM_44", "TM_50", "HM_02" ],
+    "level": [ "9#LEER", "15#FURY_ATTACK", "22#MIRROR_MOVE", "29#DRILL_PECK", "36#AGILITY" ]
+  },
+  "SQUIRTLE": {
+    "default": [ "TACKLE", "TAIL_WHIP" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_17", "TM_18", "TM_19", "TM_20", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "8#BUBBLE", "15#WATER_GUN", "22#BITE", "28#WITHDRAW", "35#SKULL_BASH", "42#HYDRO_PUMP" ]
+  },
+  "STARMIE": {
+    "default": [ "TACKLE", "WATER_GUN", "HARDEN" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_03", "HM_05" ],
+    "level": []
+  },
+  "STARYU": {
+    "default": [ "TACKLE" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_03", "HM_05" ],
+    "level": [ "17#WATER_GUN", "22#HARDEN", "27#RECOVER", "32#SWIFT", "37#MINIMIZE", "42#LIGHT_SCREEN", "47#HYDRO_PUMP" ]
+  },
+  "TANGELA": {
+    "default": [ "CONSTRICT" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_22", "TM_31", "TM_32", "TM_34", "TM_40", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "24#BIND", "27#ABSORB", "29#VINE_WHIP", "32#POISONPOWDER", "36#STUN_SPORE", "39#SLEEP_POWDER", "45#SLAM", "48#GROWTH" ]
+  },
+  "TAUROS": {
+    "default": [ "TACKLE" ],
+    "tm": [ "TM_06", "TM_07", "TM_08", "TM_09", "TM_10", "TM_13", "TM_14", "TM_15", "TM_20", "TM_24", "TM_25", "TM_26", "TM_27", "TM_31", "TM_32", "TM_34", "TM_38", "TM_40", "TM_44", "TM_50", "HM_04" ],
+    "level": [ "21#STOMP", "28#TAIL_WHIP", "35#LEER", "44#RAGE", "51#TAKE_DOWN" ]
+  },
+  "TENTACOOL": {
+    "default": [ "ACID" ],
+    "tm": [ "TM_03", "TM_06", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_20", "TM_21", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50", "HM_01", "HM_03" ],
+    "level": [ "7#SUPERSONIC", "13#WRAP", "18#POISON_STING", "22#WATER_GUN", "27#CONSTRICT", "33#BARRIER", "40#SCREECH", "48#HYDRO_PUMP" ]
+  },
+  "TENTACRUEL": {
+    "default": [ "ACID", "SUPERSONIC", "WRAP" ],
+    "tm": [ "TM_03", "TM_06", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_21", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50", "HM_01", "HM_03" ],
+    "level": [ "7#SUPERSONIC", "13#WRAP", "18#POISON_STING", "22#WATER_GUN", "27#CONSTRICT", "35#BARRIER", "43#SCREECH", "50#HYDRO_PUMP" ]
+  },
+  "VAPOREON": {
+    "default": [ "TACKLE", "TAIL_WHIP", "QUICK_ATTACK", "WATER_GUN" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_20", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_40", "TM_44", "TM_50", "HM_03" ],
+    "level": [ "8#SAND_ATTACK", "16#WATER_GUN", "23#QUICK_ATTACK", "30#BITE", "36#AURORA_BEAM", "42#HAZE", "42#MIST", "47#ACID_ARMOR", "52#HYDRO_PUMP" ]
+  },
+  "VENOMOTH": {
+    "default": [ "TACKLE", "DISABLE", "SUPERSONIC", "CONFUSION" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_22", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_44", "TM_46", "TM_50", "HM_05" ],
+    "level": [ "22#POISONPOWDER", "27#LEECH_LIFE", "30#STUN_SPORE", "38#PSYBEAM", "43#SLEEP_POWDER", "50#PSYCHIC" ]
+  },
+  "VENONAT": {
+    "default": [ "TACKLE", "DISABLE" ],
+    "tm": [ "TM_06", "TM_09", "TM_10", "TM_20", "TM_21", "TM_22", "TM_29", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_46", "TM_50", "HM_05" ],
+    "level": [ "11#SUPERSONIC", "19#CONFUSION", "22#POISONPOWDER", "27#LEECH_LIFE", "30#STUN_SPORE", "35#PSYBEAM", "38#SLEEP_POWDER", "43#PSYCHIC" ]
+  },
+  "VENUSAUR": {
+    "default": [ "TACKLE", "GROWL", "LEECH_SEED", "VINE_WHIP" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_22", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "7#LEECH_SEED", "13#VINE_WHIP", "22#POISONPOWDER", "30#RAZOR_LEAF", "43#GROWTH", "55#SLEEP_POWDER", "65#SOLARBEAM" ]
+  },
+  "VICTREEBEL": {
+    "default": [ "SLEEP_POWDER", "STUN_SPORE", "ACID", "RAZOR_LEAF" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_22", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "13#WRAP", "15#POISONPOWDER", "18#SLEEP_POWDER" ]
+  },
+  "VILEPLUME": {
+    "default": [ "STUN_SPORE", "SLEEP_POWDER", "ACID", "PETAL_DANCE" ],
+    "tm": [ "TM_03", "TM_06", "TM_08", "TM_09", "TM_10", "TM_15", "TM_20", "TM_21", "TM_22", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "15#POISONPOWDER", "17#STUN_SPORE", "19#SLEEP_POWDER" ]
+  },
+  "VOLTORB": {
+    "default": [ "TACKLE", "SCREECH" ],
+    "tm": [ "TM_06", "TM_09", "TM_20", "TM_24", "TM_25", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_36", "TM_39", "TM_44", "TM_45", "TM_47", "TM_50", "HM_05" ],
+    "level": [ "17#SONICBOOM", "22#SELFDESTRUCT", "29#LIGHT_SCREEN", "36#SWIFT", "43#EXPLOSION" ]
+  },
+  "VULPIX": {
+    "default": [ "EMBER", "TAIL_WHIP" ],
+    "tm": [ "TM_06", "TM_08", "TM_09", "TM_10", "TM_20", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_39", "TM_40", "TM_44", "TM_50" ],
+    "level": [ "16#QUICK_ATTACK", "21#ROAR", "28#CONFUSE_RAY", "35#FLAMETHROWER", "42#FIRE_SPIN" ]
+  },
+  "WARTORTLE": {
+    "default": [ "TACKLE", "TAIL_WHIP", "BUBBLE" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_17", "TM_18", "TM_19", "TM_20", "TM_28", "TM_31", "TM_32", "TM_33", "TM_34", "TM_40", "TM_44", "TM_50", "HM_03", "HM_04" ],
+    "level": [ "8#BUBBLE", "15#WATER_GUN", "24#BITE", "31#WITHDRAW", "39#SKULL_BASH", "47#HYDRO_PUMP" ]
+  },
+  "WEEDLE": {
+    "default": [ "POISON_STING", "STRING_SHOT" ],
+    "tm": [],
+    "level": []
+  },
+  "WEEPINBELL": {
+    "default": [ "VINE_WHIP", "GROWTH", "WRAP" ],
+    "tm": [ "TM_03", "TM_06", "TM_09", "TM_10", "TM_20", "TM_21", "TM_22", "TM_31", "TM_32", "TM_33", "TM_34", "TM_44", "TM_50", "HM_01" ],
+    "level": [ "13#WRAP", "15#POISONPOWDER", "18#SLEEP_POWDER", "23#STUN_SPORE", "29#ACID", "38#RAZOR_LEAF", "49#SLAM" ]
+  },
+  "WEEZING": {
+    "default": [ "TACKLE", "SMOG", "SLUDGE" ],
+    "tm": [ "TM_06", "TM_15", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_34", "TM_36", "TM_38", "TM_44", "TM_47", "TM_50" ],
+    "level": [ "32#SLUDGE", "39#SMOKESCREEN", "43#SELFDESTRUCT", "49#HAZE", "53#EXPLOSION" ]
+  },
+  "WIGGLYTUFF": {
+    "default": [ "SING", "DISABLE", "DEFENSE_CURL", "DOUBLESLAP" ],
+    "tm": [ "TM_01", "TM_05", "TM_06", "TM_08", "TM_09", "TM_10", "TM_11", "TM_12", "TM_13", "TM_14", "TM_15", "TM_17", "TM_18", "TM_19", "TM_20", "TM_22", "TM_24", "TM_25", "TM_29", "TM_30", "TM_31", "TM_32", "TM_33", "TM_34", "TM_38", "TM_40", "TM_44", "TM_45", "TM_46", "TM_49", "TM_50", "HM_04", "HM_05" ],
+    "level": []
+  },
+  "ZAPDOS": {
+    "default": [ "THUNDERSHOCK", "DRILL_PECK" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_15", "TM_20", "TM_24", "TM_25", "TM_31", "TM_32", "TM_33", "TM_34", "TM_39", "TM_43", "TM_44", "TM_45", "TM_50", "HM_02", "HM_05" ],
+    "level": [ "51#THUNDER", "55#AGILITY", "60#LIGHT_SCREEN" ]
+  },
+  "ZUBAT": {
+    "default": [ "LEECH_LIFE" ],
+    "tm": [ "TM_02", "TM_04", "TM_06", "TM_09", "TM_10", "TM_20", "TM_21", "TM_31", "TM_32", "TM_34", "TM_39", "TM_44", "TM_50" ],
+    "level": [ "10#SUPERSONIC", "15#BITE", "21#CONFUSE_RAY", "28#WING_ATTACK", "36#HAZE" ]
+  }
+}
