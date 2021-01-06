@@ -35,9 +35,9 @@ interface StorageTempRoute {
 }
 
 let exampleRoutes: { [key: string]: { json?: any, txt?: string, title: string }; } = {};
-exampleRoutes["yellow.txt"] = { txt: yellowTxt, title: "Yellow Any% Glitchless" };
 exampleRoutes["red.beginner.txt"] = { txt: redBeginnerTxt, title: "Red Any% Glitchless [Beginner Guide]" };
 exampleRoutes["red.no.it.txt"] = { txt: redRaceNoItTxt, title: "Red Any% Glitchless [race, no IT]" };
+exampleRoutes["yellow.txt"] = { txt: yellowTxt, title: "Yellow Any% Glitchless" };
 // exampleRoutes["red.any.glitchless.basic"] = { json: redAnyGlitchlessBasic, title: redAnyGlitchlessBasic.info.title };
 // exampleRoutes["red.any.glitchless.classic"] = { json: redAnyGlitchlessClassic, title: redAnyGlitchlessClassic.info.title };
 // // exampleRoutes["red.example"] = { json: exampleRoute, title: exampleRoute.info.title };

@@ -35,6 +35,10 @@ export class GameFactory1 extends GameFactory {
     super();
   }
 
+  private toKey(str: string) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase();
+  }
+
   protected getEngine(gameInfo: Model.GameInfo): Engine {
     return GameFactory1.ENGINE;
   }
@@ -53,6 +57,7 @@ export class GameFactory1 extends GameFactory {
       for (let key in _items) {
         if (key !== "info") {
           let item = _items[key];
+          key = this.toKey(key);
           GameFactory1._items[key] = new Model.Item(key, item[0], item[1], item[2], item[3], item[4], item[5]);
         }
       }
@@ -94,8 +99,8 @@ export class GameFactory1 extends GameFactory {
       GameFactory1._moves = {};
       for (let key in _moves) {
         if (key !== "info") {
-          key = key.toUpperCase();
           let move = _moves[key];
+          key = this.toKey(key);
           let type = types[move[3]];
           let physical = type.isPhysical;
           GameFactory1._moves[key] = new Model1.Move1(key, move[0], move[1], move[2], type, move[4], move[5], physical, !!move[6], move[7]);
@@ -119,14 +124,14 @@ export class GameFactory1 extends GameFactory {
           let pokemonMap: { [key: string]: Model1.Pokemon1 } = {};
           for (let id = 1; id < _pokemon.length; id++) {
             let p = _pokemon[id];
-            let pokemon = new Model1.Pokemon1(<string>p[0], id, types[(<string>p[1]).toUpperCase()], types[(<string>p[2]).toUpperCase()], <number>p[3], Model1.ExperienceGroups1[<string>p[4]], <number>p[5], <number>p[6], <number>p[7], <number>p[8], <number>p[9]);
-            pokemonMap[pokemon.key] = pokemon;
+            let pokemon = new Model1.Pokemon1(<string>p[0], id, types[this.toKey(<string>p[1])], types[this.toKey(<string>p[2])], <number>p[3], Model1.ExperienceGroups1[<string>p[4]], <number>p[5], <number>p[6], <number>p[7], <number>p[8], <number>p[9]);
+            pokemonMap[this.toKey(pokemon.key)] = pokemon;
           }
           for (let p in _movesLearnedRB) {
-            let pokemon = pokemonMap[p.toUpperCase()];
+            let pokemon = pokemonMap[this.toKey(p)];
             if (pokemon) {
               _movesLearnedRB[p].default.forEach((m: string) => {
-                let move = moves[m.toUpperCase()];
+                let move = moves[this.toKey(m)];
                 if (!move) {
                   console.error(`Error while parsing pokemon: could not find learned move ${m}`);
                 } else {
@@ -135,20 +140,20 @@ export class GameFactory1 extends GameFactory {
               });
               _movesLearnedRB[p].level.forEach((lm: string) => {
                 let [l, m] = lm.split("#");
-                let move = moves[m.toUpperCase()];
+                let move = moves[this.toKey(m)];
                 if (!move) {
                   console.error(`Error while parsing pokemon: could not find learned move ${m}`);
                 } else {
                   pokemon.addLevelupMove(parseInt(l), move);
                 }
               });
-              _movesLearnedRB[p].tm.forEach((m: string) => pokemon.addTm(items[m.toUpperCase()]));
+              _movesLearnedRB[p].tm.forEach((m: string) => pokemon.addTm(items[this.toKey(m)]));
             }
           }
           for (let p in _evolutions) {
-            let pokemon = pokemonMap[p.toUpperCase()];
+            let pokemon = pokemonMap[this.toKey(p)];
             for (let e in _evolutions[p]) {
-              let evolution = pokemonMap[e.toUpperCase()];
+              let evolution = pokemonMap[this.toKey(e)];
               let keyType = Model.EvolutionKey.Type[<string>_evolutions[p][e].type];
               pokemon.addEvolution(new Model.EvolutionKey(keyType, _evolutions[p][e].value), evolution);
             }
@@ -161,14 +166,14 @@ export class GameFactory1 extends GameFactory {
           let pokemonMap: { [key: string]: Model1.Pokemon1 } = {};
           for (let id = 1; id < _pokemon.length; id++) {
             let p = _pokemon[id];
-            let pokemon = new Model1.Pokemon1(<string>p[0], id, types[(<string>p[1]).toUpperCase()], types[(<string>p[2]).toUpperCase()], <number>p[3], Model1.ExperienceGroups1[<string>p[4]], <number>p[5], <number>p[6], <number>p[7], <number>p[8], <number>p[9]);
-            pokemonMap[pokemon.key] = pokemon;
+            let pokemon = new Model1.Pokemon1(<string>p[0], id, types[this.toKey(<string>p[1])], types[this.toKey(<string>p[2])], <number>p[3], Model1.ExperienceGroups1[<string>p[4]], <number>p[5], <number>p[6], <number>p[7], <number>p[8], <number>p[9]);
+            pokemonMap[this.toKey(pokemon.key)] = pokemon;
           }
           for (let p in _movesLearnedY) {
-            let pokemon = pokemonMap[p.toUpperCase()];
+            let pokemon = pokemonMap[this.toKey(p)];
             if (pokemon) {
               _movesLearnedY[p].default.forEach((m: string) => {
-                let move = moves[m.toUpperCase()];
+                let move = moves[this.toKey(m)];
                 if (!move) {
                   console.error(`Error while parsing pokemon: could not find learned move ${m}`);
                 } else {
@@ -177,20 +182,20 @@ export class GameFactory1 extends GameFactory {
               });
               _movesLearnedY[p].level.forEach((lm: string) => {
                 let [l, m] = lm.split("#");
-                let move = moves[m.toUpperCase()];
+                let move = moves[this.toKey(m)];
                 if (!move) {
                   console.error(`Error while parsing pokemon: could not find learned move ${m}`);
                 } else {
                   pokemon.addLevelupMove(parseInt(l), move);
                 }
               });
-              _movesLearnedY[p].tm.forEach((m: string) => pokemon.addTm(items[m.toUpperCase()]));
+              _movesLearnedY[p].tm.forEach((m: string) => pokemon.addTm(items[this.toKey(m)]));
             }
           }
           for (let p in _evolutions) {
-            let pokemon = pokemonMap[p.toUpperCase()];
+            let pokemon = pokemonMap[this.toKey(p)];
             for (let e in _evolutions[p]) {
-              let evolution = pokemonMap[e.toUpperCase()];
+              let evolution = pokemonMap[this.toKey(e)];
               let keyType = Model.EvolutionKey.Type[<string>_evolutions[p][e].type];
               pokemon.addEvolution(new Model.EvolutionKey(keyType, _evolutions[p][e].value), evolution);
             }
@@ -232,7 +237,7 @@ export class GameFactory1 extends GameFactory {
               let party: Model1.Battler1[] = [];
               t.party.forEach((pl: string) => {
                 let [p, l] = pl.split("#");
-                let poke = pokemon[p.toUpperCase()];
+                let poke = pokemon[this.toKey(p)];
                 if (!poke) {
                   console.error(`pokemon ${p} not found`);
                 } else {
@@ -242,13 +247,13 @@ export class GameFactory1 extends GameFactory {
               if (t.moves) {
                 t.moves.forEach((pimim: string) => {
                   let [pi, mi, m] = pimim.split("#");
-                  party[pi].moveset[mi] = new ModelAbstract.Battler.MoveSlot(moves[m.toUpperCase()]);
+                  party[pi].moveset[mi] = new ModelAbstract.Battler.MoveSlot(moves[this.toKey(m)]);
                 });
               }
               let tItems: ModelAbstract.Item[] = [];
               if (t.items && t.items.length > 0) {
                 t.items.forEach(i => {
-                  let item = items[i.toUpperCase()];
+                  let item = items[this.toKey(i)];
                   if (!item) {
                     console.error(`item ${i} not found`);
                   } else {
@@ -257,7 +262,7 @@ export class GameFactory1 extends GameFactory {
                 });
               }
               let trainer = new Model.Trainer(t.key, t.name, tClass, party, loc, t.alias, tItems, t.badgeboost);
-              trainers[trainer.key.toUpperCase()] = trainer;
+              trainers[this.toKey(trainer.key)] = trainer;
             });
           }
         }
@@ -293,7 +298,7 @@ export class GameFactory1 extends GameFactory {
         let allLocations: { [key: string]: Model.Location } = {};
         _locations.forEach(loc => {
           let location = this.getLocationFromJSON(allLocations, loc);
-          GameFactory1._locationsPerGame[gameInfo.key].root[location.name.toUpperCase()] = location;
+          GameFactory1._locationsPerGame[gameInfo.key].root[this.toKey(location.name)] = location;
         });
         GameFactory1._locationsPerGame[gameInfo.key].all = allLocations;
         // Parse the encounter areas
@@ -302,7 +307,7 @@ export class GameFactory1 extends GameFactory {
           let slots: Model.EncounterArea.Slot[] = [];
           ea.slots.forEach(slot => {
             let [p, l] = slot.split("#").map(s => s.trim());
-            let poke = pokemon[p.toUpperCase()];
+            let poke = pokemon[this.toKey(p)];
             if (!poke) {
               console.error(`Error while parsing encounter slots: pokemon "${p}" was not found`);
             } else {
@@ -315,7 +320,7 @@ export class GameFactory1 extends GameFactory {
             }
           });
           let encounterArea = new Model.EncounterArea(ea.location, ea.rate, slots, ea.type, ea.method);
-          let location = allLocations[encounterArea.location.toUpperCase()];
+          let location = allLocations[this.toKey(encounterArea.location)];
           if (!location) {
             console.error(`Error while parsing encounter slots: location "${encounterArea.location}" could not be found`);
           } else {
@@ -336,10 +341,10 @@ export class GameFactory1 extends GameFactory {
       locationJSON.subLocations.forEach(subLoc => subLocations.push(this.getLocationFromJSON(allLocations, subLoc)));
     }
     let location = new Model.Location(locationJSON.location, subLocations);
-    if (allLocations[location.name.toUpperCase()]) {
+    if (allLocations[this.toKey(location.name)]) {
       console.warn(`Location "${location.name}" was already added, skipping...`);
     } else {
-      allLocations[location.name.toUpperCase()] = location;
+      allLocations[this.toKey(location.name)] = location;
     }
     return location;
   }

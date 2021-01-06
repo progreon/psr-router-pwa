@@ -1493,29 +1493,29 @@
       }
     ]
   },
-  "Silph Co 5F": {
+  "Silph Co. 5F": {
     "Juggler": [
       {
-        "key": "Silph Co 5F - Juggler",
+        "key": "Silph Co. 5F - Juggler",
         "name": "Juggler",
         "party": [ "KADABRA#29", "MRMIME#29" ]
       }
     ],
     "Scientist": [
       {
-        "key": "Silph Co 5F - Scientist",
+        "key": "Silph Co. 5F - Scientist",
         "name": "Scientist",
         "party": [ "MAGNETON#26", "KOFFING#26", "WEEZING#26", "MAGNEMITE#26" ]
       }
     ],
     "Rocket": [
       {
-        "key": "Silph Co 5F - Rocket 1",
+        "key": "Silph Co. 5F - Rocket 1",
         "name": "Rocket 1",
         "party": [ "ARBOK#33" ]
       },
       {
-        "key": "Silph Co 5F - Rocket 2",
+        "key": "Silph Co. 5F - Rocket 2",
         "name": "Rocket 2",
         "party": [ "HYPNO#33" ]
       }
@@ -1731,104 +1731,104 @@
       }
     ]
   },
-  "Silph Co 2F": {
+  "Silph Co. 2F": {
     "Scientist": [
       {
-        "key": "Silph Co 2F - Scientist 1",
+        "key": "Silph Co. 2F - Scientist 1",
         "name": "Scientist 1",
         "party": [ "GRIMER#26", "WEEZING#26", "KOFFING#26", "WEEZING#26" ]
       },
       {
-        "key": "Silph Co 2F - Scientist 2",
+        "key": "Silph Co. 2F - Scientist 2",
         "name": "Scientist 2",
         "party": [ "MAGNEMITE#28", "VOLTORB#28", "MAGNETON#28" ]
       }
     ],
     "Rocket": [
       {
-        "key": "Silph Co 2F - Rocket 1",
+        "key": "Silph Co. 2F - Rocket 1",
         "name": "Rocket 1",
         "party": [ "CUBONE#29", "ZUBAT#29" ]
       },
       {
-        "key": "Silph Co 2F - Rocket 2",
+        "key": "Silph Co. 2F - Rocket 2",
         "name": "Rocket 2",
         "party": [ "GOLBAT#25", "ZUBAT#25", "ZUBAT#25", "RATICATE#25", "ZUBAT#25" ]
       }
     ]
   },
-  "Pokemon Mansion 1F,Silph Co 3F": {
+  "Pokemon Mansion 1F,Silph Co. 3F": {
     "Scientist": [
       {
-        "key": "Pokemon Mansion 1F,Silph Co 3F - Scientist",
+        "key": "Pokemon Mansion 1F,Silph Co. 3F - Scientist",
         "name": "Scientist",
         "party": [ "ELECTRODE#29", "WEEZING#29" ]
       }
     ]
   },
-  "Silph Co 4F": {
+  "Silph Co. 4F": {
     "Scientist": [
       {
-        "key": "Silph Co 4F - Scientist",
+        "key": "Silph Co. 4F - Scientist",
         "name": "Scientist",
         "party": [ "ELECTRODE#33" ]
       }
     ],
     "Rocket": [
       {
-        "key": "Silph Co 4F - Rocket 1",
+        "key": "Silph Co. 4F - Rocket 1",
         "name": "Rocket 1",
         "party": [ "MACHOP#29", "DROWZEE#29" ]
       },
       {
-        "key": "Silph Co 4F - Rocket 2",
+        "key": "Silph Co. 4F - Rocket 2",
         "name": "Rocket 2",
         "party": [ "EKANS#28", "ZUBAT#28", "CUBONE#28" ]
       }
     ]
   },
-  "Silph Co 6F": {
+  "Silph Co. 6F": {
     "Scientist": [
       {
-        "key": "Silph Co 6F - Scientist",
+        "key": "Silph Co. 6F - Scientist",
         "name": "Scientist",
         "party": [ "VOLTORB#25", "KOFFING#25", "MAGNETON#25", "MAGNEMITE#25", "KOFFING#25" ]
       }
     ],
     "Rocket": [
       {
-        "key": "Silph Co 6F - Rocket 1",
+        "key": "Silph Co. 6F - Rocket 1",
         "name": "Rocket 1",
         "party": [ "MACHOP#29", "MACHOKE#29" ]
       },
       {
-        "key": "Silph Co 6F - Rocket 2",
+        "key": "Silph Co. 6F - Rocket 2",
         "name": "Rocket 2",
         "party": [ "ZUBAT#28", "ZUBAT#28", "GOLBAT#28" ]
       }
     ]
   },
-  "Silph Co 7F": {
+  "Silph Co. 7F": {
     "Scientist": [
       {
-        "key": "Silph Co 7F - Scientist",
+        "key": "Silph Co. 7F - Scientist",
         "name": "Scientist",
         "party": [ "ELECTRODE#29", "MUK#29" ]
       }
     ],
     "Rocket": [
       {
-        "key": "Silph Co 7F - Rocket 1",
+        "key": "Silph Co. 7F - Rocket 1",
         "name": "Rocket 1",
         "party": [ "RATICATE#26", "ARBOK#26", "KOFFING#26", "GOLBAT#26" ]
       },
       {
-        "key": "Silph Co 7F - Rocket 2",
+        "key": "Silph Co. 7F - Rocket 2",
         "name": "Rocket 2",
         "party": [ "CUBONE#29", "CUBONE#29" ]
       },
       {
-        "key": "Silph Co 7F - Rocket 3",
+        "key": "Silph Co. 7F - Rocket 3",
         "name": "Rocket 3",
         "party": [ "SANDSHREW#29", "SANDSLASH#29" ]
       }
@@ -1836,77 +1836,77 @@
     "Green2": [
       {
         "alias": "Silph Rival - Jolteon",
-        "key": "Silph Co 7F - Green2 1",
+        "key": "Silph Co. 7F - Green2 1",
         "name": "Green2 1",
         "party": [ "SANDSLASH#38", "NINETALES#35", "CLOYSTER#37", "KADABRA#35", "JOLTEON#40" ]
       },
       {
         "alias": "Silph Rival - Flareon",
-        "key": "Silph Co 7F - Green2 2",
+        "key": "Silph Co. 7F - Green2 2",
         "name": "Green2 2",
         "party": [ "SANDSLASH#38", "CLOYSTER#35", "MAGNETON#37", "KADABRA#35", "FLAREON#40" ]
       },
       {
         "alias": "Silph Rival - Vaporeon",
-        "key": "Silph Co 7F - Green2 3",
+        "key": "Silph Co. 7F - Green2 3",
         "name": "Green2 3",
         "party": [ "SANDSLASH#38", "MAGNETON#35", "NINETALES#37", "KADABRA#35", "VAPOREON#40" ]
       }
     ]
   },
-  "Silph Co 8F": {
+  "Silph Co. 8F": {
     "Scientist": [
       {
-        "key": "Silph Co 8F - Scientist",
+        "key": "Silph Co. 8F - Scientist",
         "name": "Scientist",
         "party": [ "GRIMER#29", "ELECTRODE#29" ]
       }
     ],
     "Rocket": [
       {
-        "key": "Silph Co 8F - Rocket 1",
+        "key": "Silph Co. 8F - Rocket 1",
         "name": "Rocket 1",
         "party": [ "RATICATE#26", "ZUBAT#26", "GOLBAT#26", "RATTATA#26" ]
       },
       {
-        "key": "Silph Co 8F - Rocket 2",
+        "key": "Silph Co. 8F - Rocket 2",
         "name": "Rocket 2",
         "party": [ "WEEZING#28", "GOLBAT#28", "KOFFING#28" ]
       }
     ]
   },
-  "Silph Co 9F": {
+  "Silph Co. 9F": {
     "Scientist": [
       {
-        "key": "Silph Co 9F - Scientist",
+        "key": "Silph Co. 9F - Scientist",
         "name": "Scientist",
         "party": [ "VOLTORB#28", "KOFFING#28", "MAGNETON#28" ]
       }
     ],
     "Rocket": [
       {
-        "key": "Silph Co 9F - Rocket 1",
+        "key": "Silph Co. 9F - Rocket 1",
         "name": "Rocket 1",
         "party": [ "DROWZEE#28", "GRIMER#28", "MACHOP#28" ]
       },
       {
-        "key": "Silph Co 9F - Rocket 2",
+        "key": "Silph Co. 9F - Rocket 2",
         "name": "Rocket 2",
         "party": [ "GOLBAT#28", "DROWZEE#28", "HYPNO#28" ]
       }
     ]
   },
-  "Silph Co 10F": {
+  "Silph Co. 10F": {
     "Scientist": [
       {
-        "key": "Silph Co 10F - Scientist",
+        "key": "Silph Co. 10F - Scientist",
         "name": "Scientist",
         "party": [ "MAGNEMITE#29", "KOFFING#29" ]
       }
     ],
     "Rocket": [
       {
-        "key": "Silph Co 10F - Rocket",
+        "key": "Silph Co. 10F - Rocket",
         "name": "Rocket",
         "party": [ "MACHOKE#33" ]
       }
@@ -1933,22 +1933,22 @@
       }
     ]
   },
-  "Silph Co 11F": {
+  "Silph Co. 11F": {
     "Giovanni": [
       {
-        "key": "Silph Co 11F - Giovanni",
+        "key": "Silph Co. 11F - Giovanni",
         "name": "Giovanni",
         "party": [ "NIDORINO#37", "PERSIAN#35", "RHYHORN#37", "NIDOQUEEN#41" ]
       }
     ],
     "Rocket": [
       {
-        "key": "Silph Co 11F - Rocket 1",
+        "key": "Silph Co. 11F - Rocket 1",
         "name": "Rocket 1",
         "party": [ "RATTATA#25", "RATTATA#25", "ZUBAT#25", "RATTATA#25", "EKANS#25" ]
       },
       {
-        "key": "Silph Co 11F - Rocket 2",
+        "key": "Silph Co. 11F - Rocket 2",
         "name": "Rocket 2",
         "party": [ "WEEZING#31", "ARBOK#31", "MEOWTH#31" ]
       }
@@ -2015,20 +2015,20 @@
       }
     ]
   },
-  "Silph Co 3F": {
+  "Silph Co. 3F": {
     "Rocket": [
       {
-        "key": "Silph Co 3F - Rocket",
+        "key": "Silph Co. 3F - Rocket",
         "name": "Rocket",
         "party": [ "RATICATE#28", "HYPNO#28", "RATICATE#28" ]
       }
     ]
   },
   "essieJamesData:": {},
-  "Pokemon Tower 7F": {
+  "Pokémon Tower 7F": {
     "Rocket": [
       {
-        "key": "Pokemon Tower 7F - Rocket",
+        "key": "Pokémon Tower 7F - Rocket",
         "name": "Rocket",
         "party": [ "MEOWTH#27", "ARBOK#27", "WEEZING#27" ]
       }
@@ -2105,23 +2105,23 @@
       }
     ]
   },
-  "Pokemon Tower 2F": {
+  "Pokémon Tower 2F": {
     "Green2": [
       {
         "alias": "Tower Rival - Jolteon",
-        "key": "Pokemon Tower 2F - Green2 1",
+        "key": "Pokémon Tower 2F - Green2 1",
         "name": "Green2 1",
         "party": [ "FEAROW#25", "SHELLDER#23", "VULPIX#22", "SANDSHREW#20", "EEVEE#25" ]
       },
       {
         "alias": "Tower Rival - Flareon",
-        "key": "Pokemon Tower 2F - Green2 2",
+        "key": "Pokémon Tower 2F - Green2 2",
         "name": "Green2 2",
         "party": [ "FEAROW#25", "MAGNEMITE#23", "SHELLDER#22", "SANDSHREW#20", "EEVEE#25" ]
       },
       {
         "alias": "Tower Rival - Vaporeon",
-        "key": "Pokemon Tower 2F - Green2 3",
+        "key": "Pokémon Tower 2F - Green2 3",
         "name": "Green2 3",
         "party": [ "FEAROW#25", "VULPIX#23", "MAGNEMITE#22", "SANDSHREW#20", "EEVEE#25" ]
       }
@@ -2162,82 +2162,82 @@
       }
     ]
   },
-  "Pokemon Tower 3F": {
+  "Pokémon Tower 3F": {
     "Channeler": [
       {
-        "key": "Pokemon Tower 3F - Channeler 1",
+        "key": "Pokémon Tower 3F - Channeler 1",
         "name": "Channeler 1",
         "party": [ "GASTLY#23" ]
       },
       {
-        "key": "Pokemon Tower 3F - Channeler 2",
+        "key": "Pokémon Tower 3F - Channeler 2",
         "name": "Channeler 2",
         "party": [ "GASTLY#24" ]
       },
       {
-        "key": "Pokemon Tower 3F - Channeler 3",
+        "key": "Pokémon Tower 3F - Channeler 3",
         "name": "Channeler 3",
         "party": [ "GASTLY#22" ]
       }
     ]
   },
-  "Pokemon Tower 4F": {
+  "Pokémon Tower 4F": {
     "Channeler": [
       {
-        "key": "Pokemon Tower 4F - Channeler 1",
+        "key": "Pokémon Tower 4F - Channeler 1",
         "name": "Channeler 1",
         "party": [ "GASTLY#24" ]
       },
       {
-        "key": "Pokemon Tower 4F - Channeler 2",
+        "key": "Pokémon Tower 4F - Channeler 2",
         "name": "Channeler 2",
         "party": [ "GASTLY#23", "GASTLY#23" ]
       },
       {
-        "key": "Pokemon Tower 4F - Channeler 3",
+        "key": "Pokémon Tower 4F - Channeler 3",
         "name": "Channeler 3",
         "party": [ "GASTLY#22" ]
       }
     ]
   },
-  "Pokemon Tower 5F": {
+  "Pokémon Tower 5F": {
     "Channeler": [
       {
-        "key": "Pokemon Tower 5F - Channeler 1",
+        "key": "Pokémon Tower 5F - Channeler 1",
         "name": "Channeler 1",
         "party": [ "HAUNTER#23" ]
       },
       {
-        "key": "Pokemon Tower 5F - Channeler 2",
+        "key": "Pokémon Tower 5F - Channeler 2",
         "name": "Channeler 2",
         "party": [ "GASTLY#22" ]
       },
       {
-        "key": "Pokemon Tower 5F - Channeler 3",
+        "key": "Pokémon Tower 5F - Channeler 3",
         "name": "Channeler 3",
         "party": [ "GASTLY#24" ]
       },
       {
-        "key": "Pokemon Tower 5F - Channeler 4",
+        "key": "Pokémon Tower 5F - Channeler 4",
         "name": "Channeler 4",
         "party": [ "HAUNTER#22" ]
       }
     ]
   },
-  "Pokemon Tower 6F": {
+  "Pokémon Tower 6F": {
     "Channeler": [
       {
-        "key": "Pokemon Tower 6F - Channeler 1",
+        "key": "Pokémon Tower 6F - Channeler 1",
         "name": "Channeler 1",
         "party": [ "GASTLY#22", "GASTLY#22", "GASTLY#22" ]
       },
       {
-        "key": "Pokemon Tower 6F - Channeler 2",
+        "key": "Pokémon Tower 6F - Channeler 2",
         "name": "Channeler 2",
         "party": [ "GASTLY#24" ]
       },
       {
-        "key": "Pokemon Tower 6F - Channeler 3",
+        "key": "Pokémon Tower 6F - Channeler 3",
         "name": "Channeler 3",
         "party": [ "GASTLY#24" ]
       }

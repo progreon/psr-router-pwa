@@ -165,15 +165,15 @@
     ]
   },
   {
-    "location": "Pokemon Tower",
+    "location": "Pokémon Tower",
     "subLocations": [
-      { "location": "Pokemon Tower 1F" },
-      { "location": "Pokemon Tower 2F" },
-      { "location": "Pokemon Tower 3F" },
-      { "location": "Pokemon Tower 4F" },
-      { "location": "Pokemon Tower 5F" },
-      { "location": "Pokemon Tower 6F" },
-      { "location": "Pokemon Tower 7F" }
+      { "location": "Pokémon Tower 1F" },
+      { "location": "Pokémon Tower 2F" },
+      { "location": "Pokémon Tower 3F" },
+      { "location": "Pokémon Tower 4F" },
+      { "location": "Pokémon Tower 5F" },
+      { "location": "Pokémon Tower 6F" },
+      { "location": "Pokémon Tower 7F" }
     ]
   },
   {

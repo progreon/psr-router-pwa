@@ -241,204 +241,221 @@ Route: Yellow Any% Glitchless
 			Tm: TM_48 1 1
 		Fly to Lavender (3 down), and walk to the tower
 
-
-===
-
 	S: Pokémon Tower
-		NOTE: From this point on you have 2 revives which means deaths aren't as scary, so if you die remember to swap to a pokemon, revive, let the swapped pokemon die and ANY AND ALL X ITEMS ARE GONE. This route has extras so you shouldn't run out of x items, and there will still be some saving since some deaths with revives are still really slow to come back from if at all
-		B: Tower Rival - Bulbasaur :: Tower Rival :: TB x2, BB, Thrash
+		B: Tower Rival - Flareon :: Tower Rival :: X Acc + HD x5 
+			If 26-39 on 15 special, 26-37 on 14 special, or 27-39 on 13 special: TB Fearow and X Acc on Magnemite
+			Use: X_ACCURACY
 		B: Pokémon Tower 4F - Channeler 2 :: Rock Slide x2
 		GetI: ELIXER :: Get the Elixer item ball
-		GetI: ELIXER :: Get the hidden Elixer
-		Take the free heal on 5F
+		Skip Hidden Tower Elixer (Pick it up with Vape)
+		Take heal pad
 		B: Pokémon Tower 6F - Channeler 2 :: Rock Slide
 		B: Pokémon Tower 6F - Channeler 3 :: Rock Slide
-		GetI: RARE_CANDY :: Pickup the rare candy in your way
-		Menu: Teach TM07 (Horn Drill) over Rock Slide
-			Tm: TM_07 1 1
+		GetI: RARE_CANDY :: Pick up rare candy in your way
 		Enter the Ghost battle and escape using the Poke Doll
-		Menu: During the Ghost battle (TEMP: should be menu in fight)
-			Swap: 4 SUPER_REPEL
+		Menu: During the Ghost battle (TEMP: should be in fight)
 			Use: POKE_DOLL
-		B: Pokémon Tower 7F - Rocket 1 :: TB x3 + (BB)
-		B: Pokémon Tower 7F - Rocket 2 :: X ACC, HD x2
-			Use: X_ACCURACY
-		B: Pokémon Tower 7F - Rocket 3 :: TB x2, Thrash
-		GetI: POKE_FLUTE :: Get the Pokeflute and Fly to Celadon City
+		B: Pokémon Tower 7F - Rocket :: Jessie & James :: X Acc + HD x3
+		Talk to Old Man twice
+		GetI: POKE_FLUTE :: Get the Poke Flute
+		Walk outside, fly to Celadon (1 down)
+
 	S: Celadon City
 		Use the Center
 		Bike to Saffaron City
+
 	S: Silph Co.
-		Enter Silph Co and take the stairs to floor 5
+		Take the elevator to 10F
 		GetI: ELIXER :: Get the Elixer in the tree
-		B: Silph Co. 5F - Rocket 1 :: Thrash
-		Menu: If you get paralized use a heal
-			Use: PARLYZ_HEAL ?
-		GetI: CARD_KEY :: Get the Card Key
-		B: Silph Rival - Bulbasaur :: Silph Rival :: X Acc, X Speed, HD x5
+		B: Silph Co. 10F - Rocket :: X Acc + HD
 			Use: X_ACCURACY
-			Use: X_SPEED
-		NOTE: In this split we want to take a bit of damage to do a strat on Koga called Boom strats
-		Menu: If you have less than 78 HP use ether on HD before the next fight
-			Use: ETHER
-		B: Silph Co. 11F - Rocket 2 :: X Acc, BB, HD x2
-			Opp: 1
-				Use: X_ACCURACY :: Turn 1
-				Turn 2: If Cubone damages you and you need to ether still use ether now
-				BB
-			Opp: 2
-				If you haven't used ether do so now
-				HD
-			Opp: 3
-				HD
-		B: Silph Co. 11F - Giovanni :: Silph Gio :: X Acc, HD x2, BB, HD
-			Use: X_ACCURACY
-		Backtrack to 3F, then take the elevator to 10F
+		Pick up TM26 and Rare Candy
 		GetI: TM_26
 		GetI: RARE_CANDY
+		Menu: EQ Menu
+			Swap: 4 X_SPEED
+			TM: TM_26 1 1
+		B: Silph Co. 5F - Rocket 1 :: EQ
+		GetI: CARD_KEY :: Get the Card Key
+		B: Silph Rival - Flareon :: Silph Rival :: X Acc, X Speed, HD, HD, EQ, EQ, EQ
+			(If Vape: Drill, EQ x3, Drill)
+			Use: X_ACCURACY
+			Use: X_SPEED
+			Slash: 48-57 with 14/15 DV, 49-58 with 13 DV
+			Setup X Speed on Magneton if Slash kills
+			Can yolo X Speed on Kadabra to try and get red bar
+		GetP: Lapras:15
+		B: Silph Co. 11F - Rocket 2 :: Jessie & James :: EQ x3
+		B: Silph Co. 11F - Giovanni :: Silph Gio :: EQ, X Acc + X Speed + HD, BB, Drill
+			Use: X_ACCURACY
+			Can setup on Nidorino if low on HP
 		Dig out
+
 	S: Celadon City
-		Bike west
-		Menu: MENU before Snorlax:
+		Menu: Bike left to Snorlax, open menu right in front of him
 			Use: SUPER_REPEL
-			Swap: 5 RARE_CANDY
+			Swap: 6 X_SPECIAL
 			Use: POKE_FLUTE
 		Run from the Snorlax
+		Go into Cycling Road
+
 	S: Cycling Road
 		NOTE: You can hold B to stop automatically moving down on Cycling Road
 		GetI: RARE_CANDY :: Get the hidden Rare Candy
+			The candy is even with 3rd flower formation on the left side of the screen
+
 	S: Fuchsia City
-		Menu: After exiting the Cycling Road building
-			Use: SUPER_REPEL
-			Swap: 6 X_SPECIAL
-			Tm: TM_26 1 2
-			Use: BICYCLE
-		Bike to the Safari Zone
+		Bike into the Safari Zone
 		S: Safari Zone
+			Menu: Menu after entering
+				Use: SUPER_REPEL
+				Use: Elixer
+				Use: Potion ? :: 1-2 HP Potion, 3-34 HP Early Erika then Sabrina(Check Pastebin), 35-75 Super Potion, 76+ Dont Heal
+				TM: TM_13 1 4
+				Use: BICYCLE
 			Map of the Safari Zone
 				[[https://i.imgur.com/oBebL5z.jpg]]
-			Upon entering, get on the bike
-			If you have 0 potions get the full restore
-			Menu: Use a super repel above the last hill in the second area
+			Menu: In Room 3 before turning up: Super Repel
 				Use: SUPER_REPEL
-			GetI: GOLD_TEETH :: Get the Gold Teeth in the fourth area
-			GetI: HM_03 :: Get HM03 from the guy in the house
-			After getting Surf, dig out of the safari and fly back to Fuschia city
+			GetI: FULL_RESTORE :: Get the Full Restore&
+			GetI: GOLD_TEETH :: Pick up the Gold Teeth
+			GetI: HM_03 :: Walk into the house and get HM03 (surf)
+			Dig out, then fly to Fuschia OR Do Early Erika then Sabrina(Only do this if you got red bar after Erika)
 		S: Fuchsia Gym
 			B: Fuchsia Gym - Juggler 1 :: EQ x4
-			(Heal to 47+ HP, but ideally no higher than 80)
+			(If you did Early Erika and Early Sabrina, Heal and use 2 Rare Candy)
 			B: Fuchsia Gym - Juggler 2 :: EQ, EQ + TB
-				If TB gets disabled, finish with BB if it's in range, finish with EQ if not or you don't know the range
-			B: Koga :: EQ x3, then use an Elixer on Weezing (to stall for selfdestruct)
-				Opp: 4 :: *1
-					Use: ELIXER :: to stall for selfdestruct
-					If Koga uses an X Attack, use Bubblebeam till you die
-					The goal is to die to Selfdestruct, but it's OK if you don't
-					If you didn’t die from koga you can still try to get red bar by following the HP strats for the backups (https://pastebin.com/2DBBnkmf). Note that this can be risky.
-		Menu: Revive with candies and bike to the Warden's house
-			Use: RARE_CANDY *
-			Use: BICYCLE
-		GetI: HM_04 GOLD_TEETH :: Get HM04 from the warden, then Fly to Pallet Town
+			IF healing before Koga use Full Restore then use 2 Rare Candy as well
+			B: Koga :: X Acc + HD, X Speed + HD, HD, HD
+				Opp: 1
+					Use: X_ACCURACY
+				Opp: 2
+					Use: X_SPEED
+				Use https://pastebin.com/MRLfaK22 for decision making on this fight
+		Bike to Old Man's House
+		GetI: HM_04 GOLD_TEETH :: Talk to Old Man to get HM04 (Strength)
+
+	S: Saffron Gym
+		Fly to Saffron and go right side both times
+		Teleporter Puzzle: Top Left, Bottom Left, Bottom Left
+		B: Sabrina :: X Acc + X Speed + EQ, EQ, HD
+			Use: X_ACCURACY
+			Use: X_SPEED
+
+	S: Celadon Gym
+		Dig out, then Bike to Erika (Take the Center and skip Mom Heal if you cannot tank an Erika hit)
+		B: Celadon Gym - Beauty 3 :: IB
+		If 6-11 HP, use 2 Rare Candy
+		B: Erika :: IB (+IB), EQ, EQ
+			Use an X Spec if it lets you tank a hit from Tangela
+		Exit and Fly to Pallet
+
 	S: Pallet Town
-		Menu: Walk to the water, and menu
+		Take Mom heal
+		Menu: Walk to bottom of water, and menu:
 			Use: SUPER_REPEL
-			Tm: HM_03 2
+			Tm: HM_04 5
+			Tm: HM_03 5
+			Use: RARE_CANDY 3
 		Surf to Cinnabar
+
 	S: Cinnabar Mansion
 		Use this map to get through Cinnabar Mansion, doing the following actions along the way
 			[[https://i.imgur.com/UktHB4j.jpg]]
-		GetI: TM_14
-		Menu: MENU after picking up Blizzard
-			Tm: HM_04 2 1
-			Tm: TM_14 1 4
-			Use: REPEL :: NOTE THIS IS THE REPEL NOT I REPEAT NOT SUPER REPEL
-		GetI: RARE_CANDY :: Get the Rare Candy on top
-		GetI: SECRET_KEY
-		Dig out, then bike to the Celadon Gym
-	S: Celadon Gym
-		Hug the left wall and Cut the bush in the top-left corner
-		B: Celadon Gym - Beauty 3 :: Bliz (use Poke Flute if put to sleep)
-		B: Erika :: EQ, Bliz, EQ
-		Walk out, then Fly to Cinnabar (2 down) and bike to the gym
+		Menu: Use a repel halfway
+			Use: SUPER_REPEL
+		GetI: RARE_CANDY :: Pick up the visible Mansion Candy but not the hidden one
+		GetI: SECRET_KEY :: Get the Secret Key, then Dig out and Fly to Cinnabar
+
 	S: Cinnabar Gym
 		Quiz Answers: A B B B A B
-		B: Blaine :: X Acc, EQ, HD x3 (Drill Growlithe if Blaine uses a Super Potion)
-			Use: X_ACCURACY
-		Dig out, then bike to the Saffron Gym
-	S: Saffron Gym
-		Teleporter Puzzle: Top Left, Bottom Left, Bottom Left
-		B: Sabrina :: EQ x4
-		Walk back to the Teleporter and dig out and fly to Viridian (1 up) and bike to the gym
+		B: Blaine :: EQ, X Atk + EQ, EQ (+EQ or IB)
+			Opp: 2
+				Use: X_ATTACK
+		Dig out, then fly to Viridian
+
 	S: Viridian Gym
-		B: Viridian Gym - CooltrainerM 3 :: EQ
-		[OPTIONAL SAVE: This next fight has a decent chance to die, and reviving will lose red bar so saving is advised]
-		B: Viridian Gym - Blackbelt 3 :: X ACC, HD, Bliz, HD
-			Use: X_ACCURACY
-		Leave the Gym to reset the trainer
-		Menu: Elixer after entering the gym again
-			Use: ELIXER
-		B: Giovanni :: EQ x4, Bliz + (Bliz)
-			Note: Don't go bellow 2 Blizzards in this fight, if you need to use EQs to finish Rhydon
-		Menu: When outside of the gym, use a Super Repel, then bike west to Route 22
-			Use: SUPER_REPEL
-			Use: BICYCLE
-	S: Route 22
-		B: Viridian Rival - Bulbasaur :: Viridian Rival :: X ACC, X Spec, Bliz, Bliz, TB, X Spec, TB, EQ, Bliz
-			Note: If you only have 2 Blizzards, use TB on Pidgeot instead of Bliz
+		If you need to heal for Giovanni use Super Potion then Bike
+		If you have Red Bar delay your heal
+		B: Viridian Gym - CooltrainerM 3 :: IB
+		B: Viridian Gym - Blackbelt 3 :: X Spec + EQ (+IB), IB, EQ (+IB)
+			Use: X_SPECIAL
+			If Leer after X Spec IB x3
+		Walk out of gym, then back in to reset Blackbelt's position
+		Menu: Heal to survive EQ/Dig: 93-110 (97-114 with 13 Special)
+			Use: SUPER_POTION ?
+		B: Giovanni :: X Speed + EQ, X Acc + HD, HD, HD, HD
 			Opp: 1
+				Use: X_SPEED
+				If dig then use X Acc and HD Dugtrio
+			Opp: 2
 				Use: X_ACCURACY
-				Use: X_SPEED
-			Opp: 4
-				Use: X_SPEED
-	S: Route 23
-		Menu: After exiting the water, use another Super Repel and bike to Victory Road
+		Menu: Walk out of Giovanni's Gym and menu:
 			Use: SUPER_REPEL
+			Use: POTION ? :: Heal to ~60 HP
+			(Elixer if Vape)
+			Use: BICYCLE
+
+	S: Route 22
+		B: Viridian Rival - Flareon :: Viridian Rival :: X Spec + IB, IB, TB, EQ, EQ, EQ
+			Use: X_SPECIAL
+			(If Vape: X Acc, Drill x5, EQ KADABRA)
+		Bike and Surf to Victory Road
+		If you have 96+ HP, Elixer on the first Bike Menu and pick up the hidden Max Ether
+		Menu: Use Super Repel and Bike after finished surfing
+			Use: SUPER_REPEL
+
 	S: Victory Road
 		Use these maps to help you get through Victory Road
 			1F: [[https://cdn.bulbagarden.net/upload/5/56/Victory_Road_1F_RBY.png]]
 			2F: [[https://cdn.bulbagarden.net/upload/1/11/Victory_Road_2F_RBY.png]]
 			3F: [[https://cdn.bulbagarden.net/upload/e/e5/Victory_Road_3F_RBY.png]]
-		Menu: Super Repel twice during Victory Road
-			Use: SUPER_REPEL 2
-		Use Strength upon entering and push the first boulder onto the switch on the right, then bike to the ladder in the top-left corner
-		Use Strength again, push the boulder below onto the switch, bike up the steps hugging the north edge and use a Super Repel. Bike to the right, down the stairs, then right and up to the ladder
-		Use strength again and push the boulder onto the switch to the left, then bike to the bottom-right corner and push the boulder down the hole and go down the hole
-		Use Strength one last time, use your last Super Repel, then get on your bike and push the boulder onto the switch in the bottom-left, bike back to where you fell down and follow the ladders to the exit
+		Use Strength once entering Victory Road
+		Menu: Use Super Repel and Strength in 2nd Room right next to the boulder
+			Use: SUPER_REPEL
+		Use Strength in 3rd room
+		Menu: Use Strength, Super Repel, and Bike in 4th room (also Elixir if you picked up Max Ether)
+			Use: SUPER_REPEL
+		GetI: FULL_RESTORE :: Pick up the hidden Full Restore if you only have 1
+		Bike into Indigo Plateau
+		(Victory Road with Vape)
+			Yolo 2 tiles before victory road
+			Super Repel after entering and in Room 3
+
 	S: Elite Four
-		Don't deposit extra pokes unless you have no more revives
-		B: Lorelei :: Switch to your flier, let it die and swap back to Nido, X Acc, Drill x5 (Dewgong will always use Rest turn 2)
+		Deposit all 3 companions
+		Take center if you didn't Elixer
+		B: Lorelei :: X Acc, (X Speed), HD x5
 			Use: X_ACCURACY
+			Use: X_SPEED ? :: if Speedfall
 		Menu: Elixer before Bruno
 			Use: ELIXER
-		B: Bruno :: X Acc, Bliz, HD x2, Bliz, HD
-			Use: X_ACCURACY
-		Menu: Menu before Agatha:
-			Use: SUPER_POTION
-			Use: POTION ? :: with 18 or less HP
+			Use: MAX_ETHER ? :: If center skip then Swap Bike for Rare Candy then use Max Ether on Horn Drill, DONT CANDY
+			Use: RARE_CANDY ? :: If Lorelei speedfall, Use Elixir and use Candy and do this Agatha: X Spec, EQ(IB if Substitute), IB(IB), EQ x3
+		B: Bruno :: IB, X Acc + HD, HD, IB, HD
+			Opp: 2
+				Use: X_ACCURACY
+		Heal for Agatha if <38HP
+		B: Agatha :: X Speed + EQ, IB x2, EQ, EQ, EQ
+			If Lick Para, Full restore on Golbat(youll get your speed back after killing arbok)
+			If substitute use EQ
+		Menu: Menu before Lance
+			Use: FULL_RESTORE
 			Use: RARE_CANDY
-		B: Agatha :: X Spec, EQ, Bliz, EQ x3
-			Use: X_SPECIAL
-			If you get put to sleep use the pokeflute, and if you get confused risk it since you would need to X Spec again if you swapped)
-			If you miss Bliz, and Golbat uses Haze, use 2x TB on Golbat, X Speed on Arbok with 25-60 HP
-			Skip X Speed (you will be slower than last Gengar) with less than 25 or more than 60HP
-		Menu: At least 2 steps before Lance, heal to 129+ HP
-			Feel free to use your Full Restore if you picked it up and you want to play really safe
-			Use: SUPER_POTION
-			Use: ELIXER
-		[OPTIONAL SAVE: Lance is pretty likely to go bad, so saving is recommend]
-		B: Lance :: X Spec, TB, Bliz, X Speed, Bliz, TB, Bliz
+		Check HP Strats for this fight
+		B: Lance :: X Special + TB, X Special/Attack + IB, IB, IB, IB
+			Opp: 1
+				Use: X_SPECIAL
+			Opp: 2
+				Use: X_SPECIAL :: or X_ATTACK
+				If 36-48 hp after gyarados, then move the second X item to the second Dragonair
+				If less than 36 hp or playing safe, Full Restore on first Dragonair, then X Special immediately
+		Heal to tank EQ: 132-156, 134-158 if 13 Special
+		B: Champion - Flareon :: Champion :: X Spec + IB, EQ, X Acc + HD, EQ, HD, EQ
+			Poke Flute if put to sleep (Exeggutor cannot deal any damage to you)
 			Opp: 1
 				Use: X_SPECIAL
 			Opp: 3
-				Use: X_SPEED
-				If you are out of X Speeds use an X Spec
-			If you run out of Blizzards, TB the Dragonite
-		[OPTIONAL SAVE: Saving for Champ can be good if you don't have a spare X Accuracy+ spare X Special + Revive]
-		Menu: Heal at 22HP or below
-			Can also heal below at 44HP or below if you want to play safer
-			Use: POTION
-		B: Champion - Bulbasaur :: Champion :: X Spec, X Acc, HD x3, TB, HD x2
-			If Pidgeot uses Sky Attack turn 1 do the following: Bliz, EQ, X Acc, HD x4
-			Use: X_SPEED
-			Use: X_ACCURACY ?
-		END
+				Use: X_ACCURACY
+			(If Vape: X Spec, IB, EQ, X Acc, Drill, EQ, EQ, Drill)
+			Magneton is an 89% range with Vaporeon YOLO STRAT- Dont heal pre fight, IB, if you freeze then setup x acc + x spec, if you crit then EQ alakazam hoping for kinesis and dont setup x special at all

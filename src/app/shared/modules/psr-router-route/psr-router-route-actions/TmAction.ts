@@ -35,7 +35,7 @@ export class TmAction extends AAction {
         }
         this.actionString = `${this.actionString} to ${player.team[this.partyIndex]}`;
         if (this.moveIndex >= 0 && this.moveIndex < player.team[this.partyIndex].moveset.length) {
-            this.actionString = `${this.actionString} over ${player.team[this.partyIndex].moveset[this.moveIndex].move}`;
+            this.actionString = `${this.actionString} over ${player.team[this.partyIndex].moveset[this.moveIndex].move} (slot ${this.moveIndex + 1})`;
         } else if (this.moveIndex >= 0) {
             this.addMessage(new RouterMessage("Move index out of range: " + this.moveIndex, RouterMessage.Type.Error));
             return;

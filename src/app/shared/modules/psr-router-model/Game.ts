@@ -49,9 +49,13 @@ export class Game {
     this.aliasedTrainers = {};
     for (let key in this._trainers) {
       if (this._trainers[key].alias) {
-        this.aliasedTrainers[this._trainers[key].alias.toUpperCase()] = this._trainers[key];
+        this.aliasedTrainers[this.toKey(this._trainers[key].alias)] = this._trainers[key];
       }
     }
+  }
+
+  private toKey(str: string) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase();
   }
 
   /**
@@ -60,7 +64,7 @@ export class Game {
    * @returns The item.
    */
   findItemByName(name: string): Item {
-    return name ? this._items[name.toUpperCase()] : undefined;
+    return name ? this._items[this.toKey(name)] : undefined;
   }
 
   /**
@@ -84,7 +88,7 @@ export class Game {
    * @returns The move.
    */
   findMoveByName(name: string): Move {
-    return name ? this._moves[name.toUpperCase()] : undefined;
+    return name ? this._moves[this.toKey(name)] : undefined;
   }
 
   /**
@@ -115,7 +119,7 @@ export class Game {
    * @returns The pokemon.
    */
   findPokemonByName(name: string): Pokemon {
-    return name ? this._pokemon[name.toUpperCase()] : undefined;
+    return name ? this._pokemon[this.toKey(name)] : undefined;
   }
 
   /**
@@ -151,7 +155,7 @@ export class Game {
    * @returns The trainer.
    */
   findTrainerByKeyOrAlias(key: string): Trainer {
-    return key ? (this.aliasedTrainers[key.toUpperCase()] || this._trainers[key.toUpperCase()]) : undefined;
+    return key ? (this.aliasedTrainers[this.toKey(key)] || this._trainers[this.toKey(key)]) : undefined;
   }
 
   /**
@@ -175,7 +179,7 @@ export class Game {
    * @returns The type.
    */
   findLocationByName(name: string): Location {
-    return name ? this.locations.all[name.toUpperCase()] : undefined;
+    return name ? this.locations.all[this.toKey(name)] : undefined;
   }
 
   /**

@@ -23,7 +23,7 @@ export abstract class Pokemon {
     public readonly spcAtk: number,
     public readonly spcDef: number,
     public readonly spd: number) {
-    this.key = name.toUpperCase();
+    this.key = name;
     this.evolutions = {};
     this._luMoves = [];
     this._tms = [];

@@ -448,6 +448,6 @@ Route: Red Any% Glitchless [Beginner Guide]
 			Use: POTION
 		B: Champion - Bulbasaur :: Champion :: X Spec, X Acc, HD x3, TB, HD x2
 			If Pidgeot uses Sky Attack turn 1 do the following: Bliz, EQ, X Acc, HD x4
-			Use: X_SPEED
-			Use: X_ACCURACY ?
+			Use: X_SPECIAL
+			Use: X_ACCURACY
 		END
