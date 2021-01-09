@@ -1,10 +1,10 @@
 # This workflow will do a clean install of node dependencies, build the source code, run tests and deploy to the dev environment
 
-name: Deploy develop
+name: Deploy dev
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ dev ]
 
 jobs:
   build:
