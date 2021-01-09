@@ -3,6 +3,9 @@
  */
 class Range {
   private _values: { [key: number]: number };
+  public get valueMap() {
+    return this._values;
+  }
   private _count: number;
   public get count() {
     return this._count;
@@ -30,19 +33,7 @@ class Range {
    * @param value
    */
   addValue(value: number) {
-    if (!(value in this._values))
-      this._values[value] = 1;
-    else
-      this._values[value]++;
-
-    this._count++;
-
-    if (this._count === 1)
-      this._min = this._max = value;
-    else if (value < this._min)
-      this._min = value;
-    else if (value > this._max)
-      this._max = value;
+    this.addValues(value);
   }
 
   /**
@@ -50,9 +41,20 @@ class Range {
    * @param value
    * @param count
    */
-  addValues(value: number, count: number) {
-    for (let i = 0; i < count; i++)
-      this.addValue(value);
+  addValues(value: number, count: number = 1) {
+    if (!(value in this._values))
+      this._values[value] = count;
+    else
+      this._values[value] += count;
+
+    this._count += count;
+
+    if (this._count === count)
+      this._min = this._max = value;
+    else if (value < this._min)
+      this._min = value;
+    else if (value > this._max)
+      this._max = value;
   }
 
   /**
@@ -143,9 +145,11 @@ class Range {
   addRange(ra: Range): Range {
     let newRange: Range = new Range();
 
-    for (let value1 in Object.keys(this._values))
-      for (let value2 in Object.keys(ra._values))
+    Object.keys(this._values).forEach(value1 => {
+      Object.keys(ra._values).forEach(value2 => {
         newRange.addValues(+value1 + +value2, this._values[value1] * ra._values[value2]);
+      });
+    });
 
     return newRange;
   }
