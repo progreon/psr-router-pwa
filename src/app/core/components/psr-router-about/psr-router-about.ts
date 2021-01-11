@@ -45,6 +45,16 @@ class PsrRouterAbout extends PsrRouterPage {
       </section>
       <h2>Release Notes</h2>
       <section>
+        <h3>0.1.1 - Some percentages</h3>
+        <ul>
+          <li>Added a move-tooltip</li>
+          <ul>
+            <li>Display the chance for each damage roll</li>
+            <li>Display the kill chance for the first 3 hits</li>
+          </ul>
+        </ul>
+      </section>
+      <section>
         <h3>0.1.0 - Let's make this usable</h3>
         <ul>
           <li>Damage calculations!</li>
