@@ -237,8 +237,7 @@ export namespace RouteBattle {
           }
         }
       });
-      this._pauseDamageCalc = false;
-      this.updateDamages();
+      this.enableDamageCalc();
     }
 
     private getDefaultBadgeBoosts(): BadgeBoosts {
@@ -364,9 +363,19 @@ export namespace RouteBattle {
     private _pauseDamageCalc = true;
     public readonly damageRanges: {
       entrant: Entrant,
-      playerDR: { move: Move, range: Range, critRange: Range }[],
+      playerDR: { move: Move, range: Range, critRange: Range, killRanges: number[] }[],
       trainerDR: { move: Move, range: Range, critRange: Range }[]
     }[] = [];
+
+    public disableDamageCalc() {
+      this._pauseDamageCalc = true;
+      this.damageRanges.splice(0);
+    }
+    
+    public enableDamageCalc() {
+      this._pauseDamageCalc = false;
+      this.updateDamages();
+    }
 
     public updateDamages() {
       if (!this._pauseDamageCalc) {
@@ -377,12 +386,37 @@ export namespace RouteBattle {
             let ob = this.battle.opponentParty[this.opponentIndex];
             let damageRange: {
               entrant: Entrant,
-              playerDR: { move: Move, range: Range, critRange: Range }[],
+              playerDR: { move: Move, range: Range, critRange: Range, killRanges: number[] }[],
               trainerDR: { move: Move, range: Range, critRange: Range }[]
             } = { entrant, playerDR: [], trainerDR: [] };
             this.player.team[entrant.partyIndex].moveset.map(ms => ms.move).forEach(move => {
               let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, b, ob, this.stages, this.stagesOpponent, this.badgeBoosts, new BadgeBoosts());
-              damageRange.playerDR.push({ move, range: dr.range, critRange: dr.critRange });
+
+              // Calculate the kill range for 1-3 times, not accounting for accuracy
+              // TODO: can this be more performant?
+              let krs = []; // kill ranges
+              if (dr.range.count > 0) {
+                let cp = move.highCritMove ? this.player.team[entrant.partyIndex].pokemon.getHighCritRatio() : this.player.team[entrant.partyIndex].pokemon.getCritRatio(); // crit%
+                let drTimes = { range: dr.range.clone(), critRange: dr.critRange.clone() };
+                let times = 1;
+                let certainDeath = false;
+                while (times <= 3 && !certainDeath) {
+                  let killCount = 0, killTotal = drTimes.range.count * ob.hp.count;
+                  Object.keys(drTimes.range.valueMap).forEach(d => {
+                    Object.keys(ob.hp.valueMap).filter(hp => +d >= +hp).forEach(hp => killCount += drTimes.range.valueMap[d] * ob.hp.valueMap[hp]);
+                  });
+                  let ckillCount = 0, ckillTotal = drTimes.critRange.count * ob.hp.count;
+                  Object.keys(drTimes.critRange.valueMap).forEach(d => {
+                    Object.keys(ob.hp.valueMap).filter(hp => +d >= +hp).forEach(hp => ckillCount += drTimes.critRange.valueMap[d] * ob.hp.valueMap[hp]);
+                  });
+                  let kr = (killCount / killTotal) * (1 - cp) + (ckillCount / ckillTotal) * cp;
+                  krs.push(kr);
+                  certainDeath = kr == 1;
+                  drTimes = { range: drTimes.range.addRange(dr.range), critRange: drTimes.critRange.addRange(dr.critRange) };
+                  times++;
+                }
+              }
+              damageRange.playerDR.push({ move, range: dr.range, critRange: dr.critRange, killRanges: krs });
             });
             this.battle.opponentParty[this.opponentIndex].moveset.map(ms => ms.move).forEach(move => {
               let dr = this.battle.game.engine.getDamageRange(this.battle.game, move, ob, b, this.stagesOpponent, this.stages, new BadgeBoosts(), this.badgeBoosts);

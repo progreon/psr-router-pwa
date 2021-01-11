@@ -252,6 +252,16 @@ export class PsrRouterApp extends connect(store)(LitElement) {
         width: 100%;
       }
 
+      #tooltip {
+        position: absolute;
+        z-index: 1;
+        border-radius: 10px;
+        padding: 10px;
+        background: var(--app-background-color);
+        display: none;
+        box-shadow: 0px 0px 10px black;
+      }
+
       /* Wide layout: when the viewport width is bigger than 640px, layout
       changes to a wide layout. */
       @media (min-width: ${unsafeCSS(window.MyAppGlobals.wideWidth)}) {
@@ -366,6 +376,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
 
       <paper-toast id="toast" duration="10000">${this._toastHtml}</paper-toast>
       <mwc-dialog id="mwc-dialog" @closed="${this._mwcDialogClosed.bind(this)}"></mwc-dialog>
+      <div id="tooltip"></div>
     `;
     return template;
   }
@@ -406,6 +417,9 @@ export class PsrRouterApp extends connect(store)(LitElement) {
 
     if (!window.openMwcDialog) {
       window.openMwcDialog = this._openMwcDialog.bind(this);
+    }
+    if (!window.showTooltip) {
+      window.showTooltip = this._showTooltip.bind(this);
     }
   }
 
@@ -557,6 +571,26 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     if (e.target == dialog) {
       this._renderMwcDialog(null);
     }
+  }
+
+  _hideTooltip(e) {
+    let tooltip = this.shadowRoot.getElementById("tooltip");
+    if (tooltip) {
+      tooltip.style.display = "none";
+      render(null, tooltip);
+    }
+  }
+  private _tooltipHideListener = this._hideTooltip.bind(this);
+
+  _showTooltip(template: TemplateResult, forElement: HTMLElement) {
+    let r = forElement.getBoundingClientRect();
+    let tooltip = this.shadowRoot.getElementById("tooltip");
+    forElement.addEventListener("mouseleave", this._tooltipHideListener);
+    tooltip.style.display = "block";
+    render(template, tooltip);
+    let r2 = tooltip.getBoundingClientRect();
+    tooltip.style.left = (r.x + (r.width - r2.width) / 2) + "px";
+    tooltip.style.top = (r.y - r.height / 2 - r2.height) + "px";
   }
 }
 

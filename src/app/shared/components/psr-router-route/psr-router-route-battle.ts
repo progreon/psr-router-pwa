@@ -1,14 +1,15 @@
 // Imports for this element
-import { html, TemplateResult } from 'lit-element';
+import { html, TemplateResult, css } from 'lit-element';
+import { render } from 'lit-html';
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
-import { Battler } from 'App/shared/modules/psr-router-model/ModelAbstract';
+import { Battler, Move } from 'App/shared/modules/psr-router-model/ModelAbstract';
 import { Stages, BadgeBoosts, Range } from 'App/shared/modules/psr-router-util';
+import { OpponentAction } from 'App/shared/modules/psr-router-route/psr-router-route-actions/OpponentAction';
 
 // These are the elements needed by this element.
 import 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import 'SharedComponents/psr-router-model/psr-router-battler';
-import { OpponentAction } from 'App/shared/modules/psr-router-route/psr-router-route-actions/OpponentAction';
 
 export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   protected _getPopupContent(): TemplateResult {
@@ -105,17 +106,17 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
             let movesAttacker = b.moveset.map((ms, i) => {
               let move = ms.move;
               if (bdr[i].range.count == 0 && bdr[i].critRange.count == 0) {
-                return { html: `${move}`, move };
+                return { html: `${move}`, move, range: bdr[i].range, crange: bdr[i].critRange };
               } else {
-                return { html: `${move}: ${bdr[i].range.toString()} (${bdr[i].critRange.toString()})`, move };
+                return { html: `${move}: ${bdr[i].range.toString()} (${bdr[i].critRange.toString()})`, move, range: bdr[i].range, crange: bdr[i].critRange, krs: bdr[i].killRanges };
               }
             });
             let movesDefender = ob.moveset.map((ms, i) => {
               let move = ms.move;
               if (obdr[i].range.count == 0 && obdr[i].critRange.count == 0) {
-                return { html: `${move}`, move };
+                return { html: `${move}`, move, range: obdr[i].range, crange: obdr[i].critRange };
               } else {
-                return { html: `${move}: ${obdr[i].range.toString()} (${obdr[i].critRange.toString()})`, move };
+                return { html: `${move}: ${obdr[i].range.toString()} (${obdr[i].critRange.toString()})`, move, range: obdr[i].range, crange: obdr[i].critRange };
               }
             });
             let actualBB = battleStage.badgeBoosts;
@@ -152,17 +153,17 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 <div class="bcol">
                   <div class="col">
                     <div class="click" @click="${this._showBattlerDialog.bind(this, b, actualStages, actualBB, true)}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.) ${bf}</div>
-                    <div>${movesAttacker[0]?.html || "-"}</div>
-                    <div>${movesAttacker[1]?.html || "-"}</div>
-                    <div>${movesAttacker[2]?.html || "-"}</div>
-                    <div>${movesAttacker[3]?.html || "-"}</div>
+                    <div @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[0])}">${movesAttacker[0]?.html || "-"}</div>
+                    <div @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[1])}">${movesAttacker[1]?.html || "-"}</div>
+                    <div @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[2])}">${movesAttacker[2]?.html || "-"}</div>
+                    <div @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[3])}">${movesAttacker[3]?.html || "-"}</div>
                   </div>
                   <div class="col">
                     <div class="click" @click="${this._showBattlerDialog.bind(this, ob, opponentStages, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.) ${of}</div>
-                    <div>${movesDefender[0]?.html || "-"}</div>
-                    <div>${movesDefender[1]?.html || "-"}</div>
-                    <div>${movesDefender[2]?.html || "-"}</div>
-                    <div>${movesDefender[3]?.html || "-"}</div>
+                    <div @mouseenter="${e => this._showMoveTooltip(e, movesDefender[0])}">${movesDefender[0]?.html || "-"}</div>
+                    <div @mouseenter="${e => this._showMoveTooltip(e, movesDefender[1])}">${movesDefender[1]?.html || "-"}</div>
+                    <div @mouseenter="${e => this._showMoveTooltip(e, movesDefender[2])}">${movesDefender[2]?.html || "-"}</div>
+                    <div @mouseenter="${e => this._showMoveTooltip(e, movesDefender[3])}">${movesDefender[3]?.html || "-"}</div>
                   </div>
                 </div>
                 <div class="col">
@@ -250,6 +251,54 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
           ?isPlayerBattler="${!!isPlayerBattler}"
         ></psr-router-battler>
       `, { "hideActions": true });
+  }
+
+  _showMoveTooltip(e: any, move: { html: string, move: Move, range: Range, crange: Range, krs?: number[] }) {
+    if (move) {
+      let valuesDOM = [];
+      if (move.range.count > 0) {
+        Object.keys(move.range.valueMap).forEach(k => {
+          let v = move.range.valueMap[k];
+          valuesDOM.push(html`<li>${k}: ${v}/${move.range.count}</li>`);
+        });
+      }
+      let cvaluesDOM = [];
+      if (move.crange.count > 0) {
+        Object.keys(move.crange.valueMap).forEach(k => {
+          let v = move.crange.valueMap[k];
+          cvaluesDOM.push(html`<li>${k}: ${v}/${move.crange.count}</li>`);
+        });
+      }
+      let killDOM = [];
+      if (move.crange.count > 0 && move.krs) {
+        move.krs.forEach((kr, kri) => {
+          killDOM.push(html`<li>${kri + 1}: ${(kr * 100).toFixed(2)}%</li>`);
+        });
+      }
+      let template = html`
+        <style>
+          ul, ol {
+            margin: 0px;
+            padding-left: 0px;
+            list-style-type: none;
+          }
+        </style>
+        <b>${move.move}</b> (${move.move.type}, ${move.move.power}, ${move.move.accuracy}%, ${move.move.pp}pp)<br>
+        <i>${move.move.effect}</i>
+        <div style="display: flex; flex-direction: row;">
+          <div style="margin-right: 10px;" ?hidden="${valuesDOM.length == 0}">
+            Non-crits:<ul>${valuesDOM}</ul>
+          </div>
+          <div style="margin-right: 10px;" ?hidden="${cvaluesDOM.length == 0}">
+            Crits:<ul>${cvaluesDOM}</ul>
+          </div>
+          <div ?hidden="${killDOM.length == 0}">
+            Kill%:<ul>${killDOM}</ul>
+          </div>
+        </div>
+      `;
+      window.showTooltip(template, e.path[0]);
+    }
   }
 }
 
