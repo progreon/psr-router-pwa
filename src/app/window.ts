@@ -12,5 +12,6 @@ declare global {
     MyAppGlobals: any;
     isUpdateAvailable: any;
     openMwcDialog: (template: TemplateResult, dialogAtt?: { [key: string]: boolean|string }) => Dialog;
+    showTooltip: (template: TemplateResult, forElement: HTMLElement) => Dialog;
   }
 }
