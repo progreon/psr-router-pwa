@@ -89,6 +89,7 @@ class PsrRouterTrainer extends LitElement {
         <h3>${this.trainer ? this.trainer.location : ""}</h3>
         <h4 ?hidden="${!this.trainer || !this.trainer.items || this.trainer.items.length == 0}">Gives item: ${this.trainer.items.join(", ")}</h4>
         <h4 ?hidden="${!this.trainer || !this.trainer.badgeboost}">Gives badgeboost: ${this.trainer.badgeboost}</h4>
+        <h4>Prize: ₽${this.trainer.money}</h4>
         <hr ?hidden="${!this.trainer || this.trainer.party.length == 0}">
         <div class="section">
           ${party}

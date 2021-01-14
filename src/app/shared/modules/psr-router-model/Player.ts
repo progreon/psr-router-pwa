@@ -55,9 +55,10 @@ export class Player {
     public readonly name: string = "Red", //
     public readonly info: string = "", //
     public readonly team: Battler[] = [], //
+    money: number = 3000,
     public currentLocation: string = "" // TODO: to Location?
   ) {
-    this._money = 0;
+    this._money = money;
     this._bagItems = [];
     this._pcItems = [];
     this._badges = [];
@@ -393,7 +394,7 @@ export class Player {
   }
 
   clone(): Player {
-    let newPlayer = new Player(this.name, this.info, [], this.currentLocation);
+    let newPlayer = new Player(this.name, this.info, [], this.money, this.currentLocation);
     this.team.forEach(b => newPlayer.team.push(b.clone()));
     newPlayer._money = this._money;
     this._bagItems.forEach(bi => newPlayer._bagItems.push(bi));

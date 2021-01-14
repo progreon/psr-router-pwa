@@ -14,6 +14,9 @@ class PsrRouterPlayer extends LitElement {
         display: flex;
         flex-flow: column nowrap;
       }
+      h3, ul, ol {
+        margin: 0px;
+      }
     `;
   }
 
@@ -24,21 +27,22 @@ class PsrRouterPlayer extends LitElement {
     });
     let itemsDOM = []; // TODO: table -> index, item, count (, selling price? or on hover?)
     this.player.bag.forEach((is, i) => {
-      itemsDOM.push(html`<li>${i + 1}: ${is.toString()}</li>`);
+      itemsDOM.push(html`<li>${is.toString()}</li>`);
     });
     let badgesDOM = [];
     this.player.badges.forEach(b => {
       badgesDOM.push(html`<li>${b}</li>`);
     });
-    // this.player.
     return html`
       <div class="content">
-        <div>Party:</div>
-        <ul ?hidden="${partyDOM.length == 0}">${partyDOM}</ul>
-        <div>Bag items:</div>
-        <ul ?hidden="${itemsDOM.length == 0}">${itemsDOM}</ul>
-        <div>Badge boosts:</div>
-        <ul ?hidden="${badgesDOM.length == 0}">${badgesDOM}</ul>
+        <h2>${this.player.name}</h2>
+        <div>Money: ₽${this.player.money}</div>
+        <div>Party</div>
+        <ol>${partyDOM}</ol>
+        <div>Bag items</div>
+        <ol>${itemsDOM}</ol>
+        <div>Badge boosts</div>
+        <ul>${badgesDOM}</ul>
       </div>
     `;
   }

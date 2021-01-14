@@ -1,0 +1,140 @@
+{
+  "Youngster": {
+    "money": 15
+  },
+  "BugCatcher": {
+    "money": 10
+  },
+  "Lass": {
+    "money": 15
+  },
+  "Sailor": {
+    "money": 30
+  },
+  "JrTrainerM": {
+    "money": 20
+  },
+  "JrTrainerF": {
+    "money": 20
+  },
+  "Pokemaniac": {
+    "money": 50
+  },
+  "SuperNerd": {
+    "money": 25
+  },
+  "Hiker": {
+    "money": 35
+  },
+  "Biker": {
+    "money": 20
+  },
+  "Burglar": {
+    "money": 90
+  },
+  "Engineer": {
+    "money": 50
+  },
+  "Juggler": {
+    "money": 35
+  },
+  "Fisher": {
+    "money": 35
+  },
+  "Swimmer": {
+    "money": 5
+  },
+  "CueBall": {
+    "money": 25
+  },
+  "Gambler": {
+    "money": 70
+  },
+  "Beauty": {
+    "money": 70
+  },
+  "Psychic": {
+    "money": 10
+  },
+  "Rocker": {
+    "money": 25
+  },
+  "Tamer": {
+    "money": 40
+  },
+  "BirdKeeper": {
+    "money": 25
+  },
+  "Blackbelt": {
+    "money": 25
+  },
+  "Rival1": {
+    "money": 35
+  },
+  "ProfOak": {
+    "money": 99
+  },
+  "Chief": {
+    "money": 30
+  },
+  "Scientist": {
+    "money": 50
+  },
+  "Giovanni": {
+    "money": 99
+  },
+  "Rocket": {
+    "money": 30
+  },
+  "CooltrainerM": {
+    "money": 35
+  },
+  "CooltrainerF": {
+    "money": 35
+  },
+  "Bruno": {
+    "money": 99
+  },
+  "Brock": {
+    "money": 99
+  },
+  "Misty": {
+    "money": 99
+  },
+  "LtSurge": {
+    "money": 99
+  },
+  "Erika": {
+    "money": 99
+  },
+  "Koga": {
+    "money": 99
+  },
+  "Blaine": {
+    "money": 99
+  },
+  "Sabrina": {
+    "money": 99
+  },
+  "Gentleman": {
+    "money": 70
+  },
+  "Rival2": {
+    "money": 65
+  },
+  "Rival3": {
+    "money": 99
+  },
+  "Lorelei": {
+    "money": 99
+  },
+  "Channeler": {
+    "money": 30
+  },
+  "Agatha": {
+    "money": 99
+  },
+  "Lance": {
+    "money": 99
+  }
+}

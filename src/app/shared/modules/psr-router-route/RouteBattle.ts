@@ -129,9 +129,16 @@ export class RouteBattle extends ARouteActionsEntry {
       });
     }
 
-    if (this.trainer && this.trainer.badgeboost) {
-      nextPlayer.addBadge(this.trainer.badgeboost);
+    if (this.trainer) {
+      // Collect the prize money
+      nextPlayer.addMoney(this.trainer.money);
+
+      // Add badge boosts
+      if (this.trainer.badgeboost) {
+        nextPlayer.addBadge(this.trainer.badgeboost);
+      }
     }
+
 
     super.updateNextPlayer(nextPlayer, fireApplied);
   }

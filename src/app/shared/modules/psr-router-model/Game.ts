@@ -167,7 +167,7 @@ export class Game {
     if (!name) {
       return undefined;
     } else {
-      let trainer = new Trainer(name, name, name, [], "");
+      let trainer = new Trainer(name, name, name, 0, [], "");
       trainer.dummy = true;
       return trainer;
     }
