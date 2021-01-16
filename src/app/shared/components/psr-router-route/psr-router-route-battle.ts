@@ -152,18 +152,18 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 </div>
                 <div class="bcol">
                   <div class="col">
-                    <div class="click" @click="${this._showBattlerDialog.bind(this, b, actualStages, actualBB, true)}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.) ${bf}</div>
-                    <div @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[0])}">${movesAttacker[0]?.html || "-"}</div>
-                    <div @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[1])}">${movesAttacker[1]?.html || "-"}</div>
-                    <div @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[2])}">${movesAttacker[2]?.html || "-"}</div>
-                    <div @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[3])}">${movesAttacker[3]?.html || "-"}</div>
+                    <div class="click" @click="${this._openBattlerDialog.bind(this, b, actualStages, actualBB, true)}" @mouseenter="${e => this._showBattlerTooltip(e, b, actualStages, actualBB, true)}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.) ${bf}</div>
+                    <div class="click" @click="${this._openMoveDialog.bind(this, movesAttacker[0])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[0])}">${movesAttacker[0]?.html || "-"}</div>
+                    <div class="click" @click="${this._openMoveDialog.bind(this, movesAttacker[1])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[1])}">${movesAttacker[1]?.html || "-"}</div>
+                    <div class="click" @click="${this._openMoveDialog.bind(this, movesAttacker[2])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[2])}">${movesAttacker[2]?.html || "-"}</div>
+                    <div class="click" @click="${this._openMoveDialog.bind(this, movesAttacker[3])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[3])}">${movesAttacker[3]?.html || "-"}</div>
                   </div>
                   <div class="col">
-                    <div class="click" @click="${this._showBattlerDialog.bind(this, ob, opponentStages, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.) ${of}</div>
-                    <div @mouseenter="${e => this._showMoveTooltip(e, movesDefender[0])}">${movesDefender[0]?.html || "-"}</div>
-                    <div @mouseenter="${e => this._showMoveTooltip(e, movesDefender[1])}">${movesDefender[1]?.html || "-"}</div>
-                    <div @mouseenter="${e => this._showMoveTooltip(e, movesDefender[2])}">${movesDefender[2]?.html || "-"}</div>
-                    <div @mouseenter="${e => this._showMoveTooltip(e, movesDefender[3])}">${movesDefender[3]?.html || "-"}</div>
+                    <div class="click" @click="${this._openBattlerDialog.bind(this, ob, opponentStages, null, false)}" @mouseenter="${e => this._showBattlerTooltip(e, ob, actualStages, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.) ${of}</div>
+                    <div class="click" @click="${this._openMoveDialog.bind(this, movesDefender[0])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[0])}">${movesDefender[0]?.html || "-"}</div>
+                    <div class="click" @click="${this._openMoveDialog.bind(this, movesDefender[1])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[1])}">${movesDefender[1]?.html || "-"}</div>
+                    <div class="click" @click="${this._openMoveDialog.bind(this, movesDefender[2])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[2])}">${movesDefender[2]?.html || "-"}</div>
+                    <div class="click" @click="${this._openMoveDialog.bind(this, movesDefender[3])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[3])}">${movesDefender[3]?.html || "-"}</div>
                   </div>
                 </div>
                 <div class="col">
@@ -242,7 +242,21 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     return so;
   }
 
-  _showBattlerDialog(battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean): void {
+  _showBattlerTooltip(e, battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean) {
+    // TODO: fix component
+    // if (!window.isMobileView()) {
+    //   window.showTooltip(html`
+    //       <psr-router-battler
+    //         .battler="${battler}"
+    //         .stages="${stages || new Stages()}"
+    //         .badgeBoosts="${badgeBoosts || new BadgeBoosts()}"
+    //         ?isPlayerBattler="${!!isPlayerBattler}"
+    //       ></psr-router-battler>
+    //     `, e.path[0]);
+    // }
+  }
+
+  _openBattlerDialog(battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean): void {
     window.openMwcDialog(html`
         <psr-router-battler
           .battler="${battler}"
@@ -253,8 +267,8 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
       `, { "hideActions": true });
   }
 
-  _showMoveTooltip(e: any, move: { html: string, move: Move, range: Range, crange: Range, krs?: number[] }) {
-    if (move) {
+  _getMoveDOM(move: { html: string, move: Move, range: Range, crange: Range, krs?: number[] }) {
+    if (move){
       let valuesDOM = [];
       if (move.range.count > 0) {
         Object.keys(move.range.valueMap).forEach(k => {
@@ -275,7 +289,7 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
           killDOM.push(html`<li>${kri + 1}: ${(kr * 100).toFixed(2)}%</li>`);
         });
       }
-      let template = html`
+      return html`
         <style>
           ul, ol {
             margin: 0px;
@@ -297,7 +311,22 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
           </div>
         </div>
       `;
+    } else {
+      return null;
+    }
+  }
+
+  _showMoveTooltip(e: any, move: { html: string, move: Move, range: Range, crange: Range, krs?: number[] }) {
+    if (move) {
+      let template = this._getMoveDOM(move);
       window.showTooltip(template, e.path[0]);
+    }
+  }
+
+  _openMoveDialog(move) {
+    if (move) {
+      let template = this._getMoveDOM(move);
+      window.openMwcDialog(template, { "hideActions": true });
     }
   }
 }

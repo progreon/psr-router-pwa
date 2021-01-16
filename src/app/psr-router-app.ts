@@ -415,6 +415,9 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       window.localStorage.setItem("app-theme", this.theme = "light");
     }
 
+    if (!window.isMobileView) {
+      window.isMobileView = () => document.body.getBoundingClientRect().width < window.MyAppGlobals.wideWidth;
+    }
     if (!window.openMwcDialog) {
       window.openMwcDialog = this._openMwcDialog.bind(this);
     }
@@ -540,13 +543,6 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     }
   }
 
-  _dialogClosed(e: any) {
-    if (!e.detail.value) {
-      let dialog: any = this.shadowRoot.getElementById("dialog");
-      this.shadowRoot.removeChild(dialog);
-    }
-  }
-
   _renderMwcDialog(template: TemplateResult): Dialog {
     let dialog: Dialog = <Dialog>this.shadowRoot.getElementById("mwc-dialog");
     render(template, dialog);
@@ -581,16 +577,42 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     }
   }
   private _tooltipHideListener = this._hideTooltip.bind(this);
-
-  _showTooltip(template: TemplateResult, forElement: HTMLElement) {
+  
+  private _tooltipForElement = null;
+  private async _showTooltip(template: TemplateResult, forElement: HTMLElement) {
+    this._tooltipForElement = forElement;
     let r = forElement.getBoundingClientRect();
     let tooltip = this.shadowRoot.getElementById("tooltip");
     forElement.addEventListener("mouseleave", this._tooltipHideListener);
+    tooltip.style.top = "0px";
+    tooltip.style.left = "0px";
     tooltip.style.display = "block";
+    tooltip.style.visibility = "hidden";
     render(template, tooltip);
-    let r2 = tooltip.getBoundingClientRect();
-    tooltip.style.left = (r.x + (r.width - r2.width) / 2) + "px";
-    tooltip.style.top = (r.y - r.height / 2 - r2.height) + "px";
+    await this._sleep(250);
+    if (this._tooltipForElement == forElement) {
+      // only continue if we're still showing the tooltip for the same element!
+      let r2 = tooltip.getBoundingClientRect();
+      let body = document.body.getBoundingClientRect();
+      let left = r.x + (r.width - r2.width) / 2;
+      if (left + r2.width + 10 > body.width) {
+        left = body.width - r2.width - 10;
+      }
+      if (left < 0) {
+        left = 0;
+      }
+      tooltip.style.left = left + "px";
+      if (r2.width > body.width) {
+        tooltip.style.width = (body.width - 40) + "px";
+        r2 = tooltip.getBoundingClientRect();
+      }
+      tooltip.style.top = (r.y - r.height / 2 - r2.height) + "px";
+      tooltip.style.visibility = "visible";
+    }
+  }
+
+  private _sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
 
