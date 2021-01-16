@@ -397,9 +397,9 @@ export class Player {
     let newPlayer = new Player(this.name, this.info, [], this.money, this.currentLocation);
     this.team.forEach(b => newPlayer.team.push(b.clone()));
     newPlayer._money = this._money;
-    this._bagItems.forEach(bi => newPlayer._bagItems.push(bi));
+    this._bagItems.forEach(bi => newPlayer._bagItems.push(bi.clone()));
     this._badges.forEach(b => newPlayer._badges.push(b));
-    this._pcItems.forEach(pi => newPlayer._pcItems.push(pi));
+    this._pcItems.forEach(pi => newPlayer._pcItems.push(pi.clone()));
     return newPlayer;
   }
 

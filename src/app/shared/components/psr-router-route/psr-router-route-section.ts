@@ -7,6 +7,7 @@ import * as Route from 'SharedModules/psr-router-route';
 import './psr-router-route-battle';
 import './psr-router-route-directions';
 import './psr-router-route-encounter';
+import './psr-router-route-get-item';
 import './psr-router-route-get-pokemon';
 import './psr-router-route-manip';
 import './psr-router-route-menu';
@@ -28,6 +29,9 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
           break;
         case Route.RouteDirections.ENTRY_TYPE:
           childElements.push(html`<psr-router-route-directions id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-directions>`);
+          break;
+        case Route.RouteGetItem.ENTRY_TYPE:
+          childElements.push(html`<psr-router-route-get-item id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-get-item>`);
           break;
         case Route.RouteGetPokemon.ENTRY_TYPE:
           childElements.push(html`<psr-router-route-get-pokemon id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-get-pokemon>`);

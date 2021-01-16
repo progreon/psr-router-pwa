@@ -1,7 +1,7 @@
 'use strict';
 
 // imports
-import { RouteBattle, RouteDirections, RouteEncounter, RouteEntry, RouteGetPokemon, RouteMenu, RouteManip } from '.';
+import { RouteBattle, RouteDirections, RouteEncounter, RouteEntry, RouteGetItem, RouteGetPokemon, RouteMenu, RouteManip } from '.';
 import { RouteEntryInfo } from './util';
 import { Game } from '../psr-router-model/Game';
 import { Location, Player, Trainer } from '../psr-router-model/Model';
@@ -195,6 +195,9 @@ export class RouteSection extends RouteEntry {
           break;
         case RouteEntry.ENTRY_TYPE.toUpperCase():
           children.push(RouteEntry.newFromJSONObject(e, game));
+          break;
+        case RouteGetItem.ENTRY_TYPE.toUpperCase():
+          children.push(RouteGetItem.newFromJSONObject(e, game));
           break;
         case RouteGetPokemon.ENTRY_TYPE.toUpperCase():
           children.push(RouteGetPokemon.newFromJSONObject(e, game));
