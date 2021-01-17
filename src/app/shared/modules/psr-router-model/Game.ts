@@ -76,7 +76,7 @@ export class Game {
     if (!name) {
       return undefined;
     } else {
-      let item = new Item(name, name, "", 0, "Dummy", name, "Dummy Item");
+      let item = new Item(name, name, "", 0, "Dummy", name, "Dummy Item", false);
       item.dummy = true;
       return item;
     }

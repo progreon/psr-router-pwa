@@ -22,7 +22,8 @@ export class Item {
     public readonly price: number, //
     public readonly type: string, //
     public readonly value: string, //
-    public readonly description: string //
+    public readonly description: string, //
+    public readonly isKeyItem: boolean //
   ) {
     this.tossableOutsideBattle = usage && usage.indexOf("T") !== -1;
     this.usableOutsideBattle = usage && usage.indexOf("O") !== -1;

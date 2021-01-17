@@ -3,6 +3,8 @@ import { Battler } from "./battler/Battler";
 import { EvolutionKey } from "./EvolutionKey";
 import { RouteBattle } from "../psr-router-route/RouteBattle";
 
+// TODO: checks when adding key items?
+
 const MAX_SLOTS = 20;
 const MAX_PC_SLOTS = 50; // TODO
 const MAX_ITEMS = 99;
@@ -26,7 +28,11 @@ class ItemSlot {
   }
 
   toString(): string {
-    return `${this.item.toString()} x${this.count}`;
+    let str = `${this.item.toString()}`;
+    if (!this.item.isKeyItem || this.count != 1) {
+      str = `${str} x${this.count}`;
+    }
+    return str;
   }
 }
 
@@ -138,7 +144,7 @@ export class Player {
    * @returns Returns true if success.
    * @todo Overflow to next slot if count > ..
    */
-  addItem(item: Item, quantity: number = 1, toPc: boolean = false): boolean {
+  addItem(item: Item, quantity: number = 1, toPc: boolean = false, force: boolean = false): boolean {
     let items = toPc ? this._pcItems : this._bagItems;
     let index = this.getItemIndex(item, toPc);
     if (index >= 0) {
@@ -148,6 +154,9 @@ export class Player {
       items.push(new ItemSlot(item, quantity));
       return true;
     } else {
+      if (force) {
+        items.push(new ItemSlot(item, quantity));
+      }
       return false;
     }
   }
@@ -158,10 +167,13 @@ export class Player {
    * @param quantity  The amount you want to buy.
    * @returns Returns true if success.
    */
-  buyItem(item: Item, quantity: number = 1): boolean {
-    if (this._money < item.price * quantity) {
+  buyItem(item: Item, quantity: number = 1, force: boolean = false): boolean {
+    if (force) {
+      this._money -= (item.price * quantity);
+      return this.addItem(item, quantity, false, force);
+    } else if (this._money < item.price * quantity) {
       return false;
-    } else if (this.addItem(item, quantity)) {
+    } else if (this.addItem(item, quantity, false)) {
       this._money -= (item.price * quantity);
       return true;
     } else {

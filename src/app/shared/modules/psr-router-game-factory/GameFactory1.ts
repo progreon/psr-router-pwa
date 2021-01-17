@@ -59,7 +59,7 @@ export class GameFactory1 extends GameFactory {
         if (key !== "info") {
           let item = _items[key];
           key = this.toKey(key);
-          GameFactory1._items[key] = new Model.Item(key, item[0], item[1], item[2], item[3], item[4], item[5]);
+          GameFactory1._items[key] = new Model.Item(key, item[0], item[1], item[2], item[3], item[4], item[5], item[6]);
         }
       }
     }

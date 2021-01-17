@@ -51,7 +51,9 @@ export class RouteGetItem extends RouteEntry {
       }
     }
     if (this.item) {
-      nextPlayer.addItem(this.item);
+      if (!nextPlayer.addItem(this.item, 1, false, true)) {
+        this.addMessage(new RouterMessage(`You have no room for this item`, RouterMessage.Type.Error));
+      }
     } else {
       this.addMessage(new RouterMessage(`No item set to get`, RouterMessage.Type.Error));
     }

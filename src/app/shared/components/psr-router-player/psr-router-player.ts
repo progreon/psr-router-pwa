@@ -45,6 +45,7 @@ class PsrRouterPlayer extends LitElement {
       partyDOM.push(html`<li>${b.toString()}</li>`);
     });
     let itemsDOM = []; // TODO: table -> index, item, count (, selling price? or on hover?)
+    // TODO: if i >= 20 => red text
     this.player.bag.forEach((is, i) => {
       itemsDOM.push(html`<li>${is.toString()}</li>`);
     });

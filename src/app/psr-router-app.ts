@@ -595,8 +595,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       let r2 = tooltip.getBoundingClientRect();
       let body = document.body.getBoundingClientRect();
       let left = r.x + (r.width - r2.width) / 2;
-      if (left + r2.width + 10 > body.width) {
-        left = body.width - r2.width - 10;
+      if (left + r2.width + 20 > body.width) {
+        left = body.width - r2.width - 20;
       }
       if (left < 0) {
         left = 0;
