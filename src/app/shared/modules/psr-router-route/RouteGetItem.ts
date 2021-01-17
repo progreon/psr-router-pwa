@@ -18,6 +18,8 @@ export class RouteGetItem extends RouteEntry {
   public static readonly ENTRY_TYPE: string = "GetI";
   private _item: Model.Item;
   public get item() { return this._item; }
+  private _count: number;
+  public get count() { return this._count; }
   private _tradedFor: Model.Item;
   public get tradedFor() { return this._tradedFor; }
 
@@ -29,9 +31,10 @@ export class RouteGetItem extends RouteEntry {
    * @param info        The info for this entry.
    * @param location    The location in the game where this entry occurs.
    */
-  constructor(game: Model.Game, item: Model.Item, tradedFor: Model.Item = null, info: RouteEntryInfo = null, location: Model.Location = null) {
+  constructor(game: Model.Game, item: Model.Item, count: number = 1, tradedFor: Model.Item = null, info: RouteEntryInfo = null, location: Model.Location = null) {
     super(game, info, location);
     this._item = item;
+    this._count = count;
     this._tradedFor = tradedFor;
   }
 
@@ -51,8 +54,8 @@ export class RouteGetItem extends RouteEntry {
       }
     }
     if (this.item) {
-      if (!nextPlayer.addItem(this.item, 1, false, true)) {
-        this.addMessage(new RouterMessage(`You have no room for this item`, RouterMessage.Type.Error));
+      if (!nextPlayer.addItem(this.item, this.count, false, true)) {
+        this.addMessage(new RouterMessage(`You don't have enough room for this item`, RouterMessage.Type.Error));
       }
     } else {
       this.addMessage(new RouterMessage(`No item set to get`, RouterMessage.Type.Error));
@@ -65,6 +68,9 @@ export class RouteGetItem extends RouteEntry {
     let str = this.info?.toString();
     if (!str?.trim()) {
       str = `Get ${this.item.name}`;
+      if (this.count != 1) {
+        str += ` x${this.count}`;
+      }
       if (this.tradedFor) {
         str += ` for ${this.tradedFor.name}`;
       }
@@ -75,6 +81,7 @@ export class RouteGetItem extends RouteEntry {
   getJSONObject(): EntryJSON {
     let obj = super.getJSONObject();
     obj.properties.item = this.item.key;
+    obj.properties.count = this.count;
     obj.properties.tradedFor = this.tradedFor;
     return obj;
   }
@@ -85,6 +92,7 @@ export class RouteGetItem extends RouteEntry {
     let location = undefined; // TODO, parse from obj.location
 
     let item = game.findItemByName(obj.properties.item);
+    let count = obj.properties.count;
     if (!item) {
       messages.push(new RouterMessage(`Item "${obj.properties.item}" not found`, RouterMessage.Type.Error));
     }
@@ -93,7 +101,7 @@ export class RouteGetItem extends RouteEntry {
       messages.push(new RouterMessage(`Item "${obj.properties.tradedFor}" not found`, RouterMessage.Type.Error));
     }
 
-    let entry = new RouteGetItem(game, item, tradedFor, info, location);
+    let entry = new RouteGetItem(game, item, count, tradedFor, info, location);
     messages.forEach(m => entry.addMessage(m));
     return entry;
   }

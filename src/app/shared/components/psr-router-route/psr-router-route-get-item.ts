@@ -9,11 +9,14 @@ import 'SharedComponents/psr-router-mwc/psr-router-select';
 class PsrRouterRouteGetItem extends PsrRouterRouteEntry {
   _renderExpandingContent() {
     let getI = (<Route.RouteGetItem>super.routeEntry);
-    if (getI.tradedFor) {
-      return html`Get ${getI.item} for ${getI.tradedFor}`;
-    } else {
-      return html`Get ${getI.item}`;
+    let str = `Get ${getI.item}`;
+    if (getI.count != 1) {
+      str += ` x${getI.count}`;
     }
+    if (getI.tradedFor) {
+      str += ` for ${getI.tradedFor.name}`;
+    }
+    return html`${str}`;
   }
 
   protected _hasExpandingContent(): boolean {

@@ -6,10 +6,8 @@ import { RouteGetItem } from "../RouteGetItem";
 
 /**
  * lines:
- * GetI: <item> [<traded for>] [[:: <title>] :: <summary>]
+ * GetI: <item>[:<count>] [<traded for>] [[:: <title>] :: <summary>]
  *     [<description lines>]
- * with <option> = <pokemon>:<level>
- * only one preferred option (with '#') allowed
  *
  * json:
  * {
@@ -18,6 +16,7 @@ import { RouteGetItem } from "../RouteGetItem";
  *     location, // TODO
  *     properties: {
  *         item,
+ *         count,
  *         tradedFor
  *     }
  * }
@@ -30,8 +29,12 @@ export class RouteGetItemParser implements IRouteEntryParser {
             throw new Util.RouterError(`${filename}:${scopedLine.ln + 1} Please provide an item`, "Parser Error");
         }
         title = title ? title.trim() : "";
-        let [item, tradedFor] = items.trim().split(" ");
+        let [itemcount, tradedFor] = items.trim().split(" ");
+        let [item, count] = itemcount.trim().split(":");
         entry.properties.item = item.trim();
+        if (count?.trim() && +count.trim()) {
+            entry.properties.count = +count.trim();
+        }
         entry.properties.tradedFor = tradedFor?.trim();
         let summary = summ.length > 0 ? summ.join("::").trim() : title;
         entry.info = { title: summ.length > 0 ? title : "", summary: summary, description: "" };
@@ -41,6 +44,9 @@ export class RouteGetItemParser implements IRouteEntryParser {
     }
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {
         let scopedLine = new ScopedLine(`${RouteGetItem.ENTRY_TYPE}: ${jsonEntry.properties.item}`);
+        if (jsonEntry.properties.count != null && jsonEntry.properties.count != 1) {
+            scopedLine.line = `${scopedLine.line}:${jsonEntry.properties.count}`;
+        }
         if (jsonEntry.properties.tradedFor) {
             scopedLine.line = `${scopedLine.line} ${jsonEntry.properties.tradedFor}`;
         }
