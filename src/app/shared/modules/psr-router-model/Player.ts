@@ -181,6 +181,15 @@ export class Player {
     }
   }
 
+  sellItem(item: Item, quantity: number = 1, force: boolean = false): boolean {
+    if (item.price == 0) {
+      return false;
+    } else {
+      this._money += (item.price * quantity / 2);
+      return this.tossItem(item, quantity, false, force); // re-using this code to remove the items
+    }
+  }
+
   /**
    * Swap two items by their index.
    * @param index1
@@ -230,9 +239,9 @@ export class Player {
    * @returns Returns true if success.
    * @todo Support tossing an item that's in multiple slots.
    */
-  tossItemByIndex(index: number, quantity: number = 1, fromPc: boolean = false): boolean {
+  tossItemByIndex(index: number, quantity: number = 1, fromPc: boolean = false, force: boolean = false): boolean {
     let items = fromPc ? this._pcItems : this._bagItems;
-    if (index < 0 || index > items.length || items[index].count < quantity || !items[index].item.tossableOutsideBattle) {
+    if (index < 0 || index > items.length || (!force && items[index].count < quantity) || !items[index].item.tossableOutsideBattle) {
       return false;
     } else {
       if (quantity < 0)
@@ -240,7 +249,7 @@ export class Player {
       else
         items[index].count -= quantity;
 
-      if (items[index].count === 0)
+      if (items[index].count <= 0)
         items.splice(index, 1);
 
       return true;
@@ -254,8 +263,8 @@ export class Player {
    * @param fromPc
    * @returns Returns true if success.
    */
-  tossItem(item: Item, quantity: number = 1, fromPc: boolean = false): boolean {
-    return this.tossItemByIndex(this.getItemIndex(item, fromPc), quantity, fromPc);
+  tossItem(item: Item, quantity: number = 1, fromPc: boolean = false, force: boolean = false): boolean {
+    return quantity == 0 || this.tossItemByIndex(this.getItemIndex(item, fromPc), quantity, fromPc, force);
   }
 
   /**
@@ -266,14 +275,17 @@ export class Player {
    * @returns Returns true if success.
    * @todo Finish and test.
    */
-  useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battleStage?: RouteBattle.Stage): boolean {
-    // TODO: force usage option (which skips the availability check)
+  useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battleStage?: RouteBattle.Stage, force: boolean = false): boolean {
     let index = this.getItemIndex(item, false); // TODO: temporarily disabled because no GetI implementation yet!
     
-    if (battleStage && !item.usableInsideBattle) return false;
-    if (!battleStage && !item.usableOutsideBattle) return false;
+    if (!force) {
+      if (index < 0) return false;
+      if (battleStage && !item.usableInsideBattle) return false;
+      if (!battleStage && !item.usableOutsideBattle) return false;
+    }
 
     // Item management isn't mandatory, so always try to use it even if the player doesn't have the item
+    let doToss = (battleStage || item.tossableOutsideBattle) && !item.isKeyItem; // TODO: test this properly
     switch (item.type) {
       case "STONE":
         // TODO: arg check
@@ -315,7 +327,15 @@ export class Player {
         break;
     }
     // TODO: others?
-    return index >= 0 && this.tossItemByIndex(index, 1); // TODO: don't toss if forced?
+    let result = true;
+    if (doToss) {
+      result = this.tossItemByIndex(index, 1, false, force);
+    }
+    if (force) {
+      if (battleStage && !item.usableInsideBattle) return false;
+      if (!battleStage && !item.usableOutsideBattle) return false;
+    }
+    return result;
   }
 
   /**
@@ -333,8 +353,8 @@ export class Player {
    * @param quantity
    * @returns Returns true if successful.
    */
-  depositItem(item: Item, quantity: number = 1): boolean {
-    return this.depositItemByIndex(this.getItemIndex(item, false));
+  depositItem(item: Item, quantity: number = 1, force: boolean = false): boolean {
+    return this.depositItemByIndex(this.getItemIndex(item, false), quantity, force);
   }
 
   /**
@@ -342,7 +362,8 @@ export class Player {
    * @param quantity
    * @returns Returns true if successful.
    */
-  depositItemByIndex(bagIndex: number, quantity: number = 1): boolean {
+  depositItemByIndex(bagIndex: number, quantity: number = 1, force: boolean = false): boolean {
+    // TODO: handle force
     if (bagIndex < 0 || bagIndex >= this._bagItems.length || this._pcItems.length == MAX_PC_SLOTS) {
       return false;
     } else {
@@ -364,8 +385,8 @@ export class Player {
    * @param quantity
    * @returns Returns true if successful.
    */
-  withdrawItem(item: Item, quantity: number = 1): boolean {
-    return this.withdrawItemByIndex(this.getItemIndex(item, false));
+  withdrawItem(item: Item, quantity: number = 1, force: boolean = false): boolean {
+    return this.withdrawItemByIndex(this.getItemIndex(item, false), quantity, force);
   }
 
   /**
@@ -373,7 +394,8 @@ export class Player {
    * @param quantity
    * @returns Returns true if successful.
    */
-  withdrawItemByIndex(pcIndex: number, quantity: number = 1): boolean {
+  withdrawItemByIndex(pcIndex: number, quantity: number = 1, force: boolean = false): boolean {
+    // TODO: handle force
     if (pcIndex < 0 || pcIndex >= this._pcItems.length || this._bagItems.length == MAX_SLOTS) {
       return false;
     } else {

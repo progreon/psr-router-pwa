@@ -26,7 +26,7 @@ class PsrRouterRouteGetItem extends PsrRouterRouteEntry {
   protected _getSummary() {
     let summary = super._getSummary();
     if (!summary?.trim() && !super._getTitle()?.trim()) {
-      summary = super.routeEntry ? (<Route.RouteGetPokemon>super.routeEntry).toString() : "";
+      summary = super.routeEntry ? (<Route.RouteGetItem>super.routeEntry).toString() : "";
     }
     return summary;
   }

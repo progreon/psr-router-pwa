@@ -56,6 +56,7 @@ export class RouteGetItemParser implements IRouteEntryParser {
         if (jsonEntry.info.summary) {
             scopedLine.line = `${scopedLine.line} :: ${jsonEntry.info.summary}`;
         }
+        jsonEntry.info.description.split("\n").forEach(d => scopedLine.scope.push(new ScopedLine(d)));
         return scopedLine;
     }
 }

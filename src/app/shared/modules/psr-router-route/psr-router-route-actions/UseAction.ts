@@ -55,7 +55,7 @@ export class UseAction extends AAction {
         } else {
             let count = this.count == "*" ? player.getItemCount(this.item) : this.count;
             for (let i = 0; i < +count; i++) {
-                result = player.useItem(this.item, this.partyIndex, this.moveIndex, battleStage);
+                result = player.useItem(this.item, this.partyIndex, this.moveIndex, battleStage, true);
             }
         }
 

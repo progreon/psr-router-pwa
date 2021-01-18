@@ -40,7 +40,7 @@ export class TmAction extends AAction {
             this.addMessage(new RouterMessage("Move index out of range: " + this.moveIndex, RouterMessage.Type.Error));
             return;
         }
-        let result = player.useItem(this.tm, this.partyIndex, this.moveIndex, battleStage);
+        let result = player.useItem(this.tm, this.partyIndex, this.moveIndex, battleStage, true);
         if (!result) {
             this.addMessage(new RouterMessage("Unable to teach " + this.tm.toString() + " to " + player.team[this.partyIndex].toString() + " here, do you have it?", RouterMessage.Type.Error));
         }

@@ -11,6 +11,7 @@ import { RouteManipParser } from '../parse/RouteManipParser';
 import { RouteGetItemParser } from '../parse/RouteGetItemParser';
 import { RouteGetPokemonParser } from '../parse/RouteGetPokemonParser';
 import { RouteMenuParser } from '../parse/RouteMenuParser';
+import { RouteShopParser } from '../parse/RouteShopParser';
 
 /**
  * lines:
@@ -84,3 +85,4 @@ RouteSectionParser.parsers[Route.RouteGetItem.ENTRY_TYPE.toUpperCase()] = new Ro
 RouteSectionParser.parsers[Route.RouteGetPokemon.ENTRY_TYPE.toUpperCase()] = new RouteGetPokemonParser();
 RouteSectionParser.parsers[Route.RouteSection.ENTRY_TYPE.toUpperCase()] = new RouteSectionParser();
 RouteSectionParser.parsers[Route.RouteMenu.ENTRY_TYPE.toUpperCase()] = new RouteMenuParser();
+RouteSectionParser.parsers[Route.RouteShop.ENTRY_TYPE.toUpperCase()] = new RouteShopParser();

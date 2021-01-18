@@ -50,7 +50,7 @@ export class RouteGetItem extends RouteEntry {
       if (nextPlayer.getItemCount(this.tradedFor) == 0) {
         this.addMessage(new RouterMessage(`You don't have "${this.tradedFor.name}" to trade for "${this.item.name}"`, RouterMessage.Type.Warning));
       } else {
-        nextPlayer.tossItem(this.tradedFor);
+        nextPlayer.tossItem(this.tradedFor, 1, false, true);
       }
     }
     if (this.item) {

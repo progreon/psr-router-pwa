@@ -11,6 +11,7 @@ import './psr-router-route-get-item';
 import './psr-router-route-get-pokemon';
 import './psr-router-route-manip';
 import './psr-router-route-menu';
+import './psr-router-route-shop';
 
 export class PsrRouterRouteSection extends PsrRouterRouteEntry {
   _renderExpandingContent() {
@@ -44,6 +45,9 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
           break;
         case Route.RouteSection.ENTRY_TYPE:
           childElements.push(html`<psr-router-route-section id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-section>`);
+          break;
+        case Route.RouteShop.ENTRY_TYPE:
+          childElements.push(html`<psr-router-route-shop id="${'child-' + i}" .routeEntry=${children[i]}></psr-router-route-shop>`);
           break;
         case Route.RouteEntry.ENTRY_TYPE:
         default:

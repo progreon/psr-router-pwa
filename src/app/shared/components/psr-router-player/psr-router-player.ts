@@ -25,6 +25,9 @@ class PsrRouterPlayer extends LitElement {
       h2, ul, ol {
         margin: 0px;
       }
+      li[red] {
+        color: var(--app-color-error-red);
+      }
       @media (min-width: ${unsafeCSS(window.MyAppGlobals.wideWidth)}) {
         .row {
           flex-flow: row nowrap;
@@ -47,7 +50,7 @@ class PsrRouterPlayer extends LitElement {
     let itemsDOM = []; // TODO: table -> index, item, count (, selling price? or on hover?)
     // TODO: if i >= 20 => red text
     this.player.bag.forEach((is, i) => {
-      itemsDOM.push(html`<li>${is.toString()}</li>`);
+      itemsDOM.push(html`<li ?red="${i >= 20}">${is.toString()}</li>`);
     });
     let badgesDOM = [];
     this.player.badges.forEach(b => {

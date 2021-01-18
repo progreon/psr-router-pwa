@@ -86,7 +86,10 @@ Route: Red Any% Glitchless [race, no IT]
 			If the Paras breaks out, or you're not confident in throwing the ball perfectly, Poison Sting it once before throwing a ball
 			This manip requires a lot of practice. You can do runs without it while learning, but you'll eventually want to attempt it
 			If the manip fails, it might have been due to RNG. You can either continue as normal and perform a backup Paras manip at the end of Mt. Moon, or re-save to get a new chance
+		GetI: TM_12
 		GetI: RARE_CANDY
+		GetI: ESCAPE_ROPE
+		GetI: TM_01
 		GetI: MOON_STONE
 		GetP: Paras:10
 			TEMP: getting paras
@@ -168,8 +171,8 @@ Route: Red Any% Glitchless [race, no IT]
 				Get HM01 from the captain, then leave and head to the gym
 		Go to the mart
 		Shop: Sell all Poke Balls and antidote if you still have them
-			0 POKE_BALL
-			0 ANTIDOTE
+			* POKE_BALL
+			* ANTIDOTE
 			4 REPEL
 			4 PARLYZ_HEAL
 		Menu: On the tile before the Cut bush
@@ -231,7 +234,7 @@ Route: Red Any% Glitchless [race, no IT]
 		S: Shopping :: Bike to the mart and do the shopping
 			Shop: 2F
 				-1 TM_34
-				0 NUGGET
+				* NUGGET
 				1 TM_07
 				9 SUPER_REPEL
 				4 SUPER_POTION
@@ -240,7 +243,7 @@ Route: Red Any% Glitchless [race, no IT]
 				1 POKE_DOLL
 			Shop: 6F, vending machine
 				1 SODA_POP
-			GetI: TM_48 :: SODA_POP
+			GetI: TM_48 SODA_POP
 			Shop: Vending machine
 				1 FRESH_WATER
 			Shop: 5F
@@ -286,6 +289,8 @@ Route: Red Any% Glitchless [race, no IT]
 
 	S: Celadon City
 		Take the center and set the warp point for Dig, then bike to Silph Co.
+		Menu: TEMP: give the Fresh Water to the guard
+			Toss: FRESH_WATER
 
 	S: Silph Co.
 		Take the stairs to 5F

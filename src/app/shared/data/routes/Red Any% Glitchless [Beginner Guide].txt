@@ -277,6 +277,8 @@ Route: Red Any% Glitchless [Beginner Guide]
 	S: Celadon City
 		Use the Center
 		Bike to Saffaron City
+		Menu: TEMP: give the Fresh Water to the guard
+			Toss: FRESH_WATER
 	S: Silph Co.
 		Enter Silph Co and take the stairs to floor 5
 		GetI: ELIXER :: Get the Elixer in the tree

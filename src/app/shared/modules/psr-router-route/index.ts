@@ -8,5 +8,6 @@ export { RouteGetItem } from './RouteGetItem';
 export { RouteGetPokemon } from './RouteGetPokemon';
 export { RouteManip } from './RouteManip';
 export { RouteSection } from './RouteSection';
+export { RouteShop } from './RouteShop';
 export { RouteMenu } from './RouteMenu';
 export { Route } from './Route';
