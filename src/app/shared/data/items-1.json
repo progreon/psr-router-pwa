@@ -62,7 +62,7 @@
   "XXX_PP_UP": [ "XXX PP Up", "", 9800, "", "", "", false ],
   "POKE_DOLL": [ "Poke Doll", "TI", 1000, "", "", "", false ],
   "COIN": [ "Coin", "", 10, "", "", "", false ],
-  "S_S_TICKET": [ "S.S. Ticket", "", 0, "", "", "", true ],
+  "SS_TICKET": [ "S.S. Ticket", "", 0, "", "", "", true ],
   "GOLD_TEETH": [ "Gold Teeth", "T", 0, "", "", "", true ],
   "GUARD_SPEC": [ "Guard Spec", "TI", 700, "BATTLE", "MIST", "", false ],
   "DIRE_HIT": [ "Dire Hit", "TI", 650, "BATTLE", "FOCUS_ENERGY", "", false ],

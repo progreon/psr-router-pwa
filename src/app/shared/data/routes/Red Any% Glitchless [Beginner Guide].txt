@@ -132,7 +132,7 @@ Route: Red Any% Glitchless [Beginner Guide]
 			BSettings: 1 :: You will learn Thrash here, teach it over Water Gun
 				TEACH: THRASH WATER_GUN
 		GetI: ETHER :: Get the hidden Ether
-		Say yes to Bill (you'll lose instant text here)
+		GetI: SS_TICKET :: Say yes to Bill (you'll lose instant text here)
 		Menu: After the Bill cutscene: opt. heal to 55+, candy to L24, Escape Rope back to Cerulean
 			Use: POTION ? :: ONLY if you have at least 2 MP's and wealthy on potions
 			Use: RARE_CANDY

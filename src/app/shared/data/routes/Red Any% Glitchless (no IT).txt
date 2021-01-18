@@ -133,7 +133,7 @@ Route: Red Any% Glitchless [race, no IT]
 				Teach: THRASH WATER_GUN
 		GetI: ETHER
 			Get the hidden Ether
-		Say yes to Bill (you'll lose instant text here)
+		GetI: SS_TICKET :: Say yes to Bill (you'll lose instant text here)
 		Menu: After the Bill cutscene: heal to 55+, candy to L24, Escape Rope back to Cerulean
 			Use: POTION 2
 			Use: RARE_CANDY
