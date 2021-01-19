@@ -1,6 +1,5 @@
 // Imports for this element
 import { html, TemplateResult, css } from 'lit-element';
-import { render } from 'lit-html';
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 import { Battler, Move } from 'App/shared/modules/psr-router-model/ModelAbstract';
@@ -92,6 +91,54 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
         .click {
           cursor: pointer;
         }
+        *[speed="F"] {
+          background: rgba(0, 255, 0, .1);
+        }
+        *[speed=""] {
+          background: rgba(255, 0, 0, .1);
+        }
+        *[speed="BF"] {
+          background: linear-gradient(90deg, rgba(0, 255, 0, .1) 67%, rgba(255, 0, 0, .1) 133%);
+        }
+        *[speed="OF"] {
+          background: linear-gradient(90deg, rgba(255, 0, 0, .1) -33%, rgba(0, 255, 0, .1) 33%);
+        }
+        *[speed="OS"] {
+          background: linear-gradient(90deg, rgba(0, 255, 0, .1) -33%, rgba(255, 0, 0, .1) 33%);
+        }
+        *[speed="BS"] {
+          background: linear-gradient(90deg, rgba(255, 0, 0, .1) 67%, rgba(0, 255, 0, .1) 133%);
+        }
+        *[speed="T"] {
+          background: rgba(255, 170, 0, .1);
+        }
+        *[range="1:1"] {
+          background: rgba(0, 255, 0, .1);
+        }
+        *[range="2:2"] {
+          background: rgba(255, 170, 0, .1);
+        }
+        *[range="3:3"] {
+          background: rgba(255, 0, 0, .1);
+        }
+        *[range="1:2"] {
+          background: linear-gradient(90deg, rgba(255, 170, 0, .1) 33%, rgba(0, 255, 0, .1) 100%);
+        }
+        *[range="2:3"] {
+          background: linear-gradient(90deg, rgba(255, 0, 0, .1) 33%, rgba(255, 170, 0, .1) 100%);
+        }
+        *[range="3:4"] {
+          background: linear-gradient(90deg, rgba(0, 0, 0, .0) 33%, rgba(255, 0, 0, .1) 100%);
+        }
+        *[range="1:3"] {
+          background: linear-gradient(90deg, rgba(255, 0, 0, .1) 33%, rgba(255, 170, 0, .1) 67%, rgba(0, 255, 0, .1) 100%);
+        }
+        *[range="2:4"] {
+          background: linear-gradient(90deg, rgba(0, 0, 0, .0) 33%, rgba(255, 0, 0, .1) 67%, rgba(255, 170, 0, .1) 100%);
+        }
+        *[range="1:4"] {
+          background: linear-gradient(90deg, rgba(0, 0, 0, .0) 33%, rgba(0, 255, 0, .1) 100%);
+        }
       </style>
     `);
     if (battleEntry.player) {
@@ -126,13 +173,15 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
             // calculate who's the fastest
             let bSpdRange = b.getBoostedSpd(actualBB.spd, actualStages.spd);
             let oSpdRange = ob.getBoostedSpd(0, 0); // TODO: stages
-            let bf: string, of: string;
+            let bsp: string, osp: string; // battler & opponent speed
             if (bSpdRange.containsOneOf(oSpdRange)) {
-              [bf, of] = ["[T]", "[T]"];
+              [bsp, osp] = ["T", "T"];
             } else if (bSpdRange.max < oSpdRange.min) {
-              [bf, of] = ["", "[F]"];
+              // [bs, os] = ["", "F"];
+              [bsp, osp] = ["BS", "OF"];
             } else {
-              [bf, of] = ["[F]", ""];
+              // [bs, os] = ["F", ""];
+              [bsp, osp] = ["BF", "OS"];
             }
             let movesGrid = html`
               <div class="table" ?odd="${bsi % 2 == 1}">
@@ -152,14 +201,14 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 </div>
                 <div class="bcol">
                   <div class="col">
-                    <div class="click" @click="${this._openBattlerDialog.bind(this, b, actualStages, actualBB, true)}" @mouseenter="${e => this._showBattlerTooltip(e, b, actualStages, actualBB, true)}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.) ${bf}</div>
-                    <div class="click" @click="${this._openMoveDialog.bind(this, movesAttacker[0])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[0])}">${movesAttacker[0]?.html || "-"}</div>
-                    <div class="click" @click="${this._openMoveDialog.bind(this, movesAttacker[1])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[1])}">${movesAttacker[1]?.html || "-"}</div>
-                    <div class="click" @click="${this._openMoveDialog.bind(this, movesAttacker[2])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[2])}">${movesAttacker[2]?.html || "-"}</div>
-                    <div class="click" @click="${this._openMoveDialog.bind(this, movesAttacker[3])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[3])}">${movesAttacker[3]?.html || "-"}</div>
+                    <div class="click" @click="${this._openBattlerDialog.bind(this, b, actualStages, actualBB, true)}" @mouseenter="${e => this._showBattlerTooltip(e, b, actualStages, actualBB, true)}" speed="${bsp}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.)</div>
+                    <div class="click" range="${this._getHitRange(movesAttacker[0])}" @click="${this._openMoveDialog.bind(this, movesAttacker[0])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[0])}">${movesAttacker[0]?.html || "-"}</div>
+                    <div class="click" range="${this._getHitRange(movesAttacker[1])}" @click="${this._openMoveDialog.bind(this, movesAttacker[1])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[1])}">${movesAttacker[1]?.html || "-"}</div>
+                    <div class="click" range="${this._getHitRange(movesAttacker[2])}" @click="${this._openMoveDialog.bind(this, movesAttacker[2])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[2])}">${movesAttacker[2]?.html || "-"}</div>
+                    <div class="click" range="${this._getHitRange(movesAttacker[3])}" @click="${this._openMoveDialog.bind(this, movesAttacker[3])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[3])}">${movesAttacker[3]?.html || "-"}</div>
                   </div>
                   <div class="col">
-                    <div class="click" @click="${this._openBattlerDialog.bind(this, ob, opponentStages, null, false)}" @mouseenter="${e => this._showBattlerTooltip(e, ob, actualStages, null, false)}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.) ${of}</div>
+                    <div class="click" @click="${this._openBattlerDialog.bind(this, ob, opponentStages, null, false)}" @mouseenter="${e => this._showBattlerTooltip(e, ob, actualStages, null, false)}" speed="${osp}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</div>
                     <div class="click" @click="${this._openMoveDialog.bind(this, movesDefender[0])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[0])}">${movesDefender[0]?.html || "-"}</div>
                     <div class="click" @click="${this._openMoveDialog.bind(this, movesDefender[1])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[1])}">${movesDefender[1]?.html || "-"}</div>
                     <div class="click" @click="${this._openMoveDialog.bind(this, movesDefender[2])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[2])}">${movesDefender[2]?.html || "-"}</div>
@@ -267,8 +316,23 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
       `, { "hideActions": true });
   }
 
+  _getHitRange(move: { html: string, move: Move, range: Range, crange: Range, krs?: number[] }): string {
+    if (move?.krs) {
+      let i1 = 0, i2 = 0;
+      while (i1 < move.krs.length && move.krs[i1] == 0) {
+        i1++;
+      }
+      while (i2 < move.krs.length && move.krs[i2] < 1) {
+        i2++;
+      }
+      return `${i1+1}:${i2+1}`;
+    } else {
+      return "";
+    }
+  }
+
   _getMoveDOM(move: { html: string, move: Move, range: Range, crange: Range, krs?: number[] }) {
-    if (move){
+    if (move) {
       let valuesDOM = [];
       if (move.range.count > 0) {
         Object.keys(move.range.valueMap).forEach(k => {
