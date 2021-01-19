@@ -1,9 +1,13 @@
 // Imports for this element
-import { html } from 'lit-element';
+import { html, TemplateResult } from 'lit-element';
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 
 class PsrRouterRouteMenu extends PsrRouterRouteEntry {
+  protected _getPopupContent(): TemplateResult {
+    return this._renderExpandingContent();
+  }
+
   _renderExpandingContent() {
     let dom = super._renderExpandingContent();
     let actionsDom = [];
@@ -13,7 +17,7 @@ class PsrRouterRouteMenu extends PsrRouterRouteEntry {
       actionsDom.push(html`<li>${action}</li>`);
     });
 
-    return html`${dom}<ul style="margin: 0px">${actionsDom}</ul>`;
+    return html`${dom}<ul style="margin: 0px; padding-left: 20px;">${actionsDom}</ul>`;
   }
 
   protected _hasExpandingContent(): boolean {
