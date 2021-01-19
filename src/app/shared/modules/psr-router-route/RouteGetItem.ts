@@ -82,7 +82,7 @@ export class RouteGetItem extends RouteEntry {
     let obj = super.getJSONObject();
     obj.properties.item = this.item.key;
     obj.properties.count = this.count;
-    obj.properties.tradedFor = this.tradedFor;
+    obj.properties.tradedFor = this.tradedFor?.key;
     return obj;
   }
 
