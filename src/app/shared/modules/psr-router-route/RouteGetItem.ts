@@ -67,12 +67,12 @@ export class RouteGetItem extends RouteEntry {
   toString(): string {
     let str = this.info?.toString();
     if (!str?.trim()) {
-      str = `Get ${this.item.name}`;
+      str = `Get ${this.item}`;
       if (this.count != 1) {
         str += ` x${this.count}`;
       }
       if (this.tradedFor) {
-        str += ` for ${this.tradedFor.name}`;
+        str += ` for ${this.tradedFor}`;
       }
     }
     return str;

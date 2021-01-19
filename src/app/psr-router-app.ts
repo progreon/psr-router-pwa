@@ -260,6 +260,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
         background: var(--app-background-color);
         display: none;
         box-shadow: 0px 0px 10px black;
+        max-height: 66.67%;
+        overflow-y: auto;
       }
 
       /* Wide layout: when the viewport width is bigger than 640px, layout

@@ -398,9 +398,9 @@ Route: Red Any% Glitchless [Beginner Guide]
 			Note: If you only have 2 Blizzards, use TB on Pidgeot instead of Bliz
 			Opp: 1
 				Use: X_ACCURACY
-				Use: X_SPEED
+				Use: X_SPECIAL
 			Opp: 4
-				Use: X_SPEED
+				Use: X_SPECIAL
 	S: Route 23
 		Menu: After exiting the water, use another Super Repel and bike to Victory Road
 			Use: SUPER_REPEL

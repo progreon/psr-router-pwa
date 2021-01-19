@@ -25,7 +25,7 @@ class PsrRouterPlayer extends LitElement {
       h2, ul, ol {
         margin: 0px;
       }
-      li[red] {
+      *[red] {
         color: var(--app-color-error-red);
       }
       @media (min-width: ${unsafeCSS(window.MyAppGlobals.wideWidth)}) {
@@ -61,7 +61,7 @@ class PsrRouterPlayer extends LitElement {
         <h2>${this.player.name}</h2>
         <div class="row">
           <div class="col">
-            <div>Money: ₽${this.player.money}</div>
+            <div ?red="${this.player.money < 0}">Money: ₽${this.player.money}</div>
             <div>Party</div>
             <ol>${partyDOM}</ol>
             <div>Badge boosts</div>

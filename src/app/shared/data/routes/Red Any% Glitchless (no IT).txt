@@ -104,14 +104,12 @@ Route: Red Any% Glitchless [race, no IT]
 			Use: MOON_STONE 1 1
 			Tm: TM_01 1 1
 		B: Mt. Moon B2F - SuperNerd :: HA x2, MP (+PS), MP + HA
-		GetI: HELIX_FOSSIL
-			Choose the Helix Fossil
+		GetI: HELIX_FOSSIL :: Choose the Helix Fossil
 		If you don't have a Paras, use this backup manip: https://www.youtube.com/watch?v=29TwUgeeGME (This Paras does not get in the ball with perfect inputs, so you should Horn Attack it first)
 
 	S: Cerulean City
 		Take the center
-		GetI: RARE_CANDY
-			Get the hidden Rare Candy behind the top-left house
+		GetI: RARE_CANDY :: Get the hidden Rare Candy behind the top-left house
 
 	S: Nugget Bridge
 		B: Bridge Rival - Bulbasaur :: Bridge Rival :: HA x3, HA, MP, MP + HA
@@ -131,8 +129,7 @@ Route: Red Any% Glitchless [race, no IT]
 		B: Route 25 - Lass 2 :: MP, HA, MP (HA Oddishes with 0-2 Mega Punch PP)
 			BSettings: 1 :: Nidoking levels to Lv. 23 here, teach Thrash over Water Gun
 				Teach: THRASH WATER_GUN
-		GetI: ETHER
-			Get the hidden Ether
+		GetI: ETHER :: Get the hidden Ether
 		GetI: SS_TICKET :: Say yes to Bill (you'll lose instant text here)
 		Menu: After the Bill cutscene: heal to 55+, candy to L24, Escape Rope back to Cerulean
 			Use: POTION 2
@@ -167,8 +164,7 @@ Route: Red Any% Glitchless [race, no IT]
 			Take the left stairs, then go down and right to meet your rival
 			B: Boat Rival - Bulbasaur :: Boat Rival :: HA x2, MP, Thrash.
 				If you get SA'd or confused, sacrifice your weakest slave
-			GetI: HM_01
-				Get HM01 from the captain, then leave and head to the gym
+			GetI: HM_01 :: Get HM01 from the captain, then leave and head to the gym
 		Go to the mart
 		Shop: Sell all Poke Balls and antidote if you still have them
 			* POKE_BALL
@@ -186,12 +182,10 @@ Route: Red Any% Glitchless [race, no IT]
 			If the manip fails, use this guide to solve the puzzle normally [[https://i.imgur.com/mCgVe4w.png]]
 		S: Vermilion Gym
 			B: Surge :: if < 26 HP just Thrash, otherwise BB + PS, then Thrash
-		GetI: BIKE_VOUCHER
-			Go to the house above the gym, talk to the chair of the fan club to get the Bike Voucher, then Dig back to Cerulean
+		GetI: BIKE_VOUCHER :: Go to the house above the gym, talk to the chair of the fan club to get the Bike Voucher, then Dig back to Cerulean
 
 	S: Cerulean City
-		GetI: BICYCLE :: BIKE_VOUCHER
-			Get the Bicycle from the bike shop
+		GetI: BICYCLE BIKE_VOUCHER :: Get the Bicycle from the bike shop
 		Menu: After leaving the shop
 			Swap: 1 BICYCLE
 			Tm: TM_24 1 3
@@ -423,9 +417,9 @@ Route: Red Any% Glitchless [race, no IT]
 		B: Viridian Rival - Bulbasaur :: Viridian Rival :: X Acc, X Speed, Blizzard (+Blizzard), Blizzard, TB, EQ x2, Drill
 			Opp: 1
 				Use: X_ACCURACY
-				Use: X_SPEED
+				Use: X_SPECIAL
 			Opp: 4
-				Use: X_SPEED
+				Use: X_SPECIAL
 		Bike to Route 23
 
 	S: Route 23
