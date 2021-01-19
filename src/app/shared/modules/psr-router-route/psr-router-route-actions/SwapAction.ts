@@ -24,9 +24,23 @@ export class SwapAction extends AAction {
 
     public applyAction(player: Model.Player, battleStage?: RouteBattle.Stage): void {
         super.applyAction(player, battleStage);
-        // TODO: implement GetI-entry first
         this.actionString = `Swap ${this.item1?.name || "slot " + (+this.itemIndex1 + 1)} with ${this.item2?.name || "slot " + (+this.itemIndex2 + 1)}`;
-        this.addMessage(new RouterMessage("The 'Swap' action is not fully implemented yet", RouterMessage.Type.Warning));
+
+        let result = false;
+        if (this.item1 && this.item2) {
+            result = player.swapItems(this.item1, this.item2);
+        } else if (this.item1 && this.itemIndex2 != null) {
+            result = player.swapItemToSlot(this.item1, this.itemIndex2);
+        } else if (this.item2 && this.itemIndex1 != null) {
+            result = player.swapItemToSlot(this.item2, this.itemIndex1);
+        } else if (this.itemIndex1 != null && this.itemIndex2 != null) {
+            result = player.swapItemsByIndex(this.itemIndex1, this.itemIndex2);
+        }
+        if (!result) {
+            this.addMessage(new RouterMessage("Please provide two (indices of) items to swap!", RouterMessage.Type.Error));
+        }
+
+        // this.addMessage(new RouterMessage("The 'Swap' action is not fully implemented yet", RouterMessage.Type.Warning));
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {

@@ -197,7 +197,7 @@ export class Player {
    * @param pc
    * @returns Returns true if success.
    */
-  swapItemsByIndex(index1: number, index2: number, pc: boolean): boolean {
+  swapItemsByIndex(index1: number, index2: number, pc: boolean = false): boolean {
     let items = pc ? this._pcItems : this._bagItems;
     if (index1 < 0 || index1 >= items.length || index2 < 0 || index2 >= items.length || index1 === index2) {
       return false;
@@ -216,7 +216,7 @@ export class Player {
    * @param pc
    * @returns Returns true if success.
    */
-  swapItems(item1: Item, item2: Item, pc: boolean): boolean {
+  swapItems(item1: Item, item2: Item, pc: boolean = false): boolean {
     return this.swapItemsByIndex(this.getItemIndex(item1, pc), this.getItemIndex(item2, pc), pc);
   }
 
@@ -227,7 +227,7 @@ export class Player {
    * @param pc
    * @returns Returns true if success.
    */
-  swapItemToSlot(item: Item, index: number, pc: boolean): boolean {
+  swapItemToSlot(item: Item, index: number, pc: boolean = false): boolean {
     return this.swapItemsByIndex(this.getItemIndex(item, pc), index, pc);
   }
 
