@@ -254,7 +254,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
 
       #tooltip {
         position: absolute;
-        z-index: 1;
+        z-index: 9;
         border-radius: 10px;
         padding: 10px;
         background: var(--app-background-color);
@@ -535,11 +535,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       if ((<PsrRouterPage>this.shadowRoot.getElementById(this._page))?.triggerDataRefresh) {
         (<PsrRouterPage>this.shadowRoot.getElementById(this._page)).triggerDataRefresh();
       }
-      if (document.getElementById("overlay")) {
-        (<any>document.getElementById("overlay")).close();
-      }
-      if (document.getElementById("dialog")) {
-        (<any>document.getElementById("dialog")).close();
+      if (this.shadowRoot.getElementById("mwc-dialog")) {
+        (<Dialog>this.shadowRoot.getElementById("mwc-dialog")).close();
       }
       window.setTimeout(this._setScroll.bind(this, window.history.state && window.history.state.scroll), 20);
     }

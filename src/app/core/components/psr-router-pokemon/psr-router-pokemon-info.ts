@@ -1,12 +1,16 @@
 // JS imports
-import { html, css } from 'lit-element';
+import { html, css, property } from 'lit-element';
 import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 import { RouteManager } from 'SharedModules/psr-router-route/util';
 
 // These are the elements needed by this element.
 import 'SharedComponents/psr-router-pokemon/psr-router-pokemon';
+import 'SharedComponents/psr-router-move/psr-router-move';
 
 class PsrRouterPokemonInfo extends PsrRouterPage {
+  @property({ type: String })
+  private pokemon: string;
+
   static get styles() {
     return css`
       ${super.styles}
@@ -27,7 +31,8 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
       }
       .flex-container > .section {
         flex-direction: column;
-        border-top: 1px solid gray;
+        border-top: 1px solid var(--app-dark-text-color);
+        padding-bottom: 10px;
       }
       .flex-container > .section > * {
         margin: 0px;
@@ -71,27 +76,34 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
 
   _render() {
     let game = RouteManager.GetCurrentGame();
-    let pokemon = game && game.findPokemonByName(this.searchParams.p);
+    let pokemon = game && game.findPokemonByName(this.pokemon);
     let moveLevels = [];
     let moveNames = [];
+    let evolutionKeys = [];
+    let evolutionValues = [];
     if (pokemon) {
       pokemon.levelupMoves.forEach(lm => {
         moveLevels.push(html`<div>${lm.level}</div>`);
-        moveNames.push(html`<div>${lm.move}</div>`);
+        moveNames.push(html`<div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(lm.move, e.path[0])}">${lm.move}</div>`);
       });
       pokemon.tms.forEach(tm => {
         moveLevels.push(html`<div>${tm}</div>`);
         let move = game.findMoveByName(tm.value);
-        moveNames.push(html`<div>${move}</div>`);
+        moveNames.push(html`<div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(move, e.path[0])}">${move}</div>`);
+      });
+      Object.keys(pokemon.evolutions).forEach(key => {
+        let value = pokemon.evolutions[key];
+        evolutionKeys.push(html`<div>${value.evolutionKey}</div>`);
+        evolutionValues.push(html`<div style="cursor: pointer;" @click="${this._onEvolutionClicked.bind(this, value.pokemon)}">${value.pokemon}</div>`);
       });
     }
     return html`
       <div class="flex-container">
         <!-- <h1>[img]</h1> -->
-        <h1>#${this._parseIdString(pokemon.id)} ${pokemon.name}</h1>
+        <h1>#${this._parseIdString(pokemon?.id)} ${pokemon?.name}</h1>
         <div class="type">
-          <div>${pokemon.type1}</div>
-          <div ?hidden="${!pokemon.type2}">, ${pokemon.type2}</div>
+          <div>${pokemon?.type1}</div>
+          <div ?hidden="${!pokemon?.type2}">, ${pokemon?.type2}</div>
         </div>
         <div class="section">
           <h2>Base Stats</h2>
@@ -100,8 +112,8 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
               <div>HP</div><div>Atk</div><div>Def</div><div>Spd</div><div>Spc</div>
             </div>
             <div class="row">
-              <div>${pokemon.hp}</div><div>${pokemon.atk}</div><div>${pokemon.def}</div>
-              <div>${pokemon.spd}</div><div>${pokemon.spcAtk}</div>
+              <div>${pokemon?.hp}</div><div>${pokemon?.atk}</div><div>${pokemon?.def}</div>
+              <div>${pokemon?.spd}</div><div>${pokemon?.spcAtk}</div>
             </div>
           </div>
         </div>
@@ -110,18 +122,26 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
           <div class="h-table">
             <div class="column header">
               <div>Base Exp</div><div>Capture Rate</div>
-              <div>Growth Rate</div><div>Base Happiness</div>
+              <div>Growth Rate</div><div ?hidden="${this._isGen.bind(this, window.app.game, 1)}">Base Happiness</div>
             </div>
             <div class="column">
-              <div>${pokemon.expGiven}</div><div>&nbsp</div>
-              <div>${pokemon.expGroup}</div><div>&nbsp</div>
+              <div>${pokemon?.expGiven}</div><div>[TODO]</div>
+              <div>${pokemon?.expGroup}</div><div ?hidden="${this._isGen.bind(this, window.app.game, 1)}">&nbsp</div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h2>Evolutions</h2>
+          <div class="h-table">
+            <div class="column header">
+              ${evolutionKeys}
+            </div>
+            <div class="column">
+              ${evolutionValues}
             </div>
           </div>
         </div>
         <!-- <div class="section">
-          <h2>Evolution</h2>
-        </div>
-        <div class="section">
           <h2>Locations</h2>
         </div> -->
         <div class="section">
@@ -135,7 +155,7 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
             </div>
           </div>
         </div>
-        <div class="section" ?hidden="${this._isGen(window.app.game, 1)}">
+        <div class="section" ?hidden="${this._isGen.bind(this, window.app.game, 1)}">
           <h2>Breeding</h2>
         </div>
       </div>
@@ -144,6 +164,15 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
 
   constructor() {
     super();
+  }
+
+  firstUpdated(_changedProperties: any) {
+    super.firstUpdated(_changedProperties);
+    this.triggerDataRefresh();
+  }
+
+  triggerDataRefresh() {
+    this.pokemon = this.searchParams.p;
   }
 
   _parseIdString(id) {
@@ -158,6 +187,16 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
 
   _isGen(game, gen) {
     return game && game.info.gen === gen;
+  }
+
+  _onEvolutionClicked(pokemon) {
+    super._navigateTo('pokemon-info?p=' + pokemon.name);
+  }
+
+  _showMoveTooltip(move, element) {
+    if (move) {
+      window.showTooltip(html`<psr-router-move .move="${move}" detailed></psr-router-move>`, element);
+    }
   }
 }
 

@@ -35,6 +35,7 @@ class PwaMenuBarItem extends LitElement {
     }
 
     .dropbtn {
+      color: inherit;
       display: inline-block;
       text-decoration: none;
     }
@@ -94,8 +95,8 @@ class PwaMenuBarItem extends LitElement {
     });
 
     return html`
-      <div class="dropdown" ?selected="${menuItem.containsPage(this.selectedItem)}" @click=${this._handleButtonClick}>
-        <div class="dropbtn">${menuItem.title}</div>
+      <div class="dropdown" ?selected="${menuItem.containsPage(this.selectedItem)}">
+        <a class="dropbtn" href="${menuItem.key}">${menuItem.title}</a>
         <div class="icon" ?hidden="${!expandable}">${angleDownIcon}</div>
       </div>
       <div id="dropdown-area" class="dropdown-content">
