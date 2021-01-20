@@ -260,8 +260,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
         background: var(--app-background-color);
         display: none;
         box-shadow: 0px 0px 10px black;
-        max-height: 66.67%;
-        overflow-y: auto;
+        max-height: 100%;
+        overflow: hidden;
       }
 
       /* Wide layout: when the viewport width is bigger than 640px, layout
@@ -570,8 +570,10 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     }
   }
 
+  private _tooltipForElement = null;
   _hideTooltip() {
     let tooltip = this.shadowRoot.getElementById("tooltip");
+    this._tooltipForElement = null;
     if (tooltip) {
       tooltip.style.display = "none";
       render(null, tooltip);
@@ -579,22 +581,26 @@ export class PsrRouterApp extends connect(store)(LitElement) {
   }
   private _tooltipHideListener = this._hideTooltip.bind(this);
 
-  private _tooltipForElement = null;
   private async _showTooltip(template: TemplateResult, forElement: HTMLElement) {
     // Don't show tooltip if in mobile view
     if (!window.isMobileView()) {
       this._tooltipForElement = forElement;
-      let r = forElement.getBoundingClientRect();
       let tooltip = this.shadowRoot.getElementById("tooltip");
       forElement.addEventListener("mouseleave", this._tooltipHideListener);
-      tooltip.style.top = "0px";
-      tooltip.style.left = "0px";
-      tooltip.style.display = "block";
-      tooltip.style.visibility = "hidden";
-      render(template, tooltip);
-      await this._sleep(250);
+      await this._sleep(225); // don't render immediately in case of scrolling over it for performance
+      if (this._tooltipForElement == forElement) {
+        tooltip.style.top = "0px";
+        tooltip.style.left = "0px";
+        tooltip.style.height = "auto";
+        tooltip.style.maxHeight = "100%";
+        tooltip.style.display = "block";
+        tooltip.style.visibility = "hidden";
+        render(template, tooltip);
+        await this._sleep(25);
+      }
       if (this._tooltipForElement == forElement) {
         // only continue if we're still showing the tooltip for the same element!
+        let r = forElement.getBoundingClientRect();
         let r2 = tooltip.getBoundingClientRect();
         let body = document.body.getBoundingClientRect();
         let left = r.x + (r.width - r2.width) / 2;
@@ -609,7 +615,15 @@ export class PsrRouterApp extends connect(store)(LitElement) {
           tooltip.style.width = (body.width - 40) + "px";
           r2 = tooltip.getBoundingClientRect();
         }
-        tooltip.style.top = (r.y - r.height / 2 - r2.height) + "px";
+
+        let top = r.y - 15 - r2.height;
+        if (top < 0) {
+          top = r.y + r.height + 15;
+          if (top + r2.height > body.bottom) {
+            tooltip.style.height = `${body.bottom - top}px`;
+          }
+        }
+        tooltip.style.top = `${top}px`;
         tooltip.style.visibility = "visible";
       }
     }
