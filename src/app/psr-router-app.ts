@@ -556,6 +556,8 @@ export class PsrRouterApp extends connect(store)(LitElement) {
         dialog[k] = v;
       });
     }
+    // Hide the tooltip if shown
+    this._hideTooltip();
     dialog.show();
     return dialog;
   }
@@ -568,7 +570,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     }
   }
 
-  _hideTooltip(e) {
+  _hideTooltip() {
     let tooltip = this.shadowRoot.getElementById("tooltip");
     if (tooltip) {
       tooltip.style.display = "none";
@@ -576,37 +578,40 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     }
   }
   private _tooltipHideListener = this._hideTooltip.bind(this);
-  
+
   private _tooltipForElement = null;
   private async _showTooltip(template: TemplateResult, forElement: HTMLElement) {
-    this._tooltipForElement = forElement;
-    let r = forElement.getBoundingClientRect();
-    let tooltip = this.shadowRoot.getElementById("tooltip");
-    forElement.addEventListener("mouseleave", this._tooltipHideListener);
-    tooltip.style.top = "0px";
-    tooltip.style.left = "0px";
-    tooltip.style.display = "block";
-    tooltip.style.visibility = "hidden";
-    render(template, tooltip);
-    await this._sleep(250);
-    if (this._tooltipForElement == forElement) {
-      // only continue if we're still showing the tooltip for the same element!
-      let r2 = tooltip.getBoundingClientRect();
-      let body = document.body.getBoundingClientRect();
-      let left = r.x + (r.width - r2.width) / 2;
-      if (left + r2.width + 20 > body.width) {
-        left = body.width - r2.width - 20;
+    // Don't show tooltip if in mobile view
+    if (window.isMobileView()) {
+      this._tooltipForElement = forElement;
+      let r = forElement.getBoundingClientRect();
+      let tooltip = this.shadowRoot.getElementById("tooltip");
+      forElement.addEventListener("mouseleave", this._tooltipHideListener);
+      tooltip.style.top = "0px";
+      tooltip.style.left = "0px";
+      tooltip.style.display = "block";
+      tooltip.style.visibility = "hidden";
+      render(template, tooltip);
+      await this._sleep(250);
+      if (this._tooltipForElement == forElement) {
+        // only continue if we're still showing the tooltip for the same element!
+        let r2 = tooltip.getBoundingClientRect();
+        let body = document.body.getBoundingClientRect();
+        let left = r.x + (r.width - r2.width) / 2;
+        if (left + r2.width + 20 > body.width) {
+          left = body.width - r2.width - 20;
+        }
+        if (left < 0) {
+          left = 0;
+        }
+        tooltip.style.left = left + "px";
+        if (r2.width > body.width) {
+          tooltip.style.width = (body.width - 40) + "px";
+          r2 = tooltip.getBoundingClientRect();
+        }
+        tooltip.style.top = (r.y - r.height / 2 - r2.height) + "px";
+        tooltip.style.visibility = "visible";
       }
-      if (left < 0) {
-        left = 0;
-      }
-      tooltip.style.left = left + "px";
-      if (r2.width > body.width) {
-        tooltip.style.width = (body.width - 40) + "px";
-        r2 = tooltip.getBoundingClientRect();
-      }
-      tooltip.style.top = (r.y - r.height / 2 - r2.height) + "px";
-      tooltip.style.visibility = "visible";
     }
   }
 
