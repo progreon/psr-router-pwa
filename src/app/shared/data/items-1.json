@@ -60,7 +60,7 @@
   "CARD_KEY": [ "Card Key", "", 0, "", "", "", true ],
   "NUGGET": [ "Nugget", "T", 10000, "", "", "", false ],
   "XXX_PP_UP": [ "XXX PP Up", "", 9800, "", "", "", false ],
-  "POKE_DOLL": [ "Poke Doll", "TI", 1000, "", "", "", false ],
+  "POKE_DOLL": [ "Poké Doll", "TI", 1000, "", "", "", false ],
   "COIN": [ "Coin", "", 10, "", "", "", false ],
   "SS_TICKET": [ "S.S. Ticket", "", 0, "", "", "", true ],
   "GOLD_TEETH": [ "Gold Teeth", "T", 0, "", "", "", true ],
@@ -135,9 +135,9 @@
   "TM_48": [ "TM48", "TO", 4000, "TM", "ROCK_SLIDE", "", false ],
   "TM_49": [ "TM49", "TO", 4000, "TM", "TRI_ATTACK", "", false ],
   "TM_50": [ "TM50", "TO", 2000, "TM", "SUBSTITUTE", "", false ],
-  "HM_01": [ "HM01", "O", 0, "TM", "CUT", "", false ],
-  "HM_02": [ "HM02", "O", 0, "TM", "FLY", "", false ],
-  "HM_03": [ "HM03", "O", 0, "TM", "SURF", "", false ],
-  "HM_04": [ "HM04", "O", 0, "TM", "STRENGTH", "", false ],
-  "HM_05": [ "HM05", "O", 0, "TM", "FLASH", "", false ]
+  "HM_01": [ "HM01", "O", 0, "HM", "CUT", "", false ],
+  "HM_02": [ "HM02", "O", 0, "HM", "FLY", "", false ],
+  "HM_03": [ "HM03", "O", 0, "HM", "SURF", "", false ],
+  "HM_04": [ "HM04", "O", 0, "HM", "STRENGTH", "", false ],
+  "HM_05": [ "HM05", "O", 0, "HM", "FLASH", "", false ]
 }

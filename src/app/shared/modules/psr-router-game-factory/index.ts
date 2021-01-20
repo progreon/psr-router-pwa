@@ -32,5 +32,5 @@ export function GetGame(gameKey: string): Model.Game {
   } else {
     gameInfo = new Model.GameInfo(gameKey);
   }
-  return factories[gameInfo.gen].GetGame(gameInfo);
+  return (factories[gameInfo.gen] || new GameFactoryDummy()).GetGame(gameInfo);
 };

@@ -29,7 +29,7 @@ class ItemSlot {
 
   toString(): string {
     let str = `${this.item.toString()}`;
-    if (!this.item.isKeyItem || this.count != 1) {
+    if (!(this.item.isKeyItem || this.item.isHm()) || this.count != 1) {
       str = `${str} x${this.count}`;
     }
     return str;
@@ -119,7 +119,7 @@ export class Player {
    * @param pc
    * @todo Return the non-full slot if multiple slots.
    */
-  private getItemIndex(item: Item, pc = false): number {
+  public getItemIndex(item: Item, pc = false): number {
     let items = pc ? this._pcItems : this._bagItems;
     let index = 0;
     let found = false;
@@ -134,6 +134,15 @@ export class Player {
       index = -1;
 
     return index;
+  }
+
+  public getItemByIndex(itemIndex: number, pc: boolean = false): Item {
+    let items = pc ? this._pcItems : this._bagItems;
+    if (itemIndex >= 0 && itemIndex < items.length) {
+      return items[itemIndex].item;
+    } else {
+      return null;
+    }
   }
 
   /**

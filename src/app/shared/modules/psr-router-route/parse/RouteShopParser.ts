@@ -51,10 +51,10 @@ export class RouteShopParser implements IRouteEntryParser {
     public jsonToLines(jsonEntry: EntryJSON): ScopedLine {
         let scopedLine = new ScopedLine(`${RouteShop.ENTRY_TYPE}:`);
         if (jsonEntry.info.title) {
-            scopedLine.line = `${scopedLine.line} :: ${jsonEntry.info.title}`;
+            scopedLine.line = `${scopedLine.line} ${jsonEntry.info.title} ::`;
         }
         if (jsonEntry.info.summary) {
-            scopedLine.line = `${scopedLine.line} :: ${jsonEntry.info.summary}`;
+            scopedLine.line = `${scopedLine.line} ${jsonEntry.info.summary}`;
         }
         jsonEntry.properties.entries.forEach((e: { item: string, count: string, description?: string }) => {
             let estr = `${e.count} ${e.item}`;

@@ -47,7 +47,11 @@ export class Item {
   }
 
   isTmOrHm() {
-    return this.type == "TM";
+    return this.type == "TM" || this.type == "HM";
+  }
+
+  isHm() {
+    return this.type == "HM";
   }
 
   equals(item: Item): boolean {
