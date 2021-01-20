@@ -7,7 +7,7 @@ import { ExperienceGroup, Move } from "../ModelAbstract";
  */
 export abstract class Pokemon {
   public readonly key: string;
-  public evolutions: { [key: string]: Pokemon; };
+  public evolutions: { [key: string]: { evolutionKey: EvolutionKey, pokemon: Pokemon } };
   private _luMoves: { level: number, move: Move }[];
   private _tms: Item[]; // TODO: { tm: Item, move: Move } or { [key: string]: Move } ?
   constructor(
@@ -34,10 +34,10 @@ export abstract class Pokemon {
    * @todo
    */
   addEvolution(evolutionKey: EvolutionKey, pokemon: Pokemon) {
-    this.evolutions[evolutionKey.toString().toUpperCase()] = pokemon;
+    this.evolutions[evolutionKey.toString().toUpperCase()] = { evolutionKey, pokemon };
   }
   getEvolution(evolutionKey: EvolutionKey): Pokemon {
-    return this.evolutions[evolutionKey.toString().toUpperCase()];
+    return this.evolutions[evolutionKey.toString().toUpperCase()]?.pokemon;
   }
   addLevelupMove(level: number, move: Move) {
     this._luMoves.push({ level, move });

@@ -1,5 +1,5 @@
 // Imports for this element
-import { html, css, LitElement, property, customElement } from 'lit-element';
+import { html, css, LitElement, property, customElement, unsafeCSS } from 'lit-element';
 import { Player } from 'SharedModules/psr-router-model/Model';
 
 @customElement('psr-router-player')
@@ -14,6 +14,31 @@ class PsrRouterPlayer extends LitElement {
         display: flex;
         flex-flow: column nowrap;
       }
+      .row {
+        display: flex;
+        flex-flow: column nowrap;
+      }
+      .col {
+        display: flex;
+        flex-flow: column nowrap;
+      }
+      h2, ul, ol {
+        margin: 0px;
+      }
+      *[red] {
+        color: var(--app-color-error-red);
+      }
+      @media (min-width: ${unsafeCSS(window.MyAppGlobals.wideWidth)}) {
+        .row {
+          flex-flow: row nowrap;
+        }
+        .col {
+          margin-left: 10px;
+        }
+        .col:first-child {
+          margin-left: 0px;
+        }
+      }
     `;
   }
 
@@ -23,22 +48,30 @@ class PsrRouterPlayer extends LitElement {
       partyDOM.push(html`<li>${b.toString()}</li>`);
     });
     let itemsDOM = []; // TODO: table -> index, item, count (, selling price? or on hover?)
+    // TODO: if i >= 20 => red text
     this.player.bag.forEach((is, i) => {
-      itemsDOM.push(html`<li>${i + 1}: ${is.toString()}</li>`);
+      itemsDOM.push(html`<li ?red="${i >= 20}">${is.toString()}</li>`);
     });
     let badgesDOM = [];
     this.player.badges.forEach(b => {
       badgesDOM.push(html`<li>${b}</li>`);
     });
-    // this.player.
     return html`
       <div class="content">
-        <div>Party:</div>
-        <ul ?hidden="${partyDOM.length == 0}">${partyDOM}</ul>
-        <div>Bag items:</div>
-        <ul ?hidden="${itemsDOM.length == 0}">${itemsDOM}</ul>
-        <div>Badge boosts:</div>
-        <ul ?hidden="${badgesDOM.length == 0}">${badgesDOM}</ul>
+        <h2>${this.player.name}</h2>
+        <div class="row">
+          <div class="col">
+            <div ?red="${this.player.money < 0}">Money: ₽${this.player.money}</div>
+            <div>Party</div>
+            <ol>${partyDOM}</ol>
+            <div>Badge boosts</div>
+            <ul>${badgesDOM}</ul>
+          </div>
+          <div class="col">
+            <div>Bag items</div>
+            <ol>${itemsDOM}</ol>
+          </div>
+        </div>
       </div>
     `;
   }

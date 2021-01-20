@@ -132,7 +132,7 @@ Route: Red Any% Glitchless [Beginner Guide]
 			BSettings: 1 :: You will learn Thrash here, teach it over Water Gun
 				TEACH: THRASH WATER_GUN
 		GetI: ETHER :: Get the hidden Ether
-		Say yes to Bill (you'll lose instant text here)
+		GetI: SS_TICKET :: Say yes to Bill (you'll lose instant text here)
 		Menu: After the Bill cutscene: opt. heal to 55+, candy to L24, Escape Rope back to Cerulean
 			Use: POTION ? :: ONLY if you have at least 2 MP's and wealthy on potions
 			Use: RARE_CANDY
@@ -277,6 +277,8 @@ Route: Red Any% Glitchless [Beginner Guide]
 	S: Celadon City
 		Use the Center
 		Bike to Saffaron City
+		Menu: TEMP: give the Fresh Water to the guard
+			Toss: FRESH_WATER
 	S: Silph Co.
 		Enter Silph Co and take the stairs to floor 5
 		GetI: ELIXER :: Get the Elixer in the tree
@@ -396,9 +398,9 @@ Route: Red Any% Glitchless [Beginner Guide]
 			Note: If you only have 2 Blizzards, use TB on Pidgeot instead of Bliz
 			Opp: 1
 				Use: X_ACCURACY
-				Use: X_SPEED
+				Use: X_SPECIAL
 			Opp: 4
-				Use: X_SPEED
+				Use: X_SPECIAL
 	S: Route 23
 		Menu: After exiting the water, use another Super Repel and bike to Victory Road
 			Use: SUPER_REPEL

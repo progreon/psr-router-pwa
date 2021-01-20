@@ -38,6 +38,9 @@ export class RouteManip extends RouteEntry {
     super.apply(player, false);
     let nextPlayer = super.nextPlayer;
     nextPlayer.addBattler(this.battler.clone());
+    // TEMP
+    let ball = this.game.findItemByName("POKE_BALL");
+    console.debug("TEMP: use POKE_BALL", nextPlayer.useItem(ball, null, null, null, true));
     super.updateNextPlayer(nextPlayer, fireApplied);
   }
 

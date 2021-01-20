@@ -24,9 +24,38 @@ export class SwapAction extends AAction {
 
     public applyAction(player: Model.Player, battleStage?: RouteBattle.Stage): void {
         super.applyAction(player, battleStage);
-        // TODO: implement GetI-entry first
-        this.actionString = `Swap ${this.item1?.name || "slot " + (+this.itemIndex1 + 1)} with ${this.item2?.name || "slot " + (+this.itemIndex2 + 1)}`;
-        this.addMessage(new RouterMessage("The 'Swap' action is not fully implemented yet", RouterMessage.Type.Warning));
+        // this.actionString = `Swap ${this.item1?.name || "slot " + (+this.itemIndex1 + 1)} with ${this.item2?.name || "slot " + (+this.itemIndex2 + 1)}`;
+
+        let result = false;
+        let itemIndex1 = this.itemIndex1;
+        let itemIndex2 = this.itemIndex2;
+        if (this.item1 && this.item2) {
+            itemIndex1 = player.getItemIndex(this.item1);
+            itemIndex2 = player.getItemIndex(this.item2);
+            result = player.swapItems(this.item1, this.item2);
+            this.actionString = `Swap ${this.item1.name} (s${itemIndex1 + 1}) with ${this.item2.name} (s${itemIndex2 + 1})`;
+        } else if (this.item1 && this.itemIndex2 != null) {
+            itemIndex1 = player.getItemIndex(this.item1);
+            let item2 = player.getItemByIndex(this.itemIndex2);
+            result = player.swapItemToSlot(this.item1, this.itemIndex2);
+            this.actionString = `Swap ${this.item1.name} (s${itemIndex1 + 1}) with slot ${+this.itemIndex2 + 1} (${item2?.name || "unknown"})`;
+        } else if (this.item2 && this.itemIndex1 != null) {
+            let item1 = player.getItemByIndex(this.itemIndex1);
+            itemIndex2 = player.getItemIndex(this.item2);
+            result = player.swapItemToSlot(this.item2, this.itemIndex1);
+            this.actionString = `Swap slot ${this.itemIndex1 + 1} (${item1?.name || "unknown"}) with ${this.item2.name} (s${itemIndex2 + 1})`;
+        } else if (this.itemIndex1 != null && this.itemIndex2 != null) {
+            let item1 = player.getItemByIndex(this.itemIndex1);
+            let item2 = player.getItemByIndex(this.itemIndex2);
+            result = player.swapItemsByIndex(this.itemIndex1, this.itemIndex2);
+            this.actionString = `Swap slot ${this.itemIndex1 + 1} (${item1?.name || "unknown"}) with slot ${+this.itemIndex2 + 1} (${item2?.name || "unknown"})`;
+        }
+        if (itemIndex1 != itemIndex2) {
+            this.actionString += `, ${itemIndex1 < itemIndex2 ? "↓" : "↑"}${Math.abs(itemIndex1 - itemIndex2)}`;
+        }
+        if (!result) {
+            this.addMessage(new RouterMessage("Please provide two (indices of) items to swap!", RouterMessage.Type.Error));
+        }
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {

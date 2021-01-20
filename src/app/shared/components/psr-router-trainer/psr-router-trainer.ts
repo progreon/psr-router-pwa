@@ -4,6 +4,7 @@ import { Trainer } from 'App/shared/modules/psr-router-model/Model';
 
 // CSS imports for this element
 import { AppStyles } from 'Shared/app-styles';
+import 'SharedComponents/psr-router-move/psr-router-move';
 
 // This is a reusable element. It is not connected to the store. You can
 // imagine that it could just as well be a third-party element that you
@@ -40,6 +41,7 @@ class PsrRouterTrainer extends LitElement {
     }
     hr {
       border-width: 1px 0px 0px 0px;
+      border-color: var(--app-dark-text-color);
     }
     hr[hidden] {
       border: none;
@@ -76,8 +78,14 @@ class PsrRouterTrainer extends LitElement {
           <div class="column">
             <h2 class="pokemon" @click="${this._onPokemonClicked.bind(this, b.pokemon.name)}">${b.pokemon.name} L${b.level}</h2>
             <div class="center">${b.getExp()} exp. points</div>
-            <div><div>${ms[0]?.move}</div><div>${ms[1]?.move}</div></div>
-            <div><div>${ms[2]?.move}</div><div>${ms[3]?.move}</div></div>
+            <div>
+              <div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[0]?.move, e.path[0])}">${ms[0]?.move}</div>
+              <div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[1]?.move, e.path[0])}">${ms[1]?.move}</div>
+            </div>
+            <div>
+              <div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[2]?.move, e.path[0])}">${ms[2]?.move}</div>
+              <div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[3]?.move, e.path[0])}">${ms[3]?.move}</div>
+            </div>
           </div>`);
       });
     }
@@ -89,6 +97,7 @@ class PsrRouterTrainer extends LitElement {
         <h3>${this.trainer ? this.trainer.location : ""}</h3>
         <h4 ?hidden="${!this.trainer || !this.trainer.items || this.trainer.items.length == 0}">Gives item: ${this.trainer.items.join(", ")}</h4>
         <h4 ?hidden="${!this.trainer || !this.trainer.badgeboost}">Gives badgeboost: ${this.trainer.badgeboost}</h4>
+        <h4>Prize: ₽${this.trainer.money}</h4>
         <hr ?hidden="${!this.trainer || this.trainer.party.length == 0}">
         <div class="section">
           ${party}
@@ -105,6 +114,12 @@ class PsrRouterTrainer extends LitElement {
   _onPokemonClicked(pokemon) {
     const event = new CustomEvent("navigate", { detail: { href: 'pokemon-info?p=' + pokemon } });
     document.body.dispatchEvent(event);
+  }
+
+  _showMoveTooltip(move, element) {
+    if (move) {
+      window.showTooltip(html`<psr-router-move .move="${move}" detailed></psr-router-move>`, element);
+    }
   }
 }
 

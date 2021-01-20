@@ -75,23 +75,23 @@
     ]
   },
   "Cerulean City": {
-    "Green1": [
+    "Rival1": [
       {
         "alias": "Bridge Rival - Squirtle",
-        "key": "Cerulean City - Green1 1",
-        "name": "Green1 1",
+        "key": "Cerulean City - Rival1 1",
+        "name": "Rival1 1",
         "party": [ "PIDGEOTTO#18", "ABRA#15", "RATTATA#15", "SQUIRTLE#17" ]
       },
       {
         "alias": "Bridge Rival - Bulbasaur",
-        "key": "Cerulean City - Green1 2",
-        "name": "Green1 2",
+        "key": "Cerulean City - Rival1 2",
+        "name": "Rival1 2",
         "party": [ "PIDGEOTTO#18", "ABRA#15", "RATTATA#15", "BULBASAUR#17" ]
       },
       {
         "alias": "Bridge Rival - Charmander",
-        "key": "Cerulean City - Green1 3",
-        "name": "Green1 3",
+        "key": "Cerulean City - Rival1 3",
+        "name": "Rival1 3",
         "party": [ "PIDGEOTTO#18", "ABRA#15", "RATTATA#15", "CHARMANDER#17" ]
       }
     ],
@@ -267,27 +267,27 @@
       }
     ]
   },
-  "Green3": {
-    "Green3": [
+  "Rival3": {
+    "Rival3": [
       {
         "alias": "Champion - Squirtle",
-        "key": "Green3 1",
+        "key": "Rival3 1",
         "moves": [ "0#2#SKY_ATTACK", "5#2#BLIZZARD" ],
-        "name": "Green3 1",
+        "name": "Rival3 1",
         "party": [ "PIDGEOT#61", "ALAKAZAM#59", "RHYDON#61", "ARCANINE#61", "EXEGGUTOR#63", "BLASTOISE#65" ]
       },
       {
         "alias": "Champion - Bulbasaur",
-        "key": "Green3 2",
+        "key": "Rival3 2",
         "moves": [ "0#2#SKY_ATTACK", "5#2#MEGA_DRAIN" ],
-        "name": "Green3 2",
+        "name": "Rival3 2",
         "party": [ "PIDGEOT#61", "ALAKAZAM#59", "RHYDON#61", "GYARADOS#61", "ARCANINE#63", "VENUSAUR#65" ]
       },
       {
         "alias": "Champion - Charmander",
-        "key": "Green3 3",
+        "key": "Rival3 3",
         "moves": [ "0#2#SKY_ATTACK", "5#2#FIRE_BLAST" ],
-        "name": "Green3 3",
+        "name": "Rival3 3",
         "party": [ "PIDGEOT#61", "ALAKAZAM#59", "RHYDON#61", "EXEGGUTOR#61", "GYARADOS#63", "CHARIZARD#65" ]
       }
     ]
@@ -441,23 +441,23 @@
     ]
   },
   "Oaks Lab": {
-    "Green1": [
+    "Rival1": [
       {
         "alias": "Rival 1 - Squirtle",
-        "key": "Green1 1",
-        "name": "Green1 1",
+        "key": "Rival1 1",
+        "name": "Rival1 1",
         "party": [ "SQUIRTLE#5" ]
       },
       {
         "alias": "Rival 1 - Bulbasaur",
-        "key": "Green1 2",
-        "name": "Green1 2",
+        "key": "Rival1 2",
+        "name": "Rival1 2",
         "party": [ "BULBASAUR#5" ]
       },
       {
         "alias": "Rival 1 - Charmander",
-        "key": "Green1 3",
-        "name": "Green1 3",
+        "key": "Rival1 3",
+        "name": "Rival1 3",
         "party": [ "CHARMANDER#5" ]
       }
     ]
@@ -483,23 +483,23 @@
     ]
   },
   "Pokémon Tower 2F": {
-    "Green2": [
+    "Rival2": [
       {
         "alias": "Tower Rival - Squirtle",
-        "key": "Pokémon Tower 2F - Green2 1",
-        "name": "Green2 1",
+        "key": "Pokémon Tower 2F - Rival2 1",
+        "name": "Rival2 1",
         "party": [ "PIDGEOTTO#25", "GROWLITHE#23", "EXEGGCUTE#22", "KADABRA#20", "WARTORTLE#25" ]
       },
       {
         "alias": "Tower Rival - Bulbasaur",
-        "key": "Pokémon Tower 2F - Green2 2",
-        "name": "Green2 2",
+        "key": "Pokémon Tower 2F - Rival2 2",
+        "name": "Rival2 2",
         "party": [ "PIDGEOTTO#25", "GYARADOS#23", "GROWLITHE#22", "KADABRA#20", "IVYSAUR#25" ]
       },
       {
         "alias": "Tower Rival - Charmander",
-        "key": "Pokémon Tower 2F - Green2 3",
-        "name": "Green2 3",
+        "key": "Pokémon Tower 2F - Rival2 3",
+        "name": "Rival2 3",
         "party": [ "PIDGEOTTO#25", "EXEGGCUTE#23", "GYARADOS#22", "KADABRA#20", "CHARMELEON#25" ]
       }
     ]
@@ -1369,43 +1369,43 @@
     ]
   },
   "Route 22": {
-    "Green1": [
+    "Rival1": [
       {
         "alias": "Rival 1b - Squirtle",
-        "key": "Route 22 - Green1 1",
-        "name": "Green1 1",
+        "key": "Route 22 - Rival1 1",
+        "name": "Rival1 1",
         "party": [ "PIDGEY#9", "SQUIRTLE#8" ]
       },
       {
         "alias": "Rival 1b - Bulbasaur",
-        "key": "Route 22 - Green1 2",
-        "name": "Green1 2",
+        "key": "Route 22 - Rival1 2",
+        "name": "Rival1 2",
         "party": [ "PIDGEY#9", "BULBASAUR#8" ]
       },
       {
         "alias": "Rival 1b - Charmander",
-        "key": "Route 22 - Green1 3",
-        "name": "Green1 3",
+        "key": "Route 22 - Rival1 3",
+        "name": "Rival1 3",
         "party": [ "PIDGEY#9", "CHARMANDER#8" ]
       }
     ],
-    "Green2": [
+    "Rival2": [
       {
         "alias": "Viridian Rival - Squirtle",
-        "key": "Route 22 - Green2 1",
-        "name": "Green2 1",
+        "key": "Route 22 - Rival2 1",
+        "name": "Rival2 1",
         "party": [ "PIDGEOT#47", "RHYHORN#45", "GROWLITHE#45", "EXEGGCUTE#47", "ALAKAZAM#50", "BLASTOISE#53" ]
       },
       {
         "alias": "Viridian Rival - Bulbasaur",
-        "key": "Route 22 - Green2 2",
-        "name": "Green2 2",
+        "key": "Route 22 - Rival2 2",
+        "name": "Rival2 2",
         "party": [ "PIDGEOT#47", "RHYHORN#45", "GYARADOS#45", "GROWLITHE#47", "ALAKAZAM#50", "VENUSAUR#53" ]
       },
       {
         "alias": "Viridian Rival - Charmander",
-        "key": "Route 22 - Green2 3",
-        "name": "Green2 3",
+        "key": "Route 22 - Rival2 3",
+        "name": "Rival2 3",
         "party": [ "PIDGEOT#47", "RHYHORN#45", "EXEGGCUTE#45", "GYARADOS#47", "ALAKAZAM#50", "CHARIZARD#53" ]
       }
     ]
@@ -1746,23 +1746,23 @@
     ]
   },
   "SS Anne 2F": {
-    "Green2": [
+    "Rival2": [
       {
         "alias": "Boat Rival - Squirtle",
-        "key": "SS Anne 2F - Green2 1",
-        "name": "Green2 1",
+        "key": "SS Anne 2F - Rival2 1",
+        "name": "Rival2 1",
         "party": [ "PIDGEOTTO#19", "RATICATE#16", "KADABRA#18", "WARTORTLE#20" ]
       },
       {
         "alias": "Boat Rival - Bulbasaur",
-        "key": "SS Anne 2F - Green2 2",
-        "name": "Green2 2",
+        "key": "SS Anne 2F - Rival2 2",
+        "name": "Rival2 2",
         "party": [ "PIDGEOTTO#19", "RATICATE#16", "KADABRA#18", "IVYSAUR#20" ]
       },
       {
         "alias": "Boat Rival - Charmander",
-        "key": "SS Anne 2F - Green2 3",
-        "name": "Green2 3",
+        "key": "SS Anne 2F - Rival2 3",
+        "name": "Rival2 3",
         "party": [ "PIDGEOTTO#19", "RATICATE#16", "KADABRA#18", "CHARMELEON#20" ]
       }
     ]
@@ -2046,23 +2046,23 @@
     ]
   },
   "Silph Co. 7F": {
-    "Green2": [
+    "Rival2": [
       {
         "alias": "Silph Rival - Squirtle",
-        "key": "Silph Co. 7F - Green2 1",
-        "name": "Green2 1",
+        "key": "Silph Co. 7F - Rival2 1",
+        "name": "Rival2 1",
         "party": [ "PIDGEOT#37", "GROWLITHE#38", "EXEGGCUTE#35", "ALAKAZAM#35", "BLASTOISE#40" ]
       },
       {
         "alias": "Silph Rival - Bulbasaur",
-        "key": "Silph Co. 7F - Green2 2",
-        "name": "Green2 2",
+        "key": "Silph Co. 7F - Rival2 2",
+        "name": "Rival2 2",
         "party": [ "PIDGEOT#37", "GYARADOS#38", "GROWLITHE#35", "ALAKAZAM#35", "VENUSAUR#40" ]
       },
       {
         "alias": "Silph Rival - Charmander",
-        "key": "Silph Co. 7F - Green2 3",
-        "name": "Green2 3",
+        "key": "Silph Co. 7F - Rival2 3",
+        "name": "Rival2 3",
         "party": [ "PIDGEOT#37", "EXEGGCUTE#38", "GYARADOS#35", "ALAKAZAM#35", "CHARIZARD#40" ]
       }
     ],
