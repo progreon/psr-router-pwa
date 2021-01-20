@@ -418,7 +418,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     }
 
     if (!window.isMobileView) {
-      window.isMobileView = () => document.body.getBoundingClientRect().width < window.MyAppGlobals.wideWidth;
+      window.isMobileView = () => !this._wideLayout;
     }
     if (!window.openMwcDialog) {
       window.openMwcDialog = this._openMwcDialog.bind(this);
@@ -582,7 +582,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
   private _tooltipForElement = null;
   private async _showTooltip(template: TemplateResult, forElement: HTMLElement) {
     // Don't show tooltip if in mobile view
-    if (window.isMobileView()) {
+    if (!window.isMobileView()) {
       this._tooltipForElement = forElement;
       let r = forElement.getBoundingClientRect();
       let tooltip = this.shadowRoot.getElementById("tooltip");

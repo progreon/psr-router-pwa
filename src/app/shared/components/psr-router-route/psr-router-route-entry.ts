@@ -332,9 +332,7 @@ export class PsrRouterRouteEntry extends LitElement {
   }
 
   private _showInfoTooltip(e) {
-    if (!window.isMobileView()) {
-      window.showTooltip(this._getPopupContent(), e.path[0]);
-    }
+    window.showTooltip(this._getPopupContent(), e.path[0]);
   }
 
   private _openInfoDialog() {
@@ -342,7 +340,7 @@ export class PsrRouterRouteEntry extends LitElement {
   }
 
   private _showPlayerTooltip(e) {
-    if (this.routeEntry && this.routeEntry.player && !window.isMobileView()) {
+    if (this.routeEntry && this.routeEntry.player) {
       window.showTooltip(html`
         <psr-router-player .player="${this.routeEntry.player}"></psr-router-player>
       `, e.path[0]);
