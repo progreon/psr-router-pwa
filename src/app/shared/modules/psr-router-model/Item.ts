@@ -22,7 +22,8 @@ export class Item {
     public readonly price: number, //
     public readonly type: string, //
     public readonly value: string, //
-    public readonly description: string //
+    public readonly description: string, //
+    public readonly isKeyItem: boolean //
   ) {
     this.tossableOutsideBattle = usage && usage.indexOf("T") !== -1;
     this.usableOutsideBattle = usage && usage.indexOf("O") !== -1;
@@ -46,7 +47,11 @@ export class Item {
   }
 
   isTmOrHm() {
-    return this.type == "TM";
+    return this.type == "TM" || this.type == "HM";
+  }
+
+  isHm() {
+    return this.type == "HM";
   }
 
   equals(item: Item): boolean {

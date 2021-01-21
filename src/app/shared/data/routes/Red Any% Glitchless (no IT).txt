@@ -86,7 +86,10 @@ Route: Red Any% Glitchless [race, no IT]
 			If the Paras breaks out, or you're not confident in throwing the ball perfectly, Poison Sting it once before throwing a ball
 			This manip requires a lot of practice. You can do runs without it while learning, but you'll eventually want to attempt it
 			If the manip fails, it might have been due to RNG. You can either continue as normal and perform a backup Paras manip at the end of Mt. Moon, or re-save to get a new chance
+		GetI: TM_12
 		GetI: RARE_CANDY
+		GetI: ESCAPE_ROPE
+		GetI: TM_01
 		GetI: MOON_STONE
 		GetP: Paras:10
 			TEMP: getting paras
@@ -101,14 +104,12 @@ Route: Red Any% Glitchless [race, no IT]
 			Use: MOON_STONE 1 1
 			Tm: TM_01 1 1
 		B: Mt. Moon B2F - SuperNerd :: HA x2, MP (+PS), MP + HA
-		GetI: HELIX_FOSSIL
-			Choose the Helix Fossil
+		GetI: HELIX_FOSSIL :: Choose the Helix Fossil
 		If you don't have a Paras, use this backup manip: https://www.youtube.com/watch?v=29TwUgeeGME (This Paras does not get in the ball with perfect inputs, so you should Horn Attack it first)
 
 	S: Cerulean City
 		Take the center
-		GetI: RARE_CANDY
-			Get the hidden Rare Candy behind the top-left house
+		GetI: RARE_CANDY :: Get the hidden Rare Candy behind the top-left house
 
 	S: Nugget Bridge
 		B: Bridge Rival - Bulbasaur :: Bridge Rival :: HA x3, HA, MP, MP + HA
@@ -128,9 +129,8 @@ Route: Red Any% Glitchless [race, no IT]
 		B: Route 25 - Lass 2 :: MP, HA, MP (HA Oddishes with 0-2 Mega Punch PP)
 			BSettings: 1 :: Nidoking levels to Lv. 23 here, teach Thrash over Water Gun
 				Teach: THRASH WATER_GUN
-		GetI: ETHER
-			Get the hidden Ether
-		Say yes to Bill (you'll lose instant text here)
+		GetI: ETHER :: Get the hidden Ether
+		GetI: SS_TICKET :: Say yes to Bill (you'll lose instant text here)
 		Menu: After the Bill cutscene: heal to 55+, candy to L24, Escape Rope back to Cerulean
 			Use: POTION 2
 			Use: RARE_CANDY
@@ -164,12 +164,11 @@ Route: Red Any% Glitchless [race, no IT]
 			Take the left stairs, then go down and right to meet your rival
 			B: Boat Rival - Bulbasaur :: Boat Rival :: HA x2, MP, Thrash.
 				If you get SA'd or confused, sacrifice your weakest slave
-			GetI: HM_01
-				Get HM01 from the captain, then leave and head to the gym
+			GetI: HM_01 :: Get HM01 from the captain, then leave and head to the gym
 		Go to the mart
 		Shop: Sell all Poke Balls and antidote if you still have them
-			0 POKE_BALL
-			0 ANTIDOTE
+			* POKE_BALL
+			* ANTIDOTE
 			4 REPEL
 			4 PARLYZ_HEAL
 		Menu: On the tile before the Cut bush
@@ -183,12 +182,10 @@ Route: Red Any% Glitchless [race, no IT]
 			If the manip fails, use this guide to solve the puzzle normally [[https://i.imgur.com/mCgVe4w.png]]
 		S: Vermilion Gym
 			B: Surge :: if < 26 HP just Thrash, otherwise BB + PS, then Thrash
-		GetI: BIKE_VOUCHER
-			Go to the house above the gym, talk to the chair of the fan club to get the Bike Voucher, then Dig back to Cerulean
+		GetI: BIKE_VOUCHER :: Go to the house above the gym, talk to the chair of the fan club to get the Bike Voucher, then Dig back to Cerulean
 
 	S: Cerulean City
-		GetI: BICYCLE :: BIKE_VOUCHER
-			Get the Bicycle from the bike shop
+		GetI: BICYCLE BIKE_VOUCHER :: Get the Bicycle from the bike shop
 		Menu: After leaving the shop
 			Swap: 1 BICYCLE
 			Tm: TM_24 1 3
@@ -231,7 +228,7 @@ Route: Red Any% Glitchless [race, no IT]
 		S: Shopping :: Bike to the mart and do the shopping
 			Shop: 2F
 				-1 TM_34
-				0 NUGGET
+				* NUGGET
 				1 TM_07
 				9 SUPER_REPEL
 				4 SUPER_POTION
@@ -240,7 +237,7 @@ Route: Red Any% Glitchless [race, no IT]
 				1 POKE_DOLL
 			Shop: 6F, vending machine
 				1 SODA_POP
-			GetI: TM_48 :: SODA_POP
+			GetI: TM_48 SODA_POP
 			Shop: Vending machine
 				1 FRESH_WATER
 			Shop: 5F
@@ -286,6 +283,8 @@ Route: Red Any% Glitchless [race, no IT]
 
 	S: Celadon City
 		Take the center and set the warp point for Dig, then bike to Silph Co.
+		Menu: TEMP: give the Fresh Water to the guard
+			Toss: FRESH_WATER
 
 	S: Silph Co.
 		Take the stairs to 5F
@@ -418,9 +417,9 @@ Route: Red Any% Glitchless [race, no IT]
 		B: Viridian Rival - Bulbasaur :: Viridian Rival :: X Acc, X Speed, Blizzard (+Blizzard), Blizzard, TB, EQ x2, Drill
 			Opp: 1
 				Use: X_ACCURACY
-				Use: X_SPEED
+				Use: X_SPECIAL
 			Opp: 4
-				Use: X_SPEED
+				Use: X_SPECIAL
 		Bike to Route 23
 
 	S: Route 23

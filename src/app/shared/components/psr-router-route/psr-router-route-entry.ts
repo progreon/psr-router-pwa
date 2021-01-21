@@ -233,8 +233,8 @@ export class PsrRouterRouteEntry extends LitElement {
           <div>${this._getSummary()}</div>
         </div>
         <!-- </vaadin-context-menu> -->
-        <div class="icon info" @click="${this._openDialog}" ?hidden="${!popupAvailable}">${infoCircle}</div>
-        <div class="icon player" @click="${this._openPlayerDialog}">${idCardIcon}</div>
+        <div class="icon info" @click="${this._openInfoDialog}" @mouseenter="${this._showInfoTooltip}" ?hidden="${!popupAvailable}">${infoCircle}</div>
+        <div class="icon player" @click="${this._openPlayerDialog}" @mouseenter="${this._showPlayerTooltip}">${idCardIcon}</div>
       </div>
       <div class="route-header" ?hidden="${!this.routeHeader}">
         <h2>${this.routeEntry?this.routeEntry.info.title:"No route loaded"}</h2>
@@ -331,8 +331,20 @@ export class PsrRouterRouteEntry extends LitElement {
     }
   }
 
-  private _openDialog() {
+  private _showInfoTooltip(e) {
+    window.showTooltip(this._getPopupContent(), e.path[0]);
+  }
+
+  private _openInfoDialog() {
     window.openMwcDialog(this._getPopupContent(), { "hideActions": true });
+  }
+
+  private _showPlayerTooltip(e) {
+    if (this.routeEntry && this.routeEntry.player) {
+      window.showTooltip(html`
+        <psr-router-player .player="${this.routeEntry.player}"></psr-router-player>
+      `, e.path[0]);
+    }
   }
 
   private _openPlayerDialog() {

@@ -96,9 +96,15 @@ export class RouteEntry {
 
     if (this._player) {
       nextPlayer = this._player.clone();
+      if (this._player.bag.length > 20) {
+        this.addMessage(new RouterMessage(`Your bag is overflowing`, RouterMessage.Type.Error));
+      }
+      if (this._player.money < 0) {
+        this.addMessage(new RouterMessage(`You're out of money`, RouterMessage.Type.Error));
+      }
       // TODO: this.wildEncounters.apply(nextPlayer); // Defeat wild encounters
     } else {
-      this.messages.push(new RouterMessage("There is no player set!", RouterMessage.Type.Error));
+      this.messages.push(new RouterMessage("There is no player set", RouterMessage.Type.Error));
     }
 
     this.updateNextPlayer(nextPlayer, fireApplied);

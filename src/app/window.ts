@@ -11,6 +11,7 @@ declare global {
     appConfig: { app: string, siteMap: PwaPage[], pageList: { [key: string]: PwaPage } };
     MyAppGlobals: any;
     isUpdateAvailable: any;
+    isMobileView: () => boolean;
     openMwcDialog: (template: TemplateResult, dialogAtt?: { [key: string]: boolean|string }) => Dialog;
     showTooltip: (template: TemplateResult, forElement: HTMLElement) => Dialog;
   }

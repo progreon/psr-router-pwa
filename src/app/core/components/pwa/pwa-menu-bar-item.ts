@@ -23,6 +23,7 @@ class PwaMenuBarItem extends LitElement {
       align-items: center;
       line-height: 30px;
       padding: 8px 24px;
+      text-decoration: none;
     }
 
     .dropdown:hover {
@@ -36,7 +37,6 @@ class PwaMenuBarItem extends LitElement {
 
     .dropbtn {
       display: inline-block;
-      text-decoration: none;
     }
 
     .icon {
@@ -94,10 +94,10 @@ class PwaMenuBarItem extends LitElement {
     });
 
     return html`
-      <div class="dropdown" ?selected="${menuItem.containsPage(this.selectedItem)}" @click=${this._handleButtonClick}>
+      <a class="dropdown" ?selected="${menuItem.containsPage(this.selectedItem)}" href="${menuItem.key}">
         <div class="dropbtn">${menuItem.title}</div>
         <div class="icon" ?hidden="${!expandable}">${angleDownIcon}</div>
-      </div>
+      </a>
       <div id="dropdown-area" class="dropdown-content">
         ${links}
       </div>

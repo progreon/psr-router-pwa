@@ -16,6 +16,7 @@ import * as _pokemon from 'SharedData/pokemon-1.json';
 import * as _evolutions from 'SharedData/evolutions-1.json';
 import * as _trainersRB from 'SharedData/trainers/trainers-rb.json';
 import * as _trainersY from 'SharedData/trainers/trainers-y.json';
+import * as _trainerClasses1 from 'SharedData/trainers/classes-1.json';
 import * as _locations from 'SharedData/locations/locations-1.json';
 import * as _encountersR from 'SharedData/encounters/encounters-r.json';
 import * as _encountersB from 'SharedData/encounters/encounters-b.json';
@@ -58,7 +59,7 @@ export class GameFactory1 extends GameFactory {
         if (key !== "info") {
           let item = _items[key];
           key = this.toKey(key);
-          GameFactory1._items[key] = new Model.Item(key, item[0], item[1], item[2], item[3], item[4], item[5]);
+          GameFactory1._items[key] = new Model.Item(key, item[0], item[1], item[2], item[3], item[4], item[5], item[6]);
         }
       }
     }
@@ -261,7 +262,14 @@ export class GameFactory1 extends GameFactory {
                   }
                 });
               }
-              let trainer = new Model.Trainer(t.key, t.name, tClass, party, loc, t.alias, tItems, t.badgeboost);
+              let c = _trainerClasses1[tClass];
+              let money = 0;
+              if (!c) {
+                console.error(`trainer class ${tClass} not found`);
+              } else {
+                money = c.money * party[party.length - 1].level;
+              }
+              let trainer = new Model.Trainer(t.key, t.name, tClass, money, party, loc, t.alias, tItems, t.badgeboost);
               trainers[this.toKey(trainer.key)] = trainer;
             });
           }

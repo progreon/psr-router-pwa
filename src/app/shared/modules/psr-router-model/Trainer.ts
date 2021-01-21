@@ -19,6 +19,7 @@ export class Trainer {
     public readonly key: string,
     public readonly name: string,
     public readonly trainerClass: string,
+    public readonly money: number,
     public readonly party: Battler[],
     public readonly location: string,
     public readonly alias?: string,

@@ -34,6 +34,6 @@ export class Pokemon1 extends Pokemon {
     return Math.trunc(this.spd / 2) / 256;
   }
   getHighCritRatio(): number {
-    return Math.min(Math.trunc(this.spd / 2) / 32, 1);
+    return Math.min(Math.trunc(this.spd / 2) / 32, (255 / 256));
   }
 }
