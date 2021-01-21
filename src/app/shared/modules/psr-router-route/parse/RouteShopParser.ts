@@ -9,9 +9,9 @@ import { RouteShop } from "../RouteShop";
  * Shop: [<title> ::] <summary>
  *     <shop entry>
  * with <shop entry> being one of:
- *     <n> <item to buy n of> [:: description]
- *     -<n> <item to sell n of> [:: description]
- *     * <item to sell all of> [:: description]
+ *     <n> <item to buy n of> [:: <description>]
+ *     -<n> <item to sell n of> [:: <description>]
+ *     * <item to sell all of> [:: <description>]
  *
  * json:
  * {

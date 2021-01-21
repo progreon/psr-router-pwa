@@ -8,6 +8,9 @@ class PsrRouterManual extends PsrRouterPage {
   _render() {
     return html`
       <style>
+        section {
+          padding-bottom: 15px;
+        }
         ul {
           margin: var(--app-grid-x) 0px;
           padding-left: var(--app-grid-3x);
@@ -31,10 +34,12 @@ class PsrRouterManual extends PsrRouterPage {
             <li>Battle</li>
             <li>Description</li>
             <li>Encounter (temporary version)</li>
+            <li>Get Item</li>
             <li>Get Pokémon</li>
             <li>Manip</li>
             <li>Menu</li>
             <li>Section</li>
+            <li>Shop</li>
           </ul>
           <li>Route actions</li>
           <ul class="sub">
@@ -45,8 +50,8 @@ class PsrRouterManual extends PsrRouterPage {
             <li>Swap moves</li>
             <li>Swap Pokémon</li>
             <li>Use TM or HM</li>
-            <li>Toss item (not implemented yet)</li>
-            <li>Use item (not fully implemented yet)</li>
+            <li>Toss item</li>
+            <li>Use item (not 100% implemented yet, but close)</li>
           </ul>
         </ul>
       </section>
@@ -153,6 +158,21 @@ class PsrRouterManual extends PsrRouterPage {
           </ul>
         </ul>
 
+        <h4>Get Item</h4>
+        <ul class="code-lines">
+          <li><code>GetI: &lt;item&gt;[:&lt;count&gt;] [&lt;traded for&gt;] [[:: &lt;title&gt;] :: &lt;summary&gt;]</code></li>
+          <ul class="code-lines sub">
+            <li><code>[&lt;description lines&gt;]</code></li>
+          </ul>
+        </ul>
+        <ul>
+          <li><code>&lt;item&gt;[:&lt;count&gt;]</code> The item to get (and how many of them)</li>
+          <li><code>&lt;traded for&gt;</code> What to trade it for</li>
+          <li><code>&lt;title&gt;</code> An optional title</li>
+          <li><code>&lt;summary&gt;</code> A brief description</li>
+          <li><code>&lt;description lines&gt;</code> A more detailed description</li>
+        </ul>
+
         <h4>Get Pokémon</h4>
         <ul class="code-lines">
           <li><code>GetP: [#]&lt;option&gt; [[#]&lt;option&gt; [..]]</code></li>
@@ -219,7 +239,6 @@ class PsrRouterManual extends PsrRouterPage {
         <ul class="code-lines">
           <li><code>S: &lt;title&gt; [:: &lt;summary&gt;]</code></li>
           <ul class="code-lines sub">
-            <li><code>&lt;entry&gt;</code></li>
             <li><code>[&lt;entry&gt;</code></li>
             <li><code>&nbsp;..]</code></li>
           </ul>
@@ -228,6 +247,25 @@ class PsrRouterManual extends PsrRouterPage {
           <li><code>&lt;title&gt;</code> The section title</li>
           <li><code>&lt;summary&gt;</code> A brief description</li>
           <li><code>&lt;entry&gt;</code> Child entries (expanded dropdown)</li>
+        </ul>
+
+        <h4>Shop</h4>
+        <ul class="code-lines">
+          <li><code>Shop: [&lt;title&gt; ::] &lt;summary&gt;</code></li>
+          <ul class="code-lines sub">
+            <li><code>[&lt;shop entry&gt;</code></li>
+            <li><code>&nbsp;..]</code></li>
+          </ul>
+        </ul>
+        <ul>
+          <li><code>&lt;title&gt;</code> An optional title</li>
+          <li><code>&lt;summary&gt;</code> A brief description</li>
+          <li><code>&lt;shop entry&gt;</code> What to buy or sell:</li>
+          <ul class="sub">
+            <li>&lt;n&gt; &lt;item to buy n of&gt; [:: &lt;description&gt;]</li>
+            <li>-&lt;n&gt; &lt;item to sell n of&gt; [:: &lt;description&gt;]</li>
+            <li>* &lt;item to sell all of&gt; [:: &lt;description&gt;]</li>
+          </ul>
         </ul>
       </section>
       <section>
@@ -314,7 +352,7 @@ class PsrRouterManual extends PsrRouterPage {
 
         <h4>Toss item (not implemented yet)</h4>
         <ul class="code-lines">
-          <li><code>Toss: &lt;item&gt; [&lt;count:1&gt;]</code></li>
+          <li><code>Toss: &lt;item&gt; [&lt;count:1&gt;] [:: &lt;description&gt;]</code></li>
         </ul>
         <ul>
           <li><code>&lt;item&gt;</code> The item to toss</li>
@@ -328,7 +366,7 @@ class PsrRouterManual extends PsrRouterPage {
 
         <h4>Use item (not fully implemented yet)</h4>
         <ul class="code-lines">
-          <li><code>Use: &lt;item&gt; [&lt;count:1&gt; [&lt;party index:1&gt; [&lt;move index:1&gt;]]]</code></li>
+          <li><code>Use: &lt;item&gt; [&lt;count:1&gt; [&lt;party index:1&gt; [&lt;move index:1&gt;]]] [:: &lt;description&gt;]</code></li>
         </ul>
         <ul>
           <li><code>&lt;item&gt;</code> The item to toss</li>

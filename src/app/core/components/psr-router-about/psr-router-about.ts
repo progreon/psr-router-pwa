@@ -5,6 +5,11 @@ import { PsrRouterPage } from '../psr-router-page/psr-router-page';
 class PsrRouterAbout extends PsrRouterPage {
   _render() {
     return html`
+      <style>
+        section {
+          padding-bottom: 15px;
+        }
+      </style>
       <h2>About</h2>
       <p>Current version: ${window.MyAppGlobals.version}</p>
       <section>
@@ -44,6 +49,32 @@ class PsrRouterAbout extends PsrRouterPage {
         </ul>
       </section>
       <h2>Release Notes</h2>
+      <section>
+        <h3>0.2.0 - Item & money management</h3>
+        <ul>
+          <li>Added item & money management</li>
+          <ul>
+            <li>GetI(tem) entry</li>
+            <li>Shop entry</li>
+            <li>Some menuing messages improvements (needs feedback)</li>
+            <li>Error messages in case something is impossible, still tries to apply the actions for routing purposes</li>
+          </ul>
+          <li>Added colors for damage ranges & speed comparison in battle</li>
+          <li>Some more tooltips on desktop</li>
+          <ul>
+            <li>Entry info</li>
+            <li>Player info</li>
+            <li>Move info in trainer component</li>
+            <li>Some performance improvements as well</li>
+          </ul>
+          <li>Example route files</li>
+          <ul>
+            <li>Fixed the basic red route</li>
+            <li>The other routes still need to be fixed</li>
+            <li>Still need to add more example routes</li>
+          </ul>
+        </ul>
+      </section>
       <section>
         <h3>0.1.1 - Some percentages</h3>
         <ul>
