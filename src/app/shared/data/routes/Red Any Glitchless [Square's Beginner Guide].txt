@@ -205,13 +205,17 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 			B: Boat Rival - Bulbasaur :: Boat Rival :: HA x2, MP, Thrash.
 				If you get sand attacked swap to another pokemon and let it die
 			GetI: HM_01 :: Get HM01 from the captain
-			If you have less than 9 HP and IT, Fight the Gentleman before you leave the boat with thrash then pickup the rare candy
+			B: SS Anne 2F Rooms - Gentleman 1 :: Gentlemandy :: Fight the Gentleman in the 3rd hut from the right with thrash
+			GetI: RARE_CANDY :: Get the Rare Candy behind the gentleman and leave the boat
 		Shop: Buy:
-			4 REPEL
+			-1 TM_34
+			-1 NUGGET
+			-1 FULL_RESTORE
+			6 REPEL
 			4 PARLYZ_HEAL
 		Menu: MENU Before cut brush:
 			Tm: TM_11 1 4 :: if you haven't done this yet
-			[Rare Candy if you fought the gentleman]
+			Use: RARE_CANDY
 			Tm: HM_01 4
 			Tm: TM_28 4
 		Cut the bush
@@ -220,7 +224,7 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 			Pallete Cans: https://youtu.be/_tWhfBITf_g (aka 'Cheater' Palette, allows you to see through Rock Tunnel)
 			If the manip fails, use this guide to solve the puzzle normally [[https://i.imgur.com/mCgVe4w.png]]
 		S: Vermilion Gym
-			B: Surge :: if < 21 HP just Thrash, otherwise BB + HA, then Thrash
+			B: Surge :: if <= 25 HP just Thrash, otherwise BB + HA, then Thrash
 				If you are ever confused swap to the bird and let it die
 		GetI: BIKE_VOUCHER :: Get the Bike Voucher and use Dig on Paras
 	S: Cerulean City
@@ -231,10 +235,11 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 			Use: BICYCLE
 		Get on the bike and head east to Route 9, cutting the two bushes in your way
 	S: Route 9
-		B: Route 9 - JrTrainerF 1 :: MP, Thrash x3
+		If under 16 hp, save before 4 turn thrash girl
+		B: Route 9 - JrTrainerF 1 :: 4 turn thrash girl :: MP, Thrash x3
 			If you run out of mega punches without killing the first poke just Thrash you will be 25% to hit yourself on the last poke
 			If you get paralyzed, use your Full Restore after the fight (not during)
-		B: Route 9 - BugCatcher 2 :: BB, Thrash x2-3
+		B: Route 9 - BugCatcher 2 :: Thrash x3
 	S: Rock Tunnel
 		Map to get through Rock Tunnel
 			1F[[https://i.imgur.com/oPBnthL.png]]2F[[https://i.imgur.com/SMZikOB.png]]
@@ -242,10 +247,7 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 			Use: REPEL
 		B: Rock Tunnel 1F - Pokemaniac :: BB, TB
 		B: Rock Tunnel B1F - Pokemaniac 3 :: TB
-		[Optional Save if you are bellow 18 HP]
 		B: Rock Tunnel B1F - JrTrainerF 2 :: Thrash
-			If you have 18 - 22 HP use TB, then Thrash.
-			If you get para'd use a heal on it, and if you get put to sleep heal if absorb kills
 		Menu: Use your second Repel somewhere near the yellow tile on the map above
 			Use: REPEL
 		Menu: Use your third Repel on the blue/yellow tile immediately before the Hiker
@@ -254,24 +256,21 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 		B: Rock Tunnel B1F - Hiker 1 :: BB x3
 		B: Rock Tunnel 1F - JrTrainerF 2 :: Thrash
 			Pidgey does 5 with Quick Attack
-		After exiting, head south to Lavender Town and west to Route 8
+		GetI: MAX_ETHER :: Pick up the hidden Max Ether outside of Tunnel in the bush from the left hand side
+		Head south to Lavender Town and west to Route 8
 	S: Route 8
 		B: Route 8 - Gambler 2 :: BB (+Thrash), Thrash
 			Opp: 1
-				Use: POTION ? :: If you have less than 5 HP Potion
+				Use: POTION ? :: If you have less than 9 HP Potion
 			Vulpix does 4 with Quick Attack
 		Take the underground path to Celadon City
-	S: Underground :: Pick up the hidden Elixer & Nugget in the underground
+	S: Underground :: Pick up the hidden Elixer in the underground
 		GetI: ELIXER
-		GetI: NUGGET
 	S: Celadon City
 		S: Shopping :: Bike to the mart and do the shopping
 			Shop: 2F
-				-1 TM_34
-				-2 NUGGET
 				1 TM_07
-				9 SUPER_REPEL
-				4 SUPER_POTION
+				7 SUPER_REPEL
 				2 REVIVE
 			Shop: 4F
 				1 POKE_DOLL
@@ -282,14 +281,14 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 				1 FRESH_WATER
 			Shop: 5F
 				12 X_ACCURACY
-				7 X_SPECIAL
-				2 X_SPEED
+				5 X_SPECIAL
+				3 X_SPEED
 		GetI: HM_02 :: Take the Elevator and get HM 02 (Fly)
 		Menu: Upon exiting the house
 			Swap: 2 TM_07
 			Use: SUPER_REPEL
 			Tm: TM_48 1 1
-			Swap: 4 X_ACCURACY
+			Swap: SS_TICKET X_ACCURACY
 			Tm: HM_02 3
 		Fly to Lavender (3 down), and walk to the tower
 	S: Pokémon Tower
@@ -306,7 +305,7 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 			Tm: TM_07 1 1
 		Enter the Ghost battle and escape using the Poke Doll
 		Menu: During the Ghost battle (TEMP: should be menu in fight)
-			Swap: 4 SUPER_REPEL
+			Swap: 3 SUPER_REPEL
 			Use: POKE_DOLL
 		B: Pokémon Tower 7F - Rocket 1 :: TB x3 + (BB)
 		B: Pokémon Tower 7F - Rocket 2 :: X ACC, HD x2
@@ -329,12 +328,12 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 			Use: X_ACCURACY
 			Use: X_SPEED
 		NOTE: In this split we want to take a bit of damage to do a strat on Koga called Boom strats
-		Menu: If you have less than 78 HP use ether on HD before the next fight
-			Use: ETHER
+		Menu: If <78 HP use elixer before the next fight
+			Use: ELIXER
 		B: Silph Co. 11F - Rocket 2 :: X Acc, BB, HD x2
 			Opp: 1
 				Use: X_ACCURACY :: Turn 1
-				Turn 2: If Cubone damages you and you need to ether still use ether now
+				Turn 2: If Cubone damages you and you need to elixer still, use elixer now
 				BB
 			Opp: 2
 				If you haven't used ether do so now
@@ -350,7 +349,7 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 	S: Celadon City
 		Bike west
 		Menu: MENU before Snorlax:
-			Use: SUPER_REPEL
+			Use: REPEL
 			Swap: 5 RARE_CANDY
 			Use: POKE_FLUTE
 		Run from the Snorlax
@@ -358,8 +357,8 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 		NOTE: You can hold B to stop automatically moving down on Cycling Road
 		GetI: RARE_CANDY :: Get the hidden Rare Candy
 	S: Fuchsia City
-		Menu: After exiting the Cycling Road building
-			Use: SUPER_REPEL
+		Menu: After exiting the Cycling Road building (repel!)
+			Use: REPEL
 			Swap: 6 X_SPECIAL
 			Tm: TM_26 1 2
 			Use: BICYCLE
@@ -368,8 +367,7 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 			Map of the Safari Zone
 				[[https://i.imgur.com/oBebL5z.jpg]]
 			Upon entering, get on the bike
-			If you have 0 potions get the full restore
-			Menu: Use a super repel above the last hill in the second area
+			Menu: Use a Super Repel in zone 2
 				Use: SUPER_REPEL
 			GetI: GOLD_TEETH :: Get the Gold Teeth in the fourth area
 			GetI: HM_03 :: Get HM03 from the guy in the house
@@ -392,6 +390,7 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 	S: Pallet Town
 		Menu: Walk to the water, and menu
 			Use: SUPER_REPEL
+			Swap: 8 X_SPEED
 			Tm: HM_03 2
 		Surf to Cinnabar
 	S: Cinnabar Mansion
@@ -412,7 +411,7 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 		Walk out, then Fly to Cinnabar (2 down) and bike to the gym
 	S: Cinnabar Gym
 		Quiz Answers: A B B B A B
-		B: Blaine :: X Acc, EQ, HD x3 (Drill Growlithe if Blaine uses a Super Potion)
+		B: Blaine :: X Acc, EQ, HD x3
 			Use: X_ACCURACY
 		Dig out, then bike to the Saffron Gym
 	S: Saffron Gym
@@ -425,6 +424,7 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 		B: Viridian Gym - Blackbelt 3 :: X ACC, HD, Bliz, HD
 			Use: X_ACCURACY
 		Leave the Gym to reset the trainer
+		With less than 2 revives, pick up the item ball (Revive) on the way out and take the spin pad
 		Menu: Elixer after entering the gym again
 			Use: ELIXER
 		B: Giovanni :: EQ x4, Bliz + (Bliz)
@@ -433,14 +433,12 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 			Use: SUPER_REPEL
 			Use: BICYCLE
 	S: Route 22
-		B: Viridian Rival - Bulbasaur :: Viridian Rival :: X ACC, X Spec, Bliz, Bliz, TB, X Spec, TB, EQ, Bliz
-			Note: If you only have 2 Blizzards, use TB on Pidgeot instead of Bliz
+		B: Viridian Rival - Bulbasaur :: Viridian Rival :: X Acc + X Speed + Bliz + (TB), Drill (or Blizz if you still have 3 left), Drill x4
 			Opp: 1
 				Use: X_ACCURACY
-				Use: X_SPECIAL
-			Opp: 4
-				Use: X_SPECIAL
+				Use: X_SPEED
 	S: Route 23
+		GetI: MAX_ETHER :: Pick up the hidden Max Ether from the water in the top left corner of the 2x2 island
 		Menu: After exiting the water, use another Super Repel and bike to Victory Road
 			Use: SUPER_REPEL
 	S: Victory Road
@@ -448,34 +446,37 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 			1F: [[https://cdn.bulbagarden.net/upload/5/56/Victory_Road_1F_RBY.png]]
 			2F: [[https://cdn.bulbagarden.net/upload/1/11/Victory_Road_2F_RBY.png]]
 			3F: [[https://cdn.bulbagarden.net/upload/e/e5/Victory_Road_3F_RBY.png]]
-		Menu: Super Repel twice during Victory Road
-			Use: SUPER_REPEL 2
-		Use Strength upon entering and push the first boulder onto the switch on the right, then bike to the ladder in the top-left corner
-		Use Strength again, push the boulder below onto the switch, bike up the steps hugging the north edge and use a Super Repel. Bike to the right, down the stairs, then right and up to the ladder
-		Use strength again and push the boulder onto the switch to the left, then bike to the bottom-right corner and push the boulder down the hole and go down the hole
-		Use Strength one last time, use your last Super Repel, then get on your bike and push the boulder onto the switch in the bottom-left, bike back to where you fell down and follow the ladders to the exit
+		Use Strength upon entering
+		Menu: Super Repel before the second boulder & strength
+			Use: SUPER_REPEL
+		Menu: Menu before the last boulder
+			Use strength
+			Use: MAX_ETHER 1 1
+			Use: SUPER_REPEL
+			Use: BICYCLE
 	S: Elite Four
 		Don't deposit extra pokes unless you have no more revives
+		Shop: Talk to the mart guy before entering the Elite Four
+			4 FULL_RESTORE
 		B: Lorelei :: Switch to your flier, let it die and swap back to Nido, X Acc, Drill x5 (Dewgong will always use Rest turn 2)
 			Use: X_ACCURACY
-		Menu: Elixer before Bruno
-			Use: ELIXER
-		B: Bruno :: X Acc, Bliz, HD x2, Bliz, HD
+		Menu: Max Ether before Bruno
+			Use: MAX_ETHER 1 1
+		B: Bruno :: X Acc + HD x5
 			Use: X_ACCURACY
 		Menu: Menu before Agatha:
-			Use: SUPER_POTION
-			Use: POTION ? :: with 18 or less HP
+			Use: FULL_RESTORE
 			Use: RARE_CANDY
 		B: Agatha :: X Spec, EQ, Bliz, EQ x3
 			Use: X_SPECIAL
 			If you get put to sleep use the pokeflute, and if you get confused risk it since you would need to X Spec again if you swapped)
 			If you miss Bliz, and Golbat uses Haze, use 2x TB on Golbat, X Speed on Arbok with 25-60 HP
 			Skip X Speed (you will be slower than last Gengar) with less than 25 or more than 60HP
-		Menu: At least 2 steps before Lance, heal to 129+ HP
-			Feel free to use your Full Restore if you picked it up and you want to play really safe
-			Use: SUPER_POTION
+		Menu: Menu at least 2 steps before Lance. Elixer & if 128+ hp don’t heal; if 109-127 hp use one potion; under 109 hp use a full restore
 			Use: ELIXER
-		[OPTIONAL SAVE: Lance is pretty likely to go bad, so saving is recommend]
+			Use: POTION ?
+			Use: FULL_RESTORE ?
+		Always save before Lance (revives don't help if crit by hydro pump just try again)
 		B: Lance :: X Spec, TB, Bliz, X Speed, Bliz, TB, Bliz
 			Opp: 1
 				Use: X_SPECIAL
@@ -483,10 +484,10 @@ Route: Red Any% Glitchless [Square's Beginner Guide]
 				Use: X_SPEED
 				If you are out of X Speeds use an X Spec
 			If you run out of Blizzards, TB the Dragonite
-		[OPTIONAL SAVE: Saving for Champ can be good if you don't have a spare X Accuracy+ spare X Special + Revive]
-		Menu: Heal at 22HP or below
+		Menu: Menu before Champ: use one potion if under 23 hp
 			Can also heal below at 44HP or below if you want to play safer
-			Use: POTION
+			Use: POTION ?
+		Save the game if zero revives are left or if only 1 X-Acc is left
 		B: Champion - Bulbasaur :: Champion :: X Spec, X Acc, HD x3, TB, HD x2
 			If Pidgeot uses Sky Attack turn 1 do the following: Bliz, EQ, X Acc, HD x4
 			Use: X_SPECIAL
