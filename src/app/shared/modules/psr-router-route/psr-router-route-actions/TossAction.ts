@@ -23,16 +23,23 @@ export class TossAction extends AAction {
     public applyAction(player: Model.Player, battleStage?: RouteBattle.Stage): void {
         super.applyAction(player, battleStage);
         
-        if (!(+this.count && +this.count > 0) && this.count != "*") {
+        if (!(+this.count && +this.count > 0) && this.count != "*" && this.count != "?") {
             this.addMessage(new RouterMessage("The toss amount must be positive or '*' for all", RouterMessage.Type.Error));
         } else {
-            let count = +this.count || player.getItemCount(this.item);
-            if (!player.tossItem(this.item, count, false, true)) {
+            let result = false;
+            if (this.count == "?") {
+                result = player.getItemCount(this.item) > 0;
+                this.actionString = `Toss ${this.item.name}?`;
+            } else {
+                let count = +this.count || player.getItemCount(this.item);
+                result = player.tossItem(this.item, count, false, true);
+                this.actionString = `Toss ${this.count == "*" ? "all" : this.count} ${this.item.name}`;
+            }
+            if (!result) {
                 this.addMessage(new RouterMessage(`You cannot toss ${this.item}`, RouterMessage.Type.Error));
             }
         }
 
-        this.actionString = `Toss ${this.count == "*" ? "all" : this.count} ${this.item.name}`;
     }
 
     static newFromJSONObject(obj: ActionJSON, game: Model.Game): AAction {

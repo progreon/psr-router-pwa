@@ -43,7 +43,7 @@ export class UseAction extends AAction {
             this.actionString = `${this.actionString} on ${player.team[this.partyIndex]}`;
             if (this.item.isUsedOnMove()) {
                 if (this.moveIndex >= 0 && this.moveIndex < player.team[this.partyIndex].moveset.length) {
-                    this.actionString = `${this.actionString}, on ${player.team[this.partyIndex].moveset[this.moveIndex]} (s${this.moveIndex + 1})`;
+                    this.actionString = `${this.actionString}, on ${player.team[this.partyIndex].moveset[this.moveIndex].move} (s${this.moveIndex + 1})`;
                 } else {
                     this.addMessage(new RouterMessage("Move index out of range: " + this.moveIndex, RouterMessage.Type.Error));
                 }
