@@ -7,20 +7,20 @@ import * as ModelAbstract from 'SharedModules/psr-router-model/ModelAbstract';
 import * as Model1 from 'SharedModules/psr-router-model/Model1';
 import * as Util from 'SharedModules/psr-router-util';
 
-import * as _types from 'SharedData/types.json';
-import * as _items from 'SharedData/items-1.json';
-import * as _moves from 'SharedData/moves-1.json';
-import * as _movesLearnedRB from 'SharedData/moves-learned-rb.json';
-import * as _movesLearnedY from 'SharedData/moves-learned-y.json';
-import * as _pokemon from 'SharedData/pokemon-1.json';
-import * as _evolutions from 'SharedData/evolutions-1.json';
-import * as _trainersRB from 'SharedData/trainers/trainers-rb.json';
-import * as _trainersY from 'SharedData/trainers/trainers-y.json';
-import * as _trainerClasses1 from 'SharedData/trainers/classes-1.json';
-import * as _locations from 'SharedData/locations/locations-1.json';
-import * as _encountersR from 'SharedData/encounters/encounters-r.json';
-import * as _encountersB from 'SharedData/encounters/encounters-b.json';
-import * as _encountersY from 'SharedData/encounters/encounters-y.json';
+import _types from 'SharedData/types.json';
+import _items from 'SharedData/items-1.json';
+import _moves from 'SharedData/moves-1.json';
+import _movesLearnedRB from 'SharedData/moves-learned-rb.json';
+import _movesLearnedY from 'SharedData/moves-learned-y.json';
+import _pokemon from 'SharedData/pokemon-1.json';
+import _evolutions from 'SharedData/evolutions-1.json';
+import _trainersRB from 'SharedData/trainers/trainers-rb.json';
+import _trainersY from 'SharedData/trainers/trainers-y.json';
+import _trainerClasses1 from 'SharedData/trainers/classes-1.json';
+import _locations from 'SharedData/locations/locations-1.json';
+import _encountersR from 'SharedData/encounters/encounters-r.json';
+import _encountersB from 'SharedData/encounters/encounters-b.json';
+import _encountersY from 'SharedData/encounters/encounters-y.json';
 
 export class GameFactory1 extends GameFactory {
   private static readonly ENGINE = new Engine1();

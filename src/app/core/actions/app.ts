@@ -62,14 +62,16 @@ window.appConfig.pageList = {};
 window.appConfig.siteMap.forEach(p => p.getAllSubPagesIncludingThis().forEach(sp => {if (sp.element) window.appConfig.pageList[sp.key] = sp; }));
 
 const loadPage = (page: string, searchParams: { [key: string]: string; }) => (dispatch) => {
-  if (window.appConfig.pageList[page]) {
-    window.appConfig.pageList[page].doLazyLoad();
-  } else {
-    window.appConfig.pageList['404'].doLazyLoad();
-    page = '404';
-  }
+  // if (window.appConfig.pageList[page]) {
+  //   window.appConfig.pageList[page].doLazyLoad();
+  // } else {
+  //   window.appConfig.pageList['404'].doLazyLoad();
+  //   page = '404';
+  // }
 
-  dispatch(updatePage(page, searchParams));
+  // dispatch(updatePage(page, searchParams));
+  page = window.appConfig.pageList[page] ? page : '404';
+  window.appConfig.pageList[page].doLazyLoad().finally(() => dispatch(updatePage(page, searchParams)));
 };
 
 const updatePage = (page: string, searchParams: { [key: string]: string; }) => {

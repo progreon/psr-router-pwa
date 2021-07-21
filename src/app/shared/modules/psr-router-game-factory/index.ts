@@ -4,7 +4,7 @@ import { GameFactoryDummy } from './GameFactoryDummy';
 
 import * as Model from '../psr-router-model/Model';
 
-import * as _games from 'SharedData/games.json';
+import _games from 'SharedData/games.json';
 
 let factories: { [key: number]: GameFactory; } = {
   0: new GameFactoryDummy(),

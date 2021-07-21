@@ -333,7 +333,6 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       if (pageDOM instanceof PsrRouterPage) {
         let page = <PsrRouterPage>pageDOM;
         page.active = pageDOM.getAttribute('id') === this._page;
-        page.app = this;
       }
     });
     const template = html`
@@ -398,12 +397,13 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     this._pageDOMs = [];
     Object.values(window.appConfig.pageList).forEach(p => {
       if (p.element) {
-        let pageDOM: HTMLElement = document.createElement(p.element);
+        let pageDOM: PsrRouterPage = <PsrRouterPage>document.createElement(p.element);
         pageDOM.setAttribute('id', p.key);
         pageDOM.classList.add('page');
         if (p.fullSize){
           pageDOM.classList.add('full-size');
         }
+        pageDOM.app = this;
         this._pageDOMs.push(pageDOM);
       }
     });

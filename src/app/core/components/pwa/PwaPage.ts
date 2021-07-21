@@ -29,9 +29,9 @@ export class PwaPage {
         return pages;
     }
 
-    doLazyLoad(): void {
+    async doLazyLoad(): Promise<void> {
         if (this.lazyLoadFunction) {
-            this.lazyLoadFunction();
+            await this.lazyLoadFunction();
         }
     }
 }
