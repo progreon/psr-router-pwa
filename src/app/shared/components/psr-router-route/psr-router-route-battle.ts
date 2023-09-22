@@ -204,18 +204,18 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                 </div>
                 <div class="bcol">
                   <div class="col">
-                    <div class="click" @click="${this._openBattlerDialog.bind(this, b, actualStages, actualBB, true)}" @mouseenter="${e => this._showBattlerTooltip(e, b, actualStages, actualBB, true)}" speed="${bsp}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.)</div>
-                    <div class="click ${movesAttacker[0]?.move?.highCritMove ? "i" : ""}" range="${this._getHitRange(movesAttacker[0])}" @click="${this._openMoveDialog.bind(this, movesAttacker[0])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[0])}">${movesAttacker[0]?.html || "-"}</div>
-                    <div class="click ${movesAttacker[1]?.move?.highCritMove ? "i" : ""}" range="${this._getHitRange(movesAttacker[1])}" @click="${this._openMoveDialog.bind(this, movesAttacker[1])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[1])}">${movesAttacker[1]?.html || "-"}</div>
-                    <div class="click ${movesAttacker[2]?.move?.highCritMove ? "i" : ""}" range="${this._getHitRange(movesAttacker[2])}" @click="${this._openMoveDialog.bind(this, movesAttacker[2])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[2])}">${movesAttacker[2]?.html || "-"}</div>
-                    <div class="click ${movesAttacker[3]?.move?.highCritMove ? "i" : ""}" range="${this._getHitRange(movesAttacker[3])}" @click="${this._openMoveDialog.bind(this, movesAttacker[3])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[3])}">${movesAttacker[3]?.html || "-"}</div>
+                    <div class="click" id=${`${bsi}-${dri}-atk`} @click="${this._openBattlerDialog.bind(this, b, actualStages, actualBB, true)}" @mouseenter="${e => this._showBattlerTooltip(`${bsi}-${dri}-atk`, b, actualStages, actualBB, true)}" speed="${bsp}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.)</div>
+                    <div class="click ${movesAttacker[0]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-atk-0`} range="${this._getHitRange(movesAttacker[0])}" @click="${this._openMoveDialog.bind(this, movesAttacker[0])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-atk-0`, movesAttacker[0])}">${movesAttacker[0]?.html || "-"}</div>
+                    <div class="click ${movesAttacker[1]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-atk-1`} range="${this._getHitRange(movesAttacker[1])}" @click="${this._openMoveDialog.bind(this, movesAttacker[1])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-atk-1`, movesAttacker[1])}">${movesAttacker[1]?.html || "-"}</div>
+                    <div class="click ${movesAttacker[2]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-atk-2`} range="${this._getHitRange(movesAttacker[2])}" @click="${this._openMoveDialog.bind(this, movesAttacker[2])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-atk-2`, movesAttacker[2])}">${movesAttacker[2]?.html || "-"}</div>
+                    <div class="click ${movesAttacker[3]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-atk-3`} range="${this._getHitRange(movesAttacker[3])}" @click="${this._openMoveDialog.bind(this, movesAttacker[3])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-atk-3`, movesAttacker[3])}">${movesAttacker[3]?.html || "-"}</div>
                   </div>
                   <div class="col">
-                    <div class="click" @click="${this._openBattlerDialog.bind(this, ob, opponentStages, null, false)}" @mouseenter="${e => this._showBattlerTooltip(e, ob, actualStages, null, false)}" speed="${osp}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</div>
-                    <div class="click ${movesDefender[0]?.move?.highCritMove ? "i" : ""}" @click="${this._openMoveDialog.bind(this, movesDefender[0])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[0])}">${movesDefender[0]?.html || "-"}</div>
-                    <div class="click ${movesDefender[1]?.move?.highCritMove ? "i" : ""}" @click="${this._openMoveDialog.bind(this, movesDefender[1])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[1])}">${movesDefender[1]?.html || "-"}</div>
-                    <div class="click ${movesDefender[2]?.move?.highCritMove ? "i" : ""}" @click="${this._openMoveDialog.bind(this, movesDefender[2])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[2])}">${movesDefender[2]?.html || "-"}</div>
-                    <div class="click ${movesDefender[3]?.move?.highCritMove ? "i" : ""}" @click="${this._openMoveDialog.bind(this, movesDefender[3])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[3])}">${movesDefender[3]?.html || "-"}</div>
+                    <div class="click" id=${`${bsi}-${dri}-def`} @click="${this._openBattlerDialog.bind(this, ob, opponentStages, null, false)}" @mouseenter="${e => this._showBattlerTooltip(`${bsi}-${dri}-def`, ob, actualStages, null, false)}" speed="${osp}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</div>
+                    <div class="click ${movesDefender[0]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-def-0`} @click="${this._openMoveDialog.bind(this, movesDefender[0])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-def-0`, movesDefender[0])}">${movesDefender[0]?.html || "-"}</div>
+                    <div class="click ${movesDefender[1]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-def-1`} @click="${this._openMoveDialog.bind(this, movesDefender[1])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-def-1`, movesDefender[1])}">${movesDefender[1]?.html || "-"}</div>
+                    <div class="click ${movesDefender[2]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-def-2`} @click="${this._openMoveDialog.bind(this, movesDefender[2])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-def-2`, movesDefender[2])}">${movesDefender[2]?.html || "-"}</div>
+                    <div class="click ${movesDefender[3]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-def-3`} @click="${this._openMoveDialog.bind(this, movesDefender[3])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-def-3`, movesDefender[3])}">${movesDefender[3]?.html || "-"}</div>
                   </div>
                 </div>
                 <div class="col">
@@ -294,18 +294,16 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     return so;
   }
 
-  _showBattlerTooltip(e, battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean) {
+  _showBattlerTooltip(elementId, battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean) {
     // TODO: fix component
-    // if (!window.isMobileView()) {
-    //   window.showTooltip(html`
-    //       <psr-router-battler
-    //         .battler="${battler}"
-    //         .stages="${stages || new Stages()}"
-    //         .badgeBoosts="${badgeBoosts || new BadgeBoosts()}"
-    //         ?isPlayerBattler="${!!isPlayerBattler}"
-    //       ></psr-router-battler>
-    //     `, e.path[0]);
-    // }
+    window.showTooltip(html`
+        <psr-router-battler
+          .battler="${battler}"
+          .stages="${stages || new Stages()}"
+          .badgeBoosts="${badgeBoosts || new BadgeBoosts()}"
+          ?isPlayerBattler="${!!isPlayerBattler}"
+        ></psr-router-battler>
+      `, this.shadowRoot.getElementById(elementId));
   }
 
   _openBattlerDialog(battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean): void {
@@ -383,10 +381,10 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     }
   }
 
-  _showMoveTooltip(e: any, move: { html: string, move: Move, range: Range, crange: Range, krs?: number[] }) {
+  _showMoveTooltip(elementId, move: { html: string, move: Move, range: Range, crange: Range, krs?: number[] }) {
     if (move) {
       let template = this._getMoveDOM(move);
-      window.showTooltip(template, e.path[0]);
+      window.showTooltip(template, this.shadowRoot.getElementById(elementId));
     }
   }
 
