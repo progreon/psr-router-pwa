@@ -177,144 +177,185 @@ Route: Red Any Glitchless (Classic) [Beginner Route]
 			Starmie tends to be faster than you unless you outspeed with 13-15 or speedtie with 11-12 SPD
 			Note: Misty may use an X Defend on Starmie on any turn (~25% chance)
 	S: Surge Split
-
-
-
-		B: Cerulean City - Rocket :: Thrash x2-4
-		Hop the ledge and enter the gym
-		Do NOT fight the swimmer (go around to the left)
-		Always Potion after Misty if under 15 hp
-		Strongly consider Potion after Misty if under 30 hp (unless you want/need red bar for Fly Split)
-		Go to the Bike Shop and get instant text again (if you don’t have IT)
-		Walk to Vermillion through the underground (exit Cerulean through the dig house again)
-	S: Route 5
-		Enter the building in the southeast corner, and take the stairs to the underground path
-		// GetI: FULL_RESTORE :: Pick up the hidden full restore in the underground
-	S: Route 6
-		Walk through the left grass to avoid the Bug Catcher on the right
-		B: Route 6 - JrTrainerF 2 :: Thrash
-		Heal to 3+ HP
-		B: Route 6 - JrTrainerM 2 :: Thrash
-		Potion if < 13 HP
-			Potion -13+ HP lives QA x2, Wine Whip + QA non crits, and Wine Whip Crit
-	S: Vermilion City
-		Go to the S.S. Anne
-		S: SS Anne
-			Take the left stairs, then go down and right to meet your rival
-			B: Boat Rival - Bulbasaur :: Boat Rival :: HA x2, MP, Thrash.
-				If you get sand attacked swap to another pokemon and let it die
-			GetI: HM_01 :: Get HM01 from the captain
-			B: SS Anne 2F Rooms - Gentleman 1 :: Gentlemandy :: Fight the Gentleman in the 3rd hut from the right with thrash
-			GetI: RARE_CANDY :: Get the Rare Candy behind the gentleman and leave the boat
-		Shop: Buy:
-			// -1 TM_34
-			// -1 NUGGET
-			// -1 FULL_RESTORE
-			6 REPEL
-			4 PARLYZ_HEAL
-		Menu: MENU Before cut brush:
-			Tm: TM_11 1 4 :: if you haven't done this yet
-			Use: RARE_CANDY
-			Tm: HM_01 4
-			Tm: TM_28 4
-			Cut the bush
-		Surge Cans Manip
-			Optimal: https://www.youtube.com/watch?v=8Pa2f2WxCe4
-			Pallete Cans: https://youtu.be/_tWhfBITf_g (aka 'Cheater' Palette, allows you to see through Rock Tunnel)
-			If the manip fails, use this guide to solve the puzzle normally [[https://i.imgur.com/mCgVe4w.png]]
-		S: Vermilion Gym
-			B: Surge :: if <= 25 HP just Thrash, otherwise BB + HA, then Thrash
-				If you are ever confused swap to the bird and let it die
-		GetI: BIKE_VOUCHER :: Get the Bike Voucher and use Dig on Paras
-	S: Cerulean City
-		GetI: BICYCLE BIKE_VOUCHER :: Get the Bicycle from the bike shop
-		Menu: After leaving the shop
-			Swap: 1 BICYCLE
+		Menu: After Misty Menu:
+			Use: POTION ? :: 1-15 HP: Potion if you have 4+ Potions, otherwise take the Center to save Potions
+			Tm: TM_11 1 4
+		B: Cerulean City - Rocket :: Dig Rocket :: Thrash x2-3
+			Get TM28 Dig from the Rocket.
+		GetI: FULL_RESTORE :: Pick up the hidden Full Restore in the underground path (feel free to use it any time, otherwise we'll use it before Surge for a safe Fly Split).
+			[[https://i.imgur.com/MzLRsOm.jpeg]]
+		At 1-15 HP, use the Full Restore now.
+		Oddish DSUM. Ignore this if you already have a Paras
+			If you have no Paras and have a Pidgey, then weaken an Oddish with BB + (WG/BB) and throw Poke Balls
+			If you have no Paras but have a Spearow, then trade Spearow for DUX the Farfetch'd later on unless you happen to encounter an Oddish, in which case, BB + (WG/BB) and throw Poke Balls
+			Time-based (repeat last two columns of the given row): [[https://i.imgur.com/Fm7I10i.png]]
+			Step-based: [[https://i.imgur.com/fHtG2mb.png]]
+		Path through the route 6
+			[[https://i.imgur.com/aXI5GZA.jpeg]]
+		B: Route 6 - JrTrainerF 2 :: Jr. Trainer♀ :: Thrash
+		B: Route 6 - JrTrainerM 2 :: Jr. Trainer♂ :: Thrash
+		1-30 HP: Full Restore now
+		Shop: Vermilion Mart
+			* POKE_BALL
+			3 REPEL
+			6 PARLYZ_HEAL
+		Enter the S.S. Anne.
+		Walk Left and take the first stairs you see.
+		Walk down and turn right.
+		B: Boat Rival - Bulbasaur :: Boat Rival :: HA + BB, BB x2, Thrash
+			If Pidgeotto lands a Sand-Attack, swap to your bird and let it faint
+			If under 21 HP on Raticate, use Full Restore
+			If under 16 HP on Kadabra, then HA Kadabra and use Full Restore turn 1 on Ivysaur
+		GetI: HM_01 :: Get HM01 from the captain.
+		Enter the 3rd Cabin, fight the Gentleman
+			[[https://i.imgur.com/jBSOrON.png]]
+		B: SS Anne 2F Rooms - Gentleman 1 :: Gentlemandy :: Thrash
+		GetI: RARE_CANDY :: Get the Rare Candy.
+			[[https://i.imgur.com/UmZxWvL.jpeg]]
+		Exit the boat and head towards Surge's gym.
+		Trade for Dux in this house if you still need something to learn Cut.
+			[[https://i.imgur.com/xu3e7pg.png]]
+		Walk up to the tree guarding Surge's gym.
+		Menu: Cut Menu:
+			Use: FULL_RESTORE :: if you haven't already
+			Swap: POTION REPEL :: (using select)
+			Tm: HM_01 4 :: or Oddish or Dux
+			Tm: TM_28 4 :: or Squirtle
+			Cut the tree and enter Surge’s gym
+		Surge Trash Cans Puzzle
+			[[https://i.imgur.com/DgQyq4a.jpeg]]
+			Save the game after finding the first can (unless the first switch is can #2 or #4, then simply take a 1/4 guess and move onto the next can)
+			All other cans are 50/50, so if you don’t get the the second switch first try, then you soft reset and know the second switch is in the top left can (can #5)
+		B: Surge :: BB + BB or HA, Thrash
+	S: Fly Split
+		GetI: BIKE_VOUCHER :: Get the Bike Voucher, and Dig out to Cerulean City
+		GetI: BICYCLE BIKE_VOUCHER :: Get the Bike from the Bike Shop and exit the shop
+		Menu: Menu (outside of the bike shop):
+			Swap: 2 BICYCLE
 			Tm: TM_24 1 3
-			Use: BICYCLE
-		Get on the bike and head east to Route 9, cutting the two bushes in your way
-	S: Route 9
-		If under 16 hp, save before 4 turn thrash girl
-		B: Route 9 - JrTrainerF 1 :: 4 turn thrash girl :: MP, Thrash x3
-			If you run out of mega punches without killing the first poke just Thrash you will be 25% to hit yourself on the last poke
-			If you get paralyzed, use your Full Restore after the fight (not during)
-		B: Route 9 - BugCatcher 2 :: Thrash x3
-	S: Rock Tunnel
+			Use: BICYCLE :: Get on the bike, cut both trees to head east into Route 9
+		B: Route 9 - JrTrainerF 1 :: 4 turn thrash girl :: HA + TBMP, Thrash x3
+			If paralyzed, use a Parlyz Heal immediately
+		B: Route 9 - BugCatcher 2 :: Bug Catcher :: TB, Thrash x3
+		Menu: Repel one step into Rock Tunnel.
+			Use: Repel
 		Map to get through Rock Tunnel
-			1F[[https://i.imgur.com/oPBnthL.png]]2F[[https://i.imgur.com/SMZikOB.png]]
-		Menu: After taking 1 step down: Scroll down and use a Repel
-			Use: REPEL
+			1F: [[https://i.imgur.com/LllktGo.png]] B1F: [[https://i.imgur.com/cS4hPoI.png]]
 		B: Rock Tunnel 1F - Pokemaniac :: BB, TB
-		B: Rock Tunnel B1F - Pokemaniac 3 :: TB
-		B: Rock Tunnel B1F - JrTrainerF 2 :: Thrash
-		Menu: Use your second Repel somewhere near the yellow tile on the map above
+		B: Rock Tunnel B1F - Pokemaniac 3 :: TB x1-2
+			(rare to happen: swap out if confused)
+		B: Rock Tunnel B1F - JrTrainerF 2 :: Oddish Girl :: Thrash
+			If paralyzed, wait until the next Repel menu to use a Parlyz Heal
+		Menu: Repel twice before the next fight. See map for suggested spots.
 			Use: REPEL
-		Menu: Use your third Repel on the blue/yellow tile immediately before the Hiker
 			Use: REPEL
-		[You can delay these 2 repels up to ~10 tiles]
 		B: Rock Tunnel B1F - Hiker 1 :: BB x3
+		1-6 HP: Potion before the next fight
 		B: Rock Tunnel 1F - JrTrainerF 2 :: Thrash
-			Pidgey does 5 with Quick Attack
+		Exit Rock Tunnel.
 		GetI: MAX_ETHER :: Pick up the hidden Max Ether outside of Tunnel in the bush from the left hand side
-		Head south to Lavender Town and west to Route 8
-	S: Route 8
+			[[https://i.imgur.com/0WpaVOx.png]]
+		Bike straight down into Lavender Town.
+		1-34 HP: take the center in Lavender Town
+		Bike west and fight the Gambler.
+			[[https://i.imgur.com/1EHC3r4.png]]
 		B: Route 8 - Gambler 2 :: BB (+Thrash), Thrash
-			Opp: 1
-				Use: POTION ? :: If you have less than 9 HP Potion
-			Vulpix does 4 with Quick Attack
-		Take the underground path to Celadon City
-	S: Underground :: Pick up the hidden Elixer and Nugget in the underground
-		GetI: ELIXER
-		GetI: NUGGET
-	S: Celadon City
-		S: Shopping :: Bike to the mart and do the shopping
-			Shop: 2F
-				-1 TM_34
+		Be careful not to hit optionals. Take the underground path to Celadon City.
+			[[https://i.imgur.com/3TbEDS8.png]]
+		Pick up the hidden Elixer and the hidden Nugget marked on the map:
+			[[https://i.imgur.com/Jh9E0Cd.jpeg]]
+		S: Celadon Mart
+			Shop: 2F - Clerk on the left hand side
 				-2 NUGGET
-				1 TM_07
-				7 SUPER_REPEL
-				4 SUPER_POTION
+				10 SUPER_REPEL
 				2 REVIVE
-			Shop: 4F
-				1 POKE_DOLL
-			Shop: Roof: Buy a Soda Pop
+			Shop: 6F - Rooftop Vending Machine
 				1 SODA_POP
-			GetI: TM_48 SODA_POP :: Trade the Soda Pop with the girl
-			Shop: Come back and buy a Fresh Water
-				1 FRESH_WATER
-			Shop: 5F
-				12 X_ACCURACY
-				9 X_SPECIAL
-				1 X_SPEED
-		GetI: HM_02 :: Take the Elevator and get HM 02 (Fly)
-		Menu: Upon exiting the house
-			Swap: 2 TM_07
-			Use: SUPER_REPEL
-			Tm: TM_48 1 1
-			Swap: 3 X_ACCURACY
+				2 FRESH_WATER
+			GetI: TM_48 SODA_POP :: Give the Soda Pop to the girl first in exchange for TM48 Rock Slide
+			GetI: TM_13 FRESH_WATER :: and then one Fresh Water for TM13 Ice Beam
+			Shop: 5F - Clerk on the left hand side
+				16 X_ACCURACY
+				2 X_SPECIAL :: (do NOT buy guard spec, must be X Special)
+				9 X_SPEED
+			Take the elevator to the first floor.
+		GetI: HM_02 :: Bike west to the Cut bush before the Snorlax, and continue heading west to get HM02 from the girl in the house above Cycling Road.
+		Menu: Exit the house, open the menu and do the following:
+			Warning: we will be teaching Ice Beam in this menu to Nidoking, do NOT teach it to Squirtle.
+			Swap: 2 X_ACCURACY
 			Tm: HM_02 3
-		Fly to Lavender (3 down), and walk to the tower
-	S: Pokémon Tower
-		NOTE: From this point on you have 2 revives which means deaths aren't as scary, so if you die remember to swap to a pokemon, revive, let the swapped pokemon die and ANY AND ALL X ITEMS ARE GONE. This route has extras so you shouldn't run out of x items, and there will still be some saving since some deaths with revives are still really slow to come back from if at all
-		B: Tower Rival - Bulbasaur :: Tower Rival :: TB x2, BB, Thrash
+			Up 4 to place cursor on TM13
+			Fly to Celadon (down 1)
+			Tm: TM_13 1 4
+			Use: BICYCLE :: Bike to the Game Corner
+		NOTE: From this point on you have 2 Revives which means deaths aren't as scary, so if you die remember to swap to a pokemon, Revive, let the swapped pokemon die and ANY X ITEMS THAT WERE USED IN THE FIGHT NEED TO BE REUSED ON THE REVIVED NIDO. This route has extras so you shouldn't run out of x items, and there will still be some saving since some deaths with Revives are still really slow to come back from if at all.
+	S: Hideout Split
+		Talk to the Grunt standing in front of the poster at the back of the Game Corner
+		B: Game Corner - Rocket :: Poster Grunt :: Thrash
+		Press the switch behind the poster and take the stairs to the right
+		Take the stairs to the right
+		Walk down and left to avoid the Rocket and take the stairs down again
+			[[https://i.imgur.com/niQN75M.jpeg]]
+		Take the Spinning tile on the left and follow the path down to the next set of stairs
+			[[https://i.imgur.com/corqRRk.jpeg]]
+		Walk up toward the Rocket in the top left and fight him.
+			[[https://i.imgur.com/d8DVOEI.jpeg]]
+		B: Rocket Hideout B4F - Rocket 3 :: Lift Key Rocket :: Thrash x2 or IB + TB, Thrash or TB
+		GetI: LIFT_KEY :: Retalk to the Rocket, pick up the Lift Key and take the stairs you came from.
+			[[https://i.imgur.com/LO6vkvt.jpeg]]
+		GetI: RARE_CANDY :: Pick up the Rare Candy and take the stairs up.
+			[[https://i.imgur.com/XBG8ywy.jpeg]] [[https://i.imgur.com/VpkZpPw.jpeg]]
+		GetI: TM_07 :: Pick up TM07
+			[[https://i.imgur.com/Wkof1KE.jpeg]]
+		Take the elevator to B4F and Menu two steps into the next room.
+		Menu: Grunt Menu:
+			Swap: 3 SUPER_REPEL
+			Tm: TM_48 1 2
+			Use: SUPER_REPEL
+			Swap: 4 X_SPEED
+			Tm: TM_07 1 1
+			Swap: 6 FRESH_WATER :: (fixes inventory to be similar to regular route)
+		B: Rocket Hideout B4F - Rocket 2 :: Right Grunt :: (X Acc +) IB, (X Acc +) IB, HD
+			Sandshrew Slash crit can do 22, X Acc on Sandshrew if your HP is high, otherwise on Ekans
+		B: Rocket Hideout B4F - Rocket 1 :: Left Grunt :: IB x3
+		1-20 HP: Potion
+		B: Rocket Hideout B4F - Giovanni :: Giovanni :: X Acc + IB, IB, HD
+		GetI: SILPH_SCOPE
+		Menu:
+			Use: POTION ? :: 1-19 Potion (but do not use your last Potion, instead center after you dig out)
+			Dig out, fly to Lavender Town
+	S: Flute Split
+		Walk east into the Pokemon Tower to meet your Rival.
+		B: Tower Rival - Bulbasaur :: Lavender Rival :: X Acc + IB, TB, HD x3
+		Maps
+			[[https://i.imgur.com/8t6F7Kb.jpeg]]
+			[[https://i.imgur.com/8t6F7Kb.jpeg]]
 		B: Pokémon Tower 4F - Channeler 2 :: Rock Slide x2
+			If you are KO’d swap to your bird, Revive Nido, let the bird faint
 		GetI: ELIXER :: Get the Elixer item ball
+			[[https://i.imgur.com/ZPIsQ9A.jpeg]]
 		GetI: ELIXER :: Get the hidden Elixer
-		Take the free heal on 5F
+			[[https://i.imgur.com/IpM0bEO.jpeg]]
+		Take the heal-pad.
+		Map
+			[[https://i.imgur.com/eagxMpe.jpeg]]
 		B: Pokémon Tower 6F - Channeler 2 :: Rock Slide
 		B: Pokémon Tower 6F - Channeler 3 :: Rock Slide
 		GetI: RARE_CANDY :: Pickup the rare candy in your way
-		Menu: Teach TM07 (Horn Drill) over Rock Slide
-			Tm: TM_07 1 1
-		Enter the Ghost battle and escape using the Poke Doll
-		Menu: During the Ghost battle (TEMP: should be menu in fight)
-			Swap: 3 SUPER_REPEL
-			Use: POKE_DOLL
-		B: Pokémon Tower 7F - Rocket 1 :: TB x3 + (BB)
+		E: Marowak:30 :: Cubone's Mother :: IB
+		Enter the final floor and simply walk straight up letting the rockets see you.
+		B: Pokémon Tower 7F - Rocket 1 :: IB x3
 		B: Pokémon Tower 7F - Rocket 2 :: X ACC, HD x2
 			Use: X_ACCURACY
-		B: Pokémon Tower 7F - Rocket 3 :: TB x2, Thrash
-		GetI: POKE_FLUTE :: Get the Pokeflute and Fly to Celadon City
+		B: Pokémon Tower 7F - Rocket 3 :: IB x4-5
+		GetI: POKE_FLUTE :: Get the Poke Flute from Mr. Fuji.
+	S: Koga Split
+		Walk out of his house, then Fly to Celadon.
+
+
+
+
+
 	S: Celadon City
 		Use the Center
 		Bike to Saffaron City
