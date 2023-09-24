@@ -47,8 +47,21 @@ export class PsrRouterRouteEntry extends LitElement {
           is = description.length;
         } else {
           dom.push(html`<div style="white-space: pre-wrap;">${description.substring(is, i1)}</div>`);
-          let img = description.substring(i1 + 2, i2);
-          dom.push(html`<img src="${img}" style="width: 100%;">`);
+
+          let [embedType, ...embedSrcArray] = description.substring(i1 + 2, i2).trim().split('||');
+          if (embedSrcArray.length == 0) {
+            embedSrcArray.push(embedType);
+            embedType = "img";
+          }
+          let embedSrc = embedSrcArray.join('||');
+          if (embedType.trim().toLocaleLowerCase() === "img" || embedType.trim().toLocaleLowerCase() === "image") {
+            dom.push(html`<img .src="${embedSrc.trim()}" style="width:100%;" />`);
+          } else if (embedType.trim().toLocaleLowerCase() === "yt" || embedType.trim().toLocaleLowerCase() === "youtube") {
+            dom.push(html`<iframe .src="${embedSrc.trim()}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`);
+          } else {
+            // TODO: unsupported, default to image?
+          }
+
           is = i2 + 2;
         }
       }

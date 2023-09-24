@@ -8,6 +8,7 @@ import { RouteEntryInfo } from './RouteEntryInfo';
 import { RouteJSON } from 'SharedModules/psr-router-route/parse/RouteJSON';
 
 //// EXAMPLE ROUTES ////
+import redClassicBeginner from 'SharedData/routes/Red Any Glitchless (Classic) [Beginner Route].txt';
 import redBeginnerNoLass from 'SharedData/routes/Red Any Glitchless [No-Lass Version].txt';
 import redBeginnerSquareTxt from 'SharedData/routes/Red Any Glitchless [Square\'s Beginner Guide].txt';
 import redBeginnerTxt from 'SharedData/routes/Red Any Glitchless [Beginner Guide].txt';
@@ -37,6 +38,7 @@ interface StorageTempRoute {
 }
 
 let exampleRoutes: { [key: string]: { json?: any, txt?: string, title: string }; } = {};
+exampleRoutes["red.classic.beginner.txt"] = { txt: redClassicBeginner, title: "Red Any Glitchless (Classic) [Beginner Route]" };
 exampleRoutes["red.beginner.nolass.txt"] = { txt: redBeginnerNoLass, title: "Red Any% Glitchless [No-Lass Version]" };
 exampleRoutes["red.beginner.square.txt"] = { txt: redBeginnerSquareTxt, title: "Red Any% Glitchless [Square's Beginner Guide]" };
 exampleRoutes["red.beginner.txt"] = { txt: redBeginnerTxt, title: "Red Any% Glitchless [Beginner Guide]" };
