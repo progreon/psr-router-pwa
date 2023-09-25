@@ -30,6 +30,9 @@ export class UseAction extends AAction {
             this.actionString = "[Use error: no item defined]";
             return;
         }
+        if (this.item.key == "PP_UP") {
+            this.addMessage(new RouterMessage(`Using ${this.item.name} has not been properly implemented yet...`, RouterMessage.Type.Warning));
+        }
         let itemIndex = player.getItemIndex(this.item);
         this.actionString = `Use ${this.count == '*' ? "all " : ""}${this.item.name} (s${itemIndex + 1})`;
         if (+this.count > 1) {

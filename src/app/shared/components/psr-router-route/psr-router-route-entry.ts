@@ -18,9 +18,9 @@ import { AppStyles } from 'Shared/app-styles';
 
 export class PsrRouterRouteEntry extends LitElement {
 
-  @property({type: Object})
+  @property({ type: Object })
   public routeEntry: Route.RouteEntry;
-  @property({type: Boolean, reflect: true})
+  @property({ type: Boolean, reflect: true })
   public hideContent: boolean = true;
   protected routeHeader: boolean;
   private _isPendingExpandAnimation: boolean = false;
@@ -34,38 +34,56 @@ export class PsrRouterRouteEntry extends LitElement {
     return undefined;
   }
 
+  protected _renderEmbeddedDOM(embeddedString: String): TemplateResult {
+    let [embedType, ...embedSrcArray] = embeddedString.split('||');
+    if (embedSrcArray.length == 0) {
+      embedSrcArray.push(embedType);
+      embedType = "img";
+    }
+    let embedSrc = embedSrcArray.join('||');
+    if (embedType.trim().toLocaleLowerCase() === "img" || embedType.trim().toLocaleLowerCase() === "image") {
+      return html`<a .href="${embedSrc.trim()}" target="_blank" style="width:100%;"><img .src="${embedSrc.trim()}" style="width:100%;" /></a>`
+    } else if (embedType.trim().toLocaleLowerCase() === "yt" || embedType.trim().toLocaleLowerCase() === "youtube") {
+      return html`<iframe .src="${embedSrc.trim()}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    } else {
+      // TODO: unsupported, for now default to link?
+      return html`<a .href="${embedSrc.trim()}" target="_blank">${embedType.trim()}</a>`;
+    }
+  }
+
+  /**
+   * Render a string which can have embedded images & videos.
+   * TODO: also support links
+   * TODO: also support font styles?
+   * TODO: figure out proper syntax for embedding...
+   *
+   * @param fancyString The string with embedded stuff
+   * @returns The rendered DOM
+   */
+  protected _renderFancyString(fancyString): TemplateResult {
+    let dom = [];
+    let is = 0; // istart
+    while (is < fancyString.length) {
+      let i1 = fancyString.indexOf("[[", is);
+      let i2 = i1 >= 0 ? fancyString.indexOf("]]", i1) : -1;
+      if (i2 < 0) {
+        dom.push(html`<div style="white-space: pre-wrap;">${fancyString.substring(is)}</div>`);
+        is = fancyString.length;
+      } else {
+        dom.push(html`<div style="white-space: pre-wrap;">${fancyString.substring(is, i1)}</div>`);
+
+        let embeddedString = fancyString.substring(i1 + 2, i2).trim();
+        dom.push(this._renderEmbeddedDOM(embeddedString));
+
+        is = i2 + 2;
+      }
+    }
+    return html`${dom}`;
+  }
+
   protected _renderExpandingContent(): TemplateResult {
     if (this.routeEntry.info.description) {
-      let dom = [];
-      let description = this.routeEntry.info.description;
-      let is = 0; // istart
-      while (is < description.length) {
-        let i1 = description.indexOf("[[", is);
-        let i2 = i1 >= 0 ? description.indexOf("]]", i1) : -1;
-        if (i2 < 0) {
-          dom.push(html`<div style="white-space: pre-wrap;">${description.substring(is)}</div>`);
-          is = description.length;
-        } else {
-          dom.push(html`<div style="white-space: pre-wrap;">${description.substring(is, i1)}</div>`);
-
-          let [embedType, ...embedSrcArray] = description.substring(i1 + 2, i2).trim().split('||');
-          if (embedSrcArray.length == 0) {
-            embedSrcArray.push(embedType);
-            embedType = "img";
-          }
-          let embedSrc = embedSrcArray.join('||');
-          if (embedType.trim().toLocaleLowerCase() === "img" || embedType.trim().toLocaleLowerCase() === "image") {
-            dom.push(html`<img .src="${embedSrc.trim()}" style="width:100%;" />`);
-          } else if (embedType.trim().toLocaleLowerCase() === "yt" || embedType.trim().toLocaleLowerCase() === "youtube") {
-            dom.push(html`<iframe .src="${embedSrc.trim()}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`);
-          } else {
-            // TODO: unsupported, default to image?
-          }
-
-          is = i2 + 2;
-        }
-      }
-      return html`${dom}`;
+      return this._renderFancyString(this.routeEntry.info.description);
     } else {
       return undefined;
     }
@@ -250,7 +268,7 @@ export class PsrRouterRouteEntry extends LitElement {
         <div id="player-icon" class="icon player" @click="${this._openPlayerDialog}" @mouseenter="${this._showPlayerTooltip}">${idCardIcon}</div>
       </div>
       <div class="route-header" ?hidden="${!this.routeHeader}">
-        <h2>${this.routeEntry?this.routeEntry.info.title:"No route loaded"}</h2>
+        <h2>${this.routeEntry ? this.routeEntry.info.title : "No route loaded"}</h2>
       </div>
       <div class="content">
         ${contentDOM}
@@ -301,10 +319,10 @@ export class PsrRouterRouteEntry extends LitElement {
       let sectionHeight = content.scrollHeight;
       let elementTransition = content.style.transition;
       content.style.transition = '';
-      requestAnimationFrame(function() {
+      requestAnimationFrame(function () {
         content.style.height = sectionHeight + 'px';
         content.style.transition = elementTransition;
-        requestAnimationFrame(function() {
+        requestAnimationFrame(function () {
           content.style.height = 0 + 'px';
         });
       });

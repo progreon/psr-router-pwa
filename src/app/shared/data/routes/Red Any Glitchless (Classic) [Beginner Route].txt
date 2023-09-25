@@ -264,6 +264,8 @@ Route: Red Any Glitchless (Classic) [Beginner Route]
 			[[https://i.imgur.com/3TbEDS8.png]]
 		Pick up the hidden Elixer and the hidden Nugget marked on the map:
 			[[https://i.imgur.com/Jh9E0Cd.jpeg]]
+		GetI: ELIXER
+		GetI: NUGGET
 		S: Celadon Mart
 			Shop: 2F - Clerk on the left hand side
 				-2 NUGGET
@@ -312,7 +314,7 @@ Route: Red Any Glitchless (Classic) [Beginner Route]
 			Swap: 3 SUPER_REPEL
 			Tm: TM_48 1 2
 			Use: SUPER_REPEL
-			Swap: 4 X_SPEED
+			Swap: HELIX_FOSSIL X_SPEED
 			Tm: TM_07 1 1
 			Swap: 6 FRESH_WATER :: (fixes inventory to be similar to regular route)
 		B: Rocket Hideout B4F - Rocket 2 :: Right Grunt :: (X Acc +) IB, (X Acc +) IB, HD
@@ -351,85 +353,93 @@ Route: Red Any Glitchless (Classic) [Beginner Route]
 		GetI: POKE_FLUTE :: Get the Poke Flute from Mr. Fuji.
 	S: Koga Split
 		Walk out of his house, then Fly to Celadon.
-
-
-
-
-
-	S: Celadon City
-		Use the Center
-		Bike to Saffaron City
-		Menu: TEMP: give the Fresh Water to the guard
-			Toss: FRESH_WATER
-	S: Silph Co.
-		Enter Silph Co and take the stairs to floor 5
-		GetI: ELIXER :: Get the Elixer in the tree
-		B: Silph Co. 5F - Rocket 1 :: Thrash
-		Menu: If you get paralized use a heal
-			Use: PARLYZ_HEAL ?
+		MUST Take the center in Celadon. Replenishes PP & sets Celadon as the warp point.
+		Menu: Bike East to Saffron City, trading Fresh Water for passage, and enter Silph Co.
+			Toss: FRESH_WATER :: TEMP as a menu entry
+		Take the stairs up to 5F.
+		GetI: ELIXER :: Walk left and take the hidden Elixer in the plant, then walk down and talk to the Rocket next to the teleport pad.
+			[[https://i.imgur.com/WAid12E.jpeg]]
+		NOTE: In this split we ideally want to take a bit of damage to do a strat on Koga called Boom strats. We intentionally are KO’d by Koga’s Weezing to set up red bar for the gym rush up through Bruno.
+		B: Silph Co. 5F - Rocket 1 :: Silph Rocket #1 :: X Acc + HD
+			Use: PARLYZ_HEAL ? :: If paralyzed by Glare, use Parlyz Heal immediately in fight
 		GetI: CARD_KEY :: Get the Card Key
-		B: Silph Rival - Bulbasaur :: Silph Rival :: X Acc, X Speed, HD x5
-			Use: X_ACCURACY
-			Use: X_SPEED
-		NOTE: In this split we want to take a bit of damage to do a strat on Koga called Boom strats
-		Menu: If <78 HP use elixer before the next fight
-			Use: ELIXER
-		B: Silph Co. 11F - Rocket 2 :: X Acc, BB, HD x2
+		B: Silph Rival - Bulbasaur :: Silph Rival :: X Acc + X Speed + HD, HD, RS, HD, HD
+			Opp: 1
+				Use: X_ACCURACY
+				Use: X_SPEED
+		Menu: If <80 HP use Max Ether on Horn Drill before the next fight
+			Use: MAX_ETHER 1 1
+		B: Silph Co. 11F - Rocket 2 :: Silph Rocket #2 :: X Acc + HD, HD, IB
 			Opp: 1
 				Use: X_ACCURACY :: Turn 1
-				Turn 2: If Cubone damages you and you need to elixer still, use elixer now
-				BB
+				Turn 2: If Cubone damages you and you need to Ether still, use Max Ether now
+				HD
 			Opp: 2
-				If you haven't used ether do so now
+				If you haven't used Max Ether do so now
 				HD
 			Opp: 3
-				HD
-		B: Silph Co. 11F - Giovanni :: Silph Gio :: X Acc, HD x2, BB, HD
+				IB
+		B: Silph Co. 11F - Giovanni :: Silph Gio :: X Acc + HD, HD, IB, HD
 			Use: X_ACCURACY
 		Backtrack to 3F, then take the elevator to 10F
+		Walk left and pick up the rightmost item first (Carbos), then the two others (TM26 and Rare Candy).
+			[[https://i.imgur.com/ilsgeOn.png]]
+		GetI: CARBOS
 		GetI: TM_26
 		GetI: RARE_CANDY
 		Dig out
-	S: Celadon City
-		Bike west
-		Menu: MENU before Snorlax:
-			Use: REPEL
-			Swap: 5 RARE_CANDY
+		Menu: Use the Carbos on Nido (Cursor is not on Nido) & Bike west to Snorlax
+			Use: CARBOS
+		Menu: Menu next to Snorlax:
+			Use: SUPER_REPEL
+			Swap: 4 RARE_CANDY
 			Use: POKE_FLUTE
 		Run from the Snorlax
-	S: Cycling Road
-		NOTE: You can hold B to stop automatically moving down on Cycling Road
-		GetI: RARE_CANDY :: Get the hidden Rare Candy
-	S: Fuchsia City
-		Menu: After exiting the Cycling Road building (repel!)
-			Use: REPEL
-			Swap: 6 X_SPECIAL
+		Cycling Road
+			NOTE: You can hold B to stop automatically moving down on Cycling Road
+		GetI: RARE_CANDY :: Pick up the hidden Rare Candy then hug the right wall biking down.
+			[[https://i.imgur.com/klM3YDH.jpeg]]
+		GetI: PP_UP :: Get the hidden PPUP. You can bike straight down after getting PPUP, the next trainer has short two-tile vision and does not see you.
+			[[https://i.imgur.com/RXgwTA9.jpeg]]
+		Menu: Menu immediately after exiting the guard’s house after Cycling Road:
+			Use: SUPER_REPEL
+			Use: RARE_CANDY 4 :: (1 is left over)
+			Swap: HM_01 TM_26
+			Use: PP_UP 1 1
 			Tm: TM_26 1 2
 			Use: BICYCLE
-		Bike to the Safari Zone
+		Get on the bike and cut both trees to enter the Safari Zone
+			[[https://i.imgur.com/wHad35M.jpeg]]
 		S: Safari Zone
-			Map of the Safari Zone
-				[[https://i.imgur.com/oBebL5z.jpg]]
-			Upon entering, get on the bike
-			Menu: Use a Super Repel in zone 2
+			Get on your bike
+				NOTE: CURSOR IS ON CUT USER
+			Map
+				[[https://i.imgur.com/A8Qwy4y.png]]
+			GetI: CARBOS :: Get the Carbos in zone 2
+			Menu: In Zone 3, menu to use Super Repel and use the Carbos carefully on Nido
 				Use: SUPER_REPEL
-			GetI: GOLD_TEETH :: Get the Gold Teeth in the fourth area
-			GetI: HM_03 :: Get HM03 from the guy in the house
-			After getting Surf, dig out of the safari and fly back to Fuschia city
-		S: Fuchsia Gym
-			B: Fuchsia Gym - Juggler 1 :: EQ x4
-			(Heal to 47+ HP, but ideally no higher than 80)
-			B: Fuchsia Gym - Juggler 2 :: EQ, EQ + TB
-				If TB gets disabled, finish with BB if it's in range, finish with EQ if not or you don't know the range
-			B: Koga :: EQ x3, then use an Elixer on Weezing (to stall for selfdestruct)
-				Opp: 4 :: *1
-					Use: ELIXER :: to stall for selfdestruct
-					If Koga uses an X Attack, use Bubblebeam till you die
-					The goal is to die to Selfdestruct, but it's OK if you don't
-					If you didn’t die from koga you can still try to get red bar by following the HP strats for the backups (https://pastebin.com/2DBBnkmf). Note that this can be risky.
-		Menu: Revive with candies and bike to the Warden's house
-			Use: RARE_CANDY *
-			Use: BICYCLE
+				Use: CARBOS
+			GetI: GOLD_TEETH :: Pick up the Gold Teeth
+			GetI: REVIVE :: Optional: pick up the extra hidden Revive in the statue
+			GetI: HM_03 :: Get HM03 Surf from the man in the house
+			Exit the house, dig out of the safari, fly back to Fuschia city, and walk to Koga’s gym.
+		B: Fuchsia Gym - Juggler 1 :: Juggler #1 :: EQ x4
+		// (Heal to 47+ HP, but ideally no higher than 80)
+		B: Fuchsia Gym - Juggler 2 :: Juggler #2 :: EQ, EQ (+ TB)
+			If Hypno KOs you, swap to Squirtle and Revive Nido, let Squirtle faint
+			// If TB gets disabled, finish with BB if it's in range, finish with EQ if not or you don't know the range
+		B: Koga :: EQ x3, then use an Elixer on Weezing, then stall with Poke Flute until it uses Self Destruct
+			Opp: 4 :: *1
+				Use: ELIXER :: then stall with Poke Flute until it uses Self Destruct
+	S: Gym Rush
+		NOTE: The order presented in this route is (1) Blaine, (2) Sabrina, (3) Erika There is no major downside to doing them out of order, so do not panic if you do so
+		S: Mansion
+			Menu: Walk out of the gym and menu:
+				Use: RARE_CANDY
+				Use: BICYCLE :: Bike east (hopping the ledge) to the Warden's house
+
+
+===
 		GetI: HM_04 GOLD_TEETH :: Get HM04 from the warden, then Fly to Pallet Town
 	S: Pallet Town
 		Menu: Walk to the water, and menu

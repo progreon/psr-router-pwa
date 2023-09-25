@@ -286,7 +286,7 @@ export class Player {
    */
   useItem(item: Item, partyIndex: number = -1, moveIndex: number = -1, battleStage?: RouteBattle.Stage, force: boolean = false): boolean {
     let index = this.getItemIndex(item, false); // TODO: temporarily disabled because no GetI implementation yet!
-    
+
     if (!force) {
       if (index < 0) return false;
       if (battleStage && !item.usableInsideBattle) return false;
@@ -308,18 +308,30 @@ export class Player {
             this.team[partyIndex] = this.team[partyIndex].useCandy();
             break;
           case "HP":
-            return this.team[partyIndex].useHPUp(1);
+            // return this.team[partyIndex].useHPUp(1);
+            if (!this.team[partyIndex].useHPUp(1)) return false;
+            break;
           case "ATK":
-            return this.team[partyIndex].useProtein(1);
+            // return this.team[partyIndex].useProtein(1);
+            if (!this.team[partyIndex].useProtein(1)) return false;
+            break;
           case "DEF":
-            return this.team[partyIndex].useIron(1);
+            // return this.team[partyIndex].useIron(1);
+            if (!this.team[partyIndex].useIron(1)) return false;
+            break;
           case "SPD":
-            return this.team[partyIndex].useCarbos(1);
+            // return this.team[partyIndex].useCarbos(1);
+            if (!this.team[partyIndex].useCarbos(1)) return false;
+            break;
           case "SPC":
-            return this.team[partyIndex].useCalcium(1);
+            // return this.team[partyIndex].useCalcium(1);
+            if (!this.team[partyIndex].useCalcium(1)) return false;
+            break;
           case "PP":
             // TODO
             // return this.team[partyIndex].usePPUp(1);
+            // if (!this.team[partyIndex].usePPUp(1)) return false;
+            break;
           default:
             return false;
         }
