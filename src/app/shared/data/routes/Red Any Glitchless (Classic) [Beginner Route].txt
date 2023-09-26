@@ -437,113 +437,129 @@ Route: Red Any Glitchless (Classic) [Beginner Route]
 			Menu: Walk out of the gym and menu:
 				Use: RARE_CANDY
 				Use: BICYCLE :: Bike east (hopping the ledge) to the Warden's house
-
-
-===
-		GetI: HM_04 GOLD_TEETH :: Get HM04 from the warden, then Fly to Pallet Town
-	S: Pallet Town
-		Menu: Walk to the water, and menu
+			GetI: HM_04 GOLD_TEETH :: Talk to the Warden trading Gold Teeth for HM04.
+			Exit house
+			Fly to Pallet Town
+			Walk left dodging the Lass and face the edge of the water.
+			Menu: Surf Menu:
+				Use: SUPER_REPEL
+				Tm: HM_03 2
+				Use Surf
+			Go straight down, just side step one tile left to not bonk fisherman
+			Inside Mansion: take the stairs up, walk up around/above to the next stairs.
+			Hit the switch and fall through the hole:
+				[[https://i.imgur.com/Nskx2GA.jpeg]]
+			GetI: CARBOS :: Avoid the scientist and get the Carbos next to the trees:
+				[[https://i.imgur.com/Vn8Pa54.jpeg]]
+			Menu: Menu after picking up this Carbos, Note that your cursor is ON SQUIRTLE
+				Tm: HM_04 2 1
+				Use: CARBOS 1 1
+				Use: SUPER_REPEL
+				Scroll to the bottom of the bag (leave the cursor on Cancel)
+			Take the stairs to the next room.
+			Hit the switches
+			GetI: RARE_CANDY:2 :: Get two candies as seen below
+				[[https://i.imgur.com/TOuV3ag.jpeg]]
+			Menu: Use the two Rare Candies on Nidoking
+				Use: RARE_CANDY 2
+			GetI: SECRET_KEY :: Pick up the Secret Key and Dig out
+		S: Blaine
+			Fly to Cinnabar Island (down 2).
+			Blaine’s gym puzzle: A B B B A B (A=yes; B=no)
+			B: Blaine :: X Acc + EQ, HD x3
+				Use: X_ACCURACY
+			Dig out of Blaine’s gym.
+		S: Sabrina
+			Bike east to Sabrina’s gym by walking through the guard house.
+			Teleporter Puzzle: Diagonal, Diagonal, Down (bottom left)
+			Save before talking to Sabrina if you have 0 speed DV or you don't know your DVs.
+			B: Sabrina :: EQ x4-5
+				Alakazam may speedtie Nido at 0 SPD
+				If you are KO'd soft reset with A + B + Start + Select and retry
+			Take the teleporter pad and then use Dig (causes animation to be faster).
+		S: Erika
+			Bike to Erika’s gym, avoid optionals inside by hugging the left wall and cut the top left tree.
+			// Hug the left wall and Cut the bush in the top-left corner
+			B: Celadon Gym - Beauty 3 :: Beauty :: IB
+			Remember to turn up and talk to Erika, walking past her will trigger an optional
+			B: Erika :: IB x3
+			Exit Erika's gym by cutting the middle tree.
+	S: Giovanni Split
+		Fly to Viridian City (up 1) and bike to Giovanni's gym.
+		B: Viridian Gym - CooltrainerM 3 :: Cooltrainer♂ :: IB
+		Save before the next fight on the blue tile.
+			[[https://i.imgur.com/3JcpNQh.jpeg]]
+		B: Viridian Gym - Blackbelt 3 :: Blackbelt :: EQ (+ TB), EQ, EQ (+ TB)
+		Exit gym, re-enter the gym to reset the Blackbelt’s position (spin tiles are significantly slower).
+		Menu: Menu one step into the gym upon re-entering:
+			Use: ELIXER 1 1
+		B: Giovanni :: IB, IB, EQ, EQ, IB x1-2
+			Rhydon will not deal any damage to you
+		Can pick up the [[Revive||https://gunnermaniac.com/pokeworld?map=45#16/9]], if you need it.
+	S: Lorelei Split
+		Menu: Walk out of Giovanni's gym and menu:
 			Use: SUPER_REPEL
-			// Swap: 8 X_SPEED
-			Tm: HM_03 2
-		Surf to Cinnabar
-	S: Cinnabar Mansion
-		Use this map to get through Cinnabar Mansion, doing the following actions along the way
-			[[https://i.imgur.com/UktHB4j.jpg]]
-		GetI: TM_14
-		Menu: MENU after picking up Blizzard
-			Tm: HM_04 2 1
-			Tm: TM_14 1 4
-			Use: REPEL :: NOTE THIS IS THE REPEL NOT I REPEAT NOT SUPER REPEL
-		GetI: RARE_CANDY :: Get the Rare Candy on top
-		GetI: SECRET_KEY
-		Dig out, then bike to the Celadon Gym
-	S: Celadon Gym
-		Hug the left wall and Cut the bush in the top-left corner
-		B: Celadon Gym - Beauty 3 :: Bliz (use Poke Flute if put to sleep)
-		B: Erika :: EQ, Bliz, EQ
-		Walk out, then Fly to Cinnabar (2 down) and bike to the gym
-	S: Cinnabar Gym
-		Quiz Answers: A B B B A B
-		B: Blaine :: X Acc, EQ, HD x3
-			Use: X_ACCURACY
-		Dig out, then bike to the Saffron Gym
-	S: Saffron Gym
-		Teleporter Puzzle: Top Left, Bottom Left, Bottom Left
-		B: Sabrina :: EQ x4
-		Walk back to the Teleporter and dig out and fly to Viridian (1 up) and bike to the gym
-	S: Viridian Gym
-		B: Viridian Gym - CooltrainerM 3 :: EQ
-		[OPTIONAL SAVE: This next fight has a decent chance to die, and reviving will lose red bar so saving is advised]
-		B: Viridian Gym - Blackbelt 3 :: X ACC, HD, Bliz, HD
-			Use: X_ACCURACY
-		Leave the Gym to reset the trainer
-		With less than 2 revives, pick up the item ball (Revive) on the way out and take the spin pad
-		Menu: Elixer after entering the gym again
-			Use: ELIXER
-		B: Giovanni :: EQ x4, Bliz + (Bliz)
-			Note: Don't go bellow 2 Blizzards in this fight, if you need to use EQs to finish Rhydon
-		Menu: When outside of the gym, use a Super Repel, then bike west to Route 22
-			Use: SUPER_REPEL
-			Use: BICYCLE
-	S: Route 22
-		B: Viridian Rival - Bulbasaur :: Viridian Rival :: X Acc + Bliz + (TB), Drill x2, X Spec, Drill x3
+			Use: BICYCLE :: Bike west toward Victory Road to meet your Rival
+		B: Viridian Rival - Bulbasaur :: Viridian Rival :: X Acc + X Speed + IB x2, IB, TB, EQ, EQ, HD
+			Pidgeot is AI locked into Agility spam
 			Opp: 1
 				Use: X_ACCURACY
-			Opp: 4
-				Use: X_SPECIAL
-	S: Route 23
-		GetI: MAX_ETHER :: Pick up the hidden Max Ether from the water in the top left corner of the 2x2 island
-		Menu: After exiting the water, use another Super Repel and bike to Victory Road
+				Use: X_SPEED
+		Menu: Use a Super Repel when you reach the other side of the lake, then bike into Victory Road.
 			Use: SUPER_REPEL
-	S: Victory Road
-		Use these maps to help you get through Victory Road
-			1F: [[https://cdn.bulbagarden.net/upload/5/56/Victory_Road_1F_RBY.png]]
-			2F: [[https://cdn.bulbagarden.net/upload/1/11/Victory_Road_2F_RBY.png]]
-			3F: [[https://cdn.bulbagarden.net/upload/e/e5/Victory_Road_3F_RBY.png]]
-		Use Strength upon entering
-		Menu: Super Repel before the second boulder & strength
+		The best way to learn Victory Road movement is to watch a video and replicate it. The image below will help you complete VR on the fly if you need the resource.
+			[[https://i.imgur.com/bZDhJ5p.jpeg]]
+			If a Repel happens to run out early from extra steps, always use the next Super Repel right away.
+		Menu: Super Repel before the second boulder
 			Use: SUPER_REPEL
 		Menu: Menu before the last boulder
-			Use strength
-			Use: MAX_ETHER 1 1
-			Use: SUPER_REPEL
 			Use: BICYCLE
-	S: Elite Four
-		Don't deposit extra pokes unless you have no more revives
-		Shop: Talk to the mart guy before entering the Elite Four
-			4 FULL_RESTORE
-		B: Lorelei :: Switch to your flier, let it die and swap back to Nido, X Acc, Drill x5 (Dewgong will always use Rest turn 2)
+			Use: SUPER_REPEL
+			Use Strength
+		Shop: Indigo Plateau: Buy 5 Full Restores on the left before entering Elite Four
+			5 FULL_RESTORE
+		B: Lorelei :: Switch to your bird, then switch back to Nidoking, X Acc + HD, HD, HD, HD, HD
+			We take advantage of Dewgong’s turn 2 priority to go for status moves to force Rest to be used
 			Use: X_ACCURACY
-		Menu: Max Ether before Bruno
-			Use: MAX_ETHER 1 1
-		B: Bruno :: X Acc + HD x5
-			Use: X_ACCURACY
-		Menu: Menu before Agatha:
-			Use: FULL_RESTORE
-			Use: RARE_CANDY
-		B: Agatha :: X Spec, EQ, Bliz, EQ x3
-			Use: X_SPECIAL
-			If you get put to sleep use the pokeflute, and if you get confused risk it since you would need to X Spec again if you swapped)
-			If you miss Bliz, and Golbat uses Haze, use 2x TB on Golbat, X Speed on Arbok with 25-60 HP
-			Skip X Speed (you will be slower than last Gengar) with less than 25 or more than 60HP
-		Menu: Menu at least 2 steps before Lance. Elixer & if 128+ hp don’t heal; if 109-127 hp use one potion; under 109 hp use a full restore
+			EQ on Jynx if you somehow have only 1 Drill left
+	S: Bruno Split
+		Menu: Menu before Bruno:
 			Use: ELIXER
+			Only save the game if 0 Revives are left
+		B: Bruno :: X Acc + IB, HD, HD, IB, HD
+			Use: X_ACCURACY
+			Slam crit → Revive and setup another X Acc
+	S: Agatha Split
+		Menu: Menu before Agatha:
+			Use: ELIXER
+			Use: FULL_RESTORE
+			Optional save, always save with 0 Revives
+		B: Agatha :: X Speed + EQ, IB x2, EQ, EQ, E
+			Use: X_SPEED
+			If Hazed by Golbat with 28-60 HP use X Speed on Arbok; 1-27 HP or para use Full Restore
+	S: Lance Split
+		Menu: Menu before Lance:
+			If you forgot to Elixer before Agatha, use Elixer now
+			Potion to 140+ HP or Full Restore:
 			Use: POTION ?
 			Use: FULL_RESTORE ?
-		Always save before Lance (revives don't help if crit by hydro pump just try again)
-		B: Lance :: X Spec + TB, Bliz, X Special, Bliz, TB, Bliz
+			Required save the game, there is no recovery from Hydro Pump critical hit
+		B: Lance :: X Special + TB, IB, X Speed + IB, IB, IB
+			Soft-reset using A+B+Start+Select if you get crit and try again
 			Opp: 1
 				Use: X_SPECIAL
 			Opp: 3
-				Use: X_SPECIAL
-			If you run out of Blizzards, TB the Dragonite
-		Menu: Menu before Champ: use one potion if under 23 hp
-			Can also heal below at 44HP or below if you want to play safer
+				Use: X_SPEED
+	S: Champion Split
+		Menu: Menu before entering the next room:
+			Full Restore or Potion to 90+ HP:
+			Use: FULL_RESTORE ?
 			Use: POTION ?
-		Save the game if zero revives are left or if only 1 X-Acc is left
-		B: Champion - Bulbasaur :: Champion :: X Spec, X Acc, HD x3, TB, HD x2
+			Save if 0 Revives
+		B: Champion - Bulbasaur :: Champion :: X Acc + X Speed + HD, HD x5
 			If Pidgeot uses Sky Attack turn 1 do the following: Bliz, EQ, X Acc, HD x4
-			Use: X_SPECIAL
 			Use: X_ACCURACY
+			Use: X_SPEED
+	S: End Split
+		Timer ends on the fadeout that begins the credits after the in game time is displayed.
 		END
