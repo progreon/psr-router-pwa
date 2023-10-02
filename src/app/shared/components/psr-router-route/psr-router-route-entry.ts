@@ -42,9 +42,9 @@ export class PsrRouterRouteEntry extends LitElement {
     }
     let embedSrc = embedSrcArray.join('||');
     if (embedType.trim().toLocaleLowerCase() === "img" || embedType.trim().toLocaleLowerCase() === "image") {
-      return html`<a .href="${embedSrc.trim()}" target="_blank" style="width:100%;"><img .src="${embedSrc.trim()}" style="width:100%;" /></a>`
+      return html`<span style="width:100%;"><a .href="${embedSrc.trim()}" target="_blank" style="width:100%;"><img .src="${embedSrc.trim()}" style="width:100%;" /></a></span>`
     } else if (embedType.trim().toLocaleLowerCase() === "yt" || embedType.trim().toLocaleLowerCase() === "youtube") {
-      return html`<iframe .src="${embedSrc.trim()}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+      return html`<span style="width:100%;"><iframe .src="${embedSrc.trim()}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></span>`;
     } else {
       // TODO: unsupported, for now default to link?
       return html`<a .href="${embedSrc.trim()}" target="_blank">${embedType.trim()}</a>`;
@@ -67,10 +67,10 @@ export class PsrRouterRouteEntry extends LitElement {
       let i1 = fancyString.indexOf("[[", is);
       let i2 = i1 >= 0 ? fancyString.indexOf("]]", i1) : -1;
       if (i2 < 0) {
-        dom.push(html`<div style="white-space: pre-wrap;">${fancyString.substring(is)}</div>`);
+        dom.push(html`<span style="white-space: pre-wrap;">${fancyString.substring(is)}</span>`);
         is = fancyString.length;
       } else {
-        dom.push(html`<div style="white-space: pre-wrap;">${fancyString.substring(is, i1)}</div>`);
+        dom.push(html`<span style="white-space: pre-wrap;">${fancyString.substring(is, i1)}</span>`);
 
         let embeddedString = fancyString.substring(i1 + 2, i2).trim();
         dom.push(this._renderEmbeddedDOM(embeddedString));
@@ -261,7 +261,7 @@ export class PsrRouterRouteEntry extends LitElement {
           </template> -->
         <div class="entry" @click="${this._onClick}" ?pointer="${!this.routeHeader && hasExpandingDOM}">
           <div><strong>${this._getTitle()}</strong></div>
-          <div>${this._getSummary()}</div>
+          <div>${this._renderFancyString(this._getSummary())}</div>
         </div>
         <!-- </vaadin-context-menu> -->
         <div id="info-icon" class="icon info" @click="${this._openInfoDialog}" @mouseenter="${this._showInfoTooltip}" ?hidden="${!popupAvailable}">${infoCircle}</div>

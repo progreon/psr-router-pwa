@@ -18,9 +18,9 @@ class PsrRouterBattler extends LitElement {
   @property({type: Object})
   public badgeBoosts: BadgeBoosts;
   @property({type: Boolean})
-  public isPlayerBattler: Boolean;
+  public isPlayerBattler: boolean;
   @property({type: Boolean})
-  public hideBattleInfo: Boolean;
+  public hideBattleInfo: boolean;
 
   static styles = css`
     ${AppStyles}
@@ -96,7 +96,7 @@ class PsrRouterBattler extends LitElement {
         <div class="content">
           <b>${b.toString()}</b>
           <div class="table" ?hidden="${this.hideBattleInfo}">
-            <div ?hidden="${!this.isPlayerBattler}"><div>Exp. to next lv:</div><div>${b.getCurrentExpToNextLevel()}</div></div>
+            <div ?hidden="${!this.isPlayerBattler}"><div>Exp. to next lv:</div><div>${b.getCurrentExpToNextLevel()} (${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)})</div></div>
             <div ?hidden="${this.isPlayerBattler}"><div>Given exp.:</div><div>${b.getExp()}</div></div>
             <div><div>Crit ratio:</div><div>${(b.pokemon.getCritRatio() * 100).toFixed(3)} %</div></div>
             <div><div>High crit ratio:</div><div>${(b.pokemon.getHighCritRatio() * 100).toFixed(3)} %</div></div>

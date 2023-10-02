@@ -1,8 +1,10 @@
 // Imports for this element
+import { customElement } from 'lit-element';
 import { PsrRouterRouteSection } from './psr-router-route-section';
 import * as Route from 'SharedModules/psr-router-route';
 
-class PsrRouterRoute extends PsrRouterRouteSection {
+@customElement("psr-router-route")
+export class PsrRouterRoute extends PsrRouterRouteSection {
   _renderContent() {
     return super._renderExpandingContent();
   }
@@ -21,5 +23,3 @@ class PsrRouterRoute extends PsrRouterRouteSection {
     // TODO
   }
 }
-
-window.customElements.define('psr-router-route', PsrRouterRoute);

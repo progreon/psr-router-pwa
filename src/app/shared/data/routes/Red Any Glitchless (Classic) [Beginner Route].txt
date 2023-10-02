@@ -34,8 +34,10 @@ Route: Red Any Glitchless (Classic) [Beginner Route]
 			Time-Based DSUM: [[https://i.imgur.com/RBD6c2T.jpg]]
 			Step-Based DSUM: [[https://i.imgur.com/LSGYzXO.png]]
 		For more explanations on DSUM, see these videos
-			The video tutorial by Shenanagans [[yt||https://www.youtube.com/embed/SqC8cfI5XSs]]
-			The video tutorial by Gunnermaniac [[yt||https://www.youtube.com/embed/NxhT2H0GTwA]]
+			The video tutorial by Shenanagans
+			[[yt||https://www.youtube.com/embed/SqC8cfI5XSs]]
+			The video tutorial by Gunnermaniac
+			[[yt||https://www.youtube.com/embed/NxhT2H0GTwA]]
 		Manip: NIDORANM:4 13 15 15 14 15
 			[TEMP] Using a manip entry temporarily to fix the damage calc bug and before having the ability to choose options on a route.
 	S: Brock Split
