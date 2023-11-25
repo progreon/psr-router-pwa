@@ -19,9 +19,9 @@ class PsrRouterRouter extends PsrRouterPage {
   @property({ type: Object })
   public rootSection: Route.RouteSection;
   @property({ type: Boolean })
-  private _showChapters: boolean = true;
+  private _showChapters: boolean = false;
   @property({ type: Boolean })
-  private _showPlugins: boolean = true;
+  private _showPlugins: boolean = false;
   @query("#the-route")
   private _theRouteDOM: PsrRouterRoute;
 
@@ -133,6 +133,9 @@ class PsrRouterRouter extends PsrRouterPage {
           /* flex: 1; */
           overflow-x: hidden;
           padding: 0px var(--app-grid-2x);
+        }
+        #the-route {
+          width: 1000px;
         }
         .sidebar-right:not([hidden]) {
           display: block;

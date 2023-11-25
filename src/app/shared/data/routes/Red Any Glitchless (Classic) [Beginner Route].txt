@@ -1,5 +1,8 @@
 Game: r
 Route: Red Any Glitchless (Classic) [Beginner Route]
+	S: Info
+		This is an implementation of the route found [[here||https://pokemon-speedrunning.github.io/speedrun-routes/#/gen-1/red-blue/main-glitchless/classic-beginner-route/]]
+		Last update November 25th 2023
 	S: Before starting
 		Clear any existing save file by pressing Up + B + Select on the game title screen
 		Hard Reset (set palette with Up + B - optional to give full visibility in Rock Tunnel), hard resetting is required before each attempt on emulator

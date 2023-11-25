@@ -310,9 +310,10 @@ Route: Red Any% Glitchless [No-Lass Version]
 		Menu: Teach TM07 (Horn Drill) over Rock Slide
 			Tm: TM_07 1 1
 		Enter the Ghost battle and escape using the Poke Doll
-		Menu: During the Ghost battle (TEMP: should be menu in fight)
-			Swap: 3 SUPER_REPEL
-			Use: POKE_DOLL
+		E: Marowak:30 :: Cubone's Mother :: Enter the Ghost battle and escape using the Poke Doll
+			Opp: 1 :: *1
+				Swap: 3 SUPER_REPEL
+				Use: POKE_DOLL :: TEMP: solving no exp gained by marking nidoking as "fainting" during the battle
 		B: Pokémon Tower 7F - Rocket 1 :: TB x3 + (BB)
 		B: Pokémon Tower 7F - Rocket 2 :: X ACC, HD x2
 			Use: X_ACCURACY
