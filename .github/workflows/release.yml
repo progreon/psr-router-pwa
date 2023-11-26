@@ -111,7 +111,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: 14.x
+        node-version: 19.x
     - name: Setting variables
       run: |
         echo "VERSION=$(yarn -s ver)" >> $GITHUB_ENV
