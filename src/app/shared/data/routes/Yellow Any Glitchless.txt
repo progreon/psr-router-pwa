@@ -1,5 +1,5 @@
 Game: y
-Route: Yellow Any% Glitchless
+Route: Yellow Any% Glitchless [WIP]
 	S: Before starting
 		Clear any existing save file by pressing Up+B+Select on the title screen
 		Set text speed to FAST, battle animation to OFF and battle style to SHIFT
@@ -242,7 +242,7 @@ Route: Yellow Any% Glitchless
 		Fly to Lavender (3 down), and walk to the tower
 
 	S: Pokémon Tower
-		B: Tower Rival - Flareon :: Tower Rival :: X Acc + HD x5 
+		B: Tower Rival - Flareon :: Tower Rival :: X Acc + HD x5
 			If 26-39 on 15 special, 26-37 on 14 special, or 27-39 on 13 special: TB Fearow and X Acc on Magnemite
 			Use: X_ACCURACY
 		B: Pokémon Tower 4F - Channeler 2 :: Rock Slide x2

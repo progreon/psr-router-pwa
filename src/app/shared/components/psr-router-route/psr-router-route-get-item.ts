@@ -1,5 +1,5 @@
 // Imports for this element
-import { html } from 'lit-element';
+import { TemplateResult, html } from 'lit-element';
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 
@@ -21,6 +21,10 @@ class PsrRouterRouteGetItem extends PsrRouterRouteEntry {
 
   protected _hasExpandingContent(): boolean {
     return true;
+  }
+
+  protected _getPopupContent(): TemplateResult {
+    return super._renderExpandingContent();
   }
 
   protected _getSummary() {

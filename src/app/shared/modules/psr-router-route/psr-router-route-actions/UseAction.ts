@@ -30,6 +30,12 @@ export class UseAction extends AAction {
             this.actionString = "[Use error: no item defined]";
             return;
         }
+        if (this.item.key == "PP_UP") {
+            this.addMessage(new RouterMessage(`Using ${this.item.name} has not been properly implemented yet...`, RouterMessage.Type.Warning));
+        }
+        if (this.item.key == "POKE_DOLL") {
+            this.addMessage(new RouterMessage(`Using ${this.item.name} has not been properly implemented yet...`, RouterMessage.Type.Warning));
+        }
         let itemIndex = player.getItemIndex(this.item);
         this.actionString = `Use ${this.count == '*' ? "all " : ""}${this.item.name} (s${itemIndex + 1})`;
         if (+this.count > 1) {
@@ -43,7 +49,7 @@ export class UseAction extends AAction {
             this.actionString = `${this.actionString} on ${player.team[this.partyIndex]}`;
             if (this.item.isUsedOnMove()) {
                 if (this.moveIndex >= 0 && this.moveIndex < player.team[this.partyIndex].moveset.length) {
-                    this.actionString = `${this.actionString}, on ${player.team[this.partyIndex].moveset[this.moveIndex]} (s${this.moveIndex + 1})`;
+                    this.actionString = `${this.actionString}, on ${player.team[this.partyIndex].moveset[this.moveIndex].move} (s${this.moveIndex + 1})`;
                 } else {
                     this.addMessage(new RouterMessage("Move index out of range: " + this.moveIndex, RouterMessage.Type.Error));
                 }

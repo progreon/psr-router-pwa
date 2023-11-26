@@ -73,11 +73,11 @@ export class Battler1 extends Battler {
   }
 
   private addStatXP(hp: number, atk: number, def: number, spd: number, spc: number, nrOfPkmn: number) {
-    this._statExp[0] += hp / nrOfPkmn;
-    this._statExp[1] += atk / nrOfPkmn;
-    this._statExp[2] += def / nrOfPkmn;
-    this._statExp[3] += spd / nrOfPkmn;
-    this._statExp[4] += spc / nrOfPkmn;
+    this._statExp[0] += Math.floor(hp / nrOfPkmn);
+    this._statExp[1] += Math.floor(atk / nrOfPkmn);
+    this._statExp[2] += Math.floor(def / nrOfPkmn);
+    this._statExp[3] += Math.floor(spd / nrOfPkmn);
+    this._statExp[4] += Math.floor(spc / nrOfPkmn);
   }
 
   evolve(key: EvolutionKey): Battler {
@@ -306,6 +306,10 @@ export class Battler1 extends Battler {
       boostedRange = boostedRange.multiplyBy(9).divideBy(8).floor();
     }
     return boostedRange;
+  }
+
+  getStatExp(): number[] {
+    return this._statExp;
   }
 
   //     public int getHPStatIfDV(int DV) {

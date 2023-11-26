@@ -45,7 +45,10 @@ class PsrRouterPlayer extends LitElement {
   render() {
     let partyDOM = [];
     this.player.team.forEach(b => {
-      partyDOM.push(html`<li>${b.toString()}</li>`);
+      //partyDOM.push(html`<li>${b.toString()}</li>`);
+      // let stats = [];
+      // b.getStatExp();
+      partyDOM.push(html`<li>${b.toString()} (${b.getStatExp().join(",")})</li>`);
     });
     let itemsDOM = []; // TODO: table -> index, item, count (, selling price? or on hover?)
     // TODO: if i >= 20 => red text

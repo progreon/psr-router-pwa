@@ -218,7 +218,7 @@ export class PsrRouterApp extends connect(store)(LitElement) {
       .main-content {
         height: 100%;
         overflow: auto;
-        overflow-y: scroll;
+        overflow-y: auto;
       }
 
       .page {

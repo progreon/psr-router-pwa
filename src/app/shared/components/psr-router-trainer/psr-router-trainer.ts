@@ -72,19 +72,19 @@ class PsrRouterTrainer extends LitElement {
   render() {
     let party = [];
     if (this.trainer) {
-      this.trainer.party.forEach(b => {
+      this.trainer.party.forEach((b, bi) => {
         let ms = b.moveset;
         party.push(html`
           <div class="column">
             <h2 class="pokemon" @click="${this._onPokemonClicked.bind(this, b.pokemon.name)}">${b.pokemon.name} L${b.level}</h2>
             <div class="center">${b.getExp()} exp. points</div>
             <div>
-              <div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[0]?.move, e.path[0])}">${ms[0]?.move}</div>
-              <div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[1]?.move, e.path[0])}">${ms[1]?.move}</div>
+              <div id=${`move-${bi}-0`} style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[0]?.move, `move-${bi}-0`)}">${ms[0]?.move}</div>
+              <div id=${`move-${bi}-1`} style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[1]?.move, `move-${bi}-1`)}">${ms[1]?.move}</div>
             </div>
             <div>
-              <div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[2]?.move, e.path[0])}">${ms[2]?.move}</div>
-              <div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[3]?.move, e.path[0])}">${ms[3]?.move}</div>
+              <div id=${`move-${bi}-2`} style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[2]?.move, `move-${bi}-2`)}">${ms[2]?.move}</div>
+              <div id=${`move-${bi}-3`} style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(ms[3]?.move, `move-${bi}-3`)}">${ms[3]?.move}</div>
             </div>
           </div>`);
       });
@@ -116,9 +116,9 @@ class PsrRouterTrainer extends LitElement {
     document.body.dispatchEvent(event);
   }
 
-  _showMoveTooltip(move, element) {
+  _showMoveTooltip(move, elementId) {
     if (move) {
-      window.showTooltip(html`<psr-router-move .move="${move}" detailed></psr-router-move>`, element);
+      window.showTooltip(html`<psr-router-move .move="${move}" detailed></psr-router-move>`, this.shadowRoot.getElementById(elementId));
     }
   }
 }

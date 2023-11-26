@@ -18,6 +18,7 @@ import { SwapMoveAction } from './psr-router-route-actions/SwapMoveAction';
 import { SwapPokemonAction } from './psr-router-route-actions/SwapPokemonAction';
 import { DirectionAction } from './psr-router-route-actions/DirectionAction';
 import { BSettingsAction } from './psr-router-route-actions/BSettingsAction';
+import { OpponentAction } from './psr-router-route-actions/OpponentAction';
 
 const possibleActions: { [key: string]: (obj: ActionJSON, game: Game) => AAction } = {};
 possibleActions[UseAction.ACTION_TYPE.toUpperCase()] = UseAction.newFromJSONObject;
@@ -26,6 +27,7 @@ possibleActions[SwapMoveAction.ACTION_TYPE.toUpperCase()] = SwapMoveAction.newFr
 possibleActions[SwapPokemonAction.ACTION_TYPE.toUpperCase()] = SwapPokemonAction.newFromJSONObject;
 possibleActions[DirectionAction.ACTION_TYPE.toUpperCase()] = DirectionAction.newFromJSONObject;
 possibleActions[BSettingsAction.ACTION_TYPE.toUpperCase()] = BSettingsAction.newFromJSONObject;
+possibleActions[OpponentAction.ACTION_TYPE.toUpperCase()] = OpponentAction.newFromJSONObject;
 const defaultAction: (obj: ActionJSON, game: Game) => AAction = possibleActions[DirectionAction.ACTION_TYPE.toUpperCase()];
 
 /**

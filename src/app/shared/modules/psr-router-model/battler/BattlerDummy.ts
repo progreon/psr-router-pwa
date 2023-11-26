@@ -41,6 +41,7 @@ export class BattlerDummy extends Battler {
   get spdXP(): number { throw new Error("Method not implemented."); }
   get spcXP(): number { throw new Error("Method not implemented."); }
 
+  getStatExp(): number[] { return []; }
   getBoostedStat(statRange: Range, badgeBoostCount: number, xItemCount: number): Range { throw new Error("Method not implemented."); }
   equals(battler: Battler): boolean { throw new Error("Method not implemented."); }
   clone(): Battler { throw new Error("Method not implemented."); }

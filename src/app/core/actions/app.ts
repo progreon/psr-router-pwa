@@ -43,7 +43,7 @@ export const navigate = (location: Location, isSubPage: boolean) => (dispatch) =
 import { PwaPage } from 'CoreComponents/pwa/PwaPage';
 window.appConfig.siteMap = [];
 window.appConfig.siteMap.push(new PwaPage('home', 'Home', 'psr-router-home', () => import('CoreComponents/psr-router-home/psr-router-home')));
-window.appConfig.siteMap.push(new PwaPage('router', 'Route', 'psr-router-router', () => import('CoreComponents/psr-router-router/psr-router-router'), true).setSubPages([
+window.appConfig.siteMap.push(new PwaPage('router', 'Route', 'psr-router-router', () => import('CoreComponents/psr-router-router/psr-router-router'), true, true).setSubPages([
   new PwaPage('router-text', 'Edit Route Text', 'psr-router-router-text', () => import('CoreComponents/psr-router-router/psr-router-router-text'), true, true, false)
 ]));
 window.appConfig.siteMap.push(new PwaPage('data', 'Data').setSubPages([
