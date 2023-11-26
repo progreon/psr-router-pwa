@@ -82,14 +82,14 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
     let evolutionKeys = [];
     let evolutionValues = [];
     if (pokemon) {
-      pokemon.levelupMoves.forEach(lm => {
+      pokemon.levelupMoves.forEach((lm, lmi) => {
         moveLevels.push(html`<div>${lm.level}</div>`);
-        moveNames.push(html`<div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(lm.move, e.path[0])}">${lm.move}</div>`);
+        moveNames.push(html`<div id=${`lm-${lmi}`} style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(lm.move, `lm-${lmi}`)}">${lm.move}</div>`);
       });
-      pokemon.tms.forEach(tm => {
+      pokemon.tms.forEach((tm, tmi) => {
         moveLevels.push(html`<div>${tm}</div>`);
         let move = game.findMoveByName(tm.value);
-        moveNames.push(html`<div style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(move, e.path[0])}">${move}</div>`);
+        moveNames.push(html`<div id=${`tm-${tmi}`} style="cursor: pointer;" @mouseenter="${e => this._showMoveTooltip(move, `tm-${tmi}`)}">${move}</div>`);
       });
       Object.keys(pokemon.evolutions).forEach(key => {
         let value = pokemon.evolutions[key];
@@ -193,9 +193,9 @@ class PsrRouterPokemonInfo extends PsrRouterPage {
     super._navigateTo('pokemon-info?p=' + pokemon.name);
   }
 
-  _showMoveTooltip(move, element) {
+  _showMoveTooltip(move, elementId) {
     if (move) {
-      window.showTooltip(html`<psr-router-move .move="${move}" detailed></psr-router-move>`, element);
+      window.showTooltip(html`<psr-router-move .move="${move}" detailed></psr-router-move>`, this.shadowRoot.getElementById(elementId));
     }
   }
 }

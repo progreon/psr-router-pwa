@@ -1,5 +1,5 @@
 // Imports for this element
-import { html, TemplateResult, css } from 'lit-element';
+import { html, TemplateResult, css, unsafeCSS } from 'lit-element';
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 import { Battler, Move } from 'App/shared/modules/psr-router-model/ModelAbstract';
@@ -9,6 +9,9 @@ import { OpponentAction } from 'App/shared/modules/psr-router-route/psr-router-r
 // These are the elements needed by this element.
 import 'SharedComponents/psr-router-trainer/psr-router-trainer';
 import 'SharedComponents/psr-router-model/psr-router-battler';
+
+// These are the shared styles needed by this element.
+import { AppStyles } from 'Shared/app-styles';
 
 export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
   protected _getPopupContent(): TemplateResult {
@@ -47,7 +50,6 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     dom.push(html`
       <style>
         .table {
-          width: 100%;
           display: flex;
           flex-direction: row;
         }
@@ -57,6 +59,10 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
         .col {
           display: flex;
           flex-direction: column;
+          /* align-items: stretch; */
+        }
+        .badge-boosts, .stages {
+          display: none;
         }
         .table, .col > div {
           border: 1px solid black;
@@ -64,10 +70,11 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
           white-space: nowrap;
         }
         .col > * {
-          padding-left: 4px;
+          padding: 0px 4px;
           display: flex;
+        }
+        .col > *:not(:first-child) {
           justify-content: space-between;
-          flex-grow: 1;
         }
         .col div:first-child {
           font-weight: bold;
@@ -86,7 +93,13 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
           flex-direction: row;
         }
         .bcol > * {
-          width: 50%;
+          /* width: 50%; */
+          flex: 1;
+          min-width: 0;
+          /* min-width: fit-content; */
+        }
+        .xp {
+          display: none;
         }
         .click {
           cursor: pointer;
@@ -142,6 +155,22 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
         *[range="1:4"] {
           background: linear-gradient(90deg, rgba(0, 0, 0, .0) 33%, rgba(0, 255, 0, .1) 100%);
         }
+
+        /* Wide layout: when the viewport width is bigger than 640px, layout
+        changes to a wide layout. */
+        /* @media (max-width: ${unsafeCSS(window.MyAppGlobals.wideWidth)}) {
+          .badge-boosts, .stages {
+            display: none;
+          }
+        } */
+        @media (min-width: ${unsafeCSS(window.MyAppGlobals.wideWidth)}) {
+          .badge-boosts, .stages {
+            display: unset;
+          }
+          .xp {
+            display: block;
+          }
+        }
       </style>
     `);
     if (battleEntry.player) {
@@ -188,14 +217,14 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
             }
             let movesGrid = html`
               <div class="table" ?odd="${bsi % 2 == 1}">
-                <div class="col">
+                <div class="col badge-boosts">
                   <div>BB</div>
                   <div>atk <input id="bbAtk${bsi}:${dri}" type="number" value="${actualBB.atk}" min="0" max="99" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
                   <div>def <input id="bbDef${bsi}:${dri}" type="number" value="${actualBB.def}" min="0" max="99" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
                   <div>spd <input id="bbSpd${bsi}:${dri}" type="number" value="${actualBB.spd}" min="0" max="99" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
                   <div>spc <input id="bbSpc${bsi}:${dri}" type="number" value="${actualBB.spc}" min="0" max="99" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
                 </div>
-                <div class="col">
+                <div class="col stages">
                   <div>Stages</div>
                   <div>atk <input id="spAtk${bsi}:${dri}" type="number" value="${actualStages.atk}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
                   <div>def <input id="spDef${bsi}:${dri}" type="number" value="${actualStages.def}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
@@ -203,22 +232,26 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
                   <div>spc <input id="spSpc${bsi}:${dri}" type="number" value="${actualStages.spc}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
                 </div>
                 <div class="bcol">
-                  <div class="col">
-                    <div class="click" @click="${this._openBattlerDialog.bind(this, b, actualStages, actualBB, true)}" @mouseenter="${e => this._showBattlerTooltip(e, b, actualStages, actualBB, true)}" speed="${bsp}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.)</div>
-                    <div class="click ${movesAttacker[0]?.move?.highCritMove ? "i" : ""}" range="${this._getHitRange(movesAttacker[0])}" @click="${this._openMoveDialog.bind(this, movesAttacker[0])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[0])}">${movesAttacker[0]?.html || "-"}</div>
-                    <div class="click ${movesAttacker[1]?.move?.highCritMove ? "i" : ""}" range="${this._getHitRange(movesAttacker[1])}" @click="${this._openMoveDialog.bind(this, movesAttacker[1])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[1])}">${movesAttacker[1]?.html || "-"}</div>
-                    <div class="click ${movesAttacker[2]?.move?.highCritMove ? "i" : ""}" range="${this._getHitRange(movesAttacker[2])}" @click="${this._openMoveDialog.bind(this, movesAttacker[2])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[2])}">${movesAttacker[2]?.html || "-"}</div>
-                    <div class="click ${movesAttacker[3]?.move?.highCritMove ? "i" : ""}" range="${this._getHitRange(movesAttacker[3])}" @click="${this._openMoveDialog.bind(this, movesAttacker[3])}" @mouseenter="${e => this._showMoveTooltip(e, movesAttacker[3])}">${movesAttacker[3]?.html || "-"}</div>
+                  <div class="col moves">
+                    <!-- <div class="click" id=${`${bsi}-${dri}-atk`} @click="${this._openBattlerDialog.bind(this, b, actualStages, actualBB, true)}" @mouseenter="${e => this._showBattlerTooltip(`${bsi}-${dri}-atk`, b, actualStages, actualBB, true)}" speed="${bsp}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.)</div> -->
+                    <!-- <div class="click" id=${`${bsi}-${dri}-atk`} @click="${this._openBattlerDialog.bind(this, b, actualStages, actualBB, true)}" @mouseenter="${e => this._showBattlerTooltip(`${bsi}-${dri}-atk`, b, actualStages, actualBB, true)}" speed="${bsp}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp)</div> -->
+                    <div class="click" id=${`${bsi}-${dri}-atk`} @click="${this._openBattlerDialog.bind(this, b, actualStages, actualBB, true)}" @mouseenter="${e => this._showBattlerTooltip(`${bsi}-${dri}-atk`, b, actualStages, actualBB, true)}" speed="${bsp}">${dr.entrant.faint ? "*" : ""}${b.toString()} (${b.hp.toString()}hp<span class="xp">, ${b.levelExp}/${b.pokemon.expGroup.getDeltaExp(b.level, b.level + 1)} exp.</span>)</div>
+                    <div class="click ${movesAttacker[0]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-atk-0`} range="${this._getHitRange(movesAttacker[0])}" @click="${this._openMoveDialog.bind(this, movesAttacker[0])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-atk-0`, movesAttacker[0])}">${movesAttacker[0]?.html || "-"}</div>
+                    <div class="click ${movesAttacker[1]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-atk-1`} range="${this._getHitRange(movesAttacker[1])}" @click="${this._openMoveDialog.bind(this, movesAttacker[1])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-atk-1`, movesAttacker[1])}">${movesAttacker[1]?.html || "-"}</div>
+                    <div class="click ${movesAttacker[2]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-atk-2`} range="${this._getHitRange(movesAttacker[2])}" @click="${this._openMoveDialog.bind(this, movesAttacker[2])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-atk-2`, movesAttacker[2])}">${movesAttacker[2]?.html || "-"}</div>
+                    <div class="click ${movesAttacker[3]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-atk-3`} range="${this._getHitRange(movesAttacker[3])}" @click="${this._openMoveDialog.bind(this, movesAttacker[3])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-atk-3`, movesAttacker[3])}">${movesAttacker[3]?.html || "-"}</div>
                   </div>
-                  <div class="col">
-                    <div class="click" @click="${this._openBattlerDialog.bind(this, ob, opponentStages, null, false)}" @mouseenter="${e => this._showBattlerTooltip(e, ob, actualStages, null, false)}" speed="${osp}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</div>
-                    <div class="click ${movesDefender[0]?.move?.highCritMove ? "i" : ""}" @click="${this._openMoveDialog.bind(this, movesDefender[0])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[0])}">${movesDefender[0]?.html || "-"}</div>
-                    <div class="click ${movesDefender[1]?.move?.highCritMove ? "i" : ""}" @click="${this._openMoveDialog.bind(this, movesDefender[1])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[1])}">${movesDefender[1]?.html || "-"}</div>
-                    <div class="click ${movesDefender[2]?.move?.highCritMove ? "i" : ""}" @click="${this._openMoveDialog.bind(this, movesDefender[2])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[2])}">${movesDefender[2]?.html || "-"}</div>
-                    <div class="click ${movesDefender[3]?.move?.highCritMove ? "i" : ""}" @click="${this._openMoveDialog.bind(this, movesDefender[3])}" @mouseenter="${e => this._showMoveTooltip(e, movesDefender[3])}">${movesDefender[3]?.html || "-"}</div>
+                  <div class="col moves">
+                    <!-- <div class="click" id=${`${bsi}-${dri}-def`} @click="${this._openBattlerDialog.bind(this, ob, opponentStages, null, false)}" @mouseenter="${e => this._showBattlerTooltip(`${bsi}-${dri}-def`, ob, actualStages, null, false)}" speed="${osp}">${ob.toString()} (${ob.hp.toString()}hp, ${ob.getExp()} exp.)</div> -->
+                    <!-- <div class="click" id=${`${bsi}-${dri}-def`} @click="${this._openBattlerDialog.bind(this, ob, opponentStages, null, false)}" @mouseenter="${e => this._showBattlerTooltip(`${bsi}-${dri}-def`, ob, actualStages, null, false)}" speed="${osp}">${ob.toString()} (${ob.hp.toString()}hp)</div> -->
+                    <div class="click" id=${`${bsi}-${dri}-def`} @click="${this._openBattlerDialog.bind(this, ob, opponentStages, null, false)}" @mouseenter="${e => this._showBattlerTooltip(`${bsi}-${dri}-def`, ob, actualStages, null, false)}" speed="${osp}">${ob.toString()} (${ob.hp.toString()}hp<span class="xp">, ${ob.getExp()} exp.</span>)</div>
+                    <div class="click ${movesDefender[0]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-def-0`} @click="${this._openMoveDialog.bind(this, movesDefender[0])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-def-0`, movesDefender[0])}">${movesDefender[0]?.html || "-"}</div>
+                    <div class="click ${movesDefender[1]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-def-1`} @click="${this._openMoveDialog.bind(this, movesDefender[1])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-def-1`, movesDefender[1])}">${movesDefender[1]?.html || "-"}</div>
+                    <div class="click ${movesDefender[2]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-def-2`} @click="${this._openMoveDialog.bind(this, movesDefender[2])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-def-2`, movesDefender[2])}">${movesDefender[2]?.html || "-"}</div>
+                    <div class="click ${movesDefender[3]?.move?.highCritMove ? "i" : ""}" id=${`${bsi}-${dri}-def-3`} @click="${this._openMoveDialog.bind(this, movesDefender[3])}" @mouseenter="${e => this._showMoveTooltip(`${bsi}-${dri}-def-3`, movesDefender[3])}">${movesDefender[3]?.html || "-"}</div>
                   </div>
                 </div>
-                <div class="col">
+                <div class="col stages">
                   <div>Stages</div>
                   <div>atk <input id="soAtk${bsi}:${dri}" type="number" value="${opponentStages.atk}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
                   <div>def <input id="soDef${bsi}:${dri}" type="number" value="${opponentStages.def}" min="-6" max="6" step="1" @change="${this._triggerDamageCalc.bind(this, battleStage, bsi, dri)}"></div>
@@ -230,7 +263,8 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
             battle.push(movesGrid);
           });
         });
-        dom.push(battle);
+        // dom.push(battle);
+        dom.push(html`<div style="overflow-x: auto;"><div style="display: flex; min-width: fit-content; flex-direction: column;">${battle}</div></div>`);
       } else {
         dom.push(html`<div>You don't have a team to battle with! (or maybe you blacked out? :Kappa:)</div>`);
       }
@@ -294,18 +328,16 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     return so;
   }
 
-  _showBattlerTooltip(e, battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean) {
+  _showBattlerTooltip(elementId, battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean) {
     // TODO: fix component
-    // if (!window.isMobileView()) {
-    //   window.showTooltip(html`
-    //       <psr-router-battler
-    //         .battler="${battler}"
-    //         .stages="${stages || new Stages()}"
-    //         .badgeBoosts="${badgeBoosts || new BadgeBoosts()}"
-    //         ?isPlayerBattler="${!!isPlayerBattler}"
-    //       ></psr-router-battler>
-    //     `, e.path[0]);
-    // }
+    window.showTooltip(html`
+        <psr-router-battler
+          .battler="${battler}"
+          .stages="${stages || new Stages()}"
+          .badgeBoosts="${badgeBoosts || new BadgeBoosts()}"
+          ?isPlayerBattler="${!!isPlayerBattler}"
+        ></psr-router-battler>
+      `, this.shadowRoot.getElementById(elementId));
   }
 
   _openBattlerDialog(battler: Battler, stages: Stages, badgeBoosts: BadgeBoosts, isPlayerBattler: boolean): void {
@@ -383,10 +415,10 @@ export class PsrRouterRouteBattle extends PsrRouterRouteEntry {
     }
   }
 
-  _showMoveTooltip(e: any, move: { html: string, move: Move, range: Range, crange: Range, krs?: number[] }) {
+  _showMoveTooltip(elementId, move: { html: string, move: Move, range: Range, crange: Range, krs?: number[] }) {
     if (move) {
       let template = this._getMoveDOM(move);
-      window.showTooltip(template, e.path[0]);
+      window.showTooltip(template, this.shadowRoot.getElementById(elementId));
     }
   }
 

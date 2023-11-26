@@ -262,6 +262,8 @@ export abstract class Battler {
     return this.pokemon.expGroup.getDeltaExp(this.level, this.level + 1, this.levelExp);
   }
 
+  abstract getStatExp(): number[];
+
   abstract equals(battler: Battler): boolean;
 
   abstract clone(): Battler;

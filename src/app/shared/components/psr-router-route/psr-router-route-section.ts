@@ -1,5 +1,5 @@
 // Imports for this element
-import { html } from 'lit-element';
+import { html, TemplateResult } from 'lit-element';
 import { PsrRouterRouteEntry } from './psr-router-route-entry';
 import * as Route from 'SharedModules/psr-router-route';
 
@@ -81,6 +81,20 @@ export class PsrRouterRouteSection extends PsrRouterRouteEntry {
     super(routeSection);
     super.hideContent = false;
     // TODO
+  }
+
+  public findEntryDOM(entry: Route.RouteEntry): PsrRouterRouteEntry {
+    if (super.routeEntry == entry) {
+      return this;
+    } else {
+      let children = super.routeEntry ? (<Route.RouteSection>super.routeEntry).children : [];
+      let i = children.indexOf(entry);
+      if (i < 0) {
+        return null;
+      } else {
+        return <PsrRouterRouteEntry>this.shadowRoot.getElementById("child-" + i);
+      }
+    }
   }
 }
 
