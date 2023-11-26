@@ -1,6 +1,6 @@
 # This workflow will do a clean install of node dependencies, build the source code, run tests and deploy to pages
 
-name: Deploy main branch to prod
+name: Deploy main branch to GitHub Pages
 
 on:
   workflow_dispatch
