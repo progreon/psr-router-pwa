@@ -26,12 +26,6 @@ jobs:
         yarn build
         cp .htaccess dist
         cp CNAME dist
-    - name: Package
-      run: |
-        cd dist
-        echo $(yarn -s ver) > VERSION
-        zip -r dist_$(yarn -s ver)_$(date -u +%Y%m%d_%H%M%S).zip .
-        cd ..
     - name: Upload build
       uses: actions/upload-artifact@v2
       with:
