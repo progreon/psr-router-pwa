@@ -26,10 +26,14 @@ jobs:
         yarn build
         cp .htaccess dist
         cp CNAME dist
-    - name: Upload build
-      uses: actions/upload-artifact@v2
+# - name: Upload build
+#   uses: actions/upload-artifact@v2
+#   with:
+#     name: github-pages
+#     path: dist
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v2
       with:
-        name: github-pages
         path: dist
   test:
     runs-on: ubuntu-latest
