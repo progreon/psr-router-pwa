@@ -1,6 +1,6 @@
 # This workflow will do a clean install of node dependencies, build the source code, run tests and deploy to pages
 
-name: Deploy main branch to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   workflow_dispatch
@@ -8,11 +8,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.build.outputs.version }}
     steps:
     - name: checkout
       uses: actions/checkout@v2
-      with:
-        ref: 'main'
     - name: Setup Pages
       uses: actions/configure-pages@v2
     - name: Setup Node
@@ -22,15 +22,12 @@ jobs:
     - name: Yarn install
       run: yarn
     - name: Build
+      id: build
       run: |
         yarn build
         cp .htaccess dist
         cp CNAME dist
-# - name: Upload build
-#   uses: actions/upload-artifact@v2
-#   with:
-#     name: github-pages
-#     path: dist
+        echo "version=$(yarn ver)" >> $GITHUB_OUTPUT
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v2
       with:
@@ -51,6 +48,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+    - echo: echo deploying version ${{ needs.build.outputs.version }}
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v2
