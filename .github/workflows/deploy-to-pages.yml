@@ -7,6 +7,7 @@ on:
     inputs:
       ref:
         description: The branch or tag to deploy
+        default: 'main'
 
 jobs:
   build:
