@@ -15,7 +15,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
       with:
-        ref: ${{ github.events.inputs.ref }}
+        ref: ${{ github.event.inputs.ref }}
     - name: Setup Pages
       uses: actions/configure-pages@v2
     - name: Setup Node
