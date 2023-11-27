@@ -58,7 +58,7 @@ See [here](https://yarnpkg.com/en/docs/cli/add) for more documentation.
 ## Help
 If any issues with installing and/or running, look at the documentations of npm, webpack or polymer and/or contact me.
 ## Authors
-Marco Willems
+Progreon
 ## Version History
 No releases yet!
 ## License
