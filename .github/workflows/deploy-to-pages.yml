@@ -4,15 +4,18 @@ name: Deploy to GitHub Pages
 
 on:
   workflow_dispatch
+    inputs:
+      ref:
+        description: The branch or tag to deploy
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.build.outputs.version }}
     steps:
     - name: checkout
       uses: actions/checkout@v2
+      with:
+        ref: ${{ github.events.inputs.ref }}
     - name: Setup Pages
       uses: actions/configure-pages@v2
     - name: Setup Node
@@ -27,7 +30,6 @@ jobs:
         yarn build
         cp .htaccess dist
         cp CNAME dist
-        echo "version=$(yarn ver)" >> $GITHUB_OUTPUT
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v2
       with:
@@ -48,10 +50,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-    - name: version
-      env:
-        VERSION: ${{ needs.build.outputs.version }}
-      run: echo "deploying version $VERSION"
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v2
