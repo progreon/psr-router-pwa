@@ -42,10 +42,12 @@ jobs:
     - name: Yarn install
       run: yarn
     - name: Build
+      id: build
       run: |
-        mkdir dist
         yarn build
         cp .htaccess dist
+        cp CNAME dist
+        cp dist/index.html dist/404.html
     - name: Package
       run: |
         cd dist
