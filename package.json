@@ -1,6 +1,6 @@
 {
   "name": "psr-router-pwa",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A web application for routing Pokemon SpeedRuns",
   "private": true,
   "scripts": {
