@@ -50,6 +50,19 @@ class PsrRouterAbout extends PsrRouterPage {
       </section>
       <h2>Release Notes</h2>
       <section>
+        <h3>0.3.1 - Now hosted on GitHub Pages!</h3>
+        <ul>
+          <li>Now hosted on GitHub Pages!</li>
+        </ul>
+      </section>
+      <section>
+        <h3>0.3.0 - Fixed up some predefined routes</h3>
+        <ul>
+          <li>Red Any Glitchless (Classic) [Beginner Route]</li>
+          <li>Red Any% Glitchless [No-Lass Version]</li>
+        </ul>
+      </section>
+      <section>
         <h3>0.2.0 - Item & money management</h3>
         <ul>
           <li>Added item & money management</li>
@@ -93,7 +106,7 @@ class PsrRouterAbout extends PsrRouterPage {
           <ul>
             <li>Encounters</li>
             <li>Locations</li>
-            <li>Added Pokémon Yellow data</li> 
+            <li>Added Pokémon Yellow data</li>
           </ul>
           <li>Big loading performance increase</li>
           <li>Added more route entry types</li>
