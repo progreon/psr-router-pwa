@@ -31,6 +31,12 @@ jobs:
         yarn build
         cp .htaccess dist
         cp CNAME dist
+    - name: Package
+      run: |
+        cd dist
+        echo $(yarn -s ver) > VERSION
+        zip -r dist_$(yarn -s ver)_$(date -u +%Y%m%d_%H%M%S).zip .
+        cd ..
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v2
       with:

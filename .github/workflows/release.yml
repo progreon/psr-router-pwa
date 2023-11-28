@@ -2,9 +2,8 @@
 #   a clean install of node dependencies
 #   build the source code
 #   run tests
-#   deploy to the qa environment
 #   wait for confirmation
-#   deploy to the prod environment
+#   deploy to github pages
 #   merge to main
 #   create release --todo
 #   cleanup release/hotfix branch --todo
@@ -58,51 +57,32 @@ jobs:
       with:
         name: package
         path: dist
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: dist
   test:
     runs-on: ubuntu-latest
     steps:
     - name: Test
       run: yarn test
       continue-on-error: true
-  deploy-qa:
+  deploy:
     runs-on: ubuntu-latest
     needs: [ build, test ]
+    permissions:
+      pages: write
+      id-token: write
     environment:
-      name: psr-router.qa
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-    - name: Download build
-      uses: actions/download-artifact@v2
-      with:
-        name: package
-    - name: Deploy to server
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASS }}
-        local-dir: ./
-        server-dir: ./
-  deploy-prod:
-    runs-on: ubuntu-latest
-    needs: deploy-qa
-    environment:
-      name: psr-router.prod
-    steps:
-    - name: Download build
-      uses: actions/download-artifact@v2
-      with:
-        name: package
-    - name: Deploy to server
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASS }}
-        local-dir: ./
-        server-dir: ./
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
   merge-and-release:
     runs-on: ubuntu-latest
-    needs: deploy-prod
+    needs: deploy
     steps:
     - name: Checkout
       uses: actions/checkout@v2
