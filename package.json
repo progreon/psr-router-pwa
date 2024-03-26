@@ -54,7 +54,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
     "csv-loader": "^3.0.2",
-    "express": "^4.16.3",
+    "express": "^4.19.2",
     "favicons-webpack-plugin": "^0.0.9",
     "file-loader": "^6.2.0",
     "handlebars": "^4.0.11",
