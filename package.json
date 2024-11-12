@@ -95,6 +95,7 @@
     "@polymer/app-layout": "^3.0.1",
     "@polymer/paper-toast": "^3.0.1",
     "@polymer/polymer": "^3.0.2",
+    "@tanstack/table-core": "^8.20.5",
     "@vaadin/vaadin-text-field": "^2.8.2",
     "@webcomponents/webcomponentsjs": "^2.0.2",
     "es6-promise": "^4.2.4",

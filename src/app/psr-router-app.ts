@@ -391,6 +391,10 @@ export class PsrRouterApp extends connect(store)(LitElement) {
     return !!sessionStorage.getItem('dev');
   }
 
+  get page() {
+    return this._page;
+  }
+
   constructor() {
     super();
     // Setting the list of pages
