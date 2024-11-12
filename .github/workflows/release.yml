@@ -55,7 +55,7 @@ jobs:
         zip -r dist_$(yarn -s ver)_$(date -u +%Y%m%d_%H%M%S).zip .
         cd ..
     - name: Upload build
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: package
         path: dist
