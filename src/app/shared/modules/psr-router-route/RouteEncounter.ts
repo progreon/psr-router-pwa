@@ -46,7 +46,7 @@ export class RouteEncounter extends RouteBattle {
   /**
    *
    * @param {Game}            game              The Game object this route entry uses.
-   * @param {Trainer}         trainer           The trainer to battle against.
+   * @param {Battler}         encounter           The trainer to battle against.
    * @param {RouteEntryInfo}  [info]            The info for this entry.
    * @param {Location}        [location]        The location in the game where this entry occurs.
    */

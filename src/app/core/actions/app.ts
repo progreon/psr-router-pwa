@@ -49,8 +49,9 @@ window.appConfig.siteMap.push(new PwaPage('router', 'Route', 'psr-router-router'
 window.appConfig.siteMap.push(new PwaPage('data', 'Data').setSubPages([
   new PwaPage('pokemon-list', 'Pokémon', 'psr-router-pokemon-list', () => import('CoreComponents/psr-router-pokemon/psr-router-pokemon-list'), true),
   new PwaPage('pokemon-info', 'Pokémon Info', 'psr-router-pokemon-info', () => import('CoreComponents/psr-router-pokemon/psr-router-pokemon-info'), true, false, false),
-  new PwaPage('trainers', 'Trainers', 'psr-router-trainers', () => import('CoreComponents/psr-router-trainers/psr-router-trainers'), true),
-  new PwaPage('trainer-info', 'trainer Info', 'psr-router-trainer-info', () => import('CoreComponents/psr-router-trainers/psr-router-trainer-info'), true, false, false),
+  new PwaPage('trainers', 'Trainers', 'psr-router-trainers', () => import('CoreComponents/psr-router-trainers/psr-router-trainers'), true).setSubPages([
+    new PwaPage('trainer-info', 'Trainer Info', 'psr-router-trainer-info', () => import('CoreComponents/psr-router-trainers/psr-router-trainer-info'), true, false, true)
+  ]),
   new PwaPage('moves', 'Moves', 'psr-router-moves', () => import('CoreComponents/psr-router-moves/psr-router-moves'), true),
   new PwaPage('items', 'Items', 'psr-router-items', () => import('CoreComponents/psr-router-items/psr-router-items'), true)
 ]));
